@@ -1,10 +1,9 @@
 import React, { Component } from 'react';
+import ReactDOM from 'react-dom'
 import Signin from './signin.jsx';
 import DoctorEntryView from './doctorEntryView.jsx';
 import DoctorListView from './doctorListView.jsx';
-import ReactDOM from 'react-dom'
-
-// import ScriptRemind from './scriptRemind.jsx';
+import ScriptRemindView from './scriptRemind.jsx';
 
 export default class Navigator extends React.Component {
   constructor(props) {
@@ -16,7 +15,7 @@ export default class Navigator extends React.Component {
     }
     this.viewDocs = this.viewDocs.bind(this);
     this.enterDocs = this.enterDocs.bind(this);
-    // this.scriptReminder = this.scriptReminder.bind(this);
+    this.scriptReminder = this.scriptReminder.bind(this);
     this.authCheck = this.authCheck.bind(this);
   }
 
@@ -59,13 +58,13 @@ export default class Navigator extends React.Component {
     console.log("troz!");
   }
 
-  // scriptReminder() {
-  //   var $target = this.state.$mainRender;
-  //   console.log($target);
-  //   ReactDOM.render(<div>
-  //       <ScriptRemind />
-  //     </div>, $target);
-  // }
+  scriptReminder() {
+    var $target = this.state.$mainRender;
+    console.log($target);
+    ReactDOM.render(<div>
+        <ScriptRemindView />
+      </div>, $target);
+  }
 
   render() {
     return (
