@@ -85,7 +85,7 @@ export default class ScriptRemindView extends React.Component {
           },
           data: JSON.stringify(script),
           success: function(data){
-            alert("Congrats! Your prescription was saved");
+            alert("Your prescription was saved.");
             console.log('A reminder was set for: ', data);
           },
           error: function(err){
@@ -108,7 +108,7 @@ export default class ScriptRemindView extends React.Component {
         </div>
         <div>
           <input
-          width='200'
+          className='dosageInput'
           onChange={this.handleDoseAmount}
           placeholder='Dosage (e.g. if "Take 1 tablet", type "1")'
           />
@@ -139,7 +139,7 @@ export default class ScriptRemindView extends React.Component {
           </select>
         </div>
         <div>
-          <button onClick={this.submitForm}> Remind Me </button>
+          <button className= "remindBtn" onClick={this.submitForm}> Remind Me </button>
         </div>
       </div>
 
