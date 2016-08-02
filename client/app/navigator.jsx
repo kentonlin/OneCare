@@ -3,10 +3,9 @@ import ReactDOM from 'react-dom'
 import Signin from './signin.jsx';
 import DoctorEntryView from './doctorEntryView.jsx';
 import DoctorListView from './doctorListView.jsx';
+import ScriptRemindView from './scriptRemind.jsx';
 import SymptomEntryView from './symptomEntry.jsx';
 import ReactDOM from 'react-dom'
-
-// import ScriptRemind from './scriptRemind.jsx';
 
 export default class Navigator extends React.Component {
   constructor(props) {
@@ -68,6 +67,15 @@ export default class Navigator extends React.Component {
     ReactDOM.render(<div>
         <ScriptRemindView />
       </div>, $target);
+  }
+
+  enterSympsons() {
+    var $target = this.state.$mainRender;
+    console.log($target);
+    ReactDOM.render(<div>
+        <SymptomEntryView />
+      </div>, $target);
+    console.log("nuts!");
   }
 
   enterSympsons() {
