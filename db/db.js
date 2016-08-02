@@ -32,9 +32,14 @@ var doctorSchema = new Schema({
 	// patients: [{type: Schema.Types.ObjectId, ref: 'User'}]
 });
 
+var symptomSchema = new Schema({
+	id: Number,
+	selectedSymptoms: Array
+});
 
 var Script = mongoose.model('Script', scriptSchema);
 var User = mongoose.model('User', userSchema);
-var Doctor = mongoose.model('Doctor', doctorSchema);
+var Doctor = mongoose.model('Doctor', doctorSchema); 
+var Symptom = mongoose.model('Symptom', symptomSchema);
 
-module.exports = {user: User, script: Script, doctor: Doctor};
+module.exports = {user: User, script: Script, doctor: Doctor, symptom: Symptom};
