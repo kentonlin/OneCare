@@ -9,11 +9,11 @@ export default class DoctorView extends React.Component {
   render() {
     return (
       <div className="doctor-view-container">
-        <div><span>Name: </span>{this.props.name}</div>
-        <div><span>Phone: </span>{this.props.phone}</div>
-        <div><span>Fax: </span>{this.props.fax}</div>
-        <div><span>Address: </span>{this.props.address}</div>
-        <div><span>Specialty: </span>{this.props.specialty}</div>
+        <div className="doctor-name">{this.props.name}</div>
+        <div><span className="doctor-attribute">Phone: </span>{this.props.phone}</div>
+        <div><span className="doctor-attribute">Fax: </span>{this.props.fax}</div>
+        <div><span className="doctor-attribute">Address: </span>{this.props.address}</div>
+        <div><span className="doctor-attribute">Specialty: </span>{this.props.specialty}</div>
       </div>
       )
   }

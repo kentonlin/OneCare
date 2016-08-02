@@ -1,25 +1,61 @@
+body {
+  background-color: #FFFFFF;
+}
+
+.title {
+  padding-left: 15px;
+}
+
+.doctor-name {
+  font-size: 18pt;
+  font-weight: bold;
+}
+
+.doctor-attribute {
+  font-weight: bold;
+}
+
 .doctor-input {
+  padding: 10px;
+  border-radius:2px;
+  background-color: #D2EFFF;
   border:1px solid black;
 }
 
 .navbar-container {
+  border-radius:2px;
   border:1px solid black;
+  background-color: #D2EFFF;
 }
 
 .signin-container {
+  border-radius:2px;
+  background-color: #D2EFFF;
   border:1px solid black;
 }
 
 .doctor-view-container {
+  padding: 5px;
+  border-radius:2px;
+  background-color: #D2EFFF;
   border:1px solid black;
 }
 
 .navbar-button {
+  padding: 3px;
+  box-shadow: 3px 3px 2px grey;
+  background-color: #9DDDFF;
   border:1px solid black;
   display: inline-block;
 }
 
+.doctor-entry-form {
+  padding: 5px;
+}
+
 .signin-button {
+  padding: 3px;
+  background-color: #9DDDFF;
   border:1px solid black;
   display: inline-block;
 }

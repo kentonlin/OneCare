@@ -22043,6 +22043,8 @@
 	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 	
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+	// import ScriptRemind from './scriptRemind.jsx';
+	
 	
 	// import ScriptRemind from './scriptRemind.jsx';
 	
@@ -22134,7 +22136,7 @@
 	        { className: 'navbar-container' },
 	        _react2.default.createElement(
 	          'h1',
-	          null,
+	          { className: 'title' },
 	          'Welcome to OneCare!'
 	        ),
 	        _react2.default.createElement(
@@ -22361,36 +22363,36 @@
 	        ),
 	        _react2.default.createElement(
 	          "form",
-	          null,
+	          { className: "doctor-entry-form" },
 	          _react2.default.createElement(
-	            "span",
+	            "div",
 	            null,
 	            "Name"
 	          ),
 	          _react2.default.createElement("input", { id: "name", type: "text", onChange: this.handleChange }),
 	          _react2.default.createElement(
-	            "span",
+	            "div",
 	            null,
 	            "Phone"
 	          ),
 	          _react2.default.createElement("input", { id: "phone", type: "text", onChange: this.handleChange }),
 	          _react2.default.createElement("br", null),
 	          _react2.default.createElement(
-	            "span",
+	            "div",
 	            null,
 	            "Fax"
 	          ),
 	          _react2.default.createElement("input", { id: "fax", type: "text", onChange: this.handleChange }),
 	          _react2.default.createElement("br", null),
 	          _react2.default.createElement(
-	            "span",
+	            "div",
 	            null,
 	            "Address"
 	          ),
 	          _react2.default.createElement("input", { id: "address", type: "text", onChange: this.handleChange }),
 	          _react2.default.createElement("br", null),
 	          _react2.default.createElement(
-	            "span",
+	            "div",
 	            null,
 	            "Specialty"
 	          ),
@@ -22946,12 +22948,7 @@
 	        { className: "doctor-view-container" },
 	        _react2.default.createElement(
 	          "div",
-	          null,
-	          _react2.default.createElement(
-	            "span",
-	            null,
-	            "Name: "
-	          ),
+	          { className: "doctor-name" },
 	          this.props.name
 	        ),
 	        _react2.default.createElement(
@@ -22959,7 +22956,7 @@
 	          null,
 	          _react2.default.createElement(
 	            "span",
-	            null,
+	            { className: "doctor-attribute" },
 	            "Phone: "
 	          ),
 	          this.props.phone
@@ -22969,7 +22966,7 @@
 	          null,
 	          _react2.default.createElement(
 	            "span",
-	            null,
+	            { className: "doctor-attribute" },
 	            "Fax: "
 	          ),
 	          this.props.fax
@@ -22979,7 +22976,7 @@
 	          null,
 	          _react2.default.createElement(
 	            "span",
-	            null,
+	            { className: "doctor-attribute" },
 	            "Address: "
 	          ),
 	          this.props.address
@@ -22989,7 +22986,7 @@
 	          null,
 	          _react2.default.createElement(
 	            "span",
-	            null,
+	            { className: "doctor-attribute" },
 	            "Specialty: "
 	          ),
 	          this.props.specialty
