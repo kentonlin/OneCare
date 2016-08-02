@@ -1,6 +1,16 @@
 "use strict";
 
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = require("react");
+
+var _react2 = _interopRequireDefault(_react);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -8,7 +18,6 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-// import React, { Component } from 'react';
 // import $ from 'jquery';
 
 var DoctorEntryView = function (_React$Component) {
@@ -71,469 +80,469 @@ var DoctorEntryView = function (_React$Component) {
   }, {
     key: "render",
     value: function render() {
-      return React.createElement(
+      return _react2.default.createElement(
         "div",
         { className: "doctor-input" },
-        React.createElement(
+        _react2.default.createElement(
           "h2",
           null,
           "Input a new doctor!"
         ),
-        React.createElement(
+        _react2.default.createElement(
           "form",
           null,
-          React.createElement(
+          _react2.default.createElement(
             "span",
             null,
             "Name"
           ),
-          React.createElement("input", { id: "name", type: "text", onChange: this.handleChange }),
-          React.createElement(
+          _react2.default.createElement("input", { id: "name", type: "text", onChange: this.handleChange }),
+          _react2.default.createElement(
             "span",
             null,
             "Phone"
           ),
-          React.createElement("input", { id: "phone", type: "text", onChange: this.handleChange }),
-          React.createElement("br", null),
-          React.createElement(
+          _react2.default.createElement("input", { id: "phone", type: "text", onChange: this.handleChange }),
+          _react2.default.createElement("br", null),
+          _react2.default.createElement(
             "span",
             null,
             "Fax"
           ),
-          React.createElement("input", { id: "fax", type: "text", onChange: this.handleChange }),
-          React.createElement("br", null),
-          React.createElement(
+          _react2.default.createElement("input", { id: "fax", type: "text", onChange: this.handleChange }),
+          _react2.default.createElement("br", null),
+          _react2.default.createElement(
             "span",
             null,
             "Address"
           ),
-          React.createElement("input", { id: "address", type: "text", onChange: this.handleChange }),
-          React.createElement("br", null),
-          React.createElement(
+          _react2.default.createElement("input", { id: "address", type: "text", onChange: this.handleChange }),
+          _react2.default.createElement("br", null),
+          _react2.default.createElement(
             "span",
             null,
             "Specialty"
           ),
-          React.createElement(
+          _react2.default.createElement(
             "select",
             { id: "specialty", onChange: this.handleChange },
-            React.createElement(
+            _react2.default.createElement(
               "option",
               null,
               "::Select Specialty::"
             ),
-            React.createElement(
+            _react2.default.createElement(
               "option",
               null,
               "A"
             ),
-            React.createElement(
+            _react2.default.createElement(
               "option",
               null,
               "Allergology‎ "
             ),
-            React.createElement(
+            _react2.default.createElement(
               "option",
               null,
               "Andrology‎ "
             ),
-            React.createElement(
+            _react2.default.createElement(
               "option",
               null,
               "Anesthesia‎ "
             ),
-            React.createElement(
+            _react2.default.createElement(
               "option",
               null,
               "Angiology‎ "
             ),
-            React.createElement(
+            _react2.default.createElement(
               "option",
               null,
               "Aviation medicine‎ "
             ),
-            React.createElement(
+            _react2.default.createElement(
               "option",
               null,
               "B"
             ),
-            React.createElement(
+            _react2.default.createElement(
               "option",
               null,
               "Biomedicine‎ "
             ),
-            React.createElement(
+            _react2.default.createElement(
               "option",
               null,
               "C"
             ),
-            React.createElement(
+            _react2.default.createElement(
               "option",
               null,
               "Cardiology‎ "
             ),
-            React.createElement(
+            _react2.default.createElement(
               "option",
               null,
               "D"
             ),
-            React.createElement(
+            _react2.default.createElement(
               "option",
               null,
               "Dentistry‎ "
             ),
-            React.createElement(
+            _react2.default.createElement(
               "option",
               null,
               "Dentistry branches‎ "
             ),
-            React.createElement(
+            _react2.default.createElement(
               "option",
               null,
               "Dermatology‎ "
             ),
-            React.createElement(
+            _react2.default.createElement(
               "option",
               null,
               "Disaster medicine‎ "
             ),
-            React.createElement(
+            _react2.default.createElement(
               "option",
               null,
               "Sports physicians‎ "
             ),
-            React.createElement(
+            _react2.default.createElement(
               "option",
               null,
               "E"
             ),
-            React.createElement(
+            _react2.default.createElement(
               "option",
               null,
               "Emergency medicine‎ "
             ),
-            React.createElement(
+            _react2.default.createElement(
               "option",
               null,
               "Endocrinology‎ "
             ),
-            React.createElement(
+            _react2.default.createElement(
               "option",
               null,
               "F"
             ),
-            React.createElement(
+            _react2.default.createElement(
               "option",
               null,
               "Family medicine‎ "
             ),
-            React.createElement(
+            _react2.default.createElement(
               "option",
               null,
               "Fictional medical specialists‎ "
             ),
-            React.createElement(
+            _react2.default.createElement(
               "option",
               null,
               "G"
             ),
-            React.createElement(
+            _react2.default.createElement(
               "option",
               null,
               "Gastroenterology‎ "
             ),
-            React.createElement(
+            _react2.default.createElement(
               "option",
               null,
               "General practice‎ "
             ),
-            React.createElement(
+            _react2.default.createElement(
               "option",
               null,
               "Medical genetics‎ "
             ),
-            React.createElement(
+            _react2.default.createElement(
               "option",
               null,
               "Geriatrics‎ "
             ),
-            React.createElement(
+            _react2.default.createElement(
               "option",
               null,
               "Gerontology‎ "
             ),
-            React.createElement(
+            _react2.default.createElement(
               "option",
               null,
               "Gynaecology‎ "
             ),
-            React.createElement(
+            _react2.default.createElement(
               "option",
               null,
               "H"
             ),
-            React.createElement(
+            _react2.default.createElement(
               "option",
               null,
               "Hematology‎ "
             ),
-            React.createElement(
+            _react2.default.createElement(
               "option",
               null,
               "Hepatology‎ "
             ),
-            React.createElement(
+            _react2.default.createElement(
               "option",
               null,
               "I"
             ),
-            React.createElement(
+            _react2.default.createElement(
               "option",
               null,
               "Immunology‎ "
             ),
-            React.createElement(
+            _react2.default.createElement(
               "option",
               null,
               "Infectious diseases‎ "
             ),
-            React.createElement(
+            _react2.default.createElement(
               "option",
               null,
               "Intensive care medicine‎ "
             ),
-            React.createElement(
+            _react2.default.createElement(
               "option",
               null,
               "Internal medicine‎ "
             ),
-            React.createElement(
+            _react2.default.createElement(
               "option",
               null,
               "M"
             ),
-            React.createElement(
+            _react2.default.createElement(
               "option",
               null,
               "Men's health‎ "
             ),
-            React.createElement(
+            _react2.default.createElement(
               "option",
               null,
               "Military medicine‎ "
             ),
-            React.createElement(
+            _react2.default.createElement(
               "option",
               null,
               "N"
             ),
-            React.createElement(
+            _react2.default.createElement(
               "option",
               null,
               "Nephrology‎ "
             ),
-            React.createElement(
+            _react2.default.createElement(
               "option",
               null,
               "Neurology‎ "
             ),
-            React.createElement(
+            _react2.default.createElement(
               "option",
               null,
               "Nuclear medicine‎ "
             ),
-            React.createElement(
+            _react2.default.createElement(
               "option",
               null,
               "O"
             ),
-            React.createElement(
+            _react2.default.createElement(
               "option",
               null,
               "Obstetrics‎ "
             ),
-            React.createElement(
+            _react2.default.createElement(
               "option",
               null,
               "Oncology‎ "
             ),
-            React.createElement(
+            _react2.default.createElement(
               "option",
               null,
               "Ophthalmology‎ "
             ),
-            React.createElement(
+            _react2.default.createElement(
               "option",
               null,
               "Otorhinolaryngology‎ "
             ),
-            React.createElement(
+            _react2.default.createElement(
               "option",
               null,
               "P"
             ),
-            React.createElement(
+            _react2.default.createElement(
               "option",
               null,
               "Palliative medicine‎ "
             ),
-            React.createElement(
+            _react2.default.createElement(
               "option",
               null,
               "Pathology‎ "
             ),
-            React.createElement(
+            _react2.default.createElement(
               "option",
               null,
               "Pediatrics‎ "
             ),
-            React.createElement(
+            _react2.default.createElement(
               "option",
               null,
               "Podiatry‎ "
             ),
-            React.createElement(
+            _react2.default.createElement(
               "option",
               null,
               "Preventive medicine‎ "
             ),
-            React.createElement(
+            _react2.default.createElement(
               "option",
               null,
               "Prison medicine‎ "
             ),
-            React.createElement(
+            _react2.default.createElement(
               "option",
               null,
               "Psychiatric specialities‎ "
             ),
-            React.createElement(
+            _react2.default.createElement(
               "option",
               null,
               "Psychiatry‎ "
             ),
-            React.createElement(
+            _react2.default.createElement(
               "option",
               null,
               "Pulmonology‎ "
             ),
-            React.createElement(
+            _react2.default.createElement(
               "option",
               null,
               "R"
             ),
-            React.createElement(
+            _react2.default.createElement(
               "option",
               null,
               "Radiology‎ "
             ),
-            React.createElement(
+            _react2.default.createElement(
               "option",
               null,
               "Rehabilitation medicine‎ "
             ),
-            React.createElement(
+            _react2.default.createElement(
               "option",
               null,
               "Rheumatology‎ "
             ),
-            React.createElement(
+            _react2.default.createElement(
               "option",
               null,
               "S"
             ),
-            React.createElement(
+            _react2.default.createElement(
               "option",
               null,
               "Serology‎ "
             ),
-            React.createElement(
+            _react2.default.createElement(
               "option",
               null,
               "Sexual health‎ "
             ),
-            React.createElement(
+            _react2.default.createElement(
               "option",
               null,
               "Sleep medicine‎ "
             ),
-            React.createElement(
+            _react2.default.createElement(
               "option",
               null,
               "Space medicine‎ "
             ),
-            React.createElement(
+            _react2.default.createElement(
               "option",
               null,
               "Sports medicine‎ "
             ),
-            React.createElement(
+            _react2.default.createElement(
               "option",
               null,
               "Surgery‎ "
             ),
-            React.createElement(
+            _react2.default.createElement(
               "option",
               null,
               "Surgical specialties‎ "
             ),
-            React.createElement(
+            _react2.default.createElement(
               "option",
               null,
               "T"
             ),
-            React.createElement(
+            _react2.default.createElement(
               "option",
               null,
               "Toxicology‎ "
             ),
-            React.createElement(
+            _react2.default.createElement(
               "option",
               null,
               "Transplantation medicine‎ "
             ),
-            React.createElement(
+            _react2.default.createElement(
               "option",
               null,
               "Trichology‎ "
             ),
-            React.createElement(
+            _react2.default.createElement(
               "option",
               null,
               "Tropical medicine‎ "
             ),
-            React.createElement(
+            _react2.default.createElement(
               "option",
               null,
               "U"
             ),
-            React.createElement(
+            _react2.default.createElement(
               "option",
               null,
               "Urology‎ "
             ),
-            React.createElement(
+            _react2.default.createElement(
               "option",
               null,
               "W"
             ),
-            React.createElement(
+            _react2.default.createElement(
               "option",
               null,
               "Wilderness medicine‎ "
             )
           ),
-          React.createElement(
+          _react2.default.createElement(
             "button",
             { onClick: this.submitNewDoctor },
             "Submit!"
           )
         ),
-        React.createElement("hr", null),
-        React.createElement(
+        _react2.default.createElement("hr", null),
+        _react2.default.createElement(
           "div",
           null,
-          React.createElement(
+          _react2.default.createElement(
             "h3",
             null,
             "Your current doctors: "
@@ -544,4 +553,6 @@ var DoctorEntryView = function (_React$Component) {
   }]);
 
   return DoctorEntryView;
-}(React.Component);
+}(_react2.default.Component);
+
+exports.default = DoctorEntryView;

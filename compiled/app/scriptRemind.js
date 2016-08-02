@@ -1,6 +1,28 @@
-"use strict";
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = require('react');
+
+var _react2 = _interopRequireDefault(_react);
+
+require('react-date-picker/index.css');
+
+var _reactDatePicker = require('react-date-picker');
+
+var _jquery = require('jquery');
+
+var _jquery2 = _interopRequireDefault(_jquery);
+
+var _reactDropDown = require('react-drop-down');
+
+var _reactDropDown2 = _interopRequireDefault(_reactDropDown);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -34,7 +56,7 @@ var ScriptRemind = function (_React$Component) {
   }
 
   _createClass(ScriptRemind, [{
-    key: "updateDrugName",
+    key: 'updateDrugName',
     value: function updateDrugName(event) {
       console.log("value", event.target.value);
       console.log("hi");
@@ -43,21 +65,21 @@ var ScriptRemind = function (_React$Component) {
       });
     }
   }, {
-    key: "handleDayClick",
+    key: 'handleDayClick',
     value: function handleDayClick(date) {
       this.setState({
         "date": date
       });
     }
   }, {
-    key: "handleScheduleDayWeek",
+    key: 'handleScheduleDayWeek',
     value: function handleScheduleDayWeek(dayWeek) {
       this.setState({
         "scheduleDayWeek": dayWeek
       });
     }
   }, {
-    key: "handleDoseMeasurement",
+    key: 'handleDoseMeasurement',
     value: function handleDoseMeasurement(measure) {
       console.log("measure", measure);
       this.setState({
@@ -65,7 +87,7 @@ var ScriptRemind = function (_React$Component) {
       });
     }
   }, {
-    key: "submitForm",
+    key: 'submitForm',
     value: function submitForm() {
       var script = {
         "name": this.state.currentDrug,
@@ -76,7 +98,7 @@ var ScriptRemind = function (_React$Component) {
       };
       console.log("submitForm called for: ", script);
 
-      $.ajax({
+      _jquery2.default.ajax({
         type: 'POST',
         url: '/api/script/add',
         dataType: 'json',
@@ -93,117 +115,117 @@ var ScriptRemind = function (_React$Component) {
       });
     }
   }, {
-    key: "render",
+    key: 'render',
     value: function render() {
       var _this2 = this;
 
       var date = new Date();
-      return React.createElement(
-        "div",
+      return _react2.default.createElement(
+        'div',
         null,
-        React.createElement(
-          "div",
+        _react2.default.createElement(
+          'div',
           null,
-          React.createElement(
-            "h1",
+          _react2.default.createElement(
+            'h1',
             null,
-            " Current Drug: ",
+            ' Current Drug: ',
             this.state.currentDrug,
-            " "
+            ' '
           ),
-          React.createElement("input", {
+          _react2.default.createElement('input', {
             onChange: this.updateDrugName,
-            placeholder: "Name"
+            placeholder: 'Name'
           })
         ),
-        React.createElement(
-          "div",
+        _react2.default.createElement(
+          'div',
           null,
-          React.createElement("input", {
-            width: "200",
+          _react2.default.createElement('input', {
+            width: '200',
             onChange: function onChange(text) {
               return _this2.setState({ "dosageAmt": text });
             },
-            placeholder: "Dosage (e.g. if \"Take 1 tablet\", type \"1\")"
+            placeholder: 'Dosage (e.g. if "Take 1 tablet", type "1")'
           }),
-          React.createElement(
-            "select",
-            { className: "dropdown-replacement", value: this.state.dosageMeasure, onChange: this.handleDoseMeasurement },
-            React.createElement(
-              "option",
+          _react2.default.createElement(
+            'select',
+            { className: 'dropdown-replacement', value: this.state.dosageMeasure, onChange: this.handleDoseMeasurement },
+            _react2.default.createElement(
+              'option',
               null,
-              "mg"
+              'mg'
             ),
-            React.createElement(
-              "option",
+            _react2.default.createElement(
+              'option',
               null,
-              "mL"
+              'mL'
             ),
-            React.createElement(
-              "option",
+            _react2.default.createElement(
+              'option',
               null,
-              "tablet"
+              'tablet'
             )
           )
         ),
-        React.createElement(
-          "div",
+        _react2.default.createElement(
+          'div',
           null,
-          React.createElement(
-            "h1",
+          _react2.default.createElement(
+            'h1',
             null,
-            " Refill Date"
+            ' Refill Date'
           ),
-          React.createElement(Calendar, {
-            dateFormat: "YYYY-MM-DD",
+          _react2.default.createElement(_reactDatePicker.Calendar, {
+            dateFormat: 'YYYY-MM-DD',
             date: date,
             onChange: this.handleDayClick
           }),
-          React.createElement(
-            "h3",
+          _react2.default.createElement(
+            'h3',
             null,
-            " You selected ",
+            ' You selected ',
             this.state.date,
-            " "
+            ' '
           )
         ),
-        React.createElement(
-          "div",
+        _react2.default.createElement(
+          'div',
           null,
-          React.createElement("input", {
-            width: "100",
+          _react2.default.createElement('input', {
+            width: '100',
             onChange: function onChange(text) {
               return _this2.setState({ "scheduleNum": text });
             },
-            placeholder: "How often? (1x, 2x, etc..)"
+            placeholder: 'How often? (1x, 2x, etc..)'
           }),
-          React.createElement(
-            "h3",
+          _react2.default.createElement(
+            'h3',
             null,
-            " per "
+            ' per '
           ),
-          React.createElement(
-            "select",
-            { className: "dropdown-replacement", value: this.state.scheduleDayWeek, onChange: this.handleScheduleDayWeek },
-            React.createElement(
-              "option",
+          _react2.default.createElement(
+            'select',
+            { className: 'dropdown-replacement', value: this.state.scheduleDayWeek, onChange: this.handleScheduleDayWeek },
+            _react2.default.createElement(
+              'option',
               null,
-              "day"
+              'day'
             ),
-            React.createElement(
-              "option",
+            _react2.default.createElement(
+              'option',
               null,
-              "week"
+              'week'
             )
           )
         ),
-        React.createElement(
-          "div",
+        _react2.default.createElement(
+          'div',
           null,
-          React.createElement(
-            "button",
+          _react2.default.createElement(
+            'button',
             { onClick: this.submitForm() },
-            " Remind Me "
+            ' Remind Me '
           )
         )
       );
@@ -211,7 +233,7 @@ var ScriptRemind = function (_React$Component) {
   }]);
 
   return ScriptRemind;
-}(React.Component);
+}(_react2.default.Component);
 
 /* const styles = StyleSheet.create({
   container: {
@@ -244,3 +266,6 @@ var ScriptRemind = function (_React$Component) {
 });
 
 */
+
+
+exports.default = ScriptRemind;

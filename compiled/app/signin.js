@@ -1,6 +1,16 @@
 "use strict";
 
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = require("react");
+
+var _react2 = _interopRequireDefault(_react);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -28,33 +38,33 @@ var Signin = function (_React$Component) {
     value: function render() {
       var _this2 = this;
 
-      return React.createElement(
+      return _react2.default.createElement(
         "div",
         { className: "signin-container" },
-        React.createElement(
+        _react2.default.createElement(
           "h1",
           null,
           "Sign in to OneCare"
         ),
-        React.createElement(
+        _react2.default.createElement(
           "span",
           null,
           "username"
         ),
-        React.createElement("input", { type: "text", onChange: function onChange(event) {
+        _react2.default.createElement("input", { type: "text", onChange: function onChange(event) {
             _this2.setState({ username: event.target.value });
           } }),
-        React.createElement("br", null),
-        React.createElement(
+        _react2.default.createElement("br", null),
+        _react2.default.createElement(
           "span",
           null,
           "password"
         ),
-        React.createElement("input", { type: "text", onChange: function onChange(event) {
+        _react2.default.createElement("input", { type: "text", onChange: function onChange(event) {
             _this2.setState({ password: event.target.value });
           } }),
-        React.createElement("br", null),
-        React.createElement(
+        _react2.default.createElement("br", null),
+        _react2.default.createElement(
           "div",
           { className: "signin-button", onClick: function onClick() {
               window.localStorage.setItem("username", "Patrick");
@@ -71,4 +81,6 @@ var Signin = function (_React$Component) {
   }]);
 
   return Signin;
-}(React.Component);
+}(_react2.default.Component);
+
+exports.default = Signin;

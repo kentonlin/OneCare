@@ -1,7 +1,7 @@
-// import React, { Component } from 'react';
+import React, { Component } from 'react';
 // import $ from 'jquery';
 
-class DoctorEntryView extends React.Component {
+export default class DoctorEntryView extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -54,12 +54,12 @@ class DoctorEntryView extends React.Component {
     return (
       <div className="doctor-input">
       <h2>Input a new doctor!</h2>
-        <form>
-          <span>Name</span><input id="name" type="text" onChange={this.handleChange} />
-          <span>Phone</span><input id="phone" type="text" onChange={this.handleChange}></input><br />
-          <span>Fax</span><input id="fax" type="text" onChange={this.handleChange}></input><br />
-          <span>Address</span><input id="address" type="text" onChange={this.handleChange}></input><br />
-          <span>Specialty</span><select id="specialty" onChange={this.handleChange}>
+        <form className="doctor-entry-form">
+          <div>Name</div><input id="name" type="text" onChange={this.handleChange} />
+          <div>Phone</div><input id="phone" type="text" onChange={this.handleChange}></input><br />
+          <div>Fax</div><input id="fax" type="text" onChange={this.handleChange}></input><br />
+          <div>Address</div><input id="address" type="text" onChange={this.handleChange}></input><br />
+          <div>Specialty</div><select id="specialty" onChange={this.handleChange}>
             <option>::Select Specialty::</option>
             <option>A</option>
             <option>Allergology‎ </option>

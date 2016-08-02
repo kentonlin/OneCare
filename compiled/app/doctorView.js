@@ -1,6 +1,16 @@
 "use strict";
 
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = require("react");
+
+var _react2 = _interopRequireDefault(_react);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -20,53 +30,53 @@ var DoctorView = function (_React$Component) {
   _createClass(DoctorView, [{
     key: "render",
     value: function render() {
-      return React.createElement(
+      return _react2.default.createElement(
         "div",
         { className: "doctor-view-container" },
-        React.createElement(
+        _react2.default.createElement(
           "div",
           null,
-          React.createElement(
+          _react2.default.createElement(
             "span",
             null,
             "Name: "
           ),
           this.props.name
         ),
-        React.createElement(
+        _react2.default.createElement(
           "div",
           null,
-          React.createElement(
+          _react2.default.createElement(
             "span",
             null,
             "Phone: "
           ),
           this.props.phone
         ),
-        React.createElement(
+        _react2.default.createElement(
           "div",
           null,
-          React.createElement(
+          _react2.default.createElement(
             "span",
             null,
             "Fax: "
           ),
           this.props.fax
         ),
-        React.createElement(
+        _react2.default.createElement(
           "div",
           null,
-          React.createElement(
+          _react2.default.createElement(
             "span",
             null,
             "Address: "
           ),
           this.props.address
         ),
-        React.createElement(
+        _react2.default.createElement(
           "div",
           null,
-          React.createElement(
+          _react2.default.createElement(
             "span",
             null,
             "Specialty: "
@@ -78,4 +88,6 @@ var DoctorView = function (_React$Component) {
   }]);
 
   return DoctorView;
-}(React.Component);
+}(_react2.default.Component);
+
+exports.default = DoctorView;

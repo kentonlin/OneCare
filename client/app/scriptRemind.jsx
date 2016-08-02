@@ -1,52 +1,71 @@
+import React, { Component } from 'react';
+import Calendar from 'react-input-calendar'
+import $ from 'jquery';
+import Dropdown from 'react-drop-down';
 
-
-class ScriptRemind extends React.Component {
+export default class ScriptRemindView extends React.Component {
 
   constructor(props) {
     super(props);
     this.state = {
       "currentDrug": "None",
       "dosageAmt": 0,
-      "dosageMeasure": 'none',
+      "dosageMeasure": 'mg',
       "date": null,
       "scheduleNum": "none",
-      "scheduleDayWeek": "none"
+      "scheduleDayWeek": "day"
   }
   this.updateDrugName = this.updateDrugName.bind(this);
   this.submitForm = this.submitForm.bind(this);
-  this.handleDayClick = this.handleDayClick.bind(this);
+  this.handleFrequency = this.handleFrequency.bind(this);
+  this.handleDoseAmount = this.handleDoseAmount.bind(this);
+  this.handleRefillDate = this.handleRefillDate.bind(this);
   this.handleDoseMeasurement = this.handleDoseMeasurement.bind(this);
   this.handleScheduleDayWeek = this.handleScheduleDayWeek.bind(this);
 
 }
 
     updateDrugName(event){
-      console.log("value", event.target.value)
-      console.log("hi");
       this.setState({
           currentDrug: event.target.value
         });
     }
 
-    handleDayClick(date) {
+    handleRefillDate(date) {
+      console.log("selected date", date);
       this.setState({
         "date": date
       })
 
     }
+
     handleScheduleDayWeek(dayWeek){
         this.setState({
           "scheduleDayWeek": dayWeek
         })
     }
+
     handleDoseMeasurement(measure) {
-      console.log("measure", measure)
       this.setState({
-        "dosageMeasure": measure
+        dosageMeasure: measure.target.value
       })
 
     }
 
+    handleDoseAmount(amount) {
+      this.setState({
+        dosageAmt: amount.target.value
+      })
+
+    }
+
+    handleFrequency(frequency) {
+      this.setState({
+        scheduleNum: frequency.target.value
+      })
+
+    }
+    
     submitForm () {
       var script = {
         "name": this.state.currentDrug,
@@ -89,7 +108,7 @@ class ScriptRemind extends React.Component {
         <div>
           <input
           width='200'
-          onChange={(text) => this.setState({"dosageAmt": text})}
+          onChange={this.handleDoseAmount}
           placeholder='Dosage (e.g. if "Take 1 tablet", type "1")'
           />
 
@@ -101,17 +120,15 @@ class ScriptRemind extends React.Component {
       </div>
         <div>
             <h1> Refill Date</h1>
-              <Calendar
-                dateFormat="YYYY-MM-DD"
-                date={date}
-                onChange={this.handleDayClick}
-              />
-            <h3> You selected {this.state.date} </h3>
+            <div>
+              <Calendar format='MM/DD/YYYY' date={date} onChange= {this.handleRefillDate}/>
+              <h3> You selected {this.state.date} </h3>
+            </div>
         </div>
         <div>
           <input
           width='100'
-          onChange={(text) => this.setState({"scheduleNum": text})}
+          onChange={this.handleFrequency}
           placeholder='How often? (1x, 2x, etc..)'
           />
           <h3> per </h3>
@@ -121,7 +138,7 @@ class ScriptRemind extends React.Component {
           </select>
         </div>
         <div>
-          <button onClick={this.submitForm()}> Remind Me </button>
+          <button onClick={this.submitForm}> Remind Me </button>
         </div>
       </div>
 
