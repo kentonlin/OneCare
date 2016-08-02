@@ -22514,14 +22514,16 @@
 	    _this.state = {
 	      "currentDrug": "None",
 	      "dosageAmt": 0,
-	      "dosageMeasure": 'none',
+	      "dosageMeasure": 'mg',
 	      "date": null,
 	      "scheduleNum": "none",
-	      "scheduleDayWeek": "none"
+	      "scheduleDayWeek": "day"
 	    };
 	    _this.updateDrugName = _this.updateDrugName.bind(_this);
 	    _this.submitForm = _this.submitForm.bind(_this);
-	    _this.handleDayClick = _this.handleDayClick.bind(_this);
+	    _this.handleFrequency = _this.handleFrequency.bind(_this);
+	    _this.handleDoseAmount = _this.handleDoseAmount.bind(_this);
+	    _this.handleRefillDate = _this.handleRefillDate.bind(_this);
 	    _this.handleDoseMeasurement = _this.handleDoseMeasurement.bind(_this);
 	    _this.handleScheduleDayWeek = _this.handleScheduleDayWeek.bind(_this);
 
@@ -22531,15 +22533,14 @@
 	  _createClass(ScriptRemindView, [{
 	    key: 'updateDrugName',
 	    value: function updateDrugName(event) {
-	      console.log("value", event.target.value);
-	      console.log("hi");
 	      this.setState({
 	        currentDrug: event.target.value
 	      });
 	    }
 	  }, {
-	    key: 'handleDayClick',
-	    value: function handleDayClick(date) {
+	    key: 'handleRefillDate',
+	    value: function handleRefillDate(date) {
+	      console.log("selected date", date);
 	      this.setState({
 	        "date": date
 	      });
@@ -22554,9 +22555,22 @@
 	  }, {
 	    key: 'handleDoseMeasurement',
 	    value: function handleDoseMeasurement(measure) {
-	      console.log("measure", measure);
 	      this.setState({
-	        "dosageMeasure": measure
+	        dosageMeasure: measure.target.value
+	      });
+	    }
+	  }, {
+	    key: 'handleDoseAmount',
+	    value: function handleDoseAmount(amount) {
+	      this.setState({
+	        dosageAmt: amount.target.value
+	      });
+	    }
+	  }, {
+	    key: 'handleFrequency',
+	    value: function handleFrequency(frequency) {
+	      this.setState({
+	        scheduleNum: frequency.target.value
 	      });
 	    }
 	  }, {
@@ -22590,8 +22604,6 @@
 	  }, {
 	    key: 'render',
 	    value: function render() {
-	      var _this2 = this;
-
 	      var date = new Date();
 	      return _react2.default.createElement(
 	        'div',
@@ -22616,9 +22628,7 @@
 	          null,
 	          _react2.default.createElement('input', {
 	            width: '200',
-	            onChange: function onChange(text) {
-	              return _this2.setState({ "dosageAmt": text });
-	            },
+	            onChange: this.handleDoseAmount,
 	            placeholder: 'Dosage (e.g. if "Take 1 tablet", type "1")'
 	          }),
 	          _react2.default.createElement(
@@ -22652,7 +22662,7 @@
 	          _react2.default.createElement(
 	            'div',
 	            null,
-	            _react2.default.createElement(_reactInputCalendar2.default, { format: 'DD/MM/YYYY', date: '8-012-2016' }),
+	            _react2.default.createElement(_reactInputCalendar2.default, { format: 'MM/DD/YYYY', date: date, onChange: this.handleRefillDate }),
 	            _react2.default.createElement(
 	              'h3',
 	              null,
@@ -22667,9 +22677,7 @@
 	          null,
 	          _react2.default.createElement('input', {
 	            width: '100',
-	            onChange: function onChange(text) {
-	              return _this2.setState({ "scheduleNum": text });
-	            },
+	            onChange: this.handleFrequency,
 	            placeholder: 'How often? (1x, 2x, etc..)'
 	          }),
 	          _react2.default.createElement(
@@ -22697,7 +22705,7 @@
 	          null,
 	          _react2.default.createElement(
 	            'button',
-	            { onClick: this.submitForm() },
+	            { onClick: this.submitForm },
 	            ' Remind Me '
 	          )
 	        )
