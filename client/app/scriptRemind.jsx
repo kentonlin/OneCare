@@ -65,7 +65,7 @@ export default class ScriptRemindView extends React.Component {
       })
 
     }
-    
+
     submitForm () {
       var script = {
         "name": this.state.currentDrug,
@@ -85,6 +85,7 @@ export default class ScriptRemindView extends React.Component {
           },
           data: JSON.stringify(script),
           success: function(data){
+            alert("Congrats! Your prescription was saved");
             console.log('A reminder was set for: ', data);
           },
           error: function(err){
