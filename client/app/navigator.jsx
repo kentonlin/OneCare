@@ -22,7 +22,7 @@ export default class Navigator extends React.Component {
     this.enterSympsons = this.enterSympsons.bind(this);
   }
 
-////
+//
   componentDidMount() {
     this.setState({$mainRender: document.getElementById("main-render")})
     console.log("username", this.state.username, "token", this.state.token);
