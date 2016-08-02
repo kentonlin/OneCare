@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { DateField, Calendar } from 'react-date-picker'
+import Calendar from 'react-input-calendar'
 import $ from 'jquery';
 import Dropdown from 'react-drop-down';
 
@@ -104,12 +104,10 @@ export default class ScriptRemindView extends React.Component {
       </div>
         <div>
             <h1> Refill Date</h1>
-              <Calendar
-                dateFormat="YYYY-MM-DD"
-                date={date}
-                onChange={this.handleDayClick}
-              />
-            <h3> You selected {this.state.date} </h3>
+            <div>
+              <Calendar format='DD/MM/YYYY' date='8-012-2016'/>
+              <h3> You selected {this.state.date} </h3>
+            </div>
         </div>
         <div>
           <input

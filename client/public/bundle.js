@@ -22483,13 +22483,15 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _reactDatePicker = __webpack_require__(181);
+	var _reactInputCalendar = __webpack_require__(181);
 
-	var _jquery = __webpack_require__(355);
+	var _reactInputCalendar2 = _interopRequireDefault(_reactInputCalendar);
+
+	var _jquery = __webpack_require__(380);
 
 	var _jquery2 = _interopRequireDefault(_jquery);
 
-	var _reactDropDown = __webpack_require__(356);
+	var _reactDropDown = __webpack_require__(381);
 
 	var _reactDropDown2 = _interopRequireDefault(_reactDropDown);
 
@@ -22647,17 +22649,17 @@
 	            null,
 	            ' Refill Date'
 	          ),
-	          _react2.default.createElement(_reactDatePicker.Calendar, {
-	            dateFormat: 'YYYY-MM-DD',
-	            date: date,
-	            onChange: this.handleDayClick
-	          }),
 	          _react2.default.createElement(
-	            'h3',
+	            'div',
 	            null,
-	            ' You selected ',
-	            this.state.date,
-	            ' '
+	            _react2.default.createElement(_reactInputCalendar2.default, { format: 'DD/MM/YYYY', date: '8-012-2016' }),
+	            _react2.default.createElement(
+	              'h3',
+	              null,
+	              ' You selected ',
+	              this.state.date,
+	              ' '
+	            )
 	          )
 	        ),
 	        _react2.default.createElement(
@@ -22750,1529 +22752,2017 @@
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
-	exports.TimeInput = exports.TimePicker = exports.Calendar = exports.DateField = exports.ClockInput = exports.Clock = exports.Footer = exports.NavBar = exports.MultiMonthView = exports.TransitionView = exports.DateFormatSpinnerInput = exports.DateFormatInput = exports.HistoryView = exports.DecadeView = exports.YearView = exports.MonthView = exports.DateEditor = exports.DatePicker = undefined;
 
-	var _MonthView = __webpack_require__(182);
+	var _getPrototypeOf = __webpack_require__(182);
 
-	var _MonthView2 = _interopRequireDefault(_MonthView);
+	var _getPrototypeOf2 = _interopRequireDefault(_getPrototypeOf);
 
-	var _TimePicker = __webpack_require__(316);
+	var _classCallCheck2 = __webpack_require__(208);
 
-	var _TimePicker2 = _interopRequireDefault(_TimePicker);
+	var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
 
-	var _TimeInput = __webpack_require__(317);
+	var _createClass2 = __webpack_require__(209);
 
-	var _TimeInput2 = _interopRequireDefault(_TimeInput);
+	var _createClass3 = _interopRequireDefault(_createClass2);
 
-	var _TransitionView = __webpack_require__(341);
+	var _possibleConstructorReturn2 = __webpack_require__(213);
 
-	var _TransitionView2 = _interopRequireDefault(_TransitionView);
+	var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
 
-	var _MultiMonthView = __webpack_require__(344);
+	var _inherits2 = __webpack_require__(260);
 
-	var _MultiMonthView2 = _interopRequireDefault(_MultiMonthView);
-
-	var _HistoryView = __webpack_require__(305);
-
-	var _HistoryView2 = _interopRequireDefault(_HistoryView);
-
-	var _YearView = __webpack_require__(308);
-
-	var _YearView2 = _interopRequireDefault(_YearView);
-
-	var _DecadeView = __webpack_require__(310);
-
-	var _DecadeView2 = _interopRequireDefault(_DecadeView);
-
-	var _NavBar = __webpack_require__(293);
-
-	var _NavBar2 = _interopRequireDefault(_NavBar);
-
-	var _Footer = __webpack_require__(307);
-
-	var _Footer2 = _interopRequireDefault(_Footer);
-
-	var _Clock = __webpack_require__(320);
-
-	var _Clock2 = _interopRequireDefault(_Clock);
-
-	var _ClockInput = __webpack_require__(345);
-
-	var _ClockInput2 = _interopRequireDefault(_ClockInput);
-
-	var _DateField = __webpack_require__(351);
-
-	var _DateField2 = _interopRequireDefault(_DateField);
-
-	var _Calendar = __webpack_require__(354);
-
-	var _Calendar2 = _interopRequireDefault(_Calendar);
-
-	var _DateFormatInput = __webpack_require__(348);
-
-	var _DateFormatInput2 = _interopRequireDefault(_DateFormatInput);
-
-	var _DateFormatSpinnerInput = __webpack_require__(347);
-
-	var _DateFormatSpinnerInput2 = _interopRequireDefault(_DateFormatSpinnerInput);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	exports.default = _MonthView2.default;
-
-	// allow people to import with other aliases as well
-
-	var DatePicker = exports.DatePicker = _Calendar2.default;
-	var DateEditor = exports.DateEditor = _DateField2.default;
-
-	exports.MonthView = _MonthView2.default;
-	exports.YearView = _YearView2.default;
-	exports.DecadeView = _DecadeView2.default;
-	exports.HistoryView = _HistoryView2.default;
-	exports.DateFormatInput = _DateFormatInput2.default;
-	exports.DateFormatSpinnerInput = _DateFormatSpinnerInput2.default;
-	exports.TransitionView = _TransitionView2.default;
-	exports.MultiMonthView = _MultiMonthView2.default;
-	exports.NavBar = _NavBar2.default;
-	exports.Footer = _Footer2.default;
-	exports.Clock = _Clock2.default;
-	exports.ClockInput = _ClockInput2.default;
-	exports.DateField = _DateField2.default;
-	exports.Calendar = _Calendar2.default;
-	exports.TimePicker = _TimePicker2.default;
-	exports.TimeInput = _TimeInput2.default;
-
-/***/ },
-/* 182 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	exports.renderFooter = exports.NAV_KEYS = undefined;
-
-	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
-
-	var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"]) _i["return"](); } finally { if (_d) throw _e; } } return _arr; } return function (arr, i) { if (Array.isArray(arr)) { return arr; } else if (Symbol.iterator in Object(arr)) { return sliceIterator(arr, i); } else { throw new TypeError("Invalid attempt to destructure non-iterable instance"); } }; }();
-
-	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+	var _inherits3 = _interopRequireDefault(_inherits2);
 
 	var _react = __webpack_require__(1);
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _reactDom = __webpack_require__(35);
+	var _classnames = __webpack_require__(268);
 
-	var _reactClass = __webpack_require__(183);
+	var _classnames2 = _interopRequireDefault(_classnames);
 
-	var _reactClass2 = _interopRequireDefault(_reactClass);
-
-	var _moment = __webpack_require__(184);
+	var _moment = __webpack_require__(269);
 
 	var _moment2 = _interopRequireDefault(_moment);
 
-	var _objectAssign = __webpack_require__(288);
+	__webpack_require__(373);
 
-	var _objectAssign2 = _interopRequireDefault(_objectAssign);
+	var _dayView = __webpack_require__(374);
 
-	var _clampRange = __webpack_require__(289);
+	var _dayView2 = _interopRequireDefault(_dayView);
 
-	var _clampRange2 = _interopRequireDefault(_clampRange);
+	var _monthView = __webpack_require__(377);
 
-	var _toMoment = __webpack_require__(290);
+	var _monthView2 = _interopRequireDefault(_monthView);
 
-	var _toMoment2 = _interopRequireDefault(_toMoment);
+	var _yearView = __webpack_require__(378);
 
-	var _join = __webpack_require__(291);
+	var _yearView2 = _interopRequireDefault(_yearView);
 
-	var _join2 = _interopRequireDefault(_join);
+	var _util = __webpack_require__(379);
 
-	var _isInRange = __webpack_require__(292);
-
-	var _isInRange2 = _interopRequireDefault(_isInRange);
-
-	var _NavBar = __webpack_require__(293);
-
-	var _NavBar2 = _interopRequireDefault(_NavBar);
-
-	var _Footer = __webpack_require__(307);
-
-	var _Footer2 = _interopRequireDefault(_Footer);
-
-	var _bemFactory = __webpack_require__(304);
-
-	var _bemFactory2 = _interopRequireDefault(_bemFactory);
-
-	var _joinFunctions = __webpack_require__(306);
-
-	var _joinFunctions2 = _interopRequireDefault(_joinFunctions);
-
-	var _assignDefined = __webpack_require__(303);
-
-	var _assignDefined2 = _interopRequireDefault(_assignDefined);
-
-	var _BasicMonthView = __webpack_require__(313);
-
-	var _BasicMonthView2 = _interopRequireDefault(_BasicMonthView);
-
-	var _onKeyDown = __webpack_require__(311);
-
-	var _onKeyDown2 = _interopRequireDefault(_onKeyDown);
-
-	var _navKeys = __webpack_require__(312);
-
-	var _navKeys2 = _interopRequireDefault(_navKeys);
+	var _util2 = _interopRequireDefault(_util);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+	var Calendar = function (_React$Component) {
+	  (0, _inherits3.default)(Calendar, _React$Component);
 
-	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+	  function Calendar(props, context) {
+	    (0, _classCallCheck3.default)(this, Calendar);
 
-	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+	    var _this = (0, _possibleConstructorReturn3.default)(this, (0, _getPrototypeOf2.default)(Calendar).call(this, props, context));
 
-	var TODAY = void 0;
+	    _initialiseProps.call(_this);
 
-	var RENDER_DAY = function RENDER_DAY(props) {
-	  var divProps = (0, _objectAssign2.default)({}, props);
-
-	  delete divProps.date;
-	  delete divProps.dateMoment;
-	  delete divProps.day;
-	  delete divProps.isAfterMaxDate;
-	  delete divProps.isBeforeMinDate;
-	  delete divProps.inRange;
-	  delete divProps.timestamp;
-
-	  return _react2.default.createElement('div', divProps);
-	};
-
-	var isDateInMinMax = function isDateInMinMax(timestamp, props) {
-	  if (props.minDate && timestamp < props.minDate) {
-	    return false;
-	  }
-
-	  if (props.maxDate && timestamp > props.maxDate) {
-	    return false;
-	  }
-
-	  return true;
-	};
-
-	var _isValidActiveDate = function _isValidActiveDate(timestamp, props) {
-	  if (!props) {
-	    throw new Error('props is mandatory in isValidActiveDate');
-	  }
-
-	  var dayProps = props.dayPropsMap[timestamp];
-
-	  if (dayProps && dayProps.disabled) {
-	    return false;
-	  }
-
-	  return isDateInMinMax(timestamp, props);
-	};
-
-	var _isInView = function _isInView(mom, props) {
-	  if (!props) {
-	    throw new Error('props is mandatory in isInView');
-	  }
-
-	  var daysInView = props.daysInView;
-
-	  return (0, _isInRange2.default)(mom, { range: daysInView, inclusive: true });
-	};
-
-	var prepareViewDate = function prepareViewDate(props, state) {
-	  var viewDate = props.viewDate === undefined ? state.viewDate : props.viewDate;
-
-	  if (!viewDate && props.moment) {
-	    return (0, _toMoment2.default)(props.moment);
-	  }
-
-	  return viewDate;
-	};
-
-	var prepareDate = function prepareDate(props, state) {
-	  if (props.range) {
-	    return null;
-	  }
-
-	  return props.date === undefined ? state.date : props.date;
-	};
-
-	var prepareRange = function prepareRange(props, state) {
-	  if (props.moment) {
-	    return null;
-	  }
-
-	  return props.partialRange ? props.range || state.range : state.range || props.range;
-	};
-
-	var prepareActiveDate = function prepareActiveDate(props, state) {
-	  var fallbackDate = prepareDate(props, state) || (prepareRange(props, state) || [])[0];
-
-	  var activeDate = props.activeDate === undefined ?
-	  // only fallback to date if activeDate not specified
-	  state.activeDate || fallbackDate : props.activeDate;
-
-	  var daysInView = props.daysInView;
-
-	  if (activeDate && daysInView && props.constrainActiveInView) {
-	    var activeMoment = this.toMoment(activeDate);
-
-	    if (!_isInView(activeMoment, props)) {
-	      var date = fallbackDate;
-	      var dateMoment = this.toMoment(date);
-
-	      if (date && _isInView(dateMoment, props) && _isValidActiveDate(+dateMoment, props)) {
-	        return date;
-	      }
-
-	      return null;
-	    }
-	  }
-
-	  return _isValidActiveDate(+activeDate, props) ? activeDate : null;
-	};
-
-	var _renderFooter = function renderFooter(props, buttonHandlers) {
-	  if (!props.footer) {
-	    return null;
-	  }
-
-	  buttonHandlers = buttonHandlers || props;
-
-	  var renderFooter = props.renderFooter;
-
-	  var footerFnProps = {
-	    onTodayClick: buttonHandlers.onFooterTodayClick,
-	    onClearClick: buttonHandlers.onFooterClearClick,
-	    onOkClick: buttonHandlers.onFooterOkClick,
-	    onCancelClick: buttonHandlers.onFooterCancelClick
-	  };
-
-	  var childFooter = _react2.default.Children.toArray(props.children).filter(function (c) {
-	    return c && c.props && c.props.isDatePickerFooter;
-	  })[0];
-
-	  var childFooterProps = childFooter ? childFooter.props : null;
-
-	  if (childFooterProps) {
-	    // also take into account the props on childFooter
-	    // so we merge those with the other props already built
-	    Object.keys(footerFnProps).forEach(function (key) {
-	      if (childFooter.props[key]) {
-	        footerFnProps[key] = (0, _joinFunctions2.default)(footerFnProps[key], childFooter.props[key]);
-	      }
-	    });
-	  }
-
-	  var footerProps = (0, _assignDefined2.default)({}, footerFnProps, {
-	    todayButton: props.todayButton,
-	    todayButtonText: props.todayButtonText,
-	    clearButton: props.clearButton,
-	    clearButtonText: props.clearButtonText,
-
-	    okButton: props.okButton === undefined && !props.insideField ? false : props.okButton,
-
-	    okButtonText: props.okButtonText,
-
-	    cancelButton: props.cancelButton === undefined && !props.insideField ? false : props.cancelButton,
-
-	    cancelButtonText: props.cancelButtonText,
-
-	    clearDate: props.clearDate || props.footerClearDate,
-
-	    selectDate: props.selectDate
-	  });
-
-	  if (childFooter) {
-	    if (renderFooter) {
-	      return renderFooter((0, _objectAssign2.default)({}, childFooter.props, footerProps));
-	    }
-
-	    return _react2.default.cloneElement(childFooter, footerProps);
-	  }
-
-	  if (renderFooter) {
-	    return renderFooter(footerProps);
-	  }
-
-	  return _react2.default.createElement(_Footer2.default, footerProps);
-	};
-
-	var MonthView = function (_Component) {
-	  _inherits(MonthView, _Component);
-
-	  _createClass(MonthView, [{
-	    key: 'isInView',
-	    value: function isInView(mom, props) {
-	      return _isInView(mom, props || this.p);
-	    }
-	  }]);
-
-	  function MonthView(props) {
-	    _classCallCheck(this, MonthView);
-
-	    var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(MonthView).call(this, props));
+	    var date = props.date ? (0, _moment2.default)(_util2.default.toDate(props.date)) : null;
+	    var minDate = props.minDate ? (0, _moment2.default)(_util2.default.toDate(props.minDate)) : null;
+	    var maxDate = props.maxDate ? (0, _moment2.default)(_util2.default.toDate(props.maxDate)) : null;
+	    var format = props.format || 'MM-DD-YYYY';
+	    var minView = parseInt(props.minView, 10) || 0;
+	    var computableFormat = props.computableFormat || 'MM-DD-YYYY';
+	    var strictDateParsing = props.strictDateParsing || false;
+	    var parsingFormat = props.parsingFormat || format;
 
 	    _this.state = {
-	      range: props.defaultRange,
-	      date: props.defaultDate,
-	      hoverRange: props.defaultHoverRange,
-	      activeDate: props.defaultActiveDate,
-	      viewDate: props.defaultViewDate
+	      date: date,
+	      minDate: minDate,
+	      maxDate: maxDate,
+	      format: format,
+	      computableFormat: computableFormat,
+	      inputValue: date ? date.format(format) : undefined,
+	      views: ['days', 'months', 'years'],
+	      minView: minView,
+	      currentView: minView || 0,
+	      isVisible: false,
+	      strictDateParsing: strictDateParsing,
+	      parsingFormat: parsingFormat
 	    };
 	    return _this;
 	  }
 
-	  _createClass(MonthView, [{
-	    key: 'componentWillMount',
-	    value: function componentWillMount() {
-	      this.updateBem(this.props);
-	      this.updateToMoment(this.props);
+	  (0, _createClass3.default)(Calendar, [{
+	    key: 'componentDidMount',
+	    value: function componentDidMount() {
+	      document.addEventListener('click', this.documentClick);
 	    }
 	  }, {
 	    key: 'componentWillReceiveProps',
 	    value: function componentWillReceiveProps(nextProps) {
-	      if (nextProps.defaultClassName != this.props.defaultClassName) {
-	        this.updateBem(nextProps);
-	      }
-
-	      this.updateToMoment(nextProps);
-	    }
-	  }, {
-	    key: 'updateBem',
-	    value: function updateBem(props) {
-	      this.bem = (0, _bemFactory2.default)(props.defaultClassName);
-	    }
-	  }, {
-	    key: 'updateToMoment',
-	    value: function updateToMoment(props) {
-	      this.toMoment = function (value, dateFormat) {
-	        return (0, _toMoment2.default)(value, {
-	          locale: props.locale,
-	          dateFormat: dateFormat || props.dateFormat
-	        });
+	      var newState = {
+	        date: nextProps.date ? (0, _moment2.default)(_util2.default.toDate(nextProps.date)) : this.state.date,
+	        inputValue: nextProps.date ? (0, _moment2.default)(_util2.default.toDate(nextProps.date)).format(this.state.format) : null
 	      };
 
-	      TODAY = +this.toMoment().startOf('day');
+	      if (nextProps.disabled === true) {
+	        newState.isVisible = false;
+	      }
+
+	      this.setState(newState);
 	    }
 	  }, {
-	    key: 'prepareClassName',
-	    value: function prepareClassName(props) {
-	      return (0, _join2.default)(props.className, this.bem(), this.bem(null, 'theme-' + props.theme));
+	    key: 'componentWillUnmount',
+	    value: function componentWillUnmount() {
+	      document.removeEventListener('click', this.documentClick);
 	    }
 	  }, {
-	    key: 'prepareProps',
-	    value: function prepareProps(thisProps, state) {
-	      var _this2 = this;
-
-	      var props = this.p = (0, _objectAssign2.default)({}, thisProps);
-
-	      state = state || this.state;
-
-	      props.hoverRange = props.hoverRange === undefined ? this.state.hoverRange : props.hoverRange;
-
-	      props.dayPropsMap = {};
-	      props.className = this.prepareClassName && this.prepareClassName(props);
-
-	      var minDate = props.minDate;
-	      var maxDate = props.maxDate;
-
-
-	      if (minDate) {
-	        props.minDateMoment = this.toMoment(props.minDate).startOf('day');
-	        props.minDate = +props.minDateMoment;
-	      }
-
-	      if (maxDate) {
-	        props.maxDateMoment = this.toMoment(props.maxDate);
-	        props.maxDate = +props.maxDateMoment;
-	      }
-
-	      var date = prepareDate(props, state);
-
-	      if (date) {
-	        props.moment = props.moment || (props.range ? null : this.toMoment(date).startOf('day'));
-	        props.timestamp = props.moment ? +props.moment : null;
-	      }
-
-	      props.viewMoment = props.viewMoment || this.toMoment(prepareViewDate(props, state));
-
-	      if (props.constrainViewDate && props.minDate && props.viewMoment.isBefore(props.minDate)) {
-	        props.minConstrained = true;
-	        props.viewMoment = this.toMoment(props.minDate);
-	      }
-
-	      if (props.constrainViewDate && props.maxDate && props.viewMoment.isAfter(props.maxDate)) {
-	        props.maxConstrained = true;
-	        props.viewMoment = this.toMoment(props.maxDate);
-	      }
-
-	      props.viewMonthStart = this.toMoment(props.viewMoment).startOf('month');
-	      props.viewMonthEnd = this.toMoment(props.viewMoment).endOf('month');
-
-	      var range = prepareRange(props, state);
-
-	      if (range) {
-	        props.range = range.map(function (d) {
-	          return _this2.toMoment(d).startOf('day');
-	        });
-	        props.rangeStart = state.rangeStart || (props.range.length == 1 ? props.range[0] : null);
-	      }
-
-	      props.daysInView = (0, _BasicMonthView.getDaysInMonthView)(props.viewMoment, props);
-
-	      var activeDate = prepareActiveDate.call(this, props, state);
-
-	      if (activeDate) {
-	        props.activeDate = +this.toMoment(activeDate).startOf('day');
-	      }
-
-	      return props;
+	    key: 'checkIfDateDisabled',
+	    value: function checkIfDateDisabled(date) {
+	      return date && this.state.minDate && date.isBefore(this.state.minDate, 'day') || date && this.state.maxDate && date.isAfter(this.state.maxDate, 'day');
 	    }
 	  }, {
-	    key: 'getViewMoment',
-	    value: function getViewMoment() {
-	      return this.p.viewMoment;
-	    }
-	  }, {
-	    key: 'getViewSize',
-	    value: function getViewSize() {
-	      return 1;
-	    }
+	    key: 'setVisibility',
+	    value: function setVisibility(val) {
+	      var value = val !== undefined ? val : !this.state.isVisible;
+	      var eventMethod = value ? 'addEventListener' : 'removeEventListener';
 
-	    // handleViewMouseLeave(){
-	    //   this.state.range && this.setState({ range: null })
-	    // }
+	      document[eventMethod]('keydown', this.keyDown);
 
-	  }, {
-	    key: 'preparePrevNextClassName',
-	    value: function preparePrevNextClassName(timestamp, props) {
-	      var viewMonthStart = props.viewMonthStart;
-	      var viewMonthEnd = props.viewMonthEnd;
-
-
-	      var before = timestamp < viewMonthStart;
-	      var after = timestamp > viewMonthEnd;
-
-	      var thisMonth = !before && !after;
-
-	      return (0, _join2.default)(timestamp == TODAY && this.bem('day--today'), props.highlightToday && timestamp == TODAY && this.bem('day--today-highlight'), before && this.bem('day--prev-month'), before && !props.showDaysBeforeMonth && this.bem('day--hidden'), after && this.bem('day--next-month'), after && !props.showDaysAfterMonth && this.bem('day--hidden'), thisMonth && this.bem('day--this-month'));
-	    }
-	  }, {
-	    key: 'prepareMinMaxProps',
-	    value: function prepareMinMaxProps(timestamp, props) {
-	      var classes = [];
-
-	      var isBeforeMinDate = false;
-	      var isAfterMaxDate = false;
-
-	      var minDate = props.minDate;
-	      var maxDate = props.maxDate;
-
-
-	      if (minDate && timestamp < minDate) {
-	        classes.push(this.bem('day--disabled-min'));
-	        isBeforeMinDate = true;
+	      if (this.state.isVisible !== value && !this.props.disabled) {
+	        this.setState({ isVisible: value });
 	      }
-
-	      if (maxDate && timestamp > maxDate) {
-	        classes.push(this.bem('day--disabled-max'));
-	        isAfterMaxDate = true;
-	      }
-
-	      return {
-	        className: (0, _join2.default)(classes),
-	        isBeforeMinDate: isBeforeMinDate,
-	        isAfterMaxDate: isAfterMaxDate,
-	        disabled: isBeforeMinDate || isAfterMaxDate
-	      };
-	    }
-	  }, {
-	    key: 'prepareWeekendClassName',
-	    value: function prepareWeekendClassName(dateMoment, _ref) {
-	      var highlightWeekends = _ref.highlightWeekends;
-
-	      // const props = this.p
-	      var weekDay = dateMoment.day();
-
-	      // const weekendStartDay = getWeekendStartDay(props)
-
-	      if (weekDay === 0 /* Sunday */ || weekDay === 6 /* Saturday */) {
-	          // if (weekDay === weekendStartDay || weekDay === weekendStartDay + 1) {
-	          return (0, _join2.default)(this.bem('day--weekend'), highlightWeekends && this.bem('day--weekend-highlight'));
-	        }
-
-	      return '';
-	    }
-	  }, {
-	    key: 'prepareRangeProps',
-	    value: function prepareRangeProps(dateMoment, props) {
-	      var inRange = false;
-
-	      var className = [];
-
-	      var hoverRange = props.hoverRange;
-	      var range = props.range;
-
-
-	      if (range) {
-	        var _range = _slicedToArray(range, 2);
-
-	        var rangeStart = _range[0];
-	        var rangeEnd = _range[1];
-
-
-	        if (!range.length) {
-	          rangeStart = props.rangeStart;
-	        }
-
-	        // const rangeName = !props.partialRange ? 'hover-range' : 'range'
-	        var rangeName = 'range'; //hoverRange ? 'range' : 'hover-range'
-
-	        if (rangeStart && dateMoment.isSame(rangeStart)) {
-	          className.push(this.bem('day--' + rangeName + '-start'));
-	          className.push(this.bem('day--in-' + rangeName));
-
-	          if (!rangeEnd) {
-	            className.push(this.bem('day--' + rangeName + '-end'));
-	          }
-
-	          inRange = true;
-	        }
-
-	        if (rangeEnd && dateMoment.isSame(rangeEnd)) {
-	          className.push(this.bem('day--' + rangeName + '-end'));
-	          className.push(this.bem('day--in-' + rangeName));
-
-	          inRange = true;
-	        }
-
-	        if (!inRange && (0, _isInRange2.default)(dateMoment, range)) {
-	          className.push(this.bem('day--in-' + rangeName));
-
-	          inRange = true;
-	        }
-	      }
-
-	      if (range && range.length < 2 && hoverRange && (0, _isInRange2.default)(dateMoment, hoverRange)) {
-	        className.push(this.bem('day--in-hover-range'));
-
-	        if (dateMoment.isSame(hoverRange[0])) {
-	          className.push(this.bem('day--hover-range-start'));
-	        }
-
-	        if (dateMoment.isSame(hoverRange[1])) {
-	          className.push(this.bem('day--hover-range-end'));
-	        }
-	      }
-
-	      return {
-	        inRange: inRange,
-	        className: (0, _join2.default)(className)
-	      };
-	    }
-	  }, {
-	    key: 'prepareDayProps',
-	    value: function prepareDayProps(renderDayProps, props) {
-	      var timestamp = renderDayProps.timestamp;
-	      var dateMoment = renderDayProps.dateMoment;
-	      var className = renderDayProps.className;
-
-
-	      props = props || this.p;
-	      var result = {};
-
-	      var minMaxProps = this.prepareMinMaxProps(timestamp, props);
-	      var rangeProps = this.prepareRangeProps(dateMoment, props);
-
-	      var weekendClassName = this.prepareWeekendClassName(dateMoment, props);
-	      var prevNextClassName = this.preparePrevNextClassName(timestamp, props);
-
-	      var currentTimestamp = props.timestamp;
-
-	      (0, _objectAssign2.default)(result, minMaxProps, rangeProps, {
-	        children: _react2.default.createElement(
-	          'div',
-	          { className: this.bem('day-text') },
-	          renderDayProps.day
-	        ),
-	        className: (0, _join2.default)([minMaxProps.className, rangeProps.className, prevNextClassName, weekendClassName, timestamp == currentTimestamp ? this.bem('day--value') : null, timestamp == props.activeDate ? this.bem('day--active') : null, className])
-	      });
-
-	      if (!result.disabled && props.isDisabledDay) {
-	        result.disabled = props.isDisabledDay(renderDayProps, props);
-	      }
-
-	      return result;
-	    }
-	  }, {
-	    key: 'focus',
-	    value: function focus() {
-	      var domNode = (0, _reactDom.findDOMNode)(this);
-
-	      if (domNode) {
-	        domNode.focus();
-	      }
-	    }
-	  }, {
-	    key: 'onDayTextMouseEnter',
-	    value: function onDayTextMouseEnter(_ref2) {
-	      var dateMoment = _ref2.dateMoment;
-	      var timestamp = _ref2.timestamp;
-
-	      if (!this.state.focused) {
-	        this.focus();
-	      }
-
-	      this.onActiveDateChange({ dateMoment: dateMoment, timestamp: timestamp });
-	    }
-	  }, {
-	    key: 'renderDay',
-	    value: function renderDay(renderProps) {
-	      var _this3 = this;
-
-	      var props = this.p;
-
-	      var _renderProps = renderProps;
-	      var dateMoment = _renderProps.dateMoment;
-	      var timestamp = _renderProps.timestamp;
-
-
-	      (0, _objectAssign2.default)(renderProps, this.prepareDayProps(renderProps, props));
-
-	      if (props.range && props.highlightRangeOnMouseMove) {
-	        renderProps.onMouseEnter = this.handleDayMouseEnter.bind(this, renderProps);
-	      }
-
-	      if (typeof props.onRenderDay === 'function') {
-	        renderProps = props.onRenderDay(renderProps);
-	      }
-
-	      if (renderProps.disabled) {
-	        renderProps.className = (0, _join2.default)(this.bem('day--disabled'), renderProps.className);
-	      } else {
-	        (function () {
-	          var eventParam = { dateMoment: dateMoment, timestamp: timestamp };
-
-	          var onClick = _this3.handleClick.bind(_this3, eventParam);
-	          var prevOnClick = renderProps.onClick;
-
-	          renderProps.onClick = prevOnClick ? function () {
-	            prevOnClick.apply(undefined, arguments);
-	            onClick.apply(undefined, arguments);
-	          } : onClick;
-
-	          if (props.activateOnHover && _this3.props.activeDate !== null) {
-	            (function () {
-	              var onMouseEnter = _this3.onDayTextMouseEnter.bind(_this3, eventParam);
-	              var prevOnMouseEnter = renderProps.onMouseEnter;
-
-	              renderProps.onMouseEnter = prevOnMouseEnter ? function () {
-	                prevOnMouseEnter.apply(undefined, arguments);
-	                onMouseEnter.apply(undefined, arguments);
-	              } : onMouseEnter;
-	            })();
-	          }
-	        })();
-	      }
-
-	      props.dayPropsMap[timestamp] = renderProps;
-
-	      var renderFunction = props.renderDay || RENDER_DAY;
-
-	      var result = renderFunction(renderProps);
-
-	      if (result === undefined) {
-	        result = RENDER_DAY(renderProps);
-	      }
-
-	      return result;
 	    }
 	  }, {
 	    key: 'render',
 	    value: function render() {
-	      var props = this.p = this.prepareProps(this.props);
+	      // its ok for this.state.date to be null, but we should never
+	      // pass null for the date into the calendar pop up, as we want
+	      // it to just start on todays date if there is no date set
+	      var calendarDate = this.state.date || (0, _moment2.default)();
+	      var view = void 0;
 
-	      var basicViewProps = (0, _objectAssign2.default)({}, props);
-
-	      delete basicViewProps.activeDate;
-	      delete basicViewProps.activateOnHover;
-	      delete basicViewProps.arrows;
-
-	      delete basicViewProps.cleanup;
-	      delete basicViewProps.constrainViewDate;
-	      delete basicViewProps.constrainActiveInView;
-	      delete basicViewProps.dayPropsMap;
-	      delete basicViewProps.date;
-	      delete basicViewProps.defaultActiveDate;
-	      delete basicViewProps.defaultDate;
-	      delete basicViewProps.defaultViewDate;
-
-	      delete basicViewProps.enableHistoryView;
-
-	      delete basicViewProps.focusOnFooterMouseDown;
-	      delete basicViewProps.focusOnNavMouseDown;
-	      delete basicViewProps.footer;
-	      delete basicViewProps.footerClearDate;
-
-	      delete basicViewProps.getTransitionTime;
-
-	      delete basicViewProps.highlightRangeOnMouseMove;
-	      delete basicViewProps.highlightToday;
-	      delete basicViewProps.highlightWeekends;
-	      delete basicViewProps.hoverRange;
-
-	      delete basicViewProps.insideField;
-	      delete basicViewProps.isDatePicker;
-
-	      delete basicViewProps.maxConstrained;
-	      delete basicViewProps.maxDate;
-	      delete basicViewProps.maxDateMoment;
-	      delete basicViewProps.minConstrained;
-	      delete basicViewProps.minDate;
-	      delete basicViewProps.minDateMoment;
-
-	      delete basicViewProps.navBarArrows;
-	      delete basicViewProps.navNext;
-	      delete basicViewProps.navigation;
-	      delete basicViewProps.navOnDateClick;
-	      delete basicViewProps.navPrev;
-	      delete basicViewProps.onActiveDateChange;
-	      delete basicViewProps.onChange;
-	      delete basicViewProps.onViewDateChange;
-	      delete basicViewProps.onTransitionStart;
-
-	      delete basicViewProps.partialRange;
-	      delete basicViewProps.range;
-	      delete basicViewProps.renderNavBar;
-
-	      delete basicViewProps.showDaysAfterMonth;
-	      delete basicViewProps.showDaysBeforeMonth;
-
-	      delete basicViewProps.theme;
-
-	      delete basicViewProps.viewDate;
-	      delete basicViewProps.viewMonthEnd;
-	      delete basicViewProps.viewMonthStart;
-
-	      if (typeof props.cleanup == 'function') {
-	        props.cleanup(basicViewProps);
+	      switch (this.state.currentView) {
+	        case 0:
+	          view = _react2.default.createElement(_dayView2.default, {
+	            date: calendarDate,
+	            nextView: this.nextView,
+	            maxDate: this.state.maxDate,
+	            minDate: this.state.minDate,
+	            setDate: this.setDate
+	          });
+	          break;
+	        case 1:
+	          view = _react2.default.createElement(_monthView2.default, {
+	            date: calendarDate,
+	            nextView: this.nextView,
+	            maxDate: this.state.maxDate,
+	            minDate: this.state.minDate,
+	            prevView: this.prevView,
+	            setDate: this.setDate
+	          });
+	          break;
+	        case 2:
+	          view = _react2.default.createElement(_yearView2.default, {
+	            date: calendarDate,
+	            maxDate: this.state.maxDate,
+	            minDate: this.state.minDate,
+	            prevView: this.prevView,
+	            setDate: this.setDate
+	          });
+	          break;
+	        default:
+	          view = _react2.default.createElement(_dayView2.default, {
+	            date: calendarDate,
+	            nextView: this.nextView,
+	            maxDate: this.state.maxDate,
+	            minDate: this.state.minDate,
+	            setDate: this.setDate
+	          });
 	      }
 
-	      return _react2.default.createElement(_BasicMonthView2.default, _extends({
-	        tabIndex: 0
-	      }, basicViewProps, {
-
-	        renderChildren: this.renderChildren,
-
-	        onKeyDown: this.onViewKeyDown,
-	        onFocus: this.onFocus,
-	        onBlur: this.onBlur,
-
-	        renderDay: this.renderDay,
-	        viewMoment: props.viewMoment,
-	        onMouseLeave: props.highlightRangeOnMouseMove && this.handleViewMouseLeave
-	      }));
-	    }
-	  }, {
-	    key: 'handleViewMouseLeave',
-	    value: function handleViewMouseLeave(event) {
-	      if (this.props.onMouseLeave) {
-	        this.props.onMouseLeave(event);
-	      }
-
-	      if (this.state.hoverRange) {
-	        this.setHoverRange(null);
-	      }
-	    }
-	  }, {
-	    key: 'renderChildren',
-	    value: function renderChildren(children) {
-	      var props = this.p;
-	      var navBar = this.renderNavBar(props);
-	      var footer = this.renderFooter(props);
-
-	      var result = [navBar, children, footer];
-
-	      if (props.renderChildren) {
-	        return props.renderChildren(result);
-	      }
-
-	      return result;
-	    }
-	  }, {
-	    key: 'focusFromFooter',
-	    value: function focusFromFooter() {
-	      if (!this.isFocused() && this.props.focusOnFooterMouseDown) {
-	        this.focus();
-	      }
-	    }
-	  }, {
-	    key: 'onFooterTodayClick',
-	    value: function onFooterTodayClick() {
-	      this.focusFromFooter();
-
-	      if (this.props.onFooterTodayClick) {
-	        if (this.props.onFooterTodayClick() === false) {
-	          return;
-	        }
-	      }
-
-	      this.select({ dateMoment: this.toMoment(Date.now()) });
-	    }
-	  }, {
-	    key: 'onFooterClearClick',
-	    value: function onFooterClearClick() {
-	      this.focusFromFooter();
-
-	      if (this.props.onFooterClearClick) {
-	        if (this.props.onFooterClearClick() === false) {
-	          return;
-	        }
-	      }
-
-	      this.select({ dateMoment: null });
-	    }
-	  }, {
-	    key: 'onFooterOkClick',
-	    value: function onFooterOkClick() {
-	      this.focusFromFooter();
-
-	      if (this.props.onFooterOkClick) {
-	        this.props.onFooterOkClick();
-	      }
-	    }
-	  }, {
-	    key: 'onFooterCancelClick',
-	    value: function onFooterCancelClick() {
-	      if (this.props.onFooterCancelClick) {
-	        this.props.onFooterCancelClick();
-	      }
-	    }
-	  }, {
-	    key: 'renderFooter',
-	    value: function renderFooter(props) {
-	      return _renderFooter((0, _objectAssign2.default)({}, props, {
-	        selectDate: this.select,
-	        owner: this
-	      }), this);
-	    }
-	  }, {
-	    key: 'renderNavBar',
-	    value: function renderNavBar(props) {
-	      var _this4 = this;
-
-	      var theme = props.theme;
-
-	      var childNavBar = _react2.default.Children.toArray(props.children).filter(function (c) {
-	        return c && c.props && c.props.isDatePickerNavBar;
-	      })[0];
-
-	      var ref = function ref(navBar) {
-	        _this4.navBar = navBar;
-	      };
-
-	      if (!childNavBar) {
-	        if (props.navigation || props.renderNavBar) {
-	          return this.renderNavBarComponent((0, _assignDefined2.default)({
-	            // prevDisabled,
-	            // nextDisabled,
-	            minDate: props.minDate,
-	            maxDate: props.maxDate,
-	            theme: theme,
-	            secondary: true,
-	            date: props.moment,
-	            viewMoment: props.viewMoment,
-	            onViewDateChange: this.onNavViewDateChange,
-	            onMouseDown: this.onNavMouseDown,
-	            arrows: props.navBarArrows,
-	            ref: ref
-	          }, {
-	            enableHistoryView: props.enableHistoryView
-	          }));
-	        }
-
-	        return null;
-	      }
-
-	      var navBarProps = (0, _objectAssign2.default)({}, childNavBar.props, (0, _assignDefined2.default)({
-	        viewMoment: props.viewMoment,
-	        date: props.moment,
-	        theme: theme,
-	        ref: ref,
-	        minDate: props.minDate,
-	        maxDate: props.maxDate
-	      }, {
-	        enableHistoryView: props.enableHistoryView
-	      }));
-
-	      var prevOnViewDateChange = navBarProps.onViewDateChange;
-	      var onViewDateChange = this.onViewDateChange;
-
-	      if (prevOnViewDateChange) {
-	        onViewDateChange = function onViewDateChange() {
-	          prevOnViewDateChange.apply(undefined, arguments);
-	          _this4.onNavViewDateChange.apply(_this4, arguments);
-	        };
-	      }
-
-	      navBarProps.onViewDateChange = onViewDateChange;
-
-	      var prevOnMouseDown = navBarProps.onMouseDown;
-	      var onMouseDown = this.onNavMouseDown;
-
-	      if (prevOnMouseDown) {
-	        onMouseDown = function onMouseDown() {
-	          prevOnMouseDown.apply(undefined, arguments);
-	          _this4.onNavMouseDown.apply(_this4, arguments);
-	        };
-	      }
-
-	      navBarProps.onMouseDown = onMouseDown;
-
-	      if (navBarProps) {
-	        return this.renderNavBarComponent(navBarProps);
-	      }
-
-	      return null;
-	    }
-	  }, {
-	    key: 'onNavMouseDown',
-	    value: function onNavMouseDown(event) {
-	      if (this.props.focusOnNavMouseDown && !this.isFocused()) {
-	        this.focus();
-	      }
-	    }
-	  }, {
-	    key: 'renderNavBarComponent',
-	    value: function renderNavBarComponent(navBarProps) {
-	      if (this.props.renderNavBar) {
-	        return this.props.renderNavBar(navBarProps);
-	      }
-
-	      return _react2.default.createElement(_NavBar2.default, navBarProps);
-	    }
-	  }, {
-	    key: 'isFocused',
-	    value: function isFocused() {
-	      return this.state.focused;
-	    }
-	  }, {
-	    key: 'onFocus',
-	    value: function onFocus(event) {
-	      this.setState({
-	        focused: true
+	      var todayText = this.props.todayText || (_moment2.default.locale() === 'de' ? 'Heute' : 'Today');
+	      var calendarClass = (0, _classnames2.default)({
+	        'input-calendar-wrapper': true,
+	        'icon-hidden': this.props.hideIcon
 	      });
 
-	      this.props.onFocus(event);
-	    }
-	  }, {
-	    key: 'onBlur',
-	    value: function onBlur(event) {
-	      this.setState({
-	        focused: false
-	      });
+	      var calendar = !this.state.isVisible || this.props.disabled ? '' : _react2.default.createElement(
+	        'div',
+	        { className: calendarClass, onClick: this.calendarClick },
+	        view,
+	        _react2.default.createElement(
+	          'span',
+	          {
+	            className: 'today-btn' + (this.checkIfDateDisabled((0, _moment2.default)().startOf('day')) ? ' disabled' : ''),
+	            onClick: this.todayClick },
+	          todayText
+	        )
+	      );
 
-	      this.hideHistoryView();
+	      var readOnly = false;
 
-	      this.props.onBlur(event);
-	    }
-	  }, {
-	    key: 'showHistoryView',
-	    value: function showHistoryView() {
-	      if (this.navBar) {
-	        this.navBar.showHistoryView();
-	      }
-	    }
-	  }, {
-	    key: 'hideHistoryView',
-	    value: function hideHistoryView() {
-	      if (this.navBar) {
-	        this.navBar.hideHistoryView();
-	      }
-	    }
-	  }, {
-	    key: 'isHistoryViewVisible',
-	    value: function isHistoryViewVisible() {
-	      if (this.navBar) {
-	        return this.navBar.isHistoryViewVisible();
-	      }
-
-	      return false;
-	    }
-	  }, {
-	    key: 'tryNavBarKeyDown',
-	    value: function tryNavBarKeyDown(event) {
-	      if (this.navBar && this.navBar.getHistoryView) {
-	        var historyView = this.navBar.getHistoryView();
-
-	        if (historyView && historyView.onKeyDown) {
-	          historyView.onKeyDown(event);
-	          return true;
+	      if (this.props.hideTouchKeyboard) {
+	        // do not break server side rendering:
+	        try {
+	          if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
+	            readOnly = true;
+	          }
+	        } catch (e) {
+	          console.warn(e); //eslint-disable-line
 	        }
 	      }
 
-	      return false;
-	    }
-	  }, {
-	    key: 'onViewKeyDown',
-	    value: function onViewKeyDown(event) {
-	      if (this.tryNavBarKeyDown(event)) {
-	        return;
-	      }
-
-	      return _onKeyDown2.default.call(this, event);
-	    }
-	  }, {
-	    key: 'confirm',
-	    value: function confirm(date, event) {
-	      event.preventDefault();
-
-	      if (this.props.confirm) {
-	        return this.props.confirm(date, event);
-	      }
-
-	      var dateMoment = this.toMoment(date);
-
-	      this.select({ dateMoment: dateMoment, timestamp: +dateMoment }, event);
-
-	      return undefined;
-	    }
-	  }, {
-	    key: 'navigate',
-	    value: function navigate(dir, event) {
-	      var _this5 = this;
-
-	      var props = this.p;
-
-	      var getNavigationDate = function getNavigationDate(dir, date, dateFormat) {
-	        var mom = _moment2.default.isMoment(date) ? date : _this5.toMoment(date, dateFormat);
-
-	        return typeof dir == 'function' ? dir(mom) : mom.add(dir, 'day');
-	      };
-
-	      if (props.navigate) {
-	        return props.navigate(dir, event, getNavigationDate);
-	      }
-
-	      event.preventDefault();
-
-	      if (props.activeDate) {
-	        var nextMoment = getNavigationDate(dir, props.activeDate);
-
-	        this.gotoViewDate({ dateMoment: nextMoment });
-	      }
-
-	      return undefined;
-	    }
-	  }, {
-	    key: 'handleDayMouseEnter',
-	    value: function handleDayMouseEnter(dayProps) {
-	      var props = this.p;
-
-	      var rangeStart = props.rangeStart;
-	      var range = props.range;
-
-
-	      var partial = !!(rangeStart && range.length < 2);
-
-	      if (partial) {
-	        this.setHoverRange((0, _clampRange2.default)([rangeStart, dayProps.dateMoment]));
-	      }
-	    }
-	  }, {
-	    key: 'handleClick',
-	    value: function handleClick(_ref3, event) {
-	      var timestamp = _ref3.timestamp;
-	      var dateMoment = _ref3.dateMoment;
-
-	      var props = this.p;
-
-	      if (props.minDate && timestamp < props.minDate) {
-	        return;
-	      }
-
-	      if (props.maxDate && timestamp > props.maxDate) {
-	        return;
-	      }
-
-	      event.target.value = timestamp;
-
-	      this.select({ dateMoment: dateMoment, timestamp: timestamp }, event);
-	    }
-	  }, {
-	    key: 'select',
-	    value: function select(_ref4, event) {
-	      var dateMoment = _ref4.dateMoment;
-	      var timestamp = _ref4.timestamp;
-
-	      if (dateMoment && timestamp === undefined) {
-	        timestamp = +dateMoment;
-	      }
-
-	      if (this.props.select) {
-	        return this.props.select({ dateMoment: dateMoment, timestamp: timestamp }, event);
-	      }
-
-	      if (!timestamp) {
-	        timestamp = +dateMoment;
-	      }
-
-	      this.gotoViewDate({ dateMoment: dateMoment, timestamp: timestamp });
-
-	      var props = this.p;
-	      var range = props.range;
-
-	      if (range) {
-	        this.selectRange({ dateMoment: dateMoment, timestamp: timestamp }, event);
+	      var calendarIcon = void 0;
+	      if (this.props.customIcon == null) {
+	        // Do not show calendar icon if hideIcon is true
+	        calendarIcon = this.props.hideIcon || this.props.disabled ? '' : _react2.default.createElement(
+	          'span',
+	          { className: 'icon-wrapper calendar-icon', onClick: this.toggleClick },
+	          _react2.default.createElement(
+	            'svg',
+	            { width: '16', height: '16', viewBox: '0 0 16 16' },
+	            _react2.default.createElement('path', { d: 'M5 6h2v2h-2zM8 6h2v2h-2zM11 6h2v2h-2zM2 12h2v2h-2zM5 12h2v2h-2zM8 12h2v2h-2zM5 9h2v2h-2zM8 9h2v2h-2zM11 9h2v2h-2zM2 9h2v2h-2zM13 0v1h-2v-1h-7v1h-2v-1h-2v16h15v-16h-2zM14 15h-13v-11h13v11z'
+	            })
+	          )
+	        );
 	      } else {
-	        this.onChange({ dateMoment: dateMoment, timestamp: timestamp }, event);
-	      }
-
-	      return undefined;
-	    }
-	  }, {
-	    key: 'selectRange',
-	    value: function selectRange(_ref5, event) {
-	      var dateMoment = _ref5.dateMoment;
-	      var timestamp = _ref5.timestamp;
-
-	      var props = this.p;
-	      var range = props.range;
-	      var rangeStart = props.rangeStart;
-
-	      if (dateMoment == null) {
-	        this.setState({
-	          rangeStart: null
-	        });
-	        this.onRangeChange([], event);
-	        return;
-	      }
-
-	      if (!rangeStart) {
-	        this.setState({
-	          rangeStart: dateMoment
-	        });
-
-	        if (range.length == 2) {
-	          this.onRangeChange([], event);
-	        }
-	      } else {
-	        this.setState({
-	          rangeStart: null
-	        });
-
-	        this.onRangeChange((0, _clampRange2.default)([rangeStart, dateMoment]), event);
-	      }
-	    }
-	  }, {
-	    key: 'format',
-	    value: function format(mom) {
-	      return mom == null ? '' : mom.format(this.props.dateFormat);
-	    }
-	  }, {
-	    key: 'setHoverRange',
-	    value: function setHoverRange(hoverRange) {
-	      if (this.props.hoverRange === undefined) {
-	        this.setState({
-	          hoverRange: hoverRange
+	        calendarIcon = _react2.default.createElement('span', {
+	          className: (0, _classnames2.default)('icon-wrapper', 'calendar-icon', this.props.customIcon),
+	          onClick: this.toggleClick
 	        });
 	      }
 
-	      if (this.props.onHoverRangeChange) {
-	        this.props.onHoverRangeChange(hoverRange);
-	      }
-	    }
-	  }, {
-	    key: 'onRangeChange',
-	    value: function onRangeChange(range, event) {
-	      var _this6 = this;
+	      var inputClass = this.props.inputFieldClass || 'input-calendar-field';
 
-	      this.setState({
-	        range: this.props.range === undefined ? range : null
-	      });
-
-	      this.setHoverRange(null);
-
-	      if (this.props.onRangeChange) {
-	        var newRange = range.map(function (m) {
-	          var dateMoment = _this6.toMoment(m);
-
-	          return {
-	            dateString: dateMoment.format(_this6.props.dateFormat),
-	            dateMoment: dateMoment,
-	            timestamp: +dateMoment
-	          };
-	        });
-
-	        var formatted = newRange.map(function (o) {
-	          return o.dateString;
-	        });
-
-	        this.props.onRangeChange(formatted, newRange, event);
-	      }
-	    }
-	  }, {
-	    key: 'onChange',
-	    value: function onChange(_ref6, event) {
-	      var dateMoment = _ref6.dateMoment;
-	      var timestamp = _ref6.timestamp;
-
-	      if (this.props.date === undefined) {
-	        this.setState({
-	          date: timestamp
-	        });
-	      }
-
-	      if (this.props.onChange) {
-	        var dateString = this.format(dateMoment);
-	        this.props.onChange(dateString, { dateMoment: dateMoment, timestamp: timestamp, dateString: dateString }, event);
-	      }
-	    }
-	  }, {
-	    key: 'onNavViewDateChange',
-	    value: function onNavViewDateChange(dateString, _ref7) {
-	      var dateMoment = _ref7.dateMoment;
-	      var timestamp = _ref7.timestamp;
-
-	      this.onViewDateChange({ dateMoment: dateMoment, timestamp: timestamp });
-	    }
-	  }, {
-	    key: 'onViewDateChange',
-	    value: function onViewDateChange(_ref8) {
-	      var dateMoment = _ref8.dateMoment;
-	      var timestamp = _ref8.timestamp;
-
-	      var minDate = void 0;
-	      var maxDate = void 0;
-
-	      if (this.p.minDateMoment) {
-	        minDate = +this.toMoment(this.p.minDateMoment).startOf('month');
-	      }
-	      if (this.p.maxDateMoment) {
-	        maxDate = +this.toMoment(this.p.maxDateMoment).endOf('month');
-	      }
-	      if (this.props.constrainViewDate && !isDateInMinMax(timestamp, {
-	        minDate: minDate,
-	        maxDate: maxDate
-	      })) {
-	        return;
-	      }
-
-	      if (this.props.viewDate === undefined && this.props.navOnDateClick) {
-	        this.setState({
-	          viewDate: timestamp
-	        });
-	      }
-
-	      if (this.props.onViewDateChange) {
-	        var dateString = this.format(dateMoment);
-
-	        this.props.onViewDateChange(dateString, { dateMoment: dateMoment, dateString: dateString, timestamp: timestamp });
-	      }
-	    }
-	  }, {
-	    key: 'isValidActiveDate',
-	    value: function isValidActiveDate(date, props) {
-	      return _isValidActiveDate(date, props || this.p);
-	    }
-	  }, {
-	    key: 'onActiveDateChange',
-	    value: function onActiveDateChange(_ref9) {
-	      var dateMoment = _ref9.dateMoment;
-	      var timestamp = _ref9.timestamp;
-
-	      if (!_isValidActiveDate(timestamp, this.p)) {
-	        return;
-	      }
-
-	      var props = this.p;
-	      var range = props.range;
-
-	      if (range && props.rangeStart) {
-	        var newRange = (0, _clampRange2.default)([props.rangeStart, dateMoment]);
-
-	        if (props.partialRange) {
-	          this.onRangeChange(newRange);
-	        }
-
-	        this.setState({
-	          rangeStart: props.rangeStart,
-	          range: newRange
-	        });
-	      }
-
-	      if (this.props.activeDate === undefined) {
-	        this.setState({
-	          activeDate: timestamp
-	        });
-	      }
-
-	      if (this.props.onActiveDateChange) {
-	        var dateString = this.format(dateMoment);
-	        this.props.onActiveDateChange(dateString, { dateMoment: dateMoment, timestamp: timestamp, dateString: dateString });
-	      }
-	    }
-	  }, {
-	    key: 'gotoViewDate',
-	    value: function gotoViewDate(_ref10) {
-	      var dateMoment = _ref10.dateMoment;
-	      var timestamp = _ref10.timestamp;
-
-	      if (!timestamp) {
-	        timestamp = dateMoment == null ? null : +dateMoment;
-	      }
-
-	      this.onViewDateChange({ dateMoment: dateMoment, timestamp: timestamp });
-	      this.onActiveDateChange({ dateMoment: dateMoment, timestamp: timestamp });
+	      return _react2.default.createElement(
+	        'div',
+	        { className: 'input-calendar' },
+	        _react2.default.createElement('input', {
+	          name: this.props.inputName,
+	          className: inputClass,
+	          id: this.props.inputFieldId,
+	          onBlur: this.inputBlur,
+	          onChange: this.changeDate,
+	          onFocus: this.inputFocus,
+	          placeholder: this.props.placeholder,
+	          readOnly: readOnly,
+	          disabled: this.props.disabled,
+	          type: 'text',
+	          value: this.state.inputValue
+	        }),
+	        calendarIcon,
+	        calendar
+	      );
 	    }
 	  }]);
+	  return Calendar;
+	}(_react2.default.Component);
 
-	  return MonthView;
-	}(_reactClass2.default);
+	var _initialiseProps = function _initialiseProps() {
+	  var _this2 = this;
 
-	exports.default = MonthView;
+	  this.changeDate = function (e) {
+	    //eslint-disable-line
+	    _this2.setState({ inputValue: e.target.value });
+	  };
 
+	  this.documentClick = function (e) {
+	    e.preventDefault();
+	    if (!_this2.state.isCalendar) {
+	      _this2.setVisibility(false);
+	    }
+	    _this2.setState({ isCalendar: false });
+	  };
 
-	MonthView.defaultProps = {
-	  defaultClassName: 'react-date-picker__month-view',
-	  dateFormat: 'YYYY-MM-DD',
+	  this.inputBlur = function (e) {
+	    var newDate = null;
+	    var computableDate = null;
+	    var date = _this2.state.inputValue;
+	    var format = _this2.state.format;
+	    var parsingFormat = _this2.state.parsingFormat;
 
-	  theme: 'default',
+	    if (date) {
+	      // format, with strict parsing true, so we catch bad dates
+	      newDate = (0, _moment2.default)(date, parsingFormat, true);
+	      // if the new date didn't match our format, see if the native
+	      // js date can parse it
+	      if (!newDate.isValid() && !_this2.props.strictDateParsing) {
+	        var d = new Date(date);
+	        // if native js cannot parse, just make a new date
+	        if (isNaN(d.getTime())) {
+	          d = new Date();
+	        }
+	        newDate = (0, _moment2.default)(d);
+	      }
 
-	  onBlur: function onBlur() {},
-	  onFocus: function onFocus() {},
+	      computableDate = newDate.format(_this2.state.computableFormat);
+	    }
 
-	  footerClearDate: null,
+	    _this2.setState({
+	      date: newDate,
+	      inputValue: newDate ? newDate.format(format) : null
+	    });
 
-	  partialRange: true,
+	    if (_this2.props.onChange) {
+	      _this2.props.onChange(computableDate);
+	    }
 
-	  activateOnHover: false,
-	  constrainActiveInView: false,
+	    if (_this2.props.onBlur) {
+	      _this2.props.onBlur(e, computableDate);
+	    }
+	  };
 
-	  showDaysBeforeMonth: true,
-	  showDaysAfterMonth: true,
+	  this.inputFocus = function (e) {
+	    if (_this2.props.openOnInputFocus) {
+	      _this2.toggleClick();
+	    }
 
-	  highlightWeekends: true,
-	  highlightToday: true,
+	    if (_this2.props.onFocus) {
+	      _this2.props.onFocus(e);
+	    }
+	  };
 
-	  navOnDateClick: true,
-	  navigation: true,
+	  this.keyDown = function (e) {
+	    _util2.default.keyDownActions.call(_this2, e.keyCode);
+	  };
 
-	  constrainViewDate: true,
-	  highlightRangeOnMouseMove: false,
+	  this.nextView = function () {
+	    if (_this2.checkIfDateDisabled(_this2.state.date)) return;
+	    _this2.setState({ currentView: ++_this2.state.currentView });
+	  };
 
-	  isDatePicker: true,
+	  this.prevView = function (date) {
+	    var newDate = date;
+	    if (_this2.state.minDate && date.isBefore(_this2.state.minDate, 'day')) {
+	      newDate = _this2.state.minDate.clone();
+	    }
 
-	  enableHistoryView: true,
-	  focusOnNavMouseDown: true,
-	  focusOnFooterMouseDown: true
+	    if (_this2.state.maxDate && date.isAfter(_this2.state.maxDate, 'day')) {
+	      newDate = _this2.state.maxDate.clone();
+	    }
+
+	    if (_this2.state.currentView === _this2.state.minView) {
+	      _this2.setState({
+	        date: newDate,
+	        inputValue: date.format(_this2.state.format),
+	        isVisible: false
+	      });
+	      if (_this2.props.onChange) {
+	        _this2.props.onChange(date.format(_this2.state.computableFormat));
+	      }
+	    } else {
+	      _this2.setState({
+	        date: date,
+	        currentView: --_this2.state.currentView
+	      });
+	    }
+	  };
+
+	  this.setDate = function (date) {
+	    var isDayView = arguments.length <= 1 || arguments[1] === undefined ? true : arguments[1];
+
+	    if (_this2.checkIfDateDisabled(date)) return;
+
+	    _this2.setState({
+	      date: date,
+	      inputValue: date.format(_this2.state.format),
+	      isVisible: _this2.props.closeOnSelect && isDayView ? !_this2.state.isVisible : _this2.state.isVisible
+	    });
+
+	    if (_this2.props.onChange) {
+	      _this2.props.onChange(date.format(_this2.state.computableFormat));
+	    }
+	  };
+
+	  this.calendarClick = function () {
+	    _this2.setState({ isCalendar: true });
+	  };
+
+	  this.todayClick = function () {
+	    var today = (0, _moment2.default)().startOf('day');
+
+	    if (_this2.checkIfDateDisabled(today)) return;
+
+	    _this2.setState({
+	      date: today,
+	      inputValue: today.format(_this2.state.format),
+	      currentView: _this2.state.minView
+	    });
+
+	    if (_this2.props.onChange) {
+	      _this2.props.onChange(today.format(_this2.state.computableFormat));
+	    }
+	  };
+
+	  this.toggleClick = function () {
+	    _this2.setState({ isCalendar: true });
+	    _this2.setVisibility();
+	  };
 	};
 
-	MonthView.propTypes = {
-	  navOnDateClick: _react.PropTypes.bool,
-	  isDisabledDay: _react.PropTypes.func,
-
-	  onChange: _react.PropTypes.func,
-	  onViewDateChange: _react.PropTypes.func,
-	  onActiveDateChange: _react.PropTypes.func
+	Calendar.propTypes = {
+	  closeOnSelect: _react2.default.PropTypes.bool,
+	  computableFormat: _react2.default.PropTypes.string,
+	  strictDateParsing: _react2.default.PropTypes.bool,
+	  parsingFormat: _react2.default.PropTypes.oneOfType([_react2.default.PropTypes.string, _react2.default.PropTypes.arrayOf(_react2.default.PropTypes.string)]),
+	  date: _react2.default.PropTypes.any,
+	  minDate: _react2.default.PropTypes.any,
+	  maxDate: _react2.default.PropTypes.any,
+	  format: _react2.default.PropTypes.string,
+	  inputName: _react2.default.PropTypes.string,
+	  inputFieldId: _react2.default.PropTypes.string,
+	  inputFieldClass: _react2.default.PropTypes.string,
+	  minView: _react2.default.PropTypes.number,
+	  onBlur: _react2.default.PropTypes.func,
+	  onChange: _react2.default.PropTypes.func,
+	  onFocus: _react2.default.PropTypes.func,
+	  openOnInputFocus: _react2.default.PropTypes.bool,
+	  placeholder: _react2.default.PropTypes.string,
+	  hideTouchKeyboard: _react2.default.PropTypes.bool,
+	  hideIcon: _react2.default.PropTypes.bool,
+	  customIcon: _react2.default.PropTypes.string,
+	  todayText: _react2.default.PropTypes.string,
+	  disabled: _react2.default.PropTypes.bool
 	};
 
-	exports.NAV_KEYS = _navKeys2.default;
-	exports.renderFooter = _renderFooter;
+	exports.default = Calendar;
+
+/***/ },
+/* 182 */
+/***/ function(module, exports, __webpack_require__) {
+
+	module.exports = { "default": __webpack_require__(183), __esModule: true };
 
 /***/ },
 /* 183 */
 /***/ function(module, exports, __webpack_require__) {
 
-	'use strict';
-
-	var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
-
-	var _get = function get(_x, _x2, _x3) { var _again = true; _function: while (_again) { var object = _x, property = _x2, receiver = _x3; _again = false; if (object === null) object = Function.prototype; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { _x = parent; _x2 = property; _x3 = receiver; _again = true; desc = parent = undefined; continue _function; } } else if ('value' in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } } };
-
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
-
-	function _inherits(subClass, superClass) { if (typeof superClass !== 'function' && superClass !== null) { throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-	var React = __webpack_require__(1);
-	var assign = __webpack_require__(4);
-
-	function autoBind(object) {
-	  var proto = object.constructor.prototype;
-
-	  var names = Object.getOwnPropertyNames(proto).filter(function (key) {
-	    return key != 'constructor' && key != 'render' && typeof proto[key] == 'function';
-	  });
-
-	  names.push('setState');
-	  names.forEach(function (key) {
-	    object[key] = object[key].bind(object);
-	  });
-
-	  return object;
-	}
-
-	var ReactClass = (function (_React$Component) {
-	  _inherits(ReactClass, _React$Component);
-
-	  function ReactClass(props) {
-	    _classCallCheck(this, ReactClass);
-
-	    _get(Object.getPrototypeOf(ReactClass.prototype), 'constructor', this).call(this, props);
-	    autoBind(this);
-	  }
-
-	  _createClass(ReactClass, [{
-	    key: 'prepareProps',
-	    value: function prepareProps(thisProps) {
-
-	      var props = assign({}, thisProps);
-
-	      props.style = this.prepareStyle(props);
-	      props.className = this.prepareClassName(props);
-
-	      return props;
-	    }
-	  }, {
-	    key: 'prepareClassName',
-	    value: function prepareClassName(props) {
-	      var className = props.className || '';
-
-	      var defaultProps = this.constructor.defaultProps;
-
-	      if (defaultProps && defaultProps.defaultClassName != null) {
-	        className += ' ' + defaultProps.defaultClassName;
-	      }
-
-	      return className;
-	    }
-	  }, {
-	    key: 'prepareStyle',
-	    value: function prepareStyle(props) {
-	      var defaultStyle;
-
-	      if (this.constructor.defaultProps) {
-	        defaultStyle = this.constructor.defaultProps.defaultStyle;
-	      }
-
-	      return assign({}, defaultStyle, props.style);
-	    }
-	  }]);
-
-	  return ReactClass;
-	})(React.Component);
-
-	module.exports = ReactClass;
+	__webpack_require__(184);
+	module.exports = __webpack_require__(195).Object.getPrototypeOf;
 
 /***/ },
 /* 184 */
+/***/ function(module, exports, __webpack_require__) {
+
+	// 19.1.2.9 Object.getPrototypeOf(O)
+	var toObject        = __webpack_require__(185)
+	  , $getPrototypeOf = __webpack_require__(187);
+
+	__webpack_require__(193)('getPrototypeOf', function(){
+	  return function getPrototypeOf(it){
+	    return $getPrototypeOf(toObject(it));
+	  };
+	});
+
+/***/ },
+/* 185 */
+/***/ function(module, exports, __webpack_require__) {
+
+	// 7.1.13 ToObject(argument)
+	var defined = __webpack_require__(186);
+	module.exports = function(it){
+	  return Object(defined(it));
+	};
+
+/***/ },
+/* 186 */
+/***/ function(module, exports) {
+
+	// 7.2.1 RequireObjectCoercible(argument)
+	module.exports = function(it){
+	  if(it == undefined)throw TypeError("Can't call method on  " + it);
+	  return it;
+	};
+
+/***/ },
+/* 187 */
+/***/ function(module, exports, __webpack_require__) {
+
+	// 19.1.2.9 / 15.2.3.2 Object.getPrototypeOf(O)
+	var has         = __webpack_require__(188)
+	  , toObject    = __webpack_require__(185)
+	  , IE_PROTO    = __webpack_require__(189)('IE_PROTO')
+	  , ObjectProto = Object.prototype;
+
+	module.exports = Object.getPrototypeOf || function(O){
+	  O = toObject(O);
+	  if(has(O, IE_PROTO))return O[IE_PROTO];
+	  if(typeof O.constructor == 'function' && O instanceof O.constructor){
+	    return O.constructor.prototype;
+	  } return O instanceof Object ? ObjectProto : null;
+	};
+
+/***/ },
+/* 188 */
+/***/ function(module, exports) {
+
+	var hasOwnProperty = {}.hasOwnProperty;
+	module.exports = function(it, key){
+	  return hasOwnProperty.call(it, key);
+	};
+
+/***/ },
+/* 189 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var shared = __webpack_require__(190)('keys')
+	  , uid    = __webpack_require__(192);
+	module.exports = function(key){
+	  return shared[key] || (shared[key] = uid(key));
+	};
+
+/***/ },
+/* 190 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var global = __webpack_require__(191)
+	  , SHARED = '__core-js_shared__'
+	  , store  = global[SHARED] || (global[SHARED] = {});
+	module.exports = function(key){
+	  return store[key] || (store[key] = {});
+	};
+
+/***/ },
+/* 191 */
+/***/ function(module, exports) {
+
+	// https://github.com/zloirock/core-js/issues/86#issuecomment-115759028
+	var global = module.exports = typeof window != 'undefined' && window.Math == Math
+	  ? window : typeof self != 'undefined' && self.Math == Math ? self : Function('return this')();
+	if(typeof __g == 'number')__g = global; // eslint-disable-line no-undef
+
+/***/ },
+/* 192 */
+/***/ function(module, exports) {
+
+	var id = 0
+	  , px = Math.random();
+	module.exports = function(key){
+	  return 'Symbol('.concat(key === undefined ? '' : key, ')_', (++id + px).toString(36));
+	};
+
+/***/ },
+/* 193 */
+/***/ function(module, exports, __webpack_require__) {
+
+	// most Object methods by ES6 should accept primitives
+	var $export = __webpack_require__(194)
+	  , core    = __webpack_require__(195)
+	  , fails   = __webpack_require__(204);
+	module.exports = function(KEY, exec){
+	  var fn  = (core.Object || {})[KEY] || Object[KEY]
+	    , exp = {};
+	  exp[KEY] = exec(fn);
+	  $export($export.S + $export.F * fails(function(){ fn(1); }), 'Object', exp);
+	};
+
+/***/ },
+/* 194 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var global    = __webpack_require__(191)
+	  , core      = __webpack_require__(195)
+	  , ctx       = __webpack_require__(196)
+	  , hide      = __webpack_require__(198)
+	  , PROTOTYPE = 'prototype';
+
+	var $export = function(type, name, source){
+	  var IS_FORCED = type & $export.F
+	    , IS_GLOBAL = type & $export.G
+	    , IS_STATIC = type & $export.S
+	    , IS_PROTO  = type & $export.P
+	    , IS_BIND   = type & $export.B
+	    , IS_WRAP   = type & $export.W
+	    , exports   = IS_GLOBAL ? core : core[name] || (core[name] = {})
+	    , expProto  = exports[PROTOTYPE]
+	    , target    = IS_GLOBAL ? global : IS_STATIC ? global[name] : (global[name] || {})[PROTOTYPE]
+	    , key, own, out;
+	  if(IS_GLOBAL)source = name;
+	  for(key in source){
+	    // contains in native
+	    own = !IS_FORCED && target && target[key] !== undefined;
+	    if(own && key in exports)continue;
+	    // export native or passed
+	    out = own ? target[key] : source[key];
+	    // prevent global pollution for namespaces
+	    exports[key] = IS_GLOBAL && typeof target[key] != 'function' ? source[key]
+	    // bind timers to global for call from export context
+	    : IS_BIND && own ? ctx(out, global)
+	    // wrap global constructors for prevent change them in library
+	    : IS_WRAP && target[key] == out ? (function(C){
+	      var F = function(a, b, c){
+	        if(this instanceof C){
+	          switch(arguments.length){
+	            case 0: return new C;
+	            case 1: return new C(a);
+	            case 2: return new C(a, b);
+	          } return new C(a, b, c);
+	        } return C.apply(this, arguments);
+	      };
+	      F[PROTOTYPE] = C[PROTOTYPE];
+	      return F;
+	    // make static versions for prototype methods
+	    })(out) : IS_PROTO && typeof out == 'function' ? ctx(Function.call, out) : out;
+	    // export proto methods to core.%CONSTRUCTOR%.methods.%NAME%
+	    if(IS_PROTO){
+	      (exports.virtual || (exports.virtual = {}))[key] = out;
+	      // export proto methods to core.%CONSTRUCTOR%.prototype.%NAME%
+	      if(type & $export.R && expProto && !expProto[key])hide(expProto, key, out);
+	    }
+	  }
+	};
+	// type bitmap
+	$export.F = 1;   // forced
+	$export.G = 2;   // global
+	$export.S = 4;   // static
+	$export.P = 8;   // proto
+	$export.B = 16;  // bind
+	$export.W = 32;  // wrap
+	$export.U = 64;  // safe
+	$export.R = 128; // real proto method for `library` 
+	module.exports = $export;
+
+/***/ },
+/* 195 */
+/***/ function(module, exports) {
+
+	var core = module.exports = {version: '2.4.0'};
+	if(typeof __e == 'number')__e = core; // eslint-disable-line no-undef
+
+/***/ },
+/* 196 */
+/***/ function(module, exports, __webpack_require__) {
+
+	// optional / simple context binding
+	var aFunction = __webpack_require__(197);
+	module.exports = function(fn, that, length){
+	  aFunction(fn);
+	  if(that === undefined)return fn;
+	  switch(length){
+	    case 1: return function(a){
+	      return fn.call(that, a);
+	    };
+	    case 2: return function(a, b){
+	      return fn.call(that, a, b);
+	    };
+	    case 3: return function(a, b, c){
+	      return fn.call(that, a, b, c);
+	    };
+	  }
+	  return function(/* ...args */){
+	    return fn.apply(that, arguments);
+	  };
+	};
+
+/***/ },
+/* 197 */
+/***/ function(module, exports) {
+
+	module.exports = function(it){
+	  if(typeof it != 'function')throw TypeError(it + ' is not a function!');
+	  return it;
+	};
+
+/***/ },
+/* 198 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var dP         = __webpack_require__(199)
+	  , createDesc = __webpack_require__(207);
+	module.exports = __webpack_require__(203) ? function(object, key, value){
+	  return dP.f(object, key, createDesc(1, value));
+	} : function(object, key, value){
+	  object[key] = value;
+	  return object;
+	};
+
+/***/ },
+/* 199 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var anObject       = __webpack_require__(200)
+	  , IE8_DOM_DEFINE = __webpack_require__(202)
+	  , toPrimitive    = __webpack_require__(206)
+	  , dP             = Object.defineProperty;
+
+	exports.f = __webpack_require__(203) ? Object.defineProperty : function defineProperty(O, P, Attributes){
+	  anObject(O);
+	  P = toPrimitive(P, true);
+	  anObject(Attributes);
+	  if(IE8_DOM_DEFINE)try {
+	    return dP(O, P, Attributes);
+	  } catch(e){ /* empty */ }
+	  if('get' in Attributes || 'set' in Attributes)throw TypeError('Accessors not supported!');
+	  if('value' in Attributes)O[P] = Attributes.value;
+	  return O;
+	};
+
+/***/ },
+/* 200 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var isObject = __webpack_require__(201);
+	module.exports = function(it){
+	  if(!isObject(it))throw TypeError(it + ' is not an object!');
+	  return it;
+	};
+
+/***/ },
+/* 201 */
+/***/ function(module, exports) {
+
+	module.exports = function(it){
+	  return typeof it === 'object' ? it !== null : typeof it === 'function';
+	};
+
+/***/ },
+/* 202 */
+/***/ function(module, exports, __webpack_require__) {
+
+	module.exports = !__webpack_require__(203) && !__webpack_require__(204)(function(){
+	  return Object.defineProperty(__webpack_require__(205)('div'), 'a', {get: function(){ return 7; }}).a != 7;
+	});
+
+/***/ },
+/* 203 */
+/***/ function(module, exports, __webpack_require__) {
+
+	// Thank's IE8 for his funny defineProperty
+	module.exports = !__webpack_require__(204)(function(){
+	  return Object.defineProperty({}, 'a', {get: function(){ return 7; }}).a != 7;
+	});
+
+/***/ },
+/* 204 */
+/***/ function(module, exports) {
+
+	module.exports = function(exec){
+	  try {
+	    return !!exec();
+	  } catch(e){
+	    return true;
+	  }
+	};
+
+/***/ },
+/* 205 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var isObject = __webpack_require__(201)
+	  , document = __webpack_require__(191).document
+	  // in old IE typeof document.createElement is 'object'
+	  , is = isObject(document) && isObject(document.createElement);
+	module.exports = function(it){
+	  return is ? document.createElement(it) : {};
+	};
+
+/***/ },
+/* 206 */
+/***/ function(module, exports, __webpack_require__) {
+
+	// 7.1.1 ToPrimitive(input [, PreferredType])
+	var isObject = __webpack_require__(201);
+	// instead of the ES6 spec version, we didn't implement @@toPrimitive case
+	// and the second argument - flag - preferred type is a string
+	module.exports = function(it, S){
+	  if(!isObject(it))return it;
+	  var fn, val;
+	  if(S && typeof (fn = it.toString) == 'function' && !isObject(val = fn.call(it)))return val;
+	  if(typeof (fn = it.valueOf) == 'function' && !isObject(val = fn.call(it)))return val;
+	  if(!S && typeof (fn = it.toString) == 'function' && !isObject(val = fn.call(it)))return val;
+	  throw TypeError("Can't convert object to primitive value");
+	};
+
+/***/ },
+/* 207 */
+/***/ function(module, exports) {
+
+	module.exports = function(bitmap, value){
+	  return {
+	    enumerable  : !(bitmap & 1),
+	    configurable: !(bitmap & 2),
+	    writable    : !(bitmap & 4),
+	    value       : value
+	  };
+	};
+
+/***/ },
+/* 208 */
+/***/ function(module, exports) {
+
+	"use strict";
+
+	exports.__esModule = true;
+
+	exports.default = function (instance, Constructor) {
+	  if (!(instance instanceof Constructor)) {
+	    throw new TypeError("Cannot call a class as a function");
+	  }
+	};
+
+/***/ },
+/* 209 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+
+	exports.__esModule = true;
+
+	var _defineProperty = __webpack_require__(210);
+
+	var _defineProperty2 = _interopRequireDefault(_defineProperty);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	exports.default = function () {
+	  function defineProperties(target, props) {
+	    for (var i = 0; i < props.length; i++) {
+	      var descriptor = props[i];
+	      descriptor.enumerable = descriptor.enumerable || false;
+	      descriptor.configurable = true;
+	      if ("value" in descriptor) descriptor.writable = true;
+	      (0, _defineProperty2.default)(target, descriptor.key, descriptor);
+	    }
+	  }
+
+	  return function (Constructor, protoProps, staticProps) {
+	    if (protoProps) defineProperties(Constructor.prototype, protoProps);
+	    if (staticProps) defineProperties(Constructor, staticProps);
+	    return Constructor;
+	  };
+	}();
+
+/***/ },
+/* 210 */
+/***/ function(module, exports, __webpack_require__) {
+
+	module.exports = { "default": __webpack_require__(211), __esModule: true };
+
+/***/ },
+/* 211 */
+/***/ function(module, exports, __webpack_require__) {
+
+	__webpack_require__(212);
+	var $Object = __webpack_require__(195).Object;
+	module.exports = function defineProperty(it, key, desc){
+	  return $Object.defineProperty(it, key, desc);
+	};
+
+/***/ },
+/* 212 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var $export = __webpack_require__(194);
+	// 19.1.2.4 / 15.2.3.6 Object.defineProperty(O, P, Attributes)
+	$export($export.S + $export.F * !__webpack_require__(203), 'Object', {defineProperty: __webpack_require__(199).f});
+
+/***/ },
+/* 213 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+
+	exports.__esModule = true;
+
+	var _typeof2 = __webpack_require__(214);
+
+	var _typeof3 = _interopRequireDefault(_typeof2);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	exports.default = function (self, call) {
+	  if (!self) {
+	    throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
+	  }
+
+	  return call && ((typeof call === "undefined" ? "undefined" : (0, _typeof3.default)(call)) === "object" || typeof call === "function") ? call : self;
+	};
+
+/***/ },
+/* 214 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+
+	exports.__esModule = true;
+
+	var _iterator = __webpack_require__(215);
+
+	var _iterator2 = _interopRequireDefault(_iterator);
+
+	var _symbol = __webpack_require__(244);
+
+	var _symbol2 = _interopRequireDefault(_symbol);
+
+	var _typeof = typeof _symbol2.default === "function" && typeof _iterator2.default === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof _symbol2.default === "function" && obj.constructor === _symbol2.default ? "symbol" : typeof obj; };
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	exports.default = typeof _symbol2.default === "function" && _typeof(_iterator2.default) === "symbol" ? function (obj) {
+	  return typeof obj === "undefined" ? "undefined" : _typeof(obj);
+	} : function (obj) {
+	  return obj && typeof _symbol2.default === "function" && obj.constructor === _symbol2.default ? "symbol" : typeof obj === "undefined" ? "undefined" : _typeof(obj);
+	};
+
+/***/ },
+/* 215 */
+/***/ function(module, exports, __webpack_require__) {
+
+	module.exports = { "default": __webpack_require__(216), __esModule: true };
+
+/***/ },
+/* 216 */
+/***/ function(module, exports, __webpack_require__) {
+
+	__webpack_require__(217);
+	__webpack_require__(239);
+	module.exports = __webpack_require__(243).f('iterator');
+
+/***/ },
+/* 217 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	var $at  = __webpack_require__(218)(true);
+
+	// 21.1.3.27 String.prototype[@@iterator]()
+	__webpack_require__(220)(String, 'String', function(iterated){
+	  this._t = String(iterated); // target
+	  this._i = 0;                // next index
+	// 21.1.5.2.1 %StringIteratorPrototype%.next()
+	}, function(){
+	  var O     = this._t
+	    , index = this._i
+	    , point;
+	  if(index >= O.length)return {value: undefined, done: true};
+	  point = $at(O, index);
+	  this._i += point.length;
+	  return {value: point, done: false};
+	});
+
+/***/ },
+/* 218 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var toInteger = __webpack_require__(219)
+	  , defined   = __webpack_require__(186);
+	// true  -> String#at
+	// false -> String#codePointAt
+	module.exports = function(TO_STRING){
+	  return function(that, pos){
+	    var s = String(defined(that))
+	      , i = toInteger(pos)
+	      , l = s.length
+	      , a, b;
+	    if(i < 0 || i >= l)return TO_STRING ? '' : undefined;
+	    a = s.charCodeAt(i);
+	    return a < 0xd800 || a > 0xdbff || i + 1 === l || (b = s.charCodeAt(i + 1)) < 0xdc00 || b > 0xdfff
+	      ? TO_STRING ? s.charAt(i) : a
+	      : TO_STRING ? s.slice(i, i + 2) : (a - 0xd800 << 10) + (b - 0xdc00) + 0x10000;
+	  };
+	};
+
+/***/ },
+/* 219 */
+/***/ function(module, exports) {
+
+	// 7.1.4 ToInteger
+	var ceil  = Math.ceil
+	  , floor = Math.floor;
+	module.exports = function(it){
+	  return isNaN(it = +it) ? 0 : (it > 0 ? floor : ceil)(it);
+	};
+
+/***/ },
+/* 220 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	var LIBRARY        = __webpack_require__(221)
+	  , $export        = __webpack_require__(194)
+	  , redefine       = __webpack_require__(222)
+	  , hide           = __webpack_require__(198)
+	  , has            = __webpack_require__(188)
+	  , Iterators      = __webpack_require__(223)
+	  , $iterCreate    = __webpack_require__(224)
+	  , setToStringTag = __webpack_require__(237)
+	  , getPrototypeOf = __webpack_require__(187)
+	  , ITERATOR       = __webpack_require__(238)('iterator')
+	  , BUGGY          = !([].keys && 'next' in [].keys()) // Safari has buggy iterators w/o `next`
+	  , FF_ITERATOR    = '@@iterator'
+	  , KEYS           = 'keys'
+	  , VALUES         = 'values';
+
+	var returnThis = function(){ return this; };
+
+	module.exports = function(Base, NAME, Constructor, next, DEFAULT, IS_SET, FORCED){
+	  $iterCreate(Constructor, NAME, next);
+	  var getMethod = function(kind){
+	    if(!BUGGY && kind in proto)return proto[kind];
+	    switch(kind){
+	      case KEYS: return function keys(){ return new Constructor(this, kind); };
+	      case VALUES: return function values(){ return new Constructor(this, kind); };
+	    } return function entries(){ return new Constructor(this, kind); };
+	  };
+	  var TAG        = NAME + ' Iterator'
+	    , DEF_VALUES = DEFAULT == VALUES
+	    , VALUES_BUG = false
+	    , proto      = Base.prototype
+	    , $native    = proto[ITERATOR] || proto[FF_ITERATOR] || DEFAULT && proto[DEFAULT]
+	    , $default   = $native || getMethod(DEFAULT)
+	    , $entries   = DEFAULT ? !DEF_VALUES ? $default : getMethod('entries') : undefined
+	    , $anyNative = NAME == 'Array' ? proto.entries || $native : $native
+	    , methods, key, IteratorPrototype;
+	  // Fix native
+	  if($anyNative){
+	    IteratorPrototype = getPrototypeOf($anyNative.call(new Base));
+	    if(IteratorPrototype !== Object.prototype){
+	      // Set @@toStringTag to native iterators
+	      setToStringTag(IteratorPrototype, TAG, true);
+	      // fix for some old engines
+	      if(!LIBRARY && !has(IteratorPrototype, ITERATOR))hide(IteratorPrototype, ITERATOR, returnThis);
+	    }
+	  }
+	  // fix Array#{values, @@iterator}.name in V8 / FF
+	  if(DEF_VALUES && $native && $native.name !== VALUES){
+	    VALUES_BUG = true;
+	    $default = function values(){ return $native.call(this); };
+	  }
+	  // Define iterator
+	  if((!LIBRARY || FORCED) && (BUGGY || VALUES_BUG || !proto[ITERATOR])){
+	    hide(proto, ITERATOR, $default);
+	  }
+	  // Plug for library
+	  Iterators[NAME] = $default;
+	  Iterators[TAG]  = returnThis;
+	  if(DEFAULT){
+	    methods = {
+	      values:  DEF_VALUES ? $default : getMethod(VALUES),
+	      keys:    IS_SET     ? $default : getMethod(KEYS),
+	      entries: $entries
+	    };
+	    if(FORCED)for(key in methods){
+	      if(!(key in proto))redefine(proto, key, methods[key]);
+	    } else $export($export.P + $export.F * (BUGGY || VALUES_BUG), NAME, methods);
+	  }
+	  return methods;
+	};
+
+/***/ },
+/* 221 */
+/***/ function(module, exports) {
+
+	module.exports = true;
+
+/***/ },
+/* 222 */
+/***/ function(module, exports, __webpack_require__) {
+
+	module.exports = __webpack_require__(198);
+
+/***/ },
+/* 223 */
+/***/ function(module, exports) {
+
+	module.exports = {};
+
+/***/ },
+/* 224 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	var create         = __webpack_require__(225)
+	  , descriptor     = __webpack_require__(207)
+	  , setToStringTag = __webpack_require__(237)
+	  , IteratorPrototype = {};
+
+	// 25.1.2.1.1 %IteratorPrototype%[@@iterator]()
+	__webpack_require__(198)(IteratorPrototype, __webpack_require__(238)('iterator'), function(){ return this; });
+
+	module.exports = function(Constructor, NAME, next){
+	  Constructor.prototype = create(IteratorPrototype, {next: descriptor(1, next)});
+	  setToStringTag(Constructor, NAME + ' Iterator');
+	};
+
+/***/ },
+/* 225 */
+/***/ function(module, exports, __webpack_require__) {
+
+	// 19.1.2.2 / 15.2.3.5 Object.create(O [, Properties])
+	var anObject    = __webpack_require__(200)
+	  , dPs         = __webpack_require__(226)
+	  , enumBugKeys = __webpack_require__(235)
+	  , IE_PROTO    = __webpack_require__(189)('IE_PROTO')
+	  , Empty       = function(){ /* empty */ }
+	  , PROTOTYPE   = 'prototype';
+
+	// Create object with fake `null` prototype: use iframe Object with cleared prototype
+	var createDict = function(){
+	  // Thrash, waste and sodomy: IE GC bug
+	  var iframe = __webpack_require__(205)('iframe')
+	    , i      = enumBugKeys.length
+	    , lt     = '<'
+	    , gt     = '>'
+	    , iframeDocument;
+	  iframe.style.display = 'none';
+	  __webpack_require__(236).appendChild(iframe);
+	  iframe.src = 'javascript:'; // eslint-disable-line no-script-url
+	  // createDict = iframe.contentWindow.Object;
+	  // html.removeChild(iframe);
+	  iframeDocument = iframe.contentWindow.document;
+	  iframeDocument.open();
+	  iframeDocument.write(lt + 'script' + gt + 'document.F=Object' + lt + '/script' + gt);
+	  iframeDocument.close();
+	  createDict = iframeDocument.F;
+	  while(i--)delete createDict[PROTOTYPE][enumBugKeys[i]];
+	  return createDict();
+	};
+
+	module.exports = Object.create || function create(O, Properties){
+	  var result;
+	  if(O !== null){
+	    Empty[PROTOTYPE] = anObject(O);
+	    result = new Empty;
+	    Empty[PROTOTYPE] = null;
+	    // add "__proto__" for Object.getPrototypeOf polyfill
+	    result[IE_PROTO] = O;
+	  } else result = createDict();
+	  return Properties === undefined ? result : dPs(result, Properties);
+	};
+
+
+/***/ },
+/* 226 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var dP       = __webpack_require__(199)
+	  , anObject = __webpack_require__(200)
+	  , getKeys  = __webpack_require__(227);
+
+	module.exports = __webpack_require__(203) ? Object.defineProperties : function defineProperties(O, Properties){
+	  anObject(O);
+	  var keys   = getKeys(Properties)
+	    , length = keys.length
+	    , i = 0
+	    , P;
+	  while(length > i)dP.f(O, P = keys[i++], Properties[P]);
+	  return O;
+	};
+
+/***/ },
+/* 227 */
+/***/ function(module, exports, __webpack_require__) {
+
+	// 19.1.2.14 / 15.2.3.14 Object.keys(O)
+	var $keys       = __webpack_require__(228)
+	  , enumBugKeys = __webpack_require__(235);
+
+	module.exports = Object.keys || function keys(O){
+	  return $keys(O, enumBugKeys);
+	};
+
+/***/ },
+/* 228 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var has          = __webpack_require__(188)
+	  , toIObject    = __webpack_require__(229)
+	  , arrayIndexOf = __webpack_require__(232)(false)
+	  , IE_PROTO     = __webpack_require__(189)('IE_PROTO');
+
+	module.exports = function(object, names){
+	  var O      = toIObject(object)
+	    , i      = 0
+	    , result = []
+	    , key;
+	  for(key in O)if(key != IE_PROTO)has(O, key) && result.push(key);
+	  // Don't enum bug & hidden keys
+	  while(names.length > i)if(has(O, key = names[i++])){
+	    ~arrayIndexOf(result, key) || result.push(key);
+	  }
+	  return result;
+	};
+
+/***/ },
+/* 229 */
+/***/ function(module, exports, __webpack_require__) {
+
+	// to indexed object, toObject with fallback for non-array-like ES3 strings
+	var IObject = __webpack_require__(230)
+	  , defined = __webpack_require__(186);
+	module.exports = function(it){
+	  return IObject(defined(it));
+	};
+
+/***/ },
+/* 230 */
+/***/ function(module, exports, __webpack_require__) {
+
+	// fallback for non-array-like ES3 and non-enumerable old V8 strings
+	var cof = __webpack_require__(231);
+	module.exports = Object('z').propertyIsEnumerable(0) ? Object : function(it){
+	  return cof(it) == 'String' ? it.split('') : Object(it);
+	};
+
+/***/ },
+/* 231 */
+/***/ function(module, exports) {
+
+	var toString = {}.toString;
+
+	module.exports = function(it){
+	  return toString.call(it).slice(8, -1);
+	};
+
+/***/ },
+/* 232 */
+/***/ function(module, exports, __webpack_require__) {
+
+	// false -> Array#indexOf
+	// true  -> Array#includes
+	var toIObject = __webpack_require__(229)
+	  , toLength  = __webpack_require__(233)
+	  , toIndex   = __webpack_require__(234);
+	module.exports = function(IS_INCLUDES){
+	  return function($this, el, fromIndex){
+	    var O      = toIObject($this)
+	      , length = toLength(O.length)
+	      , index  = toIndex(fromIndex, length)
+	      , value;
+	    // Array#includes uses SameValueZero equality algorithm
+	    if(IS_INCLUDES && el != el)while(length > index){
+	      value = O[index++];
+	      if(value != value)return true;
+	    // Array#toIndex ignores holes, Array#includes - not
+	    } else for(;length > index; index++)if(IS_INCLUDES || index in O){
+	      if(O[index] === el)return IS_INCLUDES || index || 0;
+	    } return !IS_INCLUDES && -1;
+	  };
+	};
+
+/***/ },
+/* 233 */
+/***/ function(module, exports, __webpack_require__) {
+
+	// 7.1.15 ToLength
+	var toInteger = __webpack_require__(219)
+	  , min       = Math.min;
+	module.exports = function(it){
+	  return it > 0 ? min(toInteger(it), 0x1fffffffffffff) : 0; // pow(2, 53) - 1 == 9007199254740991
+	};
+
+/***/ },
+/* 234 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var toInteger = __webpack_require__(219)
+	  , max       = Math.max
+	  , min       = Math.min;
+	module.exports = function(index, length){
+	  index = toInteger(index);
+	  return index < 0 ? max(index + length, 0) : min(index, length);
+	};
+
+/***/ },
+/* 235 */
+/***/ function(module, exports) {
+
+	// IE 8- don't enum bug keys
+	module.exports = (
+	  'constructor,hasOwnProperty,isPrototypeOf,propertyIsEnumerable,toLocaleString,toString,valueOf'
+	).split(',');
+
+/***/ },
+/* 236 */
+/***/ function(module, exports, __webpack_require__) {
+
+	module.exports = __webpack_require__(191).document && document.documentElement;
+
+/***/ },
+/* 237 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var def = __webpack_require__(199).f
+	  , has = __webpack_require__(188)
+	  , TAG = __webpack_require__(238)('toStringTag');
+
+	module.exports = function(it, tag, stat){
+	  if(it && !has(it = stat ? it : it.prototype, TAG))def(it, TAG, {configurable: true, value: tag});
+	};
+
+/***/ },
+/* 238 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var store      = __webpack_require__(190)('wks')
+	  , uid        = __webpack_require__(192)
+	  , Symbol     = __webpack_require__(191).Symbol
+	  , USE_SYMBOL = typeof Symbol == 'function';
+
+	var $exports = module.exports = function(name){
+	  return store[name] || (store[name] =
+	    USE_SYMBOL && Symbol[name] || (USE_SYMBOL ? Symbol : uid)('Symbol.' + name));
+	};
+
+	$exports.store = store;
+
+/***/ },
+/* 239 */
+/***/ function(module, exports, __webpack_require__) {
+
+	__webpack_require__(240);
+	var global        = __webpack_require__(191)
+	  , hide          = __webpack_require__(198)
+	  , Iterators     = __webpack_require__(223)
+	  , TO_STRING_TAG = __webpack_require__(238)('toStringTag');
+
+	for(var collections = ['NodeList', 'DOMTokenList', 'MediaList', 'StyleSheetList', 'CSSRuleList'], i = 0; i < 5; i++){
+	  var NAME       = collections[i]
+	    , Collection = global[NAME]
+	    , proto      = Collection && Collection.prototype;
+	  if(proto && !proto[TO_STRING_TAG])hide(proto, TO_STRING_TAG, NAME);
+	  Iterators[NAME] = Iterators.Array;
+	}
+
+/***/ },
+/* 240 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	var addToUnscopables = __webpack_require__(241)
+	  , step             = __webpack_require__(242)
+	  , Iterators        = __webpack_require__(223)
+	  , toIObject        = __webpack_require__(229);
+
+	// 22.1.3.4 Array.prototype.entries()
+	// 22.1.3.13 Array.prototype.keys()
+	// 22.1.3.29 Array.prototype.values()
+	// 22.1.3.30 Array.prototype[@@iterator]()
+	module.exports = __webpack_require__(220)(Array, 'Array', function(iterated, kind){
+	  this._t = toIObject(iterated); // target
+	  this._i = 0;                   // next index
+	  this._k = kind;                // kind
+	// 22.1.5.2.1 %ArrayIteratorPrototype%.next()
+	}, function(){
+	  var O     = this._t
+	    , kind  = this._k
+	    , index = this._i++;
+	  if(!O || index >= O.length){
+	    this._t = undefined;
+	    return step(1);
+	  }
+	  if(kind == 'keys'  )return step(0, index);
+	  if(kind == 'values')return step(0, O[index]);
+	  return step(0, [index, O[index]]);
+	}, 'values');
+
+	// argumentsList[@@iterator] is %ArrayProto_values% (9.4.4.6, 9.4.4.7)
+	Iterators.Arguments = Iterators.Array;
+
+	addToUnscopables('keys');
+	addToUnscopables('values');
+	addToUnscopables('entries');
+
+/***/ },
+/* 241 */
+/***/ function(module, exports) {
+
+	module.exports = function(){ /* empty */ };
+
+/***/ },
+/* 242 */
+/***/ function(module, exports) {
+
+	module.exports = function(done, value){
+	  return {value: value, done: !!done};
+	};
+
+/***/ },
+/* 243 */
+/***/ function(module, exports, __webpack_require__) {
+
+	exports.f = __webpack_require__(238);
+
+/***/ },
+/* 244 */
+/***/ function(module, exports, __webpack_require__) {
+
+	module.exports = { "default": __webpack_require__(245), __esModule: true };
+
+/***/ },
+/* 245 */
+/***/ function(module, exports, __webpack_require__) {
+
+	__webpack_require__(246);
+	__webpack_require__(257);
+	__webpack_require__(258);
+	__webpack_require__(259);
+	module.exports = __webpack_require__(195).Symbol;
+
+/***/ },
+/* 246 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	// ECMAScript 6 symbols shim
+	var global         = __webpack_require__(191)
+	  , has            = __webpack_require__(188)
+	  , DESCRIPTORS    = __webpack_require__(203)
+	  , $export        = __webpack_require__(194)
+	  , redefine       = __webpack_require__(222)
+	  , META           = __webpack_require__(247).KEY
+	  , $fails         = __webpack_require__(204)
+	  , shared         = __webpack_require__(190)
+	  , setToStringTag = __webpack_require__(237)
+	  , uid            = __webpack_require__(192)
+	  , wks            = __webpack_require__(238)
+	  , wksExt         = __webpack_require__(243)
+	  , wksDefine      = __webpack_require__(248)
+	  , keyOf          = __webpack_require__(249)
+	  , enumKeys       = __webpack_require__(250)
+	  , isArray        = __webpack_require__(253)
+	  , anObject       = __webpack_require__(200)
+	  , toIObject      = __webpack_require__(229)
+	  , toPrimitive    = __webpack_require__(206)
+	  , createDesc     = __webpack_require__(207)
+	  , _create        = __webpack_require__(225)
+	  , gOPNExt        = __webpack_require__(254)
+	  , $GOPD          = __webpack_require__(256)
+	  , $DP            = __webpack_require__(199)
+	  , $keys          = __webpack_require__(227)
+	  , gOPD           = $GOPD.f
+	  , dP             = $DP.f
+	  , gOPN           = gOPNExt.f
+	  , $Symbol        = global.Symbol
+	  , $JSON          = global.JSON
+	  , _stringify     = $JSON && $JSON.stringify
+	  , PROTOTYPE      = 'prototype'
+	  , HIDDEN         = wks('_hidden')
+	  , TO_PRIMITIVE   = wks('toPrimitive')
+	  , isEnum         = {}.propertyIsEnumerable
+	  , SymbolRegistry = shared('symbol-registry')
+	  , AllSymbols     = shared('symbols')
+	  , OPSymbols      = shared('op-symbols')
+	  , ObjectProto    = Object[PROTOTYPE]
+	  , USE_NATIVE     = typeof $Symbol == 'function'
+	  , QObject        = global.QObject;
+	// Don't use setters in Qt Script, https://github.com/zloirock/core-js/issues/173
+	var setter = !QObject || !QObject[PROTOTYPE] || !QObject[PROTOTYPE].findChild;
+
+	// fallback for old Android, https://code.google.com/p/v8/issues/detail?id=687
+	var setSymbolDesc = DESCRIPTORS && $fails(function(){
+	  return _create(dP({}, 'a', {
+	    get: function(){ return dP(this, 'a', {value: 7}).a; }
+	  })).a != 7;
+	}) ? function(it, key, D){
+	  var protoDesc = gOPD(ObjectProto, key);
+	  if(protoDesc)delete ObjectProto[key];
+	  dP(it, key, D);
+	  if(protoDesc && it !== ObjectProto)dP(ObjectProto, key, protoDesc);
+	} : dP;
+
+	var wrap = function(tag){
+	  var sym = AllSymbols[tag] = _create($Symbol[PROTOTYPE]);
+	  sym._k = tag;
+	  return sym;
+	};
+
+	var isSymbol = USE_NATIVE && typeof $Symbol.iterator == 'symbol' ? function(it){
+	  return typeof it == 'symbol';
+	} : function(it){
+	  return it instanceof $Symbol;
+	};
+
+	var $defineProperty = function defineProperty(it, key, D){
+	  if(it === ObjectProto)$defineProperty(OPSymbols, key, D);
+	  anObject(it);
+	  key = toPrimitive(key, true);
+	  anObject(D);
+	  if(has(AllSymbols, key)){
+	    if(!D.enumerable){
+	      if(!has(it, HIDDEN))dP(it, HIDDEN, createDesc(1, {}));
+	      it[HIDDEN][key] = true;
+	    } else {
+	      if(has(it, HIDDEN) && it[HIDDEN][key])it[HIDDEN][key] = false;
+	      D = _create(D, {enumerable: createDesc(0, false)});
+	    } return setSymbolDesc(it, key, D);
+	  } return dP(it, key, D);
+	};
+	var $defineProperties = function defineProperties(it, P){
+	  anObject(it);
+	  var keys = enumKeys(P = toIObject(P))
+	    , i    = 0
+	    , l = keys.length
+	    , key;
+	  while(l > i)$defineProperty(it, key = keys[i++], P[key]);
+	  return it;
+	};
+	var $create = function create(it, P){
+	  return P === undefined ? _create(it) : $defineProperties(_create(it), P);
+	};
+	var $propertyIsEnumerable = function propertyIsEnumerable(key){
+	  var E = isEnum.call(this, key = toPrimitive(key, true));
+	  if(this === ObjectProto && has(AllSymbols, key) && !has(OPSymbols, key))return false;
+	  return E || !has(this, key) || !has(AllSymbols, key) || has(this, HIDDEN) && this[HIDDEN][key] ? E : true;
+	};
+	var $getOwnPropertyDescriptor = function getOwnPropertyDescriptor(it, key){
+	  it  = toIObject(it);
+	  key = toPrimitive(key, true);
+	  if(it === ObjectProto && has(AllSymbols, key) && !has(OPSymbols, key))return;
+	  var D = gOPD(it, key);
+	  if(D && has(AllSymbols, key) && !(has(it, HIDDEN) && it[HIDDEN][key]))D.enumerable = true;
+	  return D;
+	};
+	var $getOwnPropertyNames = function getOwnPropertyNames(it){
+	  var names  = gOPN(toIObject(it))
+	    , result = []
+	    , i      = 0
+	    , key;
+	  while(names.length > i){
+	    if(!has(AllSymbols, key = names[i++]) && key != HIDDEN && key != META)result.push(key);
+	  } return result;
+	};
+	var $getOwnPropertySymbols = function getOwnPropertySymbols(it){
+	  var IS_OP  = it === ObjectProto
+	    , names  = gOPN(IS_OP ? OPSymbols : toIObject(it))
+	    , result = []
+	    , i      = 0
+	    , key;
+	  while(names.length > i){
+	    if(has(AllSymbols, key = names[i++]) && (IS_OP ? has(ObjectProto, key) : true))result.push(AllSymbols[key]);
+	  } return result;
+	};
+
+	// 19.4.1.1 Symbol([description])
+	if(!USE_NATIVE){
+	  $Symbol = function Symbol(){
+	    if(this instanceof $Symbol)throw TypeError('Symbol is not a constructor!');
+	    var tag = uid(arguments.length > 0 ? arguments[0] : undefined);
+	    var $set = function(value){
+	      if(this === ObjectProto)$set.call(OPSymbols, value);
+	      if(has(this, HIDDEN) && has(this[HIDDEN], tag))this[HIDDEN][tag] = false;
+	      setSymbolDesc(this, tag, createDesc(1, value));
+	    };
+	    if(DESCRIPTORS && setter)setSymbolDesc(ObjectProto, tag, {configurable: true, set: $set});
+	    return wrap(tag);
+	  };
+	  redefine($Symbol[PROTOTYPE], 'toString', function toString(){
+	    return this._k;
+	  });
+
+	  $GOPD.f = $getOwnPropertyDescriptor;
+	  $DP.f   = $defineProperty;
+	  __webpack_require__(255).f = gOPNExt.f = $getOwnPropertyNames;
+	  __webpack_require__(252).f  = $propertyIsEnumerable;
+	  __webpack_require__(251).f = $getOwnPropertySymbols;
+
+	  if(DESCRIPTORS && !__webpack_require__(221)){
+	    redefine(ObjectProto, 'propertyIsEnumerable', $propertyIsEnumerable, true);
+	  }
+
+	  wksExt.f = function(name){
+	    return wrap(wks(name));
+	  }
+	}
+
+	$export($export.G + $export.W + $export.F * !USE_NATIVE, {Symbol: $Symbol});
+
+	for(var symbols = (
+	  // 19.4.2.2, 19.4.2.3, 19.4.2.4, 19.4.2.6, 19.4.2.8, 19.4.2.9, 19.4.2.10, 19.4.2.11, 19.4.2.12, 19.4.2.13, 19.4.2.14
+	  'hasInstance,isConcatSpreadable,iterator,match,replace,search,species,split,toPrimitive,toStringTag,unscopables'
+	).split(','), i = 0; symbols.length > i; )wks(symbols[i++]);
+
+	for(var symbols = $keys(wks.store), i = 0; symbols.length > i; )wksDefine(symbols[i++]);
+
+	$export($export.S + $export.F * !USE_NATIVE, 'Symbol', {
+	  // 19.4.2.1 Symbol.for(key)
+	  'for': function(key){
+	    return has(SymbolRegistry, key += '')
+	      ? SymbolRegistry[key]
+	      : SymbolRegistry[key] = $Symbol(key);
+	  },
+	  // 19.4.2.5 Symbol.keyFor(sym)
+	  keyFor: function keyFor(key){
+	    if(isSymbol(key))return keyOf(SymbolRegistry, key);
+	    throw TypeError(key + ' is not a symbol!');
+	  },
+	  useSetter: function(){ setter = true; },
+	  useSimple: function(){ setter = false; }
+	});
+
+	$export($export.S + $export.F * !USE_NATIVE, 'Object', {
+	  // 19.1.2.2 Object.create(O [, Properties])
+	  create: $create,
+	  // 19.1.2.4 Object.defineProperty(O, P, Attributes)
+	  defineProperty: $defineProperty,
+	  // 19.1.2.3 Object.defineProperties(O, Properties)
+	  defineProperties: $defineProperties,
+	  // 19.1.2.6 Object.getOwnPropertyDescriptor(O, P)
+	  getOwnPropertyDescriptor: $getOwnPropertyDescriptor,
+	  // 19.1.2.7 Object.getOwnPropertyNames(O)
+	  getOwnPropertyNames: $getOwnPropertyNames,
+	  // 19.1.2.8 Object.getOwnPropertySymbols(O)
+	  getOwnPropertySymbols: $getOwnPropertySymbols
+	});
+
+	// 24.3.2 JSON.stringify(value [, replacer [, space]])
+	$JSON && $export($export.S + $export.F * (!USE_NATIVE || $fails(function(){
+	  var S = $Symbol();
+	  // MS Edge converts symbol values to JSON as {}
+	  // WebKit converts symbol values to JSON as null
+	  // V8 throws on boxed symbols
+	  return _stringify([S]) != '[null]' || _stringify({a: S}) != '{}' || _stringify(Object(S)) != '{}';
+	})), 'JSON', {
+	  stringify: function stringify(it){
+	    if(it === undefined || isSymbol(it))return; // IE8 returns string on undefined
+	    var args = [it]
+	      , i    = 1
+	      , replacer, $replacer;
+	    while(arguments.length > i)args.push(arguments[i++]);
+	    replacer = args[1];
+	    if(typeof replacer == 'function')$replacer = replacer;
+	    if($replacer || !isArray(replacer))replacer = function(key, value){
+	      if($replacer)value = $replacer.call(this, key, value);
+	      if(!isSymbol(value))return value;
+	    };
+	    args[1] = replacer;
+	    return _stringify.apply($JSON, args);
+	  }
+	});
+
+	// 19.4.3.4 Symbol.prototype[@@toPrimitive](hint)
+	$Symbol[PROTOTYPE][TO_PRIMITIVE] || __webpack_require__(198)($Symbol[PROTOTYPE], TO_PRIMITIVE, $Symbol[PROTOTYPE].valueOf);
+	// 19.4.3.5 Symbol.prototype[@@toStringTag]
+	setToStringTag($Symbol, 'Symbol');
+	// 20.2.1.9 Math[@@toStringTag]
+	setToStringTag(Math, 'Math', true);
+	// 24.3.3 JSON[@@toStringTag]
+	setToStringTag(global.JSON, 'JSON', true);
+
+/***/ },
+/* 247 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var META     = __webpack_require__(192)('meta')
+	  , isObject = __webpack_require__(201)
+	  , has      = __webpack_require__(188)
+	  , setDesc  = __webpack_require__(199).f
+	  , id       = 0;
+	var isExtensible = Object.isExtensible || function(){
+	  return true;
+	};
+	var FREEZE = !__webpack_require__(204)(function(){
+	  return isExtensible(Object.preventExtensions({}));
+	});
+	var setMeta = function(it){
+	  setDesc(it, META, {value: {
+	    i: 'O' + ++id, // object ID
+	    w: {}          // weak collections IDs
+	  }});
+	};
+	var fastKey = function(it, create){
+	  // return primitive with prefix
+	  if(!isObject(it))return typeof it == 'symbol' ? it : (typeof it == 'string' ? 'S' : 'P') + it;
+	  if(!has(it, META)){
+	    // can't set metadata to uncaught frozen object
+	    if(!isExtensible(it))return 'F';
+	    // not necessary to add metadata
+	    if(!create)return 'E';
+	    // add missing metadata
+	    setMeta(it);
+	  // return object ID
+	  } return it[META].i;
+	};
+	var getWeak = function(it, create){
+	  if(!has(it, META)){
+	    // can't set metadata to uncaught frozen object
+	    if(!isExtensible(it))return true;
+	    // not necessary to add metadata
+	    if(!create)return false;
+	    // add missing metadata
+	    setMeta(it);
+	  // return hash weak collections IDs
+	  } return it[META].w;
+	};
+	// add metadata on freeze-family methods calling
+	var onFreeze = function(it){
+	  if(FREEZE && meta.NEED && isExtensible(it) && !has(it, META))setMeta(it);
+	  return it;
+	};
+	var meta = module.exports = {
+	  KEY:      META,
+	  NEED:     false,
+	  fastKey:  fastKey,
+	  getWeak:  getWeak,
+	  onFreeze: onFreeze
+	};
+
+/***/ },
+/* 248 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var global         = __webpack_require__(191)
+	  , core           = __webpack_require__(195)
+	  , LIBRARY        = __webpack_require__(221)
+	  , wksExt         = __webpack_require__(243)
+	  , defineProperty = __webpack_require__(199).f;
+	module.exports = function(name){
+	  var $Symbol = core.Symbol || (core.Symbol = LIBRARY ? {} : global.Symbol || {});
+	  if(name.charAt(0) != '_' && !(name in $Symbol))defineProperty($Symbol, name, {value: wksExt.f(name)});
+	};
+
+/***/ },
+/* 249 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var getKeys   = __webpack_require__(227)
+	  , toIObject = __webpack_require__(229);
+	module.exports = function(object, el){
+	  var O      = toIObject(object)
+	    , keys   = getKeys(O)
+	    , length = keys.length
+	    , index  = 0
+	    , key;
+	  while(length > index)if(O[key = keys[index++]] === el)return key;
+	};
+
+/***/ },
+/* 250 */
+/***/ function(module, exports, __webpack_require__) {
+
+	// all enumerable object keys, includes symbols
+	var getKeys = __webpack_require__(227)
+	  , gOPS    = __webpack_require__(251)
+	  , pIE     = __webpack_require__(252);
+	module.exports = function(it){
+	  var result     = getKeys(it)
+	    , getSymbols = gOPS.f;
+	  if(getSymbols){
+	    var symbols = getSymbols(it)
+	      , isEnum  = pIE.f
+	      , i       = 0
+	      , key;
+	    while(symbols.length > i)if(isEnum.call(it, key = symbols[i++]))result.push(key);
+	  } return result;
+	};
+
+/***/ },
+/* 251 */
+/***/ function(module, exports) {
+
+	exports.f = Object.getOwnPropertySymbols;
+
+/***/ },
+/* 252 */
+/***/ function(module, exports) {
+
+	exports.f = {}.propertyIsEnumerable;
+
+/***/ },
+/* 253 */
+/***/ function(module, exports, __webpack_require__) {
+
+	// 7.2.2 IsArray(argument)
+	var cof = __webpack_require__(231);
+	module.exports = Array.isArray || function isArray(arg){
+	  return cof(arg) == 'Array';
+	};
+
+/***/ },
+/* 254 */
+/***/ function(module, exports, __webpack_require__) {
+
+	// fallback for IE11 buggy Object.getOwnPropertyNames with iframe and window
+	var toIObject = __webpack_require__(229)
+	  , gOPN      = __webpack_require__(255).f
+	  , toString  = {}.toString;
+
+	var windowNames = typeof window == 'object' && window && Object.getOwnPropertyNames
+	  ? Object.getOwnPropertyNames(window) : [];
+
+	var getWindowNames = function(it){
+	  try {
+	    return gOPN(it);
+	  } catch(e){
+	    return windowNames.slice();
+	  }
+	};
+
+	module.exports.f = function getOwnPropertyNames(it){
+	  return windowNames && toString.call(it) == '[object Window]' ? getWindowNames(it) : gOPN(toIObject(it));
+	};
+
+
+/***/ },
+/* 255 */
+/***/ function(module, exports, __webpack_require__) {
+
+	// 19.1.2.7 / 15.2.3.4 Object.getOwnPropertyNames(O)
+	var $keys      = __webpack_require__(228)
+	  , hiddenKeys = __webpack_require__(235).concat('length', 'prototype');
+
+	exports.f = Object.getOwnPropertyNames || function getOwnPropertyNames(O){
+	  return $keys(O, hiddenKeys);
+	};
+
+/***/ },
+/* 256 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var pIE            = __webpack_require__(252)
+	  , createDesc     = __webpack_require__(207)
+	  , toIObject      = __webpack_require__(229)
+	  , toPrimitive    = __webpack_require__(206)
+	  , has            = __webpack_require__(188)
+	  , IE8_DOM_DEFINE = __webpack_require__(202)
+	  , gOPD           = Object.getOwnPropertyDescriptor;
+
+	exports.f = __webpack_require__(203) ? gOPD : function getOwnPropertyDescriptor(O, P){
+	  O = toIObject(O);
+	  P = toPrimitive(P, true);
+	  if(IE8_DOM_DEFINE)try {
+	    return gOPD(O, P);
+	  } catch(e){ /* empty */ }
+	  if(has(O, P))return createDesc(!pIE.f.call(O, P), O[P]);
+	};
+
+/***/ },
+/* 257 */
+/***/ function(module, exports) {
+
+	
+
+/***/ },
+/* 258 */
+/***/ function(module, exports, __webpack_require__) {
+
+	__webpack_require__(248)('asyncIterator');
+
+/***/ },
+/* 259 */
+/***/ function(module, exports, __webpack_require__) {
+
+	__webpack_require__(248)('observable');
+
+/***/ },
+/* 260 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+
+	exports.__esModule = true;
+
+	var _setPrototypeOf = __webpack_require__(261);
+
+	var _setPrototypeOf2 = _interopRequireDefault(_setPrototypeOf);
+
+	var _create = __webpack_require__(265);
+
+	var _create2 = _interopRequireDefault(_create);
+
+	var _typeof2 = __webpack_require__(214);
+
+	var _typeof3 = _interopRequireDefault(_typeof2);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	exports.default = function (subClass, superClass) {
+	  if (typeof superClass !== "function" && superClass !== null) {
+	    throw new TypeError("Super expression must either be null or a function, not " + (typeof superClass === "undefined" ? "undefined" : (0, _typeof3.default)(superClass)));
+	  }
+
+	  subClass.prototype = (0, _create2.default)(superClass && superClass.prototype, {
+	    constructor: {
+	      value: subClass,
+	      enumerable: false,
+	      writable: true,
+	      configurable: true
+	    }
+	  });
+	  if (superClass) _setPrototypeOf2.default ? (0, _setPrototypeOf2.default)(subClass, superClass) : subClass.__proto__ = superClass;
+	};
+
+/***/ },
+/* 261 */
+/***/ function(module, exports, __webpack_require__) {
+
+	module.exports = { "default": __webpack_require__(262), __esModule: true };
+
+/***/ },
+/* 262 */
+/***/ function(module, exports, __webpack_require__) {
+
+	__webpack_require__(263);
+	module.exports = __webpack_require__(195).Object.setPrototypeOf;
+
+/***/ },
+/* 263 */
+/***/ function(module, exports, __webpack_require__) {
+
+	// 19.1.3.19 Object.setPrototypeOf(O, proto)
+	var $export = __webpack_require__(194);
+	$export($export.S, 'Object', {setPrototypeOf: __webpack_require__(264).set});
+
+/***/ },
+/* 264 */
+/***/ function(module, exports, __webpack_require__) {
+
+	// Works with __proto__ only. Old v8 can't work with null proto objects.
+	/* eslint-disable no-proto */
+	var isObject = __webpack_require__(201)
+	  , anObject = __webpack_require__(200);
+	var check = function(O, proto){
+	  anObject(O);
+	  if(!isObject(proto) && proto !== null)throw TypeError(proto + ": can't set as prototype!");
+	};
+	module.exports = {
+	  set: Object.setPrototypeOf || ('__proto__' in {} ? // eslint-disable-line
+	    function(test, buggy, set){
+	      try {
+	        set = __webpack_require__(196)(Function.call, __webpack_require__(256).f(Object.prototype, '__proto__').set, 2);
+	        set(test, []);
+	        buggy = !(test instanceof Array);
+	      } catch(e){ buggy = true; }
+	      return function setPrototypeOf(O, proto){
+	        check(O, proto);
+	        if(buggy)O.__proto__ = proto;
+	        else set(O, proto);
+	        return O;
+	      };
+	    }({}, false) : undefined),
+	  check: check
+	};
+
+/***/ },
+/* 265 */
+/***/ function(module, exports, __webpack_require__) {
+
+	module.exports = { "default": __webpack_require__(266), __esModule: true };
+
+/***/ },
+/* 266 */
+/***/ function(module, exports, __webpack_require__) {
+
+	__webpack_require__(267);
+	var $Object = __webpack_require__(195).Object;
+	module.exports = function create(P, D){
+	  return $Object.create(P, D);
+	};
+
+/***/ },
+/* 267 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var $export = __webpack_require__(194)
+	// 19.1.2.2 / 15.2.3.5 Object.create(O [, Properties])
+	$export($export.S, 'Object', {create: __webpack_require__(225)});
+
+/***/ },
+/* 268 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
+	  Copyright (c) 2016 Jed Watson.
+	  Licensed under the MIT License (MIT), see
+	  http://jedwatson.github.io/classnames
+	*/
+	/* global define */
+
+	(function () {
+		'use strict';
+
+		var hasOwn = {}.hasOwnProperty;
+
+		function classNames () {
+			var classes = [];
+
+			for (var i = 0; i < arguments.length; i++) {
+				var arg = arguments[i];
+				if (!arg) continue;
+
+				var argType = typeof arg;
+
+				if (argType === 'string' || argType === 'number') {
+					classes.push(arg);
+				} else if (Array.isArray(arg)) {
+					classes.push(classNames.apply(null, arg));
+				} else if (argType === 'object') {
+					for (var key in arg) {
+						if (hasOwn.call(arg, key) && arg[key]) {
+							classes.push(key);
+						}
+					}
+				}
+			}
+
+			return classes.join(' ');
+		}
+
+		if (typeof module !== 'undefined' && module.exports) {
+			module.exports = classNames;
+		} else if (true) {
+			// register as 'classnames', consistent with npm package name
+			!(__WEBPACK_AMD_DEFINE_ARRAY__ = [], __WEBPACK_AMD_DEFINE_RESULT__ = function () {
+				return classNames;
+			}.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__), __WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
+		} else {
+			window.classNames = classNames;
+		}
+	}());
+
+
+/***/ },
+/* 269 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(module) {//! moment.js
@@ -26038,7 +26528,7 @@
 	                module && module.exports) {
 	            try {
 	                oldLocale = globalLocale._abbr;
-	                __webpack_require__(186)("./" + name);
+	                __webpack_require__(271)("./" + name);
 	                // because defineLocale currently also sets the global locale, we
 	                // want to undo that for lazy loaded locales
 	                locale_locales__getSetGlobalLocale(oldLocale);
@@ -28470,10 +28960,10 @@
 	    return _moment;
 
 	}));
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(185)(module)))
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(270)(module)))
 
 /***/ },
-/* 185 */
+/* 270 */
 /***/ function(module, exports) {
 
 	module.exports = function(module) {
@@ -28489,212 +28979,212 @@
 
 
 /***/ },
-/* 186 */
+/* 271 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var map = {
-		"./af": 187,
-		"./af.js": 187,
-		"./ar": 188,
-		"./ar-ma": 189,
-		"./ar-ma.js": 189,
-		"./ar-sa": 190,
-		"./ar-sa.js": 190,
-		"./ar-tn": 191,
-		"./ar-tn.js": 191,
-		"./ar.js": 188,
-		"./az": 192,
-		"./az.js": 192,
-		"./be": 193,
-		"./be.js": 193,
-		"./bg": 194,
-		"./bg.js": 194,
-		"./bn": 195,
-		"./bn.js": 195,
-		"./bo": 196,
-		"./bo.js": 196,
-		"./br": 197,
-		"./br.js": 197,
-		"./bs": 198,
-		"./bs.js": 198,
-		"./ca": 199,
-		"./ca.js": 199,
-		"./cs": 200,
-		"./cs.js": 200,
-		"./cv": 201,
-		"./cv.js": 201,
-		"./cy": 202,
-		"./cy.js": 202,
-		"./da": 203,
-		"./da.js": 203,
-		"./de": 204,
-		"./de-at": 205,
-		"./de-at.js": 205,
-		"./de.js": 204,
-		"./dv": 206,
-		"./dv.js": 206,
-		"./el": 207,
-		"./el.js": 207,
-		"./en-au": 208,
-		"./en-au.js": 208,
-		"./en-ca": 209,
-		"./en-ca.js": 209,
-		"./en-gb": 210,
-		"./en-gb.js": 210,
-		"./en-ie": 211,
-		"./en-ie.js": 211,
-		"./en-nz": 212,
-		"./en-nz.js": 212,
-		"./eo": 213,
-		"./eo.js": 213,
-		"./es": 214,
-		"./es-do": 215,
-		"./es-do.js": 215,
-		"./es.js": 214,
-		"./et": 216,
-		"./et.js": 216,
-		"./eu": 217,
-		"./eu.js": 217,
-		"./fa": 218,
-		"./fa.js": 218,
-		"./fi": 219,
-		"./fi.js": 219,
-		"./fo": 220,
-		"./fo.js": 220,
-		"./fr": 221,
-		"./fr-ca": 222,
-		"./fr-ca.js": 222,
-		"./fr-ch": 223,
-		"./fr-ch.js": 223,
-		"./fr.js": 221,
-		"./fy": 224,
-		"./fy.js": 224,
-		"./gd": 225,
-		"./gd.js": 225,
-		"./gl": 226,
-		"./gl.js": 226,
-		"./he": 227,
-		"./he.js": 227,
-		"./hi": 228,
-		"./hi.js": 228,
-		"./hr": 229,
-		"./hr.js": 229,
-		"./hu": 230,
-		"./hu.js": 230,
-		"./hy-am": 231,
-		"./hy-am.js": 231,
-		"./id": 232,
-		"./id.js": 232,
-		"./is": 233,
-		"./is.js": 233,
-		"./it": 234,
-		"./it.js": 234,
-		"./ja": 235,
-		"./ja.js": 235,
-		"./jv": 236,
-		"./jv.js": 236,
-		"./ka": 237,
-		"./ka.js": 237,
-		"./kk": 238,
-		"./kk.js": 238,
-		"./km": 239,
-		"./km.js": 239,
-		"./ko": 240,
-		"./ko.js": 240,
-		"./ky": 241,
-		"./ky.js": 241,
-		"./lb": 242,
-		"./lb.js": 242,
-		"./lo": 243,
-		"./lo.js": 243,
-		"./lt": 244,
-		"./lt.js": 244,
-		"./lv": 245,
-		"./lv.js": 245,
-		"./me": 246,
-		"./me.js": 246,
-		"./mk": 247,
-		"./mk.js": 247,
-		"./ml": 248,
-		"./ml.js": 248,
-		"./mr": 249,
-		"./mr.js": 249,
-		"./ms": 250,
-		"./ms-my": 251,
-		"./ms-my.js": 251,
-		"./ms.js": 250,
-		"./my": 252,
-		"./my.js": 252,
-		"./nb": 253,
-		"./nb.js": 253,
-		"./ne": 254,
-		"./ne.js": 254,
-		"./nl": 255,
-		"./nl.js": 255,
-		"./nn": 256,
-		"./nn.js": 256,
-		"./pa-in": 257,
-		"./pa-in.js": 257,
-		"./pl": 258,
-		"./pl.js": 258,
-		"./pt": 259,
-		"./pt-br": 260,
-		"./pt-br.js": 260,
-		"./pt.js": 259,
-		"./ro": 261,
-		"./ro.js": 261,
-		"./ru": 262,
-		"./ru.js": 262,
-		"./se": 263,
-		"./se.js": 263,
-		"./si": 264,
-		"./si.js": 264,
-		"./sk": 265,
-		"./sk.js": 265,
-		"./sl": 266,
-		"./sl.js": 266,
-		"./sq": 267,
-		"./sq.js": 267,
-		"./sr": 268,
-		"./sr-cyrl": 269,
-		"./sr-cyrl.js": 269,
-		"./sr.js": 268,
-		"./ss": 270,
-		"./ss.js": 270,
-		"./sv": 271,
-		"./sv.js": 271,
-		"./sw": 272,
-		"./sw.js": 272,
-		"./ta": 273,
-		"./ta.js": 273,
-		"./te": 274,
-		"./te.js": 274,
-		"./th": 275,
-		"./th.js": 275,
-		"./tl-ph": 276,
-		"./tl-ph.js": 276,
-		"./tlh": 277,
-		"./tlh.js": 277,
-		"./tr": 278,
-		"./tr.js": 278,
-		"./tzl": 279,
-		"./tzl.js": 279,
-		"./tzm": 280,
-		"./tzm-latn": 281,
-		"./tzm-latn.js": 281,
-		"./tzm.js": 280,
-		"./uk": 282,
-		"./uk.js": 282,
-		"./uz": 283,
-		"./uz.js": 283,
-		"./vi": 284,
-		"./vi.js": 284,
-		"./x-pseudo": 285,
-		"./x-pseudo.js": 285,
-		"./zh-cn": 286,
-		"./zh-cn.js": 286,
-		"./zh-tw": 287,
-		"./zh-tw.js": 287
+		"./af": 272,
+		"./af.js": 272,
+		"./ar": 273,
+		"./ar-ma": 274,
+		"./ar-ma.js": 274,
+		"./ar-sa": 275,
+		"./ar-sa.js": 275,
+		"./ar-tn": 276,
+		"./ar-tn.js": 276,
+		"./ar.js": 273,
+		"./az": 277,
+		"./az.js": 277,
+		"./be": 278,
+		"./be.js": 278,
+		"./bg": 279,
+		"./bg.js": 279,
+		"./bn": 280,
+		"./bn.js": 280,
+		"./bo": 281,
+		"./bo.js": 281,
+		"./br": 282,
+		"./br.js": 282,
+		"./bs": 283,
+		"./bs.js": 283,
+		"./ca": 284,
+		"./ca.js": 284,
+		"./cs": 285,
+		"./cs.js": 285,
+		"./cv": 286,
+		"./cv.js": 286,
+		"./cy": 287,
+		"./cy.js": 287,
+		"./da": 288,
+		"./da.js": 288,
+		"./de": 289,
+		"./de-at": 290,
+		"./de-at.js": 290,
+		"./de.js": 289,
+		"./dv": 291,
+		"./dv.js": 291,
+		"./el": 292,
+		"./el.js": 292,
+		"./en-au": 293,
+		"./en-au.js": 293,
+		"./en-ca": 294,
+		"./en-ca.js": 294,
+		"./en-gb": 295,
+		"./en-gb.js": 295,
+		"./en-ie": 296,
+		"./en-ie.js": 296,
+		"./en-nz": 297,
+		"./en-nz.js": 297,
+		"./eo": 298,
+		"./eo.js": 298,
+		"./es": 299,
+		"./es-do": 300,
+		"./es-do.js": 300,
+		"./es.js": 299,
+		"./et": 301,
+		"./et.js": 301,
+		"./eu": 302,
+		"./eu.js": 302,
+		"./fa": 303,
+		"./fa.js": 303,
+		"./fi": 304,
+		"./fi.js": 304,
+		"./fo": 305,
+		"./fo.js": 305,
+		"./fr": 306,
+		"./fr-ca": 307,
+		"./fr-ca.js": 307,
+		"./fr-ch": 308,
+		"./fr-ch.js": 308,
+		"./fr.js": 306,
+		"./fy": 309,
+		"./fy.js": 309,
+		"./gd": 310,
+		"./gd.js": 310,
+		"./gl": 311,
+		"./gl.js": 311,
+		"./he": 312,
+		"./he.js": 312,
+		"./hi": 313,
+		"./hi.js": 313,
+		"./hr": 314,
+		"./hr.js": 314,
+		"./hu": 315,
+		"./hu.js": 315,
+		"./hy-am": 316,
+		"./hy-am.js": 316,
+		"./id": 317,
+		"./id.js": 317,
+		"./is": 318,
+		"./is.js": 318,
+		"./it": 319,
+		"./it.js": 319,
+		"./ja": 320,
+		"./ja.js": 320,
+		"./jv": 321,
+		"./jv.js": 321,
+		"./ka": 322,
+		"./ka.js": 322,
+		"./kk": 323,
+		"./kk.js": 323,
+		"./km": 324,
+		"./km.js": 324,
+		"./ko": 325,
+		"./ko.js": 325,
+		"./ky": 326,
+		"./ky.js": 326,
+		"./lb": 327,
+		"./lb.js": 327,
+		"./lo": 328,
+		"./lo.js": 328,
+		"./lt": 329,
+		"./lt.js": 329,
+		"./lv": 330,
+		"./lv.js": 330,
+		"./me": 331,
+		"./me.js": 331,
+		"./mk": 332,
+		"./mk.js": 332,
+		"./ml": 333,
+		"./ml.js": 333,
+		"./mr": 334,
+		"./mr.js": 334,
+		"./ms": 335,
+		"./ms-my": 336,
+		"./ms-my.js": 336,
+		"./ms.js": 335,
+		"./my": 337,
+		"./my.js": 337,
+		"./nb": 338,
+		"./nb.js": 338,
+		"./ne": 339,
+		"./ne.js": 339,
+		"./nl": 340,
+		"./nl.js": 340,
+		"./nn": 341,
+		"./nn.js": 341,
+		"./pa-in": 342,
+		"./pa-in.js": 342,
+		"./pl": 343,
+		"./pl.js": 343,
+		"./pt": 344,
+		"./pt-br": 345,
+		"./pt-br.js": 345,
+		"./pt.js": 344,
+		"./ro": 346,
+		"./ro.js": 346,
+		"./ru": 347,
+		"./ru.js": 347,
+		"./se": 348,
+		"./se.js": 348,
+		"./si": 349,
+		"./si.js": 349,
+		"./sk": 350,
+		"./sk.js": 350,
+		"./sl": 351,
+		"./sl.js": 351,
+		"./sq": 352,
+		"./sq.js": 352,
+		"./sr": 353,
+		"./sr-cyrl": 354,
+		"./sr-cyrl.js": 354,
+		"./sr.js": 353,
+		"./ss": 355,
+		"./ss.js": 355,
+		"./sv": 356,
+		"./sv.js": 356,
+		"./sw": 357,
+		"./sw.js": 357,
+		"./ta": 358,
+		"./ta.js": 358,
+		"./te": 359,
+		"./te.js": 359,
+		"./th": 360,
+		"./th.js": 360,
+		"./tl-ph": 361,
+		"./tl-ph.js": 361,
+		"./tlh": 362,
+		"./tlh.js": 362,
+		"./tr": 363,
+		"./tr.js": 363,
+		"./tzl": 364,
+		"./tzl.js": 364,
+		"./tzm": 365,
+		"./tzm-latn": 366,
+		"./tzm-latn.js": 366,
+		"./tzm.js": 365,
+		"./uk": 367,
+		"./uk.js": 367,
+		"./uz": 368,
+		"./uz.js": 368,
+		"./vi": 369,
+		"./vi.js": 369,
+		"./x-pseudo": 370,
+		"./x-pseudo.js": 370,
+		"./zh-cn": 371,
+		"./zh-cn.js": 371,
+		"./zh-tw": 372,
+		"./zh-tw.js": 372
 	};
 	function webpackContext(req) {
 		return __webpack_require__(webpackContextResolve(req));
@@ -28707,11 +29197,11 @@
 	};
 	webpackContext.resolve = webpackContextResolve;
 	module.exports = webpackContext;
-	webpackContext.id = 186;
+	webpackContext.id = 271;
 
 
 /***/ },
-/* 187 */
+/* 272 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -28719,7 +29209,7 @@
 	//! author : Werner Mollentze : https://github.com/wernerm
 
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(184)) :
+	    true ? factory(__webpack_require__(269)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -28788,7 +29278,7 @@
 	}));
 
 /***/ },
-/* 188 */
+/* 273 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -28798,7 +29288,7 @@
 	//! Native plural forms: forabi https://github.com/forabi
 
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(184)) :
+	    true ? factory(__webpack_require__(269)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -28929,7 +29419,7 @@
 	}));
 
 /***/ },
-/* 189 */
+/* 274 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -28938,7 +29428,7 @@
 	//! author : Abdel Said : https://github.com/abdelsaid
 
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(184)) :
+	    true ? factory(__webpack_require__(269)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -28993,7 +29483,7 @@
 	}));
 
 /***/ },
-/* 190 */
+/* 275 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -29001,7 +29491,7 @@
 	//! author : Suhail Alkowaileet : https://github.com/xsoh
 
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(184)) :
+	    true ? factory(__webpack_require__(269)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -29101,14 +29591,14 @@
 	}));
 
 /***/ },
-/* 191 */
+/* 276 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
 	//! locale  :  Arabic (Tunisia) [ar-tn]
 
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(184)) :
+	    true ? factory(__webpack_require__(269)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -29163,7 +29653,7 @@
 	}));
 
 /***/ },
-/* 192 */
+/* 277 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -29171,7 +29661,7 @@
 	//! author : topchiyev : https://github.com/topchiyev
 
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(184)) :
+	    true ? factory(__webpack_require__(269)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -29272,7 +29762,7 @@
 	}));
 
 /***/ },
-/* 193 */
+/* 278 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -29282,7 +29772,7 @@
 	//! Author : Menelion Elensúle : https://github.com/Oire
 
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(184)) :
+	    true ? factory(__webpack_require__(269)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -29410,7 +29900,7 @@
 	}));
 
 /***/ },
-/* 194 */
+/* 279 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -29418,7 +29908,7 @@
 	//! author : Krasen Borisov : https://github.com/kraz
 
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(184)) :
+	    true ? factory(__webpack_require__(269)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -29504,7 +29994,7 @@
 	}));
 
 /***/ },
-/* 195 */
+/* 280 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -29512,7 +30002,7 @@
 	//! author : Kaushik Gandhi : https://github.com/kaushikgandhi
 
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(184)) :
+	    true ? factory(__webpack_require__(269)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -29627,7 +30117,7 @@
 	}));
 
 /***/ },
-/* 196 */
+/* 281 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -29635,7 +30125,7 @@
 	//! author : Thupten N. Chakrishar : https://github.com/vajradog
 
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(184)) :
+	    true ? factory(__webpack_require__(269)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -29750,7 +30240,7 @@
 	}));
 
 /***/ },
-/* 197 */
+/* 282 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -29758,7 +30248,7 @@
 	//! author : Jean-Baptiste Le Duigou : https://github.com/jbleduigou
 
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(184)) :
+	    true ? factory(__webpack_require__(269)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -29862,7 +30352,7 @@
 	}));
 
 /***/ },
-/* 198 */
+/* 283 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -29871,7 +30361,7 @@
 	//! based on (hr) translation by Bojan Marković
 
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(184)) :
+	    true ? factory(__webpack_require__(269)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -30009,7 +30499,7 @@
 	}));
 
 /***/ },
-/* 199 */
+/* 284 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -30017,7 +30507,7 @@
 	//! author : Juan G. Hurtado : https://github.com/juanghurtado
 
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(184)) :
+	    true ? factory(__webpack_require__(269)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -30094,7 +30584,7 @@
 	}));
 
 /***/ },
-/* 200 */
+/* 285 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -30102,7 +30592,7 @@
 	//! author : petrbela : https://github.com/petrbela
 
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(184)) :
+	    true ? factory(__webpack_require__(269)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -30270,7 +30760,7 @@
 	}));
 
 /***/ },
-/* 201 */
+/* 286 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -30278,7 +30768,7 @@
 	//! author : Anatoly Mironov : https://github.com/mirontoli
 
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(184)) :
+	    true ? factory(__webpack_require__(269)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -30337,7 +30827,7 @@
 	}));
 
 /***/ },
-/* 202 */
+/* 287 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -30345,7 +30835,7 @@
 	//! author : Robert Allen
 
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(184)) :
+	    true ? factory(__webpack_require__(269)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -30421,7 +30911,7 @@
 	}));
 
 /***/ },
-/* 203 */
+/* 288 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -30429,7 +30919,7 @@
 	//! author : Ulrik Nielsen : https://github.com/mrbase
 
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(184)) :
+	    true ? factory(__webpack_require__(269)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -30485,7 +30975,7 @@
 	}));
 
 /***/ },
-/* 204 */
+/* 289 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -30495,7 +30985,7 @@
 	//! author : Mikolaj Dadela : https://github.com/mik01aj
 
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(184)) :
+	    true ? factory(__webpack_require__(269)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -30567,7 +31057,7 @@
 	}));
 
 /***/ },
-/* 205 */
+/* 290 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -30578,7 +31068,7 @@
 	//! author : Mikolaj Dadela : https://github.com/mik01aj
 
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(184)) :
+	    true ? factory(__webpack_require__(269)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -30650,7 +31140,7 @@
 	}));
 
 /***/ },
-/* 206 */
+/* 291 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -30658,7 +31148,7 @@
 	//! author : Jawish Hameed : https://github.com/jawish
 
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(184)) :
+	    true ? factory(__webpack_require__(269)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -30753,7 +31243,7 @@
 	}));
 
 /***/ },
-/* 207 */
+/* 292 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -30761,7 +31251,7 @@
 	//! author : Aggelos Karalias : https://github.com/mehiel
 
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(184)) :
+	    true ? factory(__webpack_require__(269)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -30855,14 +31345,14 @@
 	}));
 
 /***/ },
-/* 208 */
+/* 293 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
 	//! locale : English (Australia) [en-au]
 
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(184)) :
+	    true ? factory(__webpack_require__(269)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -30925,7 +31415,7 @@
 	}));
 
 /***/ },
-/* 209 */
+/* 294 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -30933,7 +31423,7 @@
 	//! author : Jonathan Abourbih : https://github.com/jonbca
 
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(184)) :
+	    true ? factory(__webpack_require__(269)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -30992,7 +31482,7 @@
 	}));
 
 /***/ },
-/* 210 */
+/* 295 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -31000,7 +31490,7 @@
 	//! author : Chris Gedrim : https://github.com/chrisgedrim
 
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(184)) :
+	    true ? factory(__webpack_require__(269)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -31063,7 +31553,7 @@
 	}));
 
 /***/ },
-/* 211 */
+/* 296 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -31071,7 +31561,7 @@
 	//! author : Chris Cartlidge : https://github.com/chriscartlidge
 
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(184)) :
+	    true ? factory(__webpack_require__(269)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -31134,14 +31624,14 @@
 	}));
 
 /***/ },
-/* 212 */
+/* 297 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
 	//! locale : English (New Zealand) [en-nz]
 
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(184)) :
+	    true ? factory(__webpack_require__(269)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -31204,7 +31694,7 @@
 	}));
 
 /***/ },
-/* 213 */
+/* 298 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -31214,7 +31704,7 @@
 	//!          Se ne, bonvolu korekti kaj avizi min por ke mi povas lerni!
 
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(184)) :
+	    true ? factory(__webpack_require__(269)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -31281,7 +31771,7 @@
 	}));
 
 /***/ },
-/* 214 */
+/* 299 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -31289,7 +31779,7 @@
 	//! author : Julio Napurí : https://github.com/julionc
 
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(184)) :
+	    true ? factory(__webpack_require__(269)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -31366,14 +31856,14 @@
 	}));
 
 /***/ },
-/* 215 */
+/* 300 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
 	//! locale : Spanish (Dominican Republic) [es-do]
 
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(184)) :
+	    true ? factory(__webpack_require__(269)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -31450,7 +31940,7 @@
 	}));
 
 /***/ },
-/* 216 */
+/* 301 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -31459,7 +31949,7 @@
 	//! improvements : Illimar Tambek : https://github.com/ragulka
 
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(184)) :
+	    true ? factory(__webpack_require__(269)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -31534,7 +32024,7 @@
 	}));
 
 /***/ },
-/* 217 */
+/* 302 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -31542,7 +32032,7 @@
 	//! author : Eneko Illarramendi : https://github.com/eillarra
 
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(184)) :
+	    true ? factory(__webpack_require__(269)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -31604,7 +32094,7 @@
 	}));
 
 /***/ },
-/* 218 */
+/* 303 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -31612,7 +32102,7 @@
 	//! author : Ebrahim Byagowi : https://github.com/ebraminio
 
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(184)) :
+	    true ? factory(__webpack_require__(269)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -31714,7 +32204,7 @@
 	}));
 
 /***/ },
-/* 219 */
+/* 304 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -31722,7 +32212,7 @@
 	//! author : Tarmo Aidantausta : https://github.com/bleadof
 
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(184)) :
+	    true ? factory(__webpack_require__(269)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -31825,7 +32315,7 @@
 	}));
 
 /***/ },
-/* 220 */
+/* 305 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -31833,7 +32323,7 @@
 	//! author : Ragnar Johannesen : https://github.com/ragnar123
 
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(184)) :
+	    true ? factory(__webpack_require__(269)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -31889,7 +32379,7 @@
 	}));
 
 /***/ },
-/* 221 */
+/* 306 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -31897,7 +32387,7 @@
 	//! author : John Fischer : https://github.com/jfroffice
 
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(184)) :
+	    true ? factory(__webpack_require__(269)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -31957,7 +32447,7 @@
 	}));
 
 /***/ },
-/* 222 */
+/* 307 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -31965,7 +32455,7 @@
 	//! author : Jonathan Abourbih : https://github.com/jonbca
 
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(184)) :
+	    true ? factory(__webpack_require__(269)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -32021,7 +32511,7 @@
 	}));
 
 /***/ },
-/* 223 */
+/* 308 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -32029,7 +32519,7 @@
 	//! author : Gaspard Bucher : https://github.com/gaspard
 
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(184)) :
+	    true ? factory(__webpack_require__(269)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -32089,7 +32579,7 @@
 	}));
 
 /***/ },
-/* 224 */
+/* 309 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -32097,7 +32587,7 @@
 	//! author : Robin van der Vliet : https://github.com/robin0van0der0v
 
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(184)) :
+	    true ? factory(__webpack_require__(269)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -32166,7 +32656,7 @@
 	}));
 
 /***/ },
-/* 225 */
+/* 310 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -32174,7 +32664,7 @@
 	//! author : Jon Ashdown : https://github.com/jonashdown
 
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(184)) :
+	    true ? factory(__webpack_require__(269)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -32246,7 +32736,7 @@
 	}));
 
 /***/ },
-/* 226 */
+/* 311 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -32254,7 +32744,7 @@
 	//! author : Juan G. Hurtado : https://github.com/juanghurtado
 
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(184)) :
+	    true ? factory(__webpack_require__(269)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -32327,7 +32817,7 @@
 	}));
 
 /***/ },
-/* 227 */
+/* 312 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -32337,7 +32827,7 @@
 	//! author : Tal Ater : https://github.com/TalAter
 
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(184)) :
+	    true ? factory(__webpack_require__(269)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -32430,7 +32920,7 @@
 	}));
 
 /***/ },
-/* 228 */
+/* 313 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -32438,7 +32928,7 @@
 	//! author : Mayank Singhal : https://github.com/mayanksinghal
 
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(184)) :
+	    true ? factory(__webpack_require__(269)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -32558,7 +33048,7 @@
 	}));
 
 /***/ },
-/* 229 */
+/* 314 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -32566,7 +33056,7 @@
 	//! author : Bojan Marković : https://github.com/bmarkovic
 
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(184)) :
+	    true ? factory(__webpack_require__(269)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -32707,7 +33197,7 @@
 	}));
 
 /***/ },
-/* 230 */
+/* 315 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -32715,7 +33205,7 @@
 	//! author : Adam Brunner : https://github.com/adambrunner
 
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(184)) :
+	    true ? factory(__webpack_require__(269)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -32820,7 +33310,7 @@
 	}));
 
 /***/ },
-/* 231 */
+/* 316 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -32828,7 +33318,7 @@
 	//! author : Armendarabyan : https://github.com/armendarabyan
 
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(184)) :
+	    true ? factory(__webpack_require__(269)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -32919,7 +33409,7 @@
 	}));
 
 /***/ },
-/* 232 */
+/* 317 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -32928,7 +33418,7 @@
 	//! reference: http://id.wikisource.org/wiki/Pedoman_Umum_Ejaan_Bahasa_Indonesia_yang_Disempurnakan
 
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(184)) :
+	    true ? factory(__webpack_require__(269)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -33006,7 +33496,7 @@
 	}));
 
 /***/ },
-/* 233 */
+/* 318 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -33014,7 +33504,7 @@
 	//! author : Hinrik Örn Sigurðsson : https://github.com/hinrik
 
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(184)) :
+	    true ? factory(__webpack_require__(269)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -33137,7 +33627,7 @@
 	}));
 
 /***/ },
-/* 234 */
+/* 319 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -33146,7 +33636,7 @@
 	//! author: Mattia Larentis: https://github.com/nostalgiaz
 
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(184)) :
+	    true ? factory(__webpack_require__(269)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -33211,7 +33701,7 @@
 	}));
 
 /***/ },
-/* 235 */
+/* 320 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -33219,7 +33709,7 @@
 	//! author : LI Long : https://github.com/baryon
 
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(184)) :
+	    true ? factory(__webpack_require__(269)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -33291,7 +33781,7 @@
 	}));
 
 /***/ },
-/* 236 */
+/* 321 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -33300,7 +33790,7 @@
 	//! reference: http://jv.wikipedia.org/wiki/Basa_Jawa
 
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(184)) :
+	    true ? factory(__webpack_require__(269)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -33378,7 +33868,7 @@
 	}));
 
 /***/ },
-/* 237 */
+/* 322 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -33386,7 +33876,7 @@
 	//! author : Irakli Janiashvili : https://github.com/irakli-janiashvili
 
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(184)) :
+	    true ? factory(__webpack_require__(269)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -33471,7 +33961,7 @@
 	}));
 
 /***/ },
-/* 238 */
+/* 323 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -33479,7 +33969,7 @@
 	//! authors : Nurlan Rakhimzhanov : https://github.com/nurlan
 
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(184)) :
+	    true ? factory(__webpack_require__(269)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -33562,7 +34052,7 @@
 	}));
 
 /***/ },
-/* 239 */
+/* 324 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -33570,7 +34060,7 @@
 	//! author : Kruy Vanna : https://github.com/kruyvanna
 
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(184)) :
+	    true ? factory(__webpack_require__(269)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -33624,7 +34114,7 @@
 	}));
 
 /***/ },
-/* 240 */
+/* 325 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -33636,7 +34126,7 @@
 	//! - Jeeeyul Lee <jeeeyul@gmail.com>
 
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(184)) :
+	    true ? factory(__webpack_require__(269)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -33696,7 +34186,7 @@
 	}));
 
 /***/ },
-/* 241 */
+/* 326 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -33704,7 +34194,7 @@
 	//! author : Chyngyz Arystan uulu : https://github.com/chyngyz
 
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(184)) :
+	    true ? factory(__webpack_require__(269)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -33788,7 +34278,7 @@
 	}));
 
 /***/ },
-/* 242 */
+/* 327 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -33796,7 +34286,7 @@
 	//! author : mweimerskirch : https://github.com/mweimerskirch, David Raison : https://github.com/kwisatz
 
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(184)) :
+	    true ? factory(__webpack_require__(269)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -33928,7 +34418,7 @@
 	}));
 
 /***/ },
-/* 243 */
+/* 328 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -33936,7 +34426,7 @@
 	//! author : Ryan Hart : https://github.com/ryanhart2
 
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(184)) :
+	    true ? factory(__webpack_require__(269)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -34002,7 +34492,7 @@
 	}));
 
 /***/ },
-/* 244 */
+/* 329 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -34010,7 +34500,7 @@
 	//! author : Mindaugas Mozūras : https://github.com/mmozuras
 
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(184)) :
+	    true ? factory(__webpack_require__(269)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -34123,7 +34613,7 @@
 	}));
 
 /***/ },
-/* 245 */
+/* 330 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -34132,7 +34622,7 @@
 	//! author : Jānis Elmeris : https://github.com/JanisE
 
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(184)) :
+	    true ? factory(__webpack_require__(269)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -34224,7 +34714,7 @@
 	}));
 
 /***/ },
-/* 246 */
+/* 331 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -34232,7 +34722,7 @@
 	//! author : Miodrag Nikač <miodrag@restartit.me> : https://github.com/miodragnikac
 
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(184)) :
+	    true ? factory(__webpack_require__(269)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -34339,7 +34829,7 @@
 	}));
 
 /***/ },
-/* 247 */
+/* 332 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -34347,7 +34837,7 @@
 	//! author : Borislav Mickov : https://github.com/B0k0
 
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(184)) :
+	    true ? factory(__webpack_require__(269)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -34433,7 +34923,7 @@
 	}));
 
 /***/ },
-/* 248 */
+/* 333 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -34441,7 +34931,7 @@
 	//! author : Floyd Pink : https://github.com/floydpink
 
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(184)) :
+	    true ? factory(__webpack_require__(269)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -34518,7 +35008,7 @@
 	}));
 
 /***/ },
-/* 249 */
+/* 334 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -34527,7 +35017,7 @@
 	//! author : Vivek Athalye : https://github.com/vnathalye
 
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(184)) :
+	    true ? factory(__webpack_require__(269)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -34681,7 +35171,7 @@
 	}));
 
 /***/ },
-/* 250 */
+/* 335 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -34689,7 +35179,7 @@
 	//! author : Weldan Jamili : https://github.com/weldan
 
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(184)) :
+	    true ? factory(__webpack_require__(269)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -34767,7 +35257,7 @@
 	}));
 
 /***/ },
-/* 251 */
+/* 336 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -34776,7 +35266,7 @@
 	//! author : Weldan Jamili : https://github.com/weldan
 
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(184)) :
+	    true ? factory(__webpack_require__(269)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -34854,7 +35344,7 @@
 	}));
 
 /***/ },
-/* 252 */
+/* 337 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -34862,7 +35352,7 @@
 	//! author : Squar team, mysquar.com
 
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(184)) :
+	    true ? factory(__webpack_require__(269)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -34951,7 +35441,7 @@
 	}));
 
 /***/ },
-/* 253 */
+/* 338 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -34960,7 +35450,7 @@
 	//!           Sigurd Gartmann : https://github.com/sigurdga
 
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(184)) :
+	    true ? factory(__webpack_require__(269)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -35018,7 +35508,7 @@
 	}));
 
 /***/ },
-/* 254 */
+/* 339 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -35026,7 +35516,7 @@
 	//! author : suvash : https://github.com/suvash
 
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(184)) :
+	    true ? factory(__webpack_require__(269)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -35145,7 +35635,7 @@
 	}));
 
 /***/ },
-/* 255 */
+/* 340 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -35153,7 +35643,7 @@
 	//! author : Joris Röling : https://github.com/jjupiter
 
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(184)) :
+	    true ? factory(__webpack_require__(269)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -35222,7 +35712,7 @@
 	}));
 
 /***/ },
-/* 256 */
+/* 341 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -35230,7 +35720,7 @@
 	//! author : https://github.com/mechuwind
 
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(184)) :
+	    true ? factory(__webpack_require__(269)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -35286,7 +35776,7 @@
 	}));
 
 /***/ },
-/* 257 */
+/* 342 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -35294,7 +35784,7 @@
 	//! author : Harpreet Singh : https://github.com/harpreetkhalsagtbit
 
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(184)) :
+	    true ? factory(__webpack_require__(269)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -35414,7 +35904,7 @@
 	}));
 
 /***/ },
-/* 258 */
+/* 343 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -35422,7 +35912,7 @@
 	//! author : Rafal Hirsz : https://github.com/evoL
 
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(184)) :
+	    true ? factory(__webpack_require__(269)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -35523,7 +36013,7 @@
 	}));
 
 /***/ },
-/* 259 */
+/* 344 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -35531,7 +36021,7 @@
 	//! author : Jefferson : https://github.com/jalex79
 
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(184)) :
+	    true ? factory(__webpack_require__(269)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -35592,7 +36082,7 @@
 	}));
 
 /***/ },
-/* 260 */
+/* 345 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -35600,7 +36090,7 @@
 	//! author : Caio Ribeiro Pereira : https://github.com/caio-ribeiro-pereira
 
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(184)) :
+	    true ? factory(__webpack_require__(269)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -35657,7 +36147,7 @@
 	}));
 
 /***/ },
-/* 261 */
+/* 346 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -35666,7 +36156,7 @@
 	//! author : Valentin Agachi : https://github.com/avaly
 
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(184)) :
+	    true ? factory(__webpack_require__(269)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -35736,7 +36226,7 @@
 	}));
 
 /***/ },
-/* 262 */
+/* 347 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -35746,7 +36236,7 @@
 	//! author : Коренберг Марк : https://github.com/socketpair
 
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(184)) :
+	    true ? factory(__webpack_require__(269)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -35923,7 +36413,7 @@
 	}));
 
 /***/ },
-/* 263 */
+/* 348 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -35931,7 +36421,7 @@
 	//! authors : Bård Rolstad Henriksen : https://github.com/karamell
 
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(184)) :
+	    true ? factory(__webpack_require__(269)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -35988,7 +36478,7 @@
 	}));
 
 /***/ },
-/* 264 */
+/* 349 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -35996,7 +36486,7 @@
 	//! author : Sampath Sitinamaluwa : https://github.com/sampathsris
 
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(184)) :
+	    true ? factory(__webpack_require__(269)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -36063,7 +36553,7 @@
 	}));
 
 /***/ },
-/* 265 */
+/* 350 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -36072,7 +36562,7 @@
 	//! based on work of petrbela : https://github.com/petrbela
 
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(184)) :
+	    true ? factory(__webpack_require__(269)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -36217,7 +36707,7 @@
 	}));
 
 /***/ },
-/* 266 */
+/* 351 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -36225,7 +36715,7 @@
 	//! author : Robert Sedovšek : https://github.com/sedovsek
 
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(184)) :
+	    true ? factory(__webpack_require__(269)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -36383,7 +36873,7 @@
 	}));
 
 /***/ },
-/* 267 */
+/* 352 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -36393,7 +36883,7 @@
 	//! author : Oerd Cukalla : https://github.com/oerd (fixes)
 
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(184)) :
+	    true ? factory(__webpack_require__(269)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -36457,7 +36947,7 @@
 	}));
 
 /***/ },
-/* 268 */
+/* 353 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -36465,7 +36955,7 @@
 	//! author : Milan Janačković<milanjanackovic@gmail.com> : https://github.com/milan-j
 
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(184)) :
+	    true ? factory(__webpack_require__(269)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -36571,7 +37061,7 @@
 	}));
 
 /***/ },
-/* 269 */
+/* 354 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -36579,7 +37069,7 @@
 	//! author : Milan Janačković<milanjanackovic@gmail.com> : https://github.com/milan-j
 
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(184)) :
+	    true ? factory(__webpack_require__(269)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -36685,7 +37175,7 @@
 	}));
 
 /***/ },
-/* 270 */
+/* 355 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -36693,7 +37183,7 @@
 	//! author : Nicolai Davies<mail@nicolai.io> : https://github.com/nicolaidavies
 
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(184)) :
+	    true ? factory(__webpack_require__(269)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -36778,7 +37268,7 @@
 	}));
 
 /***/ },
-/* 271 */
+/* 356 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -36786,7 +37276,7 @@
 	//! author : Jens Alm : https://github.com/ulmus
 
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(184)) :
+	    true ? factory(__webpack_require__(269)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -36851,7 +37341,7 @@
 	}));
 
 /***/ },
-/* 272 */
+/* 357 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -36859,7 +37349,7 @@
 	//! author : Fahad Kassim : https://github.com/fadsel
 
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(184)) :
+	    true ? factory(__webpack_require__(269)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -36914,7 +37404,7 @@
 	}));
 
 /***/ },
-/* 273 */
+/* 358 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -36922,7 +37412,7 @@
 	//! author : Arjunkumar Krishnamoorthy : https://github.com/tk120404
 
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(184)) :
+	    true ? factory(__webpack_require__(269)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -37047,7 +37537,7 @@
 	}));
 
 /***/ },
-/* 274 */
+/* 359 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -37055,7 +37545,7 @@
 	//! author : Krishna Chaitanya Thota : https://github.com/kcthota
 
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(184)) :
+	    true ? factory(__webpack_require__(269)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -37140,7 +37630,7 @@
 	}));
 
 /***/ },
-/* 275 */
+/* 360 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -37148,7 +37638,7 @@
 	//! author : Kridsada Thanabulpong : https://github.com/sirn
 
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(184)) :
+	    true ? factory(__webpack_require__(269)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -37211,7 +37701,7 @@
 	}));
 
 /***/ },
-/* 276 */
+/* 361 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -37219,7 +37709,7 @@
 	//! author : Dan Hagman
 
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(184)) :
+	    true ? factory(__webpack_require__(269)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -37277,7 +37767,7 @@
 	}));
 
 /***/ },
-/* 277 */
+/* 362 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -37285,7 +37775,7 @@
 	//! author : Dominika Kruk : https://github.com/amaranthrose
 
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(184)) :
+	    true ? factory(__webpack_require__(269)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -37401,7 +37891,7 @@
 	}));
 
 /***/ },
-/* 278 */
+/* 363 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -37410,7 +37900,7 @@
 	//!           Burak Yiğit Kaya: https://github.com/BYK
 
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(184)) :
+	    true ? factory(__webpack_require__(269)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -37495,7 +37985,7 @@
 	}));
 
 /***/ },
-/* 279 */
+/* 364 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -37503,7 +37993,7 @@
 	//! author : Robin van der Vliet : https://github.com/robin0van0der0v with the help of Iustì Canun
 
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(184)) :
+	    true ? factory(__webpack_require__(269)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -37590,7 +38080,7 @@
 	}));
 
 /***/ },
-/* 280 */
+/* 365 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -37598,7 +38088,7 @@
 	//! author : Abdel Said : https://github.com/abdelsaid
 
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(184)) :
+	    true ? factory(__webpack_require__(269)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -37652,7 +38142,7 @@
 	}));
 
 /***/ },
-/* 281 */
+/* 366 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -37660,7 +38150,7 @@
 	//! author : Abdel Said : https://github.com/abdelsaid
 
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(184)) :
+	    true ? factory(__webpack_require__(269)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -37714,7 +38204,7 @@
 	}));
 
 /***/ },
-/* 282 */
+/* 367 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -37723,7 +38213,7 @@
 	//! Author : Menelion Elensúle : https://github.com/Oire
 
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(184)) :
+	    true ? factory(__webpack_require__(269)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -37864,7 +38354,7 @@
 	}));
 
 /***/ },
-/* 283 */
+/* 368 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -37872,7 +38362,7 @@
 	//! author : Sardor Muminov : https://github.com/muminoff
 
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(184)) :
+	    true ? factory(__webpack_require__(269)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -37926,7 +38416,7 @@
 	}));
 
 /***/ },
-/* 284 */
+/* 369 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -37934,7 +38424,7 @@
 	//! author : Bang Nguyen : https://github.com/bangnk
 
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(184)) :
+	    true ? factory(__webpack_require__(269)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -38009,7 +38499,7 @@
 	}));
 
 /***/ },
-/* 285 */
+/* 370 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -38017,7 +38507,7 @@
 	//! author : Andrew Hood : https://github.com/andrewhood125
 
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(184)) :
+	    true ? factory(__webpack_require__(269)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -38081,7 +38571,7 @@
 	}));
 
 /***/ },
-/* 286 */
+/* 371 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -38090,7 +38580,7 @@
 	//! author : Zeno Zeng : https://github.com/zenozeng
 
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(184)) :
+	    true ? factory(__webpack_require__(269)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -38212,7 +38702,7 @@
 	}));
 
 /***/ },
-/* 287 */
+/* 372 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -38221,7 +38711,7 @@
 	//! author : Chris Lam : https://github.com/hehachris
 
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(184)) :
+	    true ? factory(__webpack_require__(269)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -38320,193 +38810,411 @@
 	}));
 
 /***/ },
-/* 288 */
-/***/ function(module, exports) {
-
-	/* eslint-disable no-unused-vars */
-	'use strict';
-	var hasOwnProperty = Object.prototype.hasOwnProperty;
-	var propIsEnumerable = Object.prototype.propertyIsEnumerable;
-
-	function toObject(val) {
-		if (val === null || val === undefined) {
-			throw new TypeError('Object.assign cannot be called with null or undefined');
-		}
-
-		return Object(val);
-	}
-
-	module.exports = Object.assign || function (target, source) {
-		var from;
-		var to = toObject(target);
-		var symbols;
-
-		for (var s = 1; s < arguments.length; s++) {
-			from = Object(arguments[s]);
-
-			for (var key in from) {
-				if (hasOwnProperty.call(from, key)) {
-					to[key] = from[key];
-				}
-			}
-
-			if (Object.getOwnPropertySymbols) {
-				symbols = Object.getOwnPropertySymbols(from);
-				for (var i = 0; i < symbols.length; i++) {
-					if (propIsEnumerable.call(from, symbols[i])) {
-						to[symbols[i]] = from[symbols[i]];
-					}
-				}
-			}
-		}
-
-		return to;
-	};
-
-
-/***/ },
-/* 289 */
-/***/ function(module, exports) {
-
-	"use strict";
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-
-	exports.default = function (range) {
-	  if (range[1] && range[0].isAfter(range[1])) {
-	    range = [range[1], range[0]];
-	  }
-
-	  return range;
-	};
-
-/***/ },
-/* 290 */
+/* 373 */
 /***/ function(module, exports, __webpack_require__) {
 
-	'use strict';
+	var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;(function (root, factory) {
+	  if (true) {
+	    // AMD. Register as an anonymous module unless amdModuleId is set
+	    !(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__(269)], __WEBPACK_AMD_DEFINE_RESULT__ = function (a0) {
+	      return (root['DateRange'] = factory(a0));
+	    }.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__), __WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
+	  } else if (typeof exports === 'object') {
+	    // Node. Does not work with strict CommonJS, but
+	    // only CommonJS-like environments that support module.exports,
+	    // like Node.
+	    module.exports = factory(require("moment"));
+	  } else {
+	    root['DateRange'] = factory(moment);
+	  }
+	}(this, function (moment) {
 
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
+	//-----------------------------------------------------------------------------
+	// Contstants
+	//-----------------------------------------------------------------------------
 
-	var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
 
-	var _moment = __webpack_require__(184);
 
-	var _moment2 = _interopRequireDefault(_moment);
+	var INTERVALS = {
+	  year:   true,
+	  month:  true,
+	  week:   true,
+	  day:    true,
+	  hour:   true,
+	  minute: true,
+	  second: true
+	};
 
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	//-----------------------------------------------------------------------------
+	// Date Ranges
+	//-----------------------------------------------------------------------------
 
 	/**
-	 * This function will be used to convert a date to a moment.
+	 * DateRange class to store ranges and query dates.
 	 *
-	 * It accepts input as sring, date or moment
+	 * @constructor
+	 * @param {(Moment|Date)} start Start of interval
+	 * @param {(Moment|Date)} end End of interval
+	 *//**
+	 * DateRange class to store ranges and query dates.
 	 *
-	 * @param  {String/Date/Moment} value
+	 * @constructor
+	 * @param {!Array} range Array containing start and end dates.
+	 *//**
+	 * DateRange class to store ranges and query dates.
 	 *
-	 * @param  {String} [dateFormat] if value is string, it will be parsed to a moment
-	 * using this format.
-	 * You can skip this argument and only specify the config instead,
-	 * where you can have a dateFormat property
-	 *
-	 * @param  {Object} [config]
-	 * @param  {String} [config.dateFormat] a dateFormat string
-	 * @param  {String} [config.locale] a locale
-	 * @param  {Boolean} [config.strict] whether to perform strict parsing on strings
-	 *
-	 * @return {Moment}
+	 * @constructor
+	 * @param {!String} range String formatted as an IS0 8601 time interval
 	 */
+	function DateRange(start, end) {
+	  var parts;
+	  var s = start;
+	  var e = end;
 
-	exports.default = function (value, dateFormat, config) {
-	  if ((typeof dateFormat === 'undefined' ? 'undefined' : _typeof(dateFormat)) === 'object') {
-	    config = dateFormat;
-	    dateFormat = null;
-	  }
-
-	  var strict = !!(config && config.strict);
-	  var locale = config && config.locale;
-
-	  dateFormat = dateFormat || config && config.dateFormat || 'YYYY-MM-DD';
-
-	  if (typeof value == 'string') {
-	    return (0, _moment2.default)(value, dateFormat, locale, strict);
-	  }
-
-	  value = value == null ? new Date() : value;
-
-	  return (0, _moment2.default)(value, undefined, locale, strict);
-	};
-
-/***/ },
-/* 291 */
-/***/ function(module, exports) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-
-	exports.default = function () {
-	  for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
-	    args[_key] = arguments[_key];
-	  }
-
-	  if (args.length == 1 && Array.isArray(args[0])) {
-	    args = args[0];
-	  }
-
-	  return args.filter(function (x) {
-	    return !!x;
-	  }).join(' ');
-	};
-
-/***/ },
-/* 292 */
-/***/ function(module, exports) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-
-	var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
-
-	exports.default = function (moment, configOrRange) {
-
-	  var range = configOrRange;
-	  var inclusive = true;
-
-	  if (!Array.isArray(configOrRange) && (typeof configOrRange === 'undefined' ? 'undefined' : _typeof(configOrRange)) == 'object') {
-	    range = configOrRange.range;
-
-	    if (configOrRange.inclusive !== undefined) {
-	      inclusive = !!configOrRange.inclusive;
+	  if (arguments.length === 1 || end === undefined) {
+	    if (typeof start === 'object' && start.length === 2) {
+	      s = start[0];
+	      e = start[1];
+	    }
+	    else if (typeof start === 'string') {
+	      parts = start.split('/');
+	      s = parts[0];
+	      e = parts[1];
 	    }
 	  }
 
-	  var start = range[0];
-	  var end = range.length >= 2 && range[range.length - 1];
+	  this.start = (s === null) ? moment(-8640000000000000) : moment(s);
+	  this.end   = (e === null) ? moment(8640000000000000) : moment(e);
+	}
 
-	  if (!moment) {
-	    return false;
-	  }
+	/**
+	 * Constructor for prototype.
+	 *
+	 * @type {DateRange}
+	 */
+	DateRange.prototype.constructor = DateRange;
 
-	  if (start && end) {
-	    var insideRange = start.isBefore(moment) && end.isAfter(moment);
-
-	    return inclusive ? insideRange || start.isSame(moment) || end.isSame(moment) : insideRange;
-	  }
-
-	  return false;
+	/**
+	 * Deep clone range.
+	 *
+	 * @return {!DateRange}
+	 */
+	DateRange.prototype.clone = function() {
+	  return moment().range(this.start, this.end);
 	};
 
+	/**
+	 * Determine if the current interval contains a given moment/date/range.
+	 *
+	 * @param {(Moment|Date|DateRange)} other Date to check
+	 * @param {!boolean} exclusive True if the to value is exclusive
+	 *
+	 * @return {!boolean}
+	 */
+	DateRange.prototype.contains = function(other, exclusive) {
+	  var start = this.start;
+	  var end   = this.end;
+
+	  if (other instanceof DateRange) {
+	    return start <= other.start && (end > other.end || (end.isSame(other.end) && !exclusive));
+	  }
+	  else {
+	    return start <= other && (end > other || (end.isSame(other) && !exclusive));
+	  }
+	};
+
+	/**
+	 * Determine if the current date range overlaps a given date range.
+	 *
+	 * @param {!DateRange} range Date range to check
+	 *
+	 * @return {!boolean}
+	 */
+	DateRange.prototype.overlaps = function(range) {
+	  return this.intersect(range) !== null;
+	};
+
+	/**
+	 * Determine the intersecting periods from one or more date ranges.
+	 *
+	 * @param {!DateRange} other A date range to intersect with this one
+	 *
+	 * @return {DateRange} Returns the intersecting date or `null` if the ranges do
+	 *                     not intersect
+	 */
+	DateRange.prototype.intersect = function(other) {
+	  var start = this.start;
+	  var end   = this.end;
+
+	  if ((start <= other.start) && (other.start < end) && (end < other.end)) {
+	    return new DateRange(other.start, end);
+	  }
+	  else if ((other.start < start) && (start < other.end) && (other.end <= end)) {
+	    return new DateRange(start, other.end);
+	  }
+	  else if ((other.start < start) && (start <= end) && (end < other.end)) {
+	    return this;
+	  }
+	  else if ((start <= other.start) && (other.start <= other.end) && (other.end <= end)) {
+	    return other;
+	  }
+
+	  return null;
+	};
+
+	/**
+	 * Merge date ranges if they intersect.
+	 *
+	 * @param {!DateRange} other A date range to add to this one
+	 *
+	 * @return {DateRange} Returns the new `DateRange` or `null` if they do not
+	 *                     overlap
+	 */
+	DateRange.prototype.add = function(other) {
+	  if (this.overlaps(other)) {
+	    return new DateRange(moment.min(this.start, other.start), moment.max(this.end, other.end));
+	  }
+
+	  return null;
+	};
+
+	/**
+	 * Subtract one range from another.
+	 *
+	 * @param {!DateRange} other A date range to substract from this one
+	 *
+	 * @return {!Array<DateRange>}
+	 */
+	DateRange.prototype.subtract = function(other) {
+	  var start = this.start;
+	  var end   = this.end;
+
+	  if (this.intersect(other) === null) {
+	    return [this];
+	  }
+	  else if ((other.start <= start) && (start < end) && (end <= other.end)) {
+	    return [];
+	  }
+	  else if ((other.start <= start) && (start < other.end) && (other.end < end)) {
+	    return [new DateRange(other.end, end)];
+	  }
+	  else if ((start < other.start) && (other.start < end) && (end <= other.end)) {
+	    return [new DateRange(start, other.start)];
+	  }
+	  else if ((start < other.start) && (other.start < other.end) && (other.end < end)) {
+	    return [new DateRange(start, other.start), new DateRange(other.end, end)];
+	  }
+	  else if ((start < other.start) && (other.start < end) && (other.end < end)) {
+	    return [new DateRange(start, other.start), new DateRange(other.start, end)];
+	  }
+	};
+
+	/**
+	 * Build a n array of dates.
+	 *
+	 * @param {(!DateRange|String)} range Date range to be used for iteration or
+	 *                                    shorthand string (shorthands:
+	 *                                    http://momentjs.com/docs/#/manipulating/add/)
+	 * @param {!boolean} exclusive Indicate that the end of the range should not
+	 *                             be included in the iter.
+	 *
+	 * @return {!Array}
+	 */
+	DateRange.prototype.toArray = function(by, exclusive) {
+	  var acc = [];
+	  this.by(by, function(unit) {
+	    acc.push(unit);
+	  }, exclusive);
+	  return acc;
+	};
+
+	/**
+	 * Iterate over the date range by a given date range, executing a function
+	 * for each sub-range.
+	 *
+	 * @param {(!DateRange|String)} range Date range to be used for iteration or
+	 *                                    shorthand string (shorthands:
+	 *                                    http://momentjs.com/docs/#/manipulating/add/)
+	 * @param {!DateRange~by} hollaback Callback
+	 * @param {!boolean} exclusive Indicate that the end of the range should not
+	 *                             be included in the iter.
+	 *
+	 * @return {DateRange} `this`
+	 */
+	DateRange.prototype.by = function(range, hollaback, exclusive) {
+	  if (typeof range === 'string') {
+	    _byString.call(this, range, hollaback, exclusive);
+	  }
+	  else {
+	    _byRange.call(this, range, hollaback, exclusive);
+	  }
+	  return this;
+	};
+
+
+	/**
+	 * Callback executed for each sub-range.
+	 *
+	 * @callback DateRange~by
+	 *
+	 * @param {!Moment} current Current moment object for iteration
+	 */
+
+	/**
+	 * @private
+	 */
+	function _byString(interval, hollaback, exclusive) {
+	  var current = moment(this.start);
+
+	  while (this.contains(current, exclusive)) {
+	    hollaback.call(this, current.clone());
+	    current.add(1, interval);
+	  }
+	}
+
+	/**
+	 * @private
+	 */
+	function _byRange(interval, hollaback, exclusive) {
+	  var div = this / interval;
+	  var l = Math.floor(div);
+
+	  if (l === Infinity) { return; }
+	  if (l === div && exclusive) {
+	    l--;
+	  }
+
+	  for (var i = 0; i <= l; i++) {
+	    hollaback.call(this, moment(this.start.valueOf() + interval.valueOf() * i));
+	  }
+	}
+
+	/**
+	 * Date range formatted as an [ISO8601 Time
+	 * Interval](http://en.wikipedia.org/wiki/ISO_8601#Time_intervals).
+	 *
+	 * @return {!String}
+	 */
+	DateRange.prototype.toString = function() {
+	  return this.start.format() + '/' + this.end.format();
+	};
+
+	/**
+	 * Date range in milliseconds. Allows basic coercion math of date ranges.
+	 *
+	 * @return {!number}
+	 */
+	DateRange.prototype.valueOf = function() {
+	  return this.end - this.start;
+	};
+
+	/**
+	 * Center date of the range.
+	 *
+	 * @return {!Moment}
+	 */
+	DateRange.prototype.center = function() {
+	  var center = this.start + this.diff() / 2;
+	  return moment(center);
+	};
+
+	/**
+	 * Date range toDate
+	 *
+	 * @return {!Array<Date>}
+	 */
+	DateRange.prototype.toDate = function() {
+	  return [this.start.toDate(), this.end.toDate()];
+	};
+
+	/**
+	 * Determine if this date range is the same as another.
+	 *
+	 * @param {!DateRange} other Another date range to compare to
+	 *
+	 * @return {!boolean}
+	 */
+	DateRange.prototype.isSame = function(other) {
+	  return this.start.isSame(other.start) && this.end.isSame(other.end);
+	};
+
+	/**
+	 * The difference of the end vs start.
+	 *
+	 * @param {number} unit Unit of difference, if no unit is passed in
+	 *                      milliseconds are returned. E.g.: `"days"`, `"months"`,
+	 *                      etc...
+	 *
+	 * @return {!number}
+	 */
+	DateRange.prototype.diff = function(unit) {
+	  return this.end.diff(this.start, unit);
+	};
+
+
+	//-----------------------------------------------------------------------------
+	// Moment Extensions
+	//-----------------------------------------------------------------------------
+
+	/**
+	 * Build a date range.
+	 *
+	 * @param {(Moment|Date)} start Start of range
+	 * @param {(Moment|Date)} end End of range
+	 *
+	 * @this {Moment}
+	 *
+	 * @return {!DateRange}
+	 */
+	moment.range = function(start, end) {
+	  if (start in INTERVALS) {
+	    return new DateRange(moment(this).startOf(start), moment(this).endOf(start));
+	  }
+	  else {
+	    return new DateRange(start, end);
+	  }
+	};
+
+	/**
+	 * Expose constructor
+	 *
+	 * @const
+	 */
+	moment.range.constructor = DateRange;
+
+	/**
+	 * @deprecated
+	 */
+	moment.fn.range = moment.range;
+
+	/**
+	 * Check if the current moment is within a given date range.
+	 *
+	 * @param {!DateRange} range Date range to check
+	 *
+	 * @this {Moment}
+	 *
+	 * @return {!boolean}
+	 */
+	moment.fn.within = function(range) {
+	  return range.contains(this._d);
+	};
+
+
+	//-----------------------------------------------------------------------------
+	// Export
+	//-----------------------------------------------------------------------------
+
+
+
+	return DateRange;
+
+	}));
+
+
 /***/ },
-/* 293 */
+/* 374 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -38515,8543 +39223,186 @@
 	  value: true
 	});
 
-	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+	var _getPrototypeOf = __webpack_require__(182);
 
-	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+	var _getPrototypeOf2 = _interopRequireDefault(_getPrototypeOf);
+
+	var _classCallCheck2 = __webpack_require__(208);
+
+	var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
+
+	var _createClass2 = __webpack_require__(209);
+
+	var _createClass3 = _interopRequireDefault(_createClass2);
+
+	var _possibleConstructorReturn2 = __webpack_require__(213);
+
+	var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
+
+	var _inherits2 = __webpack_require__(260);
+
+	var _inherits3 = _interopRequireDefault(_inherits2);
 
 	var _react = __webpack_require__(1);
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _reactClass = __webpack_require__(183);
+	var _classnames = __webpack_require__(268);
 
-	var _reactClass2 = _interopRequireDefault(_reactClass);
+	var _classnames2 = _interopRequireDefault(_classnames);
 
-	var _reactFlex = __webpack_require__(294);
+	var _moment = __webpack_require__(269);
 
-	var _reactInlineBlock = __webpack_require__(302);
+	var _moment2 = _interopRequireDefault(_moment);
 
-	var _reactInlineBlock2 = _interopRequireDefault(_reactInlineBlock);
+	__webpack_require__(373);
 
-	var _objectAssign = __webpack_require__(288);
+	var _cell = __webpack_require__(375);
 
-	var _objectAssign2 = _interopRequireDefault(_objectAssign);
+	var _cell2 = _interopRequireDefault(_cell);
 
-	var _assignDefined = __webpack_require__(303);
+	var _viewHeader = __webpack_require__(376);
 
-	var _assignDefined2 = _interopRequireDefault(_assignDefined);
-
-	var _toMoment2 = __webpack_require__(290);
-
-	var _toMoment3 = _interopRequireDefault(_toMoment2);
-
-	var _join = __webpack_require__(291);
-
-	var _join2 = _interopRequireDefault(_join);
-
-	var _bemFactory = __webpack_require__(304);
-
-	var _bemFactory2 = _interopRequireDefault(_bemFactory);
-
-	var _HistoryView = __webpack_require__(305);
-
-	var _HistoryView2 = _interopRequireDefault(_HistoryView);
+	var _viewHeader2 = _interopRequireDefault(_viewHeader);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-	function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+	var DayView = function (_React$Component) {
+	  (0, _inherits3.default)(DayView, _React$Component);
 
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+	  function DayView() {
+	    var _Object$getPrototypeO;
 
-	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+	    var _temp, _this, _ret;
 
-	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+	    (0, _classCallCheck3.default)(this, DayView);
 
-	var ARROWS = {
-	  prev: _react2.default.createElement(
-	    'svg',
-	    { height: '24', viewBox: '0 0 24 24', width: '24' },
-	    _react2.default.createElement('path', { d: 'M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z' }),
-	    _react2.default.createElement('path', { d: 'M0 0h24v24H0z', fill: 'none' })
-	  ),
+	    for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
+	      args[_key] = arguments[_key];
+	    }
 
-	  next: _react2.default.createElement(
-	    'svg',
-	    { height: '24', viewBox: '0 0 24 24', width: '24' },
-	    _react2.default.createElement('path', { d: 'M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z' }),
-	    _react2.default.createElement('path', { d: 'M0 0h24v24H0z', fill: 'none' })
-	  )
-	};
+	    return _ret = (_temp = (_this = (0, _possibleConstructorReturn3.default)(this, (_Object$getPrototypeO = (0, _getPrototypeOf2.default)(DayView)).call.apply(_Object$getPrototypeO, [this].concat(args))), _this), _this.cellClick = function (e) {
+	      var cell = e.target;
+	      var date = parseInt(cell.innerHTML, 10);
+	      var newDate = _this.props.date ? _this.props.date.clone() : (0, _moment2.default)();
 
-	var bem = (0, _bemFactory2.default)('react-date-picker__nav-bar');
+	      if (isNaN(date)) return;
 
-	var NavBar = function (_Component) {
-	  _inherits(NavBar, _Component);
+	      if (cell.className.indexOf('prev') > -1) {
+	        newDate.subtract(1, 'months');
+	      } else if (cell.className.indexOf('next') > -1) {
+	        newDate.add(1, 'months');
+	      }
 
-	  function NavBar(props) {
-	    _classCallCheck(this, NavBar);
-
-	    var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(NavBar).call(this, props));
-
-	    _this.state = {
-	      viewDate: props.defaultViewDate
-	    };
-	    return _this;
+	      newDate.date(date);
+	      _this.props.setDate(newDate, true);
+	    }, _this.next = function () {
+	      var nextDate = _this.props.date.clone().add(1, 'months');
+	      if (_this.props.maxDate && nextDate.isAfter(_this.props.maxDate, 'day')) {
+	        nextDate = _this.props.maxDate;
+	      }
+	      _this.props.setDate(nextDate);
+	    }, _this.prev = function () {
+	      var prevDate = _this.props.date.clone().subtract(1, 'months');
+	      if (_this.props.minDate && prevDate.isBefore(_this.props.minDate, 'day')) {
+	        prevDate = _this.props.minDate;
+	      }
+	      _this.props.setDate(prevDate);
+	    }, _temp), (0, _possibleConstructorReturn3.default)(_this, _ret);
 	  }
 
-	  _createClass(NavBar, [{
-	    key: 'prepareViewDate',
-	    value: function prepareViewDate(props) {
-	      return props.viewDate === undefined ? this.state.viewDate : props.viewDate;
+	  (0, _createClass3.default)(DayView, [{
+	    key: 'getDays',
+	    value: function getDays() {
+	      var now = this.props.date ? this.props.date : (0, _moment2.default)();
+	      var start = now.clone().startOf('month').weekday(0);
+	      var end = now.clone().endOf('month').weekday(6);
+	      var minDate = this.props.minDate;
+	      var maxDate = this.props.maxDate;
+	      var month = now.month();
+	      var today = (0, _moment2.default)();
+	      var currDay = now.date();
+	      var year = now.year();
+	      var days = [];
+
+	      (0, _moment2.default)().range(start, end).by('days', function (day) {
+	        days.push({
+	          label: day.format('D'),
+	          prev: day.month() < month && !(day.year() > year) || day.year() < year,
+	          next: day.month() > month || day.year() > year,
+	          disabled: day.isBefore(minDate, 'day') || day.isAfter(maxDate, 'day'),
+	          curr: day.date() === currDay && day.month() === month,
+	          today: day.date() === today.date() && day.month() === today.month() && day.year() === today.year()
+	        });
+	      });
+	      return days;
+	    }
+	  }, {
+	    key: 'getDaysTitles',
+	    value: function getDaysTitles() {
+	      var now = (0, _moment2.default)();
+	      return [0, 1, 2, 3, 4, 5, 6].map(function (i) {
+	        var weekday = now.weekday(i).format('dd');
+	        return { val: weekday, label: weekday };
+	      });
 	    }
 	  }, {
 	    key: 'render',
 	    value: function render() {
-	      var props = this.p = (0, _objectAssign2.default)({}, this.props);
+	      var titles = this.getDaysTitles().map(function (item, i) {
+	        return _react2.default.createElement(_cell2.default, { classes: 'day title', key: i, value: item.label });
+	      });
+	      var _class = void 0;
 
-	      var viewMoment = props.viewMoment = props.viewMoment || this.toMoment(this.prepareViewDate(props));
+	      var days = this.getDays().map(function (item, i) {
+	        _class = (0, _classnames2.default)({
+	          day: true,
+	          next: item.next,
+	          prev: item.prev,
+	          disabled: item.disabled,
+	          current: item.curr,
+	          today: item.today
+	        });
+	        return _react2.default.createElement(_cell2.default, { classes: _class, key: i, value: item.label });
+	      });
 
-	      props.historyViewEnabled = props.expandedHistoryView || props.enableHistoryView;
-
-	      var secondary = props.secondary;
-
-	      var className = (0, _join2.default)(props.className, bem(), bem(null, 'theme-' + props.theme), props.historyViewEnabled && bem(null, 'with-history-view'));
-
-	      var historyView = props.historyViewEnabled ? this.renderHistoryView() : null;
-
-	      var flexProps = (0, _objectAssign2.default)({}, props);
-
-	      delete flexProps.arrows;
-	      delete flexProps.date;
-	      delete flexProps.enableHistoryView;
-	      delete flexProps.historyViewEnabled;
-	      delete flexProps.isDatePickerNavBar;
-	      delete flexProps.minDate;
-	      delete flexProps.maxDate;
-	      delete flexProps.navDateFormat;
-	      delete flexProps.onNavClick;
-	      delete flexProps.onViewDateChange;
-	      delete flexProps.secondary;
-	      delete flexProps.theme;
-	      delete flexProps.viewDate;
-	      delete flexProps.viewMoment;
-
-	      if (typeof props.cleanup == 'function') {
-	        props.cleanup(flexProps);
-	      }
+	      var currentDate = this.props.date ? this.props.date.format('MMMM') : (0, _moment2.default)().format('MMMM');
 
 	      return _react2.default.createElement(
-	        _reactFlex.Flex,
-	        _extends({ inline: true, row: true }, flexProps, { className: className }),
-	        secondary && this.renderNav(-2, viewMoment),
-	        this.renderNav(-1, viewMoment),
+	        'div',
+	        { className: 'view days-view', onKeyDown: this.keyDown },
+	        _react2.default.createElement(_viewHeader2.default, {
+	          data: currentDate,
+	          next: this.next,
+	          prev: this.prev,
+	          titleAction: this.props.nextView }),
 	        _react2.default.createElement(
-	          _reactFlex.Item,
-	          {
-	            className: bem('date'),
-	            style: { textAlign: 'center' },
-	            onMouseDown: props.historyViewEnabled ? this.toggleHistoryView : null
-	          },
-	          this.renderNavDate(viewMoment)
+	          'div',
+	          { className: 'days-title' },
+	          titles
 	        ),
-	        this.renderNav(1, viewMoment),
-	        secondary && this.renderNav(2, viewMoment),
-	        historyView
-	      );
-	    }
-	  }, {
-	    key: 'renderHistoryView',
-	    value: function renderHistoryView() {
-	      var _this2 = this;
-
-	      if (!this.state.historyView) {
-	        return null;
-	      }
-
-	      var className = bem('history-view');
-	      var _p = this.p;
-	      var viewMoment = _p.viewMoment;
-	      var theme = _p.theme;
-	      var minDate = _p.minDate;
-	      var maxDate = _p.maxDate;
-
-
-	      var historyViewProps = (0, _assignDefined2.default)({
-	        defaultViewDate: viewMoment,
-	        defaultDate: viewMoment,
-
-	        ref: function ref(view) {
-	          _this2.historyView = view;
-	        },
-	        focusDecadeView: false,
-
-	        className: className,
-	        theme: theme,
-
-	        onOkClick: this.onHistoryViewOk,
-	        onCancelClick: this.onHistoryViewCancel
-	      }, {
-	        minDate: minDate,
-	        maxDate: maxDate
-	      });
-
-	      if (this.props.renderHistoryView) {
-	        return this.props.renderHistoryView(historyViewProps);
-	      }
-
-	      return _react2.default.createElement(_HistoryView2.default, historyViewProps);
-	    }
-	  }, {
-	    key: 'toggleHistoryView',
-	    value: function toggleHistoryView(event) {
-	      if (this.isHistoryViewVisible()) {
-	        this.hideHistoryView(event);
-	      } else {
-	        this.showHistoryView(event);
-	      }
-	    }
-	  }, {
-	    key: 'getHistoryView',
-	    value: function getHistoryView() {
-	      return this.historyView;
-	    }
-	  }, {
-	    key: 'isHistoryViewVisible',
-	    value: function isHistoryViewVisible() {
-	      return !!this.historyView;
-	    }
-	  }, {
-	    key: 'onHistoryViewOk',
-	    value: function onHistoryViewOk(dateString, _ref) {
-	      var dateMoment = _ref.dateMoment;
-	      var timestamp = _ref.timestamp;
-
-	      this.hideHistoryView();
-	      this.onViewDateChange({ dateMoment: dateMoment, timestamp: timestamp });
-	    }
-	  }, {
-	    key: 'onHistoryViewCancel',
-	    value: function onHistoryViewCancel() {
-	      this.hideHistoryView();
-	    }
-	  }, {
-	    key: 'showHistoryView',
-	    value: function showHistoryView(event) {
-	      event.preventDefault();
-
-	      this.setState({
-	        historyView: true
-	      });
-
-	      if (this.props.onShowHistoryView) {
-	        this.props.onShowHistoryView();
-	      }
-	    }
-	  }, {
-	    key: 'hideHistoryView',
-	    value: function hideHistoryView(event) {
-	      if (event && event.preventDefault) {
-	        event.preventDefault();
-	      }
-
-	      this.setState({
-	        historyView: false
-	      });
-
-	      if (this.props.onHideHistoryView) {
-	        this.props.onHideHistoryView();
-	      }
-	    }
-	  }, {
-	    key: 'toMoment',
-	    value: function toMoment(value, props) {
-	      props = props || this.props;
-
-	      return (0, _toMoment3.default)(value, {
-	        locale: props.locale,
-	        dateFormat: props.dateFormat
-	      });
-	    }
-	  }, {
-	    key: 'renderNav',
-	    value: function renderNav(dir, viewMoment) {
-	      var props = this.p;
-
-	      var name = dir < 0 ? 'prev' : 'next';
-	      var disabled = dir < 0 ? props.prevDisabled : props.nextDisabled;
-	      var secondary = Math.abs(dir) == 2;
-
-	      if (dir < 0 && props.minDate) {
-	        var gotoMoment = this.getGotoMoment(dir, viewMoment).endOf('month');
-
-	        if (gotoMoment.isBefore(this.toMoment(props.minDate))) {
-	          disabled = true;
-	        }
-	      }
-
-	      if (dir > 0 && props.maxDate) {
-	        var _gotoMoment = this.getGotoMoment(dir, viewMoment).startOf('month');
-
-	        if (_gotoMoment.isAfter(this.toMoment(props.maxDate))) {
-	          disabled = true;
-	        }
-	      }
-
-	      if (this.state.historyView) {
-	        disabled = true;
-	      }
-
-	      var className = [bem('arrow'), bem('arrow--' + name), secondary && bem('secondary-arrow'), disabled && bem('arrow--disabled')];
-
-	      var arrow = props.arrows[dir] || props.arrows[name] || ARROWS[name];
-
-	      var children = void 0;
-
-	      if (secondary) {
-	        var dirArrow = props.arrows[dir];
-
-	        if (dirArrow) {
-	          children = dirArrow;
-	        } else {
-	          var secondArrow = _react2.default.createElement(
-	            _reactInlineBlock2.default,
-	            { style: _defineProperty({ position: 'absolute' }, dir < 0 ? 'left' : 'left', 7) },
-	            arrow
-	          );
-	          children = dir < 0 ? [secondArrow, arrow] : [secondArrow, arrow];
-	        }
-	      } else {
-	        children = arrow;
-	      }
-
-	      var navProps = {
-	        dir: dir,
-	        name: name,
-	        disabled: disabled,
-	        className: (0, _join2.default)(className),
-	        onClick: !disabled && this.onNavClick.bind(this, dir, viewMoment),
-	        children: children
-	      };
-
-	      if (props.renderNav) {
-	        return props.renderNav(navProps);
-	      }
-
-	      if (dir < 0 && props.renderNavPrev) {
-	        return props.renderNavPrev(navProps);
-	      }
-
-	      if (dir > 0 && props.renderNavNext) {
-	        return props.renderNavNext(navProps);
-	      }
-
-	      return _react2.default.createElement(_reactInlineBlock2.default, _extends({}, navProps, {
-	        disabled: null,
-	        name: null
-	      }));
-	    }
-	  }, {
-	    key: 'getGotoMoment',
-	    value: function getGotoMoment(dir, viewMoment) {
-	      viewMoment = viewMoment || this.p.viewMoment;
-
-	      var sign = dir < 0 ? -1 : 1;
-	      var abs = Math.abs(dir);
-
-	      var mom = this.toMoment(viewMoment);
-
-	      mom.add(sign, abs == 1 ? 'month' : 'year');
-
-	      return mom;
-	    }
-	  }, {
-	    key: 'onNavClick',
-	    value: function onNavClick(dir, viewMoment, event) {
-	      var props = this.props;
-
-	      var dateMoment = this.toMoment(viewMoment);
-
-	      if (props.onUpdate) {
-	        dateMoment = props.onUpdate(dateMoment, dir);
-	      } else {
-	        var sign = dir < 0 ? -1 : 1;
-	        var abs = Math.abs(dir);
-
-	        dateMoment.add(sign, abs == 1 ? 'month' : 'year');
-	      }
-
-	      var timestamp = +dateMoment;
-
-	      props.onNavClick(dir, viewMoment, event);
-
-	      var disabled = dir < 0 ? props.prevDisabled : props.nextDisabled;
-
-	      if (disabled) {
-	        return;
-	      }
-
-	      this.onViewDateChange({
-	        dateMoment: dateMoment,
-	        timestamp: timestamp
-	      });
-	    }
-	  }, {
-	    key: 'renderNavDate',
-	    value: function renderNavDate(viewMoment) {
-	      var props = this.props;
-	      var text = viewMoment.format(props.navDateFormat);
-
-	      if (props.renderNavDate) {
-	        return props.renderNavDate(viewMoment, text);
-	      }
-
-	      return text;
-	    }
-	  }, {
-	    key: 'onViewDateChange',
-	    value: function onViewDateChange(_ref3) {
-	      var dateMoment = _ref3.dateMoment;
-	      var timestamp = _ref3.timestamp;
-
-	      if (this.props.viewDate === undefined) {
-	        this.setState({
-	          viewDate: timestamp
-	        });
-	      }
-
-	      if (this.props.onViewDateChange) {
-	        var dateString = dateMoment.format(this.props.dateFormat);
-	        this.props.onViewDateChange(dateString, { dateString: dateString, dateMoment: dateMoment, timestamp: timestamp });
-	      }
-	    }
-	  }]);
-
-	  return NavBar;
-	}(_reactClass2.default);
-
-	exports.default = NavBar;
-
-
-	NavBar.defaultProps = {
-	  arrows: {},
-
-	  theme: 'default',
-
-	  isDatePickerNavBar: true,
-
-	  navDateFormat: 'MMM YYYY',
-	  enableHistoryView: true,
-	  onNavClick: function onNavClick(dir, viewMoment) {},
-
-	  onViewDateChange: function onViewDateChange() {}
-	};
-
-	NavBar.propTypes = {
-	  secondary: _react.PropTypes.bool,
-
-	  renderNav: _react.PropTypes.func,
-	  renderNavPrev: _react.PropTypes.func,
-	  renderNavNext: _react.PropTypes.func,
-
-	  arrows: _react.PropTypes.object,
-	  navDateFormat: _react.PropTypes.string,
-
-	  onUpdate: _react.PropTypes.func,
-	  onNavClick: _react.PropTypes.func,
-	  onViewDateChange: _react.PropTypes.func
-	};
-
-/***/ },
-/* 294 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	exports.Item = exports.Flex = undefined;
-
-	var _Flex = __webpack_require__(295);
-
-	Object.defineProperty(exports, 'Flex', {
-	  enumerable: true,
-	  get: function get() {
-	    return _interopRequireDefault(_Flex).default;
-	  }
-	});
-
-	var _Item = __webpack_require__(301);
-
-	Object.defineProperty(exports, 'Item', {
-	  enumerable: true,
-	  get: function get() {
-	    return _interopRequireDefault(_Item).default;
-	  }
-	});
-
-	var _Flex2 = _interopRequireDefault(_Flex);
-
-	var _Item2 = _interopRequireDefault(_Item);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	exports.default = {
-	  Flex: _Flex2.default,
-	  Item: _Item2.default
-	};
-
-/***/ },
-/* 295 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-
-	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-	var _react = __webpack_require__(1);
-
-	var _react2 = _interopRequireDefault(_react);
-
-	var _objectAssign = __webpack_require__(4);
-
-	var _objectAssign2 = _interopRequireDefault(_objectAssign);
-
-	var _reactClass = __webpack_require__(183);
-
-	var _reactClass2 = _interopRequireDefault(_reactClass);
-
-	var _join = __webpack_require__(296);
-
-	var _join2 = _interopRequireDefault(_join);
-
-	var _props2className = __webpack_require__(297);
-
-	var _props2className2 = _interopRequireDefault(_props2className);
-
-	var _cleanup = __webpack_require__(300);
-
-	var _cleanup2 = _interopRequireDefault(_cleanup);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-	var Flex = function (_Component) {
-	  _inherits(Flex, _Component);
-
-	  function Flex() {
-	    _classCallCheck(this, Flex);
-
-	    return _possibleConstructorReturn(this, Object.getPrototypeOf(Flex).apply(this, arguments));
-	  }
-
-	  _createClass(Flex, [{
-	    key: 'render',
-	    value: function render() {
-	      var props = this.props;
-	      var className = (0, _join2.default)('react-flex', (0, _props2className2.default)(props));
-
-	      var allProps = (0, _objectAssign2.default)({}, props);
-
-	      (0, _cleanup2.default)(allProps);
-
-	      allProps.className = className;
-
-	      if (props.factory) {
-	        return props.factory(allProps);
-	      }
-
-	      return _react2.default.createElement('div', allProps);
-	    }
-	  }]);
-
-	  return Flex;
-	}(_reactClass2.default);
-
-	Flex.defaultProps = {
-	  row: true,
-	  wrap: true,
-	  alignItems: 'center',
-	  display: 'flex'
-	};
-
-	Flex.propTypes = {
-
-	  flex: _react.PropTypes.oneOfType([_react.PropTypes.string, _react.PropTypes.number, _react.PropTypes.bool]),
-
-	  display: _react.PropTypes.oneOf(['flex', 'inline-flex']),
-
-	  inline: _react.PropTypes.bool,
-
-	  reverse: _react.PropTypes.bool,
-
-	  row: _react.PropTypes.bool,
-	  column: _react.PropTypes.bool,
-	  wrap: _react.PropTypes.bool,
-
-	  alignItems: _react.PropTypes.string,
-	  alignContent: _react.PropTypes.string,
-	  justifyContent: _react.PropTypes.string
-	};
-
-	exports.default = Flex;
-
-/***/ },
-/* 296 */
-/***/ function(module, exports) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	var notEmpty = function notEmpty(v) {
-	  return !!v;
-	};
-
-	exports.default = function () {
-	  for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
-	    args[_key] = arguments[_key];
-	  }
-
-	  return args.filter(notEmpty).join(' ');
-	};
-
-/***/ },
-/* 297 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-
-	var _join = __webpack_require__(296);
-
-	var _join2 = _interopRequireDefault(_join);
-
-	var _props2flex = __webpack_require__(298);
-
-	var _props2flex2 = _interopRequireDefault(_props2flex);
-
-	var _prefix = __webpack_require__(299);
-
-	var _prefix2 = _interopRequireDefault(_prefix);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	var PREFIX = _prefix2.default;
-
-	exports.default = function (props) {
-
-	  var column = !!props.column;
-	  var row = !column && !!props.row;
-	  var reverse = props.reverse ? '-reverse' : '';
-
-	  var flex = (0, _props2flex2.default)(props);
-
-	  var flexGrow = props.flexGrow;
-	  var flexShrink = props.flexShrink;
-	  var flexBasis = props.flexBasis;
-	  var display = props.inline ? 'inline-flex' : props.display;
-
-	  var className = (0, _join2.default)(props.className, props.alignItems ? PREFIX + '--align-items-' + props.alignItems : null, props.alignContent ? PREFIX + '--align-content-' + props.alignContent : null, props.justifyContent ? PREFIX + '--justify-content-' + props.justifyContent : null, props.wrap ? PREFIX + '--wrap' : null, props.alignSelf ? PREFIX + '--align-self-' + props.alignSelf : null, row ? PREFIX + '--row' + reverse : null, column ? PREFIX + '--column' + reverse : null,
-
-	  // more like flex item related
-	  flex != null ? PREFIX + '--flex-' + flex : null, flexGrow != null ? PREFIX + '--flex-grow-' + flexGrow : null, flexShrink != null ? PREFIX + '--flex-shrink-' + flexShrink : null, flexBasis != null ? PREFIX + '--flex-basis-' + flexBasis : null, display != null ? PREFIX + '--display-' + display : null);
-
-	  return className;
-	};
-
-/***/ },
-/* 298 */
-/***/ function(module, exports) {
-
-	"use strict";
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-
-	exports.default = function (props) {
-	  return props.flex === false ? 0 : props.flex === true ? 1 : props.flex;
-	};
-
-/***/ },
-/* 299 */
-/***/ function(module, exports) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	exports.default = 'react-flex-v2';
-
-/***/ },
-/* 300 */
-/***/ function(module, exports) {
-
-	"use strict";
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-
-	exports.default = function (props) {
-	  delete props.display;
-	  delete props.wrap;
-	  delete props.row;
-	  delete props.column;
-	  delete props.alignItems;
-	  delete props.alignSelf;
-	  delete props.alignContent;
-	  delete props.justifyContent;
-	  delete props.flex;
-	  delete props.flexGrow;
-	  delete props.flexShrink;
-	  delete props.flexBasis;
-	  delete props.inline;
-	  delete props.wrap;
-	};
-
-/***/ },
-/* 301 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-
-	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-	var _react = __webpack_require__(1);
-
-	var _react2 = _interopRequireDefault(_react);
-
-	var _objectAssign = __webpack_require__(4);
-
-	var _objectAssign2 = _interopRequireDefault(_objectAssign);
-
-	var _reactClass = __webpack_require__(183);
-
-	var _reactClass2 = _interopRequireDefault(_reactClass);
-
-	var _join = __webpack_require__(296);
-
-	var _join2 = _interopRequireDefault(_join);
-
-	var _props2className = __webpack_require__(297);
-
-	var _props2className2 = _interopRequireDefault(_props2className);
-
-	var _cleanup = __webpack_require__(300);
-
-	var _cleanup2 = _interopRequireDefault(_cleanup);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-	var FlexItem = function (_Component) {
-	  _inherits(FlexItem, _Component);
-
-	  function FlexItem() {
-	    _classCallCheck(this, FlexItem);
-
-	    return _possibleConstructorReturn(this, Object.getPrototypeOf(FlexItem).apply(this, arguments));
-	  }
-
-	  _createClass(FlexItem, [{
-	    key: 'render',
-	    value: function render() {
-
-	      var props = this.props;
-	      var className = (0, _join2.default)('react-flex-item', (0, _props2className2.default)(props));
-
-	      var allProps = (0, _objectAssign2.default)({}, props);
-
-	      (0, _cleanup2.default)(allProps);
-
-	      allProps.className = className;
-
-	      if (props.factory) {
-	        return props.factory(allProps);
-	      }
-
-	      return _react2.default.createElement('div', allProps);
-	    }
-	  }]);
-
-	  return FlexItem;
-	}(_reactClass2.default);
-
-	FlexItem.defaultProps = {
-	  flex: 1
-	};
-
-	FlexItem.propTypes = {
-	  display: _react.PropTypes.oneOf(['flex', 'inline-flex']),
-	  inline: function inline(props, propName) {
-	    if (props[propName] !== undefined) {
-	      return new Error('"inline" prop should not be used on "Item". Use "display=\'inline-flex\'" instead');
-	    }
-	  },
-
-	  flex: _react.PropTypes.any,
-	  flexGrow: _react.PropTypes.any,
-	  flexShrink: _react.PropTypes.any,
-	  flexBasis: _react.PropTypes.any
-	};
-
-	exports.default = FlexItem;
-
-/***/ },
-/* 302 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	var React = __webpack_require__(1);
-	var assign = __webpack_require__(4);
-
-	var inlineBlockStyle = {
-	  display: 'inline-block'
-	};
-
-	module.exports = React.createClass({
-
-	  displayName: 'ReactInlineBlock',
-
-	  render: function render() {
-	    var style = assign({}, this.props.style, inlineBlockStyle);
-	    var props = assign({}, this.props, { style: style });
-
-	    return React.createElement('div', props);
-	  }
-	});
-
-/***/ },
-/* 303 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-
-	var _objectAssign = __webpack_require__(288);
-
-	var _objectAssign2 = _interopRequireDefault(_objectAssign);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
-
-	var filter = function filter(object) {
-	  return Object.keys(object).reduce(function (acc, prop) {
-	    var value = object[prop];
-
-	    if (value !== undefined) {
-	      acc[prop] = value;
-	    }
-
-	    return acc;
-	  }, {});
-	};
-
-	exports.default = function (target) {
-	  for (var _len = arguments.length, args = Array(_len > 1 ? _len - 1 : 0), _key = 1; _key < _len; _key++) {
-	    args[_key - 1] = arguments[_key];
-	  }
-
-	  return _objectAssign2.default.apply(undefined, [target].concat(_toConsumableArray(args.map(filter))));
-	};
-
-/***/ },
-/* 304 */
-/***/ function(module, exports) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-
-	exports.default = function (className) {
-
-	  return function (element, modifier) {
-	    var el = element ? '-' + element : '';
-	    var mod = modifier ? '--' + modifier : '';
-
-	    return '' + className + el + mod;
-	  };
-	};
-
-/***/ },
-/* 305 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-
-	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
-
-	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-	var _react = __webpack_require__(1);
-
-	var _react2 = _interopRequireDefault(_react);
-
-	var _reactClass = __webpack_require__(183);
-
-	var _reactClass2 = _interopRequireDefault(_reactClass);
-
-	var _objectAssign = __webpack_require__(288);
-
-	var _objectAssign2 = _interopRequireDefault(_objectAssign);
-
-	var _reactFlex = __webpack_require__(294);
-
-	var _toMoment2 = __webpack_require__(290);
-
-	var _toMoment3 = _interopRequireDefault(_toMoment2);
-
-	var _join = __webpack_require__(291);
-
-	var _join2 = _interopRequireDefault(_join);
-
-	var _joinFunctions = __webpack_require__(306);
-
-	var _joinFunctions2 = _interopRequireDefault(_joinFunctions);
-
-	var _bemFactory = __webpack_require__(304);
-
-	var _bemFactory2 = _interopRequireDefault(_bemFactory);
-
-	var _Footer = __webpack_require__(307);
-
-	var _Footer2 = _interopRequireDefault(_Footer);
-
-	var _YearView = __webpack_require__(308);
-
-	var _YearView2 = _interopRequireDefault(_YearView);
-
-	var _assignDefined = __webpack_require__(303);
-
-	var _assignDefined2 = _interopRequireDefault(_assignDefined);
-
-	var _DecadeView = __webpack_require__(310);
-
-	var _DecadeView2 = _interopRequireDefault(_DecadeView);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-	var bem = (0, _bemFactory2.default)('react-date-picker__history-view');
-
-	var preventDefault = function preventDefault(e) {
-	  e.preventDefault();
-	};
-
-	var HistoryView = function (_Component) {
-	  _inherits(HistoryView, _Component);
-
-	  function HistoryView(props) {
-	    _classCallCheck(this, HistoryView);
-
-	    var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(HistoryView).call(this, props));
-
-	    _this.state = (0, _DecadeView.getInitialState)(props);
-	    return _this;
-	  }
-
-	  _createClass(HistoryView, [{
-	    key: 'componentWillUnmount',
-	    value: function componentWillUnmount() {
-	      this.unmounted = true;
-	    }
-	  }, {
-	    key: 'toMoment',
-	    value: function toMoment(date, format) {
-	      return (0, _toMoment3.default)(date, format, this.props);
-	    }
-	  }, {
-	    key: 'render',
-	    value: function render() {
-	      var _this2 = this;
-
-	      var dateProps = (0, _DecadeView.prepareDateProps)(this.props, this.state);
-
-	      var props = this.p = (0, _objectAssign2.default)({}, this.props, dateProps);
-
-	      props.children = _react2.default.Children.toArray(props.children);
-
-	      var className = (0, _join2.default)(props.className, bem(), props.theme && bem(null, 'theme-' + props.theme));
-
-	      var commonProps = (0, _assignDefined2.default)({}, {
-	        locale: props.locale,
-	        theme: props.theme,
-	        minDate: props.minDate,
-	        maxDate: props.maxDate,
-
-	        viewDate: props.viewMoment,
-	        activeDate: props.activeDate,
-	        date: props.date,
-
-	        dateFormat: props.dateFormat
-	      });
-
-	      var yearViewProps = (0, _objectAssign2.default)({}, commonProps);
-
-	      var decadeViewProps = (0, _objectAssign2.default)({}, commonProps, {
-	        ref: function ref(view) {
-	          _this2.decadeView = view;
-	        }
-	      });
-
-	      var flexProps = (0, _objectAssign2.default)({}, this.props);
-
-	      delete flexProps.activeDate;
-	      delete flexProps.adjustDateStartOf;
-	      delete flexProps.adjustMaxDateStartOf;
-	      delete flexProps.adjustMinDateStartOf;
-
-	      delete flexProps.cleanup;
-
-	      delete flexProps.date;
-	      delete flexProps.dateFormat;
-	      delete flexProps.defaultDate;
-	      delete flexProps.defaultViewDate;
-
-	      delete flexProps.focusDecadeView;
-	      delete flexProps.focusYearView;
-	      delete flexProps.footer;
-
-	      delete flexProps.locale;
-
-	      delete flexProps.maxDate;
-	      delete flexProps.minDate;
-
-	      delete flexProps.onOkClick;
-	      delete flexProps.onCancelClick;
-	      delete flexProps.okOnEnter;
-
-	      delete flexProps.navigation;
-
-	      delete flexProps.theme;
-
-	      delete flexProps.viewMoment;
-
-	      if (typeof props.cleanup == 'function') {
-	        props.cleanup(flexProps);
-	      }
-
-	      return _react2.default.createElement(
-	        _reactFlex.Flex,
-	        _extends({
-	          inline: true,
-	          column: true,
-	          alignItems: 'stretch'
-	        }, flexProps, {
-	          className: className
-	        }),
-	        this.renderYearView(yearViewProps),
-	        this.renderDecadeView(decadeViewProps),
-	        this.renderFooter()
-	      );
-	    }
-	  }, {
-	    key: 'renderFooter',
-	    value: function renderFooter() {
-	      var props = this.p;
-	      var children = props.children;
-
-	      if (!props.footer) {
-	        return null;
-	      }
-
-	      var footerChild = children.filter(function (c) {
-	        return c && c.props && c.props.isDatePickerFooter;
-	      })[0];
-
-	      if (footerChild) {
-	        var newFooterProps = {
-	          onOkClick: (0, _joinFunctions2.default)(this.onOkClick, footerChild.props.onOkClick),
-	          onCancelClick: (0, _joinFunctions2.default)(this.onCancelClick, footerChild.props.onCancelClick)
-	        };
-
-	        if (footerChild.props.centerButtons === undefined) {
-	          newFooterProps.centerButtons = true;
-	        }
-	        if (footerChild.props.todayButton === undefined) {
-	          newFooterProps.todayButton = false;
-	        }
-	        if (footerChild.props.clearButton === undefined) {
-	          newFooterProps.clearButton = false;
-	        }
-
-	        return _react2.default.cloneElement(footerChild, newFooterProps);
-	      }
-
-	      return _react2.default.createElement(_Footer2.default, {
-	        todayButton: false,
-	        clearButton: false,
-	        onOkClick: this.onOkClick,
-	        onCancelClick: this.onCancelClick,
-	        centerButtons: true
-	      });
-	    }
-	  }, {
-	    key: 'onOkClick',
-	    value: function onOkClick() {
-	      if (this.props.onOkClick) {
-	        var dateMoment = this.p.activeMoment;
-	        var dateString = this.format(dateMoment);
-	        var timestamp = +dateMoment;
-
-	        this.props.onOkClick(dateString, { dateMoment: dateMoment, timestamp: timestamp });
-	      }
-	    }
-	  }, {
-	    key: 'onCancelClick',
-	    value: function onCancelClick() {
-	      if (this.props.onCancelClick) {
-	        this.props.onCancelClick();
-	      }
-	    }
-	  }, {
-	    key: 'renderYearView',
-	    value: function renderYearView(yearViewProps) {
-	      var props = this.p;
-	      var children = props.children;
-
-	      var yearViewChild = children.filter(function (c) {
-	        return c && c.props && c.props.isYearView;
-	      })[0];
-	      var yearViewChildProps = yearViewChild ? yearViewChild.props : {};
-
-	      var tabIndex = yearViewChildProps.tabIndex == null ? null : yearViewChildProps.tabIndex;
-
-	      yearViewProps.tabIndex = tabIndex;
-
-	      if (props.focusYearView === false || tabIndex == null) {
-	        yearViewProps.tabIndex = null;
-	        yearViewProps.onFocus = this.onYearViewFocus;
-	        yearViewProps.onMouseDown = this.onYearViewMouseDown;
-	      }
-
-	      (0, _objectAssign2.default)(yearViewProps, {
-	        // viewDate: props.moment || props.viewDate,
-	        onViewDateChange: (0, _joinFunctions2.default)(this.onViewDateChange, yearViewChildProps.onViewDateChange),
-	        onActiveDateChange: (0, _joinFunctions2.default)(this.onActiveDateChange, yearViewChildProps.onActiveDateChange),
-	        onChange: (0, _joinFunctions2.default)(this.handleYearViewOnChange, yearViewChildProps.onChange)
-	      });
-
-	      if (yearViewChild) {
-	        return _react2.default.cloneElement(yearViewChild, yearViewProps);
-	      }
-
-	      return _react2.default.createElement(_YearView2.default, yearViewProps);
-	    }
-	  }, {
-	    key: 'renderDecadeView',
-	    value: function renderDecadeView(decadeViewProps) {
-	      var props = this.p;
-	      var children = props.children;
-	      var decadeViewChild = children.filter(function (c) {
-	        return c && c.props && c.props.isDecadeView;
-	      })[0];
-
-	      var decadeViewChildProps = decadeViewChild ? decadeViewChild.props : {};
-
-	      var tabIndex = decadeViewChildProps.tabIndex == null ? null : decadeViewChildProps.tabIndex;
-
-	      decadeViewProps.tabIndex = tabIndex;
-
-	      if (props.focusDecadeView === false || tabIndex == null) {
-	        decadeViewProps.tabIndex = null;
-	        decadeViewProps.onMouseDown = this.onDecadeViewMouseDown;
-	      }
-
-	      (0, _objectAssign2.default)(decadeViewProps, {
-	        onConfirm: (0, _joinFunctions2.default)(this.handleDecadeViewOnConfirm, decadeViewChildProps.onConfirm),
-	        onViewDateChange: (0, _joinFunctions2.default)(this.handleDecadeOnViewDateChange, decadeViewChildProps.onViewDateChange),
-	        onActiveDateChange: (0, _joinFunctions2.default)(this.handleDecadeOnActiveDateChange, decadeViewChildProps.onActiveDateChange),
-	        onChange: (0, _joinFunctions2.default)(this.handleDecadeOnChange, decadeViewChildProps.onChange)
-	      });
-
-	      if (decadeViewChild) {
-	        return _react2.default.cloneElement(decadeViewChild, decadeViewProps);
-	      }
-
-	      return _react2.default.createElement(_DecadeView2.default, decadeViewProps);
-	    }
-	  }, {
-	    key: 'onYearViewFocus',
-	    value: function onYearViewFocus() {
-	      if (this.props.focusYearView === false) {
-	        this.focus();
-	      }
-	    }
-	  }, {
-	    key: 'focus',
-	    value: function focus() {
-	      if (this.decadeView && this.props.focusDecadeView) {
-	        this.decadeView.focus();
-	      }
-	    }
-	  }, {
-	    key: 'onYearViewMouseDown',
-	    value: function onYearViewMouseDown(e) {
-	      preventDefault(e);
-
-	      this.focus();
-	    }
-	  }, {
-	    key: 'onDecadeViewMouseDown',
-	    value: function onDecadeViewMouseDown(e) {
-	      preventDefault(e);
-	    }
-	  }, {
-	    key: 'format',
-	    value: function format(mom, _format) {
-	      _format = _format || this.props.dateFormat;
-
-	      return mom.format(_format);
-	    }
-	  }, {
-	    key: 'handleDecadeViewOnConfirm',
-	    value: function handleDecadeViewOnConfirm() {
-	      if (this.props.okOnEnter) {
-	        this.onOkClick();
-	      }
-	    }
-	  }, {
-	    key: 'onKeyDown',
-	    value: function onKeyDown(event) {
-	      if (event.key == 'Escape') {
-	        return this.onCancelClick();
-	      }
-
-	      if (this.decadeView) {
-	        this.decadeView.onKeyDown(event);
-	      }
-
-	      return undefined;
-	    }
-	  }, {
-	    key: 'confirm',
-	    value: function confirm(date, event) {
-	      return _DecadeView.confirm.call(this, date, event);
-	    }
-	  }, {
-	    key: 'navigate',
-	    value: function navigate(direction, event) {
-	      return _DecadeView.navigate.call(this, direction, event);
-	    }
-	  }, {
-	    key: 'select',
-	    value: function select(_ref, event) {
-	      var dateMoment = _ref.dateMoment;
-	      var timestamp = _ref.timestamp;
-
-	      return _DecadeView.select.call(this, { dateMoment: dateMoment, timestamp: timestamp }, event);
-	    }
-	  }, {
-	    key: 'handleDecadeOnViewDateChange',
-	    value: function handleDecadeOnViewDateChange(dateString, _ref2) {
-	      var dateMoment = _ref2.dateMoment;
-	      var timestamp = _ref2.timestamp;
-
-	      var props = this.p;
-	      var currentViewMoment = props.viewMoment;
-
-	      if (currentViewMoment) {
-	        dateMoment.set('month', currentViewMoment.get('month'));
-	        dateString = this.format(dateMoment);
-	        timestamp = +dateMoment;
-	      }
-
-	      this.onViewDateChange(dateString, { dateMoment: dateMoment, timestamp: timestamp });
-	    }
-	  }, {
-	    key: 'handleDecadeOnActiveDateChange',
-	    value: function handleDecadeOnActiveDateChange(dateString, _ref3) {
-	      var dateMoment = _ref3.dateMoment;
-	      var timestamp = _ref3.timestamp;
-
-	      var props = this.p;
-	      var currentViewMoment = props.viewMoment;
-
-	      if (currentViewMoment) {
-	        dateMoment.set('month', currentViewMoment.get('month'));
-	        dateString = this.format(dateMoment);
-	        timestamp = +dateMoment;
-	      }
-
-	      this.onActiveDateChange(dateString, { dateMoment: dateMoment, timestamp: timestamp });
-	    }
-	  }, {
-	    key: 'handleDecadeOnChange',
-	    value: function handleDecadeOnChange(dateString, _ref4, event) {
-	      var dateMoment = _ref4.dateMoment;
-	      var timestamp = _ref4.timestamp;
-
-	      var props = this.p;
-	      var currentViewMoment = props.viewMoment;
-
-	      if (currentViewMoment) {
-	        dateMoment.set('month', currentViewMoment.get('month'));
-	        dateString = this.format(dateMoment);
-	        timestamp = +dateMoment;
-	      }
-
-	      this.onChange(dateString, { dateMoment: dateMoment, timestamp: timestamp }, event);
-	    }
-	  }, {
-	    key: 'handleYearViewOnChange',
-	    value: function handleYearViewOnChange(dateString, _ref5, event) {
-	      var dateMoment = _ref5.dateMoment;
-	      var timestamp = _ref5.timestamp;
-
-	      var props = this.p;
-	      var currentMoment = props.moment;
-
-	      if (currentMoment) {
-	        dateMoment.set('year', currentMoment.get('year'));
-	        dateString = this.format(dateMoment);
-	        timestamp = +dateMoment;
-	      }
-
-	      this.onChange(dateString, { dateMoment: dateMoment, timestamp: timestamp }, event);
-	    }
-	  }, {
-	    key: 'onViewDateChange',
-	    value: function onViewDateChange(dateString, _ref6) {
-	      var dateMoment = _ref6.dateMoment;
-	      var timestamp = _ref6.timestamp;
-
-	      return _DecadeView.onViewDateChange.call(this, { dateMoment: dateMoment, timestamp: timestamp });
-	    }
-	  }, {
-	    key: 'gotoViewDate',
-	    value: function gotoViewDate(_ref7) {
-	      var dateMoment = _ref7.dateMoment;
-	      var timestamp = _ref7.timestamp;
-
-	      return _DecadeView.gotoViewDate.call(this, { dateMoment: dateMoment, timestamp: timestamp });
-	    }
-	  }, {
-	    key: 'onActiveDateChange',
-	    value: function onActiveDateChange(dateString, _ref8) {
-	      var dateMoment = _ref8.dateMoment;
-	      var timestamp = _ref8.timestamp;
-
-	      return _DecadeView.onActiveDateChange.call(this, { dateMoment: dateMoment, timestamp: timestamp });
-	    }
-	  }, {
-	    key: 'onChange',
-	    value: function onChange(dateString, _ref9, event) {
-	      var dateMoment = _ref9.dateMoment;
-	      var timestamp = _ref9.timestamp;
-
-	      return _DecadeView.onChange.call(this, { dateMoment: dateMoment, timestamp: timestamp }, event);
-	    }
-	  }]);
-
-	  return HistoryView;
-	}(_reactClass2.default);
-
-	exports.default = HistoryView;
-
-
-	HistoryView.defaultProps = {
-	  okOnEnter: true,
-
-	  footer: true,
-	  theme: 'default',
-	  navigation: true,
-
-	  focusYearView: false,
-	  focusDecadeView: true,
-
-	  dateFormat: 'YYYY-MM-DD',
-
-	  adjustDateStartOf: 'month',
-	  adjustMinDateStartOf: 'month',
-	  adjustMaxDateStartOf: 'month'
-	};
-
-/***/ },
-/* 306 */
-/***/ function(module, exports) {
-
-	"use strict";
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-
-	exports.default = function (a, b) {
-	  if (a && b) {
-	    return function () {
-	      a.apply(undefined, arguments);
-	      b.apply(undefined, arguments);
-	    };
-	  }
-
-	  return a || b;
-	};
-
-/***/ },
-/* 307 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	exports.Button = undefined;
-
-	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
-
-	var _react = __webpack_require__(1);
-
-	var _react2 = _interopRequireDefault(_react);
-
-	var _reactClass = __webpack_require__(183);
-
-	var _reactClass2 = _interopRequireDefault(_reactClass);
-
-	var _reactFlex = __webpack_require__(294);
-
-	var _reactInlineBlock = __webpack_require__(302);
-
-	var _reactInlineBlock2 = _interopRequireDefault(_reactInlineBlock);
-
-	var _objectAssign = __webpack_require__(288);
-
-	var _objectAssign2 = _interopRequireDefault(_objectAssign);
-
-	var _joinFunctions = __webpack_require__(306);
-
-	var _joinFunctions2 = _interopRequireDefault(_joinFunctions);
-
-	var _join = __webpack_require__(291);
-
-	var _join2 = _interopRequireDefault(_join);
-
-	var _bemFactory = __webpack_require__(304);
-
-	var _bemFactory2 = _interopRequireDefault(_bemFactory);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-	var bem = (0, _bemFactory2.default)('react-date-picker__footer');
-
-	var SPACER = _react2.default.createElement(_reactFlex.Item, null);
-
-	var buttonClassName = 'react-date-picker__footer-button';
-
-	var preventDefault = function preventDefault(e) {
-	  return e.preventDefault();
-	};
-
-	var Button = exports.Button = function Button(props) {
-	  var disabledClassName = props.disabled ? buttonClassName + '--disabled' : '';
-
-	  var className = (props.className || '') + ' ' + buttonClassName + ' ' + disabledClassName;
-	  return _react2.default.createElement('button', _extends({
-	    tabIndex: -1
-	  }, props, {
-	    className: className
-	  }));
-	};
-
-	var Footer = function (_Component) {
-	  _inherits(Footer, _Component);
-
-	  function Footer() {
-	    _classCallCheck(this, Footer);
-
-	    return _possibleConstructorReturn(this, Object.getPrototypeOf(Footer).apply(this, arguments));
-	  }
-
-	  _createClass(Footer, [{
-	    key: 'render',
-	    value: function render() {
-	      var props = this.p = (0, _objectAssign2.default)({}, this.props);
-
-	      var className = (0, _join2.default)(props.className, bem(), bem(null, 'theme-' + props.theme));
-
-	      var todayButton = this.renderTodayButton();
-	      var clearButton = this.renderClearButton();
-
-	      var okButton = this.renderOkButton();
-	      var cancelButton = this.renderCancelButton();
-
-	      if (!todayButton && !clearButton && !okButton && !cancelButton) {
-	        return null;
-	      }
-
-	      var middleSpacer = okButton || cancelButton ? SPACER : null;
-
-	      var spacer = !props.centerButtons ? middleSpacer : null;
-
-	      var children = [props.centerButtons && SPACER, todayButton, clearButton, spacer, okButton, cancelButton, props.centerButtons && SPACER];
-
-	      if (props.renderChildren) {
-	        children = props.renderChildren(children, props);
-	      }
-
-	      var flexProps = (0, _objectAssign2.default)({}, props);
-
-	      delete flexProps.actionEvent;
-	      delete flexProps.buttonFactory;
-	      delete flexProps.cancelButton;
-	      delete flexProps.cancelButtonText;
-	      delete flexProps.centerButtons;
-	      delete flexProps.clearDate;
-	      delete flexProps.cleanup;
-	      delete flexProps.clearButton;
-	      delete flexProps.clearButtonText;
-	      delete flexProps.isDatePickerFooter;
-	      delete flexProps.onCancelClick;
-	      delete flexProps.onClearClick;
-	      delete flexProps.onOkClick;
-	      delete flexProps.onTodayClick;
-	      delete flexProps.okButton;
-	      delete flexProps.okButtonText;
-	      delete flexProps.selectDate;
-	      delete flexProps.theme;
-	      delete flexProps.todayButton;
-	      delete flexProps.todayButtonText;
-
-	      if (typeof props.cleanup == 'function') {
-	        props.cleanup(flexProps);
-	      }
-
-	      return _react2.default.createElement(_reactFlex.Flex, _extends({
-	        inline: true,
-	        row: true
-	      }, flexProps, {
-	        justifyContent: 'center',
-	        className: className,
-	        children: children
-	      }));
-	    }
-	  }, {
-	    key: 'renderTodayButton',
-	    value: function renderTodayButton() {
-	      if (!this.props.todayButton) {
-	        return null;
-	      }
-	      return this.renderButton(this.props.todayButtonText, this.props.onTodayClick);
-	    }
-	  }, {
-	    key: 'renderClearButton',
-	    value: function renderClearButton() {
-	      if (!this.props.clearButton) {
-	        return null;
-	      }
-
-	      return this.renderButton({
-	        children: this.props.clearButtonText,
-	        disabled: this.props.clearDate === undefined
-	      }, this.props.onClearClick);
-	    }
-	  }, {
-	    key: 'renderOkButton',
-	    value: function renderOkButton() {
-	      if (!this.props.okButton) {
-	        return null;
-	      }
-	      return this.renderButton(this.props.okButtonText, this.props.onOkClick);
-	    }
-	  }, {
-	    key: 'renderCancelButton',
-	    value: function renderCancelButton() {
-	      if (!this.props.cancelButton) {
-	        return null;
-	      }
-	      return this.renderButton(this.props.cancelButtonText, this.props.onCancelClick);
-	    }
-	  }, {
-	    key: 'renderButton',
-	    value: function renderButton(props, fn) {
-	      var text = props.children;
-	      var p = props;
-
-	      if (typeof props == 'string') {
-	        p = {};
-	        text = props;
-	      }
-
-	      if (typeof fn == 'function' && !p.onClick && !p.disabled) {
-	        p.onClick = fn;
-	      }
-
-	      var Factory = this.props.buttonFactory;
-
-	      var onMouseDown = p.onMouseDown ? (0, _joinFunctions2.default)(p.onMouseDown, preventDefault) : preventDefault;
-
-	      return _react2.default.createElement(
-	        Factory,
-	        _extends({ tabIndex: 0 }, p, { onMouseDown: onMouseDown }),
-	        text
-	      );
-	    }
-	  }]);
-
-	  return Footer;
-	}(_reactClass2.default);
-
-	exports.default = Footer;
-
-
-	Footer.defaultProps = {
-	  actionEvent: 'onClick',
-	  theme: 'default',
-
-	  buttonFactory: Button,
-
-	  todayButton: true,
-	  clearButton: true,
-	  okButton: true,
-	  cancelButton: true,
-
-	  todayButtonText: 'Today',
-	  clearButtonText: 'Clear',
-	  okButtonText: 'OK',
-	  cancelButtonText: 'Cancel',
-
-	  isDatePickerFooter: true
-	};
-
-	Footer.propTypes = {
-	  theme: _react.PropTypes.string,
-	  centerButtons: _react.PropTypes.bool,
-
-	  cokButtonText: _react.PropTypes.node,
-	  clearButtonText: _react.PropTypes.node,
-	  cancelButtonText: _react.PropTypes.node,
-	  todayButtonText: _react.PropTypes.node,
-
-	  onTodayClick: _react.PropTypes.func,
-	  onClearClick: _react.PropTypes.func,
-	  onOkClick: _react.PropTypes.func,
-	  onCancelClick: _react.PropTypes.func
-	};
-
-/***/ },
-/* 308 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-
-	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
-
-	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-	var _react = __webpack_require__(1);
-
-	var _react2 = _interopRequireDefault(_react);
-
-	var _reactDom = __webpack_require__(35);
-
-	var _reactClass = __webpack_require__(183);
-
-	var _reactClass2 = _interopRequireDefault(_reactClass);
-
-	var _objectAssign = __webpack_require__(288);
-
-	var _objectAssign2 = _interopRequireDefault(_objectAssign);
-
-	var _times = __webpack_require__(309);
-
-	var _times2 = _interopRequireDefault(_times);
-
-	var _join = __webpack_require__(291);
-
-	var _join2 = _interopRequireDefault(_join);
-
-	var _toMoment2 = __webpack_require__(290);
-
-	var _toMoment3 = _interopRequireDefault(_toMoment2);
-
-	var _reactFlex = __webpack_require__(294);
-
-	var _bemFactory = __webpack_require__(304);
-
-	var _bemFactory2 = _interopRequireDefault(_bemFactory);
-
-	var _DecadeView = __webpack_require__(310);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-	var bem = (0, _bemFactory2.default)('react-date-picker__year-view');
-
-	var NAV_KEYS = {
-	  ArrowUp: function ArrowUp(mom) {
-	    if (mom.get('month') >= 4) {
-	      mom.add(-4, 'month');
-	    }
-
-	    return mom;
-	  },
-	  ArrowDown: function ArrowDown(mom) {
-	    if (mom.get('month') <= 7) {
-	      mom.add(4, 'month');
-	    }
-
-	    return mom;
-	  },
-	  ArrowLeft: function ArrowLeft(mom) {
-	    if (mom.get('month') >= 1) {
-	      mom.add(-1, 'month');
-	    }
-
-	    return mom;
-	  },
-	  ArrowRight: function ArrowRight(mom) {
-	    if (mom.get('month') <= 10) {
-	      mom.add(1, 'month');
-	    }
-
-	    return mom;
-	  },
-	  Home: function Home(mom) {
-	    return mom.startOf('year').startOf('month');
-	  },
-	  End: function End(mom) {
-	    return mom.endOf('year').startOf('month');
-	  },
-	  PageUp: function PageUp(mom) {
-	    var month = mom.get('month') - 4;
-	    var extra4 = month - 4;
-
-	    if (month >= 0) {
-	      if (extra4 >= 0) {
-	        return mom.set('month', extra4);
-	      }
-
-	      return mom.set('month', month);
-	    }
-
-	    return mom;
-	  },
-	  PageDown: function PageDown(mom) {
-	    var month = mom.get('month') + 4;
-	    var extra4 = month + 4;
-
-	    if (month <= 11) {
-	      if (extra4 <= 11) {
-	        return mom.set('month', extra4);
-	      }
-
-	      return mom.set('month', month);
-	    }
-
-	    return mom;
-	  }
-	};
-
-	var YearView = function (_Component) {
-	  _inherits(YearView, _Component);
-
-	  function YearView(props) {
-	    _classCallCheck(this, YearView);
-
-	    var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(YearView).call(this, props));
-
-	    _this.state = (0, _DecadeView.getInitialState)(props);
-	    return _this;
-	  }
-
-	  /**
-	   * Returns all the days in the specified month.
-	   *
-	   * @param  {Moment/Date/Number} value
-	   * @return {Moment[]}
-	   */
-
-
-	  _createClass(YearView, [{
-	    key: 'getMonthsInYear',
-	    value: function getMonthsInYear(value) {
-	      var _this2 = this;
-
-	      var start = this.toMoment(value).startOf('year');
-
-	      return (0, _times2.default)(12).map(function (i) {
-	        return _this2.toMoment(start).add(i, 'month');
-	      });
-	    }
-	  }, {
-	    key: 'toMoment',
-	    value: function toMoment(date) {
-	      return (0, _toMoment3.default)(date, this.props);
-	    }
-	  }, {
-	    key: 'render',
-	    value: function render() {
-	      var props = this.p = (0, _objectAssign2.default)({}, this.props);
-
-	      if (props.onlyCompareMonth) {
-	        // props.adjustDateStartOf = null
-	      }
-
-	      var dateProps = (0, _DecadeView.prepareDateProps)(props, this.state);
-
-	      (0, _objectAssign2.default)(props, dateProps);
-
-	      var className = (0, _join2.default)(props.className, bem(), props.theme && bem(null, 'theme-' + props.theme));
-
-	      var monthsInView = this.getMonthsInYear(props.viewMoment);
-
-	      var flexProps = (0, _objectAssign2.default)({}, props);
-
-	      delete flexProps.activeDate;
-	      delete flexProps.activeMoment;
-	      delete flexProps.adjustDateStartOf;
-	      delete flexProps.adjustMaxDateStartOf;
-	      delete flexProps.adjustMinDateStartOf;
-
-	      delete flexProps.cleanup;
-	      delete flexProps.constrainViewDate;
-
-	      delete flexProps.date;
-	      delete flexProps.dateFormat;
-
-	      delete flexProps.isYearView;
-
-	      delete flexProps.maxConstrained;
-	      delete flexProps.maxDate;
-	      delete flexProps.maxDateMoment;
-	      delete flexProps.minConstrained;
-	      delete flexProps.minDate;
-	      delete flexProps.minDateMoment;
-	      delete flexProps.moment;
-	      delete flexProps.monthFormat;
-
-	      delete flexProps.navKeys;
-
-	      delete flexProps.onActiveDateChange;
-	      delete flexProps.onViewDateChange;
-	      delete flexProps.onlyCompareMonth;
-
-	      delete flexProps.timestamp;
-	      delete flexProps.theme;
-
-	      delete flexProps.viewDate;
-	      delete flexProps.viewMoment;
-
-	      if (typeof props.cleanup == 'function') {
-	        props.cleanup(flexProps);
-	      }
-
-	      return _react2.default.createElement(
-	        _reactFlex.Flex,
-	        _extends({
-	          inline: true,
-	          column: true,
-	          alignItems: 'stretch',
-	          tabIndex: 0
-	        }, flexProps, {
-	          onKeyDown: this.onKeyDown,
-	          className: className
-	        }),
-	        this.renderMonths(props, monthsInView)
-	      );
-	    }
-	  }, {
-	    key: 'renderMonths',
-	    value: function renderMonths(props, months) {
-	      var _this3 = this;
-
-	      var nodes = months.map(function (monthMoment) {
-	        return _this3.renderMonth(props, monthMoment);
-	      });
-
-	      var buckets = (0, _times2.default)(Math.ceil(nodes.length / 4)).map(function (i) {
-	        return nodes.slice(i * 4, (i + 1) * 4);
-	      });
-
-	      var className = bem('row');
-
-	      return buckets.map(function (bucket, i) {
-	        return _react2.default.createElement(
-	          _reactFlex.Flex,
-	          {
-	            alignItems: 'center',
-	            flex: true,
-	            row: true,
-	            inline: true,
-	            key: 'row_' + i,
-	            className: className
-	          },
-	          bucket
-	        );
-	      });
-	    }
-	  }, {
-	    key: 'format',
-	    value: function format(mom, _format) {
-	      _format = _format || this.props.monthFormat;
-
-	      return mom.format(_format);
-	    }
-	  }, {
-	    key: 'renderMonth',
-	    value: function renderMonth(props, dateMoment) {
-	      var index = dateMoment.get('month');
-
-	      var monthText = props.monthNames ? props.monthNames[index] || this.format(dateMoment) : this.format(dateMoment);
-
-	      var timestamp = +dateMoment;
-
-	      var isActiveDate = props.onlyCompareMonth && props.activeMoment ? dateMoment.get('month') == props.activeMoment.get('month') : timestamp === props.activeDate;
-
-	      var isValue = props.onlyCompareMonth && props.moment ? dateMoment.get('month') == props.moment.get('month') : timestamp === props.timestamp;
-
-	      var disabled = props.minDate != null && timestamp < props.minDate || props.maxDate != null && timestamp > props.maxDate;
-
-	      var className = (0, _join2.default)(bem('month'), !disabled && isActiveDate && bem('month', 'active'), isValue && bem('month', 'value'), disabled && bem('month', 'disabled'));
-
-	      var onClick = disabled ? null : this.handleClick.bind(this, {
-	        dateMoment: dateMoment,
-	        timestamp: timestamp
-	      });
-
-	      return _react2.default.createElement(
-	        _reactFlex.Item,
-	        {
-	          key: monthText,
-	          className: className,
-	          onClick: onClick
-	        },
-	        monthText
-	      );
-	    }
-	  }, {
-	    key: 'handleClick',
-	    value: function handleClick(_ref, event) {
-	      var timestamp = _ref.timestamp;
-	      var dateMoment = _ref.dateMoment;
-
-	      event.target.value = timestamp;
-
-	      this.select({ dateMoment: dateMoment, timestamp: timestamp }, event);
-	    }
-	  }, {
-	    key: 'onKeyDown',
-	    value: function onKeyDown(event) {
-	      return _DecadeView.onKeyDown.call(this, event);
-	    }
-	  }, {
-	    key: 'confirm',
-	    value: function confirm(date, event) {
-	      return _DecadeView.confirm.call(this, date, event);
-	    }
-	  }, {
-	    key: 'navigate',
-	    value: function navigate(direction, event) {
-	      return _DecadeView.navigate.call(this, direction, event);
-	    }
-	  }, {
-	    key: 'select',
-	    value: function select(_ref2, event) {
-	      var dateMoment = _ref2.dateMoment;
-	      var timestamp = _ref2.timestamp;
-
-	      return _DecadeView.select.call(this, { dateMoment: dateMoment, timestamp: timestamp }, event);
-	    }
-	  }, {
-	    key: 'onViewDateChange',
-	    value: function onViewDateChange(_ref3) {
-	      var dateMoment = _ref3.dateMoment;
-	      var timestamp = _ref3.timestamp;
-
-	      return _DecadeView.onViewDateChange.call(this, { dateMoment: dateMoment, timestamp: timestamp });
-	    }
-	  }, {
-	    key: 'gotoViewDate',
-	    value: function gotoViewDate(_ref4) {
-	      var dateMoment = _ref4.dateMoment;
-	      var timestamp = _ref4.timestamp;
-
-	      return _DecadeView.gotoViewDate.call(this, { dateMoment: dateMoment, timestamp: timestamp });
-	    }
-	  }, {
-	    key: 'onActiveDateChange',
-	    value: function onActiveDateChange(_ref5) {
-	      var dateMoment = _ref5.dateMoment;
-	      var timestamp = _ref5.timestamp;
-
-	      return _DecadeView.onActiveDateChange.call(this, { dateMoment: dateMoment, timestamp: timestamp });
-	    }
-	  }, {
-	    key: 'onChange',
-	    value: function onChange(_ref6, event) {
-	      var dateMoment = _ref6.dateMoment;
-	      var timestamp = _ref6.timestamp;
-
-	      return _DecadeView.onChange.call(this, { dateMoment: dateMoment, timestamp: timestamp }, event);
-	    }
-	  }, {
-	    key: 'focus',
-	    value: function focus() {
-	      (0, _reactDom.findDOMNode)(this).focus();
-	    }
-	  }]);
-
-	  return YearView;
-	}(_reactClass2.default);
-
-	exports.default = YearView;
-
-
-	YearView.defaultProps = {
-	  isYearView: true,
-	  navKeys: NAV_KEYS,
-	  constrainViewDate: true,
-	  theme: 'default',
-	  monthFormat: 'MMM',
-	  dateFormat: 'YYYY-MM-DD',
-
-	  onlyCompareMonth: true,
-
-	  adjustDateStartOf: 'month',
-	  adjustMinDateStartOf: 'month',
-	  adjustMaxDateStartOf: 'month'
-	};
-
-/***/ },
-/* 309 */
-/***/ function(module, exports) {
-
-	"use strict";
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-
-	function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
-
-	var times = function times(count) {
-	  return (count >= 0 ? [].concat(_toConsumableArray(new Array(count))) : []).map(function (v, i) {
-	    return i;
-	  });
-	};
-	exports.default = times;
-
-/***/ },
-/* 310 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	exports.getInitialState = exports.isValidActiveDate = exports.isDateInMinMax = exports.prepareDate = exports.prepareDateProps = exports.prepareMinMax = exports.prepareViewDate = exports.prepareActiveDate = exports.onKeyDown = exports.navigate = exports.gotoViewDate = exports.confirm = exports.select = exports.onActiveDateChange = exports.onViewDateChange = exports.onChange = undefined;
-
-	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
-
-	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-	var _react = __webpack_require__(1);
-
-	var _react2 = _interopRequireDefault(_react);
-
-	var _reactDom = __webpack_require__(35);
-
-	var _reactClass = __webpack_require__(183);
-
-	var _reactClass2 = _interopRequireDefault(_reactClass);
-
-	var _objectAssign = __webpack_require__(288);
-
-	var _objectAssign2 = _interopRequireDefault(_objectAssign);
-
-	var _reactFlex = __webpack_require__(294);
-
-	var _moment = __webpack_require__(184);
-
-	var _moment2 = _interopRequireDefault(_moment);
-
-	var _times = __webpack_require__(309);
-
-	var _times2 = _interopRequireDefault(_times);
-
-	var _toMoment2 = __webpack_require__(290);
-
-	var _toMoment3 = _interopRequireDefault(_toMoment2);
-
-	var _join = __webpack_require__(291);
-
-	var _join2 = _interopRequireDefault(_join);
-
-	var _bemFactory = __webpack_require__(304);
-
-	var _bemFactory2 = _interopRequireDefault(_bemFactory);
-
-	var _onKeyDown = __webpack_require__(311);
-
-	var _onKeyDown2 = _interopRequireDefault(_onKeyDown);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-	var bem = (0, _bemFactory2.default)('react-date-picker__decade-view');
-
-	var ARROWS = {
-	  prev: _react2.default.createElement(
-	    'svg',
-	    { height: '24', viewBox: '0 0 24 24', width: '24' },
-	    _react2.default.createElement('path', { d: 'M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z' }),
-	    _react2.default.createElement('path', { d: 'M0 0h24v24H0z', fill: 'none' })
-	  ),
-
-	  next: _react2.default.createElement(
-	    'svg',
-	    { height: '24', viewBox: '0 0 24 24', width: '24' },
-	    _react2.default.createElement('path', { d: 'M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z' }),
-	    _react2.default.createElement('path', { d: 'M0 0h24v24H0z', fill: 'none' })
-	  )
-	};
-
-	var getDecadeStartYear = function getDecadeStartYear(mom) {
-	  var year = mom.get('year');
-
-	  return year - year % 10;
-	};
-
-	var getDecadeEndYear = function getDecadeEndYear(mom) {
-	  return getDecadeStartYear(mom) + 9;
-	};
-
-	var NAV_KEYS = {
-	  ArrowUp: function ArrowUp(mom) {
-	    return mom.add(-5, 'year');
-	  },
-	  ArrowDown: function ArrowDown(mom) {
-	    return mom.add(5, 'year');
-	  },
-	  ArrowLeft: function ArrowLeft(mom) {
-	    return mom.add(-1, 'year');
-	  },
-	  ArrowRight: function ArrowRight(mom) {
-	    return mom.add(1, 'year');
-	  },
-	  Home: function Home(mom) {
-	    return mom.set('year', getDecadeStartYear(mom));
-	  },
-	  End: function End(mom) {
-	    return mom.set('year', getDecadeEndYear(mom));
-	  },
-	  PageUp: function PageUp(mom) {
-	    return mom.add(-10, 'year');
-	  },
-	  PageDown: function PageDown(mom) {
-	    return mom.add(10, 'year');
-	  }
-	};
-
-	var isDateInMinMax = function isDateInMinMax(timestamp, props) {
-	  if (props.minDate && timestamp < props.minDate) {
-	    return false;
-	  }
-
-	  if (props.maxDate && timestamp > props.maxDate) {
-	    return false;
-	  }
-
-	  return true;
-	};
-
-	var isValidActiveDate = function isValidActiveDate(timestamp, props) {
-	  if (!props) {
-	    throw new Error('props is mandatory in isValidActiveDate');
-	  }
-
-	  return isDateInMinMax(timestamp, props);
-	};
-
-	var _select = function _select(_ref, event) {
-	  var dateMoment = _ref.dateMoment;
-	  var timestamp = _ref.timestamp;
-
-	  if (this.props.select) {
-	    return this.props.select({ dateMoment: dateMoment, timestamp: timestamp }, event);
-	  }
-
-	  if (!timestamp) {
-	    timestamp = +dateMoment;
-	  }
-
-	  this.gotoViewDate({ dateMoment: dateMoment, timestamp: timestamp });
-	  this.onChange({ dateMoment: dateMoment, timestamp: timestamp }, event);
-
-	  return undefined;
-	};
-
-	var _confirm = function _confirm(date, event) {
-	  event.preventDefault();
-
-	  if (this.props.confirm) {
-	    return this.props.confirm(date, event);
-	  }
-
-	  var dateMoment = this.toMoment(date);
-	  var timestamp = +dateMoment;
-
-	  this.select({ dateMoment: dateMoment, timestamp: timestamp }, event);
-
-	  if (this.props.onConfirm) {
-	    this.props.onConfirm({ dateMoment: dateMoment, timestamp: timestamp });
-	  }
-
-	  return undefined;
-	};
-
-	var _onActiveDateChange = function _onActiveDateChange(_ref2) {
-	  var dateMoment = _ref2.dateMoment;
-	  var timestamp = _ref2.timestamp;
-
-	  if (!isValidActiveDate(timestamp, this.p)) {
-	    return;
-	  }
-
-	  if (this.props.activeDate === undefined) {
-	    this.setState({
-	      activeDate: timestamp
-	    });
-	  }
-
-	  if (this.props.onActiveDateChange) {
-	    var dateString = this.format(dateMoment);
-	    this.props.onActiveDateChange(dateString, { dateMoment: dateMoment, timestamp: timestamp, dateString: dateString });
-	  }
-	};
-
-	var _onViewDateChange = function _onViewDateChange(_ref3) {
-	  var dateMoment = _ref3.dateMoment;
-	  var timestamp = _ref3.timestamp;
-
-	  if (dateMoment && timestamp === undefined) {
-	    timestamp = +dateMoment;
-	  }
-
-	  if (this.props.constrainViewDate && !isDateInMinMax(timestamp, this.p)) {
-	    return;
-	  }
-
-	  if (this.props.viewDate === undefined) {
-	    this.setState({
-	      viewDate: timestamp
-	    });
-	  }
-
-	  if (this.props.onViewDateChange) {
-	    var dateString = this.format(dateMoment);
-	    this.props.onViewDateChange(dateString, { dateMoment: dateMoment, dateString: dateString, timestamp: timestamp });
-	  }
-	};
-
-	var _onChange = function _onChange(_ref4, event) {
-	  var dateMoment = _ref4.dateMoment;
-	  var timestamp = _ref4.timestamp;
-
-	  if (this.props.date === undefined) {
-	    this.setState({
-	      date: timestamp
-	    });
-	  }
-
-	  if (this.props.onChange) {
-	    var dateString = this.format(dateMoment);
-	    this.props.onChange(dateString, { dateMoment: dateMoment, timestamp: timestamp, dateString: dateString }, event);
-	  }
-	};
-
-	var _navigate = function _navigate(direction, event) {
-	  var _this = this;
-
-	  var props = this.p;
-
-	  var getNavigationDate = function getNavigationDate(dir, date, dateFormat) {
-	    var mom = _moment2.default.isMoment(date) ? date : _this.toMoment(date, dateFormat);
-
-	    if (typeof dir == 'function') {
-	      return dir(mom);
-	    }
-
-	    return mom;
-	  };
-
-	  if (props.navigate) {
-	    return props.navigate(direction, event, getNavigationDate);
-	  }
-
-	  event.preventDefault();
-
-	  if (props.activeDate) {
-	    var nextMoment = getNavigationDate(direction, props.activeDate);
-
-	    this.gotoViewDate({ dateMoment: nextMoment });
-	  }
-
-	  return undefined;
-	};
-
-	var _gotoViewDate = function _gotoViewDate(_ref5) {
-	  var dateMoment = _ref5.dateMoment;
-	  var timestamp = _ref5.timestamp;
-
-	  if (!timestamp) {
-	    timestamp = dateMoment == null ? null : +dateMoment;
-	  }
-
-	  this.onViewDateChange({ dateMoment: dateMoment, timestamp: timestamp });
-	  this.onActiveDateChange({ dateMoment: dateMoment, timestamp: timestamp });
-	};
-
-	var prepareDate = function prepareDate(props, state) {
-	  return props.date === undefined ? state.date : props.date;
-	};
-
-	var prepareViewDate = function prepareViewDate(props, state) {
-	  var viewDate = props.viewDate === undefined ? state.viewDate : props.viewDate;
-
-	  if (!viewDate && props.date) {
-	    return props.date;
-	  }
-
-	  return viewDate;
-	};
-
-	var prepareActiveDate = function prepareActiveDate(props, state) {
-	  var activeDate = props.activeDate === undefined ? state.activeDate || prepareDate(props, state) : props.activeDate;
-
-	  return activeDate;
-	};
-
-	var prepareMinMax = function prepareMinMax(props) {
-	  var minDate = props.minDate;
-	  var maxDate = props.maxDate;
-
-
-	  var result = {};
-
-	  if (minDate != null) {
-	    result.minDateMoment = (0, _toMoment3.default)(props.minDate, props).startOf(props.adjustMinDateStartOf);
-
-	    result.minDate = +result.minDateMoment;
-	  }
-
-	  if (maxDate != null) {
-	    result.maxDateMoment = (0, _toMoment3.default)(props.maxDate, props).endOf(props.adjustMaxDateStartOf);
-
-	    result.maxDate = +result.maxDateMoment;
-	  }
-
-	  return result;
-	};
-
-	var prepareDateProps = function prepareDateProps(props, state) {
-	  var result = {};
-
-	  (0, _objectAssign2.default)(result, prepareMinMax(props));
-
-	  result.date = prepareDate(props, state);
-	  result.viewDate = prepareViewDate(props, state);
-
-	  var activeDate = prepareActiveDate(props, state);
-
-	  if (result.date != null) {
-	    result.moment = (0, _toMoment3.default)(result.date, props);
-	    if (props.adjustDateStartOf) {
-	      result.moment.startOf(props.adjustDateStartOf);
-	    }
-	    result.timestamp = +result.moment;
-	  }
-
-	  if (activeDate) {
-	    result.activeMoment = (0, _toMoment3.default)(activeDate, props);
-	    if (props.adjustDateStartOf) {
-	      result.activeMoment.startOf(props.adjustDateStartOf);
-	    }
-	    result.activeDate = +result.activeMoment;
-	  }
-
-	  var viewMoment = (0, _toMoment3.default)(result.viewDate, props);
-
-	  if (props.constrainViewDate && result.minDate != null && viewMoment.isBefore(result.minDate)) {
-	    result.minConstrained = true;
-	    viewMoment = (0, _toMoment3.default)(result.minDate, props);
-	  }
-
-	  if (props.constrainViewDate && result.maxDate != null && viewMoment.isAfter(result.maxDate)) {
-	    result.maxConstrained = true;
-	    viewMoment = (0, _toMoment3.default)(result.maxDate, props);
-	  }
-
-	  if (props.adjustDateStartOf) {
-	    viewMoment.startOf(props.adjustDateStartOf);
-	  }
-
-	  result.viewMoment = viewMoment;
-
-	  return result;
-	};
-
-	var getInitialState = function getInitialState(props) {
-	  return {
-	    date: props.defaultDate,
-	    activeDate: props.defaultActiveDate,
-	    viewDate: props.defaultViewDate
-	  };
-	};
-
-	var DecadeView = function (_Component) {
-	  _inherits(DecadeView, _Component);
-
-	  function DecadeView(props) {
-	    _classCallCheck(this, DecadeView);
-
-	    var _this2 = _possibleConstructorReturn(this, Object.getPrototypeOf(DecadeView).call(this, props));
-
-	    _this2.state = getInitialState(props);
-	    return _this2;
-	  }
-
-	  _createClass(DecadeView, [{
-	    key: 'getYearsInDecade',
-	    value: function getYearsInDecade(value) {
-	      var _this3 = this;
-
-	      var year = getDecadeStartYear(this.toMoment(value));
-
-	      var start = this.toMoment('' + year, 'YYYY').startOf('year');
-
-	      return (0, _times2.default)(10).map(function (i) {
-	        return _this3.toMoment(start).add(i, 'year');
-	      });
-	    }
-	  }, {
-	    key: 'toMoment',
-	    value: function toMoment(date, format) {
-	      return (0, _toMoment3.default)(date, format, this.props);
-	    }
-	  }, {
-	    key: 'render',
-	    value: function render() {
-	      var props = this.p = (0, _objectAssign2.default)({}, this.props);
-
-	      if (props.onlyCompareYear) {
-	        // props.adjustDateStartOf = null
-	      }
-
-	      var dateProps = prepareDateProps(props, this.state);
-
-	      (0, _objectAssign2.default)(props, dateProps);
-
-	      var yearsInView = this.getYearsInDecade(props.viewMoment);
-
-	      var className = (0, _join2.default)(props.className, bem(), props.theme && bem(null, 'theme-' + props.theme));
-
-	      var children = this.renderYears(props, yearsInView);
-	      var align = 'stretch';
-	      var column = true;
-
-	      if (props.navigation) {
-	        column = false;
-	        align = 'center';
-
-	        children = [this.renderNav(-1), _react2.default.createElement(_reactFlex.Flex, { inline: true, flex: true, column: true, alignItems: 'stretch', children: children }), this.renderNav(1)];
-	      }
-
-	      var flexProps = (0, _objectAssign2.default)({}, this.props);
-
-	      delete flexProps.activeDate;
-	      delete flexProps.adjustDateStartOf;
-	      delete flexProps.adjustMaxDateStartOf;
-	      delete flexProps.adjustMinDateStartOf;
-	      delete flexProps.arrows;
-	      delete flexProps.cleanup;
-	      delete flexProps.constrainViewDate;
-	      delete flexProps.date;
-	      delete flexProps.dateFormat;
-	      delete flexProps.isDecadeView;
-	      delete flexProps.maxDate;
-	      delete flexProps.minDate;
-	      delete flexProps.navigation;
-	      delete flexProps.navKeys;
-	      delete flexProps.onActiveDateChange;
-	      delete flexProps.onConfirm;
-	      delete flexProps.onlyCompareYear;
-	      delete flexProps.onViewDateChange;
-	      delete flexProps.perRow;
-	      delete flexProps.theme;
-	      delete flexProps.viewDate;
-	      delete flexProps.yearFormat;
-
-	      if (typeof props.cleanup == 'function') {
-	        props.cleanup(flexProps);
-	      }
-
-	      return _react2.default.createElement(_reactFlex.Flex, _extends({
-	        inline: true,
-	        column: column,
-	        alignItems: align,
-	        tabIndex: 0
-	      }, flexProps, {
-	        onKeyDown: this.onKeyDown,
-	        className: className,
-	        children: children
-	      }));
-	    }
-	  }, {
-	    key: 'renderNav',
-	    value: function renderNav(dir) {
-	      var _this4 = this;
-
-	      var props = this.p;
-
-	      var name = dir == -1 ? 'prev' : 'next';
-	      var navMoment = this.toMoment(props.viewMoment).add(dir * 10, 'year');
-
-	      var disabled = dir == -1 ? props.minDateMoment && getDecadeEndYear(navMoment) < getDecadeEndYear(props.minDateMoment) : props.maxDateMoment && getDecadeEndYear(navMoment) > getDecadeEndYear(props.maxDateMoment);
-
-	      var className = (0, _join2.default)(bem('arrow'), bem('arrow--' + name), disabled && bem('arrow--disabled'));
-
-	      var arrow = props.arrows[name] || ARROWS[name];
-
-	      var arrowProps = {
-	        className: className,
-	        onClick: !disabled ? function () {
-	          return _this4.onViewDateChange({ dateMoment: navMoment });
-	        } : null,
-	        children: arrow,
-	        disabled: disabled
-	      };
-
-	      if (props.renderNavigation) {
-	        return props.renderNavigation(arrowProps, props);
-	      }
-
-	      return _react2.default.createElement('div', arrowProps);
-	    }
-	  }, {
-	    key: 'renderYears',
-	    value: function renderYears(props, years) {
-	      var nodes = years.map(this.renderYear);
-
-	      var perRow = props.perRow;
-	      var buckets = (0, _times2.default)(Math.ceil(nodes.length / perRow)).map(function (i) {
-	        return nodes.slice(i * perRow, (i + 1) * perRow);
-	      });
-
-	      return buckets.map(function (bucket, i) {
-	        return _react2.default.createElement(
-	          _reactFlex.Flex,
-	          {
-	            alignItems: 'center',
-	            flex: true,
-	            row: true,
-	            inline: true,
-	            key: 'row_' + i,
-	            className: 'dp-row'
-	          },
-	          bucket
-	        );
-	      });
-	    }
-	  }, {
-	    key: 'renderYear',
-	    value: function renderYear(dateMoment) {
-	      var props = this.p;
-	      var yearText = this.format(dateMoment);
-
-	      var timestamp = +dateMoment;
-
-	      var isActiveDate = props.onlyCompareYear && props.activeMoment ? dateMoment.get('year') == props.activeMoment.get('year') : timestamp === props.activeDate;
-
-	      var isValue = props.onlyCompareYear && props.moment ? dateMoment.get('year') == props.moment.get('year') : timestamp === props.timestamp;
-
-	      var className = (0, _join2.default)(bem('year'), isActiveDate && bem('year', 'active'), isValue && bem('year', 'value'), props.minDate != null && timestamp < props.minDate && bem('year', 'disabled'), props.maxDate != null && timestamp > props.maxDate && bem('year', 'disabled'));
-
-	      var onClick = this.handleClick.bind(this, {
-	        dateMoment: dateMoment,
-	        timestamp: timestamp
-	      });
-
-	      return _react2.default.createElement(
-	        _reactFlex.Item,
-	        {
-	          key: yearText,
-	          className: className,
-	          onClick: onClick
-	        },
-	        yearText
-	      );
-	    }
-	  }, {
-	    key: 'format',
-	    value: function format(mom, _format) {
-	      _format = _format || this.props.yearFormat;
-
-	      return mom.format(_format);
-	    }
-	  }, {
-	    key: 'handleClick',
-	    value: function handleClick(_ref6, event) {
-	      var timestamp = _ref6.timestamp;
-	      var dateMoment = _ref6.dateMoment;
-
-	      event.target.value = timestamp;
-
-	      var props = this.p;
-	      if (props.minDate && timestamp < props.minDate) {
-	        return;
-	      }
-
-	      if (props.maxDate && timestamp > props.maxDate) {
-	        return;
-	      }
-
-	      this.select({ dateMoment: dateMoment, timestamp: timestamp }, event);
-	    }
-	  }, {
-	    key: 'onKeyDown',
-	    value: function onKeyDown(event) {
-	      return _onKeyDown2.default.call(this, event);
-	    }
-	  }, {
-	    key: 'confirm',
-	    value: function confirm(date, event) {
-	      return _confirm.call(this, date, event);
-	    }
-	  }, {
-	    key: 'navigate',
-	    value: function navigate(direction, event) {
-	      return _navigate.call(this, direction, event);
-	    }
-	  }, {
-	    key: 'select',
-	    value: function select(_ref7, event) {
-	      var dateMoment = _ref7.dateMoment;
-	      var timestamp = _ref7.timestamp;
-
-	      return _select.call(this, { dateMoment: dateMoment, timestamp: timestamp }, event);
-	    }
-	  }, {
-	    key: 'onViewDateChange',
-	    value: function onViewDateChange(_ref8) {
-	      var dateMoment = _ref8.dateMoment;
-	      var timestamp = _ref8.timestamp;
-
-	      return _onViewDateChange.call(this, { dateMoment: dateMoment, timestamp: timestamp });
-	    }
-	  }, {
-	    key: 'gotoViewDate',
-	    value: function gotoViewDate(_ref9) {
-	      var dateMoment = _ref9.dateMoment;
-	      var timestamp = _ref9.timestamp;
-
-	      return _gotoViewDate.call(this, { dateMoment: dateMoment, timestamp: timestamp });
-	    }
-	  }, {
-	    key: 'onActiveDateChange',
-	    value: function onActiveDateChange(_ref10) {
-	      var dateMoment = _ref10.dateMoment;
-	      var timestamp = _ref10.timestamp;
-
-	      return _onActiveDateChange.call(this, { dateMoment: dateMoment, timestamp: timestamp });
-	    }
-	  }, {
-	    key: 'onChange',
-	    value: function onChange(_ref11, event) {
-	      var dateMoment = _ref11.dateMoment;
-	      var timestamp = _ref11.timestamp;
-
-	      return _onChange.call(this, { dateMoment: dateMoment, timestamp: timestamp }, event);
-	    }
-	  }, {
-	    key: 'focus',
-	    value: function focus() {
-	      (0, _reactDom.findDOMNode)(this).focus();
-	    }
-	  }]);
-
-	  return DecadeView;
-	}(_reactClass2.default);
-
-	exports.default = DecadeView;
-
-
-	DecadeView.defaultProps = {
-	  isDecadeView: true,
-	  arrows: {},
-	  navigation: true,
-	  constrainViewDate: true,
-	  navKeys: NAV_KEYS,
-	  theme: 'default',
-	  yearFormat: 'YYYY',
-	  dateFormat: 'YYYY-MM-DD',
-	  perRow: 5,
-
-	  onlyCompareYear: true,
-
-	  adjustDateStartOf: 'year',
-	  adjustMinDateStartOf: 'year',
-	  adjustMaxDateStartOf: 'year'
-	};
-
-	exports.onChange = _onChange;
-	exports.onViewDateChange = _onViewDateChange;
-	exports.onActiveDateChange = _onActiveDateChange;
-	exports.select = _select;
-	exports.confirm = _confirm;
-	exports.gotoViewDate = _gotoViewDate;
-	exports.navigate = _navigate;
-	exports.onKeyDown = _onKeyDown2.default;
-	exports.prepareActiveDate = prepareActiveDate;
-	exports.prepareViewDate = prepareViewDate;
-	exports.prepareMinMax = prepareMinMax;
-	exports.prepareDateProps = prepareDateProps;
-	exports.prepareDate = prepareDate;
-	exports.isDateInMinMax = isDateInMinMax;
-	exports.isValidActiveDate = isValidActiveDate;
-	exports.getInitialState = getInitialState;
-
-/***/ },
-/* 311 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-
-	exports.default = function (event) {
-	  var key = event.key;
-
-	  if (this.props.onKeyDown) {
-	    if (this.props.onKeyDown(event) === false) {
-	      return;
-	    }
-	  }
-
-	  if (key == 'Enter' && this.p.activeDate) {
-	    this.confirm(this.p.activeDate, event);
-	  }
-
-	  var navKeys = this.p.navKeys || _navKeys2.default;
-	  var dir = navKeys[key];
-
-	  if (!dir) {
-	    return;
-	  }
-
-	  event.preventDefault();
-	  this.navigate(dir, event);
-	};
-
-	var _navKeys = __webpack_require__(312);
-
-	var _navKeys2 = _interopRequireDefault(_navKeys);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-/***/ },
-/* 312 */
-/***/ function(module, exports) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	exports.default = {
-	  ArrowUp: -7,
-	  ArrowDown: 7,
-	  ArrowLeft: -1,
-	  ArrowRight: 1,
-
-	  PageUp: function PageUp(mom) {
-	    return mom.add(-1, 'month');
-	  },
-	  PageDown: function PageDown(mom) {
-	    return mom.add(1, 'month');
-	  },
-	  Home: function Home(mom) {
-	    return mom.startOf('month');
-	  },
-	  End: function End(mom) {
-	    return mom.endOf('month');
-	  }
-	};
-
-/***/ },
-/* 313 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	exports.getDaysInMonthView = exports.getWeekendStartDay = exports.getWeekStartMoment = exports.getWeekStartDay = undefined;
-
-	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
-
-	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-	var _react = __webpack_require__(1);
-
-	var _react2 = _interopRequireDefault(_react);
-
-	var _reactClass = __webpack_require__(183);
-
-	var _reactClass2 = _interopRequireDefault(_reactClass);
-
-	var _moment = __webpack_require__(184);
-
-	var _moment2 = _interopRequireDefault(_moment);
-
-	var _objectAssign = __webpack_require__(288);
-
-	var _objectAssign2 = _interopRequireDefault(_objectAssign);
-
-	var _reactFlex = __webpack_require__(294);
-
-	var _format = __webpack_require__(314);
-
-	var _format2 = _interopRequireDefault(_format);
-
-	var _toMoment = __webpack_require__(290);
-
-	var _toMoment2 = _interopRequireDefault(_toMoment);
-
-	var _getWeekDayNames = __webpack_require__(315);
-
-	var _getWeekDayNames2 = _interopRequireDefault(_getWeekDayNames);
-
-	var _join = __webpack_require__(291);
-
-	var _join2 = _interopRequireDefault(_join);
-
-	var _bemFactory = __webpack_require__(304);
-
-	var _bemFactory2 = _interopRequireDefault(_bemFactory);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-	function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
-
-	var CLASS_NAME = 'react-date-picker__basic-month-view';
-
-	var RENDER_DAY = function RENDER_DAY(props) {
-	  var divProps = (0, _objectAssign2.default)({}, props);
-
-	  delete divProps.date;
-	  delete divProps.dateMoment;
-	  delete divProps.day;
-	  delete divProps.timestamp;
-
-	  return _react2.default.createElement('div', divProps);
-	};
-
-	var getWeekStartDay = function getWeekStartDay(props) {
-	  var locale = props.locale;
-	  var weekStartDay = props.weekStartDay;
-
-	  if (weekStartDay == null) {
-	    var localeData = props.localeData || _moment2.default.localeData(locale);
-	    weekStartDay = localeData._week ? localeData._week.dow : null;
-	  }
-
-	  return weekStartDay;
-	};
-
-	/**
-	 * Gets the number for the first day of the weekend
-	 *
-	 * @param  {Object} props
-	 * @param  {Number/String} props.weekStartDay
-	 *
-	 * @return {Number}
-	 */
-	var getWeekendStartDay = function getWeekendStartDay(props) {
-	  var weekendStartDay = props.weekendStartDay;
-
-
-	  if (weekendStartDay == null) {
-	    return getWeekStartDay(props) + 5 % 7;
-	  }
-
-	  return weekendStartDay;
-	};
-
-	/**
-	 * Gets a moment that points to the first day of the week
-	 *
-	 * @param  {Moment/Date/String} value]
-	 * @param  {Object} props
-	 * @param  {String} props.dateFormat
-	 * @param  {String} props.locale
-	 * @param  {Number/String} props.weekStartDay
-	 *
-	 * @return {Moment}
-	 */
-	var getWeekStartMoment = function getWeekStartMoment(value, props) {
-	  var locale = props.locale;
-	  var dateFormat = props.dateFormat;
-
-	  var weekStartDay = getWeekStartDay(props);
-
-	  return (0, _toMoment2.default)(value, {
-	    locale: locale,
-	    dateFormat: dateFormat
-	  }).day(weekStartDay);
-	};
-
-	/**
-	 * Returns an array of moments with the days in the month of the value
-	 *
-	 * @param  {Moment/Date/String} value
-	 *
-	 * @param  {Object} props
-	 * @param  {String} props.locale
-	 * @param  {String} props.dateFormat
-	 * @param  {String} props.weekStartDay
-	 * @param  {Boolean} props.alwaysShowPrevWeek
-	 *
-	 * @return {Moment[]}
-	 */
-	var getDaysInMonthView = function getDaysInMonthView(value, props) {
-	  var locale = props.locale;
-	  var dateFormat = props.dateFormat;
-
-	  var toMomentParam = { locale: locale, dateFormat: dateFormat };
-
-	  var first = (0, _toMoment2.default)(value, toMomentParam).startOf('month');
-	  var beforeFirst = (0, _toMoment2.default)(value, toMomentParam).startOf('month').add(-1, 'days');
-
-	  var start = getWeekStartMoment(first, props);
-
-	  var result = [];
-
-	  var i = 0;
-
-	  if (beforeFirst.isBefore(start)
-	  // and it doesn't start with a full week before and the
-	  // week has at least 1 day from current month (default)
-	   && (props.alwaysShowPrevWeek || !start.isSame(first))) {
-	    start.add(-1, 'weeks');
-	  }
-
-	  for (; i < 42; i++) {
-	    result.push((0, _toMoment2.default)(start, toMomentParam));
-	    start.add(1, 'days');
-	  }
-
-	  return result;
-	};
-
-	/**
-	 * @param  {Object} props
-	 * @param  {String} props.locale
-	 * @param  {Number} props.weekStartDay
-	 * @param  {Array/Function} props.weekDayNames
-	 *
-	 * @return {String[]}
-	 */
-	var getWeekDayNames = function getWeekDayNames(props) {
-	  var weekStartDay = props.weekStartDay;
-	  var weekDayNames = props.weekDayNames;
-	  var locale = props.locale;
-
-
-	  var names = weekDayNames;
-
-	  if (typeof names == 'function') {
-	    names = names(weekStartDay, locale);
-	  } else if (Array.isArray(names)) {
-	    names = [].concat(_toConsumableArray(names));
-
-	    var index = weekStartDay;
-
-	    while (index > 0) {
-	      names.push(names.shift());
-	      index--;
-	    }
-	  }
-
-	  return names;
-	};
-
-	var BasicMonthView = function (_Component) {
-	  _inherits(BasicMonthView, _Component);
-
-	  function BasicMonthView() {
-	    _classCallCheck(this, BasicMonthView);
-
-	    return _possibleConstructorReturn(this, Object.getPrototypeOf(BasicMonthView).apply(this, arguments));
-	  }
-
-	  _createClass(BasicMonthView, [{
-	    key: 'componentWillMount',
-	    value: function componentWillMount() {
-	      this.updateBem(this.props);
-	      this.updateToMoment(this.props);
-	    }
-	  }, {
-	    key: 'componentWillReceiveProps',
-	    value: function componentWillReceiveProps(nextProps) {
-	      if (nextProps.defaultClassName != this.props.defaultClassName) {
-	        this.updateBem(nextProps);
-	      }
-
-	      this.updateToMoment(nextProps);
-	    }
-	  }, {
-	    key: 'updateBem',
-	    value: function updateBem(props) {
-	      this.bem = (0, _bemFactory2.default)(props.defaultClassName);
-	    }
-	  }, {
-	    key: 'updateToMoment',
-	    value: function updateToMoment(props) {
-	      this.toMoment = function (value, dateFormat) {
-	        return (0, _toMoment2.default)(value, {
-	          locale: props.locale,
-	          dateFormat: dateFormat || props.dateFormat
-	        });
-	      };
-	    }
-	  }, {
-	    key: 'prepareProps',
-	    value: function prepareProps(thisProps) {
-	      var props = (0, _objectAssign2.default)({}, thisProps);
-
-	      props.viewMoment = props.viewMoment || this.toMoment(props.viewDate);
-
-	      props.weekStartDay = getWeekStartDay(props);
-
-	      props.className = this.prepareClassName(props);
-
-	      return props;
-	    }
-	  }, {
-	    key: 'prepareClassName',
-	    value: function prepareClassName(props) {
-	      return (0, _join2.default)(props.className, CLASS_NAME + ' dp-month-view');
-	    }
-	  }, {
-	    key: 'render',
-	    value: function render() {
-	      var props = this.p = this.prepareProps(this.props);
-
-	      var viewMoment = props.viewMoment;
-
-
-	      var daysInView = props.daysInView || getDaysInMonthView(viewMoment, props);
-
-	      var children = [this.renderWeekDayNames(), this.renderDays(props, daysInView)];
-
-	      if (props.renderChildren) {
-	        children = props.renderChildren(children, props);
-	      }
-
-	      var flexProps = (0, _objectAssign2.default)({}, props);
-
-	      delete flexProps.alwaysShowPrevWeek;
-	      delete flexProps.cleanup;
-	      delete flexProps.dateFormat;
-	      delete flexProps.daysInView;
-	      delete flexProps.defaultClassName;
-	      delete flexProps.defaultDate;
-	      delete flexProps.defaultValue;
-	      delete flexProps.forceValidDate;
-	      delete flexProps.locale;
-	      delete flexProps.moment;
-	      delete flexProps.onClockEnterKey;
-	      delete flexProps.onClockEscapeKey;
-	      delete flexProps.onClockInputBlur;
-	      delete flexProps.onClockInputFocus;
-	      delete flexProps.onClockInputMouseDown;
-	      delete flexProps.onFooterCancelClick;
-	      delete flexProps.onFooterClearClick;
-	      delete flexProps.onFooterOkClick;
-	      delete flexProps.onFooterTodayClick;
-	      delete flexProps.onRenderDay;
-	      delete flexProps.renderChildren;
-	      delete flexProps.renderDay;
-	      delete flexProps.timestamp;
-	      delete flexProps.value;
-	      delete flexProps.viewDate;
-	      delete flexProps.viewMoment;
-	      delete flexProps.weekDayNames;
-	      delete flexProps.weekNumbers;
-	      delete flexProps.weekNumberName;
-	      delete flexProps.weekStartDay;
-
-	      if (typeof props.cleanup == 'function') {
-	        props.cleanup(flexProps);
-	      }
-
-	      return _react2.default.createElement(_reactFlex.Flex, _extends({
-	        column: true,
-	        wrap: false,
-	        inline: true,
-	        alignItems: 'stretch'
-	      }, flexProps, {
-
-	        children: children
-	      }));
-	    }
-
-	    /**
-	     * Render the week number cell
-	     * @param  {Moment[]} days The days in a week
-	     * @return {React.DOM}
-	     */
-
-	  }, {
-	    key: 'renderWeekNumber',
-	    value: function renderWeekNumber(props, days) {
-	      var firstDayOfWeek = days[0];
-	      var week = firstDayOfWeek.weeks();
-
-	      var weekNumberProps = {
-	        key: 'week',
-
-	        className: this.bem('cell') + ' ' + this.bem('week-number') + ' dp-cell dp-weeknumber',
-
-	        // week number
-	        week: week,
-
-	        // the days in this week
-	        days: days,
-
-	        date: firstDayOfWeek,
-
-	        children: week
-	      };
-
-	      var renderWeekNumber = props.renderWeekNumber;
-
-	      var result = void 0;
-
-	      if (renderWeekNumber) {
-	        result = renderWeekNumber(weekNumberProps);
-	      }
-
-	      if (result === undefined) {
-	        var divProps = (0, _objectAssign2.default)({}, weekNumberProps);
-
-	        delete divProps.date;
-	        delete divProps.days;
-	        delete divProps.week;
-
-	        result = _react2.default.createElement('div', divProps);
-	      }
-
-	      return result;
-	    }
-
-	    /**
-	     * Render the given array of days
-	     * @param  {Moment[]} days
-	     *
-	     * @return {React.DOM}
-	     */
-
-	  }, {
-	    key: 'renderDays',
-	    value: function renderDays(props, days) {
-	      var _this2 = this;
-
-	      var nodes = days.map(function (date) {
-	        return _this2.renderDay(props, date);
-	      });
-
-	      var len = days.length;
-	      var buckets = [];
-	      var bucketsLen = Math.ceil(len / 7);
-
-	      var i = 0;
-	      var weekStart = void 0;
-	      var weekEnd = void 0;
-
-	      for (; i < bucketsLen; i++) {
-	        weekStart = i * 7;
-	        weekEnd = (i + 1) * 7;
-
-	        buckets.push([props.weekNumbers && this.renderWeekNumber(props, days.slice(weekStart, weekEnd))].concat(nodes.slice(weekStart, weekEnd)));
-	      }
-
-	      return buckets.map(function (bucket, index) {
-	        return _react2.default.createElement('div', {
-	          key: 'row_' + index,
-	          className: _this2.bem('row') + ' dp-week dp-row',
-	          children: bucket
-	        });
-	      });
-	    }
-	  }, {
-	    key: 'renderDay',
-	    value: function renderDay(props, dateMoment) {
-	      var dayText = _format2.default.day(dateMoment, props.dayFormat);
-
-	      var classes = [this.bem('cell'), this.bem('day'), 'dp-cell dp-day'];
-
-	      var renderDayProps = {
-	        day: dayText,
-	        dateMoment: dateMoment,
-	        timestamp: +dateMoment,
-
-	        key: dayText,
-	        className: classes.join(' '),
-	        children: dayText
-	      };
-
-	      if (typeof props.onRenderDay === 'function') {
-	        renderDayProps = props.onRenderDay(renderDayProps);
-	      }
-
-	      var renderFunction = props.renderDay || RENDER_DAY;
-
-	      var result = renderFunction(renderDayProps);
-
-	      if (result === undefined) {
-	        result = RENDER_DAY(renderDayProps);
-	      }
-
-	      return result;
-	    }
-	  }, {
-	    key: 'renderWeekDayNames',
-	    value: function renderWeekDayNames() {
-	      var _this3 = this;
-
-	      var props = this.p;
-	      var weekNumbers = props.weekNumbers;
-	      var weekNumberName = props.weekNumberName;
-	      var weekDayNames = props.weekDayNames;
-	      var renderWeekDayNames = props.renderWeekDayNames;
-	      var renderWeekDayName = props.renderWeekDayName;
-	      var weekStartDay = props.weekStartDay;
-
-
-	      if (weekDayNames === false) {
-	        return null;
-	      }
-
-	      var names = weekNumbers ? [weekNumberName].concat(getWeekDayNames(props)) : getWeekDayNames(props);
-
-	      var className = this.bem('row') + ' ' + this.bem('week-day-names') + ' dp-row dp-week-day-names';
-
-	      var renderProps = {
-	        className: className,
-	        names: names
-	      };
-
-	      if (renderWeekDayNames) {
-	        return renderWeekDayNames(renderProps);
-	      }
-
-	      return _react2.default.createElement(
-	        'div',
-	        { className: className },
-	        names.map(function (name, index) {
-	          var props = {
-	            weekStartDay: weekStartDay,
-	            index: index,
-	            name: name,
-
-	            key: index,
-	            className: _this3.bem('cell') + ' ' + _this3.bem('week-day-name') + ' dp-week-day-name',
-	            children: name
-	          };
-
-	          if (renderWeekDayName) {
-	            return renderWeekDayName(props);
-	          }
-
-	          var divProps = (0, _objectAssign2.default)({}, props);
-
-	          delete divProps.index;
-	          delete divProps.weekStartDay;
-	          delete divProps.name;
-
-	          return _react2.default.createElement('div', divProps);
-	        })
-	      );
-	    }
-	  }]);
-
-	  return BasicMonthView;
-	}(_reactClass2.default);
-
-	BasicMonthView.propTypes = {
-	  viewDate: _react.PropTypes.any,
-	  viewMoment: _react.PropTypes.any,
-
-	  locale: _react.PropTypes.string,
-	  weekStartDay: _react.PropTypes.number, // 0 is Sunday in the English locale
-
-	  // boolean prop to show/hide week numbers
-	  weekNumbers: _react.PropTypes.bool,
-
-	  // the name to give to the week number column
-	  weekNumberName: _react.PropTypes.string,
-
-	  weekDayNames: function weekDayNames(props, propName) {
-	    var value = props[propName];
-
-	    if (typeof value != 'function' && value !== false && !Array.isArray(value)) {
-	      return new Error('"weekDayNames" should be a function, an array or the boolean "false"');
-	    }
-
-	    return undefined;
-	  },
-
-
-	  renderWeekDayNames: _react.PropTypes.func,
-	  renderWeekDayName: _react.PropTypes.func,
-
-	  renderWeekNumber: _react.PropTypes.func,
-	  renderDay: _react.PropTypes.func,
-	  onRenderDay: _react.PropTypes.func,
-
-	  alwaysShowPrevWeek: _react.PropTypes.bool
-	};
-
-	BasicMonthView.defaultProps = {
-
-	  defaultClassName: CLASS_NAME,
-
-	  dateFormat: 'YYYY-MM-DD',
-	  alwaysShowPrevWeek: false,
-	  weekNumbers: true,
-	  weekNumberName: null,
-
-	  weekDayNames: _getWeekDayNames2.default
-	};
-
-	exports.default = BasicMonthView;
-	exports.getWeekStartDay = getWeekStartDay;
-	exports.getWeekStartMoment = getWeekStartMoment;
-	exports.getWeekendStartDay = getWeekendStartDay;
-	exports.getDaysInMonthView = getDaysInMonthView;
-
-/***/ },
-/* 314 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-
-	var _toMoment = __webpack_require__(290);
-
-	var _toMoment2 = _interopRequireDefault(_toMoment);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	var CONFIG = {
-	  // the format in which days should be displayed in month view
-	  dayFormat: 'D',
-
-	  // the format in which months should be displayed in year view
-	  monthFormat: 'MMMM',
-
-	  // the format in which years should be displayed in decade view
-	  yearFormat: 'YYYY'
-	};
-
-	var f = function f(mom, format) {
-	  return (0, _toMoment2.default)(mom).format(format);
-	};
-
-	exports.default = {
-	  day: function day(mom, format) {
-	    return f(mom, format || CONFIG.dayFormat);
-	  },
-	  month: function month(mom, format) {
-	    return f(mom, format || CONFIG.monthFormat);
-	  },
-	  year: function year(mom, format) {
-	    return f(mom, format || CONFIG.yearFormat);
-	  }
-	};
-
-/***/ },
-/* 315 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	exports.default = getWeekDayNames;
-
-	var _moment = __webpack_require__(184);
-
-	var _moment2 = _interopRequireDefault(_moment);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	var DEFAULT_WEEK_START_DAY = (0, _moment2.default)().startOf('week').format('d') * 1;
-
-	function getWeekDayNames(startDay, locale) {
-	  var weekDays = void 0;
-
-	  if (locale) {
-	    var data = _moment2.default.localeData(locale);
-
-	    weekDays = data && data._weekdaysShort ? data._weekdaysShort : weekDays;
-	  }
-
-	  weekDays = (weekDays || _moment2.default.weekdaysShort()).concat();
-
-	  var names = weekDays;
-	  var index = startDay == null ? DEFAULT_WEEK_START_DAY : startDay;
-
-	  while (index > 0) {
-	    names.push(names.shift());
-	    index--;
-	  }
-
-	  return names;
-	}
-
-/***/ },
-/* 316 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-
-	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
-
-	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-	var _react = __webpack_require__(1);
-
-	var _react2 = _interopRequireDefault(_react);
-
-	var _reactDom = __webpack_require__(35);
-
-	var _reactClass = __webpack_require__(183);
-
-	var _reactClass2 = _interopRequireDefault(_reactClass);
-
-	var _TimeInput = __webpack_require__(317);
-
-	var _TimeInput2 = _interopRequireDefault(_TimeInput);
-
-	var _moment = __webpack_require__(184);
-
-	var _moment2 = _interopRequireDefault(_moment);
-
-	var _objectAssign = __webpack_require__(288);
-
-	var _objectAssign2 = _interopRequireDefault(_objectAssign);
-
-	var _toMoment = __webpack_require__(290);
-
-	var _toMoment2 = _interopRequireDefault(_toMoment);
-
-	var _join = __webpack_require__(291);
-
-	var _join2 = _interopRequireDefault(_join);
-
-	var _Clock = __webpack_require__(320);
-
-	var _Clock2 = _interopRequireDefault(_Clock);
-
-	var _reactFlex = __webpack_require__(294);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-	var TimePicker = function (_Component) {
-	  _inherits(TimePicker, _Component);
-
-	  function TimePicker(props) {
-	    _classCallCheck(this, TimePicker);
-
-	    var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(TimePicker).call(this, props));
-
-	    _this.state = {};
-	    return _this;
-	  }
-
-	  // prepareDate(props){
-	  //   return toMoment(props.date, props)
-	  // }
-
-	  _createClass(TimePicker, [{
-	    key: 'render',
-	    value: function render() {
-
-	      var props = this.p = (0, _objectAssign2.default)({}, this.props);
-	      props.children = _react2.default.Children.toArray(props.children);
-
-	      var timeFormat = props.timeFormat.toLowerCase();
-
-	      // props.date = this.prepareDate(props)
-	      props.hasTime = props.hasTime || timeFormat.indexOf('k') != -1 || timeFormat.indexOf('h') != -1;
-
-	      var className = (0, _join2.default)(props.className, 'react-date-picker__time-picker', props.theme && 'react-date-picker__time-picker--theme-' + props.theme);
-
-	      return _react2.default.createElement(
-	        _reactFlex.Flex,
-	        _extends({
-	          inline: true,
-	          column: true,
-	          wrap: false
-	        }, this.props, {
-	          className: className }),
-	        this.renderClock(),
-	        this.renderInput()
-	      );
-	    }
-	  }, {
-	    key: 'renderInput',
-	    value: function renderInput() {
-	      return _react2.default.createElement(_TimeInput2.default, {
-	        className: 'react-date-picker__time-picker-input',
-	        format: this.props.timeFormat || this.props.format,
-	        defaultValue: this.props.value || this.props.defaultValue,
-	        onChange: this.onTimeChange
-	      });
-	    }
-	  }, {
-	    key: 'onTimeChange',
-	    value: function onTimeChange(value) {
-	      var time = value.split(':');
-
-	      var seconds = time[0] * 3600 + parseInt(time[1], 10) * 60;
-
-	      if (time[2]) {
-	        seconds += parseInt(time[2], 10);
-	      }
-
-	      this.setState({
-	        seconds: seconds
-	      });
-
-	      if (this.props.onChange) {
-	        this.props.onChange(value);
-	      }
-	    }
-	  }, {
-	    key: 'renderClock',
-	    value: function renderClock() {
-
-	      var props = this.p;
-	      var clock = props.children.filter(function (child) {
-	        return child && child.props && child.props.isTimePickerClock;
-	      })[0];
-
-	      var clockProps = {
-	        seconds: this.state.seconds,
-	        showSecondsHand: true
-	      };
-
-	      if (clock) {
-	        return _react2.default.cloneElement(clock, clockProps);
-	      }
-
-	      return _react2.default.createElement(_Clock2.default, clockProps);
-	    }
-	  }]);
-
-	  return TimePicker;
-	}(_reactClass2.default);
-
-	exports.default = TimePicker;
-
-
-	TimePicker.defaultProps = {
-	  format: 'HH:mm:ss a',
-	  theme: 'default',
-	  isTimePicker: true
-	};
-
-	TimePicker.propTypes = {};
-
-/***/ },
-/* 317 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	exports.toTimeValue = exports.setCaretPosition = exports.getNewValue = exports.getSelectionEnd = exports.getSelectionStart = undefined;
-
-	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
-
-	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-	var _react = __webpack_require__(1);
-
-	var _react2 = _interopRequireDefault(_react);
-
-	var _reactDom = __webpack_require__(35);
-
-	var _reactClass = __webpack_require__(183);
-
-	var _reactClass2 = _interopRequireDefault(_reactClass);
-
-	var _raf = __webpack_require__(318);
-
-	var _raf2 = _interopRequireDefault(_raf);
-
-	var _moment = __webpack_require__(184);
-
-	var _moment2 = _interopRequireDefault(_moment);
-
-	var _objectAssign = __webpack_require__(288);
-
-	var _objectAssign2 = _interopRequireDefault(_objectAssign);
-
-	var _toMoment = __webpack_require__(290);
-
-	var _toMoment2 = _interopRequireDefault(_toMoment);
-
-	var _join = __webpack_require__(291);
-
-	var _join2 = _interopRequireDefault(_join);
-
-	var _Clock = __webpack_require__(320);
-
-	var _Clock2 = _interopRequireDefault(_Clock);
-
-	var _reactFlex = __webpack_require__(294);
-
-	var _getSelectionStart = __webpack_require__(334);
-
-	var _getSelectionStart2 = _interopRequireDefault(_getSelectionStart);
-
-	var _getSelectionEnd = __webpack_require__(335);
-
-	var _getSelectionEnd2 = _interopRequireDefault(_getSelectionEnd);
-
-	var _setCaretPosition2 = __webpack_require__(336);
-
-	var _setCaretPosition3 = _interopRequireDefault(_setCaretPosition2);
-
-	var _getNewValue2 = __webpack_require__(337);
-
-	var _getNewValue3 = _interopRequireDefault(_getNewValue2);
-
-	var _toTimeValue = __webpack_require__(338);
-
-	var _toTimeValue2 = _interopRequireDefault(_toTimeValue);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-	exports.getSelectionStart = _getSelectionStart2.default;
-	exports.getSelectionEnd = _getSelectionEnd2.default;
-	exports.getNewValue = _getNewValue3.default;
-	exports.setCaretPosition = _setCaretPosition3.default;
-	exports.toTimeValue = _toTimeValue2.default;
-
-	var TimeInput = function (_Component) {
-	  _inherits(TimeInput, _Component);
-
-	  function TimeInput(props) {
-	    _classCallCheck(this, TimeInput);
-
-	    var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(TimeInput).call(this, props));
-
-	    var format = props.format || props.timeFormat;
-
-	    if (format.indexOf('hh') != 0 && format.indexOf('HH') != 0) {
-	      console.warn('Please start your time format with 2 digit hours.');
-	    }
-
-	    var hours24 = true;
-	    var meridiem = format.indexOf('a') != -1 || format.indexOf('A') != -1;
-
-	    if (format.indexOf('hh') == 0) {
-	      hours24 = false;
-	    }
-
-	    var separator = props.separator || format && format.length > 2 ? format.charAt(2) : ':';
-	    var hasSeconds = format.indexOf('ss') != -1;
-
-	    if (hasSeconds && format.charAt(5) != separator) {
-	      console.warn('Expected minutes-seconds separator to be same as hours-minutes separator. (at position 5)');
-	    }
-
-	    var defaultValue = '00' + separator + '00';
-
-	    if (hasSeconds) {
-	      defaultValue += separator + '00';
-	    }
-	    if (meridiem) {
-	      defaultValue += ' am';
-	    }
-
-	    _this.state = {
-	      valueRange: props.valueRange || 0,
-	      separator: separator,
-	      hours24: hours24,
-	      meridiem: meridiem,
-	      value: props.defaultValue || defaultValue
-	    };
-	    return _this;
-	  }
-
-	  _createClass(TimeInput, [{
-	    key: 'render',
-	    value: function render() {
-
-	      var props = this.p = (0, _objectAssign2.default)({}, this.props);
-
-	      props.value = this.state.value; //props.value !== undefined?
-	      // props.value:
-	      // this.state.value
-
-	      return _react2.default.createElement('input', _extends({}, props, {
-	        defaultValue: undefined,
-	        value: props.value,
-	        onKeyDown: this.onKeyDown,
-	        onChange: this.onChange
-	      }));
-	    }
-	  }, {
-	    key: 'onChange',
-	    value: function onChange(event) {
-	      event.stopPropagation();
-	    }
-	  }, {
-	    key: 'onKeyDown',
-	    value: function onKeyDown(event) {
-	      var _this2 = this;
-
-	      var value = this.p.value;
-
-	      var valueRange = this.state.valueRange;
-
-	      if (this.props.onKeyDown) {
-	        this.props.onKeyDown(event);
-	      }
-
-	      var range = this.getSelectedRange();
-	      var separator = this.props.separator || this.state.separator || ':';
-
-	      var _getNewValue = (0, _getNewValue3.default)({
-	        range: range,
-	        event: event,
-
-	        circular: this.props.circular,
-	        propagate: this.props.propagate,
-
-	        oldValue: value,
-	        separator: separator,
-	        meridiem: this.state.meridiem,
-	        hours24: this.state.hours24,
-	        incrementNext: this.props.incrementNext
-
-	      });
-
-	      var newValue = _getNewValue.value;
-	      var update = _getNewValue.update;
-	      var caretPos = _getNewValue.caretPos;
-
-
-	      var updateCaretPos = function updateCaretPos() {
-	        if (caretPos != undefined) {
-	          _this2.setCaretPosition(caretPos);
-	        }
-	      };
-
-	      if (update || caretPos) {
-	        event.preventDefault();
-	      }
-
-	      if (update) {
-	        this.setValue(newValue, updateCaretPos);
-	      } else {
-	        (0, _raf2.default)(updateCaretPos);
-	      }
-	    }
-	  }, {
-	    key: 'getInput',
-	    value: function getInput() {
-	      return (0, _reactDom.findDOMNode)(this);
-	    }
-	  }, {
-	    key: 'setCaretPosition',
-	    value: function setCaretPosition(pos) {
-	      var dom = this.getInput();
-	      dom && (0, _setCaretPosition3.default)(dom, pos);
-	    }
-	  }, {
-	    key: 'setValue',
-	    value: function setValue(value, callback) {
-	      // if (this.props.value === undefined){
-	      this.setState({
-	        now: Date.now(),
-	        value: value
-	      }, typeof callback == 'function' && callback);
-	      // } else {
-	      //   this.updateCallback = callback
-	      // }
-
-	      if (this.props.onChange) {
-	        this.props.onChange(value);
-	      }
-	    }
-	  }, {
-	    key: 'componentDidUpdate',
-	    value: function componentDidUpdate() {
-	      if (this.updateCallback) {
-	        this.updateCallback();
-	        this.updateCallback = null;
-	      }
-	    }
-	  }, {
-	    key: 'getSelectedRange',
-	    value: function getSelectedRange() {
-	      var dom = this.getInput();
-
-	      return {
-	        start: (0, _getSelectionStart2.default)(dom),
-	        end: (0, _getSelectionEnd2.default)(dom)
-	      };
-	    }
-	  }, {
-	    key: 'getSelectedValue',
-	    value: function getSelectedValue() {
-	      var range = this.getSelectedRange();
-	      var value = this.p.value;
-
-	      return value.substring(range.start, range.end);
-	    }
-	  }, {
-	    key: 'onChange',
-	    value: function onChange(event) {
-	      var value = event.target.value;
-	    }
-	  }, {
-	    key: 'onTimeChange',
-	    value: function onTimeChange(value) {
-	      var time = value.split(':');
-
-	      this.setState({
-	        minutes: time[0] * 60 + time[1]
-	      });
-	    }
-	  }, {
-	    key: 'renderClock',
-	    value: function renderClock() {
-
-	      var props = this.p;
-	      var clock = props.children.filter(function (child) {
-	        return child && child.props && child.props.isTimePickerClock;
-	      })[0];
-
-	      var clockProps = {
-	        time: this.state.minutes || props.date,
-	        showSecondsHand: true
-	      };
-
-	      if (clock) {
-	        return _react2.default.cloneElement(clock, clockProps);
-	      }
-
-	      return _react2.default.createElement(_Clock2.default, clockProps);
-	    }
-	  }]);
-
-	  return TimeInput;
-	}(_reactClass2.default);
-
-	exports.default = TimeInput;
-
-
-	TimeInput.defaultProps = {
-	  theme: 'default',
-
-	  circular: true,
-	  propagate: true,
-	  incrementNext: true
-	};
-
-	TimeInput.propTypes = {
-	  format: _react.PropTypes.string,
-	  value: function value(props, propName) {
-	    if (props[propName] !== undefined) {
-	      console.warn('Due to performance considerations, TimeInput will only be uncontrolled.');
-	    }
-	  }
-	};
-
-/***/ },
-/* 318 */
-/***/ function(module, exports, __webpack_require__) {
-
-	/* WEBPACK VAR INJECTION */(function(global) {var now = __webpack_require__(319)
-	  , root = typeof window === 'undefined' ? global : window
-	  , vendors = ['moz', 'webkit']
-	  , suffix = 'AnimationFrame'
-	  , raf = root['request' + suffix]
-	  , caf = root['cancel' + suffix] || root['cancelRequest' + suffix]
-
-	for(var i = 0; !raf && i < vendors.length; i++) {
-	  raf = root[vendors[i] + 'Request' + suffix]
-	  caf = root[vendors[i] + 'Cancel' + suffix]
-	      || root[vendors[i] + 'CancelRequest' + suffix]
-	}
-
-	// Some versions of FF have rAF but not cAF
-	if(!raf || !caf) {
-	  var last = 0
-	    , id = 0
-	    , queue = []
-	    , frameDuration = 1000 / 60
-
-	  raf = function(callback) {
-	    if(queue.length === 0) {
-	      var _now = now()
-	        , next = Math.max(0, frameDuration - (_now - last))
-	      last = next + _now
-	      setTimeout(function() {
-	        var cp = queue.slice(0)
-	        // Clear queue here to prevent
-	        // callbacks from appending listeners
-	        // to the current frame's queue
-	        queue.length = 0
-	        for(var i = 0; i < cp.length; i++) {
-	          if(!cp[i].cancelled) {
-	            try{
-	              cp[i].callback(last)
-	            } catch(e) {
-	              setTimeout(function() { throw e }, 0)
-	            }
-	          }
-	        }
-	      }, Math.round(next))
-	    }
-	    queue.push({
-	      handle: ++id,
-	      callback: callback,
-	      cancelled: false
-	    })
-	    return id
-	  }
-
-	  caf = function(handle) {
-	    for(var i = 0; i < queue.length; i++) {
-	      if(queue[i].handle === handle) {
-	        queue[i].cancelled = true
-	      }
-	    }
-	  }
-	}
-
-	module.exports = function(fn) {
-	  // Wrap in a new function to prevent
-	  // `cancel` potentially being assigned
-	  // to the native rAF function
-	  return raf.call(root, fn)
-	}
-	module.exports.cancel = function() {
-	  caf.apply(root, arguments)
-	}
-	module.exports.polyfill = function() {
-	  root.requestAnimationFrame = raf
-	  root.cancelAnimationFrame = caf
-	}
-
-	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }())))
-
-/***/ },
-/* 319 */
-/***/ function(module, exports, __webpack_require__) {
-
-	/* WEBPACK VAR INJECTION */(function(process) {// Generated by CoffeeScript 1.7.1
-	(function() {
-	  var getNanoSeconds, hrtime, loadTime;
-
-	  if ((typeof performance !== "undefined" && performance !== null) && performance.now) {
-	    module.exports = function() {
-	      return performance.now();
-	    };
-	  } else if ((typeof process !== "undefined" && process !== null) && process.hrtime) {
-	    module.exports = function() {
-	      return (getNanoSeconds() - loadTime) / 1e6;
-	    };
-	    hrtime = process.hrtime;
-	    getNanoSeconds = function() {
-	      var hr;
-	      hr = hrtime();
-	      return hr[0] * 1e9 + hr[1];
-	    };
-	    loadTime = getNanoSeconds();
-	  } else if (Date.now) {
-	    module.exports = function() {
-	      return Date.now() - loadTime;
-	    };
-	    loadTime = Date.now();
-	  } else {
-	    module.exports = function() {
-	      return new Date().getTime() - loadTime;
-	    };
-	    loadTime = new Date().getTime();
-	  }
-
-	}).call(this);
-
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3)))
-
-/***/ },
-/* 320 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-
-	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
-
-	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-	var _react = __webpack_require__(1);
-
-	var _react2 = _interopRequireDefault(_react);
-
-	var _reactClass = __webpack_require__(183);
-
-	var _reactClass2 = _interopRequireDefault(_reactClass);
-
-	var _objectAssign = __webpack_require__(288);
-
-	var _objectAssign2 = _interopRequireDefault(_objectAssign);
-
-	var _reactNotifyResize = __webpack_require__(321);
-
-	var _join = __webpack_require__(291);
-
-	var _join2 = _interopRequireDefault(_join);
-
-	var _toMoment = __webpack_require__(290);
-
-	var _toMoment2 = _interopRequireDefault(_toMoment);
-
-	var _reactStyleNormalizer = __webpack_require__(322);
-
-	var _reactStyleNormalizer2 = _interopRequireDefault(_reactStyleNormalizer);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-	var MINUTES = Array.apply(null, new Array(60)).map(function (_, index) {
-	  return index;
-	});
-
-	var toUpperFirst = function toUpperFirst(str) {
-	  return str ? str.charAt(0).toUpperCase() + str.substr(1) : '';
-	};
-
-	var transformStyle = (0, _reactStyleNormalizer2.default)({ transform: '' });
-
-	var rotateTickStyle = function rotateTickStyle(tick, _ref, totalSize, offset) {
-	  var width = _ref.width;
-	  var height = _ref.height;
-
-	  var result = (0, _objectAssign2.default)({}, transformStyle);
-	  var deg = tick * 6;
-
-	  var transform = 'translate3d(' + -width / 2 + 'px, ' + -height / 2 + 'px, 0px) ' + ('rotate(' + deg + 'deg) translate3d(0px, -' + offset + 'px, 0px)');
-
-	  Object.keys(result).forEach(function (name) {
-	    result[name] = transform;
-	  });
-
-	  return result;
-	};
-
-	var Clock = function (_Component) {
-	  _inherits(Clock, _Component);
-
-	  function Clock(props) {
-	    _classCallCheck(this, Clock);
-
-	    var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(Clock).call(this, props));
-
-	    var time = void 0;
-	    var seconds = void 0;
-
-	    if (props.defaultSeconds) {
-	      seconds = props.defaultSeconds == true ? Date.now() / 1000 : +props.defaultSeconds;
-	    }
-
-	    if (props.defaultTime) {
-	      time = props.defaultTime == true ? Date.now() : +props.defaultTime;
-	    }
-
-	    // if (time === undefined) {
-	    //   seconds = 0
-	    // }
-
-	    _this.state = {};
-
-	    if (seconds !== undefined) {
-	      _this.state.seconds = seconds;
-	      _this.state.defaultSeconds = seconds;
-	    }
-
-	    if (time !== undefined) {
-	      _this.state.time = time;
-	      _this.state.defaultTime = time;
-	    }
-	    return _this;
-	  }
-
-	  _createClass(Clock, [{
-	    key: 'shouldRun',
-	    value: function shouldRun(props) {
-	      props = props || this.props;
-
-	      if (props.run === false) {
-	        return false;
-	      }
-
-	      return !!(props.defaultSeconds || props.defaultTime);
-	    }
-	  }, {
-	    key: 'componentDidMount',
-	    value: function componentDidMount() {
-	      if (this.shouldRun(this.props)) {
-	        this.start();
-	      }
-
-	      if (this.props.size == 'auto') {
-	        this.setState({
-	          rendered: true
-	        });
-	      }
-	    }
-	  }, {
-	    key: 'componentWillReceiveProps',
-	    value: function componentWillReceiveProps(nextProps) {
-	      var currentRun = this.shouldRun(this.props);
-	      var nextRun = this.shouldRun(nextProps);
-
-	      if (!currentRun && nextRun) {
-	        this.start();
-	      } else if (currentRun && !nextRun) {
-	        this.stop();
-	      }
-	    }
-	  }, {
-	    key: 'start',
-	    value: function start() {
-	      this.startTime = Date.now ? Date.now() : +new Date();
-
-	      this.run();
-	    }
-	  }, {
-	    key: 'stop',
-	    value: function stop() {
-	      if (this.timeoutId) {
-	        clearTimeout(this.timeoutId);
-	      }
-	    }
-	  }, {
-	    key: 'run',
-	    value: function run() {
-	      var _this2 = this;
-
-	      this.timeoutId = setTimeout(function () {
-	        _this2.update();
-	        _this2.run();
-	      }, this.props.updateInterval || 1000);
-	    }
-	  }, {
-	    key: 'update',
-	    value: function update() {
-	      var now = Date.now ? Date.now() : +new Date();
-	      var diff = now - this.startTime;
-
-	      var seconds = this.getPropsSeconds();
-
-	      if (seconds !== undefined) {
-	        this.setSeconds(seconds + diff / 1000);
-	        return;
-	      }
-
-	      var time = this.getPropsTime();
-
-	      this.setTime(time + diff);
-	    }
-	  }, {
-	    key: 'setSeconds',
-	    value: function setSeconds(seconds) {
-	      this.setState({
-	        seconds: seconds
-	      });
-
-	      if (this.props.onSecondsChange) {
-	        this.props.onSecondsChange(seconds);
-	      }
-	    }
-	  }, {
-	    key: 'setTime',
-	    value: function setTime(time) {
-	      this.setState({
-	        time: time
-	      });
-
-	      if (this.props.onTimeChange) {
-	        this.props.onTimeChange(time);
-	      }
-	    }
-	  }, {
-	    key: 'getPropsTime',
-	    value: function getPropsTime() {
-	      return this.props.time || this.state.defaultTime || 0;
-	    }
-	  }, {
-	    key: 'getPropsSeconds',
-	    value: function getPropsSeconds() {
-	      return this.props.seconds || this.state.defaultSeconds;
-	    }
-	  }, {
-	    key: 'getSeconds',
-	    value: function getSeconds() {
-	      return this.state.seconds || this.getPropsSeconds();
-	    }
-	  }, {
-	    key: 'getTime',
-	    value: function getTime() {
-	      return this.state.time || this.getPropsTime();
-	    }
-	  }, {
-	    key: 'render',
-	    value: function render() {
-	      var props = this.p = (0, _objectAssign2.default)({}, this.props);
-	      var size = props.size;
-
-	      if (size == 'auto') {
-	        this.ignoreRender = false;
-	        if (!this.state.rendered) {
-	          this.ignoreRender = true;
-	        }
-
-	        size = props.size = this.state.size;
-	      }
-
-	      var valueSeconds = this.getSeconds();
-	      var valueTime = this.getTime();
-
-	      var width = size;
-	      var height = size;
-
-	      var className = (0, _join2.default)(props.className, 'react-date-picker__clock', 'react-date-picker__clock--theme-' + props.theme);
-
-	      var seconds = void 0;
-	      var minutes = void 0;
-	      var hours = void 0;
-
-	      if (valueSeconds != undefined) {
-	        seconds = Math.floor(valueSeconds % 60);
-	        minutes = valueSeconds / 60 % 60;
-	        hours = valueSeconds / 3600 % 24;
-	      } else {
-	        var mom = (0, _toMoment2.default)(valueTime);
-
-	        seconds = mom.seconds();
-	        minutes = mom.minutes() + seconds / 60;
-	        hours = mom.hours() + minutes / 60;
-	      }
-
-	      hours *= 5;
-
-	      var defaultStyle = {};
-
-	      if (props.color) {
-	        defaultStyle.borderColor = props.color;
-	      }
-
-	      var style = (0, _objectAssign2.default)(defaultStyle, props.style, {
-	        width: width, height: height, borderWidth: props.borderWidth
-	      });
-
-	      var divProps = (0, _objectAssign2.default)({}, props);
-
-	      delete divProps.bigTickHeight;
-	      delete divProps.bigTickOffset;
-	      delete divProps.bigTickWidth;
-	      delete divProps.borderColor;
-	      delete divProps.borderWidth;
-	      delete divProps.centerOverlaySize;
-	      delete divProps.centerSize;
-	      delete divProps.cleanup;
-	      delete divProps.defaultSeconds;
-	      delete divProps.defaultTime;
-	      delete divProps.handHeight;
-	      delete divProps.handOffset;
-	      delete divProps.handWidth;
-	      delete divProps.hourHandDiff;
-	      delete divProps.isDatePickerClock;
-	      delete divProps.minuteHandDiff;
-	      delete divProps.seconds;
-	      delete divProps.secondHandDiff;
-	      delete divProps.secondHandWidth;
-	      delete divProps.showHoursHand;
-	      delete divProps.showMinutesHand;
-	      delete divProps.showSecondsHand;
-	      delete divProps.showSmallTicks;
-	      delete divProps.smallTickHeight;
-	      delete divProps.smallTickOffset;
-	      delete divProps.smallTickWidth;
-	      delete divProps.theme;
-	      delete divProps.time;
-	      delete divProps.tickHeight;
-	      delete divProps.tickOffset;
-	      delete divProps.tickWidth;
-
-	      if (typeof props.cleanup == 'function') {
-	        props.cleanup(divProps);
-	      }
-
-	      return _react2.default.createElement(
-	        'div',
-	        _extends({}, divProps, {
-	          className: className,
-	          style: style
-	        }),
-	        this.renderCenter(),
-	        this.renderHourHand(hours),
-	        this.renderMinuteHand(minutes),
-	        this.renderSecondHand(seconds),
-	        this.renderCenterOverlay(),
-	        MINUTES.map(this.renderTick),
-	        this.props.size == 'auto' && _react2.default.createElement(_reactNotifyResize.NotifyResize, { notifyOnMount: true, onResize: this.onResize })
-	      );
-	    }
-	  }, {
-	    key: 'renderCenter',
-	    value: function renderCenter() {
-	      var props = this.props;
-	      var centerSize = props.centerSize || (props.bigTickHeight || props.tickHeight) * 3;
-
-	      return _react2.default.createElement('div', {
-	        className: 'react-date-picker__clock-center',
-	        style: { width: centerSize, height: centerSize }
-	      });
-	    }
-	  }, {
-	    key: 'renderCenterOverlay',
-	    value: function renderCenterOverlay() {
-	      var props = this.props;
-	      var centerOverlaySize = props.centerOverlaySize || props.handWidth * 4;
-
-	      return _react2.default.createElement('div', {
-	        className: 'react-date-picker__clock-overlay',
-	        style: {
-	          width: centerOverlaySize,
-	          height: centerOverlaySize,
-	          borderWidth: props.handWidth
-	        }
-	      });
-	    }
-	  }, {
-	    key: 'onResize',
-	    value: function onResize(_ref2) {
-	      var width = _ref2.width;
-	      var height = _ref2.height;
-
-	      if (width != height) {
-	        console.warn('Clock width != height. Please make sure it\'s a square.');
-	      }
-
-	      this.setState({
-	        size: width
-	      });
-	    }
-	  }, {
-	    key: 'renderSecondHand',
-	    value: function renderSecondHand(value) {
-	      return this.props.showSecondsHand && this.renderHand('second', value);
-	    }
-	  }, {
-	    key: 'renderMinuteHand',
-	    value: function renderMinuteHand(value) {
-	      return this.props.showMinutesHand && this.renderHand('minute', value);
-	    }
-	  }, {
-	    key: 'renderHourHand',
-	    value: function renderHourHand(value) {
-	      return this.props.showHoursHand && this.renderHand('hour', value);
-	    }
-	  }, {
-	    key: 'renderHand',
-	    value: function renderHand(name, value) {
-	      if (this.ignoreRender) {
-	        return null;
-	      }
-
-	      var props = this.p;
-	      var size = props.size;
-	      var borderWidth = props.borderWidth;
-
-
-	      var height = props[name + 'HandHeight'] || props.handHeight || size / 2 - props[name + 'HandDiff'];
-
-	      var width = props[name + 'HandWidth'] || props.handWidth || props.tickWidth;
-	      var offset = props[name + 'HandOffset'] || props.handOffset;
-
-	      if (!offset && offset != 0) {
-	        offset = 5;
-	      }
-
-	      var style = rotateTickStyle(value, { width: width, height: height }, size - borderWidth, height / 2 - offset);
-	      style.width = width;
-	      style.height = height;
-
-	      if (props.color) {
-	        style.background = props.color;
-	      }
-
-	      var className = (0, _join2.default)('react-date-picker__clock-hand', 'react-date-picker__clock-hand-' + name);
-
-	      var renderName = 'render' + toUpperFirst(name) + 'Hand';
-
-	      if (props[renderName]) {
-	        return props[renderName]({
-	          key: name,
-	          className: className,
-	          style: style
-	        });
-	      }
-
-	      return _react2.default.createElement('div', { key: name, className: className, style: style });
-	    }
-	  }, {
-	    key: 'renderTick',
-	    value: function renderTick(tick) {
-	      if (this.ignoreRender) {
-	        return null;
-	      }
-
-	      var _p = this.p;
-	      var size = _p.size;
-	      var borderWidth = _p.borderWidth;
-	      var tickWidth = _p.tickWidth;
-	      var smallTickWidth = _p.smallTickWidth;
-	      var bigTickWidth = _p.bigTickWidth;
-	      var tickHeight = _p.tickHeight;
-	      var smallTickHeight = _p.smallTickHeight;
-	      var bigTickHeight = _p.bigTickHeight;
-	      var tickOffset = _p.tickOffset;
-	      var smallTickOffset = _p.smallTickOffset;
-	      var bigTickOffset = _p.bigTickOffset;
-
-
-	      var small = !!(tick % 5);
-	      var sizeName = small ? 'small' : 'big';
-
-	      if (small && !this.props.showSmallTicks) {
-	        return false;
-	      }
-
-	      var className = (0, _join2.default)('react-date-picker__clock-tick', 'react-date-picker__clock-tick--' + sizeName);
-
-	      var offset = small ? smallTickOffset || tickOffset : bigTickOffset || tickOffset;
-
-	      var tWidth = small ? smallTickWidth || tickWidth : bigTickWidth || tickWidth;
-
-	      var tHeight = small ? smallTickHeight || tickHeight : bigTickHeight || tickHeight;
-
-	      var totalSize = size - borderWidth;
-	      var style = rotateTickStyle(tick, {
-	        width: tWidth,
-	        height: tHeight
-	      }, totalSize, totalSize / 2 - (tHeight / 2 + offset));
-
-	      style.height = tHeight;
-	      style.width = tWidth;
-
-	      if (this.props.color) {
-	        style.background = this.props.color;
-	      }
-
-	      if (this.props.renderTick) {
-	        return this.props.renderTick({
-	          tick: tick,
-	          className: className,
-	          style: style
-	        });
-	      }
-
-	      return _react2.default.createElement('div', { key: tick, className: className, style: style });
-	    }
-	  }]);
-
-	  return Clock;
-	}(_reactClass2.default);
-
-	exports.default = Clock;
-
-
-	Clock.defaultProps = {
-
-	  centerSize: null,
-	  centerOverlaySize: null,
-
-	  size: 150,
-	  theme: 'default',
-
-	  showSecondsHand: true,
-	  showHoursHand: true,
-	  showMinutesHand: true,
-
-	  handWidth: 2,
-	  secondHandWidth: 1,
-	  handOffset: 10,
-
-	  hourHandDiff: 35,
-	  minuteHandDiff: 25,
-	  secondHandDiff: 10,
-
-	  tickWidth: 1,
-	  bigTickWidth: 2,
-	  tickOffset: 2,
-
-	  smallTickHeight: 6,
-	  bigTickHeight: 10,
-
-	  color: '',
-	  borderWidth: 0,
-	  showSmallTicks: true,
-	  isDatePickerClock: true
-	};
-
-/***/ },
-/* 321 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	exports.NotifyResize = undefined;
-
-	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
-
-	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-	var _react = __webpack_require__(1);
-
-	var _react2 = _interopRequireDefault(_react);
-
-	var _reactClass = __webpack_require__(183);
-
-	var _reactClass2 = _interopRequireDefault(_reactClass);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-	var notifyResizeStyle = {
-	  position: 'absolute',
-	  top: 0,
-	  left: 0,
-	  width: '100%',
-	  height: '100%',
-	  zIndex: -1,
-	  overflow: 'hidden',
-	  display: 'block',
-	  pointerEvents: 'none',
-	  opacity: 0
-	};
-
-	var expandToolStyle = {
-	  position: 'absolute',
-	  top: 0,
-	  left: 0,
-	  width: '100%',
-	  height: '100%',
-	  overflow: 'auto'
-	};
-
-	var contractToolStyle = {
-	  position: 'absolute',
-	  top: 0,
-	  left: 0,
-	  width: '100%',
-	  height: '100%',
-	  overflow: 'auto'
-	};
-
-	var contractToolInnerStyle = {
-	  position: 'absolute',
-	  top: 0,
-	  left: 0,
-	  width: '200%',
-	  height: '200%'
-	};
-
-	var NotifyResize = function (_Component) {
-	  _inherits(NotifyResize, _Component);
-
-	  function NotifyResize(props) {
-	    _classCallCheck(this, NotifyResize);
-
-	    var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(NotifyResize).call(this, props));
-
-	    _this.state = {
-	      notifyResizeWidth: 0,
-	      notifyResizeHeight: 0,
-
-	      expandToolWidth: 0,
-	      expandToolHeight: 0,
-
-	      contractToolWidth: 0,
-	      contractToolHeight: 0
-	    };
-
-	    return _this;
-	  }
-
-	  _createClass(NotifyResize, [{
-	    key: 'componentDidMount',
-	    value: function componentDidMount() {
-	      if (typeof this.props.onMount === 'function') {
-	        this.props.onMount(this);
-	      }
-
-	      this.resetResizeTool();
-
-	      if (this.props.notifyOnMount) {
-	        var _notifyResizeSize = this.notifyResizeSize;
-	        var width = _notifyResizeSize.notifyResizeWidth;
-	        var height = _notifyResizeSize.notifyResizeHeight;
-
-	        this.onResize({ width: width, height: height });
-	      }
-	    }
-	  }, {
-	    key: 'render',
-	    value: function render() {
-	      return _react2.default.createElement(
-	        'div',
-	        {
-	          ref: 'notifyResize',
-	          style: notifyResizeStyle,
-	          onScroll: this.checkResize
-	        },
-	        this.renderExpandTool(),
-	        this.renderContractTool()
-	      );
-	    }
-	  }, {
-	    key: 'renderExpandTool',
-	    value: function renderExpandTool() {
-	      return _react2.default.createElement(
-	        'div',
-	        {
-	          ref: 'expandTool',
-	          className: 'expandTool',
-	          style: expandToolStyle
-	        },
-	        _react2.default.createElement('div', {
-	          ref: 'expandToolInner',
-	          className: 'expandToolInner',
-	          style: {
-	            position: 'absolute',
-	            top: 0,
-	            left: 0,
-	            width: this.state.expandToolWidth,
-	            height: this.state.expandToolHeight
-	          }
-	        })
-	      );
-	    }
-	  }, {
-	    key: 'renderContractTool',
-	    value: function renderContractTool() {
-	      return _react2.default.createElement(
-	        'div',
-	        {
-	          ref: 'contractTool',
-	          className: 'contractTool',
-	          style: contractToolStyle,
-	          onScroll: this.checkResize
-	        },
-	        _react2.default.createElement('div', { ref: 'contractInner', style: contractToolInnerStyle })
-	      );
-	    }
-	  }, {
-	    key: 'resetResizeTool',
-	    value: function resetResizeTool() {
-	      this.setDimensions();
-	      this.scrollToBottomExpandTool();
-	    }
-	  }, {
-	    key: 'setDimensions',
-	    value: function setDimensions() {
-	      var _notifyResizeSize2 = this.notifyResizeSize = this.getDimensions();
-
-	      var notifyResizeWidth = _notifyResizeSize2.notifyResizeWidth;
-	      var notifyResizeHeight = _notifyResizeSize2.notifyResizeHeight;
-
-	      // Resize tool will be bigger than it's parent by 1 pixel in each direction
-
-	      this.setState({
-	        notifyResizeWidth: notifyResizeWidth,
-	        notifyResizeHeight: notifyResizeHeight,
-	        expandToolWidth: notifyResizeWidth + 1,
-	        expandToolHeight: notifyResizeHeight + 1
-	      });
-	    }
-	  }, {
-	    key: 'getDimensions',
-	    value: function getDimensions() {
-	      var notifyResize = this.refs.notifyResize;
-	      var node = notifyResize.parentElement || notifyResize;
-
-	      var size = void 0;
-
-	      if (typeof this.props.measureSize == 'function') {
-	        size = this.props.measureSize(node, notifyResize);
-	      } else {
-	        size = {
-	          width: node.offsetWidth,
-	          height: node.offsetHeight
-	        };
-	      }
-
-	      return {
-	        notifyResizeWidth: size.width,
-	        notifyResizeHeight: size.height
-	      };
-	    }
-	  }, {
-	    key: 'scrollToBottomExpandTool',
-	    value: function scrollToBottomExpandTool() {
-	      var _this2 = this;
-
-	      // so the scroll moves when element resizes
-
-	      if (this.refs.notifyResize) {
-	        setTimeout(function () {
-	          // scroll to bottom
-	          var expandTool = _this2.refs.expandTool;
-
-	          if (expandTool) {
-	            expandTool.scrollTop = expandTool.scrollHeight;
-	            expandTool.scrollLeft = expandTool.scrollWidth;
-	          }
-
-	          var contractTool = _this2.refs.contractTool;
-	          if (contractTool) {
-	            contractTool.scrollTop = contractTool.scrollHeight;
-	            contractTool.scrollLeft = contractTool.scrollWidth;
-	          }
-	        }, 0);
-	      }
-	    }
-	  }, {
-	    key: 'checkResize',
-	    value: function checkResize() {
-	      var _getDimensions = this.getDimensions();
-
-	      var notifyResizeWidth = _getDimensions.notifyResizeWidth;
-	      var notifyResizeHeight = _getDimensions.notifyResizeHeight;
-
-
-	      if (notifyResizeWidth !== this.state.notifyResizeWidth || notifyResizeHeight !== this.state.notifyResizeHeight) {
-	        // reset resizeToolDimensions
-	        this.onResize({
-	          width: notifyResizeWidth,
-	          height: notifyResizeHeight
-	        });
-	        this.resetResizeTool();
-	      }
-	    }
-	  }, {
-	    key: 'onResize',
-	    value: function onResize(_ref) {
-	      var width = _ref.width;
-	      var height = _ref.height;
-
-	      if (typeof this.props.onResize === 'function') {
-	        this.props.onResize({ width: width, height: height });
-	      }
-	    }
-	  }]);
-
-	  return NotifyResize;
-	}(_reactClass2.default);
-
-	NotifyResize.propTypes = {
-	  onResize: _react.PropTypes.func,
-	  onMount: _react.PropTypes.func,
-	  notifyOnMount: _react.PropTypes.bool
-	};
-
-	var notifyResize = function notifyResize(Component) {
-	  return function (_Component2) {
-	    _inherits(NotifyResizeWrapper, _Component2);
-
-	    function NotifyResizeWrapper() {
-	      _classCallCheck(this, NotifyResizeWrapper);
-
-	      return _possibleConstructorReturn(this, Object.getPrototypeOf(NotifyResizeWrapper).apply(this, arguments));
-	    }
-
-	    _createClass(NotifyResizeWrapper, [{
-	      key: 'componentDidMount',
-	      value: function componentDidMount() {
-	        var component = this.component = this.refs.component;
-
-	        // check if they are mounted
-	        if (!this.notifyResize) {
-	          console.warn('For notifyResize to work you must render resizeTool from {props.resizeTool}');
-	        }
-	      }
-	    }, {
-	      key: 'onNotifyResizeMount',
-	      value: function onNotifyResizeMount(notifier) {
-	        this.notifyResize = notifier;
-	      }
-	    }, {
-	      key: 'render',
-	      value: function render() {
-
-	        var resizeTool = _react2.default.createElement(NotifyResize, {
-	          onResize: this.onResize,
-	          onMount: this.onNotifyResizeMount,
-
-	          notifyOnMount: this.props.notifyOnMount
-	        });
-
-	        return _react2.default.createElement(Component, _extends({ ref: 'component' }, this.props, { resizeTool: resizeTool }));
-	      }
-	    }, {
-	      key: 'onResize',
-	      value: function onResize() {
-	        if (typeof this.props.onResize === 'function') {
-	          var _props;
-
-	          (_props = this.props).onResize.apply(_props, arguments);
-	        }
-
-	        if (typeof this.refs.component.onResize === 'function') {
-	          var _refs$component;
-
-	          (_refs$component = this.refs.component).onResize.apply(_refs$component, arguments);
-	        }
-	      }
-	    }]);
-
-	    return NotifyResizeWrapper;
-	  }(Component);
-	};
-
-	exports.default = notifyResize;
-	exports.NotifyResize = NotifyResize;
-
-/***/ },
-/* 322 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	var hasOwn      = __webpack_require__(323)
-	var getPrefixed = __webpack_require__(324)
-
-	var map      = __webpack_require__(330)
-	var plugable = __webpack_require__(331)
-
-	function plugins(key, value){
-
-		var result = {
-			key  : key,
-			value: value
-		}
-
-		;(RESULT.plugins || []).forEach(function(fn){
-
-			var tmp = map(function(res){
-				return fn(key, value, res)
-			}, result)
-
-			if (tmp){
-				result = tmp
-			}
-		})
-
-		return result
-	}
-
-	function normalize(key, value){
-
-		var result = plugins(key, value)
-
-		return map(function(result){
-			return {
-				key  : getPrefixed(result.key, result.value),
-				value: result.value
-			}
-		}, result)
-
-		return result
-	}
-
-	var RESULT = function(style){
-
-		var k
-		var item
-		var result = {}
-
-		for (k in style) if (hasOwn(style, k)){
-			item = normalize(k, style[k])
-
-			if (!item){
-				continue
-			}
-
-			map(function(item){
-				result[item.key] = item.value
-			}, item)
-		}
-
-		return result
-	}
-
-	module.exports = plugable(RESULT)
-
-/***/ },
-/* 323 */
-/***/ function(module, exports) {
-
-	'use strict';
-
-	module.exports = function(obj, prop){
-		return Object.prototype.hasOwnProperty.call(obj, prop)
-	}
-
-
-/***/ },
-/* 324 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	var getStylePrefixed = __webpack_require__(325)
-	var properties       = __webpack_require__(329)
-
-	module.exports = function(key, value){
-
-		if (!properties[key]){
-			return key
-		}
-
-		return getStylePrefixed(key, value)
-	}
-
-/***/ },
-/* 325 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	var toUpperFirst = __webpack_require__(326)
-	var getPrefix    = __webpack_require__(327)
-	var el           = __webpack_require__(328)
-
-	var MEMORY = {}
-	var STYLE
-	var ELEMENT
-
-	var PREFIX
-
-	module.exports = function(key, value){
-
-	    ELEMENT = ELEMENT || el()
-	    STYLE   = STYLE   || ELEMENT.style
-
-	    var k = key// + ': ' + value
-
-	    if (MEMORY[k]){
-	        return MEMORY[k]
-	    }
-
-	    var prefix
-	    var prefixed
-
-	    if (!(key in STYLE)){//we have to prefix
-
-	        // if (PREFIX){
-	        //     prefix = PREFIX
-	        // } else {
-	            prefix = getPrefix('appearance')
-
-	        //     if (prefix){
-	        //         prefix = PREFIX = prefix.toLowerCase()
-	        //     }
-	        // }
-
-	        if (prefix){
-	            prefixed = prefix + toUpperFirst(key)
-
-	            if (prefixed in STYLE){
-	                key = prefixed
-	            }
-	        }
-	    }
-
-	    MEMORY[k] = key
-
-	    return key
-	}
-
-/***/ },
-/* 326 */
-/***/ function(module, exports) {
-
-	'use strict';
-
-	module.exports = function(str){
-		return str?
-				str.charAt(0).toUpperCase() + str.slice(1):
-				''
-	}
-
-/***/ },
-/* 327 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	var toUpperFirst = __webpack_require__(326)
-	var prefixes     = ["ms", "Moz", "Webkit", "O"]
-
-	var el = __webpack_require__(328)
-
-	var ELEMENT
-	var PREFIX
-
-	module.exports = function(key){
-
-		if (PREFIX !== undefined){
-			return PREFIX
-		}
-
-		ELEMENT = ELEMENT || el()
-
-		var i = 0
-		var len = prefixes.length
-		var tmp
-		var prefix
-
-		for (; i < len; i++){
-			prefix = prefixes[i]
-			tmp = prefix + toUpperFirst(key)
-
-			if (typeof ELEMENT.style[tmp] != 'undefined'){
-				return PREFIX = prefix
-			}
-		}
-
-		return PREFIX
-	}
-
-/***/ },
-/* 328 */
-/***/ function(module, exports) {
-
-	/* WEBPACK VAR INJECTION */(function(global) {'use strict';
-
-	var el
-
-	module.exports = function(){
-
-		if(!el && !!global.document){
-		  	el = global.document.createElement('div')
-		}
-
-		if (!el){
-			el = {style: {}}
-		}
-
-		return el
-	}
-	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }())))
-
-/***/ },
-/* 329 */
-/***/ function(module, exports) {
-
-	'use strict';
-
-	module.exports = {
-	  'alignItems': 1,
-	  'justifyContent': 1,
-	  'flex': 1,
-	  'flexFlow': 1,
-	  'flexGrow': 1,
-	  'flexShrink': 1,
-	  'flexBasis': 1,
-	  'flexDirection': 1,
-	  'flexWrap': 1,
-	  'alignContent': 1,
-	  'alignSelf': 1,
-
-	  'userSelect': 1,
-	  'transform': 1,
-	  'transition': 1,
-	  'transformOrigin': 1,
-	  'transformStyle': 1,
-	  'transitionProperty': 1,
-	  'transitionDuration': 1,
-	  'transitionTimingFunction': 1,
-	  'transitionDelay': 1,
-	  'borderImage': 1,
-	  'borderImageSlice': 1,
-	  'boxShadow': 1,
-	  'backgroundClip': 1,
-	  'backfaceVisibility': 1,
-	  'perspective': 1,
-	  'perspectiveOrigin': 1,
-	  'animation': 1,
-	  'animationDuration': 1,
-	  'animationName': 1,
-	  'animationDelay': 1,
-	  'animationDirection': 1,
-	  'animationIterationCount': 1,
-	  'animationTimingFunction': 1,
-	  'animationPlayState': 1,
-	  'animationFillMode': 1,
-	  'appearance': 1
-	}
-
-
-/***/ },
-/* 330 */
-/***/ function(module, exports) {
-
-	'use strict';
-
-	module.exports = function(fn, item){
-
-		if (!item){
-			return
-		}
-
-		if (Array.isArray(item)){
-			return item.map(fn).filter(function(x){
-				return !!x
-			})
-		} else {
-			return fn(item)
-		}
-	}
-
-/***/ },
-/* 331 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	var getCssPrefixedValue = __webpack_require__(332)
-
-	module.exports = function(target){
-		target.plugins = target.plugins || [
-			(function(){
-				var values = {
-					'flex':1,
-					'inline-flex':1
-				}
-
-				return function(key, value){
-					if (key === 'display' && value in values){
-						return {
-							key  : key,
-							value: getCssPrefixedValue(key, value, true)
-						}
-					}
-				}
-			})()
-		]
-
-		target.plugin = function(fn){
-			target.plugins = target.plugins || []
-
-			target.plugins.push(fn)
-		}
-
-		return target
-	}
-
-/***/ },
-/* 332 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	var getPrefix     = __webpack_require__(327)
-	var forcePrefixed = __webpack_require__(333)
-	var el            = __webpack_require__(328)
-
-	var MEMORY = {}
-	var STYLE
-	var ELEMENT
-
-	module.exports = function(key, value, force){
-
-	    ELEMENT = ELEMENT || el()
-	    STYLE   = STYLE   ||  ELEMENT.style
-
-	    var k = key + ': ' + value
-
-	    if (MEMORY[k]){
-	        return MEMORY[k]
-	    }
-
-	    var prefix
-	    var prefixed
-	    var prefixedValue
-
-	    if (force || !(key in STYLE)){
-
-	        prefix = getPrefix('appearance')
-
-	        if (prefix){
-	            prefixed = forcePrefixed(key, value)
-
-	            prefixedValue = '-' + prefix.toLowerCase() + '-' + value
-
-	            if (prefixed in STYLE){
-	                ELEMENT.style[prefixed] = ''
-	                ELEMENT.style[prefixed] = prefixedValue
-
-	                if (ELEMENT.style[prefixed] !== ''){
-	                    value = prefixedValue
-	                }
-	            }
-	        }
-	    }
-
-	    MEMORY[k] = value
-
-	    return value
-	}
-
-/***/ },
-/* 333 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	var toUpperFirst = __webpack_require__(326)
-	var getPrefix    = __webpack_require__(327)
-	var properties   = __webpack_require__(329)
-
-	/**
-	 * Returns the given key prefixed, if the property is found in the prefixProps map.
-	 *
-	 * Does not test if the property supports the given value unprefixed.
-	 * If you need this, use './getPrefixed' instead
-	 */
-	module.exports = function(key, value){
-
-		if (!properties[key]){
-			return key
-		}
-
-		var prefix = getPrefix(key)
-
-		return prefix?
-					prefix + toUpperFirst(key):
-					key
-	}
-
-/***/ },
-/* 334 */
-/***/ function(module, exports) {
-
-	/* WEBPACK VAR INJECTION */(function(global) {'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-	    value: true
-	});
-	exports.default = getSelectionStart;
-	var document = global.document;
-
-	//from http://javascript.nwbox.com/cursor_position/, but added the !window.getSelection check, which
-	//is needed for newer versions of IE, which adhere to standards
-	function getSelectionStart(o) {
-	    if (o.createTextRange && !global.getSelection) {
-	        var r = document.selection.createRange().duplicate();
-	        r.moveEnd('character', o.value.length);
-	        if (r.text == '') return o.value.length;
-	        return o.value.lastIndexOf(r.text);
-	    } else return o.selectionStart;
-	}
-	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }())))
-
-/***/ },
-/* 335 */
-/***/ function(module, exports) {
-
-	/* WEBPACK VAR INJECTION */(function(global) {'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-	    value: true
-	});
-	exports.default = getSelectionEnd;
-	var document = global.document;
-
-	function getSelectionEnd(o) {
-	    if (o.createTextRange && !global.getSelection) {
-	        var r = document.selection.createRange().duplicate();
-	        r.moveStart('character', -o.value.length);
-	        return r.text.length;
-	    } else return o.selectionEnd;
-	}
-	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }())))
-
-/***/ },
-/* 336 */
-/***/ function(module, exports) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	exports.default = setCaretPosition;
-	function setCaretPosition(elem, caretPos) {
-	  var start = caretPos;
-	  var end = caretPos;
-
-	  if (caretPos && (caretPos.start != undefined || caretPos.end != undefined)) {
-	    start = caretPos.start || 0;
-	    end = caretPos.end || start;
-	  }
-
-	  if (elem != null) {
-	    if (elem.createTextRange) {
-	      var range = elem.createTextRange();
-	      range.moveStart('character', start);
-	      range.moveEnd('character', end);
-	      range.select();
-	    } else {
-	      elem.focus();
-	      elem.setSelectionRange(start, end);
-	    }
-	  }
-	}
-
-/***/ },
-/* 337 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-
-	exports.default = function (_ref10) {
-	  var oldValue = _ref10.oldValue;
-	  var range = _ref10.range;
-	  var event = _ref10.event;
-	  var _ref10$separator = _ref10.separator;
-	  var separator = _ref10$separator === undefined ? ':' : _ref10$separator;
-	  var incrementNext = _ref10.incrementNext;
-	  var circular = _ref10.circular;
-	  var propagate = _ref10.propagate;
-	  var hours24 = _ref10.hours24;
-	  var meridiem = _ref10.meridiem;
-
-
-	  var newChar = String.fromCharCode(event.which);
-	  var start = range.start;
-	  var end = range.end;
-	  var key = event.key;
-
-
-	  if (key == 'Delete' || key == 'Backspace') {
-	    return getValueOnDelete({
-	      key: key,
-	      oldValue: oldValue,
-	      range: range,
-	      separator: separator,
-	      meridiem: meridiem
-	    });
-	  }
-
-	  var dir = ARROWS[key];
-
-	  if (dir) {
-	    return getValueOnDirection({
-	      hours24: hours24,
-	      meridiem: meridiem,
-	      dir: dir,
-	      oldValue: oldValue,
-	      range: range,
-	      circular: circular,
-	      propagate: propagate,
-	      separator: separator,
-	      incrementNext: incrementNext
-	    });
-	  }
-
-	  if (key == 'Unidentified' && newChar * 1 == newChar) {
-	    return getValueOnNumber({
-	      num: newChar * 1,
-	      circular: circular,
-	      separator: separator,
-	      oldValue: oldValue,
-	      range: range,
-	      meridiem: meridiem
-	    });
-	  }
-
-	  return {
-	    value: oldValue
-	  };
-	};
-
-	var _objectAssign = __webpack_require__(288);
-
-	var _objectAssign2 = _interopRequireDefault(_objectAssign);
-
-	var _toTimeValue = __webpack_require__(338);
-
-	var _toTimeValue2 = _interopRequireDefault(_toTimeValue);
-
-	var _leftPad = __webpack_require__(339);
-
-	var _leftPad2 = _interopRequireDefault(_leftPad);
-
-	var _clamp = __webpack_require__(340);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	var removeAt = function removeAt(_ref) {
-	  var value = _ref.value;
-	  var index = _ref.index;
-	  var _ref$len = _ref.len;
-	  var len = _ref$len === undefined ? 1 : _ref$len;
-
-	  return value.substring(0, index) + value.substring(index + len);
-	};
-
-	var replaceAt = function replaceAt(_ref2) {
-	  var value = _ref2.value;
-	  var index = _ref2.index;
-	  var _ref2$len = _ref2.len;
-	  var len = _ref2$len === undefined ? 1 : _ref2$len;
-	  var str = _ref2.str;
-
-	  return value.substring(0, index) + str + value.substring(index + len);
-	};
-
-	var replaceBetween = function replaceBetween(_ref3) {
-	  var value = _ref3.value;
-	  var start = _ref3.start;
-	  var end = _ref3.end;
-	  var str = _ref3.str;
-
-	  return (value.substring(0, start) || '') + str + (value.substring(end) || '');
-	};
-
-	var toggleMeridiem = function toggleMeridiem(meridiem) {
-	  return {
-	    am: 'pm',
-	    AM: 'PM',
-	    pm: 'am',
-	    PM: 'pm'
-	  }[meridiem];
-	};
-
-	var getValueOnDelete = function getValueOnDelete(_ref4) {
-	  var oldValue = _ref4.oldValue;
-	  var range = _ref4.range;
-	  var key = _ref4.key;
-	  var separator = _ref4.separator;
-	  var meridiem = _ref4.meridiem;
-	  var start = range.start;
-	  var end = range.end;
-
-
-	  var selectedValue = oldValue.substring(start, end);
-
-	  var value = void 0;
-
-	  if (selectedValue) {
-
-	    var replacement = selectedValue.split('').map(function (c) {
-	      if (c == separator || c == ' ') {
-	        return c;
-	      }
-
-	      if (meridiem && c * 1 != c) {
-	        return c == 'p' ? 'a' : c == 'P' ? 'A' : c;
-	      }
-
-	      return 0;
-	    }).join('');
-
-	    value = replaceBetween({ value: oldValue, start: start, end: end, str: replacement });
-
-	    return {
-	      value: value,
-	      update: value != oldValue,
-	      caretPos: key == 'Backspace' ? start : end
-	    };
-	  } else {
-
-	    var back = key == 'Backspace';
-	    var index = start + (back ? -1 : 0);
-	    var caretPos = start + (back ? -1 : 1);
-
-	    if (index < 0) {
-	      return {
-	        value: oldValue,
-	        update: false
-	      };
-	    }
-
-	    var char = oldValue[index];
-
-	    value = oldValue;
-
-	    var _replacement = char == separator || char == ' ' ? char : 0;
-
-	    if (char && char * 1 != char && _replacement === 0 && meridiem) {
-	      if (char == 'p') {
-	        _replacement = 'a';
-	      } else if (char == 'P') {
-	        _replacement = 'A';
-	      } else if (char == 'M' || char == 'm' || char == 'a' || char == 'A') {
-	        _replacement = char;
-	      }
-	    }
-
-	    value = replaceAt({ value: oldValue, index: index, str: _replacement });
-
-	    return {
-	      update: value != oldValue,
-	      value: value,
-	      caretPos: caretPos
-	    };
-	  }
-	};
-
-	var ARROWS = {
-	  ArrowUp: 1,
-	  ArrowDown: -1,
-	  PageUp: 10,
-	  PageDown: -10
-	};
-
-	var TIME_PARTS = {
-	  24: [{ start: 0, end: 2, name: 'hours', max: 23 }, { start: 3, end: 5, name: 'minutes', max: 59 }, { start: 6, end: 8, name: 'seconds', max: 59 }],
-	  12: [{ start: 0, end: 2, name: 'hours', max: 12, min: 1 }, { start: 3, end: 5, name: 'minutes', max: 59 }, { start: 6, end: 8, name: 'seconds', max: 59 }]
-	};
-
-	var getActiveTimePartIndex = function getActiveTimePartIndex(_ref5) {
-	  var value = _ref5.value;
-	  var timeValue = _ref5.timeValue;
-	  var separator = _ref5.separator;
-	  var range = _ref5.range;
-	  var hours24 = _ref5.hours24;
-	  var meridiem = _ref5.meridiem;
-	  var start = range.start;
-
-	  var timeParts = TIME_PARTS[hours24 ? 24 : 12];
-
-	  var partIndex = 0;
-	  var currentPart = void 0;
-
-	  while (currentPart = timeParts[partIndex]) {
-
-	    if (currentPart.name == 'seconds' && timeValue && !timeValue.seconds) {
-	      return 4; //the index of the meridiem
-	    }
-	    if (start >= currentPart.start && start <= currentPart.end) {
-	      return partIndex;
-	    }
-
-	    partIndex++;
-	  }
-
-	  return 4;
-	};
-
-	var getTimePartAt = function getTimePartAt(index, _ref6) {
-	  var hours24 = _ref6.hours24;
-
-	  return (0, _objectAssign2.default)({}, TIME_PARTS[hours24 ? 24 : 12][index]);
-	};
-
-	var getActiveTimePart = function getActiveTimePart(_ref7) {
-	  var value = _ref7.value;
-	  var timeValue = _ref7.timeValue;
-	  var separator = _ref7.separator;
-	  var range = _ref7.range;
-	  var hours24 = _ref7.hours24;
-	  var meridiem = _ref7.meridiem;
-
-
-	  var index = getActiveTimePartIndex({ value: value, timeValue: timeValue, separator: separator, range: range, hours24: hours24 });
-
-	  if (index == 4 && meridiem) {
-	    var timePart = {
-	      start: 6, end: 8, name: 'meridiem'
-	    };
-
-	    if (timeValue.seconds) {
-	      timePart.start += 3;
-	      timePart.end += 3;
-	    }
-
-	    return timePart;
-	  }
-
-	  return getTimePartAt(index, { hours24: hours24 });
-	};
-
-	var getValueOnDirection = function getValueOnDirection(_ref8) {
-	  var oldValue = _ref8.oldValue;
-	  var range = _ref8.range;
-	  var separator = _ref8.separator;
-	  var dir = _ref8.dir;
-	  var incrementNext = _ref8.incrementNext;
-	  var circular = _ref8.circular;
-	  var propagate = _ref8.propagate;
-	  var hours24 = _ref8.hours24;
-	  var meridiem = _ref8.meridiem;
-	  var start = range.start;
-	  var end = range.end;
-
-
-	  var value = void 0;
-
-	  var timeValue = (0, _toTimeValue2.default)({ value: oldValue, separator: separator, meridiem: meridiem });
-	  var activeTimePart = getActiveTimePart({ value: oldValue, timeValue: timeValue, separator: separator, range: range, hours24: hours24, meridiem: meridiem });
-
-	  if (activeTimePart.name != 'meridiem') {
-	    timeValue[activeTimePart.name] = dir + timeValue[activeTimePart.name] * 1;
-	  }
-
-	  var hours = timeValue.hours;
-	  var minutes = timeValue.minutes;
-	  var seconds = timeValue.seconds;
-
-
-	  var toggleMeridiemValue = false;
-
-	  hours *= 1;
-	  minutes *= 1;
-
-	  if (seconds) {
-	    seconds *= 1;
-	  }
-
-	  if (activeTimePart.name != 'meridiem') {
-
-	    if (seconds && (seconds > 59 || seconds < 0)) {
-
-	      if (propagate) {
-	        minutes += seconds > 59 ? 1 : -1;
-	      }
-
-	      if (circular) {
-	        seconds %= 60;
-
-	        if (seconds < 0) {
-	          seconds = 60 + seconds;
-	        }
-	      }
-	    }
-
-	    if (minutes && (minutes > 59 || minutes < 0)) {
-	      if (propagate) {
-	        hours += minutes > 59 ? 1 : -1;
-	      }
-
-	      if (circular) {
-	        minutes %= 60;
-
-	        if (minutes < 0) {
-	          minutes = 60 + minutes;
-	        }
-	      }
-	    }
-
-	    if (meridiem && circular && (hours > 12 || hours < 1)) {
-	      toggleMeridiemValue = true;
-	    }
-	  }
-
-	  hours = (0, _leftPad2.default)((0, _clamp.clampHour)(hours * 1, { circular: circular, max: activeTimePart.max, min: activeTimePart.min }));
-	  minutes = (0, _leftPad2.default)((0, _clamp.clampMinute)(minutes * 1, { circular: circular }));
-
-	  if (seconds != undefined) {
-	    seconds = (0, _leftPad2.default)((0, _clamp.clampSecond)(seconds * 1, { circular: circular }));
-	  }
-
-	  value = hours + separator + minutes;
-
-	  if (seconds) {
-	    value += separator + seconds;
-	  }
-
-	  if (activeTimePart.name == 'meridiem') {
-	    toggleMeridiemValue = true;
-	  }
-
-	  if (meridiem) {
-	    value += ' ' + (toggleMeridiemValue ? toggleMeridiem(timeValue.meridiem) : timeValue.meridiem);
-	  }
-
-	  return {
-	    value: value,
-	    caretPos: activeTimePart || range.start,
-	    update: oldValue != value
-	  };
-	};
-
-	var getValueOnNumber = function getValueOnNumber(_ref9) {
-	  var oldValue = _ref9.oldValue;
-	  var num = _ref9.num;
-	  var range = _ref9.range;
-	  var separator = _ref9.separator;
-	  var circular = _ref9.circular;
-	  var hours24 = _ref9.hours24;
-	  var meridiem = _ref9.meridiem;
-
-	  var activeTimePartIndex = getActiveTimePartIndex({ value: oldValue, separator: separator, range: range, hours24: hours24 });
-	  var activeTimePart = getTimePartAt(activeTimePartIndex, { hours24: hours24 });
-
-	  if (activeTimePart && range.start == range.end && activeTimePart.end == range.end) {
-	    activeTimePart = getTimePartAt(activeTimePartIndex + 1, { hours24: hours24 });
-	  }
-
-	  if (!activeTimePart) {
-	    return {
-	      value: value,
-	      update: false
-	    };
-	  }
-
-	  var name = activeTimePart.name;
-	  var timeParts = (0, _toTimeValue2.default)({ value: oldValue, separator: separator, meridiem: meridiem });
-
-	  var timePartValue = timeParts[name] + '';
-
-	  var caretPos = void 0;
-
-	  if (range.start <= activeTimePart.start) {
-	    var maxFirstChar = (activeTimePart.max + '').charAt(0) * 1;
-
-	    caretPos = range.start + (num > maxFirstChar ? 3 : range.start < activeTimePart.start ? 2 : 1);
-	    timeParts[name] = num > maxFirstChar ? '0' + num : num + timeParts[name].charAt(1);
-	  } else {
-	    caretPos = range.start + 2;
-	    timeParts[name] = (0, _clamp.clampNamed)(name, replaceAt({ value: timePartValue, index: 1, str: num }) * 1, { circular: circular });
-	  }
-
-	  var hours = timeParts.hours;
-	  var minutes = timeParts.minutes;
-	  var seconds = timeParts.seconds;
-
-
-	  var value = hours + separator + minutes;
-
-	  if (seconds) {
-	    value += separator + seconds;
-	  }
-
-	  if (meridiem) {
-	    value += ' ' + timeParts.meridiem;
-	  }
-
-	  return {
-	    value: value,
-	    caretPos: caretPos,
-	    update: true
-	  };
-	};
-
-/***/ },
-/* 338 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-
-	var _leftPad = __webpack_require__(339);
-
-	var _leftPad2 = _interopRequireDefault(_leftPad);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	exports.default = function (_ref) {
-	  var value = _ref.value;
-	  var _ref$separator = _ref.separator;
-	  var separator = _ref$separator === undefined ? ':' : _ref$separator;
-	  var meridiem = _ref.meridiem;
-
-	  var parts = value.split(separator);
-
-	  var hours = parts[0];
-	  var minutes = parts[1];
-	  var seconds = parts[2];
-
-	  var result = { hours: hours, minutes: minutes };
-
-	  if (typeof seconds == 'string' && seconds.length) {
-	    result.seconds = seconds;
-	  }
-
-	  if (meridiem && seconds !== undefined && seconds * 1 != seconds) {
-	    result.seconds = (0, _leftPad2.default)(parseInt(seconds, 10));
-	  }
-
-	  if (meridiem && seconds === undefined && minutes * 1 != minutes) {
-	    result.minutes = (0, _leftPad2.default)(parseInt(minutes, 10));
-	  }
-
-	  if (meridiem) {
-	    (function () {
-	      var meridiems = ['am', 'AM', 'pm', 'PM'];
-	      var indexes = meridiems.map(function (m) {
-	        return (seconds || minutes).indexOf(m);
-	      });
-
-	      indexes.forEach(function (indexOf, i) {
-	        if (indexOf != -1) {
-	          result.meridiem = meridiems[i];
-	        }
-	      });
-	    })();
-	  }
-
-	  return result;
-	};
-
-/***/ },
-/* 339 */
-/***/ function(module, exports) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-
-	exports.default = function (str) {
-
-	  if (typeof str == 'string' && str.length < 2) {
-	    return str.length ? '0' + str : '00';
-	  }
-
-	  if (typeof str == 'number') {
-	    return str < 10 ? '0' + str : str + '';
-	  }
-
-	  return str;
-	};
-
-/***/ },
-/* 340 */
-/***/ function(module, exports) {
-
-	"use strict";
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	var clamp = function clamp(value, _ref) {
-	  var min = _ref.min;
-	  var max = _ref.max;
-	  var _ref$circular = _ref.circular;
-	  var circular = _ref$circular === undefined ? true : _ref$circular;
-
-	  return value < min ? circular ? max : min : value > max ? circular ? min : max : value;
-	};
-
-	var clampHour = exports.clampHour = function clampHour(value, _ref2) {
-	  var max = _ref2.max;
-	  var min = _ref2.min;
-	  var circular = _ref2.circular;
-
-	  return clamp(value, { min: min || 0, max: max || 23, circular: circular });
-	};
-
-	var clampMinute = exports.clampMinute = function clampMinute(value, _ref3) {
-	  var circular = _ref3.circular;
-
-	  return clamp(value, { min: 0, max: 59, circular: circular });
-	};
-
-	var clampSecond = exports.clampSecond = function clampSecond(value, _ref4) {
-	  var circular = _ref4.circular;
-
-	  return clamp(value, { min: 0, max: 59, circular: circular });
-	};
-
-	var MAP = {
-	  second: clampSecond,
-	  seconds: clampSecond,
-	  minute: clampMinute,
-	  minutes: clampMinute,
-	  hour: clampHour,
-	  hours: clampHour
-	};
-
-	var clampNamed = exports.clampNamed = function clampNamed(name, value, _ref5) {
-	  var circular = _ref5.circular;
-	  var max = _ref5.max;
-	  var min = _ref5.min;
-
-	  return MAP[name](value, { circular: circular, max: max, min: min });
-	};
-
-	exports.default = clamp;
-
-/***/ },
-/* 341 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-
-	var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
-
-	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
-
-	var _react = __webpack_require__(1);
-
-	var _react2 = _interopRequireDefault(_react);
-
-	var _reactDom = __webpack_require__(35);
-
-	var _reactClass = __webpack_require__(183);
-
-	var _reactClass2 = _interopRequireDefault(_reactClass);
-
-	var _objectAssign = __webpack_require__(288);
-
-	var _objectAssign2 = _interopRequireDefault(_objectAssign);
-
-	var _join = __webpack_require__(291);
-
-	var _join2 = _interopRequireDefault(_join);
-
-	var _toMoment2 = __webpack_require__(290);
-
-	var _toMoment3 = _interopRequireDefault(_toMoment2);
-
-	var _forwardTime = __webpack_require__(342);
-
-	var _forwardTime2 = _interopRequireDefault(_forwardTime);
-
-	var _getTransitionEnd = __webpack_require__(343);
-
-	var _getTransitionEnd2 = _interopRequireDefault(_getTransitionEnd);
-
-	var _assignDefined = __webpack_require__(303);
-
-	var _assignDefined2 = _interopRequireDefault(_assignDefined);
-
-	var _MonthView = __webpack_require__(182);
-
-	var _NavBar = __webpack_require__(293);
-
-	var _NavBar2 = _interopRequireDefault(_NavBar);
-
-	var _reactFlex = __webpack_require__(294);
-
-	var _times = __webpack_require__(309);
-
-	var _times2 = _interopRequireDefault(_times);
-
-	var _reactInlineBlock = __webpack_require__(302);
-
-	var _reactInlineBlock2 = _interopRequireDefault(_reactInlineBlock);
-
-	var _reactStyleNormalizer = __webpack_require__(322);
-
-	var _reactStyleNormalizer2 = _interopRequireDefault(_reactStyleNormalizer);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-	var renderHiddenNav = function renderHiddenNav(props) {
-	  return _react2.default.createElement(_reactInlineBlock2.default, _extends({}, props, { style: { visibility: 'hidden' } }));
-	};
-
-	var joinFunctions = function joinFunctions(a, b) {
-	  if (a && b) {
-	    return function () {
-	      a.apply(undefined, arguments);
-	      b.apply(undefined, arguments);
-	    };
-	  }
-
-	  return a || b;
-	};
-
-	var TRANSITION_DURATION = '0.4s';
-
-	var TransitionView = function (_Component) {
-	  _inherits(TransitionView, _Component);
-
-	  function TransitionView(props) {
-	    _classCallCheck(this, TransitionView);
-
-	    var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(TransitionView).call(this, props));
-
-	    var child = _react2.default.Children.toArray(_this.props.children)[0];
-	    var childProps = child.props;
-
-	    var viewDate = props.viewDate || props.defaultViewDate || props.defaultDate || props.date || childProps.viewDate || childProps.defaultViewDate || childProps.defaultDate || childProps.date;
-
-	    var dateFormat = props.dateFormat || childProps.dateFormat;
-	    var locale = props.locale || childProps.locale;
-
-	    _this.state = {
-	      rendered: false,
-	      viewDate: _this.toMoment(viewDate, { dateFormat: dateFormat, locale: locale })
-	    };
-	    return _this;
-	  }
-
-	  _createClass(TransitionView, [{
-	    key: 'toMoment',
-	    value: function toMoment(value, props) {
-	      props = props || this.props;
-
-	      return (0, _toMoment3.default)(value, {
-	        locale: props.locale,
-	        dateFormat: props.dateFormat
-	      });
-	    }
-	  }, {
-	    key: 'format',
-	    value: function format(mom, props) {
-	      props = props || this.props;
-	      return mom.format(props.dateFormat);
-	    }
-	  }, {
-	    key: 'componentDidMount',
-	    value: function componentDidMount() {
-	      this.setState({
-	        rendered: true
-	      });
-	    }
-	  }, {
-	    key: 'componentWillReceiveProps',
-	    value: function componentWillReceiveProps(nextProps) {
-	      if (nextProps.viewDate) {
-	        // this is in order to transition when the prop changes
-	        // if we were to simply do setState({ viewDate }) it wouldn't have had a transition
-	        this.transitionTo(nextProps.viewDate, nextProps);
-	      }
-	    }
-	  }, {
-	    key: 'transitionTo',
-	    value: function transitionTo(date, props) {
-	      props = props || this.props;
-
-	      var dateMoment = this.toMoment(date, props);
-
-	      this.doTransition(dateMoment);
-	    }
-	  }, {
-	    key: 'getViewChild',
-	    value: function getViewChild() {
-	      return _react2.default.Children.toArray(this.props.children).filter(function (c) {
-	        return c && c.props && c.props.isDatePicker;
-	      })[0];
-	    }
-	  }, {
-	    key: 'prepareChildProps',
-	    value: function prepareChildProps(child, extraProps) {
-	      if (this.view) {
-	        return this.view.p;
-	      }
-
-	      child = child || this.getViewChild();
-
-	      return (0, _objectAssign2.default)({}, child.props, extraProps);
-	    }
-	  }, {
-	    key: 'render',
-	    value: function render() {
-	      var _this2 = this;
-
-	      var props = this.props;
-
-	      var child = this.child = this.getViewChild();
-
-	      var viewDate = this.state.viewDate || props.viewMoment || props.viewDate;
-
-	      var renderedChildProps = this.renderedChildProps = this.prepareChildProps(child, (0, _assignDefined2.default)({
-	        viewDate: viewDate
-	      }));
-
-	      viewDate = this.state.viewDate || renderedChildProps.viewMoment || renderedChildProps.viewDate;
-
-	      if (!this.state.transition) {
-	        this.viewDate = viewDate;
-	      }
-
-	      var multiView = !!(child.props.size && child.props.size >= 2);
-
-	      var onViewDateChange = joinFunctions(this.onViewDateChange, props.onViewDateChange);
-
-	      // TODO make transition view pass all props, as is to child component
-	      var newProps = {
-	        key: 'picker',
-	        ref: function ref(v) {
-	          _this2.view = v;
-	        },
-
-	        viewDate: this.viewDate,
-	        onViewDateChange: onViewDateChange,
-	        navigation: multiView,
-	        constrainActiveInView: props.constrainActiveInView,
-
-	        className: (0, _join2.default)(child.props.className, 'react-date-picker__center')
-	      };
-
-	      // only pass those down if they have been specified
-	      // as props on this TransitionView
-	      (0, _assignDefined2.default)(newProps, {
-	        // tabIndex: -1,
-	        range: props.range,
-	        date: props.date,
-	        activeDate: props.activeDate,
-	        footer: false,
-	        insideField: props.insideField,
-
-	        defaultRange: props.defaultRange,
-	        defaultDate: props.defaultDate,
-	        defaultActiveDate: props.defaultActiveDate,
-
-	        // this is here in order to ensure time changes are reflected
-	        // when using a TransitionView inside a DateField
-	        onTimeChange: props.onTimeChange,
-	        onClockInputBlur: props.onClockInputBlur,
-	        onClockInputFocus: props.onClockInputFocus,
-	        onClockEnterKey: props.onClockEnterKey,
-	        onClockEscapeKey: props.onClockEscapeKey,
-	        showClock: props.showClock,
-
-	        tabIndex: props.tabIndex,
-
-	        dateFormat: props.dateFormat,
-	        locale: props.locale,
-	        theme: props.theme,
-
-	        minDate: props.minDate,
-	        maxDate: props.maxDate,
-	        onKeyDown: this.onKeyDown,
-	        onBlur: this.onBlur
-	      });
-
-	      if (props.onChange) {
-	        newProps.onChange = joinFunctions(props.onChange, renderedChildProps.onChange);
-	      }
-	      if (props.onRangeChange) {
-	        newProps.onRangeChange = joinFunctions(props.onRangeChange, renderedChildProps.onRangeChange);
-	      }
-
-	      if (props.onActiveDateChange) {
-	        newProps.onActiveDateChange = joinFunctions(props.onActiveDateChange, renderedChildProps.onActiveDateChange);
-	      }
-
-	      if (this.state.transition) {
-	        this.transitionDurationStyle = (0, _reactStyleNormalizer2.default)({
-	          transitionDuration: props.transitionDuration || TRANSITION_DURATION
-	        });
-
-	        newProps.style = (0, _objectAssign2.default)({}, child.props.style, this.transitionDurationStyle);
-
-	        newProps.className = (0, _join2.default)(newProps.className, 'react-date-picker--transition', 'react-date-picker--transition-' + (this.state.transition == -1 ? 'left' : 'right'));
-	      }
-
-	      var navBar = void 0;
-
-	      var navBarProps = {
-	        minDate: props.minDate || renderedChildProps.minDate,
-	        maxDate: props.maxDate || renderedChildProps.maxDate,
-	        enableHistoryView: props.enableHistoryView === undefined ? renderedChildProps.enableHistoryView : props.enableHistoryView,
-	        secondary: true,
-	        viewDate: this.nextViewDate || this.viewDate,
-	        onViewDateChange: onViewDateChange,
-	        multiView: multiView
-	      };
-
-	      if (props.navigation) {
-	        navBar = this.renderNavBar((0, _objectAssign2.default)({}, navBarProps, { mainNavBar: true }));
-	      }
-
-	      var footer = void 0;
-
-	      if (props.footer) {
-	        footer = (0, _MonthView.renderFooter)(props, props.insideField ? props : this.view);
-	      }
-
-	      if (multiView) {
-	        newProps.renderNavBar = this.renderMultiViewNavBar.bind(this, navBarProps);
-	      }
-
-	      var clone = _react2.default.cloneElement(child, newProps);
-
-	      return _react2.default.createElement(
-	        _reactFlex.Flex,
-	        _extends({
-	          column: true,
-	          inline: true,
-	          wrap: false,
-	          alignItems: 'stretch'
-	        }, props, {
-	          className: (0, _join2.default)(props.className, 'react-date-picker__transition-month-view', props.theme && 'react-date-picker__transition-month-view--theme-' + props.theme)
-	        }),
-	        navBar,
 	        _react2.default.createElement(
-	          _reactFlex.Flex,
-	          { inline: true, row: true, style: { position: 'relative' } },
-	          this.renderAt(-1, { multiView: multiView, navBarProps: navBarProps }),
-	          clone,
-	          this.renderAt(1, { multiView: multiView, navBarProps: navBarProps })
-	        ),
-	        footer
-	      );
-	    }
-	  }, {
-	    key: 'tryNavBarKeyDown',
-	    value: function tryNavBarKeyDown(event) {
-	      if (this.navBar && this.navBar.getHistoryView) {
-	        var historyView = this.navBar.getHistoryView();
-
-	        if (historyView && historyView.onKeyDown) {
-	          historyView.onKeyDown(event);
-	          return true;
-	        }
-	      }
-
-	      return false;
-	    }
-	  }, {
-	    key: 'onKeyDown',
-	    value: function onKeyDown(event) {
-	      var initialKeyDown = this.child.onKeyDown;
-
-	      if (this.tryNavBarKeyDown(event)) {
-	        return false;
-	      }
-
-	      if (initialKeyDown) {
-	        return initialKeyDown(event);
-	      }
-	    }
-	  }, {
-	    key: 'isHistoryViewVisible',
-	    value: function isHistoryViewVisible() {
-	      if (this.navBar && this.navBar.isHistoryViewVisible) {
-	        return this.navBar.isHistoryViewVisible();
-	      }
-
-	      return false;
-	    }
-	  }, {
-	    key: 'showHistoryView',
-	    value: function showHistoryView() {
-	      if (this.navBar) {
-	        this.navBar.showHistoryView();
-	      }
-	    }
-	  }, {
-	    key: 'hideHistoryView',
-	    value: function hideHistoryView() {
-	      if (this.navBar) {
-	        this.navBar.hideHistoryView();
-	      }
-	    }
-	  }, {
-	    key: 'onBlur',
-	    value: function onBlur(event) {
-	      var initialBlur = this.child.onBlur;
-
-	      this.hideHistoryView();
-
-	      if (initialBlur) {
-	        initialBlur(event);
-	      }
-
-	      return true;
-	    }
-
-	    /**
-	     * This method is only called when rendering the NavBar of the MonthViews
-	     * that are not on the first row of the MultiMonthView
-	     *
-	     * @param  {Object} navBarProps
-	     * @param  {Object} config
-	     * @return {ReactNode}
-	     */
-
-	  }, {
-	    key: 'renderMultiViewNavBar',
-	    value: function renderMultiViewNavBar(navBarProps, config) {
-	      var index = config.index;
-
-	      var count = this.child.props.perRow;
-
-	      if (index >= count) {
-	        var viewDate = this.toMoment(navBarProps.viewDate).add(index, 'month');
-
-	        return _react2.default.createElement(_NavBar2.default, _extends({}, navBarProps, {
-	          renderNavNext: renderHiddenNav,
-	          renderNavPrev: renderHiddenNav,
-	          onViewDateChange: null,
-	          viewDate: this.toMoment(viewDate)
-	        }));
-	      }
-
-	      return null;
-	    }
-	  }, {
-	    key: 'renderNavBar',
-	    value: function renderNavBar(navBarProps) {
-	      var _this3 = this;
-
-	      navBarProps = (0, _objectAssign2.default)({}, navBarProps);
-
-	      if (navBarProps.mainNavBar) {
-	        navBarProps.ref = function (navBar) {
-	          _this3.navBar = navBar;
-	        };
-	        navBarProps.onMouseDown = this.onNavMouseDown;
-	      }
-
-	      var props = this.props;
-	      var _navBarProps = navBarProps;
-	      var multiView = _navBarProps.multiView;
-
-
-	      var navBar = _react2.default.Children.toArray(props.children).filter(function (c) {
-	        return c && c.props && c.props.isDatePickerNavBar;
-	      })[0];
-
-	      var newProps = navBarProps;
-
-	      if (navBar) {
-	        newProps = (0, _objectAssign2.default)({}, navBarProps, navBar.props);
-
-	        // have viewDate & onViewDateChange win over initial navBar.props
-	        newProps.viewDate = navBarProps.viewDate;
-	        newProps.onViewDateChange = navBarProps.onViewDateChange;
-	      }
-
-	      if (multiView) {
-	        var _ret = function () {
-	          var count = _this3.child.props.perRow;
-	          var viewSize = _this3.getViewSize();
-
-	          var bars = (0, _times2.default)(count).map(function (index) {
-	            var onUpdate = function onUpdate(dateMoment, dir) {
-	              var mom = _this3.toMoment(newProps.viewDate);
-
-	              if (Math.abs(dir) == 1) {
-	                mom.add(dir * viewSize, 'month');
-	              } else {
-	                var sign = dir > 0 ? 1 : -1;
-
-	                mom.add(sign, 'year');
-	              }
-
-	              return mom;
-	            };
-
-	            var barProps = (0, _objectAssign2.default)({}, newProps, {
-	              onUpdate: onUpdate,
-	              renderNavNext: renderHiddenNav,
-	              renderNavPrev: renderHiddenNav,
-	              viewDate: _this3.toMoment(newProps.viewDate).add(index, 'month')
-	            });
-
-	            if (index == 0) {
-	              delete barProps.renderNavPrev;
-	            }
-	            if (index == count - 1) {
-	              delete barProps.renderNavNext;
-	            }
-
-	            return _react2.default.createElement(_NavBar2.default, _extends({ flex: true }, barProps));
-	          });
-
-	          return {
-	            v: _react2.default.createElement(_reactFlex.Flex, { row: true, children: bars })
-	          };
-	        }();
-
-	        if ((typeof _ret === 'undefined' ? 'undefined' : _typeof(_ret)) === "object") return _ret.v;
-	      }
-
-	      return navBar ? _react2.default.cloneElement(navBar, newProps) : _react2.default.createElement(_NavBar2.default, newProps);
-	    }
-	  }, {
-	    key: 'getViewSize',
-	    value: function getViewSize() {
-	      return this.view && this.view.getViewSize ? this.view.getViewSize() || 1 : 1;
-	    }
-	  }, {
-	    key: 'renderAt',
-	    value: function renderAt(index, _ref) {
-	      var multiView = _ref.multiView;
-	      var navBarProps = _ref.navBarProps;
-
-	      if (!this.state.rendered || !this.view) {
-	        // || this.state.prepareTransition != -index ) {
-	        return null;
-	      }
-
-	      var viewSize = this.getViewSize();
-	      var viewDiff = viewSize * index;
-
-	      var childProps = this.child.props;
-	      var renderedProps = this.renderedChildProps;
-
-	      var viewDate = this.toMoment(this.viewDate).add(viewDiff, 'month');
-
-	      if (this.nextViewDate && this.state.prepareTransition == -index) {
-	        // we're transitioning to this viewDate, so make sure
-	        // it renders the date we'll need at the end of the transition
-	        viewDate = this.nextViewDate;
-	      }
-
-	      var date = renderedProps.date || renderedProps.moment;
-
-	      if (this.state.transitionTime) {
-	        date = (0, _forwardTime2.default)(this.state.transitionTime, this.toMoment(date));
-	        // console.log('date.format', date.format('HH:mm'));
-	      }
-
-	      var newProps = (0, _objectAssign2.default)({
-	        date: date,
-	        readOnly: true,
-	        range: renderedProps.range,
-	        activeDate: renderedProps.activeDate,
-	        dateFormat: renderedProps.dateFormat,
-	        locale: renderedProps.locale,
-	        tabIndex: -1,
-	        clockTabIndex: -1,
-	        navigation: multiView,
-	        viewDate: viewDate,
-	        key: index,
-	        footer: false,
-	        className: (0, _join2.default)(childProps.className, 'react-date-picker__' + (index == -1 ? 'prev' : 'next'))
-	      });
-
-	      (0, _assignDefined2.default)(newProps, {
-	        showClock: renderedProps.showClock,
-	        minDate: renderedProps.minDate,
-	        maxDate: renderedProps.maxDate
-	      });
-
-	      if (this.state.transition && this.state.transition != index) {
-	        newProps.style = (0, _objectAssign2.default)({}, childProps.style, this.transitionDurationStyle);
-	        newProps.className = (0, _join2.default)(newProps.className, 'react-date-picker--transition', 'react-date-picker--transition-' + (this.state.transition == -1 ? 'left' : 'right'));
-	      }
-
-	      if (multiView) {
-	        newProps.renderNavBar = this.renderMultiViewNavBar.bind(this, (0, _objectAssign2.default)({}, navBarProps, { viewDate: viewDate, onViewDateChange: null }));
-	      }
-
-	      return _react2.default.cloneElement(this.child, newProps);
-	    }
-	  }, {
-	    key: 'getView',
-	    value: function getView() {
-	      return this.view;
-	    }
-	  }, {
-	    key: 'isInView',
-	    value: function isInView() {
-	      var _view;
-
-	      return (_view = this.view).isInView.apply(_view, arguments);
-	    }
-	  }, {
-	    key: 'onViewDateChange',
-	    value: function onViewDateChange(dateString, _ref2) {
-	      var dateMoment = _ref2.dateMoment;
-
-	      this.doTransition(dateMoment);
-	    }
-	  }, {
-	    key: 'doTransition',
-	    value: function doTransition(dateMoment) {
-	      var _this4 = this;
-
-	      if (this.state.transition) {
-	        // this.nextViewDate = dateMoment
-	        return;
-	      }
-	      // to protect of null, which will default to current date
-	      dateMoment = this.toMoment(dateMoment);
-
-	      var newMoment = this.toMoment(dateMoment).startOf('month');
-	      var viewMoment = this.toMoment(this.viewDate).startOf('month');
-
-	      if (newMoment.format('YYYY-MM') == viewMoment.format('YYYY-MM')) {
-	        return;
-	      }
-
-	      var navNext = newMoment.isAfter(viewMoment);
-	      var transition = navNext ? -1 : 1;
-	      var viewSize = this.getViewSize();
-
-	      if (Math.abs(viewSize) > 1) {
-	        var temp = this.toMoment(viewMoment).add(viewSize * -transition, 'month');
-
-	        if (navNext) {
-	          dateMoment = dateMoment.isAfter(temp) ? dateMoment : temp;
-	        } else {
-	          dateMoment = dateMoment.isBefore(temp) ? dateMoment : temp;
-	        }
-	      }
-
-	      var transitionTime = this.props.getTransitionTime ? this.props.getTransitionTime() : null;
-
-	      this.setState({
-	        transitionTime: transitionTime,
-	        prepareTransition: transition
-	      }, function () {
-	        setTimeout(function () {
-	          // in order to allow this.view.p to update
-	          if (!(0, _reactDom.findDOMNode)(_this4.view)) {
-	            return;
-	          }
-
-	          _this4.nextViewDate = dateMoment;
-
-	          _this4.addTransitionEnd();
-
-	          _this4.setState({
-	            transition: transition
-	          });
-	        });
-	      });
-	    }
-	  }, {
-	    key: 'addTransitionEnd',
-	    value: function addTransitionEnd() {
-	      var dom = (0, _reactDom.findDOMNode)(this.view);
-
-	      if (dom) {
-	        dom.addEventListener((0, _getTransitionEnd2.default)(), this.onTransitionEnd, false);
-	      }
-	    }
-	  }, {
-	    key: 'removeTransitionEnd',
-	    value: function removeTransitionEnd(dom) {
-	      dom = dom || (0, _reactDom.findDOMNode)(this.view);
-
-	      if (dom) {
-	        dom.removeEventListener((0, _getTransitionEnd2.default)(), this.onTransitionEnd);
-	      }
-	    }
-	  }, {
-	    key: 'onTransitionEnd',
-	    value: function onTransitionEnd() {
-	      this.removeTransitionEnd();
-
-	      if (!this.nextViewDate) {
-	        return;
-	      }
-
-	      this.setState({
-	        viewDate: this.nextViewDate,
-	        transition: 0,
-	        prepareTransition: 0
-	      });
-
-	      if (this.props.focusOnTransitionEnd) {
-	        this.focus();
-	      }
-
-	      delete this.nextViewDate;
-	    }
-	  }, {
-	    key: 'onNavMouseDown',
-	    value: function onNavMouseDown() {
-	      if (this.props.focusOnNavMouseDown && !this.isFocused()) {
-	        this.focus();
-	      }
-	    }
-	  }, {
-	    key: 'isFocused',
-	    value: function isFocused() {
-	      var view = this.getView();
-
-	      if (view) {
-	        return view.isFocused();
-	      }
-
-	      return false;
-	    }
-	  }, {
-	    key: 'focus',
-	    value: function focus() {
-	      this.getView().focus();
-	    }
-	  }]);
-
-	  return TransitionView;
-	}(_reactClass2.default);
-
-	exports.default = TransitionView;
-
-
-	TransitionView.propTypes = {
-	  children: _react2.default.PropTypes.node.isRequired
-	};
-
-	TransitionView.defaultProps = {
-	  focusOnNavMouseDown: true,
-
-	  onTransitionStart: function onTransitionStart() {},
-	  onTransitionEnd: function onTransitionEnd() {},
-
-	  footerClearDate: null,
-	  enableHistoryView: true,
-	  constrainActiveInView: false,
-	  focusOnTransitionEnd: false,
-	  navigation: true,
-	  theme: 'default',
-	  isDatePicker: true
-	};
-
-/***/ },
-/* 342 */
-/***/ function(module, exports) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-
-	exports.default = function (from, to) {
-	  if (from) {
-	    ['hour', 'minute', 'second', 'millisecond'].forEach(function (part) {
-	      to.set(part, from.get ? from.get(part) : from[part]);
-	    });
-	  }
-
-	  return to;
-	};
-
-/***/ },
-/* 343 */
-/***/ function(module, exports) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	/**
-	 * Transition-end mapping
-	 */
-
-	var map = {
-	  'WebkitTransition': 'webkitTransitionEnd',
-	  'MozTransition': 'transitionend',
-	  'OTransition': 'oTransitionEnd',
-	  'msTransition': 'MSTransitionEnd',
-	  'transition': 'transitionend'
-	};
-
-	var EL = void 0;
-	var RESULT = void 0;
-
-	exports.default = function () {
-	  if (!EL) {
-	    EL = document.createElement('p');
-	  }
-
-	  if (RESULT) {
-	    return RESULT;
-	  }
-
-	  for (var transition in map) {
-	    if (null != EL.style[transition]) {
-	      RESULT = map[transition];
-	      break;
-	    }
-	  }
-
-	  return RESULT;
-	};
-
-/***/ },
-/* 344 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	exports.renderNavBar = undefined;
-
-	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
-
-	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-	var _react = __webpack_require__(1);
-
-	var _react2 = _interopRequireDefault(_react);
-
-	var _reactClass = __webpack_require__(183);
-
-	var _reactClass2 = _interopRequireDefault(_reactClass);
-
-	var _reactFlex = __webpack_require__(294);
-
-	var _reactInlineBlock = __webpack_require__(302);
-
-	var _reactInlineBlock2 = _interopRequireDefault(_reactInlineBlock);
-
-	var _objectAssign = __webpack_require__(288);
-
-	var _objectAssign2 = _interopRequireDefault(_objectAssign);
-
-	var _clampRange = __webpack_require__(289);
-
-	var _clampRange2 = _interopRequireDefault(_clampRange);
-
-	var _NavBar = __webpack_require__(293);
-
-	var _NavBar2 = _interopRequireDefault(_NavBar);
-
-	var _toMoment = __webpack_require__(290);
-
-	var _toMoment2 = _interopRequireDefault(_toMoment);
-
-	var _join = __webpack_require__(291);
-
-	var _join2 = _interopRequireDefault(_join);
-
-	var _isInRange2 = __webpack_require__(292);
-
-	var _isInRange3 = _interopRequireDefault(_isInRange2);
-
-	var _BasicMonthView = __webpack_require__(313);
-
-	var _MonthView = __webpack_require__(182);
-
-	var _MonthView2 = _interopRequireDefault(_MonthView);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-	function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
-
-	var times = function times(count) {
-	  return [].concat(_toConsumableArray(new Array(count))).map(function (v, i) {
-	    return i;
-	  });
-	};
-
-	var prepareDate = function prepareDate(props, state) {
-	  if (props.range) {
-	    return null;
-	  }
-
-	  return props.date === undefined ? state.date : props.date;
-	};
-
-	var prepareViewDate = function prepareViewDate(props, state) {
-	  return props.viewDate === undefined ? state.viewDate : state.propViewDate || props.viewDate;
-	};
-
-	var prepareRange = function prepareRange(props, state) {
-	  return props.range && props.range.length ? props.range : state.range;
-	};
-
-	var prepareActiveDate = function prepareActiveDate(props, state) {
-	  var fallbackDate = prepareDate(props, state) || (prepareRange(props, state) || [])[0];
-
-	  var activeDate = props.activeDate === undefined ?
-	  // only fallback to date if activeDate not specified
-	  state.activeDate || fallbackDate : props.activeDate;
-
-	  if (activeDate && props.inViewStart && props.inViewEnd && props.constrainActiveInView) {
-	    var activeMoment = this.toMoment(activeDate);
-
-	    if (!(0, _isInRange3.default)(activeMoment, [props.inViewStart, props.inViewEnd])) {
-	      var date = fallbackDate;
-	      var dateMoment = this.toMoment(date);
-
-	      if (date && (0, _isInRange3.default)(dateMoment, [props.inViewStart, props.inViewEnd])) {
-	        return date;
-	      }
-
-	      return null;
-	    }
-	  }
-
-	  return activeDate;
-	};
-
-	var prepareViews = function prepareViews(props) {
-	  var daysInView = [];
-
-	  var viewMoments = [];
-
-	  var viewMoment = props.viewMoment;
-
-	  var index = 0;
-	  var size = props.size;
-
-	  while (index < size) {
-	    var mom = this.toMoment(viewMoment).startOf('day').add(index, 'month');
-	    var days = (0, _BasicMonthView.getDaysInMonthView)(mom, props);
-
-	    viewMoments.push(mom);
-	    daysInView.push(days);
-
-	    index++;
-	  }
-
-	  props.daysInView = daysInView;
-	  props.viewMoments = viewMoments;
-
-	  var lastViewDays = daysInView[size - 1];
-
-	  props.inViewStart = daysInView[0][0];
-	  props.inViewEnd = lastViewDays[lastViewDays.length - 1];
-	};
-
-	var _renderNavBar = function _renderNavBar(config, navBarProps) {
-	  var props = this.props;
-	  var index = config.index;
-	  var viewMoment = config.viewMoment;
-
-
-	  navBarProps = (0, _objectAssign2.default)({}, navBarProps, {
-	    secondary: true,
-
-	    minDate: config.minDate || props.minDate,
-	    maxDate: config.maxDate || props.maxDate,
-
-	    renderNavNext: config.renderHiddenNav || this.renderHiddenNav,
-	    renderNavPrev: config.renderHiddenNav || this.renderHiddenNav,
-
-	    viewMoment: viewMoment,
-
-	    onViewDateChange: config.onViewDateChange || this.onNavViewDateChange,
-	    onUpdate: config.onUpdate || this.updateViewMoment,
-
-	    enableHistoryView: props.enableHistoryView
-	  });
-
-	  if (index == 0) {
-	    delete navBarProps.renderNavPrev;
-	  }
-
-	  if (index == props.perRow - 1) {
-	    delete navBarProps.renderNavNext;
-	  }
-
-	  return _react2.default.createElement(_NavBar2.default, navBarProps);
-	};
-
-	exports.renderNavBar = _renderNavBar;
-
-	var MultiMonthView = function (_Component) {
-	  _inherits(MultiMonthView, _Component);
-
-	  function MultiMonthView(props) {
-	    _classCallCheck(this, MultiMonthView);
-
-	    var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(MultiMonthView).call(this, props));
-
-	    _this.state = {
-	      hoverRange: null,
-	      range: props.defaultRange,
-	      date: props.defaultDate,
-	      activeDate: props.defaultActiveDate,
-	      viewDate: props.defaultViewDate
-	    };
-	    return _this;
-	  }
-
-	  _createClass(MultiMonthView, [{
-	    key: 'componentWillMount',
-	    value: function componentWillMount() {
-	      this.updateToMoment(this.props);
-	    }
-	  }, {
-	    key: 'componentWillReceiveProps',
-	    value: function componentWillReceiveProps(nextProps) {
-	      if (nextProps.locale != this.props.locale || nextProps.dateFormat != this.props.dateFormat) {
-	        this.updateToMoment(nextProps);
-	      }
-
-	      // if (nextProps.viewDate && !nextProps.forceViewUpdate){
-
-	      //   //this is here in order not to change view if already in view
-	      //   const viewMoment = this.toMoment(nextProps.viewDate)
-
-	      //   if (this.isInRange(viewMoment) && !nextProps.forceViewUpdate){
-	      //     console.log(this.format(viewMoment), this.format(this.p.viewStart),
-	      // this.format(this.p.viewEnd))
-	      //     this.setState({
-	      //       propViewDate: this.p.viewMoment
-	      //     })
-	      //   } else {
-	      //     debugger
-	      //     this.setState({
-	      //       propViewDate: null
-	      //     })
-	      //   }
-	      // }
-	    }
-	  }, {
-	    key: 'updateToMoment',
-	    value: function updateToMoment(props) {
-	      this.toMoment = function (value, dateFormat) {
-	        return (0, _toMoment2.default)(value, {
-	          locale: props.locale,
-	          dateFormat: dateFormat || props.dateFormat
-	        });
-	      };
-	    }
-	  }, {
-	    key: 'prepareProps',
-	    value: function prepareProps(thisProps, state) {
-	      var _this2 = this;
-
-	      var props = (0, _objectAssign2.default)({}, thisProps);
-	      state = state || this.state;
-
-	      props.viewMoment = this.toMoment(prepareViewDate(props, state));
-
-	      // viewStart is the first day of the first month displayed
-	      // viewEnd is the last day of the last month displayed
-	      props.viewStart = this.toMoment(props.viewMoment).startOf('month');
-	      props.viewEnd = this.toMoment(props.viewStart).add(props.size - 1, 'month').endOf('month');
-
-	      // but we also have inViewStart, which can be a day before viewStart
-	      // which is in displayed as belonging to the prev month
-	      // but is displayed in the current view since it's on the same week
-	      // as viewStart
-	      //
-	      // same for inViewEnd, which is a day after viewEnd - the last day in the same week
-	      prepareViews.call(this, props);
-
-	      var activeDate = prepareActiveDate.call(this, props, state);
-
-	      if (activeDate) {
-	        props.activeDate = +this.toMoment(activeDate);
-	      }
-
-	      props.date = prepareDate(props, state);
-
-	      if (!props.date) {
-	        var range = prepareRange(props, state);
-
-	        if (range) {
-	          props.range = range.map(function (d) {
-	            return _this2.toMoment(d).startOf('day');
-	          });
-	          props.rangeStart = state.rangeStart || (props.range.length == 1 ? props.range[0] : null);
-	        }
-	      }
-
-	      return props;
-	    }
-	  }, {
-	    key: 'render',
-	    value: function render() {
-	      this.views = [];
-	      var props = this.p = this.prepareProps(this.props, this.state);
-	      var size = props.size;
-
-	      var rowCount = Math.ceil(size / props.perRow);
-	      var children = times(rowCount).map(this.renderRow).filter(function (x) {
-	        return !!x;
-	      });
-
-	      var className = (0, _join2.default)(props.className, 'react-date-picker__multi-month-view', props.theme && 'react-date-picker__multi-month-view--theme-' + props.theme);
-
-	      var footer = (0, _MonthView.renderFooter)(props, this);
-
-	      if (footer) {
-	        children.push(footer);
-	      }
-
-	      return _react2.default.createElement(_reactFlex.Flex, _extends({
-	        column: true,
-	        inline: true,
-	        alignItems: 'stretch',
-	        wrap: false
-	      }, props, {
-	        className: className,
-	        children: children
-	      }));
-	    }
-	  }, {
-	    key: 'renderRow',
-	    value: function renderRow(rowIndex) {
-	      var _this3 = this;
-
-	      var props = this.p;
-
-	      var children = times(props.perRow).map(function (i) {
-	        var index = rowIndex * props.perRow + i;
-
-	        if (index >= props.size) {
-	          return null;
-	        }
-
-	        return _this3.renderView(index, props.size);
-	      });
-
-	      return _react2.default.createElement(_reactFlex.Flex, { inline: true, row: true, wrap: false, children: children });
-	    }
-	  }, {
-	    key: 'renderView',
-	    value: function renderView(index, size) {
-	      var _this4 = this;
-
-	      var props = this.p;
-	      var viewMoment = props.viewMoments[index];
-
-	      var range = void 0;
-
-	      if (props.range) {
-	        range = props.rangeStart && props.range.length == 0 ? [props.rangeStart] : props.range;
-	      }
-
-	      return _react2.default.createElement(_MonthView2.default, _extends({
-	        ref: function ref(view) {
-	          _this4.views[index] = view;
-	        },
-	        constrainViewDate: false
-	      }, this.props, {
-
-	        className: null,
-
-	        index: index,
-
-	        footer: false,
-	        constrainActiveInView: false,
-
-	        navigate: this.onMonthNavigate.bind(this, index),
-	        hoverRange: this.state.hoverRange,
-	        onHoverRangeChange: this.setHoverRange,
-
-	        activeDate: props.activeDate,
-
-	        onActiveDateChange: this.onActiveDateChange,
-	        onViewDateChange: this.onAdjustViewDateChange,
-
-	        date: props.date,
-	        defaultDate: null,
-	        onChange: this.onChange,
-
-	        range: range,
-	        defaultRange: null,
-	        onRangeChange: this.onRangeChange,
-
-	        viewMoment: viewMoment,
-
-	        insideMultiView: true,
-
-	        daysInView: props.daysInView[index],
-
-	        showDaysBeforeMonth: index == 0,
-	        showDaysAfterMonth: index == size - 1,
-
-	        select: this.select,
-
-	        renderNavBar: this.props.navigation && (this.props.renderNavBar || this.renderNavBar).bind(this, { index: index, viewMoment: viewMoment })
-	      }));
-	    }
-	  }, {
-	    key: 'onFooterTodayClick',
-	    value: function onFooterTodayClick() {
-	      this.views[0].onFooterTodayClick();
-	    }
-	  }, {
-	    key: 'onFooterClearClick',
-	    value: function onFooterClearClick() {
-	      this.views[0].onFooterClearClick();
-	    }
-	  }, {
-	    key: 'onFooterOkClick',
-	    value: function onFooterOkClick() {
-	      this.views[0].onFooterOkClick();
-	    }
-	  }, {
-	    key: 'onFooterCancelClick',
-	    value: function onFooterCancelClick() {
-	      this.views[0].onFooterCancelClick();
-	    }
-	  }, {
-	    key: 'isFocused',
-	    value: function isFocused() {
-	      var firstView = this.views[0];
-
-	      if (firstView) {
-	        return firstView.isFocused();
-	      }
-
-	      return false;
-	    }
-	  }, {
-	    key: 'focus',
-	    value: function focus() {
-	      var firstView = this.views[0];
-
-	      if (firstView) {
-	        firstView.focus();
-	      }
-	    }
-	  }, {
-	    key: 'setHoverRange',
-	    value: function setHoverRange(hoverRange) {
-	      this.setState({
-	        hoverRange: hoverRange
-	      });
-	    }
-	  }, {
-	    key: 'select',
-	    value: function select(_ref) {
-	      var dateMoment = _ref.dateMoment;
-	      var timestamp = _ref.timestamp;
-
-	      // if (!dateMoment) {
-	      //   return
-	      // }
-
-	      var props = this.p;
-
-	      var visibleRange = [props.inViewStart, props.inViewEnd];
-
-	      // TODO check why this was needed
-	      // if (!isInRange(dateMoment, { range: visibleRange, inclusive: true })) {
-	      //   return
-	      // }
-
-	      this.onAdjustViewDateChange({ dateMoment: dateMoment, timestamp: timestamp });
-	      this.onActiveDateChange({ dateMoment: dateMoment, timestamp: timestamp });
-
-	      var range = props.range;
-
-	      if (range) {
-	        this.selectRange({ dateMoment: dateMoment, timestamp: timestamp });
-	      } else {
-	        this.onChange({ dateMoment: dateMoment, timestamp: timestamp }, event);
-	      }
-	    }
-	  }, {
-	    key: 'selectRange',
-	    value: function selectRange(_ref2) {
-	      var dateMoment = _ref2.dateMoment;
-	      var timestamp = _ref2.timestamp;
-
-	      return _MonthView2.default.prototype.selectRange.call(this, { dateMoment: dateMoment, timestamp: timestamp });
-	    }
-	  }, {
-	    key: 'onRangeChange',
-	    value: function onRangeChange(range) {
-	      return _MonthView2.default.prototype.onRangeChange.call(this, range);
-	    }
-	  }, {
-	    key: 'onViewKeyDown',
-	    value: function onViewKeyDown() {
-	      var view = this.views[0];
-	      if (view) {
-	        view.onViewKeyDown.apply(view, arguments);
-	      }
-	    }
-	  }, {
-	    key: 'renderNavBar',
-	    value: function renderNavBar(config, navBarProps) {
-	      return _renderNavBar.call(this, config, navBarProps);
-	    }
-	  }, {
-	    key: 'onMonthNavigate',
-	    value: function onMonthNavigate(index, dir, event, getNavigationDate) {
-	      var props = this.p;
-
-	      event.preventDefault();
-
-	      if (!props.activeDate) {
-	        return;
-	      }
-
-	      var key = event.key;
-
-	      var homeEndDate = key == 'Home' ? props.viewStart : props.viewEnd;
-
-	      var mom = key == 'Home' || key == 'End' ? homeEndDate : props.activeDate;
-
-	      var nextMoment = getNavigationDate(dir, this.toMoment(mom));
-
-	      var viewMoment = this.toMoment(nextMoment);
-
-	      this.onActiveDateChange({
-	        dateMoment: nextMoment,
-	        timestamp: +nextMoment
-	      });
-
-	      if (this.isInRange(viewMoment)) {
-	        return;
-	      }
-
-	      if (viewMoment.isAfter(props.viewEnd)) {
-	        viewMoment.add(-props.size + 1, 'month');
-	      }
-
-	      this.onViewDateChange({
-	        dateMoment: viewMoment,
-	        timestamp: +viewMoment
-	      });
-	    }
-	  }, {
-	    key: 'onAdjustViewDateChange',
-	    value: function onAdjustViewDateChange(_ref3) {
-	      var dateMoment = _ref3.dateMoment;
-	      var timestamp = _ref3.timestamp;
-
-	      var props = this.p;
-
-	      var update = dateMoment == null;
-
-	      if (dateMoment && dateMoment.isAfter(props.viewEnd)) {
-	        dateMoment = this.toMoment(dateMoment).add(-props.size + 1, 'month');
-	        timestamp = +dateMoment;
-	        update = true;
-	      } else if (dateMoment && dateMoment.isBefore(props.viewStart)) {
-	        update = true;
-	      }
-
-	      if (update) {
-	        this.onViewDateChange({ dateMoment: dateMoment, timestamp: timestamp });
-	      }
-	    }
-	  }, {
-	    key: 'updateViewMoment',
-	    value: function updateViewMoment(dateMoment, dir) {
-	      var sign = dir < 0 ? -1 : 1;
-	      var abs = Math.abs(dir);
-
-	      var newMoment = this.toMoment(this.p.viewStart);
-
-	      newMoment.add(sign, abs == 1 ? 'month' : 'year');
-
-	      return newMoment;
-	    }
-	  }, {
-	    key: 'renderHiddenNav',
-	    value: function renderHiddenNav(props) {
-	      return _react2.default.createElement(_reactInlineBlock2.default, _extends({}, props, { style: { visibility: 'hidden' } }));
-	    }
-	  }, {
-	    key: 'isInRange',
-	    value: function isInRange(moment) {
-	      return (0, _isInRange3.default)(moment, [this.p.viewStart, this.p.viewEnd]);
-	    }
-	  }, {
-	    key: 'isInView',
-	    value: function isInView(moment) {
-	      return this.isInRange(moment);
-	    }
-	  }, {
-	    key: 'onNavViewDateChange',
-	    value: function onNavViewDateChange(dateString, _ref4) {
-	      var dateMoment = _ref4.dateMoment;
-	      var timestamp = _ref4.timestamp;
-
-	      this.onViewDateChange({ dateMoment: dateMoment, timestamp: timestamp });
-	    }
-	  }, {
-	    key: 'onViewDateChange',
-	    value: function onViewDateChange(_ref5) {
-	      var dateMoment = _ref5.dateMoment;
-	      var timestamp = _ref5.timestamp;
-
-	      if (this.props.viewDate === undefined) {
-	        this.setState({
-	          viewDate: timestamp
-	        });
-	      }
-
-	      if (this.props.onViewDateChange) {
-	        var dateString = this.format(dateMoment);
-	        this.props.onViewDateChange(dateString, { dateMoment: dateMoment, dateString: dateString, timestamp: timestamp });
-	      }
-	    }
-	  }, {
-	    key: 'onActiveDateChange',
-	    value: function onActiveDateChange(_ref6) {
-	      var dateMoment = _ref6.dateMoment;
-	      var timestamp = _ref6.timestamp;
-
-	      var valid = this.views.reduce(function (isValid, view) {
-	        return isValid && view.isValidActiveDate(timestamp);
-	      }, true);
-
-	      if (!valid) {
-	        return;
-	      }
-
-	      var props = this.p;
-	      var range = props.range;
-
-	      if (range && props.rangeStart) {
-	        this.setState({
-	          rangeStart: props.rangeStart,
-	          range: (0, _clampRange2.default)([props.rangeStart, dateMoment])
-	        });
-	      }
-
-	      if (this.props.activeDate === undefined) {
-	        this.setState({
-	          activeDate: timestamp
-	        });
-	      }
-
-	      if (this.props.onActiveDateChange) {
-	        var dateString = this.format(dateMoment);
-	        this.props.onActiveDateChange(dateString, { dateMoment: dateMoment, dateString: dateString, timestamp: timestamp });
-	      }
-	    }
-	  }, {
-	    key: 'gotoViewDate',
-	    value: function gotoViewDate(_ref7) {
-	      var dateMoment = _ref7.dateMoment;
-	      var timestamp = _ref7.timestamp;
-
-	      if (!timestamp) {
-	        timestamp = +dateMoment;
-	      }
-
-	      this.onViewDateChange({ dateMoment: dateMoment, timestamp: timestamp });
-	      this.onActiveDateChange({ dateMoment: dateMoment, timestamp: timestamp });
-	    }
-	  }, {
-	    key: 'format',
-	    value: function format(mom) {
-	      return mom == null ? '' : mom.format(this.props.dateFormat);
-	    }
-	  }, {
-	    key: 'onChange',
-	    value: function onChange(_ref8, event) {
-	      var dateMoment = _ref8.dateMoment;
-	      var timestamp = _ref8.timestamp;
-
-	      if (this.props.date === undefined) {
-	        this.setState({
-	          date: timestamp
-	        });
-	      }
-
-	      if (this.props.onChange) {
-	        var dateString = this.format(dateMoment);
-	        this.props.onChange(dateString, { dateMoment: dateMoment, dateString: dateString, timestamp: timestamp }, event);
-	      }
-	    }
-	  }, {
-	    key: 'getViewSize',
-	    value: function getViewSize() {
-	      return this.props.size;
-	    }
-	  }]);
-
-	  return MultiMonthView;
-	}(_reactClass2.default);
-
-	exports.default = MultiMonthView;
-
-
-	MultiMonthView.defaultProps = {
-	  perRow: 2,
-	  size: 2,
-
-	  enableHistoryView: true,
-
-	  footerClearDate: null,
-
-	  isDatePicker: true,
-	  forceViewUpdate: false,
-
-	  navigation: true,
-	  theme: 'default',
-
-	  constrainActiveInView: true,
-
-	  dateFormat: 'YYYY-MM-DD'
-	};
-
-	MultiMonthView.propTypes = {};
-
-/***/ },
-/* 345 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-
-	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
-
-	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-	var _react = __webpack_require__(1);
-
-	var _react2 = _interopRequireDefault(_react);
-
-	var _reactClass = __webpack_require__(183);
-
-	var _reactClass2 = _interopRequireDefault(_reactClass);
-
-	var _lodash = __webpack_require__(346);
-
-	var _lodash2 = _interopRequireDefault(_lodash);
-
-	var _objectAssign = __webpack_require__(288);
-
-	var _objectAssign2 = _interopRequireDefault(_objectAssign);
-
-	var _reactFlex = __webpack_require__(294);
-
-	var _join = __webpack_require__(291);
-
-	var _join2 = _interopRequireDefault(_join);
-
-	var _toMoment = __webpack_require__(290);
-
-	var _toMoment2 = _interopRequireDefault(_toMoment);
-
-	var _Clock = __webpack_require__(320);
-
-	var _Clock2 = _interopRequireDefault(_Clock);
-
-	var _DateFormatSpinnerInput = __webpack_require__(347);
-
-	var _DateFormatSpinnerInput2 = _interopRequireDefault(_DateFormatSpinnerInput);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-	var ClockInput = function (_Component) {
-	  _inherits(ClockInput, _Component);
-
-	  function ClockInput(props) {
-	    _classCallCheck(this, ClockInput);
-
-	    var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(ClockInput).call(this, props));
-
-	    var delay = props.changeDelay;
-	    _this.throttleSetValue = delay == -1 ? _this.setValue : (0, _lodash2.default)(_this.setValue, delay);
-
-	    _this.state = {
-	      value: props.defaultValue || Date.now()
-	    };
-	    return _this;
-	  }
-
-	  _createClass(ClockInput, [{
-	    key: 'getValue',
-	    value: function getValue() {
-	      return this.value;
-	    }
-	  }, {
-	    key: 'render',
-	    value: function render() {
-	      var props = this.props;
-	      var format = props.dateFormat || props.format;
-
-	      var dateFormat = format.substring(format.toLowerCase().indexOf('hh'));
-
-	      this.dateFormat = dateFormat;
-
-	      this.value = props.value !== undefined ? props.value : this.state.value;
-
-	      var className = (0, _join2.default)(props.className, 'react-date-picker__clock-input', props.theme && 'react-date-picker__clock-input--theme-' + props.theme);
-
-	      var flexProps = (0, _objectAssign2.default)({}, this.props);
-
-	      delete flexProps.changeDelay;
-	      delete flexProps.cleanup;
-	      delete flexProps.dateFormat;
-	      delete flexProps.isClockInput;
-	      delete flexProps.onEnterKey;
-	      delete flexProps.onEscapeKey;
-	      delete flexProps.onTimeChange;
-	      delete flexProps.updateOnWheel;
-	      delete flexProps.theme;
-	      delete flexProps.viewIndex;
-	      delete flexProps.wrapTime;
-
-	      if (typeof this.props.cleanup == 'function') {
-	        this.props.cleanup(flexProps);
-	      }
-
-	      return _react2.default.createElement(
-	        _reactFlex.Flex,
-	        _extends({
-	          column: true
-	        }, flexProps, {
-	          value: null,
-	          defaultValue: null,
-	          className: className
-	        }),
-	        this.renderClock(),
-	        this.renderTimeInput()
-	      );
-	    }
-	  }, {
-	    key: 'renderTimeInput',
-	    value: function renderTimeInput() {
-	      var _this2 = this;
-
-	      var props = this.props;
-	      var dateInput = _react2.default.Children.toArray(props.children).filter(function (child) {
-	        return child && child.props && child.props.isDateInput;
-	      })[0];
-
-	      var dateInputProps = (0, _objectAssign2.default)({}, this.props, {
-	        ref: function ref(field) {
-	          _this2.field = field;
-	        },
-	        tabIndex: props.readOnly ? -1 : props.tabIndex || 0,
-	        readOnly: props.readOnly,
-	        value: this.value,
-	        dateFormat: this.dateFormat,
-	        onChange: this.onChange,
-	        onKeyDown: this.onKeyDown,
-	        size: props.size || this.dateFormat.length + 2
-	      });
-
-	      if (dateInput) {
-	        return _react2.default.cloneElement(dateInput, dateInputProps);
-	      }
-
-	      return _react2.default.createElement(_DateFormatSpinnerInput2.default, _extends({}, dateInputProps, { style: null }));
-	    }
-	  }, {
-	    key: 'focus',
-	    value: function focus() {
-	      if (this.field) {
-	        this.field.focus();
-	      }
-	    }
-	  }, {
-	    key: 'onKeyDown',
-	    value: function onKeyDown(event) {
-	      if (this.props.onEnterKey && event.key == 'Enter') {
-	        this.props.onEnterKey(event);
-	      }
-
-	      if (this.props.onEscapeKey && event.key == 'Escape') {
-	        this.props.onEscapeKey(event);
-	      }
-	    }
-	  }, {
-	    key: 'onChange',
-	    value: function onChange(value) {
-	      if (this.props.value === undefined) {
-	        this.setState({
-	          value: value
-	        });
-	      }
-
-	      if (this.props.onChange) {
-	        this.throttleSetValue(value);
-	      }
-	    }
-	  }, {
-	    key: 'setValue',
-	    value: function setValue(value) {
-	      if (this.props.value === undefined) {
-	        this.setState({
-	          value: value
-	        });
-	      }
-
-	      if (this.props.onChange) {
-	        this.props.onChange(value, this.dateFormat);
-	      }
-	    }
-	  }, {
-	    key: 'renderClock',
-	    value: function renderClock() {
-	      var props = this.props;
-	      var clock = _react2.default.Children.toArray(props.children).filter(function (child) {
-	        return child && child.props && child.props.isDatePickerClock;
-	      })[0];
-
-	      var dateFormat = this.dateFormat;
-	      var time = (0, _toMoment2.default)(this.value, { dateFormat: dateFormat });
-
-	      var clockProps = {
-	        time: time,
-	        theme: props.theme,
-	        showMinutesHand: dateFormat.indexOf('mm') != -1,
-	        showSecondsHand: dateFormat.indexOf('ss') != -1
-	      };
-
-	      if (clock) {
-	        return _react2.default.cloneElement(clock, clockProps);
-	      }
-
-	      return _react2.default.createElement(_Clock2.default, clockProps);
-	    }
-	  }]);
-
-	  return ClockInput;
-	}(_reactClass2.default);
-
-	exports.default = ClockInput;
-
-
-	ClockInput.defaultProps = {
-	  changeDelay: 50,
-
-	  dateFormat: 'YYYY-MM-DD',
-	  updateOnWheel: true,
-
-	  theme: 'default',
-
-	  wrapTime: false,
-	  isClockInput: true,
-
-	  onTimeChange: function onTimeChange() {}
-	};
-
-	ClockInput.propTypes = {};
-
-/***/ },
-/* 346 */
-/***/ function(module, exports) {
-
-	/**
-	 * lodash (Custom Build) <https://lodash.com/>
-	 * Build: `lodash modularize exports="npm" -o ./`
-	 * Copyright jQuery Foundation and other contributors <https://jquery.org/>
-	 * Released under MIT license <https://lodash.com/license>
-	 * Based on Underscore.js 1.8.3 <http://underscorejs.org/LICENSE>
-	 * Copyright Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
-	 */
-
-	/** Used as the `TypeError` message for "Functions" methods. */
-	var FUNC_ERROR_TEXT = 'Expected a function';
-
-	/** Used as references for various `Number` constants. */
-	var NAN = 0 / 0;
-
-	/** `Object#toString` result references. */
-	var funcTag = '[object Function]',
-	    genTag = '[object GeneratorFunction]',
-	    symbolTag = '[object Symbol]';
-
-	/** Used to match leading and trailing whitespace. */
-	var reTrim = /^\s+|\s+$/g;
-
-	/** Used to detect bad signed hexadecimal string values. */
-	var reIsBadHex = /^[-+]0x[0-9a-f]+$/i;
-
-	/** Used to detect binary string values. */
-	var reIsBinary = /^0b[01]+$/i;
-
-	/** Used to detect octal string values. */
-	var reIsOctal = /^0o[0-7]+$/i;
-
-	/** Built-in method references without a dependency on `root`. */
-	var freeParseInt = parseInt;
-
-	/** Used for built-in method references. */
-	var objectProto = Object.prototype;
-
-	/**
-	 * Used to resolve the
-	 * [`toStringTag`](http://ecma-international.org/ecma-262/6.0/#sec-object.prototype.tostring)
-	 * of values.
-	 */
-	var objectToString = objectProto.toString;
-
-	/* Built-in method references for those with the same name as other `lodash` methods. */
-	var nativeMax = Math.max,
-	    nativeMin = Math.min;
-
-	/**
-	 * Gets the timestamp of the number of milliseconds that have elapsed since
-	 * the Unix epoch (1 January 1970 00:00:00 UTC).
-	 *
-	 * @static
-	 * @memberOf _
-	 * @since 2.4.0
-	 * @category Date
-	 * @returns {number} Returns the timestamp.
-	 * @example
-	 *
-	 * _.defer(function(stamp) {
-	 *   console.log(_.now() - stamp);
-	 * }, _.now());
-	 * // => Logs the number of milliseconds it took for the deferred invocation.
-	 */
-	function now() {
-	  return Date.now();
-	}
-
-	/**
-	 * Creates a debounced function that delays invoking `func` until after `wait`
-	 * milliseconds have elapsed since the last time the debounced function was
-	 * invoked. The debounced function comes with a `cancel` method to cancel
-	 * delayed `func` invocations and a `flush` method to immediately invoke them.
-	 * Provide an options object to indicate whether `func` should be invoked on
-	 * the leading and/or trailing edge of the `wait` timeout. The `func` is invoked
-	 * with the last arguments provided to the debounced function. Subsequent calls
-	 * to the debounced function return the result of the last `func` invocation.
-	 *
-	 * **Note:** If `leading` and `trailing` options are `true`, `func` is invoked
-	 * on the trailing edge of the timeout only if the debounced function is
-	 * invoked more than once during the `wait` timeout.
-	 *
-	 * See [David Corbacho's article](https://css-tricks.com/debouncing-throttling-explained-examples/)
-	 * for details over the differences between `_.debounce` and `_.throttle`.
-	 *
-	 * @static
-	 * @memberOf _
-	 * @since 0.1.0
-	 * @category Function
-	 * @param {Function} func The function to debounce.
-	 * @param {number} [wait=0] The number of milliseconds to delay.
-	 * @param {Object} [options={}] The options object.
-	 * @param {boolean} [options.leading=false]
-	 *  Specify invoking on the leading edge of the timeout.
-	 * @param {number} [options.maxWait]
-	 *  The maximum time `func` is allowed to be delayed before it's invoked.
-	 * @param {boolean} [options.trailing=true]
-	 *  Specify invoking on the trailing edge of the timeout.
-	 * @returns {Function} Returns the new debounced function.
-	 * @example
-	 *
-	 * // Avoid costly calculations while the window size is in flux.
-	 * jQuery(window).on('resize', _.debounce(calculateLayout, 150));
-	 *
-	 * // Invoke `sendMail` when clicked, debouncing subsequent calls.
-	 * jQuery(element).on('click', _.debounce(sendMail, 300, {
-	 *   'leading': true,
-	 *   'trailing': false
-	 * }));
-	 *
-	 * // Ensure `batchLog` is invoked once after 1 second of debounced calls.
-	 * var debounced = _.debounce(batchLog, 250, { 'maxWait': 1000 });
-	 * var source = new EventSource('/stream');
-	 * jQuery(source).on('message', debounced);
-	 *
-	 * // Cancel the trailing debounced invocation.
-	 * jQuery(window).on('popstate', debounced.cancel);
-	 */
-	function debounce(func, wait, options) {
-	  var lastArgs,
-	      lastThis,
-	      maxWait,
-	      result,
-	      timerId,
-	      lastCallTime,
-	      lastInvokeTime = 0,
-	      leading = false,
-	      maxing = false,
-	      trailing = true;
-
-	  if (typeof func != 'function') {
-	    throw new TypeError(FUNC_ERROR_TEXT);
-	  }
-	  wait = toNumber(wait) || 0;
-	  if (isObject(options)) {
-	    leading = !!options.leading;
-	    maxing = 'maxWait' in options;
-	    maxWait = maxing ? nativeMax(toNumber(options.maxWait) || 0, wait) : maxWait;
-	    trailing = 'trailing' in options ? !!options.trailing : trailing;
-	  }
-
-	  function invokeFunc(time) {
-	    var args = lastArgs,
-	        thisArg = lastThis;
-
-	    lastArgs = lastThis = undefined;
-	    lastInvokeTime = time;
-	    result = func.apply(thisArg, args);
-	    return result;
-	  }
-
-	  function leadingEdge(time) {
-	    // Reset any `maxWait` timer.
-	    lastInvokeTime = time;
-	    // Start the timer for the trailing edge.
-	    timerId = setTimeout(timerExpired, wait);
-	    // Invoke the leading edge.
-	    return leading ? invokeFunc(time) : result;
-	  }
-
-	  function remainingWait(time) {
-	    var timeSinceLastCall = time - lastCallTime,
-	        timeSinceLastInvoke = time - lastInvokeTime,
-	        result = wait - timeSinceLastCall;
-
-	    return maxing ? nativeMin(result, maxWait - timeSinceLastInvoke) : result;
-	  }
-
-	  function shouldInvoke(time) {
-	    var timeSinceLastCall = time - lastCallTime,
-	        timeSinceLastInvoke = time - lastInvokeTime;
-
-	    // Either this is the first call, activity has stopped and we're at the
-	    // trailing edge, the system time has gone backwards and we're treating
-	    // it as the trailing edge, or we've hit the `maxWait` limit.
-	    return (lastCallTime === undefined || (timeSinceLastCall >= wait) ||
-	      (timeSinceLastCall < 0) || (maxing && timeSinceLastInvoke >= maxWait));
-	  }
-
-	  function timerExpired() {
-	    var time = now();
-	    if (shouldInvoke(time)) {
-	      return trailingEdge(time);
-	    }
-	    // Restart the timer.
-	    timerId = setTimeout(timerExpired, remainingWait(time));
-	  }
-
-	  function trailingEdge(time) {
-	    timerId = undefined;
-
-	    // Only invoke if we have `lastArgs` which means `func` has been
-	    // debounced at least once.
-	    if (trailing && lastArgs) {
-	      return invokeFunc(time);
-	    }
-	    lastArgs = lastThis = undefined;
-	    return result;
-	  }
-
-	  function cancel() {
-	    if (timerId !== undefined) {
-	      clearTimeout(timerId);
-	    }
-	    lastInvokeTime = 0;
-	    lastArgs = lastCallTime = lastThis = timerId = undefined;
-	  }
-
-	  function flush() {
-	    return timerId === undefined ? result : trailingEdge(now());
-	  }
-
-	  function debounced() {
-	    var time = now(),
-	        isInvoking = shouldInvoke(time);
-
-	    lastArgs = arguments;
-	    lastThis = this;
-	    lastCallTime = time;
-
-	    if (isInvoking) {
-	      if (timerId === undefined) {
-	        return leadingEdge(lastCallTime);
-	      }
-	      if (maxing) {
-	        // Handle invocations in a tight loop.
-	        timerId = setTimeout(timerExpired, wait);
-	        return invokeFunc(lastCallTime);
-	      }
-	    }
-	    if (timerId === undefined) {
-	      timerId = setTimeout(timerExpired, wait);
-	    }
-	    return result;
-	  }
-	  debounced.cancel = cancel;
-	  debounced.flush = flush;
-	  return debounced;
-	}
-
-	/**
-	 * Creates a throttled function that only invokes `func` at most once per
-	 * every `wait` milliseconds. The throttled function comes with a `cancel`
-	 * method to cancel delayed `func` invocations and a `flush` method to
-	 * immediately invoke them. Provide an options object to indicate whether
-	 * `func` should be invoked on the leading and/or trailing edge of the `wait`
-	 * timeout. The `func` is invoked with the last arguments provided to the
-	 * throttled function. Subsequent calls to the throttled function return the
-	 * result of the last `func` invocation.
-	 *
-	 * **Note:** If `leading` and `trailing` options are `true`, `func` is
-	 * invoked on the trailing edge of the timeout only if the throttled function
-	 * is invoked more than once during the `wait` timeout.
-	 *
-	 * See [David Corbacho's article](https://css-tricks.com/debouncing-throttling-explained-examples/)
-	 * for details over the differences between `_.throttle` and `_.debounce`.
-	 *
-	 * @static
-	 * @memberOf _
-	 * @since 0.1.0
-	 * @category Function
-	 * @param {Function} func The function to throttle.
-	 * @param {number} [wait=0] The number of milliseconds to throttle invocations to.
-	 * @param {Object} [options={}] The options object.
-	 * @param {boolean} [options.leading=true]
-	 *  Specify invoking on the leading edge of the timeout.
-	 * @param {boolean} [options.trailing=true]
-	 *  Specify invoking on the trailing edge of the timeout.
-	 * @returns {Function} Returns the new throttled function.
-	 * @example
-	 *
-	 * // Avoid excessively updating the position while scrolling.
-	 * jQuery(window).on('scroll', _.throttle(updatePosition, 100));
-	 *
-	 * // Invoke `renewToken` when the click event is fired, but not more than once every 5 minutes.
-	 * var throttled = _.throttle(renewToken, 300000, { 'trailing': false });
-	 * jQuery(element).on('click', throttled);
-	 *
-	 * // Cancel the trailing throttled invocation.
-	 * jQuery(window).on('popstate', throttled.cancel);
-	 */
-	function throttle(func, wait, options) {
-	  var leading = true,
-	      trailing = true;
-
-	  if (typeof func != 'function') {
-	    throw new TypeError(FUNC_ERROR_TEXT);
-	  }
-	  if (isObject(options)) {
-	    leading = 'leading' in options ? !!options.leading : leading;
-	    trailing = 'trailing' in options ? !!options.trailing : trailing;
-	  }
-	  return debounce(func, wait, {
-	    'leading': leading,
-	    'maxWait': wait,
-	    'trailing': trailing
-	  });
-	}
-
-	/**
-	 * Checks if `value` is classified as a `Function` object.
-	 *
-	 * @static
-	 * @memberOf _
-	 * @since 0.1.0
-	 * @category Lang
-	 * @param {*} value The value to check.
-	 * @returns {boolean} Returns `true` if `value` is a function, else `false`.
-	 * @example
-	 *
-	 * _.isFunction(_);
-	 * // => true
-	 *
-	 * _.isFunction(/abc/);
-	 * // => false
-	 */
-	function isFunction(value) {
-	  // The use of `Object#toString` avoids issues with the `typeof` operator
-	  // in Safari 8 which returns 'object' for typed array and weak map constructors,
-	  // and PhantomJS 1.9 which returns 'function' for `NodeList` instances.
-	  var tag = isObject(value) ? objectToString.call(value) : '';
-	  return tag == funcTag || tag == genTag;
-	}
-
-	/**
-	 * Checks if `value` is the
-	 * [language type](http://www.ecma-international.org/ecma-262/6.0/#sec-ecmascript-language-types)
-	 * of `Object`. (e.g. arrays, functions, objects, regexes, `new Number(0)`, and `new String('')`)
-	 *
-	 * @static
-	 * @memberOf _
-	 * @since 0.1.0
-	 * @category Lang
-	 * @param {*} value The value to check.
-	 * @returns {boolean} Returns `true` if `value` is an object, else `false`.
-	 * @example
-	 *
-	 * _.isObject({});
-	 * // => true
-	 *
-	 * _.isObject([1, 2, 3]);
-	 * // => true
-	 *
-	 * _.isObject(_.noop);
-	 * // => true
-	 *
-	 * _.isObject(null);
-	 * // => false
-	 */
-	function isObject(value) {
-	  var type = typeof value;
-	  return !!value && (type == 'object' || type == 'function');
-	}
-
-	/**
-	 * Checks if `value` is object-like. A value is object-like if it's not `null`
-	 * and has a `typeof` result of "object".
-	 *
-	 * @static
-	 * @memberOf _
-	 * @since 4.0.0
-	 * @category Lang
-	 * @param {*} value The value to check.
-	 * @returns {boolean} Returns `true` if `value` is object-like, else `false`.
-	 * @example
-	 *
-	 * _.isObjectLike({});
-	 * // => true
-	 *
-	 * _.isObjectLike([1, 2, 3]);
-	 * // => true
-	 *
-	 * _.isObjectLike(_.noop);
-	 * // => false
-	 *
-	 * _.isObjectLike(null);
-	 * // => false
-	 */
-	function isObjectLike(value) {
-	  return !!value && typeof value == 'object';
-	}
-
-	/**
-	 * Checks if `value` is classified as a `Symbol` primitive or object.
-	 *
-	 * @static
-	 * @memberOf _
-	 * @since 4.0.0
-	 * @category Lang
-	 * @param {*} value The value to check.
-	 * @returns {boolean} Returns `true` if `value` is a symbol, else `false`.
-	 * @example
-	 *
-	 * _.isSymbol(Symbol.iterator);
-	 * // => true
-	 *
-	 * _.isSymbol('abc');
-	 * // => false
-	 */
-	function isSymbol(value) {
-	  return typeof value == 'symbol' ||
-	    (isObjectLike(value) && objectToString.call(value) == symbolTag);
-	}
-
-	/**
-	 * Converts `value` to a number.
-	 *
-	 * @static
-	 * @memberOf _
-	 * @since 4.0.0
-	 * @category Lang
-	 * @param {*} value The value to process.
-	 * @returns {number} Returns the number.
-	 * @example
-	 *
-	 * _.toNumber(3.2);
-	 * // => 3.2
-	 *
-	 * _.toNumber(Number.MIN_VALUE);
-	 * // => 5e-324
-	 *
-	 * _.toNumber(Infinity);
-	 * // => Infinity
-	 *
-	 * _.toNumber('3.2');
-	 * // => 3.2
-	 */
-	function toNumber(value) {
-	  if (typeof value == 'number') {
-	    return value;
-	  }
-	  if (isSymbol(value)) {
-	    return NAN;
-	  }
-	  if (isObject(value)) {
-	    var other = isFunction(value.valueOf) ? value.valueOf() : value;
-	    value = isObject(other) ? (other + '') : other;
-	  }
-	  if (typeof value != 'string') {
-	    return value === 0 ? value : +value;
-	  }
-	  value = value.replace(reTrim, '');
-	  var isBinary = reIsBinary.test(value);
-	  return (isBinary || reIsOctal.test(value))
-	    ? freeParseInt(value.slice(2), isBinary ? 2 : 8)
-	    : (reIsBadHex.test(value) ? NAN : +value);
-	}
-
-	module.exports = throttle;
-
-
-/***/ },
-/* 347 */
-/***/ function(module, exports, __webpack_require__) {
-
-	/* WEBPACK VAR INJECTION */(function(global) {'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-
-	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
-
-	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-	var _react = __webpack_require__(1);
-
-	var _react2 = _interopRequireDefault(_react);
-
-	var _reactClass = __webpack_require__(183);
-
-	var _reactClass2 = _interopRequireDefault(_reactClass);
-
-	var _reactFlex = __webpack_require__(294);
-
-	var _DateFormatInput = __webpack_require__(348);
-
-	var _DateFormatInput2 = _interopRequireDefault(_DateFormatInput);
-
-	var _objectAssign = __webpack_require__(288);
-
-	var _objectAssign2 = _interopRequireDefault(_objectAssign);
-
-	var _joinFunctions = __webpack_require__(306);
-
-	var _joinFunctions2 = _interopRequireDefault(_joinFunctions);
-
-	var _assignDefined = __webpack_require__(303);
-
-	var _assignDefined2 = _interopRequireDefault(_assignDefined);
-
-	var _join = __webpack_require__(291);
-
-	var _join2 = _interopRequireDefault(_join);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-	var DateFormatSpinnerInput = function (_Component) {
-	  _inherits(DateFormatSpinnerInput, _Component);
-
-	  function DateFormatSpinnerInput(props) {
-	    _classCallCheck(this, DateFormatSpinnerInput);
-
-	    var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(DateFormatSpinnerInput).call(this, props));
-
-	    _this.state = {
-	      focused: false
-	    };
-	    return _this;
-	  }
-
-	  _createClass(DateFormatSpinnerInput, [{
-	    key: 'componentWillUnmount',
-	    value: function componentWillUnmount() {
-	      this.started = false;
-	    }
-	  }, {
-	    key: 'render',
-	    value: function render() {
-	      var _this2 = this;
-
-	      var props = this.props;
-	      var children = _react2.default.Children.toArray(props.children);
-
-	      var input = this.inputChild = children.filter(function (c) {
-	        return c && c.type == 'input';
-	      })[0];
-	      var inputProps = input ? (0, _objectAssign2.default)({}, input.props) : {};
-
-	      var onKeyDown = (0, _joinFunctions2.default)(props.onKeyDown, inputProps.onKeyDown);
-	      var onChange = (0, _joinFunctions2.default)(props.onChange, inputProps.onChange);
-	      var disabled = props.disabled || inputProps.disabled;
-
-	      (0, _assignDefined2.default)(inputProps, {
-	        size: props.size || inputProps.size,
-	        minDate: props.minDate || inputProps.minDate,
-	        maxDate: props.maxDate || inputProps.maxDate,
-
-	        changeDelay: props.changeDelay === undefined ? inputProps.changeDelay : props.changeDelay,
-
-	        tabIndex: props.tabIndex,
-
-	        onKeyDown: onKeyDown,
-	        onChange: onChange,
-	        disabled: disabled,
-
-	        dateFormat: props.dateFormat === undefined ? inputProps.dateFormat : props.dateFormat,
-	        stopPropagation: props.stopPropagation,
-	        updateOnWheel: props.updateOnWheel,
-
-	        onBlur: this.onBlur,
-	        onFocus: this.onFocus
-	      });
-
-	      this.inputProps = inputProps;
-
-	      var arrowSize = this.props.arrowSize;
-
-	      this.arrows = {
-	        1: _react2.default.createElement(
-	          'svg',
-	          { height: arrowSize, viewBox: '0 0 24 24', width: arrowSize },
-	          _react2.default.createElement('path', { d: 'M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z' })
-	        ),
-
-	        '-1': _react2.default.createElement(
-	          'svg',
-	          { height: arrowSize, viewBox: '0 0 24 24', width: arrowSize },
-	          _react2.default.createElement('path', { d: 'M7.41 7.84L12 12.42l4.59-4.58L18 9.25l-6 6-6-6z' })
+	          'div',
+	          { className: 'days', onClick: this.cellClick },
+	          days
 	        )
-	      };
-
-	      var className = (0, _join2.default)(props.className, 'react-date-picker__date-format-spinner', disabled && 'react-date-picker__date-format-spinner--disabled', this.isFocused() && 'react-date-picker__date-format-spinner--focused', 'react-date-picker__date-format-spinner--theme-' + props.theme);
-
-	      return _react2.default.createElement(
-	        _reactFlex.Flex,
-	        {
-	          inline: true,
-	          row: true,
-	          className: className,
-	          disabled: props.disabled
-	        },
-	        _react2.default.createElement(_DateFormatInput2.default, _extends({
-	          ref: function ref(inputDOM) {
-	            _this2.input = inputDOM;
-	          },
-	          value: props.value
-	        }, inputProps)),
-	        this.renderArrows()
 	      );
-	    }
-	  }, {
-	    key: 'renderArrows',
-	    value: function renderArrows() {
-	      if (this.props.renderArrows) {
-	        return this.props.renderArrows(this.props);
-	      }
-
-	      return _react2.default.createElement(
-	        _reactFlex.Flex,
-	        {
-	          column: true,
-	          inline: true
-	        },
-	        this.renderArrow(1),
-	        this.renderArrow(-1)
-	      );
-	    }
-	  }, {
-	    key: 'renderArrow',
-	    value: function renderArrow(dir) {
-	      return _react2.default.createElement(
-	        _reactFlex.Item,
-	        {
-	          flexShrink: 1,
-	          className: 'react-date-picker__date-format-spinner-arrow',
-	          style: { overflow: 'hidden', height: this.props.arrowSize },
-	          onMouseDown: this.onMouseDown.bind(this, dir),
-	          onMouseUp: this.stop,
-	          onMouseLeave: this.stop
-	        },
-	        this.arrows[dir]
-	      );
-	    }
-	  }, {
-	    key: 'onMouseDown',
-	    value: function onMouseDown(dir, event) {
-	      var _this3 = this;
-
-	      if (this.props.disabled) {
-	        event.preventDefault();
-	        return;
-	      }
-
-	      event.preventDefault();
-	      if (this.isFocused()) {
-	        this.start(dir);
-	      } else {
-	        this.focus();
-
-	        setTimeout(function () {
-	          _this3.increment(dir);
-	        }, 1);
-	      }
-	    }
-	  }, {
-	    key: 'start',
-	    value: function start(dir) {
-	      var _this4 = this;
-
-	      this.started = true;
-	      this.startTime = Date.now();
-
-	      this.step(dir);
-
-	      this.timeoutId = setTimeout(function () {
-	        _this4.step(dir);
-
-	        _this4.timeoutId = setTimeout(function () {
-	          var lazyStep = function lazyStep() {
-	            var delay = _this4.props.stepDelay - (Date.now() - _this4.startTime) / 500;
-	            _this4.step(dir, lazyStep, delay);
-	          };
-
-	          lazyStep();
-	        }, _this4.props.secondStepDelay);
-	      }, this.props.firstStepDelay);
-	    }
-	  }, {
-	    key: 'isStarted',
-	    value: function isStarted() {
-	      return !!(this.started && this.input);
-	    }
-	  }, {
-	    key: 'increment',
-	    value: function increment(dir) {
-	      this.input.onDirection(dir);
-	    }
-	  }, {
-	    key: 'step',
-	    value: function step(dir, callback, delay) {
-	      var _this5 = this;
-
-	      if (this.isStarted()) {
-	        this.increment(dir);
-
-	        if (typeof callback == 'function') {
-	          this.timeoutId = setTimeout(function () {
-	            if (_this5.isStarted()) {
-	              callback();
-	            }
-	          }, delay === undefined ? this.props.stepDelay : delay);
-	        }
-	      }
-	    }
-	  }, {
-	    key: 'stop',
-	    value: function stop() {
-	      this.started = false;
-	      if (this.timeoutId) {
-	        global.clearTimeout(this.timeoutId);
-	      }
-	    }
-	  }, {
-	    key: 'focus',
-	    value: function focus() {
-	      if (this.input) {
-	        this.input.focus();
-	      }
-	    }
-	  }, {
-	    key: 'isFocused',
-	    value: function isFocused() {
-	      return this.state.focused;
-	    }
-	  }, {
-	    key: 'onBlur',
-	    value: function onBlur(event) {
-	      var props = this.props;
-
-	      var onBlur = (0, _joinFunctions2.default)(props.onBlur, this.inputChild && this.inputChild.props && this.inputChild.props.onBlur);
-
-	      if (onBlur) {
-	        onBlur(event);
-	      }
-
-	      this.setState({
-	        focused: false
-	      });
-	    }
-	  }, {
-	    key: 'onFocus',
-	    value: function onFocus(event) {
-	      var props = this.props;
-
-	      var onFocus = (0, _joinFunctions2.default)(props.onFocus, this.inputChild && this.inputChild.props && this.inputChild.props.onFocus);
-
-	      if (onFocus) {
-	        onFocus(event);
-	      }
-
-	      this.setState({
-	        focused: true
-	      });
 	    }
 	  }]);
+	  return DayView;
+	}(_react2.default.Component);
 
-	  return DateFormatSpinnerInput;
-	}(_reactClass2.default);
-
-	exports.default = DateFormatSpinnerInput;
-
-
-	DateFormatSpinnerInput.defaultProps = {
-	  firstStepDelay: 150,
-	  secondStepDelay: 100,
-	  stepDelay: 50,
-
-	  changeDelay: undefined,
-
-	  theme: 'default',
-
-	  disabled: false,
-	  arrowSize: 15,
-	  isDateInput: true,
-	  stopPropagation: true,
-	  updateOnWheel: true
+	DayView.propTypes = {
+	  date: _react2.default.PropTypes.object.isRequired,
+	  minDate: _react2.default.PropTypes.any,
+	  maxDate: _react2.default.PropTypes.any,
+	  setDate: _react2.default.PropTypes.func,
+	  nextView: _react2.default.PropTypes.func
 	};
-	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }())))
+	exports.default = DayView;
 
 /***/ },
-/* 348 */
+/* 375 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -47059,2135 +39410,30 @@
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
-
-	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
-
-	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+	exports.default = Cell;
 
 	var _react = __webpack_require__(1);
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _reactDom = __webpack_require__(35);
-
-	var _reactClass = __webpack_require__(183);
-
-	var _reactClass2 = _interopRequireDefault(_reactClass);
-
-	var _lodash = __webpack_require__(346);
-
-	var _lodash2 = _interopRequireDefault(_lodash);
-
-	var _objectAssign = __webpack_require__(288);
-
-	var _objectAssign2 = _interopRequireDefault(_objectAssign);
-
-	var _TimeInput = __webpack_require__(317);
-
-	var _toMoment2 = __webpack_require__(290);
-
-	var _toMoment3 = _interopRequireDefault(_toMoment2);
-
-	var _parseFormat2 = __webpack_require__(349);
-
-	var _parseFormat3 = _interopRequireDefault(_parseFormat2);
-
-	var _forwardTime = __webpack_require__(342);
-
-	var _forwardTime2 = _interopRequireDefault(_forwardTime);
+	__webpack_require__(373);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-	var emptyFn = function emptyFn() {};
-
-	var BACKWARDS = {
-	  Backspace: 1,
-	  ArrowUp: 1,
-	  ArrowDown: 1,
-	  PageUp: 1,
-	  PageDown: 1
-	};
-
-	var DateFormatInput = function (_Component) {
-	  _inherits(DateFormatInput, _Component);
-
-	  function DateFormatInput(props) {
-	    _classCallCheck(this, DateFormatInput);
-
-	    var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(DateFormatInput).call(this, props));
-
-	    var _parseFormat = (0, _parseFormat3.default)(props.dateFormat);
-
-	    var positions = _parseFormat.positions;
-	    var matches = _parseFormat.matches;
-
-	    var defaultValue = props.defaultValue || Date.now();
-
-	    var delay = props.changeDelay;
-	    _this.throttleSetValue = delay == -1 ? _this.setValue : (0, _lodash2.default)(_this.setValue, delay);
-
-	    var _this$getMinMax = _this.getMinMax(props);
-
-	    var minDate = _this$getMinMax.minDate;
-	    var maxDate = _this$getMinMax.maxDate;
-
-
-	    _this.state = {
-	      positions: positions,
-	      matches: matches,
-	      propsValue: props.value !== undefined,
-	      value: defaultValue,
-	      minDate: minDate,
-	      maxDate: maxDate
-	    };
-	    return _this;
-	  }
-
-	  _createClass(DateFormatInput, [{
-	    key: 'getMinMax',
-	    value: function getMinMax(props) {
-	      props = props || this.props;
-
-	      var minDate = null;
-
-	      if (props.minDate) {
-	        minDate = this.toMoment(props.minDate, props);
-	      }
-
-	      var maxDate = null;
-
-	      if (props.maxDate) {
-	        maxDate = this.toMoment(props.maxDate, props);
-	      }
-
-	      return {
-	        minDate: minDate, maxDate: maxDate
-	      };
-	    }
-	  }, {
-	    key: 'componentWillReceiveProps',
-	    value: function componentWillReceiveProps(nextProps) {
-	      var _getMinMax = this.getMinMax(nextProps);
-
-	      var minDate = _getMinMax.minDate;
-	      var maxDate = _getMinMax.maxDate;
-
-
-	      this.setState({
-	        minDate: minDate, maxDate: maxDate
-	      });
-	    }
-	  }, {
-	    key: 'componentDidUpdate',
-	    value: function componentDidUpdate() {
-	      if (this.props.value !== undefined && this.caretPos && this.isFocused()) {
-	        this.setCaretPosition(this.caretPos);
-	      }
-	    }
-	  }, {
-	    key: 'toMoment',
-	    value: function toMoment(value, props) {
-	      props = props || this.props;
-
-	      return (0, _toMoment3.default)(value, {
-	        locale: props.locale,
-	        dateFormat: props.dateFormat || this.props.dateFormat
-	      });
-	    }
-	  }, {
-	    key: 'render',
-	    value: function render() {
-	      var props = this.props;
-
-
-	      var value = this.state.propsValue ? props.value : this.state.value;
-
-	      var displayValue = this.displayValue = this.toMoment(value).format(props.dateFormat);
-
-	      var inputProps = (0, _objectAssign2.default)({}, props);
-
-	      delete inputProps.changeDelay;
-	      delete inputProps.date;
-	      delete inputProps.dateFormat;
-	      delete inputProps.isDateInput;
-	      delete inputProps.maxDate;
-	      delete inputProps.minDate;
-	      delete inputProps.stopPropagation;
-	      delete inputProps.updateOnWheel;
-
-	      if (typeof props.cleanup == 'function') {
-	        props.cleanup(inputProps);
-	      }
-
-	      return _react2.default.createElement('input', _extends({}, inputProps, {
-	        defaultValue: undefined,
-	        onFocus: this.onFocus,
-	        onBlur: this.onBlur,
-	        value: displayValue,
-	        onKeyDown: this.onKeyDown,
-	        onWheel: this.onWheel,
-	        onChange: this.onChange
-	      }));
-	    }
-	  }, {
-	    key: 'focus',
-	    value: function focus() {
-	      (0, _reactDom.findDOMNode)(this).focus();
-	    }
-	  }, {
-	    key: 'onFocus',
-	    value: function onFocus(event) {
-	      if (this.props.onFocus) {
-	        this.props.onFocus(event);
-	      }
-
-	      this.setState({
-	        focused: true
-	      });
-	    }
-	  }, {
-	    key: 'onBlur',
-	    value: function onBlur(event) {
-	      if (this.props.onBlur) {
-	        this.props.onBlur(event);
-	      }
-
-	      this.setState({
-	        focused: false
-	      });
-	    }
-	  }, {
-	    key: 'isFocused',
-	    value: function isFocused() {
-	      return this.state.focused;
-	    }
-	  }, {
-	    key: 'onChange',
-	    value: function onChange(event) {
-	      event.stopPropagation();
-	    }
-	  }, {
-	    key: 'onDirection',
-	    value: function onDirection(dir) {
-	      var event = arguments.length <= 1 || arguments[1] === undefined ? {} : arguments[1];
-
-	      this.onKeyDown({
-	        key: dir > 0 ? 'ArrowUp' : 'ArrowDown',
-	        type: event.type || 'unknown',
-	        stopPropagation: typeof event.stopPropagation == 'function' ? function () {
-	          return event.stopPropagation();
-	        } : emptyFn,
-	        preventDefault: typeof event.preventDefault == 'function' ? function () {
-	          return event.preventDefault();
-	        } : emptyFn
-	      });
-	    }
-	  }, {
-	    key: 'onWheel',
-	    value: function onWheel(event) {
-	      if (this.props.updateOnWheel && this.isFocused()) {
-	        this.onDirection(-event.deltaY, event);
-	        // this.onKeyDown({
-	        //   key: event.deltaY < 0 ? 'ArrowUp' : 'ArrowDown',
-	        //   type: event.type,
-	        //   stopPropagation: () => event.stopPropagation(),
-	        //   preventDefault: () => event.preventDefault()
-	        // })
-	      }
-
-	      if (this.props.onWheel) {
-	        this.props.onWheel(event);
-	      }
-	    }
-	  }, {
-	    key: 'onKeyDown',
-	    value: function onKeyDown(event) {
-	      var _this2 = this;
-
-	      var props = this.props;
-	      var key = event.key;
-	      var type = event.type;
-	      var which = event.which;
-
-
-	      if (key !== 'Unidentified' && which && which >= 65 && which <= 90) {
-	        key = ' ';
-	      }
-
-	      if (key != ' ' && key * 1 == key) {
-	        key = 'Unidentified';
-	      }
-
-	      if (props.stopPropagation) {
-	        event.stopPropagation();
-	      }
-
-	      var range = this.getSelectedRange();
-	      var selectedValue = this.getSelectedValue(range);
-	      var value = this.displayValue;
-
-	      var _state = this.state;
-	      var positions = _state.positions;
-	      var matches = _state.matches;
-
-	      var valueStr = '' + value;
-
-	      var currentPosition = positions[range.start];
-
-	      if (typeof currentPosition == 'string') {
-	        currentPosition = positions[range.start + (key in BACKWARDS ? -1 : 1)];
-	      }
-
-	      if (!currentPosition) {
-	        currentPosition = positions[range.start - 1];
-	      }
-
-	      if (props.onKeyDown && type == 'keydown') {
-	        if (props.onKeyDown(event, currentPosition) === false) {
-	          this.caretPos = range;
-	          return;
-	        }
-	      }
-
-	      var keyName = key;
-
-	      if (key == 'ArrowUp' || key == 'ArrowDown') {
-	        keyName = 'Arrow';
-	      }
-
-	      var handlerName = 'handle' + keyName;
-
-	      var preventDefault = void 0;
-	      var newValue = void 0;
-	      var newCaretPos = void 0;
-
-	      if (currentPosition && currentPosition[handlerName]) {
-	        var returnValue = currentPosition[handlerName](currentPosition, {
-	          range: range,
-	          selectedValue: selectedValue,
-	          value: value,
-	          positions: positions,
-	          currentValue: valueStr.substring(currentPosition.start, currentPosition.end + 1),
-	          matches: matches,
-	          event: event,
-	          key: key,
-	          input: this.getInput(),
-	          setCaretPosition: function setCaretPosition() {
-	            return _this2.setCaretPosition.apply(_this2, arguments);
-	          }
-	        });
-
-	        this.caretPos = range;
-
-	        if (returnValue && returnValue.value !== undefined) {
-	          newValue = valueStr.substring(0, currentPosition.start) + returnValue.value + valueStr.substring(currentPosition.end + 1);
-
-	          newCaretPos = returnValue.caretPos || range;
-	          if (newCaretPos === true) {
-	            newCaretPos = { start: currentPosition.start, end: currentPosition.end + 1 };
-	          }
-	          preventDefault = returnValue.preventDefault !== false;
-	        }
-	      }
-
-	      if (preventDefault || key == 'Backspace' || key == 'Delete' || key == ' ') {
-	        if (!preventDefault) {
-	          this.setCaretPosition(this.caretPos = {
-	            start: range.start + (key == 'Backspace' ? -1 : 1)
-	          });
-	        }
-	        preventDefault = true;
-	      }
-
-	      var config = {
-	        currentPosition: currentPosition,
-	        preventDefault: preventDefault,
-	        event: event,
-	        value: newValue,
-	        stop: false
-	      };
-
-	      if (this.props.afterKeyDown && type == 'keydown') {
-	        this.props.afterKeyDown(config);
-	      }
-
-	      if (!config.stop && newCaretPos !== undefined) {
-	        var updateCaretPos = function updateCaretPos() {
-	          return _this2.setCaretPosition(newCaretPos);
-	        };
-	        this.caretPos = newCaretPos;
-	        this.setStateValue(newValue, updateCaretPos, { key: key, oldValue: valueStr, currentPosition: currentPosition });
-	      }
-
-	      if (config.preventDefault) {
-	        event.preventDefault();
-	      }
-	    }
-	  }, {
-	    key: 'getInput',
-	    value: function getInput() {
-	      return (0, _reactDom.findDOMNode)(this);
-	    }
-	  }, {
-	    key: 'setCaretPosition',
-	    value: function setCaretPosition(pos) {
-	      var dom = this.getInput();
-	      if (dom) {
-	        (0, _TimeInput.setCaretPosition)(dom, pos);
-	      }
-	    }
-	  }, {
-	    key: 'format',
-	    value: function format(mom, _format) {
-	      return mom.format(_format || this.props.dateFormat);
-	    }
-	  }, {
-	    key: 'setStateValue',
-	    value: function setStateValue(value, callback, _ref) {
-	      var key = _ref.key;
-	      var oldValue = _ref.oldValue;
-	      var currentPosition = _ref.currentPosition;
-
-	      var dateMoment = this.toMoment(value);
-
-	      if (!dateMoment.isValid()) {
-	        var dir = key == 'ArrowUp' || key == 'PageUp' ? 1 : -1;
-
-	        if (currentPosition.format == 'MM') {
-	          // updating the month
-	          dateMoment = this.toMoment(oldValue).add(dir, 'month');
-	        } else {
-	          // updating the day
-	          dateMoment = dir > 0 ?
-	          // we've gone with +1 beyond max, so reset to 1
-	          this.toMoment(oldValue).date(1) :
-
-	          // we've gone with -1 beyond max, so reset to max of month
-	          this.toMoment(oldValue).endOf('month');
-	        }
-
-	        if (!dateMoment.isValid()) {
-	          return;
-	        }
-
-	        value = this.format(dateMoment);
-	      }
-
-	      var _state2 = this.state;
-	      var minDate = _state2.minDate;
-	      var maxDate = _state2.maxDate;
-
-
-	      if (minDate && dateMoment.isBefore(minDate)) {
-	        var clone = this.toMoment(dateMoment);
-
-	        // try with time
-	        dateMoment = (0, _forwardTime2.default)(clone, this.toMoment(minDate));
-
-	        if (dateMoment.isBefore(minDate)) {
-	          // try without time
-	          dateMoment = this.toMoment(minDate);
-	        }
-
-	        value = this.format(dateMoment);
-	      }
-
-	      if (maxDate && dateMoment.isAfter(maxDate)) {
-	        var _clone = this.toMoment(dateMoment);
-	        dateMoment = (0, _forwardTime2.default)(_clone, this.toMoment(maxDate));
-
-	        if (dateMoment.isAfter(maxDate)) {
-	          dateMoment = this.toMoment(maxDate);
-	        }
-
-	        value = this.format(dateMoment);
-	      }
-
-	      this.setState({
-	        value: value,
-	        propsValue: false
-	      }, typeof callback == 'function' && callback);
-
-	      // if (this.props.value !== undefined) {
-	      if (this.props.onChange) {
-	        this.throttleSetValue(value, dateMoment);
-	      }
-	    }
-	  }, {
-	    key: 'setValue',
-	    value: function setValue(value, dateMoment) {
-	      if (this.props.value === undefined) {
-	        this.setState({
-	          value: value,
-	          propsValue: false
-	        });
-	      } else {
-	        this.setState({
-	          propsValue: true,
-	          value: undefined
-	        });
-	      }
-
-	      if (this.props.onChange) {
-	        this.props.onChange(value, { dateMoment: dateMoment || this.toMoment(value) });
-	      }
-	    }
-	  }, {
-	    key: 'getSelectedRange',
-	    value: function getSelectedRange() {
-	      var dom = this.getInput();
-
-	      return {
-	        start: (0, _TimeInput.getSelectionStart)(dom),
-	        end: (0, _TimeInput.getSelectionEnd)(dom)
-	      };
-	    }
-	  }, {
-	    key: 'getSelectedValue',
-	    value: function getSelectedValue(range) {
-	      range = range || this.getSelectedRange();
-	      var value = this.displayValue;
-
-	      return value.substring(range.start, range.end);
-	    }
-	  }]);
-
-	  return DateFormatInput;
-	}(_reactClass2.default);
-
-	exports.default = DateFormatInput;
-
-
-	DateFormatInput.defaultProps = {
-	  isDateInput: true,
-	  stopPropagation: true,
-	  updateOnWheel: true,
-	  changeDelay: 100
-	};
-
-	DateFormatInput.propTypes = {
-	  dateFormat: _react.PropTypes.string.isRequired,
-	  value: function value(props, propName) {
-	    if (props[propName] !== undefined) {
-	      // console.warn('Due to performance considerations, TimeInput will only be uncontrolled.')
-	    }
-	  }
-	};
-
-/***/ },
-/* 349 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-
-	var _objectAssign = __webpack_require__(288);
-
-	var _objectAssign2 = _interopRequireDefault(_objectAssign);
-
-	var _formats = __webpack_require__(350);
-
-	var _formats2 = _interopRequireDefault(_formats);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	var SUGGESTIONS = {
-	  Y: ['YYYY', 'YY'],
-	  M: ['MM'],
-	  D: ['DD'],
-	  H: ['HH'],
-	  h: ['hh'],
-	  m: ['mm'],
-	  s: ['ss']
-	};
-
-	exports.default = function (format) {
-	  var index = 0;
-	  var positionIndex = 0;
-
-	  var suggestions = void 0;
-	  var suggestionMatch = void 0;
-
-	  var positions = [];
-	  var matches = [];
-
-	  while (index < format.length) {
-	    var char = format[index];
-	    var match = _formats2.default[char];
-	    var matchObject = void 0;
-
-	    suggestionMatch = null;
-	    suggestions = SUGGESTIONS[char];
-
-	    if (!match && !suggestions) {
-	      positions[positionIndex] = char;
-	      matches.push(char);
-	    } else {
-	      if (suggestions && suggestions.length) {
-	        // it might be a longer match
-	        suggestionMatch = suggestions.filter(function (s) {
-	          return format.substr(index, s.length) == s;
-	        })[0];
-	      }
-
-	      if (!suggestionMatch) {
-	        if (!_formats2.default[char]) {
-	          console.warn('Format ' + char + ' is not supported yet!');
-	          if (suggestions) {
-	            console.warn('Use one of ["' + suggestions.join(',') + '"]');
-	          }
-	          positions[positionIndex] = char;
-	          matches.push(char);
-	        } else {
-	          // we found a match, with no other suggestion
-
-	          var currentFormat = _formats2.default[char];
-	          var start = positionIndex;
-	          var end = positionIndex + (currentFormat.length || 1) - 1;
-
-	          matchObject = (0, _objectAssign2.default)({}, currentFormat, { format: char, start: start, end: end });
-
-	          for (; start <= end; start++) {
-	            positions[positionIndex] = matchObject;
-	            positionIndex++;
-	          }
-	          index++;
-	          matches.push(matchObject);
-	          continue; // to skip incrementing twice
-	        }
-	      } else {
-	          matchObject = (0, _objectAssign2.default)({}, _formats2.default[suggestionMatch], {
-	            format: suggestionMatch, start: positionIndex
-	          });
-	          matches.push(matchObject);
-
-	          var endIndex = positionIndex + suggestionMatch.length;
-
-	          matchObject.end = endIndex - 1;
-	          while (positionIndex < endIndex) {
-	            positions[positionIndex] = matchObject;
-	            positionIndex++;
-	            index++;
-	          }
-	          continue; // to skip incrementing index once more
-	        }
-	    }
-
-	    positionIndex++;
-	    index++;
-	  }
-
-	  return { positions: positions, matches: matches };
-	};
-
-/***/ },
-/* 350 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	exports.getFormats = undefined;
-
-	var _leftPad = __webpack_require__(339);
-
-	var _leftPad2 = _interopRequireDefault(_leftPad);
-
-	var _clamp = __webpack_require__(340);
-
-	var _clamp2 = _interopRequireDefault(_clamp);
-
-	var _times = __webpack_require__(309);
-
-	var _times2 = _interopRequireDefault(_times);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	var isValid = function isValid(value, format) {
-	  value *= 1;
-	  return value >= format.min && value <= format.max;
-	};
-
-	var replaceAt = function replaceAt(_ref) {
+	function Cell(_ref) {
 	  var value = _ref.value;
-	  var index = _ref.index;
-	  var _ref$len = _ref.len;
-	  var len = _ref$len === undefined ? 1 : _ref$len;
-	  var str = _ref.str;
-
-	  return value.substring(0, index) + str + value.substring(index + len);
-	};
-
-	var handleArrow = function handleArrow(format, _ref2) {
-	  var currentValue = _ref2.currentValue;
-	  var key = _ref2.key;
-	  var dir = _ref2.dir;
-
-	  dir = dir || (key == 'ArrowUp' ? 1 : -1);
-
-	  return {
-	    value: (0, _clamp2.default)(currentValue * 1 + dir, {
-	      min: format.min,
-	      max: format.max,
-	      circular: true
-	    }),
-	    caretPos: true
-	  };
-	};
-
-	var handleArrowLeftPad = function handleArrowLeftPad(format, config) {
-	  var _handleArrow = handleArrow(format, config);
-
-	  var value = _handleArrow.value;
-	  var caretPos = _handleArrow.caretPos;
-
-
-	  return {
-	    value: (0, _leftPad2.default)(value),
-	    caretPos: caretPos
-	  };
-	};
-
-	var handlePage = function handlePage(format, config) {
-	  config.dir = config.dir || (config.key == 'PageUp' ? 10 : -10);
-
-	  return handleArrow(format, config);
-	};
-
-	var handlePageLeftPad = function handlePageLeftPad(format, config) {
-	  config.dir = config.dir || (config.key == 'PageUp' ? 10 : -10);
-
-	  return handleArrowLeftPad(format, config);
-	};
-
-	var handleUpdate = function handleUpdate(value, format, _ref3) {
-	  var range = _ref3.range;
-
-	  value *= 1;
-
-	  var len = range.end - range.start + 1;
-	  var pow10 = ('1' + (0, _times2.default)(3 - len).map(function () {
-	    return '0';
-	  }).join('')) * 1;
-	  var modLen = value % pow10;
-
-	  var newValue = (0, _clamp2.default)(value, { min: format.min, max: format.max, circular: false });
-
-	  if (pow10 > 1 && value % pow10 == 0) {
-	    // the user is modifying the millenium or century
-	    newValue += modLen;
-	    // so we try to keep the century
-	    newValue = (0, _clamp2.default)(newValue, { min: format.min, max: format.max, circular: false });
-	  }
-
-	  return newValue;
-	};
-
-	var handleUnidentified = function handleUnidentified(format, _ref4) {
-	  var event = _ref4.event;
-	  var currentValue = _ref4.currentValue;
-	  var range = _ref4.range;
-
-	  var newChar = String.fromCharCode(event.which);
-	  var index = range.start - format.start;
-
-	  var caretPos = { start: range.start + 1 };
-
-	  if (newChar * 1 != newChar) {
-	    return {
-	      preventDefault: false,
-	      value: currentValue
-	    };
-	  }
-
-	  // caretPos
-	  var value = void 0;
-	  var valid = void 0;
-
-	  value = replaceAt({ value: currentValue, index: index, str: newChar });
-	  valid = isValid(value, format);
-
-	  if (!valid && index == 0 && newChar == ('' + format.max)[0]) {
-	    valid = true;
-	    value = format.max;
-	    caretPos.start++;
-	  }
-
-	  if (!valid) {
-	    do {
-	      value = (0, _times2.default)(index).map(function () {
-	        return '0';
-	      }).join('') + replaceAt({ value: currentValue, index: index, str: newChar }).substring(index);
-
-	      valid = isValid(value, format);
-	      index++;
-
-	      if (!valid) {
-	        caretPos.start++;
-	      }
-	    } while (!valid && index <= format.end);
-	  }
-
-	  if (valid) {
-	    value = handleUpdate(value, format, { range: range });
-	  } else {
-	    var defaultValue = format.default;
-	    value = 1 * replaceAt({ value: defaultValue, index: defaultValue.length - 1, str: newChar });
-
-	    if (isValid(value, format)) {
-	      caretPos.start = format.start + defaultValue.length;
-	    } else {
-	      caretPos.start = range.start + 1;
-	      value = currentValue;
-	    }
-	  }
-
-	  return {
-	    value: value,
-	    caretPos: caretPos
-	  };
-	};
-
-	var handleUnidentifiedLeftPad = function handleUnidentifiedLeftPad(format, config) {
-	  var _handleUnidentified = handleUnidentified(format, config);
-
-	  var value = _handleUnidentified.value;
-	  var caretPos = _handleUnidentified.caretPos;
-	  var preventDefault = _handleUnidentified.preventDefault;
-
-
-	  return {
-	    value: (0, _leftPad2.default)(value),
-	    caretPos: caretPos,
-	    preventDefault: preventDefault
-	  };
-	};
-
-	var handleYearUnidentified = handleUnidentified;
-
-	var handleDelete = function handleDelete(format, _ref5) {
-	  var range = _ref5.range;
-	  var currentValue = _ref5.currentValue;
-	  var dir = _ref5.dir;
-
-	  dir = dir || 0;
-
-	  if (range.start <= format.start && range.end >= format.end) {
-	    return {
-	      value: format.default,
-	      caretPos: true
-	    };
-	  }
-
-	  var len = range.end - range.start + 1;
-	  var str = (0, _times2.default)(len).map(function () {
-	    return '0';
-	  }).join('');
-	  var index = range.start - format.start + dir;
-
-	  var value = replaceAt({ value: currentValue, index: index, str: str, len: len }) * 1;
-
-	  value = (0, _leftPad2.default)(handleUpdate(value, format, { range: range }));
-
-	  return {
-	    value: value,
-	    caretPos: { start: range.start + (dir < 0 ? -1 : 1) }
-	  };
-	};
-
-	var handleBackspace = function handleBackspace(format, config) {
-	  config.dir = -1;
-	  return handleDelete(format, config);
-	};
-
-	var toggleMeridiem = function toggleMeridiem(_ref6) {
-	  var upper = _ref6.upper;
-	  var value = _ref6.value;
-
-	  if (upper) {
-	    return value == 'AM' ? 'PM' : 'AM';
-	  }
-
-	  return value == 'am' ? 'pm' : 'am';
-	};
-
-	var handleMeridiemArrow = function handleMeridiemArrow(format, _ref7) {
-	  var currentValue = _ref7.currentValue;
-
-	  return {
-	    value: toggleMeridiem({ upper: format.upper, value: currentValue }),
-	    caretPos: true
-	  };
-	};
-
-	var handleMeridiemDelete = function handleMeridiemDelete(format, _ref8) {
-	  var dir = _ref8.dir;
-	  var range = _ref8.range;
-
-	  dir = dir || 0;
-
-	  if (range.start <= format.start && range.end >= format.end) {
-	    return {
-	      value: format.default,
-	      caretPos: true
-	    };
-	  }
-
-	  return {
-	    value: format.upper ? 'AM' : 'am',
-	    caretPos: { start: range.start + (dir < 0 ? -1 : 1) }
-	  };
-	};
-
-	var handleMeridiemBackspace = function handleMeridiemBackspace(format, config) {
-	  config.dir = -1;
-	  return handleMeridiemDelete(format, config);
-	};
-
-	var getFormats = function getFormats() {
-	  return {
-	    YYYY: {
-	      min: 100,
-	      max: 9999,
-	      default: '0100',
-	      handleDelete: handleDelete,
-	      handleBackspace: handleBackspace,
-	      handleArrow: handleArrow,
-	      handlePageUp: handlePage,
-	      handlePageDown: handlePage,
-	      handleUnidentified: handleYearUnidentified
-	    },
-
-	    // YY: {
-	    //   default: '00'
-	    // },
-
-	    // M: { min: 1, max: 12, default: '1', maxLen: 2 },
-	    MM: {
-	      min: 1,
-	      max: 12,
-	      default: '01',
-	      handleDelete: handleDelete,
-	      handleBackspace: handleBackspace,
-	      handlePageUp: handlePageLeftPad,
-	      handlePageDown: handlePageLeftPad,
-	      handleUnidentified: handleUnidentifiedLeftPad,
-	      handleArrow: handleArrowLeftPad
-	    },
-
-	    // D: { min: 1, max: 31, default: '1', maxLen: 2 },
-	    DD: {
-	      min: 1,
-	      max: 31,
-	      default: '01',
-	      handlePageUp: handlePageLeftPad,
-	      handlePageDown: handlePageLeftPad,
-	      handleDelete: handleDelete,
-	      handleBackspace: handleBackspace,
-	      handleUnidentified: handleUnidentifiedLeftPad,
-	      handleArrow: handleArrowLeftPad
-	    },
-
-	    // H: {
-	    //   min: 0, max: 23, default: '0', maxLen: 2,
-	    //   handleDelete,
-	    //   handleBackspace,
-	    //   handleArrow: handleArrowLeftPad,
-	    //   handlePageUp: handlePageLeftPad,
-	    //   handlePageDown: handlePageLeftPad
-	    // },
-	    HH: {
-	      time: true,
-	      min: 0, max: 23, default: '00',
-	      handleDelete: handleDelete,
-	      handleBackspace: handleBackspace,
-	      handleUnidentified: handleUnidentifiedLeftPad,
-	      handleArrow: handleArrowLeftPad,
-	      handlePageUp: handlePageLeftPad,
-	      handlePageDown: handlePageLeftPad
-	    },
-
-	    // h: { min: 1, max: 12, default: '1', maxLen: 2,
-	    //   handleArrow: handleArrowLeftPad,
-	    //   handlePageUp: handlePageLeftPad,
-	    //   handlePageDown: handlePageLeftPad
-	    // },
-	    hh: { min: 1, max: 12, default: '01',
-	      time: true,
-	      handleDelete: handleDelete,
-	      handleBackspace: handleBackspace,
-	      handleUnidentified: handleUnidentifiedLeftPad,
-	      handleArrow: handleArrowLeftPad,
-	      handlePageUp: handlePageLeftPad,
-	      handlePageDown: handlePageLeftPad
-	    },
-
-	    a: {
-	      time: true,
-	      length: 2,
-	      default: 'am',
-	      handleArrow: handleMeridiemArrow,
-	      handlePageUp: handleMeridiemArrow,
-	      handlePageDown: handleMeridiemArrow,
-	      handleDelete: handleMeridiemDelete,
-	      handleBackspace: handleMeridiemBackspace
-	    },
-	    A: {
-	      length: 2,
-	      time: true,
-	      default: 'AM', upper: true,
-	      handleArrow: handleMeridiemArrow,
-	      handlePageUp: handleMeridiemArrow,
-	      handlePageDown: handleMeridiemArrow,
-	      handleDelete: handleMeridiemDelete,
-	      handleBackspace: handleMeridiemBackspace
-	    },
-
-	    // m: { min: 0, max: 59, default: '0', maxLen: 2 },
-	    mm: { min: 0, max: 59, default: '00',
-	      time: true,
-	      handleDelete: handleDelete,
-	      handleBackspace: handleBackspace,
-	      handleUnidentified: handleUnidentifiedLeftPad,
-	      handleArrow: handleArrowLeftPad,
-	      handlePageUp: handlePageLeftPad,
-	      handlePageDown: handlePageLeftPad
-	    },
-
-	    // s: { min: 0, max: 59, default: '0' },
-	    ss: {
-	      time: true,
-	      min: 0, max: 59, default: '00',
-	      handleDelete: handleDelete,
-	      handleBackspace: handleBackspace,
-	      handleUnidentified: handleUnidentifiedLeftPad,
-	      handleArrow: handleArrowLeftPad,
-	      handlePageUp: handlePageLeftPad,
-	      handlePageDown: handlePageLeftPad
-	    }
-	  };
-	};
-
-	exports.getFormats = getFormats;
-	exports.default = getFormats();
+	  var classes = _ref.classes;
+
+	  var _classes = classes + ' cell';
+	  return _react2.default.createElement(
+	    'div',
+	    { className: _classes },
+	    value
+	  );
+	}
 
 /***/ },
-/* 351 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-
-	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
-
-	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-	var _react = __webpack_require__(1);
-
-	var _react2 = _interopRequireDefault(_react);
-
-	var _reactDom = __webpack_require__(35);
-
-	var _reactClass = __webpack_require__(183);
-
-	var _reactClass2 = _interopRequireDefault(_reactClass);
-
-	var _objectAssign = __webpack_require__(288);
-
-	var _objectAssign2 = _interopRequireDefault(_objectAssign);
-
-	var _reactFlex = __webpack_require__(294);
-
-	var _reactField = __webpack_require__(352);
-
-	var _reactField2 = _interopRequireDefault(_reactField);
-
-	var _DateFormatInput = __webpack_require__(348);
-
-	var _DateFormatInput2 = _interopRequireDefault(_DateFormatInput);
-
-	var _reactInlineBlock = __webpack_require__(302);
-
-	var _reactInlineBlock2 = _interopRequireDefault(_reactInlineBlock);
-
-	var _icons = __webpack_require__(353);
-
-	var _moment = __webpack_require__(184);
-
-	var _moment2 = _interopRequireDefault(_moment);
-
-	var _join = __webpack_require__(291);
-
-	var _join2 = _interopRequireDefault(_join);
-
-	var _toMoment2 = __webpack_require__(290);
-
-	var _toMoment3 = _interopRequireDefault(_toMoment2);
-
-	var _Calendar = __webpack_require__(354);
-
-	var _Calendar2 = _interopRequireDefault(_Calendar);
-
-	var _joinFunctions = __webpack_require__(306);
-
-	var _joinFunctions2 = _interopRequireDefault(_joinFunctions);
-
-	var _assignDefined = __webpack_require__(303);
-
-	var _assignDefined2 = _interopRequireDefault(_assignDefined);
-
-	var _forwardTime = __webpack_require__(342);
-
-	var _forwardTime2 = _interopRequireDefault(_forwardTime);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-	var POSITIONS = { top: 'top', bottom: 'bottom' };
-
-	var getPicker = function getPicker(props) {
-	  return _react2.default.Children.toArray(props.children).filter(function (c) {
-	    return c && c.props && c.props.isDatePicker;
-	  })[0] || _react2.default.createElement(_Calendar2.default, null);
-	};
-
-	var FIND_INPUT = function FIND_INPUT(c) {
-	  return c && (c.type === 'input' || c.props && c.isDateInput);
-	};
-
-	var preventDefault = function preventDefault(event) {
-	  event.preventDefault();
-	};
-
-	var DateField = function (_Component) {
-	  _inherits(DateField, _Component);
-
-	  function DateField(props) {
-	    _classCallCheck(this, DateField);
-
-	    var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(DateField).call(this, props));
-
-	    _this.state = {
-	      value: props.defaultValue === undefined ? '' : props.defaultValue,
-	      expanded: props.defaultExpanded || false,
-	      focused: false
-	    };
-	    return _this;
-	  }
-
-	  _createClass(DateField, [{
-	    key: 'componentWillUnmount',
-	    value: function componentWillUnmount() {
-	      this.unmounted = true;
-	    }
-	  }, {
-	    key: 'render',
-	    value: function render() {
-	      var props = this.prepareProps(this.props);
-
-	      var flexProps = (0, _objectAssign2.default)({}, props);
-
-	      delete flexProps.activeDate;
-	      delete flexProps.cleanup;
-	      delete flexProps.clearIcon;
-	      delete flexProps.collapseOnDateClick;
-	      delete flexProps.date;
-	      delete flexProps.dateFormat;
-	      delete flexProps.expanded;
-	      delete flexProps.expandOnFocus;
-	      delete flexProps.footer;
-	      delete flexProps.forceValidDate;
-	      delete flexProps.locale;
-	      delete flexProps.onExpand;
-	      delete flexProps.onExpandChange;
-	      delete flexProps.onCollapse;
-	      delete flexProps.minDate;
-	      delete flexProps.maxDate;
-	      delete flexProps.pickerProps;
-	      delete flexProps.position;
-	      delete flexProps.showClock;
-	      delete flexProps.skipTodayTime;
-	      delete flexProps.strict;
-	      delete flexProps.valid;
-	      delete flexProps.validateOnBlur;
-	      delete flexProps.viewDate;
-	      delete flexProps.value;
-	      delete flexProps.text;
-	      delete flexProps.theme;
-	      delete flexProps.updateOnDateClick;
-
-	      if (typeof props.cleanup == 'function') {
-	        props.cleanup(flexProps);
-	      }
-
-	      return _react2.default.createElement(
-	        _reactFlex.Flex,
-	        _extends({
-	          inline: true,
-	          row: true,
-	          wrap: false
-	        }, flexProps),
-	        this.renderInput(),
-	        this.renderClearIcon(),
-	        this.renderCalendarIcon(),
-	        this.renderPicker()
-	      );
-	    }
-	  }, {
-	    key: 'renderInput',
-	    value: function renderInput() {
-	      var props = this.p;
-	      var inputProps = this.prepareInputProps(props);
-
-	      var input = void 0;
-
-	      if (props.renderInput) {
-	        input = props.renderInput(inputProps);
-	      }
-
-	      if (input === undefined) {
-	        input = props.children.filter(FIND_INPUT)[0];
-
-	        var FieldInput = props.forceValidDate ? _DateFormatInput2.default : _reactField2.default;
-
-	        var propsForInput = (0, _objectAssign2.default)({}, inputProps);
-
-	        if (!props.forceValidDate) {
-	          delete propsForInput.date;
-	          delete propsForInput.maxDate;
-	          delete propsForInput.minDate;
-	          delete propsForInput.dateFormat;
-	        }
-
-	        input = input ? _react2.default.cloneElement(input, propsForInput) : _react2.default.createElement(FieldInput, propsForInput);
-	      }
-
-	      return input;
-	    }
-	  }, {
-	    key: 'renderClearIcon',
-	    value: function renderClearIcon() {
-	      var props = this.p;
-
-	      if (!props.clearIcon || props.forceValidDate || props.disabled) {
-	        return undefined;
-	      }
-
-	      var clearIcon = props.clearIcon === true ? _icons.CLEAR_ICON : props.clearIcon;
-
-	      var clearIconProps = {
-	        style: {
-	          visibility: props.text ? 'visible' : 'hidden'
-	        },
-	        className: 'react-date-field__clear-icon',
-	        onMouseDown: this.onClearMouseDown,
-	        children: clearIcon
-	      };
-
-	      var result = void 0;
-
-	      if (props.renderClearIcon) {
-	        result = props.renderClearIcon(clearIconProps);
-	      }
-
-	      if (result === undefined) {
-	        result = _react2.default.createElement(_reactInlineBlock2.default, clearIconProps);
-	      }
-
-	      return result;
-	    }
-	  }, {
-	    key: 'onClearMouseDown',
-	    value: function onClearMouseDown(event) {
-	      event.preventDefault();
-	      this.onFieldChange('');
-
-	      if (!this.isFocused()) {
-	        this.focus();
-	      }
-	    }
-	  }, {
-	    key: 'renderCalendarIcon',
-	    value: function renderCalendarIcon() {
-	      var result = void 0;
-	      var renderIcon = this.props.renderCalendarIcon;
-
-	      var calendarIconProps = {
-	        className: 'react-date-field__calendar-icon',
-	        onMouseDown: this.onCalendarIconMouseDown,
-	        children: _react2.default.createElement('div', { className: 'react-date-field__calendar-icon-inner' })
-	      };
-
-	      if (renderIcon) {
-	        result = renderIcon(calendarIconProps);
-	      }
-
-	      if (result === undefined) {
-	        result = _react2.default.createElement('div', calendarIconProps);
-	      }
-
-	      return result;
-	    }
-	  }, {
-	    key: 'onCalendarIconMouseDown',
-	    value: function onCalendarIconMouseDown(event) {
-	      if (this.props.disabled) {
-	        return;
-	      }
-	      event.preventDefault();
-
-	      if (!this.isFocused()) {
-	        this.focus();
-	      }
-
-	      this.toggleExpand();
-	    }
-	  }, {
-	    key: 'prepareExpanded',
-	    value: function prepareExpanded(props) {
-	      return props.expanded === undefined ? this.state.expanded : props.expanded;
-	    }
-	  }, {
-	    key: 'prepareDate',
-	    value: function prepareDate(props, pickerProps) {
-	      props = props || this.p;
-	      pickerProps = pickerProps || props.pickerProps;
-
-	      var locale = props.locale || pickerProps.locale;
-	      var dateFormat = props.dateFormat || pickerProps.dateFormat;
-
-	      var value = props.value === undefined ? this.state.value : props.value;
-
-	      var date = this.toMoment(value);
-	      var valid = date.isValid();
-
-	      if (value && typeof value != 'string' && valid) {
-	        value = this.format(date);
-	      }
-
-	      if (date && valid) {
-	        this.lastValidDate = date;
-	      } else {
-	        value = this.state.value;
-	      }
-
-	      var viewDate = this.state.viewDate || this.lastValidDate || new Date();
-	      var activeDate = this.state.activeDate || this.lastValidDate || new Date();
-
-	      return {
-	        viewDate: viewDate,
-	        activeDate: activeDate,
-	        dateFormat: dateFormat,
-	        locale: locale,
-	        valid: valid,
-	        date: date,
-	        value: value
-	      };
-	    }
-	  }, {
-	    key: 'preparePickerProps',
-	    value: function preparePickerProps(props) {
-	      var picker = getPicker(props, this);
-
-	      if (!picker) {
-	        return null;
-	      }
-
-	      return picker.props || {};
-	    }
-	  }, {
-	    key: 'prepareProps',
-	    value: function prepareProps(thisProps) {
-	      var props = this.p = (0, _objectAssign2.default)({}, thisProps);
-
-	      props.children = _react2.default.Children.toArray(props.children);
-
-	      props.expanded = this.prepareExpanded(props);
-	      props.pickerProps = this.preparePickerProps(props);
-
-	      var input = props.children.filter(FIND_INPUT)[0];
-
-	      if (input && input.type == 'input') {
-	        props.rawInput = true;
-	        props.forceValidDate = false;
-	      }
-
-	      var dateInfo = this.prepareDate(props, props.pickerProps);
-
-	      (0, _objectAssign2.default)(props, dateInfo);
-
-	      if (props.text === undefined) {
-	        props.text = this.state.text;
-
-	        if (props.text == null) {
-	          props.text = props.valid && props.date ? props.value : this.props.value;
-	        }
-	      }
-
-	      if (props.text === undefined) {
-	        props.text = '';
-	      }
-
-	      props.className = this.prepareClassName(props);
-
-	      return props;
-	    }
-	  }, {
-	    key: 'prepareClassName',
-	    value: function prepareClassName(props) {
-	      var position = POSITIONS[props.pickerProps.position || props.pickerPosition] || 'bottom';
-
-	      return (0, _join2.default)(['react-date-field', props.className, props.disabled && 'react-date-field--disabled', props.theme && 'react-date-field--theme-' + props.theme, 'react-date-field--picker-position-' + position, this.isLazyFocused() && (0, _join2.default)('react-date-field--focused', props.focusedClassName), this.isExpanded() && (0, _join2.default)('react-date-field--expanded', props.expandedClassName), !props.valid && (0, _join2.default)(props.invalidClassName, 'react-date-field--invalid')]);
-	    }
-	  }, {
-	    key: 'prepareInputProps',
-	    value: function prepareInputProps(props) {
-	      var _this2 = this;
-
-	      var input = props.children.filter(FIND_INPUT)[0];
-	      var inputProps = input && input.props || {};
-
-	      var onBlur = (0, _joinFunctions2.default)(inputProps.onBlur, this.onFieldBlur);
-	      var onFocus = (0, _joinFunctions2.default)(inputProps.onFocus, this.onFieldFocus);
-	      var onChange = (0, _joinFunctions2.default)(inputProps.onChange, this.onFieldChange);
-	      var onKeyDown = (0, _joinFunctions2.default)(inputProps.onKeyDown, this.onFieldKeyDown);
-
-	      var newInputProps = (0, _objectAssign2.default)({}, inputProps, {
-
-	        ref: function ref(f) {
-	          _this2.field = f;
-	        },
-	        date: props.date,
-
-	        onFocus: onFocus,
-	        onBlur: onBlur,
-	        onChange: onChange,
-
-	        dateFormat: props.dateFormat,
-	        value: props.text || '',
-
-	        onKeyDown: onKeyDown,
-
-	        className: (0, _join2.default)('react-date-field__input', inputProps.className)
-	      });
-
-	      (0, _assignDefined2.default)(newInputProps, {
-	        placeholder: props.placeholder,
-	        disabled: props.disabled,
-	        minDate: props.minDate,
-	        maxDate: props.maxDate
-	      });
-
-	      return newInputProps;
-	    }
-	  }, {
-	    key: 'renderPicker',
-	    value: function renderPicker() {
-	      var _this3 = this;
-
-	      var props = this.p;
-
-	      if (this.isExpanded()) {
-	        var newExpand = !this.picker;
-	        var picker = getPicker(props, this);
-
-	        var pickerProps = props.pickerProps;
-
-	        var onMouseDown = (0, _joinFunctions2.default)(pickerProps.onMouseDown, this.onPickerMouseDown);
-	        var onChange = (0, _joinFunctions2.default)(pickerProps.onChange, this.onPickerChange);
-
-	        var date = props.valid && props.date;
-	        var footer = pickerProps.footer !== undefined ? pickerProps.footer : props.footer;
-
-	        var viewDate = newExpand && date ? date : props.viewDate;
-	        var activeDate = newExpand && date ? date : props.activeDate;
-
-	        return _react2.default.cloneElement(picker, (0, _assignDefined2.default)({
-	          ref: function ref(p) {
-	            _this3.picker = _this3.pickerView = p;
-
-	            if (p && p.getView) {
-	              _this3.pickerView = p.getView();
-	            }
-
-	            if (!_this3.state.viewDate) {
-	              _this3.onViewDateChange(props.viewDate);
-	            }
-	          },
-
-	          footer: footer,
-
-	          focusOnNavMouseDown: false,
-	          focusOnFooterMouseDown: false,
-
-	          insideField: true,
-	          showClock: props.showClock,
-
-	          getTransitionTime: this.getTime,
-
-	          updateOnWheel: props.updateOnWheel,
-
-	          onClockInputBlur: this.onClockInputBlur,
-	          onClockEnterKey: this.onClockEnterKey,
-	          onClockEscapeKey: this.onClockEscapeKey,
-
-	          footerClearDate: props.clearDate || props.minDate,
-
-	          onFooterCancelClick: this.onFooterCancelClick,
-	          onFooterTodayClick: this.onFooterTodayClick,
-	          onFooterOkClick: this.onFooterOkClick,
-	          onFooterClearClick: this.onFooterClearClick,
-
-	          dateFormat: props.dateFormat,
-	          theme: props.theme || pickerProps.theme,
-	          arrows: props.navBarArrows,
-
-	          className: (0, _join2.default)(pickerProps.className, 'react-date-field__picker'),
-
-	          date: date || null,
-
-	          tabIndex: -1,
-
-	          viewDate: viewDate,
-	          activeDate: activeDate,
-	          locale: props.locale,
-
-	          onViewDateChange: this.onViewDateChange,
-	          onActiveDateChange: this.onActiveDateChange,
-	          onTimeChange: this.onTimeChange,
-
-	          onTransitionStart: this.onTransitionStart,
-
-	          onMouseDown: onMouseDown,
-	          onChange: onChange
-	        }, {
-	          minDate: props.minDate,
-	          maxDate: props.maxDate
-	        }));
-	      }
-
-	      this.time = null;
-
-	      return null;
-	    }
-	  }, {
-	    key: 'onTimeChange',
-	    value: function onTimeChange(value, timeFormat) {
-	      var timeMoment = this.toMoment(value, { dateFormat: timeFormat });
-
-	      var time = ['hour', 'minute', 'second', 'millisecond'].reduce(function (acc, part) {
-	        acc[part] = timeMoment.get(part);
-	        return acc;
-	      }, {});
-
-	      this.time = time;
-	    }
-	  }, {
-	    key: 'getTime',
-	    value: function getTime() {
-	      return this.time;
-	    }
-	  }, {
-	    key: 'setValue',
-	    value: function setValue(value) {
-	      var config = arguments.length <= 1 || arguments[1] === undefined ? {} : arguments[1];
-
-	      var dateMoment = this.toMoment(value);
-	      var dateString = this.format(dateMoment);
-
-	      this.setDate(dateString, (0, _objectAssign2.default)(config, { dateMoment: dateMoment }));
-	    }
-	  }, {
-	    key: 'onFooterOkClick',
-	    value: function onFooterOkClick() {
-	      var activeDate = this.p.activeDate;
-
-	      if (activeDate) {
-	        var date = this.toMoment(activeDate);
-
-	        (0, _forwardTime2.default)(this.time, date);
-
-	        this.setValue(date, { skipTime: !!this.time });
-	      }
-
-	      this.setExpanded(false);
-	    }
-	  }, {
-	    key: 'onFooterCancelClick',
-	    value: function onFooterCancelClick() {
-	      this.setExpanded(false);
-	    }
-	  }, {
-	    key: 'onFooterTodayClick',
-	    value: function onFooterTodayClick() {
-	      var today = this.toMoment(new Date()).startOf('day');
-
-	      this.onPickerChange(this.format(today), { dateMoment: today });
-	      this.onViewDateChange(today);
-	      this.onActiveDateChange(today);
-
-	      return false;
-	    }
-	  }, {
-	    key: 'onFooterClearClick',
-	    value: function onFooterClearClick() {
-	      var clearDate = this.props.clearDate === undefined ? this.props.minDate : this.props.clearDate;
-
-	      if (clearDate !== undefined) {
-	        this.setValue(clearDate, {
-	          skipTime: true
-	        });
-	      }
-
-	      this.setExpanded(false);
-
-	      return false;
-	    }
-	  }, {
-	    key: 'toMoment',
-	    value: function toMoment(value, props) {
-	      if (_moment2.default.isMoment(value)) {
-	        return value;
-	      }
-
-	      props = props || this.p;
-
-	      var date = (0, _toMoment3.default)(value, {
-	        strict: props.strict,
-	        locale: props.locale,
-	        dateFormat: props.displayFormat || props.dateFormat || this.p.dateFormat
-	      });
-
-	      if (!date.isValid() && props.displayFormat) {
-	        date = (0, _toMoment3.default)(value, {
-	          strict: props.strict,
-	          locale: props.locale,
-	          dateFormat: props.dateFormat || this.p.dateFormat
-	        });
-	      }
-
-	      return date;
-	    }
-	  }, {
-	    key: 'isValid',
-	    value: function isValid(text) {
-	      if (text === undefined) {
-	        text = this.p.text;
-	      }
-
-	      return this.toMoment(text).isValid();
-	    }
-	  }, {
-	    key: 'onViewDateChange',
-	    value: function onViewDateChange(viewDate) {
-	      this.setState({
-	        viewDate: viewDate
-	      });
-	    }
-	  }, {
-	    key: 'onActiveDateChange',
-	    value: function onActiveDateChange(activeDate) {
-	      this.setState({
-	        activeDate: activeDate
-	      });
-	    }
-	  }, {
-	    key: 'onViewKeyDown',
-	    value: function onViewKeyDown(event) {
-	      var key = event.key;
-
-	      if (this.pickerView) {
-	        // } && (key == 'Escape' || key == 'Enter' || (key in NAV_KEYS))) {
-	        this.pickerView.onViewKeyDown(event);
-	      }
-	    }
-	  }, {
-	    key: 'onPickerMouseDown',
-	    value: function onPickerMouseDown(event) {
-	      preventDefault(event);
-
-	      if (!this.isFocused()) {
-	        this.focus();
-	      }
-	    }
-	  }, {
-	    key: 'isHistoryViewVisible',
-	    value: function isHistoryViewVisible() {
-	      if (this.picker && this.picker.isHistoryViewVisible) {
-	        return this.picker.isHistoryViewVisible();
-	      }
-
-	      return false;
-	    }
-	  }, {
-	    key: 'onFieldKeyDown',
-	    value: function onFieldKeyDown(event) {
-	      var key = event.key;
-	      var expanded = this.isExpanded();
-	      var historyVisible = this.isHistoryViewVisible();
-
-	      if (key == 'Enter' && !historyVisible) {
-	        this.onViewKeyDown(event);
-	        this.toggleExpand();
-	        return false;
-	      }
-
-	      if (historyVisible && (key == 'Escape' || key == 'Enter')) {
-	        this.onViewKeyDown(event);
-	        return false;
-	      }
-
-	      if (key == 'Escape') {
-	        if (expanded) {
-	          this.setExpanded(false);
-	          return false;
-	        }
-	      }
-
-	      if (expanded) {
-	        if (key in _Calendar.NAV_KEYS) {
-	          this.onViewKeyDown(event);
-	          return false;
-	        }
-	        // if (!currentPosition || !currentPosition.time) {
-	        //   // the time has not changed, so it's safe to forward the event
-	        //   this.onViewKeyDown(event)
-	        //   return false
-	        // }
-	      }
-
-	      return true;
-	    }
-	  }, {
-	    key: 'getInput',
-	    value: function getInput() {
-	      return (0, _reactDom.findDOMNode)(this.field);
-	    }
-	  }, {
-	    key: 'isFocused',
-	    value: function isFocused() {
-	      return this.state.focused;
-	    }
-	  }, {
-	    key: 'isLazyFocused',
-	    value: function isLazyFocused() {
-	      return this.isFocused() || this.isTimeInputFocused();
-	    }
-	  }, {
-	    key: 'isTimeInputFocused',
-	    value: function isTimeInputFocused() {
-	      if (this.pickerView && this.pickerView.isTimeInputFocused) {
-	        return this.pickerView.isTimeInputFocused();
-	      }
-
-	      return false;
-	    }
-	  }, {
-	    key: 'onFieldFocus',
-	    value: function onFieldFocus(event) {
-	      if (this.state.focused) {
-	        return;
-	      }
-
-	      this.setState({
-	        focused: true
-	      });
-
-	      if (this.props.expandOnFocus) {
-	        this.setExpanded(true);
-	      }
-
-	      this.props.onFocus(event);
-	    }
-	  }, {
-	    key: 'onFieldBlur',
-	    value: function onFieldBlur(event) {
-	      var _this4 = this;
-
-	      if (!this.isFocused()) {
-	        return;
-	      }
-
-	      this.setState({
-	        focused: false
-	      });
-
-	      this.props.onBlur(event);
-
-	      if (!this.pickerView || !this.pickerView.isTimeInputFocused) {
-	        this.onLazyBlur();
-	        return;
-	      }
-
-	      setTimeout(function () {
-	        return _this4.onLazyBlur();
-	      }, 0);
-	    }
-	  }, {
-	    key: 'onClockEnterKey',
-	    value: function onClockEnterKey() {
-	      if (!this.isFocused()) {
-	        this.focus();
-	      }
-
-	      this.onFooterOkClick();
-	    }
-	  }, {
-	    key: 'onClockEscapeKey',
-	    value: function onClockEscapeKey() {
-	      if (!this.isFocused()) {
-	        this.focus();
-	      }
-
-	      this.onFooterCancelClick();
-	    }
-	  }, {
-	    key: 'onClockInputBlur',
-	    value: function onClockInputBlur() {
-	      var _this5 = this;
-
-	      setTimeout(function () {
-	        if (!_this5.isFocused()) {
-	          _this5.onLazyBlur();
-	        }
-	      }, 0);
-	    }
-	  }, {
-	    key: 'onLazyBlur',
-	    value: function onLazyBlur() {
-	      var _this6 = this;
-
-	      if (this.unmounted) {
-	        return;
-	      }
-
-	      if (this.isTimeInputFocused()) {
-	        return;
-	      }
-
-	      this.setExpanded(false);
-
-	      if (!this.isValid() && this.props.validateOnBlur) {
-	        (function () {
-	          var value = _this6.lastValidDate && _this6.p.text != '' ? _this6.format(_this6.lastValidDate) : '';
-
-	          setTimeout(function () {
-	            _this6.onFieldChange(value);
-	          }, 0);
-	        })();
-	      }
-	    }
-	  }, {
-	    key: 'onInputChange',
-	    value: function onInputChange() {}
-	  }, {
-	    key: 'isExpanded',
-	    value: function isExpanded() {
-	      return this.p.expanded;
-	    }
-	  }, {
-	    key: 'toggleExpand',
-	    value: function toggleExpand() {
-	      this.setExpanded(!this.p.expanded);
-	    }
-	  }, {
-	    key: 'setExpanded',
-	    value: function setExpanded(bool) {
-	      var _this7 = this;
-
-	      var props = this.p;
-
-	      if (bool === props.expanded) {
-	        return;
-	      }
-
-	      if (!bool) {
-	        this.onCollapse();
-	      } else {
-	        this.setState({}, function () {
-	          _this7.onExpand();
-	        });
-	      }
-
-	      if (bool && props.valid) {
-	        this.setState({
-	          // viewDate: props.date,
-	          activeDate: props.date
-	        });
-	      }
-
-	      if (this.props.expanded === undefined) {
-	        this.setState({
-	          expanded: bool
-	        });
-	      }
-
-	      this.props.onExpandChange(bool);
-	    }
-	  }, {
-	    key: 'onCollapse',
-	    value: function onCollapse() {
-	      this.props.onCollapse();
-	    }
-	  }, {
-	    key: 'onExpand',
-	    value: function onExpand() {
-	      this.props.onExpand();
-	    }
-	  }, {
-	    key: 'onFieldChange',
-	    value: function onFieldChange(value) {
-	      if (this.p.rawInput && typeof value != 'string') {
-	        var event = value;
-	        value = event.target.value;
-	      }
-
-	      var dateMoment = value == '' ? null : this.toMoment(value);
-
-	      if (dateMoment === null || dateMoment.isValid()) {
-	        this.onChange(dateMoment);
-	      }
-
-	      this.onTextChange(value);
-	    }
-	  }, {
-	    key: 'onTextChange',
-	    value: function onTextChange(text) {
-	      if (this.props.text === undefined && this.props.value === undefined) {
-	        this.setState({
-	          text: text
-	        });
-	      }
-
-	      if (this.props.onTextChange) {
-	        this.props.onTextChange(text);
-	      }
-	    }
-	  }, {
-	    key: 'onPickerChange',
-	    value: function onPickerChange(dateString, _ref, event) {
-	      var dateMoment = _ref.dateMoment;
-	      var forceUpdate = _ref.forceUpdate;
-
-	      var isEnter = event && event.key == 'Enter';
-	      var updateOnDateClick = forceUpdate ? true : this.props.updateOnDateClick || isEnter;
-
-	      if (updateOnDateClick) {
-	        (0, _forwardTime2.default)(this.time, dateMoment);
-
-	        this.setDate(dateString, { dateMoment: dateMoment });
-
-	        if (this.props.collapseOnDateClick || isEnter) {
-	          this.setExpanded(false);
-	        }
-	      }
-	    }
-	  }, {
-	    key: 'setDate',
-	    value: function setDate(dateString, _ref2) {
-	      var dateMoment = _ref2.dateMoment;
-	      var _ref2$skipTime = _ref2.skipTime;
-	      var skipTime = _ref2$skipTime === undefined ? false : _ref2$skipTime;
-
-	      var props = this.p;
-
-	      var currentDate = props.date;
-
-	      if (props.valid && currentDate) {
-	        var dateFormat = props.dateFormat.toLowerCase();
-
-	        var hasTime = dateFormat.indexOf('k') != -1 || dateFormat.indexOf('h') != -1;
-
-	        if (hasTime && !skipTime) {
-	          ['hour', 'minute', 'second', 'millisecond'].forEach(function (part) {
-	            dateMoment.set(part, currentDate.get(part));
-	          });
-	        }
-	      }
-
-	      this.onTextChange(this.format(dateMoment));
-	      this.onChange(dateMoment);
-	    }
-	  }, {
-	    key: 'onChange',
-	    value: function onChange(dateMoment) {
-	      if (dateMoment != null && !_moment2.default.isMoment(dateMoment)) {
-	        dateMoment = this.toMoment(dateMoment);
-	      }
-
-	      (0, _forwardTime2.default)(this.time, dateMoment);
-
-	      var newState = {};
-
-	      if (this.props.value === undefined) {
-	        (0, _objectAssign2.default)(newState, {
-	          text: null,
-	          value: dateMoment
-	        });
-	      }
-
-	      newState.activeDate = dateMoment;
-
-	      if (!this.pickerView || !this.pickerView.isInView || !this.pickerView.isInView(dateMoment)) {
-	        newState.viewDate = dateMoment;
-	      }
-
-	      if (this.props.onChange) {
-	        this.props.onChange(this.format(dateMoment), { dateMoment: dateMoment });
-	      }
-
-	      this.setState(newState);
-	    }
-	  }, {
-	    key: 'format',
-	    value: function format(mom, _format) {
-	      return mom == null ? '' : mom.format(_format || this.p.displayFormat || this.p.dateFormat);
-	    }
-	  }, {
-	    key: 'focusField',
-	    value: function focusField() {
-	      var input = (0, _reactDom.findDOMNode)(this.field);
-
-	      if (input) {
-	        input.focus();
-	      }
-	    }
-	  }, {
-	    key: 'focus',
-	    value: function focus() {
-	      this.focusField();
-	    }
-	  }]);
-
-	  return DateField;
-	}(_reactClass2.default);
-
-	exports.default = DateField;
-
-
-	DateField.defaultProps = {
-	  showClock: undefined,
-
-	  forceValidDate: false,
-	  strict: true,
-
-	  expandOnFocus: true,
-
-	  updateOnDateClick: false,
-	  collapseOnDateClick: false,
-
-	  theme: 'default',
-
-	  footer: true,
-
-	  onBlur: function onBlur() {},
-	  onFocus: function onFocus() {},
-
-	  clearIcon: true,
-	  validateOnBlur: true,
-
-	  onExpandChange: function onExpandChange() {},
-	  onCollapse: function onCollapse() {},
-	  onExpand: function onExpand() {},
-
-	  minDate: (0, _moment2.default)('1000-01-01', 'YYYY-MM-DD'),
-	  maxDate: (0, _moment2.default)('9999-12-31 HH:mm:ss', 'YYYY-MM-DD 23:59:59'),
-
-	  skipTodayTime: false
-	};
-
-	DateField.propTypes = {
-	  dateFormat: _react.PropTypes.string.isRequired
-	};
-
-/***/ },
-/* 352 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-
-	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
-
-	var _react = __webpack_require__(1);
-
-	var _react2 = _interopRequireDefault(_react);
-
-	var _reactDom = __webpack_require__(35);
-
-	var _objectAssign = __webpack_require__(4);
-
-	var _objectAssign2 = _interopRequireDefault(_objectAssign);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	exports.default = _react2.default.createClass({
-
-	  displayName: 'Field',
-
-	  propTypes: {
-	    type: _react.PropTypes.string,
-	    stopChangePropagation: _react.PropTypes.bool
-	  },
-
-	  getDefaultProps: function getDefaultProps() {
-	    return {
-	      stopChangePropagation: true,
-	      type: 'text'
-	    };
-	  },
-	  render: function render() {
-	    var onChange = null;
-
-	    if (typeof this.props.onChange === 'function') {
-	      //only pass our onChange if the user provided one
-	      //so the React warning is still displayed if the user didn't provide onChange
-	      //but provided value
-	      onChange = this.onChange;
-	    }
-
-	    var inputProps = (0, _objectAssign2.default)({}, this.props);
-
-	    delete inputProps.stopChangePropagation;
-
-	    return _react2.default.createElement('input', _extends({}, inputProps, { onChange: onChange, ref: 'input' }));
-	  },
-	  focus: function focus() {
-	    (0, _reactDom.findDOMNode)(this.refs.input).focus();
-	  },
-	  onChange: function onChange(event) {
-	    if (this.props.stopChangePropagation) {
-	      event.stopPropagation();
-	    }
-
-	    this.props.onChange(event.target.value, event);
-	  }
-	});
-
-/***/ },
-/* 353 */
+/* 376 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -49195,7 +39441,7 @@
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
-	exports.CLEAR_ICON = undefined;
+	exports.default = ViewHeader;
 
 	var _react = __webpack_require__(1);
 
@@ -49203,15 +39449,35 @@
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-	var CLEAR_ICON = exports.CLEAR_ICON = _react2.default.createElement(
-	  "svg",
-	  { height: "20", width: "20", viewBox: "0 0 24 24" },
-	  _react2.default.createElement("path", { d: "M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z" }),
-	  _react2.default.createElement("path", { d: "M0 0h24v24H0z", fill: "none" })
-	);
+	function ViewHeader(_ref) {
+	  var prev = _ref.prev;
+	  var next = _ref.next;
+	  var titleAction = _ref.titleAction;
+	  var data = _ref.data;
+
+	  return _react2.default.createElement(
+	    "div",
+	    { className: "navigation-wrapper" },
+	    _react2.default.createElement(
+	      "span",
+	      { className: "icon", onClick: prev },
+	      "<"
+	    ),
+	    _react2.default.createElement(
+	      "span",
+	      { className: "navigation-title", onClick: titleAction },
+	      data
+	    ),
+	    _react2.default.createElement(
+	      "span",
+	      { className: "icon", onClick: next },
+	      ">"
+	    )
+	  );
+	}
 
 /***/ },
-/* 354 */
+/* 377 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -49219,337 +39485,398 @@
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
-	exports.NAV_KEYS = undefined;
 
-	var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"]) _i["return"](); } finally { if (_d) throw _e; } } return _arr; } return function (arr, i) { if (Array.isArray(arr)) { return arr; } else if (Symbol.iterator in Object(arr)) { return sliceIterator(arr, i); } else { throw new TypeError("Invalid attempt to destructure non-iterable instance"); } }; }();
+	var _getPrototypeOf = __webpack_require__(182);
 
-	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+	var _getPrototypeOf2 = _interopRequireDefault(_getPrototypeOf);
 
-	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+	var _classCallCheck2 = __webpack_require__(208);
+
+	var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
+
+	var _createClass2 = __webpack_require__(209);
+
+	var _createClass3 = _interopRequireDefault(_createClass2);
+
+	var _possibleConstructorReturn2 = __webpack_require__(213);
+
+	var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
+
+	var _inherits2 = __webpack_require__(260);
+
+	var _inherits3 = _interopRequireDefault(_inherits2);
 
 	var _react = __webpack_require__(1);
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _reactClass = __webpack_require__(183);
+	var _classnames = __webpack_require__(268);
 
-	var _reactClass2 = _interopRequireDefault(_reactClass);
+	var _classnames2 = _interopRequireDefault(_classnames);
 
-	var _objectAssign = __webpack_require__(288);
+	var _moment = __webpack_require__(269);
 
-	var _objectAssign2 = _interopRequireDefault(_objectAssign);
+	var _moment2 = _interopRequireDefault(_moment);
 
-	var _assignDefined = __webpack_require__(303);
+	__webpack_require__(373);
 
-	var _assignDefined2 = _interopRequireDefault(_assignDefined);
+	var _cell = __webpack_require__(375);
 
-	var _MonthView = __webpack_require__(182);
+	var _cell2 = _interopRequireDefault(_cell);
 
-	var _MonthView2 = _interopRequireDefault(_MonthView);
+	var _viewHeader = __webpack_require__(376);
 
-	var _toMoment = __webpack_require__(290);
-
-	var _toMoment2 = _interopRequireDefault(_toMoment);
-
-	var _join = __webpack_require__(291);
-
-	var _join2 = _interopRequireDefault(_join);
-
-	var _ClockInput = __webpack_require__(345);
-
-	var _ClockInput2 = _interopRequireDefault(_ClockInput);
-
-	var _forwardTime = __webpack_require__(342);
-
-	var _forwardTime2 = _interopRequireDefault(_forwardTime);
-
-	var _reactFlex = __webpack_require__(294);
+	var _viewHeader2 = _interopRequireDefault(_viewHeader);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-	function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+	var MonthView = function (_React$Component) {
+	  (0, _inherits3.default)(MonthView, _React$Component);
 
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+	  function MonthView() {
+	    var _Object$getPrototypeO;
 
-	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+	    var _temp, _this, _ret;
 
-	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+	    (0, _classCallCheck3.default)(this, MonthView);
 
-	var Calendar = function (_Component) {
-	  _inherits(Calendar, _Component);
+	    for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
+	      args[_key] = arguments[_key];
+	    }
 
-	  function Calendar(props) {
-	    _classCallCheck(this, Calendar);
+	    return _ret = (_temp = (_this = (0, _possibleConstructorReturn3.default)(this, (_Object$getPrototypeO = (0, _getPrototypeOf2.default)(MonthView)).call.apply(_Object$getPrototypeO, [this].concat(args))), _this), _this.cellClick = function (e) {
+	      var month = e.target.innerHTML;
+	      if (_this.checkIfMonthDisabled(month)) return;
 
-	    var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(Calendar).call(this, props));
-
-	    _this.state = {
-	      timeFocused: false
-	    };
-	    return _this;
+	      var date = _this.props.date.clone().month(month);
+	      _this.props.prevView(date);
+	    }, _this.next = function () {
+	      var nextDate = _this.props.date.clone().add(1, 'years');
+	      if (_this.props.maxDate && nextDate.isAfter(_this.props.maxDate, 'day')) {
+	        nextDate = _this.props.maxDate;
+	      }
+	      _this.props.setDate(nextDate);
+	    }, _this.prev = function () {
+	      var prevDate = _this.props.date.clone().subtract(1, 'years');
+	      if (_this.props.minDate && prevDate.isBefore(_this.props.minDate, 'day')) {
+	        prevDate = _this.props.minDate;
+	      }
+	      _this.props.setDate(prevDate);
+	    }, _temp), (0, _possibleConstructorReturn3.default)(_this, _ret);
 	  }
 
-	  _createClass(Calendar, [{
-	    key: 'prepareDate',
-	    value: function prepareDate(props) {
-	      return (0, _toMoment2.default)(props.date, props);
+	  (0, _createClass3.default)(MonthView, [{
+	    key: 'checkIfMonthDisabled',
+	    value: function checkIfMonthDisabled(month) {
+	      var now = this.props.date;
+	      return now.clone().month(month).endOf('month').isBefore(this.props.minDate, 'day') || now.clone().month(month).startOf('month').isAfter(this.props.maxDate, 'day');
+	    }
+	  }, {
+	    key: 'getMonth',
+	    value: function getMonth() {
+	      var _this2 = this;
+
+	      var month = this.props.date.month();
+	      return _moment2.default.monthsShort().map(function (item, i) {
+	        return {
+	          label: item,
+	          disabled: _this2.checkIfMonthDisabled(i),
+	          curr: i === month
+	        };
+	      });
 	    }
 	  }, {
 	    key: 'render',
 	    value: function render() {
-	      var _this2 = this;
-
-	      var props = this.p = (0, _objectAssign2.default)({}, this.props);
-	      var dateFormat = props.dateFormat.toLowerCase();
-
-	      props.date = this.prepareDate(props);
-	      if (props.showClock === undefined) {
-	        props.showClock = dateFormat.indexOf('k') != -1 || dateFormat.indexOf('h') != -1;
-	      }
-
-	      var timeFormat = dateFormat.substring(dateFormat.toLowerCase().indexOf('hh'));
-
-	      props.timeFormat = timeFormat;
-
-	      var className = (0, _join2.default)(props.className, 'react-date-picker__calendar', props.theme && 'react-date-picker__calendar--theme-' + props.theme);
-
-	      var monthViewProps = (0, _objectAssign2.default)({}, this.props);
-
-	      delete monthViewProps.onTimeChange;
-	      delete monthViewProps.showClock;
-	      delete monthViewProps.updateOnWheel;
-	      delete monthViewProps.wrapTime;
-
-	      if (typeof this.props.cleanup == 'function') {
-	        this.props.cleanup(monthViewProps);
-	      }
-
-	      var monthView = _react2.default.createElement(_MonthView2.default, _extends({}, monthViewProps, {
-	        onChange: this.onChange,
-	        className: null,
-	        style: null,
-	        ref: function ref(view) {
-	          _this2.view = view;
-	        },
-	        renderChildren: this.renderChildren
-	      }));
+	      var currentDate = this.props.date.format('YYYY');
+	      var months = this.getMonth().map(function (item, i) {
+	        var _class = (0, _classnames2.default)({
+	          month: true,
+	          disabled: item.disabled,
+	          current: item.curr
+	        });
+	        return _react2.default.createElement(_cell2.default, { classes: _class, key: i, value: item.label });
+	      });
 
 	      return _react2.default.createElement(
-	        _reactFlex.Flex,
-	        { inline: true, row: true, wrap: false, className: className, style: props.style },
-	        monthView
+	        'div',
+	        { className: 'months-view' },
+	        _react2.default.createElement(_viewHeader2.default, { data: currentDate, next: this.next, prev: this.prev, titleAction: this.props.nextView }),
+	        _react2.default.createElement(
+	          'div',
+	          { className: 'months', onClick: this.cellClick },
+	          months
+	        )
 	      );
 	    }
-	  }, {
-	    key: 'isHistoryViewVisible',
-	    value: function isHistoryViewVisible() {
-	      if (this.view && this.view.isHistoryViewVisible) {
-	        return this.view.isHistoryViewVisible();
-	      }
-
-	      return false;
-	    }
-	  }, {
-	    key: 'renderChildren',
-	    value: function renderChildren(_ref) {
-	      var _ref2 = _slicedToArray(_ref, 3);
-
-	      var navBar = _ref2[0];
-	      var inner = _ref2[1];
-	      var footer = _ref2[2];
-
-	      var props = this.p;
-	      var clockInput = props.showClock && this.renderClockInput();
-
-	      var children = [navBar, _react2.default.createElement(
-	        _reactFlex.Flex,
-	        { justifyContent: 'center', wrap: this.props.wrap || this.props.wrapTime },
-	        _react2.default.createElement(_reactFlex.Flex, {
-	          flexGrow: '1',
-	          flexShrink: '0',
-	          flexBasis: 'auto',
-	          column: true,
-	          wrap: false,
-	          alignItems: 'stretch',
-	          children: inner
-	        }),
-	        clockInput
-	      ), footer];
-
-	      return _react2.default.createElement(_reactFlex.Flex, {
-	        column: true,
-	        wrap: false,
-	        alignItems: 'stretch',
-	        children: children
-	      });
-	    }
-	  }, {
-	    key: 'focus',
-	    value: function focus() {
-	      if (this.view) {
-	        this.view.focus();
-	      }
-	    }
-	  }, {
-	    key: 'isFocused',
-	    value: function isFocused() {
-	      if (this.view) {
-	        return this.view.isFocused();
-	      }
-
-	      return false;
-	    }
-	  }, {
-	    key: 'onViewKeyDown',
-	    value: function onViewKeyDown() {
-	      if (this.view) {
-	        var _view;
-
-	        (_view = this.view).onViewKeyDown.apply(_view, arguments);
-	      }
-	    }
-	  }, {
-	    key: 'isTimeInputFocused',
-	    value: function isTimeInputFocused() {
-	      return this.state.timeFocused;
-	    }
-	  }, {
-	    key: 'renderClockInput',
-	    value: function renderClockInput() {
-	      var _this3 = this,
-	          _clockInputProps;
-
-	      var clockInput = null;
-
-	      var readOnly = this.props.readOnly;
-
-	      var clockInputProps = (_clockInputProps = {
-	        ref: function ref(clkInput) {
-	          _this3.clockInput = clkInput;
-	        },
-	        viewIndex: this.props.viewIndex,
-	        dateFormat: this.p.dateFormat
-	      }, _defineProperty(_clockInputProps, readOnly ? 'value' : 'defaultValue', this.p.date), _defineProperty(_clockInputProps, 'onFocus', this.onClockInputFocus), _defineProperty(_clockInputProps, 'onBlur', this.onClockInputBlur), _defineProperty(_clockInputProps, 'onChange', this.onTimeChange), _defineProperty(_clockInputProps, 'onMouseDown', this.onClockInputMouseDown), _clockInputProps);
-
-	      (0, _assignDefined2.default)(clockInputProps, {
-	        onEnterKey: this.props.onClockEnterKey,
-	        onEscapeKey: this.props.onClockEscapeKey,
-	        readOnly: readOnly,
-	        tabIndex: readOnly ? null : this.props.clockTabIndex,
-	        theme: this.props.theme,
-	        updateOnWheel: this.props.updateOnWheel
-	      });
-
-	      if (clockInput) {
-	        return _react2.default.cloneElement(clockInput, clockInputProps);
-	      }
-
-	      return _react2.default.createElement(_ClockInput2.default, clockInputProps);
-	    }
-	  }, {
-	    key: 'onClockInputFocus',
-	    value: function onClockInputFocus() {
-	      this.setState({
-	        timeFocused: true
-	      });
-
-	      this.props.onClockInputFocus();
-	    }
-	  }, {
-	    key: 'onClockInputBlur',
-	    value: function onClockInputBlur() {
-	      this.setState({
-	        timeFocused: false
-	      });
-
-	      this.props.onClockInputBlur();
-	    }
-	  }, {
-	    key: 'onClockInputMouseDown',
-	    value: function onClockInputMouseDown(event) {
-	      event.stopPropagation();
-	      if (event.target && event.target.type != 'text') {
-	        // in order not to blur - in case we're in a date field
-	        event.preventDefault();
-	      }
-
-	      this.clockInput.focus();
-	    }
-	  }, {
-	    key: 'onTimeChange',
-	    value: function onTimeChange(value, timeFormat) {
-	      this.time = value;
-	      this.props.onTimeChange(value, timeFormat);
-
-	      var view = this.view;
-	      var moment = view.p.moment;
-
-	      if (moment == null) {
-	        return;
-	      }
-
-	      view.onChange({
-	        dateMoment: moment,
-	        timestamp: +moment
-	      });
-	    }
-	  }, {
-	    key: 'onChange',
-	    value: function onChange(dateString, _ref3, event) {
-	      var dateMoment = _ref3.dateMoment;
-	      var timestamp = _ref3.timestamp;
-
-	      var props = this.p;
-
-	      if (props.showClock) {
-	        var time = (0, _toMoment2.default)(this.time || this.clockInput.getValue(), {
-	          dateFormat: props.timeFormat,
-	          locale: props.locale
-	        });
-
-	        (0, _forwardTime2.default)(time, dateMoment);
-	        timestamp = +dateMoment;
-	        dateString = this.view.format(dateMoment);
-	      }
-
-	      if (this.props.onChange) {
-	        this.props.onChange(dateString, { dateMoment: dateMoment, timestamp: timestamp, dateString: dateString }, event);
-	      }
-	    }
 	  }]);
+	  return MonthView;
+	}(_react2.default.Component);
 
-	  return Calendar;
-	}(_reactClass2.default);
-
-	exports.default = Calendar;
-
-
-	Calendar.defaultProps = {
-	  dateFormat: 'YYYY-MM-DD',
-
-	  theme: 'default',
-
-	  isDatePicker: true,
-	  wrapTime: false,
-
-	  onTimeChange: function onTimeChange() {},
-
-	  onClockEnterKey: function onClockEnterKey() {},
-	  onClockInputBlur: function onClockInputBlur() {},
-	  onClockInputFocus: function onClockInputFocus() {},
-
-	  onFooterTodayClick: function onFooterTodayClick() {},
-	  onFooterCancelClick: function onFooterCancelClick() {},
-	  onFooterClearClick: function onFooterClearClick() {},
-	  onFooterOkClick: function onFooterOkClick() {}
+	MonthView.propTypes = {
+	  date: _react2.default.PropTypes.object.isRequired,
+	  minDate: _react2.default.PropTypes.any,
+	  maxDate: _react2.default.PropTypes.any
 	};
-
-	Calendar.propTypes = {};
-
-	exports.NAV_KEYS = _MonthView.NAV_KEYS;
+	exports.default = MonthView;
 
 /***/ },
-/* 355 */
+/* 378 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _getPrototypeOf = __webpack_require__(182);
+
+	var _getPrototypeOf2 = _interopRequireDefault(_getPrototypeOf);
+
+	var _classCallCheck2 = __webpack_require__(208);
+
+	var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
+
+	var _createClass2 = __webpack_require__(209);
+
+	var _createClass3 = _interopRequireDefault(_createClass2);
+
+	var _possibleConstructorReturn2 = __webpack_require__(213);
+
+	var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
+
+	var _inherits2 = __webpack_require__(260);
+
+	var _inherits3 = _interopRequireDefault(_inherits2);
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _classnames = __webpack_require__(268);
+
+	var _classnames2 = _interopRequireDefault(_classnames);
+
+	var _moment = __webpack_require__(269);
+
+	var _moment2 = _interopRequireDefault(_moment);
+
+	__webpack_require__(373);
+
+	var _cell = __webpack_require__(375);
+
+	var _cell2 = _interopRequireDefault(_cell);
+
+	var _viewHeader = __webpack_require__(376);
+
+	var _viewHeader2 = _interopRequireDefault(_viewHeader);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	var YearsView = function (_React$Component) {
+	  (0, _inherits3.default)(YearsView, _React$Component);
+
+	  function YearsView() {
+	    var _Object$getPrototypeO;
+
+	    var _temp, _this, _ret;
+
+	    (0, _classCallCheck3.default)(this, YearsView);
+
+	    for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
+	      args[_key] = arguments[_key];
+	    }
+
+	    return _ret = (_temp = (_this = (0, _possibleConstructorReturn3.default)(this, (_Object$getPrototypeO = (0, _getPrototypeOf2.default)(YearsView)).call.apply(_Object$getPrototypeO, [this].concat(args))), _this), _this.state = { years: [] }, _this.cellClick = function (e) {
+	      var year = parseInt(e.target.innerHTML, 10);
+	      var date = _this.props.date.clone().year(year);
+	      if (_this.checkIfYearDisabled(date)) return;
+	      _this.props.prevView(date);
+	    }, _this.next = function () {
+	      var nextDate = _this.props.date.clone().add(10, 'years');
+	      if (_this.props.maxDate && nextDate.isAfter(_this.props.maxDate, 'day')) {
+	        nextDate = _this.props.maxDate;
+	      }
+	      _this.props.setDate(nextDate);
+	    }, _this.prev = function () {
+	      var prevDate = _this.props.date.clone().subtract(10, 'years');
+	      if (_this.props.minDate && prevDate.isBefore(_this.props.minDate, 'day')) {
+	        prevDate = _this.props.minDate;
+	      }
+	      _this.props.setDate(prevDate);
+	    }, _this.rangeCheck = function (currYear) {
+	      var years = _this.state.years;
+
+	      if (years.length == 0) {
+	        return false;
+	      }
+	      return years[0].label <= currYear && years[years.length - 1].label >= currYear;
+	    }, _temp), (0, _possibleConstructorReturn3.default)(_this, _ret);
+	  }
+
+	  (0, _createClass3.default)(YearsView, [{
+	    key: 'componentWillMount',
+	    value: function componentWillMount() {
+	      this.getYears();
+	    }
+	  }, {
+	    key: 'componentWillReceiveProps',
+	    value: function componentWillReceiveProps() {
+	      this.getYears();
+	    }
+	  }, {
+	    key: 'checkIfYearDisabled',
+	    value: function checkIfYearDisabled(year) {
+	      return year.clone().endOf('year').isBefore(this.props.minDate, 'day') || year.clone().startOf('year').isAfter(this.props.maxDate, 'day');
+	    }
+	  }, {
+	    key: 'getYears',
+	    value: function getYears() {
+	      var _this2 = this;
+
+	      var now = this.props.date;
+	      var start = now.clone().subtract(5, 'year');
+	      var end = now.clone().add(6, 'year');
+	      var currYear = now.year();
+	      var items = [];
+	      var inRange = this.rangeCheck(currYear);
+
+	      var years = this.state.years;
+
+
+	      if (years.length > 0 && inRange) {
+	        return years;
+	      }
+
+	      (0, _moment2.default)().range(start, end).by('years', function (year) {
+	        items.push({
+	          label: year.format('YYYY'),
+	          disabled: _this2.checkIfYearDisabled(year),
+	          curr: currYear === year.year()
+	        });
+	      });
+
+	      this.setState({ years: items });
+
+	      return items;
+	    }
+	  }, {
+	    key: 'render',
+	    value: function render() {
+	      var years = this.state.years;
+	      var currYear = this.props.date.year();
+	      var _class = void 0;
+
+	      var yearsCells = years.map(function (item, i) {
+	        _class = (0, _classnames2.default)({
+	          year: true,
+	          disabled: item.disabled,
+	          current: item.label == currYear
+	        });
+	        return _react2.default.createElement(_cell2.default, { value: item.label, classes: _class, key: i });
+	      });
+	      var currentDate = [years[0].label, years[years.length - 1].label].join('-');
+	      return _react2.default.createElement(
+	        'div',
+	        { className: 'years-view' },
+	        _react2.default.createElement(_viewHeader2.default, { data: currentDate, next: this.next, prev: this.prev }),
+	        _react2.default.createElement(
+	          'div',
+	          { className: 'years', onClick: this.cellClick },
+	          yearsCells
+	        )
+	      );
+	    }
+	  }]);
+	  return YearsView;
+	}(_react2.default.Component);
+
+	YearsView.propTypes = {
+	  date: _react2.default.PropTypes.object,
+	  minDate: _react2.default.PropTypes.any,
+	  maxDate: _react2.default.PropTypes.any,
+	  changeView: _react2.default.PropTypes.func
+	};
+	exports.default = YearsView;
+
+/***/ },
+/* 379 */
+/***/ function(module, exports) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	var _keyDownViewHelper = [{
+	  prev: false,
+	  next: true,
+	  exit: true,
+	  unit: 'day',
+	  upDown: 7
+	}, {
+	  prev: true,
+	  next: true,
+	  unit: 'months',
+	  upDown: 3
+	}, {
+	  prev: true,
+	  next: false,
+	  unit: 'years',
+	  upDown: 3
+	}];
+
+	var KEYS = {
+	  backspace: 8,
+	  enter: 13,
+	  esc: 27,
+	  left: 37,
+	  up: 38,
+	  right: 39,
+	  down: 40
+	};
+
+	exports.default = {
+	  toDate: function toDate(date) {
+	    return date instanceof Date ? date : new Date(date);
+	  },
+	  keyDownActions: function keyDownActions(code) {
+	    var _viewHelper = _keyDownViewHelper[this.state.currentView];
+	    var unit = _viewHelper.unit;
+
+	    switch (code) {
+	      case KEYS.left:
+	        this.setDate(this.state.date.subtract(1, unit));
+	        break;
+	      case KEYS.right:
+	        this.setDate(this.state.date.add(1, unit));
+	        break;
+	      case KEYS.up:
+	        this.setDate(this.state.date.subtract(_viewHelper.upDown, unit));
+	        break;
+	      case KEYS.down:
+	        this.setDate(this.state.date.add(_viewHelper.upDown, unit));
+	        break;
+	      case KEYS.enter:
+	        if (_viewHelper.prev) {
+	          this.prevView(this.state.date);
+	        }
+	        if (_viewHelper.exit) {
+	          this.setState({ isVisible: false });
+	        }
+	        break;
+	      case KEYS.esc:
+	        this.setState({ isVisible: false });
+	        break;
+	      default:
+	        break;
+	    }
+	  }
+	};
+
+/***/ },
+/* 380 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
@@ -59369,7 +49696,7 @@
 
 
 /***/ },
-/* 356 */
+/* 381 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
