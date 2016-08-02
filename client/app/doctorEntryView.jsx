@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-// import $ from 'jquery';
+import $ from 'jquery';
 
 export default class DoctorEntryView extends React.Component {
   constructor(props) {

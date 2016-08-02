@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import Signin from './signin.jsx';
 import DoctorEntryView from './doctorEntryView.jsx';
 import DoctorListView from './doctorListView.jsx';
+import SymptomEntryView from './symptomEntry.jsx';
 import ReactDOM from 'react-dom'
 
 // import ScriptRemind from './scriptRemind.jsx';
@@ -18,6 +19,7 @@ export default class Navigator extends React.Component {
     this.enterDocs = this.enterDocs.bind(this);
     // this.scriptReminder = this.scriptReminder.bind(this);
     this.authCheck = this.authCheck.bind(this);
+    this.enterSympsons = this.enterSympsons.bind(this);
   }
 
 ////
@@ -67,6 +69,15 @@ export default class Navigator extends React.Component {
   //     </div>, $target);
   // }
 
+  enterSympsons() {
+    var $target = this.state.$mainRender;
+    console.log($target);
+    ReactDOM.render(<div>
+        <SymptomEntryView />
+      </div>, $target);
+    console.log("nuts!");
+  }
+
   render() {
     return (
       <div className="navbar-container">
@@ -74,6 +85,7 @@ export default class Navigator extends React.Component {
         <div className="navbar-button navbar-view-doctors" onClick={this.viewDocs}> View Your Doctors </div>
         <div className="navbar-button navbar-enter-doctors" onClick={this.enterDocs}> Enter New Doctor </div>
         <div className="navbar-button navbar-enter-doctors" onClick={this.scriptReminder}> New Prescription? </div>
+        <div className="navbar-button navbar-enter-doctors" onClick={this.enterSympsons}> What ails you? </div>
         <div className="navbar-button navbar-enter-doctors" onClick={() => {window.localStorage.removeItem("username"); window.localStorage.removeItem("token"); location.reload()}}> Logout </div>
       </div>
       )
