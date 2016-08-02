@@ -3,14 +3,8 @@ import ReactDOM from 'react-dom'
 import Signin from './signin.jsx';
 import DoctorEntryView from './doctorEntryView.jsx';
 import DoctorListView from './doctorListView.jsx';
-<<<<<<< 5c2ad5db104e7dfbb75bf30b8f09632654cb13d1
-import ScriptRemindView from './scriptRemind.jsx';
-=======
 import SymptomEntryView from './symptomEntry.jsx';
 import ReactDOM from 'react-dom'
-
-// import ScriptRemind from './scriptRemind.jsx';
->>>>>>> entered more symptoms
 
 export default class Navigator extends React.Component {
   constructor(props) {
@@ -27,7 +21,7 @@ export default class Navigator extends React.Component {
     this.enterSympsons = this.enterSympsons.bind(this);
   }
 
-////
+//
   componentDidMount() {
     this.setState({$mainRender: document.getElementById("main-render")})
     console.log("username", this.state.username, "token", this.state.token);
@@ -83,20 +77,24 @@ export default class Navigator extends React.Component {
     console.log("nuts!");
   }
 
+  enterSympsons() {
+    var $target = this.state.$mainRender;
+    console.log($target);
+    ReactDOM.render(<div>
+        <SymptomEntryView />
+      </div>, $target);
+    console.log("nuts!");
+  }
+
   render() {
     return (
       <div className="navbar-container">
         <h1 className="title">Welcome to OneCare!</h1>
         <div className="navbar-button navbar-view-doctors" onClick={this.viewDocs}> View Your Doctors </div>
         <div className="navbar-button navbar-enter-doctors" onClick={this.enterDocs}> Enter New Doctor </div>
-<<<<<<< 5c2ad5db104e7dfbb75bf30b8f09632654cb13d1
-        <div className="navbar-button navbar-enter-doctors" onClick={this.scriptReminder}> Prescription Reminder </div>
-        <div className="navbar-enter-doctors right logout" onClick={() => {window.localStorage.removeItem("username"); window.localStorage.removeItem("token"); location.reload()}}> Logout </div>
-=======
         <div className="navbar-button navbar-enter-doctors" onClick={this.scriptReminder}> New Prescription? </div>
         <div className="navbar-button navbar-enter-doctors" onClick={this.enterSympsons}> What ails you? </div>
         <div className="navbar-button navbar-enter-doctors" onClick={() => {window.localStorage.removeItem("username"); window.localStorage.removeItem("token"); location.reload()}}> Logout </div>
->>>>>>> entered more symptoms
       </div>
       )
   }

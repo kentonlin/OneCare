@@ -39,13 +39,7 @@ var symptomSchema = new Schema({
 
 var Script = mongoose.model('Script', scriptSchema);
 var User = mongoose.model('User', userSchema);
-<<<<<<< 5c2ad5db104e7dfbb75bf30b8f09632654cb13d1
-var Doctor = mongoose.model('Doctor', doctorSchema);
-
-module.exports = {user: User, script: Script, doctor: Doctor};
-=======
 var Doctor = mongoose.model('Doctor', doctorSchema); 
 var Symptom = mongoose.model('Symptom', symptomSchema);
 
 module.exports = {user: User, script: Script, doctor: Doctor, symptom: Symptom};
->>>>>>> entered more symptoms
