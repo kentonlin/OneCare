@@ -49,3 +49,9 @@ app.get('/api/doctor/find', function(req, res) {
   var targetDocs = req.body;
   dbHelpers.getDocs(targetDocs, res);
 });
+
+app.post('/api/symptomEntry/add', function(req, res) {
+  var newSympson = req.body;
+  console.log(newSympson);
+  dbHelpers.addSymptom(newSympson, res);
+});
