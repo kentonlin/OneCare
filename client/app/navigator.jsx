@@ -4,7 +4,7 @@ import Signin from './signin.jsx';
 import DoctorEntryView from './doctorEntryView.jsx';
 import DoctorListView from './doctorListView.jsx';
 import SymptomEntryView from './symptomEntry.jsx';
-import ReactDOM from 'react-dom'
+import ScriptRemindView from './scriptRemind.jsx';
 
 export default class Navigator extends React.Component {
   constructor(props) {
@@ -92,9 +92,9 @@ export default class Navigator extends React.Component {
         <h1 className="title">Welcome to OneCare!</h1>
         <div className="navbar-button navbar-view-doctors" onClick={this.viewDocs}> View Your Doctors </div>
         <div className="navbar-button navbar-enter-doctors" onClick={this.enterDocs}> Enter New Doctor </div>
-        <div className="navbar-button navbar-enter-doctors" onClick={this.scriptReminder}> New Prescription? </div>
-        <div className="navbar-button navbar-enter-doctors" onClick={this.enterSympsons}> What ails you? </div>
-        <div className="navbar-button navbar-enter-doctors" onClick={() => {window.localStorage.removeItem("username"); window.localStorage.removeItem("token"); location.reload()}}> Logout </div>
+        <div className="navbar-button navbar-enter-doctors" onClick={this.scriptReminder}> Prescription Reminder </div>
+        <div className="navbar-button navbar-enter-doctors" onClick={this.enterSympsons}> Physician Recommender </div>
+        <div className="navbar-enter-doctors right logout" onClick={() => {window.localStorage.removeItem("username"); window.localStorage.removeItem("token"); location.reload()}}> Logout </div>
       </div>
       )
   }
