@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom'
 import Signin from './signin.jsx';
 import DoctorEntryView from './doctorEntryView.jsx';
 import DoctorListView from './doctorListView.jsx';
-import ScriptRemindView from './scriptRemind.jsx';
+// import ScriptRemindView from './scriptRemind.jsx';
 
 export default class Navigator extends React.Component {
   constructor(props) {
@@ -58,13 +58,13 @@ export default class Navigator extends React.Component {
     console.log("troz!");
   }
 
-  scriptReminder() {
-    var $target = this.state.$mainRender;
-    console.log($target);
-    ReactDOM.render(<div>
-        <ScriptRemindView />
-      </div>, $target);
-  }
+  // scriptReminder() {
+  //   var $target = this.state.$mainRender;
+  //   console.log($target);
+  //   ReactDOM.render(<div>
+  //       <ScriptRemindView />
+  //     </div>, $target);
+  // }
 
   render() {
     return (
