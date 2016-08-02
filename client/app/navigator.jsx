@@ -3,7 +3,6 @@ import ReactDOM from 'react-dom'
 import Signin from './signin.jsx';
 import DoctorEntryView from './doctorEntryView.jsx';
 import DoctorListView from './doctorListView.jsx';
-import ScriptRemindView from './scriptRemind.jsx';
 import SymptomEntryView from './symptomEntry.jsx';
 import ReactDOM from 'react-dom'
 

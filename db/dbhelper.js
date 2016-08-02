@@ -42,18 +42,6 @@ var dbFunc = {
   },
 
   addSymptom: function(data, res) {
-    // var newSymptom;
-    // Promise.all(data.map(function(symptom) {
-    //   return newSymptom = new Model.symptom(data);
-    //   newSymptom.save(function(err) {
-    //     if (err) {
-    //       console.log(err);
-    //     }
-    //   })
-    //   .then(function() {
-    //     res.send(newSymptom);
-    //   });
-    // }));
     console.log(data);
     var newSymptom = new Model.symptom(data);
       newSymptom.save(function(err) {
@@ -64,6 +52,6 @@ var dbFunc = {
         res.send(newSymptom);
       });
   }
-}
+};
 
-module.exports = dbFunc; 
+module.exports = dbFunc;
