@@ -1,7 +1,7 @@
-// import React, { Component } from 'react';
+import React, { Component } from 'react';
 // import $ from 'jquery';
 
-class DoctorEntryView extends React.Component {
+export default class DoctorEntryView extends React.Component {
   constructor(props) {
     super(props);
     this.state = {

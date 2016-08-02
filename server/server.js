@@ -7,8 +7,8 @@ var app = express();
 var rootPath = path.normalize(__dirname + '/../client');
 // app.use(express.static(__dirname + "/client"));
 app.use("/node_modules",express.static(__dirname + "/../node_modules"));
-app.use("/styles", express.static(__dirname + "/../styles"));
-app.use("/compiled", express.static(__dirname + "/../compiled"));
+app.use("/styles", express.static(rootPath + "/styles"));
+app.use("/public", express.static(rootPath + '/public'));
 app.use("/server", express.static(__dirname + "/../server"));
 app.use(bodyParser.json());
 app.use(function(req, res, next) {
@@ -31,21 +31,21 @@ app.get('/fuckDan', function(req, res){
 });
 
 app.post('/api/script/add', function(req, res) {
-	var newScript = req.body; 
-	dbHelpers.addScript(newScript, res); 
-}); 
+	var newScript = req.body;
+	dbHelpers.addScript(newScript, res);
+});
 
 app.post('/api/script/find', function(req, res) {
-	var findScript = req.body; 
-	dbHelpers.getScripts( findScript, res); 
-}); 
+	var findScript = req.body;
+	dbHelpers.getScripts( findScript, res);
+});
 
 app.post('/api/doctor/add', function(req, res) {
-  var newDoc = req.body; 
-  dbHelpers.addDoc(newDoc, res); 
-}); 
+  var newDoc = req.body;
+  dbHelpers.addDoc(newDoc, res);
+});
 
 app.get('/api/doctor/find', function(req, res) {
-  var targetDocs = req.body; 
-  dbHelpers.getDocs(targetDocs, res); 
-}); 
+  var targetDocs = req.body;
+  dbHelpers.getDocs(targetDocs, res);
+});

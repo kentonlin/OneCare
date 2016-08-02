@@ -1,4 +1,6 @@
-class DoctorView extends React.Component {
+import React, { Component } from 'react';
+
+export default class DoctorView extends React.Component {
   constructor(props) {
     super(props);
   }

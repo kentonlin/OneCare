@@ -1,6 +1,10 @@
+import React, { Component } from 'react';
+import 'react-date-picker/index.css';
+import { DateField, Calendar } from 'react-date-picker'
+import $ from 'jquery';
+import Dropdown from 'react-drop-down';
 
-
-class ScriptRemind extends React.Component {
+export default class ScriptRemind extends React.Component {
 
   constructor(props) {
     super(props);
