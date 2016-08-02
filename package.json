@@ -43,7 +43,6 @@
     "react-date-picker": "^5.3.26",
     "react-dom": "^15.3.0",
     "react-drop-down": "^1.0.2",
-    "react-input-calendar": "^0.3.11",
     "react-filtered-multiselect": "^0.4.2",
     "request": "^2.72.0",
     "webpack": "^1.13.1",

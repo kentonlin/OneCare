@@ -42,7 +42,6 @@ var dbFunc = {
   },
 
   addSymptom: function(data, res) {
-    // console.log(data);
     var newSymptom = new Model.symptom(data);
       newSymptom.save(function(err) {
         if (err) {
@@ -52,6 +51,6 @@ var dbFunc = {
         res.send(newSymptom);
       });
   }
-};
+}
 
 module.exports = dbFunc;
