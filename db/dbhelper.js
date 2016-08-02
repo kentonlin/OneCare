@@ -1,5 +1,4 @@
 var Model = require('./db.js');
-
 var dbFunc = {
 
 	addScript: function(script, res) {
@@ -39,13 +38,32 @@ var dbFunc = {
     Model.doctor.find({}, function(err, docs) {
       console.log(docs);
       res.send(docs);
-    })
+    });
+  },
+
+  addSymptom: function(data, res) {
+    // var newSymptom;
+    // Promise.all(data.map(function(symptom) {
+    //   return newSymptom = new Model.symptom(data);
+    //   newSymptom.save(function(err) {
+    //     if (err) {
+    //       console.log(err);
+    //     }
+    //   })
+    //   .then(function() {
+    //     res.send(newSymptom);
+    //   });
+    // }));
+    console.log(data);
+    var newSymptom = new Model.symptom(data);
+      newSymptom.save(function(err) {
+        if (err) {
+          console.log(err);
+        }
+        console.log('New sympson added!');
+        res.send(newSymptom);
+      });
   }
-
-
-
-
-
 }
 
 module.exports = dbFunc; 
