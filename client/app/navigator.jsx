@@ -15,7 +15,7 @@ export default class Navigator extends React.Component {
     }
     this.viewDocs = this.viewDocs.bind(this);
     this.enterDocs = this.enterDocs.bind(this);
-    this.scriptReminder = this.scriptReminder.bind(this);
+    // this.scriptReminder = this.scriptReminder.bind(this);
     this.authCheck = this.authCheck.bind(this);
   }
 

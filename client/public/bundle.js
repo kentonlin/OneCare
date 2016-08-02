@@ -22061,7 +22061,7 @@
 	    };
 	    _this.viewDocs = _this.viewDocs.bind(_this);
 	    _this.enterDocs = _this.enterDocs.bind(_this);
-	    _this.scriptReminder = _this.scriptReminder.bind(_this);
+	    // this.scriptReminder = this.scriptReminder.bind(this);
 	    _this.authCheck = _this.authCheck.bind(_this);
 	    return _this;
 	  }
