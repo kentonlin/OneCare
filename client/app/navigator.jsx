@@ -87,6 +87,15 @@ export default class Navigator extends React.Component {
     console.log("nuts!");
   }
 
+  enterSympsons() {
+    var $target = this.state.$mainRender;
+    console.log($target);
+    ReactDOM.render(<div>
+        <SymptomEntryView />
+      </div>, $target);
+    console.log("nuts!");
+  }
+
   render() {
     return (
       <div className="navbar-container">
