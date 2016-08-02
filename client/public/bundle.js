@@ -22138,7 +22138,7 @@
 	        { className: 'navbar-container' },
 	        _react2.default.createElement(
 	          'h1',
-	          null,
+	          { className: 'title' },
 	          'Welcome to OneCare!'
 	        ),
 	        _react2.default.createElement(
@@ -22365,36 +22365,36 @@
 	        ),
 	        _react2.default.createElement(
 	          "form",
-	          null,
+	          { className: "doctor-entry-form" },
 	          _react2.default.createElement(
-	            "span",
+	            "div",
 	            null,
 	            "Name"
 	          ),
 	          _react2.default.createElement("input", { id: "name", type: "text", onChange: this.handleChange }),
 	          _react2.default.createElement(
-	            "span",
+	            "div",
 	            null,
 	            "Phone"
 	          ),
 	          _react2.default.createElement("input", { id: "phone", type: "text", onChange: this.handleChange }),
 	          _react2.default.createElement("br", null),
 	          _react2.default.createElement(
-	            "span",
+	            "div",
 	            null,
 	            "Fax"
 	          ),
 	          _react2.default.createElement("input", { id: "fax", type: "text", onChange: this.handleChange }),
 	          _react2.default.createElement("br", null),
 	          _react2.default.createElement(
-	            "span",
+	            "div",
 	            null,
 	            "Address"
 	          ),
 	          _react2.default.createElement("input", { id: "address", type: "text", onChange: this.handleChange }),
 	          _react2.default.createElement("br", null),
 	          _react2.default.createElement(
-	            "span",
+	            "div",
 	            null,
 	            "Specialty"
 	          ),
@@ -22950,12 +22950,7 @@
 	        { className: "doctor-view-container" },
 	        _react2.default.createElement(
 	          "div",
-	          null,
-	          _react2.default.createElement(
-	            "span",
-	            null,
-	            "Name: "
-	          ),
+	          { className: "doctor-name" },
 	          this.props.name
 	        ),
 	        _react2.default.createElement(
@@ -22963,7 +22958,7 @@
 	          null,
 	          _react2.default.createElement(
 	            "span",
-	            null,
+	            { className: "doctor-attribute" },
 	            "Phone: "
 	          ),
 	          this.props.phone
@@ -22973,7 +22968,7 @@
 	          null,
 	          _react2.default.createElement(
 	            "span",
-	            null,
+	            { className: "doctor-attribute" },
 	            "Fax: "
 	          ),
 	          this.props.fax
@@ -22983,7 +22978,7 @@
 	          null,
 	          _react2.default.createElement(
 	            "span",
-	            null,
+	            { className: "doctor-attribute" },
 	            "Address: "
 	          ),
 	          this.props.address
@@ -22993,7 +22988,7 @@
 	          null,
 	          _react2.default.createElement(
 	            "span",
-	            null,
+	            { className: "doctor-attribute" },
 	            "Specialty: "
 	          ),
 	          this.props.specialty

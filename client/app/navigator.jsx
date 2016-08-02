@@ -69,7 +69,7 @@ export default class Navigator extends React.Component {
   render() {
     return (
       <div className="navbar-container">
-        <h1>Welcome to OneCare!</h1>
+        <h1 className="title">Welcome to OneCare!</h1>
         <div className="navbar-button navbar-view-doctors" onClick={this.viewDocs}> View Your Doctors </div>
         <div className="navbar-button navbar-enter-doctors" onClick={this.enterDocs}> Enter New Doctor </div>
         <div className="navbar-button navbar-enter-doctors" onClick={this.scriptReminder}> New Prescription? </div>
