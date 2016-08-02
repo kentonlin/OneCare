@@ -1,4 +1,7 @@
-class DoctorListView extends React.Component {
+import React, { Component } from 'react';
+import DoctorView from './doctorView.jsx'
+
+export default class DoctorListView extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -17,7 +20,7 @@ class DoctorListView extends React.Component {
 
   render() {
     return (
-      <div className="doctor-list-view"> 
+      <div className="doctor-list-view">
         {
          this.state.doctors.map((doctor, idx) => {
           return (<DoctorView key={idx} name={doctor.name} phone={doctor.phone} fax={doctor.fax} address={doctor.address} specialty={doctor.specialty} />)
