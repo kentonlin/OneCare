@@ -134,6 +134,7 @@ var SYMPTOMS = [
   {id: 119, name: 'Brittle hair'},
   {id: 120, name: 'Coarse hair'},
   {id: 121, name: 'Finer hair'},
+  {id: 122, name: 'Oily hair'},
   {id: 123, name: 'Premature baldness'},
   {id: 124, name: 'Premature grey hair'},
   {id: 125, name: 'Change in hair texture'},
@@ -257,123 +258,123 @@ var SYMPTOMS = [
   {id: 236, name: 'Abnormal estrogen levels'},
   {id: 237, name: 'Abnormal progesterone levels'},
   {id: 238, name: 'Abnormal testosterone levels'},
-  {id: 231, name: 'Drop in sperm count'},
-  {id: 232, name: 'Erectile dysfunction'},
-  {id: 233, name: 'Loss of libido'},
-  {id: 234, name: 'Sexual dysfunction'},
-  {id: 235, name: 'Vaginal dryness'},
-  {id: 236, name: 'Painful sex'},
-  {id: 237, name: 'Breasts leaking milk (but not lactating or breastfeeding)'},
-  {id: 238, name: 'Maternal anemia'},
-  {id: 239, name: 'Placental abruption'},
-  {id: 240, name: 'Postpartum hemorrhage'},
-  {id: 241, name: 'Prolonged labour'},
-  {id: 242, name: 'Inability to dilate'},
-  {id: 243, name: 'Difficulty breast-feeding'},
-  {id: 244, name: 'Premature birth'},
-  {id: 245, name: 'Low birth weight'},
-  {id: 246, name: 'High birthweight'},
-  {id: 247, name: 'Newborn with deficits in intellectual development'},
-  {id: 248, name: 'Newborns with jaundice'},
-  {id: 249, name: 'Autism'},
-  {id: 250, name: 'ADD/ADHD'},
+  {id: 239, name: 'Drop in sperm count'},
+  {id: 240, name: 'Erectile dysfunction'},
+  {id: 241, name: 'Loss of libido'},
+  {id: 242, name: 'Sexual dysfunction'},
+  {id: 243, name: 'Vaginal dryness'},
+  {id: 244, name: 'Painful sex'},
+  {id: 245, name: 'Breasts leaking milk (but not lactating or breastfeeding)'},
+  {id: 246, name: 'Maternal anemia'},
+  {id: 247, name: 'Placental abruption'},
+  {id: 248, name: 'Postpartum hemorrhage'},
+  {id: 249, name: 'Prolonged labour'},
+  {id: 250, name: 'Inability to dilate'},
+  {id: 251, name: 'Difficulty breast-feeding'},
+  {id: 252, name: 'Premature birth'},
+  {id: 253, name: 'Low birth weight'},
+  {id: 254, name: 'High birthweight'},
+  {id: 255, name: 'Newborn with deficits in intellectual development'},
+  {id: 256, name: 'Newborns with jaundice'},
+  {id: 257, name: 'Autism'},
+  {id: 258, name: 'ADD/ADHD'},
   // Emotional
-  {id: 251, name: 'Irritability'},
-  {id: 252, name: 'Wanting to be solitary'},
-  {id: 253, name: 'Mood swings'},
-  {id: 254, name: 'Anxiety'},
-  {id: 255, name: 'Personality changes'},
-  {id: 256, name: 'Feelings of resentment'},
-  {id: 257, name: 'Jumpy'},
-  {id: 258, name: 'Easily startled'},
-  {id: 259, name: 'Lack of confidence'},
+  {id: 259, name: 'Irritability'},
+  {id: 260, name: 'Wanting to be solitary'},
+  {id: 261, name: 'Mood swings'},
+  {id: 262, name: 'Anxiety'},
+  {id: 263, name: 'Personality changes'},
+  {id: 264, name: 'Feelings of resentment'},
+  {id: 265, name: 'Jumpy'},
+  {id: 266, name: 'Easily startled'},
+  {id: 267, name: 'Lack of confidence'},
   // Other Related Conditions
-  {id: 260, name: 'Adrenal Fatigue'},
-  {id: 261, name: 'Anemia'},
-  {id: 262, name: 'Hyponatremia (low blood sodium)'},
-  {id: 263, name: 'Lack of coordination'},
-  {id: 264, name: 'Clumsiness'},
-  {id: 265, name: 'Tendency to fall'},
-  {id: 266, name: 'Dizziness'},
-  {id: 267, name: 'Fainting episodes'},
-  {id: 268, name: 'Tremor'},
-  {id: 269, name: 'Chemical sensitivities'},
-  {id: 270, name: 'Restless Leg Syndrome'},
-  {id: 271, name: 'Rhabdomyolysis (destruction of skeletal muscle)'},
-  {id: 272, name: 'Hernia'},
+  {id: 268, name: 'Adrenal Fatigue'},
+  {id: 269, name: 'Anemia'},
+  {id: 270, name: 'Hyponatremia (low blood sodium)'},
+  {id: 271, name: 'Lack of coordination'},
+  {id: 272, name: 'Clumsiness'},
+  {id: 273, name: 'Tendency to fall'},
+  {id: 274, name: 'Dizziness'},
+  {id: 275, name: 'Fainting episodes'},
+  {id: 276, name: 'Tremor'},
+  {id: 277, name: 'Chemical sensitivities'},
+  {id: 278, name: 'Restless Leg Syndrome'},
+  {id: 279, name: 'Rhabdomyolysis (destruction of skeletal muscle)'},
+  {id: 280, name: 'Hernia'},
   // Brain
-  {id: 273, name: 'Depression'},
-  {id: 274, name: 'Panic attacks'},
-  {id: 275, name: 'Memory loss'},
-  {id: 276, name: 'Confusion'},
-  {id: 277, name: 'Brain fog'},
-  {id: 278, name: 'Mental sluggishness'},
-  {id: 279, name: 'Porr concentration'},
-  {id: 280, name: 'Noises and/or voices in head'},
-  {id: 281, name: 'Hallucinations'},
-  {id: 282, name: 'Delusions'},
-  {id: 283, name: 'Mania'},
-  {id: 284, name: 'Phobias'},
-  {id: 285, name: 'Obsessions'},
-  {id: 286, name: 'Alcohol & substance abuse'},
-  {id: 287, name: 'Rage'},
-  {id: 288, name: 'Loss of drive'},
-  {id: 289, name: 'Personality disorders'},
-  {id: 290, name: 'Schizophrenia'},
-  {id: 291, name: 'Postpartum Depression'},
-  {id: 292, name: 'Seasonal Affective Disorder (SAD)'},
-  {id: 293, name: 'Nightmares'},
-  {id: 294, name: 'Bipolar'},
-  {id: 295, name: 'Suicide'},
-  {id: 296, name: 'ADHD'},
-  {id: 297, name: 'Dementia'},
-  {id: 298, name: 'Alzheimer\'s Disease'},
-  {id: 299, name: 'Parkinson\'s Disease'},
+  {id: 281, name: 'Depression'},
+  {id: 282, name: 'Panic attacks'},
+  {id: 283, name: 'Memory loss'},
+  {id: 284, name: 'Confusion'},
+  {id: 285, name: 'Brain fog'},
+  {id: 286, name: 'Mental sluggishness'},
+  {id: 287, name: 'Porr concentration'},
+  {id: 288, name: 'Noises and/or voices in head'},
+  {id: 289, name: 'Hallucinations'},
+  {id: 290, name: 'Delusions'},
+  {id: 291, name: 'Mania'},
+  {id: 292, name: 'Phobias'},
+  {id: 293, name: 'Obsessions'},
+  {id: 294, name: 'Alcohol & substance abuse'},
+  {id: 295, name: 'Rage'},
+  {id: 296, name: 'Loss of drive'},
+  {id: 297, name: 'Personality disorders'},
+  {id: 298, name: 'Schizophrenia'},
+  {id: 299, name: 'Postpartum Depression'},
+  {id: 300, name: 'Seasonal Affective Disorder (SAD)'},
+  {id: 301, name: 'Nightmares'},
+  {id: 302, name: 'Bipolar'},
+  {id: 303, name: 'Suicide'},
+  {id: 304, name: 'ADHD'},
+  {id: 305, name: 'Dementia'},
+  {id: 306, name: 'Alzheimer\'s Disease'},
+  {id: 307, name: 'Parkinson\'s Disease'},
   // Kidney and Bladder
-  {id: 300, name: 'Albuminuria (protein in urine)'},
-  {id: 301, name: 'Urinary incontinence'},
-  {id: 302, name: 'Frequent need to urinate'},
-  {id: 303, name: 'Decreased output of urine'},
-  {id: 304, name: 'Interstitial cystitis (chronic bladder problems)'},
-  {id: 305, name: 'Urinary incontinence while sleeping'},
-  {id: 306, name: 'Kidney stones'},
-  {id: 307, name: 'Recurrent kidney infections'},
-  {id: 308, name: 'Recurrent bladder infections'},
-  {id: 309, name: 'Irritable bladder syndrome'},
-  {id: 310, name: 'Chronic kidney failure'},
+  {id: 308, name: 'Albuminuria (protein in urine)'},
+  {id: 309, name: 'Urinary incontinence'},
+  {id: 310, name: 'Frequent need to urinate'},
+  {id: 311, name: 'Decreased output of urine'},
+  {id: 312, name: 'Interstitial cystitis (chronic bladder problems)'},
+  {id: 313, name: 'Urinary incontinence while sleeping'},
+  {id: 314, name: 'Kidney stones'},
+  {id: 315, name: 'Recurrent kidney infections'},
+  {id: 316, name: 'Recurrent bladder infections'},
+  {id: 317, name: 'Irritable bladder syndrome'},
+  {id: 318, name: 'Chronic kidney failure'},
   // Gallbladder
-  {id: 311, name: 'Gallbladder Disease'},
-  {id: 312, name: 'Gallstones'},
+  {id: 319, name: 'Gallbladder Disease'},
+  {id: 320, name: 'Gallstones'},
   // Liver
-  {id: 313, name: 'Liver tenderness and enlargement'},
-  {id: 314, name: 'Congestion of the liver'},
-  {id: 315, name: 'Elevated liver enzymes'},
+  {id: 321, name: 'Liver tenderness and enlargement'},
+  {id: 322, name: 'Congestion of the liver'},
+  {id: 323, name: 'Elevated liver enzymes'},
   // Lungs
-  {id: 316, name: 'Asthma'},
-  {id: 317, name: 'Bronchitis'},
-  {id: 318, name: 'Emphysema'},
-  {id: 319, name: 'Air hunger'},
-  {id: 320, name: 'Shortness of breath'},
-  {id: 321, name: 'Tightness in chest'},
-  {id: 322, name: 'Pneumonia'},
+  {id: 324, name: 'Asthma'},
+  {id: 325, name: 'Bronchitis'},
+  {id: 326, name: 'Emphysema'},
+  {id: 327, name: 'Air hunger'},
+  {id: 328, name: 'Shortness of breath'},
+  {id: 329, name: 'Tightness in chest'},
+  {id: 330, name: 'Pneumonia'},
   // Heart
-  {id: 323, name: 'High blood pressure'},
-  {id: 324, name: 'Low blood pressure'},
-  {id: 325, name: 'Slow/weak pulse (under 60bpm)'},
-  {id: 326, name: 'Fast pulse (over 90bpm at rest)'},
-  {id: 327, name: 'Arrhythmia (irregular heartbeat)'},
-  {id: 328, name: 'Skipped beats'},
-  {id: 329, name: 'Chest pain'},
-  {id: 330, name: 'Heart palpitations'},
-  {id: 331, name: 'High cholesterol'},
-  {id: 332, name: 'High triglycerides'},
-  {id: 333, name: 'High LDL'},
-  {id: 334, name: 'Coronary Artery Disease'},
-  {id: 335, name: 'Plaque buildup'},
-  {id: 336, name: 'Poor circulation'},
-  {id: 337, name: 'Enlarged heart'},
-  {id: 338, name: 'Stroke'},
-  {id: 339, name: 'Heart attack'}
+  {id: 331, name: 'High blood pressure'},
+  {id: 332, name: 'Low blood pressure'},
+  {id: 333, name: 'Slow/weak pulse (under 60bpm)'},
+  {id: 334, name: 'Fast pulse (over 90bpm at rest)'},
+  {id: 335, name: 'Arrhythmia (irregular heartbeat)'},
+  {id: 336, name: 'Skipped beats'},
+  {id: 337, name: 'Chest pain'},
+  {id: 338, name: 'Heart palpitations'},
+  {id: 339, name: 'High cholesterol'},
+  {id: 340, name: 'High triglycerides'},
+  {id: 341, name: 'High LDL'},
+  {id: 342, name: 'Coronary Artery Disease'},
+  {id: 343, name: 'Plaque buildup'},
+  {id: 344, name: 'Poor circulation'},
+  {id: 345, name: 'Enlarged heart'},
+  {id: 346, name: 'Stroke'},
+  {id: 347, name: 'Heart attack'}
 ];
 
 export default class SymptomEntryView extends Component {
@@ -432,168 +433,168 @@ export default class SymptomEntryView extends Component {
         <h4>Weight</h4>
         <FilteredMultiSelect
           onChange={this.handleSelectionChange}
-          options={SYMPTOMS.slice(11, 21)}
+          options={SYMPTOMS.slice(11, 20)}
           selectedOptions={selectedSymptoms}
           textProp='name'
           valueProp='id' />
         <h4>Body Temperature</h4>
         <FilteredMultiSelect
           onChange={this.handleSelectionChange}
-          options={SYMPTOMS.slice(21, 34)}
+          options={SYMPTOMS.slice(20, 33)}
           selectedOptions={selectedSymptoms}
           textProp='name'
           valueProp='id' />
         <h4>Slowness</h4>
         <FilteredMultiSelect
           onChange={this.handleSelectionChange}
-          options={SYMPTOMS.slice(34, 38)}
+          options={SYMPTOMS.slice(33, 37)}
           selectedOptions={selectedSymptoms}
           textProp='name'
           valueProp='id' />
         <h4>Infections</h4>
         <FilteredMultiSelect
           onChange={this.handleSelectionChange}
-          options={SYMPTOMS.slice(38, 54)}
+          options={SYMPTOMS.slice(37, 52)}
           selectedOptions={selectedSymptoms}
           textProp='name'
           valueProp='id' />
         <h4>Swelling and Thickened Skin of</h4>
         <FilteredMultiSelect
           onChange={this.handleSelectionChange}
-          options={SYMPTOMS.slice(54, 64)}
+          options={SYMPTOMS.slice(52, 63)}
           selectedOptions={selectedSymptoms}
           textProp='name'
           valueProp='id' />
         <h4>Mouth and Throat</h4>
         <FilteredMultiSelect
           onChange={this.handleSelectionChange}
-          options={SYMPTOMS.slice(64, 90)}
+          options={SYMPTOMS.slice(63, 89)}
           selectedOptions={selectedSymptoms}
           textProp='name'
           valueProp='id' />
         <h4>Ears</h4>
         <FilteredMultiSelect
           onChange={this.handleSelectionChange}
-          options={SYMPTOMS.slice(90, 98)}
+          options={SYMPTOMS.slice(89, 97)}
           selectedOptions={selectedSymptoms}
           textProp='name'
           valueProp='id' />
         <h4>Eyes</h4>
         <FilteredMultiSelect
           onChange={this.handleSelectionChange}
-          options={SYMPTOMS.slice(98, 116)}
+          options={SYMPTOMS.slice(97, 115)}
           selectedOptions={selectedSymptoms}
           textProp='name'
           valueProp='id' />
         <h4>Hair</h4>
         <FilteredMultiSelect
           onChange={this.handleSelectionChange}
-          options={SYMPTOMS.slice(116, 130)}
+          options={SYMPTOMS.slice(115, 129)}
           selectedOptions={selectedSymptoms}
           textProp='name'
           valueProp='id' />
         <h4>Nails</h4>
         <FilteredMultiSelect
           onChange={this.handleSelectionChange}
-          options={SYMPTOMS.slice(130, 138)}
+          options={SYMPTOMS.slice(129, 137)}
           selectedOptions={selectedSymptoms}
           textProp='name'
           valueProp='id' />
         <h4>Skin</h4>
         <FilteredMultiSelect
           onChange={this.handleSelectionChange}
-          options={SYMPTOMS.slice(138, 174)}
+          options={SYMPTOMS.slice(137, 173)}
           selectedOptions={selectedSymptoms}
           textProp='name'
           valueProp='id' />
         <h4>Numbness and Tingling</h4>
         <FilteredMultiSelect
           onChange={this.handleSelectionChange}
-          options={SYMPTOMS.slice(174, 180)}
+          options={SYMPTOMS.slice(173, 179)}
           selectedOptions={selectedSymptoms}
           textProp='name'
           valueProp='id' />
         <h4>Pain</h4>
         <FilteredMultiSelect
           onChange={this.handleSelectionChange}
-          options={SYMPTOMS.slice(180, 200)}
+          options={SYMPTOMS.slice(179, 199)}
           selectedOptions={selectedSymptoms}
           textProp='name'
           valueProp='id' />
         <h4>Digestion</h4>
         <FilteredMultiSelect
           onChange={this.handleSelectionChange}
-          options={SYMPTOMS.slice(200, 217)}
+          options={SYMPTOMS.slice(199, 216)}
           selectedOptions={selectedSymptoms}
           textProp='name'
           valueProp='id' />
         <h4>Menstrual Disorders</h4>
         <FilteredMultiSelect
           onChange={this.handleSelectionChange}
-          options={SYMPTOMS.slice(217, 231)}
+          options={SYMPTOMS.slice(216, 230)}
           selectedOptions={selectedSymptoms}
           textProp='name'
           valueProp='id' />
         <h4>Reproductive Disorders and Pregnancy</h4>
         <FilteredMultiSelect
           onChange={this.handleSelectionChange}
-          options={SYMPTOMS.slice(231, 251)}
+          options={SYMPTOMS.slice(230, 258)}
           selectedOptions={selectedSymptoms}
           textProp='name'
           valueProp='id' />
         <h4>Emotional</h4>
         <FilteredMultiSelect
           onChange={this.handleSelectionChange}
-          options={SYMPTOMS.slice(251, 260)}
+          options={SYMPTOMS.slice(258, 267)}
           selectedOptions={selectedSymptoms}
           textProp='name'
           valueProp='id' />
         <h4>Other Related Conditions</h4>
         <FilteredMultiSelect
           onChange={this.handleSelectionChange}
-          options={SYMPTOMS.slice(260, 273)}
+          options={SYMPTOMS.slice(267, 280)}
           selectedOptions={selectedSymptoms}
           textProp='name'
           valueProp='id' />
         <h4>Brain</h4>
         <FilteredMultiSelect
           onChange={this.handleSelectionChange}
-          options={SYMPTOMS.slice(273, 300)}
+          options={SYMPTOMS.slice(280, 307)}
           selectedOptions={selectedSymptoms}
           textProp='name'
           valueProp='id' />
         <h4>Kidney and Bladder</h4>
         <FilteredMultiSelect
           onChange={this.handleSelectionChange}
-          options={SYMPTOMS.slice(300, 311)}
+          options={SYMPTOMS.slice(307, 318)}
           selectedOptions={selectedSymptoms}
           textProp='name'
           valueProp='id' />
         <h4>Gallbladder</h4>
         <FilteredMultiSelect
           onChange={this.handleSelectionChange}
-          options={SYMPTOMS.slice(311, 313)}
+          options={SYMPTOMS.slice(318, 320)}
           selectedOptions={selectedSymptoms}
           textProp='name'
           valueProp='id' />
         <h4>Liver</h4>
         <FilteredMultiSelect
           onChange={this.handleSelectionChange}
-          options={SYMPTOMS.slice(313, 316)}
+          options={SYMPTOMS.slice(320, 323)}
           selectedOptions={selectedSymptoms}
           textProp='name'
           valueProp='id' />
         <h4>Lungs</h4>
         <FilteredMultiSelect
           onChange={this.handleSelectionChange}
-          options={SYMPTOMS.slice(316, 323)}
+          options={SYMPTOMS.slice(323, 330)}
           selectedOptions={selectedSymptoms}
           textProp='name'
           valueProp='id' />
         <h4>Heart</h4>
         <FilteredMultiSelect
           onChange={this.handleSelectionChange}
-          options={SYMPTOMS.slice(323, 339)}
+          options={SYMPTOMS.slice(330, 347)}
           selectedOptions={selectedSymptoms}
           textProp='name'
           valueProp='id' />
