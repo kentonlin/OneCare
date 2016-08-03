@@ -3,6 +3,7 @@ var bodyParser = require('body-parser');
 var dbHelpers = require('../db/dbhelper.js');
 var path = require('path')
 var app = express();
+var brain = require('./brain.js');
 
 var rootPath = path.normalize(__dirname + '/../client');
 // app.use(express.static(__dirname + "/client"));
@@ -55,3 +56,4 @@ app.post('/api/symptomEntry/add', function(req, res) {
   console.log(newSympson);
   dbHelpers.addSymptom(newSympson, res);
 });
+
