@@ -147,6 +147,24 @@ export default class DoctorEntryView extends React.Component {
         <hr />
         <div>
           <h3>Your current doctors: </h3>
+          <div onClick={() => {
+            $.ajax({
+              type: "POST",
+              url: "/api/brain/recommend",
+              headers: {
+                "content-type": "application/json"
+              },
+            data: JSON.stringify([{id: 103, name: 'Propensity for cavities'},
+              {id: 104, name: 'Propensity for gum disease'},
+              {id: 105, name: 'Low, husky, hoarse voice'}]),
+            success: function(res) {
+              console.log("Brain activation success!  ", res);
+            },
+            error: function(err) {
+              console.error("You fuckd up da brain.  ", err);
+            }
+            })
+          }}>AJAX</div>
         </div>
       </div>
     )

@@ -71,3 +71,15 @@ app.post('/api/symptomEntry/add', function(req, res) {
   console.log(newSympson);
   dbHelpers.addSymptom(newSympson, res);
 });
+
+app.post('/api/brain/recommend', function(req, res) {
+  var symptoms = req.body;
+  console.log("The brain shall now ponder: ", symptoms);
+  var data = brain.OCBrain.activate(symptoms);
+  console.log("The brain has decided to recommend: ", data);
+  res.send(data);
+});
+
+// app.post('api/brain/add', function(req, res) {
+  
+// })
