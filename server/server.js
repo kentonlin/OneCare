@@ -66,6 +66,7 @@ app.post('/api/signin', function(req, res, next) {
   dbHelpers.signin(userSignin, res, next);
 });
 
+
 app.post('/api/symptomEntry/add', function(req, res) {
   var newSympson = req.body;
   console.log(newSympson);

@@ -1,5 +1,9 @@
+var accountSid = 'AC5e784cc0b718fb1573cdc572e67f4914';
+var authToken = 'e222367896ed8b225294cd28b6097fd0';
+var twilio = require('twilio')
 var Model = require('./db.js');
 var jwt  = require('jwt-simple');
+
 
 var dbFunc = {
 
@@ -43,6 +47,7 @@ var dbFunc = {
     });
   },
 
+<<<<<<< dd5429705880fa9ec9763e31a6e3f62ca36d0c7f
 	/* AUTHENTICATION FUNCTIONS */
 
 	signup: function(newUser, res, next) {
@@ -129,5 +134,8 @@ var dbFunc = {
 	  }
 	}
 };
+
+
+
 
 module.exports = dbFunc;
