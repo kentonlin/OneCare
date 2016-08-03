@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import ReactDOM from 'react-dom'
+import ReactDOM from 'react-dom';
 import Signin from './signin.jsx';
 import DoctorEntryView from './doctorEntryView.jsx';
 import DoctorListView from './doctorListView.jsx';
