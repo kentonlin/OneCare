@@ -4,6 +4,7 @@ var dbHelpers = require('../db/dbhelper.js');
 var path = require('path');
 var app = express();
 var brain = require('./brain.js');
+var twilio = require('twilio');
 
 app.use(express.static('public'));
 
@@ -69,8 +70,8 @@ app.post('/api/signin', function(req, res, next) {
 app.post('/api/script/remind', function(req, res) {
   var number = req.body.number;
   var message = req.body.message;
-  dbHelpers.sendReminder(numner, message);
-})
+  dbHelpers.sendReminder(number, message);
+});
 
 app.post('/api/symptomEntry/add', function(req, res) {
   var newSympson = req.body;
