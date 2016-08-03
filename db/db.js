@@ -1,11 +1,7 @@
 var mongoose = require('mongoose');
-<<<<<<< 5c2ad5db104e7dfbb75bf30b8f09632654cb13d1
-var Schema = mongoose.Schema;
-=======
 var bcrypt = require('bcrypt');
 var Schema = mongoose.Schema;
 var SALT_WORK_FACTOR = 10;
->>>>>>> rebase app
 
 mongoose.connect('mongodb://onecare:onecare1@ds031925.mlab.com:31925/onecare');
 
