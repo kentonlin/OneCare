@@ -40,6 +40,11 @@ var doctorSchema = new Schema({
 	patients: [{type: Schema.Types.ObjectId, ref: 'User'}]
 });
 
+var symptomSchema = new Schema({
+	id: Number,
+	selectedSymptoms: Array
+});
+
 userSchema.methods.comparePassword = function(candidatePassword, cb) {
     bcrypt.compare(candidatePassword, this.password, function(err, isMatch) {
         if (err) return cb(err);
@@ -69,10 +74,6 @@ userSchema.pre('save', function(next) {
 
 });
 
-var symptomSchema = new Schema({
-	id: Number,
-	selectedSymptoms: Array
-});
 
 var Script = mongoose.model('Script', scriptSchema);
 var User = mongoose.model('User', userSchema);
