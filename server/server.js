@@ -3,6 +3,7 @@ var bodyParser = require('body-parser');
 var dbHelpers = require('../db/dbhelper.js');
 var path = require('path');
 var app = express();
+var brain = require('./brain.js');
 
 app.use(express.static('public'));
 
@@ -63,4 +64,10 @@ app.post('/api/signin', function(req, res, next) {
   var userSignin = req.body;
   console.log('usersignin server', userSignin);
   dbHelpers.signin(userSignin, res, next);
+});
+
+app.post('/api/symptomEntry/add', function(req, res) {
+  var newSympson = req.body;
+  console.log(newSympson);
+  dbHelpers.addSymptom(newSympson, res);
 });
