@@ -13,6 +13,7 @@ var scriptSchema = new Schema({
 	refill: Date, // date of refill
 	refillRemind: Number, //reminder for refill
 	dailyRemind: Number, //reminder for doses
+	phone: String
 	// User: {type: Schema.Types.ObjectId, ref: 'User'}
 	// refers to a specific user
 });
@@ -39,7 +40,7 @@ var symptomSchema = new Schema({
 
 var Script = mongoose.model('Script', scriptSchema);
 var User = mongoose.model('User', userSchema);
-var Doctor = mongoose.model('Doctor', doctorSchema); 
+var Doctor = mongoose.model('Doctor', doctorSchema);
 var Symptom = mongoose.model('Symptom', symptomSchema);
 
 module.exports = {user: User, script: Script, doctor: Doctor, symptom: Symptom};

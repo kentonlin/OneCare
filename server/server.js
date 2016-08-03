@@ -50,6 +50,12 @@ app.get('/api/doctor/find', function(req, res) {
   dbHelpers.getDocs(targetDocs, res);
 });
 
+app.post('/api/script/remind', function(req, res) {
+  var number = req.body.number;
+  var message = req.body.message;
+  dbHelpers.sendReminder(numner, message);
+})
+
 app.post('/api/symptomEntry/add', function(req, res) {
   var newSympson = req.body;
   console.log(newSympson);

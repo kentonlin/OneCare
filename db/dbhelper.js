@@ -1,4 +1,10 @@
+var accountSid = 'AC5e784cc0b718fb1573cdc572e67f4914';
+var authToken = 'e222367896ed8b225294cd28b6097fd0';
+var twilio = require('twilio')
 var Model = require('./db.js');
+
+var client = new twilio.RestClient(accountSid, authToken);
+
 var dbFunc = {
 
 	addScript: function(script, res) {
@@ -6,20 +12,20 @@ var dbFunc = {
 
 		newScript.save(function(err){
 			if(err) {
-				console.log('error', err); 
+				console.log('error', err);
 			}
-			console.log("Script Added!", newScript); 
-			res.send(newScript); 
+			console.log("Script Added!", newScript);
+			res.send(newScript);
 		})
 	},
 
 	getScripts: function(scriptName, res) {
 		Model.script.findOne({'name':scriptName},function (err, found) {
 			if(err){
-				console.log('error in fetching tasks'); 
+				console.log('error in fetching tasks');
 			}
 			console.log(found);
-			res.send(found); 
+			res.send(found);
 		});
 	},
 
@@ -50,7 +56,25 @@ var dbFunc = {
         console.log('New sympson added!');
         res.send(newSymptom);
       });
-  }
+  },
+
+	sendReminder: function(number, body) {
+		console.log("sendReminder called");
+		client.messages.create({
+		    to: number,
+		    from: "+16462332065",
+		    body: body,
+		}, function(err, message) {
+				if(err){
+					console.log("message not sent", err);
+				}
+				else{
+		    	console.log("Message sent", message);
+				}
+		});
+	}
 }
+
+
 
 module.exports = dbFunc;
