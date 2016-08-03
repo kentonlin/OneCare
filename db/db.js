@@ -16,6 +16,7 @@ var scriptSchema = new Schema({
 	refillRemind: Number, //reminder for refill
 	dailyRemind: Number, //reminder for doses
 	phone: String
+
 	// User: {type: Schema.Types.ObjectId, ref: 'User'}
 	// refers to a specific user
 });
