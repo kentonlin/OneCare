@@ -402,14 +402,14 @@ export default class SymptomEntryView extends Component {
     console.log('you chose: ', this.state.selectedSymptoms);
     $.ajax({
       type: 'POST',
-      url: '/api/symptomEntry/add',
+      url: '/api/brain/recommend',
       dataType: 'json',
       headers: {
         'Content-Type': 'application/json'
       },
-      data: JSON.stringify(this.state),
+      data: JSON.stringify(this.state.selectedSymptoms),
       success: function(data) {
-        console.log('You have cancer!', data);
+        console.log('You have cancer!', data.pop());
       },
       error: function(err) {
         console.log('Congrats you are superhuman', err);  
