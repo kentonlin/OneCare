@@ -33184,7 +33184,7 @@
 	        "dosage": this.state.dosageAmt + ' ' + this.state.dosageMeasure,
 	        "refill": this.state.date,
 	        "frequency": this.state.scheduleNum + ' per ' + this.state.scheduleDayWeek,
-	        "phoneNum": "8108414628"
+	        "phone": "8108414628"
 	      };
 	      console.log("submitForm called for: ", script);
 

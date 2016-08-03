@@ -28,6 +28,7 @@
     "babel-preset-react": "^6.11.1",
     "bcrypt": "latest",
     "body-parser": "^1.15.2",
+    "cron": "^1.1.0",
     "express": "^4.14.0",
     "express-partials": "~0.2.0",
     "express-session": "^1.7.2",
@@ -47,7 +48,8 @@
     "react-filtered-multiselect": "^0.4.2",
     "react-input-calendar": "^0.3.11",
     "request": "^2.72.0",
-    "underscore": "^1.8.3",
+    "synaptic": "^1.0.8",
+    "twilio": "^2.9.1",
     "webpack": "^1.13.1",
     "webpack-dev-server": "^1.14.1"
   },
