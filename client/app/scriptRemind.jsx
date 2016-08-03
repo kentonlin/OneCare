@@ -11,10 +11,11 @@ export default class ScriptRemindView extends React.Component {
       "currentDrug": "None",
       "dosageAmt": 0,
       "dosageMeasure": 'mg',
-      "date": null,
+      "date": date,
       "scheduleNum": "none",
       "scheduleDayWeek": "day"
   }
+  var date = new Date();
   this.updateDrugName = this.updateDrugName.bind(this);
   this.submitForm = this.submitForm.bind(this);
   this.handleFrequency = this.handleFrequency.bind(this);
@@ -72,7 +73,7 @@ export default class ScriptRemindView extends React.Component {
         "dosage": this.state.dosageAmt + ' ' + this.state.dosageMeasure,
         "refill": this.state.date,
         "frequency": this.state.scheduleNum + ' per ' + this.state.scheduleDayWeek,
-        "phoneNum": "8108414628"
+        "phone": "8108414628"
       }
       console.log("submitForm called for: ", script)
 
@@ -96,7 +97,6 @@ export default class ScriptRemindView extends React.Component {
     }
 
   render() {
-    let date = new Date();
     return (
       <div>
         <div>
@@ -122,7 +122,7 @@ export default class ScriptRemindView extends React.Component {
         <div>
             <h1> Refill Date</h1>
             <div>
-              <Calendar format='MM/DD/YYYY' date={date} onChange= {this.handleRefillDate}/>
+              <Calendar format='MM/DD/YYYY' date={this.state.date} onChange= {this.handleRefillDate}/>
               <h3> You selected {this.state.date} </h3>
             </div>
         </div>

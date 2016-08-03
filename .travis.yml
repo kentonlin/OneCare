@@ -1,0 +1,12 @@
+language: node_js
+node_js:
+- '6'
+- '6.1'
+- '5.11'
+- '0.6'
+- iojs
+deploy:
+  provider: heroku
+  api_key:
+    secure: O5Aq0pgAEkKjLTGERpqKjfH0aPVuvDMUOsxBzpJQWsaP2BB62mG3DSLfJWdzkFrCFAaLYG+nB7uSuhGireg5bzmHVEwGisjZU+z1PsXU5nweBWxGbfhRPz9S9PBXPQ35/5dORzb1Lzj8fhzc/9e9IsCl1RF6tQuj4z3j3sRgfc3WTaGZg/2FdH/larDCedkRE+AtZcC3uSqB6HhEv5/azW/5AgWGlTHrE7oD+6PIu/w7uhJmIsnBLEbNUcCZ4dIj7dDVUN4PlCnxNWvVL8Z19efbNOacKhto3Rmiob5BOdWjPJPpYJ+1vO/rrYO4y0C9ZVeEz+fIzfukxhmmb2rDiNozoid/eWi1BNlt+ViNYh/oN2eZwPlfv4ZOjs1/ZLzwMC+Wk5qpKsUEY9Kw3LyQ8r1n7vhOUVFb2XCdlY/lI2dsz84vrhS3A3JofYPKdZGcfJ3QslQVONBa+P5W6d5gBDLpvHk3wIW1wGKfUaQLizBYp46+AHigxBt0irJebKHDIS7nx7Yx4chxL6X+ttvqb5TGRObEUOWJ1acpMdIV7djv99UnKLKOlrc6BIeXMD1S505GxhUsTdsb3oJ21BTyasdvwp8zsqYBUxVRexAzyPKCpAomfLS2iRaO5/s4YgfP/dW+jwtqfdt54FGgHUXwsXVhvBWnxvhP1UqZLdTAzWo=
+  app: onecare

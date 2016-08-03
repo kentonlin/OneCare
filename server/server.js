@@ -1,8 +1,12 @@
 var express = require('express');
 var bodyParser = require('body-parser');
 var dbHelpers = require('../db/dbhelper.js');
-var path = require('path')
+var path = require('path');
 var app = express();
+var brain = require('./brain.js');
+var twilio = require('twilio');
+
+app.use(express.static('public'));
 
 var rootPath = path.normalize(__dirname + '/../client');
 // app.use(express.static(__dirname + "/client"));
@@ -23,7 +27,7 @@ app.listen(process.env.PORT || 3000, function(){
 
 app.get('/', function(req, res) {
   res.sendFile(path.join(rootPath + "/index.html"));
-})
+});
 
 app.get('/fuckDan', function(req, res){
   console.log('request received at /fuckDan');
@@ -48,6 +52,25 @@ app.post('/api/doctor/add', function(req, res) {
 app.get('/api/doctor/find', function(req, res) {
   var targetDocs = req.body;
   dbHelpers.getDocs(targetDocs, res);
+});
+
+// USER SIGNUP SIGNIN
+
+app.post('/api/signup', function(req, res, next) {
+  var userSignup = req.body;
+  dbHelpers.signup(userSignup, res, next);
+});
+
+app.post('/api/signin', function(req, res, next) {
+  var userSignin = req.body;
+  console.log('usersignin server', userSignin);
+  dbHelpers.signin(userSignin, res, next);
+});
+
+app.post('/api/script/remind', function(req, res) {
+  var number = req.body.number;
+  var message = req.body.message;
+  dbHelpers.sendReminder(number, message);
 });
 
 app.post('/api/symptomEntry/add', function(req, res) {
