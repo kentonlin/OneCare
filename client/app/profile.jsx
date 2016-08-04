@@ -27,13 +27,14 @@ export default class Profile extends React.Component {
 
   render() {
     return (
+      [
       <div className="doctor-list-view">
         {
          this.state.doctors.map((doctor, idx) => {
           return (<DoctorView key={idx} name={doctor.name} phone={doctor.phone} fax={doctor.fax} address={doctor.address} specialty={doctor.specialty} />)
          }, this)
         }
-      </div>
+      </div>,
 
       <div className="script-list-view">
         {
@@ -44,6 +45,7 @@ export default class Profile extends React.Component {
           }, this)
         }
       </div>
+    ]
     );
   }
 }
