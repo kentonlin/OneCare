@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import Calendar from 'react-input-calendar'
 import $ from 'jquery';
 import Dropdown from 'react-drop-down';
+import { Link } from 'react-router';
+import Navigate from './navigate.jsx';
 
 export default class ScriptRemindView extends React.Component {
 
@@ -99,6 +101,7 @@ export default class ScriptRemindView extends React.Component {
   render() {
     return (
       <div>
+      <Navigate />
         <div>
           <h1> Current Drug: {this.state.currentDrug} </h1>
           <input
