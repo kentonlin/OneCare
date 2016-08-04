@@ -11,8 +11,6 @@ var ObjectId = require('mongoose').Types.ObjectId;
 var dbFunc = {
 
 	addScript: function(script, res, next) {
-		console.log("what is THIS", this);
-		console.log("username!!!!", script.username);
 		/*
 			Script Format
 			{
@@ -39,7 +37,6 @@ var dbFunc = {
 				}
 				// res.status(200).send("script added to user model");
 
-				//call set reminder function
 				this.setReminder(script.username, message, time, next);
 
 			}.bind(this))
