@@ -8,7 +8,7 @@ import Signin from './signin.jsx';
 import Container from './container.jsx';
 import DoctorListView from './doctorListView.jsx';
 import DoctorEntryView from './doctorEntryView.jsx';
-import SymptomEntry from './symptomEntry.jsx'
+import SymptomEntry from './symptomEntry.jsx';
 import Signup from './signup.jsx';
 
 class App extends React.Component {
