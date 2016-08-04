@@ -92,6 +92,14 @@ app.post('/api/brain/recommend', function(req, res) {
   res.send(data);
 });
 
-// app.post('api/brain/add', function(req, res) {
+app.get('/api/brain/save', function(req, res) {
+  brain.OCBrain.save("MainBrain");
+  res.send("huehuehue");
+});
 
-// })
+app.post('/api/brain/add', function(req, res) {
+  var pair = req.body.pair;
+  res.send(brain.OCBrain.addTrainingPair(pair))
+  brain.OCBrain.train(10);
+  brain.OCBrain.save("MainBrain");
+})

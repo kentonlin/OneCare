@@ -6,9 +6,7 @@ var jwt  = require('jwt-simple');
 var client = new twilio.RestClient(accountSid, authToken);
 var cron = require('cron');
 var cronJob = cron.CronJob;
-
-
-
+var ObjectId = require('mongoose').Types.ObjectId; 
 
 var dbFunc = {
 
@@ -197,8 +195,23 @@ var dbFunc = {
 				// .catch(function(err){
 				// 	console.log("user not found")
 				// })
-	}
+	},
 
+	saveBrain: function(brainState, trainingData, name) {
+		var success = Model.brain.findOneAndUpdate({"_id": ObjectId("57a3a316dcba0f71400f021a")}, {
+			$set: {
+				brainState: brainState,
+		  	trainingInputs: trainingData,
+			  name: name
+			}
+		})
+		.then(function(res) {
+			console.log("Brain ", name, " updated! ");
+		})
+		.catch(function(err) {
+			console.error("dun goofed!  ", err);
+		});
+	}
 };
 
 module.exports = dbFunc;
