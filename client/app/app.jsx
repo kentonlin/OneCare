@@ -12,6 +12,5 @@ class App extends React.Component {
       )
   }
 }
-if(typeof window !== 'undefined') {
-    React.render(<div><App /></div>, document.getElementById("app"));
-}
+
+ReactDOM.render(<div><App /></div>, document.getElementById("app"));
