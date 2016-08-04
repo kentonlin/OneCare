@@ -66,10 +66,13 @@ app.post('/api/signin', function(req, res, next) {
   dbHelpers.signin(userSignin, res, next);
 });
 
-app.post('/api/script/remind', function(req, res) {
-  var number = req.body.number;
+app.post('/api/script/remind', function(req, res, next) {
+  console.log("request received at setReminder route");
+  var username = req.body.username;
   var message = req.body.message;
-  dbHelpers.sendReminder(numner, message);
+  var phone = req.body.phone;
+  var time = req.body.time;
+  dbHelpers.setReminder(username, message, phone, time, next);
 })
 
 app.post('/api/symptomEntry/add', function(req, res) {
