@@ -153,13 +153,13 @@ export default class DoctorEntryView extends React.Component {
           <div onClick={() => {
             $.ajax({
               type: "POST",
-              url: "/api/brain/recommend",
+              url: "/api/brain/add",
               headers: {
                 "content-type": "application/json"
               },
-            data: JSON.stringify([{id: 103, name: 'Propensity for cavities'},
+            data: JSON.stringify({pair: [[{id: 103, name: 'Propensity for cavities'},
               {id: 104, name: 'Propensity for gum disease'},
-              {id: 105, name: 'Low, husky, hoarse voice'}]),
+              {id: 105, name: 'Low, husky, hoarse voice'}],[{id: 12, name: 'Sports physicians‎'}]]}),
             success: function(res) {
               console.log("Brain activation success!  ", res);
             },

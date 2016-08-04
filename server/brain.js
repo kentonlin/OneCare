@@ -1,5 +1,8 @@
 var synaptic = require('synaptic');
 var _ = require("lodash");
+var Model = require("../db/db.js");
+var ObjectId = require('mongoose').Types.ObjectId; 
+var dbHelpers = require('../db/dbhelper.js');
 
 var Brain = function() {
 
@@ -445,24 +448,51 @@ var SYMPTOMS = [
 ];
 
 
-  //declare some layers for our brain.
-  var inputLayer = new synaptic.Layer(SYMPTOMS.length);
-  var hiddenLayer = new synaptic.Layer (SYMPTOMS.length+DOCTORS.length);
-  var outputLayer = new synaptic.Layer(DOCTORS.length);
+  var initBrain = function() {
+    //declare some layers for our brain.
+    var inputLayer = new synaptic.Layer(SYMPTOMS.length);
+    var hiddenLayer = new synaptic.Layer (SYMPTOMS.length+DOCTORS.length);
+    var outputLayer = new synaptic.Layer(DOCTORS.length);
 
-  //the learning rate:
-  var learningRate = .3;
+    //the learning rate:
+    var learningRate = .3;
 
-  //project all the layers onto each other ("wire up" our brain.)
-  inputLayer.project(hiddenLayer);
-  hiddenLayer.project(outputLayer);
+    //project all the layers onto each other ("wire up" our brain.)
+    inputLayer.project(hiddenLayer);
+    hiddenLayer.project(outputLayer);
 
-  //Let's make a brain!!!
-  var OneCareNeural = new synaptic.Network({
-    input: inputLayer,
-    hidden: [hiddenLayer],
-    output: outputLayer
-  });
+    //Let's make a brain!!!
+    var newBrain = new synaptic.Network({
+      input: inputLayer,
+      hidden: [hiddenLayer],
+      output: outputLayer
+    });
+    return newBrain;
+  }
+
+  var OneCareNeural;
+  var trainingSet = [];
+
+  var loadBrain = function() {
+    var data = Model.brain.findOne({
+        "_id": ObjectId("57a3a316dcba0f71400f021a")
+    })
+    .then(function(brain) {
+      console.log("Brain is loading.  Standby...");
+      var loaded = synaptic.Network.fromJSON(JSON.parse(brain.brainState));
+      console.log("Brain loaded successfully:  ", brain.name );
+      trainingSet = JSON.parse(brain.trainingInputs);
+      console.log("Training set length:  ", trainingSet.length);
+      OneCareNeural = loaded;
+      BrainTrain = new synaptic.Trainer(OneCareNeural);
+    })
+    .catch(function(err) {
+      console.log("Brain load failed.  Initializing new brain. ", err);
+      OneCareNeural = initBrain();
+    })
+  }
+
+  loadBrain();
 
   //let's give our brain a trainer.  
   var BrainTrain = new synaptic.Trainer(OneCareNeural);
@@ -511,9 +541,12 @@ var SYMPTOMS = [
     })
   }
 
-
-
-  var trainingSet = [];
+  var trainMyBrain = function(iter) {
+    BrainTrain.train(trainingSet, {
+      iterations: iter,
+      log: 10
+    });
+  }
 
   var addTrainingPair = function(pair) {
     //validate input.
@@ -523,32 +556,29 @@ var SYMPTOMS = [
     } else { //push to the module variables.
       trainingSet.push(makeTrainingObj(pair[0], pair[1]));
     }
-  }
-
-  var trainMyBrain = function(iter) {
-    BrainTrain.train(trainingSet, {
-      iterations: iter,
-      log: 10
-    });
+    return pair;
   }
 
   var activateMyBrain = function(input) {
     return interpretOutput(OneCareNeural.activate(makeIO(input)));
   }
 
+  var saveBrain = function(name) {
+    console.log("Saving.  Training set length:  ", trainingSet.length);
+    dbHelpers.saveBrain(JSON.stringify(OneCareNeural.toJSON()), JSON.stringify(trainingSet), name);
+  }
 
   return {
     network: OneCareNeural,
     trainer: BrainTrain,
     addTrainingPair: addTrainingPair,
     train: trainMyBrain, 
-    activate: activateMyBrain
+    activate: activateMyBrain,
+    save: saveBrain
   }
 };
 
 exports.OCBrain = Brain();
-
-//////// TEST STUFF BELOW
 
 
 

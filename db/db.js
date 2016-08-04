@@ -47,9 +47,10 @@ var symptomSchema = new Schema({
 });
 
 var brainSchema = new Schema({
-	saveState: String,
-	testValues: String
-})
+	name: String,
+  brainState: String,
+  trainingInputs: String
+});
 
 userSchema.methods.comparePassword = function(candidatePassword, cb) {
     bcrypt.compare(candidatePassword, this.password, function(err, isMatch) {
@@ -86,6 +87,5 @@ var User = mongoose.model('User', userSchema);
 var Doctor = mongoose.model('Doctor', doctorSchema);
 var Symptom = mongoose.model('Symptom', symptomSchema);
 var Brain = mongoose.model('Brain', brainSchema);
-
 
 module.exports = {user: User, script: Script, doctor: Doctor, symptom: Symptom, brain: Brain};
