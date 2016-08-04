@@ -14,7 +14,7 @@ export default class ScriptRemindView extends React.Component {
       "dosageAmt": 0,
       "dosageMeasure": 'mg',
       "date": date,
-      "scheduleFreq": "none",
+      "scheduleFreq": "1x",
       "scheduleDayWeek": "day"
   }
   var date = new Date();
@@ -75,13 +75,13 @@ export default class ScriptRemindView extends React.Component {
         "dosage": this.state.dosageAmt + ' ' + this.state.dosageMeasure,
         "refill": this.state.date,
         "frequency": this.state.scheduleFreq + ' per ' + this.state.scheduleDayWeek,
-        "phone": "18108414628"
+        "username": window.localStorage.username
       }
       console.log("submitForm called for: ", script)
 
       $.ajax({
           type: 'POST',
-          url: '/api/script/add',
+          url: '/api/reminder/add',
           dataType: 'json',
           headers: {
             'Content-Type': 'application/json'
@@ -103,7 +103,8 @@ export default class ScriptRemindView extends React.Component {
       <div>
       <Navigate />
         <div>
-          <h1> Current Drug: {this.state.currentDrug} </h1>
+          <h1> Set a Prescription Reminder </h1>
+          <h2> Current Drug: {this.state.currentDrug} </h2>
           <input
           onChange={this.updateDrugName}
           placeholder='Name'

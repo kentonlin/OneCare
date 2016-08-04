@@ -12,16 +12,40 @@ var cronJob = cron.CronJob;
 
 var dbFunc = {
 
-	addScript: function(script, res) {
+	addScript: function(script, res, next) {
+		console.log("what is THIS", this);
+		console.log("username!!!!", script.username);
+		/*
+			Script Format
+			{
+				"name": 'bactrim',
+				"dosage": '1 tablet',
+				"refill": '08-17-2016',
+				"frequency": '2x per day',
+				"username": 'harish'
+		}
+		*/
+		var message = "Time to take your " + script.name + ' (' + script.dosage + ')!';
+		//hard-coded time right now...need to change time to be based on frequency
+		var time = '36 19 * * *'
 		var newScript = new Model.script(script);
-
 		newScript.save(function(err){
 			if(err) {
 				console.log('error', err);
 			}
-			console.log("Script Added!", newScript);
-			res.send(newScript);
-		});
+			Model.user.update({"username": script.username}, {$push:{"scripts": newScript}},
+			function(err){
+				if(err){
+					res.send(new Error("script not added to user document"));
+				}
+				// res.status(200).send("script added to user model");
+
+				//call set reminder function
+				this.setReminder(script.username, message, time, next);
+
+			}.bind(this))
+		}.bind(this))
+
 	},
 
 
@@ -150,24 +174,17 @@ var dbFunc = {
 			});
 	},
 
-	setReminder: function(username, message, phone, time, next) {
+	setReminder: function(username, message, time, next) {
 		console.log("sendReminder called for", username, "with the message:", message);
-		var phoneNum = '+' + phone;
-		console.log("phoneNum", phoneNum);
-		//look up user object and find their phone number
-				// Model.user.findOne({"username": username}, function(err, user){
-				// 	if(err){
-				// 		next(new Error(err));
-				// 	}
-				// 	phoneNum = "+" + user.phone;
-				// 	console.log("Number on file", phoneNum);
-				// 	return phoneNum;
-				// })
-				// .then(function(number) {
-				// //set cron job for script reminder
-				// console.log("Promise.then condition hit with", number);
-				//'03 19 * * *'
-				var textJob = new cronJob(time, function(){
+		// look up user object and find their phone number
+				Model.user.findOne({"username": username}, function(err, user){
+					if(err){
+						next(new Error(err));
+					}
+					phoneNum = "+" + user.phone;
+					console.log("Number on file", phoneNum);
+				//set cron job for script reminder
+				var textJob = new cronJob(time, function(){ // Time format for cronJob: '03 19 * * *'
 				  client.sendMessage( {
 						to: phoneNum,
 						from:"+16462332065",
@@ -179,26 +196,10 @@ var dbFunc = {
 						next("Message sent.");
 					});
 				},  null, true);
-
 				next("Reminder successfully set");
-					// client.messages.create({
-					// 		to: number,
-					// 		from: "+16462332065",
-					// 		body: body,
-					// }, function(err, message) {
-					// 		if(err){
-					// 			console.log("message not sent", err);
-					// 		}
-					// 		else{
-					// 			console.log("Message sent", message);
-					// 		}
-					// });
-				// })
-				// .catch(function(err){
-				// 	console.log("user not found")
-				// })
+			})
 	}
+}
 
-};
 
 module.exports = dbFunc;
