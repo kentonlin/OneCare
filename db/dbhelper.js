@@ -8,7 +8,6 @@ var cron = require('cron');
 var cronJob = cron.CronJob;
 var ObjectId = require('mongoose').Types.ObjectId; 
 
-
 var dbFunc = {
 
 	addScript: function(script, res) {
@@ -197,9 +196,12 @@ var dbFunc = {
 				// 	console.log("user not found")
 				// })
 	},
+<<<<<<< 9784c1aec06d6cc10286a6ec22d0df3277d3dd85
+=======
+
+>>>>>>> rebase
 
 	saveBrain: function(brainState, trainingData, name) {
-		console.log("got into dbHelper!");
 		var success = Model.brain.findOneAndUpdate({"_id": ObjectId("57a3a316dcba0f71400f021a")}, {
 			$set: {
 				brainState: brainState,
