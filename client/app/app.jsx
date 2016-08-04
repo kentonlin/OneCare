@@ -1,6 +1,6 @@
 import React from 'react';
-import ReactDOM from 'react-dom'
-import Navigator from './navigator.jsx'
+import ReactDOM from 'react-dom';
+import Navigator from './navigator.jsx';
 
 class App extends React.Component {
   render() {
@@ -12,7 +12,6 @@ class App extends React.Component {
       )
   }
 }
-
-ReactDOM.render(<div>
-   <App />
-  </div>, document.getElementById("app"));
+if(typeof window !== 'undefined') {
+    React.render(<div><App /></div>, document.getElementById("app"));
+}
