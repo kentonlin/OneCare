@@ -4,6 +4,8 @@ var twilio = require('twilio')
 var Model = require('./db.js');
 var jwt  = require('jwt-simple');
 var client = new twilio.RestClient(accountSid, authToken);
+var cron = require('cron');
+var cronJob = cron.CronJob;
 
 
 
@@ -148,20 +150,53 @@ var dbFunc = {
 			});
 	},
 
-	sendReminder: function(number, body) {
-		console.log("sendReminder called");
-		client.messages.create({
-				to: number,
-				from: "+16462332065",
-				body: body,
-		}, function(err, message) {
-				if(err){
-					console.log("message not sent", err);
-				}
-				else{
-					console.log("Message sent", message);
-				}
-		});
+	setReminder: function(username, message, phone, time, next) {
+		console.log("sendReminder called for", username, "with the message:", message);
+		var phoneNum = '+' + phone;
+		console.log("phoneNum", phoneNum);
+		//look up user object and find their phone number
+				// Model.user.findOne({"username": username}, function(err, user){
+				// 	if(err){
+				// 		next(new Error(err));
+				// 	}
+				// 	phoneNum = "+" + user.phone;
+				// 	console.log("Number on file", phoneNum);
+				// 	return phoneNum;
+				// })
+				// .then(function(number) {
+				// //set cron job for script reminder
+				// console.log("Promise.then condition hit with", number);
+				//'03 19 * * *'
+				var textJob = new cronJob(time, function(){
+				  client.sendMessage( {
+						to: phoneNum,
+						from:"+16462332065",
+						body: message,
+					}, function( err, data ) {
+						if(err){
+							console.log("CronJob not set: ", err);
+						}
+						next("Message sent.");
+					});
+				},  null, true);
+
+				next("Reminder successfully set");
+					// client.messages.create({
+					// 		to: number,
+					// 		from: "+16462332065",
+					// 		body: body,
+					// }, function(err, message) {
+					// 		if(err){
+					// 			console.log("message not sent", err);
+					// 		}
+					// 		else{
+					// 			console.log("Message sent", message);
+					// 		}
+					// });
+				// })
+				// .catch(function(err){
+				// 	console.log("user not found")
+				// })
 	}
 
 };

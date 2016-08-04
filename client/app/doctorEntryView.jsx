@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import $ from 'jquery';
+import Navigate from './navigate.jsx';
+
 
 export default class DoctorEntryView extends React.Component {
   constructor(props) {
@@ -53,6 +55,7 @@ export default class DoctorEntryView extends React.Component {
   render() {
     return (
       <div className="doctor-input">
+      <Navigate />
       <h2>Input a new doctor!</h2>
         <form className="doctor-entry-form">
           <div>Name</div><input id="name" type="text" onChange={this.handleChange} />

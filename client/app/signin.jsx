@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Router, Route, Link, browserHistory } from 'react-router';
 import $ from 'jquery';
 
 export default class Signin extends React.Component {
@@ -45,6 +46,7 @@ export default class Signin extends React.Component {
     return (
       <div className="signin-container">
         <h1>Sign in to OneCare</h1>
+        <Link to='/remind'>Reminder View</Link>
         <form>
           <span>username</span><input type="text" onChange={(event) => {this.setState({username: event.target.value})}}></input><br />
           <span>password</span><input type="password" onChange={(event) => {this.setState({password: event.target.value})}}></input><br />

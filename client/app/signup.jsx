@@ -15,7 +15,15 @@ export default class Signup extends React.Component {
     var newUser = {
       username: this.state.username,
       password: this.state.password,
-      
+
     }
+  }
+
+  render() {
+    return (
+      <div>
+        <h1> Fuck Ken </h1>
+      </div>
+    )
   }
 }
