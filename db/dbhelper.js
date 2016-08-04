@@ -69,13 +69,13 @@ var dbFunc = {
 				console.log("new user saved");
 				var token = jwt.encode(user, 'secret'); //create new token
 	      res.json({"token": token, "user": {"id": user._id, "username": user.username}}); //send new token and user object
-			})
+			});
 
 			}
 			else {
 				next(new Error("user already exists"));
 			}
-		})
+		});
 	},
 
 	signin: function(reqUser, res, next){
@@ -132,7 +132,7 @@ var dbFunc = {
 	    		res.status(401).send();
 	    	}
 	    	else{ //token decoded and user found in database
-	    		console.log("user authenticated")
+	    		console.log("user authenticated");
 	    		res.status(200).send();
 	    	}
 	    });
