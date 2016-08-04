@@ -12,7 +12,7 @@ export default class ScriptRemindView extends React.Component {
       "dosageAmt": 0,
       "dosageMeasure": 'mg',
       "date": date,
-      "scheduleNum": "none",
+      "scheduleFreq": "none",
       "scheduleDayWeek": "day"
   }
   var date = new Date();
@@ -61,10 +61,10 @@ export default class ScriptRemindView extends React.Component {
     }
 
     handleFrequency(frequency) {
+      console.log("handleFreq called with", frequency.target.value);
       this.setState({
-        scheduleNum: frequency.target.value
+        scheduleFreq: frequency.target.value
       })
-
     }
 
     submitForm () {
@@ -72,8 +72,8 @@ export default class ScriptRemindView extends React.Component {
         "name": this.state.currentDrug,
         "dosage": this.state.dosageAmt + ' ' + this.state.dosageMeasure,
         "refill": this.state.date,
-        "frequency": this.state.scheduleNum + ' per ' + this.state.scheduleDayWeek,
-        "phone": "8108414628"
+        "frequency": this.state.scheduleFreq + ' per ' + this.state.scheduleDayWeek,
+        "phone": "18108414628"
       }
       console.log("submitForm called for: ", script)
 
@@ -127,11 +127,11 @@ export default class ScriptRemindView extends React.Component {
             </div>
         </div>
         <div>
-          <input
-          width='100'
-          onChange={this.handleFrequency}
-          placeholder='How often? (1x, 2x, etc..)'
-          />
+          <select className="dropdown-replacement" value={this.state.scheduleFreq} onChange={this.handleFrequency}>
+            <option>1x</option>
+            <option>2x</option>
+            <option>3x</option>
+          </select>
           <h3> per </h3>
           <select className="dropdown-replacement" value={this.state.scheduleDayWeek} onChange={this.handleScheduleDayWeek}>
             <option>day</option>

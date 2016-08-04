@@ -3,7 +3,7 @@ var bodyParser = require('body-parser');
 var dbHelpers = require('../db/dbhelper.js');
 var path = require('path');
 var app = express();
-var brain = require('./brain.js');
+// var brain = require('./brain.js');
 
 app.use(express.static('public'));
 
@@ -70,6 +70,7 @@ app.post('/api/script/remind', function(req, res, next) {
   console.log("request received at setReminder route");
   var username = req.body.username;
   var message = req.body.message;
+  //phone will not be a parameter in final version, we'll look it up based on the username
   var phone = req.body.phone;
   var time = req.body.time;
   dbHelpers.setReminder(username, message, phone, time, next);
@@ -90,5 +91,5 @@ app.post('/api/brain/recommend', function(req, res) {
 });
 
 // app.post('api/brain/add', function(req, res) {
-  
+
 // })
