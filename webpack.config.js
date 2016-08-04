@@ -16,6 +16,8 @@ var config = {
       {
         test: /\.jsx?/,
         include: APP_DIR,
+        // Don't run node_modules or bower_components through babel loader
+        excudel: /(node_modules|bower_components)/,
         loader: 'babel'
       }
     ]
