@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import Navigator from './navigator.jsx';
+<<<<<<< HEAD
 import { Router, Route, Link, browserHistory, IndexRoute } from 'react-router';
 import ScriptRemindView from './scriptRemind.jsx';
 import NotFoundView from './notFound.jsx';
@@ -8,7 +9,7 @@ import Signin from './signin.jsx';
 import Container from './container.jsx';
 import DoctorListView from './doctorListView.jsx';
 import DoctorEntryView from './doctorEntryView.jsx';
-import SymptomEntry from './symptomEntry.jsx'
+import SymptomEntry from './symptomEntry.jsx';
 import Signup from './signup.jsx';
 
 class App extends React.Component {
@@ -26,11 +27,8 @@ class App extends React.Component {
             <Route path='*' component={NotFoundView} />
           </Route>
       </Router>
-
       )
   }
 }
 
-ReactDOM.render(<div>
-   <App />
-  </div>, document.getElementById("app"));
+ReactDOM.render(<div><App /></div>, document.getElementById("app"));
