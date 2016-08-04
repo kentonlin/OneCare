@@ -12,17 +12,28 @@ import SymptomEntry from './symptomEntry.jsx'
 import Signup from './signup.jsx';
 
 class App extends React.Component {
+
+  authCheck() {
+    console.log("authcheck called");
+    if(!(window.localStorage.token && window.localStorage.username)) {
+        window.location= "/signin";
+    }
+    else{
+      console.log('else condition hit!');
+    }
+  }
   render() {
     return(
       <Router history={browserHistory}>
         <Route path='/' component={Container}>
             <IndexRoute component={Signin} />
             {/* <Route path='/home' component={} /> */}
-            <Route path='/remind' component={ScriptRemindView} />
+            <Route path='/remind' onEnter={this.authCheck} component={ScriptRemindView} />
             {/* <Route path= '/alldoctors' component={Signup} /> */}
-            <Route path='/newdoctor' component={DoctorEntryView} />
-            <Route path='/recommend' component={SymptomEntry} />
+            <Route path='/newdoctor' onEnter={this.authCheck} component={DoctorEntryView} />
+            <Route path='/recommend' onEnter={this.authCheck} component={SymptomEntry} />
             <Route path='/signin' component={Signin} />
+            <Route path='/signup' component={Signup} />
             <Route path='*' component={NotFoundView} />
           </Route>
       </Router>
