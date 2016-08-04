@@ -1,3 +1,7 @@
+// THIS FILE IS USELESS !!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+
+
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import Signin from './signin.jsx';
@@ -46,6 +50,8 @@ export default class Navigator extends React.Component {
       console.log("second condition hit!");
       cb(this.state.username, this.state.token);
     }
+
+
   }
 
   enterDocs() {

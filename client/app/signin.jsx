@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import { Router, Route, Link, browserHistory } from 'react-router';
 import $ from 'jquery';
 import ReactDOM from 'react-dom';
-import Signup from './signup.jsx'
+import Signup from './signup.jsx';
+
 
 export default class Signin extends React.Component {
   constructor(props) {
@@ -12,7 +13,6 @@ export default class Signin extends React.Component {
       password: ""
     };
     this.submitLogin = this.submitLogin.bind(this);
-    this.signup = this.signup.bind(this);
   }
 
   componentDidMount() {
@@ -39,10 +39,7 @@ export default class Signin extends React.Component {
         console.log("user signed in", data);
         window.localStorage.setItem("username", data.user.username);
         window.localStorage.setItem("token", data.token);
-        $.get("/", function(data) {
-          console.log("login successful!");
-          location.reload();
-        });
+        window.location = '/remind';
       },
       error: function(err){
         console.log('user not found in database error in ajax', err);
@@ -50,21 +47,17 @@ export default class Signin extends React.Component {
     });
   }
 
-  signup() {
-    console.log("wtf", window.localStorage);
-    window.localStorage.currentPage = "signup";
-    ReactDOM.render(<div> <Signup/> </div>, document.getElementById("app"));
-  }
 
   render() {
     return (
       <div className="signin-container">
         <h1>Sign in to OneCare</h1>
-        <Link to='/remind'>Reminder View</Link>
         <form>
           <span>username</span><input type="text" onChange={(event) => {this.setState({username: event.target.value})}}></input><br />
           <span>password</span><input type="password" onChange={(event) => {this.setState({password: event.target.value})}}></input><br />
-          <button onClick= {this.signup}> Signup create a new account </button>
+          <div className='signup'>
+            <Link to='/signup'> Signup </Link>
+          </div>
           <button onClick={ this.submitLogin}>Submit</button>
         </form>
       </div>

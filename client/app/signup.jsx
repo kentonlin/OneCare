@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Router, Route, Link, browserHistory } from 'react-router';
 import $ from 'jquery';
 
 export default class Signup extends React.Component {
@@ -38,10 +39,7 @@ export default class Signup extends React.Component {
           console.log('user signup successful! This is the data returned: ', data);
           window.localStorage.setItem("username", data.user.username);
           window.localStorage.setItem("token", data.token);
-          $.get("/", function(data){
-            console.log('signup successful');
-            location.reload();
-          });
+          window.location = "/remind";
         },
         error: function(err){
           console.log('error in signup :', err);
@@ -59,13 +57,14 @@ export default class Signup extends React.Component {
       <div className= "signup-container">
         <h1> Signup </h1>
         <form>
-          {/* <span> Username </span> <input type= "text" onChange= {(event) => {this.setState({"username": event.target.value})}}> </input>
-          <span> Password </span> <input type= "password" onChange= {(event) => {this.setState({"password": event.target.value})}}></input>
-          <span> Address </span> <input type= "text" onChange= {(event) => {this.setState({"address": event.target.value})}}></input>
-          <span> Zip Code </span> <input type= "text" onChange= {(event) => {this.setState({"zipcode": event.target.value})}}></input>
-          <span> Phone </span> <input type= "text" onChange={(event) => {this.setState({"phone": event.target.value})}}></input> */}
-          <button onClick={ this.submitLogin }>Submit</button>
+          <span>username</span><input type="text" onChange={(event) => {this.setState({username: event.target.value})}}></input><br />
+          <span>password</span><input type="password" onChange={(event) => {this.setState({password: event.target.value})}}></input><br />
+          <span>address</span><input type="text" onChange={(event) => {this.setState({address: event.target.value})}}></input><br />
+          <span>zip code</span><input type="text" onChange={(event) => {this.setState({zipCode: event.target.value})}}></input><br />
+          <span>phone</span><input type="text" onChange={(event) => {this.setState({phone: event.target.value})}}></input><br />
+          <button onClick={ this.submitUser }>Submit</button>
         </form>
+        <Link to="/signin">Signin </Link>
       </div>
     );
   }
