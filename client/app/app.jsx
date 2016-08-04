@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import Navigator from './navigator.jsx';
+<<<<<<< HEAD
 import { Router, Route, Link, browserHistory, IndexRoute } from 'react-router';
 import ScriptRemindView from './scriptRemind.jsx';
 import NotFoundView from './notFound.jsx';
