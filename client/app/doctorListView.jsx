@@ -11,6 +11,7 @@ export default class DoctorListView extends React.Component {
     }
     this.makeDocs = this.makeDocs.bind(this);
   }
+  
 
   makeDocs(doctors) {
     this.setState({doctors: doctors});
