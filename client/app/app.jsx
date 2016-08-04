@@ -26,7 +26,6 @@ class App extends React.Component {
             <Route path='*' component={NotFoundView} />
           </Route>
       </Router>
-
       )
   }
 }
