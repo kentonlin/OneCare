@@ -26,6 +26,7 @@
   "dependencies": {
     "bcrypt": "latest",
     "body-parser": "^1.15.2",
+    "cron-job-manager": "^1.0.7",
     "express": "^4.14.0",
     "express-partials": "~0.2.0",
     "express-session": "^1.7.2",
@@ -45,6 +46,7 @@
     "react-drop-down": "^1.0.2",
     "react-filtered-multiselect": "^0.4.2",
     "react-input-calendar": "^0.3.11",
+    "react-kronos": "^1.4.1",
     "react-router": "^2.6.1",
     "request": "^2.72.0",
     "synaptic": "^1.0.8",
