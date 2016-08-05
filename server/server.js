@@ -25,11 +25,6 @@ app.listen(process.env.PORT || 3000, function(){
   console.log('Server is running');
 });
 
-
-app.get('*', function(req, res) {
-  res.sendFile(path.join(rootPath + "/index.html"));
-});
-
 app.get('/fuckDan', function(req, res){
   console.log('request received at /fuckDan');
   res.send(JSON.stringify({"message": "Fuck Dan"}));
@@ -89,7 +84,7 @@ app.post('/api/brain/recommend', function(req, res) {
   console.log("The brain shall now ponder: ", symptoms);
   var data = brain.OCBrain.activate(symptoms);
   console.log("The brain has decided to recommend: ", data);
-  res.send(data);
+  res.status(200).send(data);
 });
 
 app.get('/api/brain/save', function(req, res) {
@@ -100,6 +95,10 @@ app.get('/api/brain/save', function(req, res) {
 app.post('/api/brain/add', function(req, res) {
   var pair = req.body.pair;
   res.send(brain.OCBrain.addTrainingPair(pair))
-  brain.OCBrain.train(10);
+  brain.OCBrain.train(3);
   brain.OCBrain.save("MainBrain");
 })
+
+app.get('/*', function(req, res) {
+  res.sendFile(path.join(rootPath + "/index.html"));
+});
