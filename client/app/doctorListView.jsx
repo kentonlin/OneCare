@@ -8,10 +8,10 @@ export default class DoctorListView extends React.Component {
     super(props);
     this.state = {
       doctors: []
-    }
+    };
     this.makeDocs = this.makeDocs.bind(this);
   }
-  
+
 
   makeDocs(doctors) {
     this.setState({doctors: doctors});
@@ -21,7 +21,7 @@ export default class DoctorListView extends React.Component {
 
   componentDidMount() {
     // console.log('doctor list view about to be mounted');
-    $.get("/api/doctor/find", this.makeDocs)
+    $.get("/api/doctor/find", this.makeDocs);
   }
 
   render() {
@@ -34,7 +34,7 @@ export default class DoctorListView extends React.Component {
          }, this)
         }
       </div>
-    )
+    );
   }
 
 }

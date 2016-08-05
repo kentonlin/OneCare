@@ -42,8 +42,8 @@ app.post('/api/reminder/add', function(req, res, next) {
 });
 
 app.post('/api/script/find', function(req, res) {
-	var findScript = req.body;
-	dbHelpers.getScripts( findScript, res);
+	var username = req.body.username;
+	dbHelpers.getScripts( username, res);
 });
 
 app.post('/api/doctor/add', function(req, res) {

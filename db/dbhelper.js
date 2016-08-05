@@ -40,19 +40,19 @@ var dbFunc = {
 				//call set reminder function
 				this.setReminder(script.username, message, time, next);
 
-			}.bind(this))
-		}.bind(this))
+			}.bind(this));
+		}.bind(this)); 
 
 	},
 
 
-	getScripts: function(scriptName, res) {
-		Model.script.findOne({'name':scriptName},function (err, found) {
+	getScripts: function(username, res) {
+		Model.user.findOne({'username': username}).populate('scripts').exec(function (err, found) {
 			if(err){
-				console.log('error in fetching tasks');
+				console.log('error in fetching tasks', err);
 			}
-			console.log(found);
-			res.send(found);
+			console.log('these are the found scripts for harish', found.scripts)
+			res.send(found.scripts);
 		});
 	},
 

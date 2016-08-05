@@ -10,26 +10,27 @@ import DoctorListView from './doctorListView.jsx';
 import DoctorEntryView from './doctorEntryView.jsx';
 import SymptomEntry from './symptomEntry.jsx';
 import Signup from './signup.jsx';
+import Profile from './profile.jsx';
 
 class App extends React.Component {
 
   authCheck() {
     console.log("authcheck called");
-    if(!(window.localStorage.token && window.localStorage.username)) {
+    if(!window.localStorage.token) {
         window.location= "/signin";
-    }
-    else{
-      console.log('else condition hit!');
+    }else {
+      console.log('authenticated user!');
     }
   }
+
   render() {
     return(
       <Router history={browserHistory}>
         <Route path='/' component={Container}>
             <IndexRoute component={Signin} />
-            {/* <Route path='/home' component={} /> */}
             <Route path='/remind' onEnter={this.authCheck} component={ScriptRemindView} />
             <Route path= '/alldoctors' component={DoctorListView} />
+            <Route path='/profile' onEnter={this.authCheck} component={Profile} />
             <Route path='/newdoctor' onEnter={this.authCheck} component={DoctorEntryView} />
             <Route path='/recommend' onEnter={this.authCheck} component={SymptomEntry} />
             <Route path='/signin' component={Signin} />
@@ -37,7 +38,7 @@ class App extends React.Component {
             <Route path='*' component={NotFoundView} />
           </Route>
       </Router>
-      )
+    );
   }
 }
 
