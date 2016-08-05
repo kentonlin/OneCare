@@ -52,9 +52,9 @@ app.post('/api/doctor/add', function(req, res) {
   dbHelpers.addDoc(newDoc, res);
 });
 
-app.get('/api/doctor/find', function(req, res) {
-  var targetDocs = req.body;
-  dbHelpers.getDocs(targetDocs, res);
+app.post('/api/doctors/get', function(req, res, next) {
+  console.log("request received at getDoctors for", req.body.username)
+  dbHelpers.getDocs(req.body.username, res, next);
 });
 
 // USER SIGNUP SIGNIN

@@ -83,11 +83,14 @@ var dbFunc = {
   	});
   },
 
-  getDocs: function(target, res) {
-    Model.doctor.find({}, function(err, docs) {
-      console.log(docs);
-      res.send(docs);
-    });
+  getDocs: function(username, res, next) {
+		Model.user.findOne({"username": username}, function(err, user){
+			if(err){
+				next(new Error(err));
+			}
+			console.log("?!?!", user);
+			res.send(user.doctors)
+		})
   },
 
 	/* AUTHENTICATION FUNCTIONS */
@@ -142,10 +145,6 @@ var dbFunc = {
 						var token = jwt.encode(user, 'secret'); //create new token
 						console.log('this is token',token);
 						var resultData = {"token": token, "user": {"id": user._id, "username": user.username}}
-						console.log('to be sent', resultData);
-						console.log(res);
-						// res.send({"token": token, "user": {"id": user._id, "username": user.username}});
-						// next(JSON.stringify({"token": token, "user": {"id": user._id, "username": user.username}}));
 	          res.status(201).send(resultData); //send new token and user object
 					}
 				});
@@ -160,7 +159,6 @@ var dbFunc = {
 	  }
 	  else {
 	    var user = jwt.decode(token, 'secret');
-	    console.log("Decoded user:", user);
 	    Model.user.find(user, function(err, user){
 	    	if(err){
 	    		next("Error: ", error);

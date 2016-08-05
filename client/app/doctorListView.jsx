@@ -10,7 +10,6 @@ export default class DoctorListView extends React.Component {
       doctors: []
     };
     this.makeDocs = this.makeDocs.bind(this);
-    this.componentDidMount = this.componentDidMount.bind(this);
   }
 
 
@@ -21,13 +20,19 @@ export default class DoctorListView extends React.Component {
   }
 
   componentDidMount() {
-    // console.log('doctor list view about to be mounted');
     $.ajax({
-      type: 'GET',
-      url: '/api/doctor/find',
-      success: function(docs) {
-        console.log('I AM DR.X', docs);
+      type: 'POST',
+      url: '/api/doctors/get',
+      headers: {
+        "content-type": "application/json"
       },
+      data: JSON.stringify({"username": window.localStorage.username}),
+      success: function(docs) {
+        console.log("DOCTORS", docs);
+        this.setState({
+          doctors: docs
+        })
+      }.bind(this),
       error: function(err) {
         console.log('I can\'t pill you...not today', err);
       }

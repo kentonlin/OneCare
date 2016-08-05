@@ -15,7 +15,7 @@ export default class Navigate extends React.Component {
   render() {
     return(
      <div className="navbar-container">
-       <h1 className="title">Welcome to OneCare!</h1>
+       <h1 className="title">Welcome to OneCare, {this.state.username}!</h1>
        <div className="navbar-button navbar-home">
         <Link to='/profile'> Profile </Link>
        </div>
