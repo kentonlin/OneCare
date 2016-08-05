@@ -42,6 +42,7 @@ var dbFunc = {
 
 			}.bind(this));
 		}.bind(this));
+
 	},
 
 
@@ -60,7 +61,7 @@ var dbFunc = {
   	newDoc.save(function(err) {
   		if (err) {
   			console.log(err);
-  		};
+  		}
   		console.log("Doctor added!");
   		res.send(newDoc);
   	});
@@ -68,7 +69,7 @@ var dbFunc = {
 
   getDocs: function(target, res) {
     Model.doctor.find({}, function(err, docs) {
-      // console.log(docs);
+      console.log(docs);
       res.send(docs);
     });
   },
