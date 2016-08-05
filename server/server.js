@@ -3,7 +3,7 @@ var bodyParser = require('body-parser');
 var dbHelpers = require('../db/dbhelper.js');
 var path = require('path');
 var app = express();
-// var brain = require('./brain.js');
+var brain = require('./brain.js');
 var twilio = require('twilio');
 
 app.use(express.static('public'));

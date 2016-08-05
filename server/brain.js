@@ -6,7 +6,7 @@ var dbHelpers = require('../db/dbhelper.js');
 
 var Brain = function() {
 
-  var ACTIVATION_SPLIT = .5;
+  var ACTIVATION_SPLIT = .2;
 
   var DOCTORS = [
     {id: 1, name: 'Allergology'}, 
