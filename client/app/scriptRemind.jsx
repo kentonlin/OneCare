@@ -4,6 +4,8 @@ import $ from 'jquery';
 import Dropdown from 'react-drop-down';
 import { Link } from 'react-router';
 import Navigate from './navigate.jsx';
+import Kronos from 'react-kronos';
+import moment from 'moment';
 
 export default class ScriptRemindView extends React.Component {
 
@@ -14,6 +16,7 @@ export default class ScriptRemindView extends React.Component {
       "dosageAmt": 0,
       "dosageMeasure": 'mg',
       "date": date,
+      "reminderTime": null,
       "scheduleFreq": "1x",
       "scheduleDayWeek": "day"
   }
@@ -25,6 +28,7 @@ export default class ScriptRemindView extends React.Component {
   this.handleRefillDate = this.handleRefillDate.bind(this);
   this.handleDoseMeasurement = this.handleDoseMeasurement.bind(this);
   this.handleScheduleDayWeek = this.handleScheduleDayWeek.bind(this);
+  this.handleReminderTime = this.handleReminderTime.bind(this);
 
 }
 
@@ -63,9 +67,17 @@ export default class ScriptRemindView extends React.Component {
     }
 
     handleFrequency(frequency) {
+      console.log("current state", this.state);
       console.log("handleFreq called with", frequency.target.value);
       this.setState({
         scheduleFreq: frequency.target.value
+      })
+    }
+
+    handleReminderTime(time){
+      console.log("handleReminderTime called with", moment(time).format('LT'));
+      this.setState({
+        "reminderTime": moment(time).format('LT')
       })
     }
 
@@ -75,6 +87,7 @@ export default class ScriptRemindView extends React.Component {
         "dosage": this.state.dosageAmt + ' ' + this.state.dosageMeasure,
         "refill": this.state.date,
         "frequency": this.state.scheduleFreq + ' per ' + this.state.scheduleDayWeek,
+        "reminderTime": this.state.reminderTime,
         "username": window.localStorage.username
       }
       console.log("submitForm called for: ", script)
@@ -143,6 +156,10 @@ export default class ScriptRemindView extends React.Component {
           </select>
         </div>
         <div>
+          <h2> Reminder Time </h2>
+          <Kronos time={this.state.reminderTime} value={''} placeholder={"Click to select a time"} onChangeDateTime={this.handleReminderTime}/>
+        </div>
+        <div>
           <button className= "remindBtn" onClick={this.submitForm}> Remind Me </button>
         </div>
       </div>
@@ -150,36 +167,3 @@ export default class ScriptRemindView extends React.Component {
     );
   }
 }
-
-
-/* const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#F5FCFF',
-  },
-  welcome: {
-    fontSize: 20,
-    textAlign: 'center',
-    margin: 10,
-  },
-  instructions: {
-    textAlign: 'center',
-    color: '#333333',
-    marginBottom: 5,
-  },
-  topbar: {
-  flexDirection: 'row',
-  justifyContent: 'flex-end',
-  backgroundColor: 'black',
-  paddingHorizontal: 5,
-  paddingVertical: 10
-  },
-  submit: {
-    textAlign: 'center'
-  },
-
-});
-
-*/
