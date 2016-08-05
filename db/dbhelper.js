@@ -193,23 +193,8 @@ var dbFunc = {
 					});
 				},  null, true);
 				next("Reminder successfully set");
-					// client.messages.create({
-					// 		to: number,
-					// 		from: "+16462332065",
-					// 		body: body,
-					// }, function(err, message) {
-					// 		if(err){
-					// 			console.log("message not sent", err);
-					// 		}
-					// 		else{
-					// 			console.log("Message sent", message);
-					// 		}
-					// });
-				// })
-				// .catch(function(err){
-				// 	console.log("user not found")
-				// })
-	},
+	})
+},
 
 	saveBrain: function(brainState, trainingData, name) {
 		var success = Model.brain.findOneAndUpdate({"_id": ObjectId("57a3a316dcba0f71400f021a")}, {
