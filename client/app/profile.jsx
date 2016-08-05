@@ -1,7 +1,6 @@
 import React, {Component} from 'react';
 import $ from 'jquery';
-// import DoctorView from './doctorView.jsx';
-// import ScriptView from './script.jsx'
+import Navigate from './navigate.jsx';
 
 export default class Profile extends React.Component {
   constructor(props) {
@@ -46,6 +45,7 @@ export default class Profile extends React.Component {
   render() {
     return (
       <div>
+      <Navigate />
       <h2> Profile {window.localStorage.username} </h2>
 
              {
@@ -60,6 +60,7 @@ export default class Profile extends React.Component {
                   <li> <span className="user-script"> Refill Reminder </span> {script.refillRemind} </li>
                   <li> <span className="user-script"> Refill Reminder </span> {script.dailyRemind} </li>
                  <li> <span className="user-script"> Phone: </span> {script.phone} </li>
+                 <button>Delete</button>
                  </ul>
                )
               }, this)
