@@ -35,8 +35,7 @@ var userSchema = new Schema({
 var doctorSchema = new Schema({
 	name: String,
 	phone: String,
-	fax: String,
-	Email: String,
+	email: String,
 	specialty: String,
 	address: String,
 	patients: [{type: Schema.Types.ObjectId, ref: 'User'}]

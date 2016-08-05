@@ -47,14 +47,19 @@ app.post('/api/script/find', function(req, res) {
 	dbHelpers.getScripts( username, res);
 });
 
-app.post('/api/doctor/add', function(req, res) {
-  var newDoc = req.body;
-  dbHelpers.addDoc(newDoc, res);
+app.post('/api/doctor/add', function(req, res, next) {
+  console.log("POST request received at add Doctor", req.body);
+  dbHelpers.addDoc(req.body, res, next);
 });
 
-app.get('/api/doctor/find', function(req, res) {
-  var targetDocs = req.body;
-  dbHelpers.getDocs(targetDocs, res);
+app.post('/api/doctor/delete', function(req, res, next) {
+  console.log("POST request received at delete Doctor", req.body);
+  dbHelpers.deleteDoc(req.body.docID, res, next);
+});
+
+app.post('/api/doctors/get', function(req, res, next) {
+  console.log("request received at getDoctors for", req.body.username)
+  dbHelpers.getDocs(req.body.username, res, next);
 });
 
 // USER SIGNUP SIGNIN

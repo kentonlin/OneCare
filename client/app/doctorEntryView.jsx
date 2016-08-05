@@ -1,19 +1,16 @@
 import React, { Component } from 'react';
 import $ from 'jquery';
 import Navigate from './navigate.jsx';
+import DoctorListView from './doctorListView.jsx';
 
 
 export default class DoctorEntryView extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      // user: {
-      //   username: window.localStorage.get("username") || "default",
-      //   userId: window.localStorage.get("userId") || "default"
-      // },
       name: "",
       phone: "",
-      fax: "",
+      email: "",
       address: "",
       specialty: ""
     }
@@ -27,29 +24,31 @@ export default class DoctorEntryView extends React.Component {
       this.setState({name: event.target.value});
     } else if (stateVal === "phone") {
       this.setState({phone: event.target.value});
-    } else if (stateVal === "fax") {
-      this.setState({fax: event.target.value});
+    } else if (stateVal === "email") {
+      this.setState({email: event.target.value});
     } else if (stateVal === "address") {
       this.setState({address: event.target.value});
     } else if (stateVal === "specialty") {
       this.setState({specialty: event.target.value});
     }
   }
-  submitNewDoctor(formData) {
-    console.log("this.state is: ", this.state);
+  submitNewDoctor() {
+    var toSubmit = { "username": window.localStorage.username, "doc": this.state }
+
     $.ajax({
       type: "POST",
       url: "/api/doctor/add",
       headers: {
         "content-type": "application/json"
       },
-      data: JSON.stringify(this.state)
-    })
-    .then(function(res) {
-      console.log("Doctor registration success!  ");
-    })
-    .catch(function(err) {
-      console.error("Doctor not registered.  ", err);
+      data: JSON.stringify(toSubmit),
+      success: function(res) {
+        console.log(res, "has been added");
+        DoctorListView.getDocs();
+      },
+      error: function(err) {
+        console.error("Doctor not registered: ", err);
+      }
     });
   }
   render() {
@@ -60,7 +59,7 @@ export default class DoctorEntryView extends React.Component {
         <form className="doctor-entry-form">
           <div>Name</div><input id="name" type="text" onChange={this.handleChange} />
           <div>Phone</div><input id="phone" type="text" onChange={this.handleChange}></input><br />
-          <div>Fax</div><input id="fax" type="text" onChange={this.handleChange}></input><br />
+          <div>Email</div><input id="email" type="text" onChange={this.handleChange}></input><br />
           <div>Address</div><input id="address" type="text" onChange={this.handleChange}></input><br />
           <div>Specialty</div><select id="specialty" onChange={this.handleChange}>
             <option>::Select Specialty::</option>
@@ -150,24 +149,7 @@ export default class DoctorEntryView extends React.Component {
         <hr />
         <div>
           <h3>Your current doctors: </h3>
-          <div onClick={() => {
-            $.ajax({
-              type: "POST",
-              url: "/api/brain/add",
-              headers: {
-                "content-type": "application/json"
-              },
-            data: JSON.stringify({pair: [[{id: 103, name: 'Propensity for cavities'},
-              {id: 104, name: 'Propensity for gum disease'},
-              {id: 105, name: 'Low, husky, hoarse voice'}],[{id: 12, name: 'Sports physicians‎'}]]}),
-            success: function(res) {
-              console.log("Brain activation success!  ", res);
-            },
-            error: function(err) {
-              console.error("You fuckd up da brain.  ", err);
-            }
-            })
-          }}>AJAX</div>
+          <DoctorListView />
         </div>
       </div>
     )

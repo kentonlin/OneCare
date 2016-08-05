@@ -9,29 +9,34 @@ export default class DoctorListView extends React.Component {
     this.state = {
       doctors: []
     };
-    this.makeDocs = this.makeDocs.bind(this);
-    this.componentDidMount = this.componentDidMount.bind(this);
+    this.getDocs = this.getDocs.bind(this);
   }
 
 
-  makeDocs(doctors) {
-    this.setState({doctors});
-    // console.log("current docs", this.state.doctors);
+  getDocs() {
 
-  }
-
-  componentDidMount() {
-    // console.log('doctor list view about to be mounted');
     $.ajax({
-      type: 'GET',
-      url: '/api/doctor/find',
-      success: function(docs) {
-        console.log('I AM DR.X', docs);
+      type: 'POST',
+      url: '/api/doctors/get',
+      headers: {
+        "content-type": "application/json"
       },
+      data: JSON.stringify({"username": window.localStorage.username}),
+      success: function(docs) {
+        console.log("DOCTORS", docs);
+        this.setState({
+          doctors: docs
+        })
+      }.bind(this),
       error: function(err) {
         console.log('I can\'t pill you...not today', err);
       }
     });
+  }
+
+
+  componentDidMount() {
+    this.getDocs();
   }
 
   render() {
@@ -41,7 +46,7 @@ export default class DoctorListView extends React.Component {
       <div className="doctor-list-view">
         {
          doctors.map((doctor, idx) => {
-          return (<DoctorView key={idx} name={doctor.name} phone={doctor.phone} fax={doctor.fax} address={doctor.address} specialty={doctor.specialty} />)
+          return (<DoctorView key={idx} id={doctor._id} name={doctor.name} phone={doctor.phone} email={doctor.email} address={doctor.address} specialty={doctor.specialty} />)
          }, this)
         }
       </div>
