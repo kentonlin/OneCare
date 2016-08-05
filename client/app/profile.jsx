@@ -51,7 +51,7 @@ export default class Profile extends React.Component {
              {
               this.state.scripts.map((script, idx) => {
                 return (
-                  <ul className="User-Scripts">
+                  <ul key= {idx} className="User-Scripts">
                   <li> <span className="user-script"> Name: </span> {script.name} </li>
                   <li> <span className="user-script"> Dosage: </span> {script.dosage} </li>
                   <li> <span className="user-script"> Frequency </span> {script.frequency} </li>

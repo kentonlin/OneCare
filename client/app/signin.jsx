@@ -39,7 +39,7 @@ export default class Signin extends React.Component {
         console.log("user signed in", data);
         window.localStorage.setItem("username", data.user.username);
         window.localStorage.setItem("token", data.token);
-        window.location = '/remind';
+        window.location = '/profile';
       },
       error: function(err){
         console.log('user not found in database error in ajax', err);
