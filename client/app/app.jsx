@@ -35,7 +35,7 @@ class App extends React.Component {
             <Route path='/recommend' onEnter={this.authCheck} component={SymptomEntry} />
             <Route path='/signin' component={Signin} />
             <Route path='/signup' component={Signup} />
-            <Route path='*' component={NotFoundView} />
+            <Route path='/*' component={NotFoundView} />
           </Route>
       </Router>
     );

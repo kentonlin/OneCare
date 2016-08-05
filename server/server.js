@@ -25,11 +25,6 @@ app.listen(process.env.PORT || 3000, function(){
   console.log('Server is running');
 });
 
-
-app.get('*', function(req, res) {
-  res.sendFile(path.join(rootPath + "/index.html"));
-});
-
 app.get('/fuckDan', function(req, res){
   console.log('request received at /fuckDan');
   res.send(JSON.stringify({"message": "Fuck Dan"}));
@@ -77,7 +72,7 @@ app.post('/api/script/remind', function(req, res, next) {
   var phone = req.body.phone;
   var time = req.body.time;
   dbHelpers.setReminder(username, message, phone, time, next);
-})
+});
 
 app.post('/api/symptomEntry/add', function(req, res) {
   var newSympson = req.body;
@@ -87,9 +82,9 @@ app.post('/api/symptomEntry/add', function(req, res) {
 
 app.post('/api/brain/recommend', function(req, res) {
   var symptoms = req.body;
-  console.log("The brain shall now ponder: ", symptoms);
+  // console.log("The brain shall now ponder: ", symptoms);
   var data = brain.OCBrain.activate(symptoms);
-  console.log("The brain has decided to recommend: ", data);
+  // console.log("The brain has decided to recommend: ", data);
   res.send(data);
 });
 
@@ -100,7 +95,11 @@ app.get('/api/brain/save', function(req, res) {
 
 app.post('/api/brain/add', function(req, res) {
   var pair = req.body.pair;
-  res.send(brain.OCBrain.addTrainingPair(pair))
+  res.send(brain.OCBrain.addTrainingPair(pair));
   brain.OCBrain.train(10);
   brain.OCBrain.save("MainBrain");
-})
+});
+
+app.get('/*', function(req, res) {
+  res.sendFile(path.join(rootPath + "/index.html"));
+});
