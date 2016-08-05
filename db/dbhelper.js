@@ -224,7 +224,9 @@ deleteReminder: function(reminderID, next) {
 		if(err){
 			next("reminder not deleted", err);
 		}
-		reminderManager.deleteJob(reminderID.toString());
+		if(reminderManager.exists(reminderID.toString())) {
+			reminderManager.deleteJob(reminderID.toString())
+		}
 		next("reminder deleted");
 	})
 },
