@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import $ from 'jquery';
+import Navigate from './navigate.jsx';
+
 
 export default class DoctorEntryView extends React.Component {
   constructor(props) {
@@ -53,6 +55,7 @@ export default class DoctorEntryView extends React.Component {
   render() {
     return (
       <div className="doctor-input">
+      <Navigate />
       <h2>Input a new doctor!</h2>
         <form className="doctor-entry-form">
           <div>Name</div><input id="name" type="text" onChange={this.handleChange} />
@@ -147,6 +150,24 @@ export default class DoctorEntryView extends React.Component {
         <hr />
         <div>
           <h3>Your current doctors: </h3>
+          <div onClick={() => {
+            $.ajax({
+              type: "POST",
+              url: "/api/brain/add",
+              headers: {
+                "content-type": "application/json"
+              },
+            data: JSON.stringify({pair: [[{id: 103, name: 'Propensity for cavities'},
+              {id: 104, name: 'Propensity for gum disease'},
+              {id: 105, name: 'Low, husky, hoarse voice'}],[{id: 12, name: 'Sports physicians‎'}]]}),
+            success: function(res) {
+              console.log("Brain activation success!  ", res);
+            },
+            error: function(err) {
+              console.error("You fuckd up da brain.  ", err);
+            }
+            })
+          }}>AJAX</div>
         </div>
       </div>
     )

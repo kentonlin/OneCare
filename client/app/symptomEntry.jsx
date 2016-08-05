@@ -1,10 +1,12 @@
 import React, { Component } from 'react';
 import FilteredMultiSelect from 'react-filtered-multiselect';
 import $ from 'jquery';
+import Navigate from './navigate.jsx';
 
-var SYMPTOMS = [ 
+
+var SYMPTOMS = [
   // Energy Level and Sleep
-  {id: 1, name: 'Chronic fatigue'}, 
+  {id: 1, name: 'Chronic fatigue'},
   {id: 2, name: 'Less stamina than others'},
   {id: 3, name: 'Long recovery period after any activity'},
   {id: 4, name: 'Inability to concentrate'},
@@ -402,17 +404,17 @@ export default class SymptomEntryView extends Component {
     console.log('you chose: ', this.state.selectedSymptoms);
     $.ajax({
       type: 'POST',
-      url: '/api/symptomEntry/add',
+      url: '/api/brain/recommend',
       dataType: 'json',
       headers: {
         'Content-Type': 'application/json'
       },
-      data: JSON.stringify(this.state),
+      data: JSON.stringify(this.state.selectedSymptoms),
       success: function(data) {
-        console.log('You have cancer!', data);
+        console.log('You have cancer!', data.pop());
       },
       error: function(err) {
-        console.log('Congrats you are superhuman', err);  
+        console.log('Congrats you are superhuman', err);
       }
     })
   };
@@ -422,6 +424,7 @@ export default class SymptomEntryView extends Component {
 
     return (
       <div>
+      <Navigate />
         <h2>Choose your symptoms, weakling. They will appear at the bottom.</h2>
         <h4>Energy Level and Sleep</h4>
         <FilteredMultiSelect

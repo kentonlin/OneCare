@@ -1,6 +1,11 @@
+// THIS FILE IS USELESS !!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+
+
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import Signin from './signin.jsx';
+import Signup from './signup.jsx';
 import DoctorEntryView from './doctorEntryView.jsx';
 import DoctorListView from './doctorListView.jsx';
 import SymptomEntryView from './symptomEntry.jsx';
@@ -32,14 +37,21 @@ export default class Navigator extends React.Component {
   }
 
   authCheck(cb) {
-    if (this.state.username ==="none" || this.state.token === "none") {
-      //re-route to login page
+    if ((this.state.username ==="none" || this.state.token === "none")) {
+      var FUCK = window.localStorage.currentPage ? window.localStorage.currentPage : 'signin';
+      window.localStorage.setItem("currentPage", FUCK);
+      var $nextPage = (window.localStorage.currentPage === 'signin') ? <Signin /> : <Signup />;
+      // re-route to login page
+      console.log("first condition hit!");
       ReactDOM.render(<div>
-        <Signin />
+        {$nextPage}
       </div>, document.getElementById("app"));
     } else {
+      console.log("second condition hit!");
       cb(this.state.username, this.state.token);
     }
+
+
   }
 
   enterDocs() {
@@ -85,7 +97,7 @@ export default class Navigator extends React.Component {
         <div className="navbar-button navbar-enter-doctors" onClick={this.enterDocs}> Enter New Doctor </div>
         <div className="navbar-button navbar-enter-doctors" onClick={this.scriptReminder}> Prescription Reminder </div>
         <div className="navbar-button navbar-enter-doctors" onClick={this.enterSympsons}> Physician Recommender </div>
-        <div className="navbar-enter-doctors right logout" onClick={() => {window.localStorage.removeItem("username"); window.localStorage.removeItem("token"); location.reload()}}> Logout </div>
+        <div className="navbar-enter-doctors right logout" onClick={() => {window.localStorage.removeItem("username"); window.localStorage.removeItem("token"); window.localStorage.removeItem("currentPage"); location.reload()}}> Logout </div>
       </div>
       )
   }

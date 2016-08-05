@@ -4,22 +4,45 @@ var twilio = require('twilio')
 var Model = require('./db.js');
 var jwt  = require('jwt-simple');
 var client = new twilio.RestClient(accountSid, authToken);
-
-
-
+var cron = require('cron');
+var cronJob = cron.CronJob;
+var ObjectId = require('mongoose').Types.ObjectId;
 
 var dbFunc = {
 
-	addScript: function(script, res) {
+	addScript: function(script, res, next) {
+		/*
+			Script Format
+			{
+				"name": 'bactrim',
+				"dosage": '1 tablet',
+				"refill": '08-17-2016',
+				"frequency": '2x per day',
+				"username": 'harish'
+		}
+		*/
+		var message = "Time to take your " + script.name + ' (' + script.dosage + ')!';
+		//hard-coded time right now...need to change time to be based on frequency
+		var time = '36 19 * * *'
 		var newScript = new Model.script(script);
-
 		newScript.save(function(err){
 			if(err) {
 				console.log('error', err);
 			}
-			console.log("Script Added!", newScript);
-			res.send(newScript);
-		});
+
+			Model.user.update({"username": script.username}, {$push:{"scripts": newScript}},
+			function(err){
+				if(err){
+					res.send(new Error("script not added to user document"));
+				}
+				// res.status(200).send("script added to user model");
+
+				//call set reminder function
+				this.setReminder(script.username, message, time, next);
+
+			}.bind(this))
+		}.bind(this))
+
 	},
 
 
@@ -67,13 +90,13 @@ var dbFunc = {
 				console.log("new user saved");
 				var token = jwt.encode(user, 'secret'); //create new token
 	      res.json({"token": token, "user": {"id": user._id, "username": user.username}}); //send new token and user object
-			})
+			});
 
 			}
 			else {
 				next(new Error("user already exists"));
 			}
-		})
+		});
 	},
 
 	signin: function(reqUser, res, next){
@@ -130,7 +153,7 @@ var dbFunc = {
 	    		res.status(401).send();
 	    	}
 	    	else{ //token decoded and user found in database
-	    		console.log("user authenticated")
+	    		console.log("user authenticated");
 	    		res.status(200).send();
 	    	}
 	    });
@@ -148,22 +171,49 @@ var dbFunc = {
 			});
 	},
 
-	sendReminder: function(number, body) {
-		console.log("sendReminder called");
-		client.messages.create({
-				to: number,
-				from: "+16462332065",
-				body: body,
-		}, function(err, message) {
-				if(err){
-					console.log("message not sent", err);
-				}
-				else{
-					console.log("Message sent", message);
-				}
+	setReminder: function(username, message, time, next) {
+		console.log("sendReminder called for", username, "with the message:", message);
+		// look up user object and find their phone number
+				Model.user.findOne({"username": username}, function(err, user){
+					if(err){
+						next(new Error(err));
+					}
+					phoneNum = "+" + user.phone;
+					console.log("Number on file", phoneNum);
+				//set cron job for script reminder
+				var textJob = new cronJob(time, function(){ // Time format for cronJob: '03 19 * * *'
+				  client.sendMessage( {
+						to: phoneNum,
+						from:"+16462332065",
+						body: message,
+					}, function( err, data ) {
+						if(err){
+							console.log("CronJob not set: ", err);
+						}
+						next("Message sent.");
+					});
+				},  null, true);
+				next("Reminder successfully set");
+	})
+},
+
+	saveBrain: function(brainState, trainingData, name) {
+		var success = Model.brain.findOneAndUpdate({"_id": ObjectId("57a3a316dcba0f71400f021a")}, {
+			$set: {
+				brainState: brainState,
+		  	trainingInputs: trainingData,
+			  name: name
+			}
+		})
+		.then(function(res) {
+			console.log("Brain ", name, " updated! ");
+		})
+		.catch(function(err) {
+			console.error("dun goofed!  ", err);
 		});
 	}
-
 };
+
+
 
 module.exports = dbFunc;

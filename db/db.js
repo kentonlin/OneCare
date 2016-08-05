@@ -1,4 +1,5 @@
 var mongoose = require('mongoose');
+mongoose.Promise = global.Promise;
 var bcrypt = require('bcrypt');
 var Schema = mongoose.Schema;
 var SALT_WORK_FACTOR = 10;
@@ -24,10 +25,9 @@ var scriptSchema = new Schema({
 var userSchema = new Schema({
 	username: {type: String, required: true, index: {unique: true} },
 	password: {type: String, required: true },
-	token: String,
 	address: String,
 	phone: String,
-	zipCode: Number,
+	zipcode: Number,
 	scripts: [{type: Schema.Types.ObjectId, ref: 'Script'}],
 	doctors: [{type: Schema.Types.ObjectId, ref: 'Doctor'}]// script models for user
 });
@@ -45,6 +45,12 @@ var doctorSchema = new Schema({
 var symptomSchema = new Schema({
 	id: Number,
 	selectedSymptoms: Array
+});
+
+var brainSchema = new Schema({
+	name: String,
+  brainState: String,
+  trainingInputs: String
 });
 
 userSchema.methods.comparePassword = function(candidatePassword, cb) {
@@ -81,5 +87,6 @@ var Script = mongoose.model('Script', scriptSchema);
 var User = mongoose.model('User', userSchema);
 var Doctor = mongoose.model('Doctor', doctorSchema);
 var Symptom = mongoose.model('Symptom', symptomSchema);
+var Brain = mongoose.model('Brain', brainSchema);
 
-module.exports = {user: User, script: Script, doctor: Doctor, symptom: Symptom};
+module.exports = {user: User, script: Script, doctor: Doctor, symptom: Symptom, brain: Brain};
