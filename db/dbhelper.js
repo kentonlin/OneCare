@@ -37,6 +37,7 @@ var dbFunc = {
 				}
 				// res.status(200).send("script added to user model");
 
+				//call set reminder function
 				this.setReminder(script.username, message, time, next);
 
 			}.bind(this))
@@ -212,6 +213,7 @@ var dbFunc = {
 		});
 	}
 };
+
 
 
 module.exports = dbFunc;
