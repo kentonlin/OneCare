@@ -9,17 +9,12 @@ export default class DoctorListView extends React.Component {
     this.state = {
       doctors: []
     };
-    this.makeDocs = this.makeDocs.bind(this);
+    this.getDocs = this.getDocs.bind(this);
   }
 
 
-  makeDocs(doctors) {
-    this.setState({doctors});
-    // console.log("current docs", this.state.doctors);
+  getDocs() {
 
-  }
-
-  componentDidMount() {
     $.ajax({
       type: 'POST',
       url: '/api/doctors/get',
@@ -39,6 +34,11 @@ export default class DoctorListView extends React.Component {
     });
   }
 
+
+  componentDidMount() {
+    this.getDocs();
+  }
+
   render() {
     var { doctors } = this.state;
     return (
@@ -46,7 +46,7 @@ export default class DoctorListView extends React.Component {
       <div className="doctor-list-view">
         {
          doctors.map((doctor, idx) => {
-          return (<DoctorView key={idx} name={doctor.name} phone={doctor.phone} fax={doctor.fax} address={doctor.address} specialty={doctor.specialty} />)
+          return (<DoctorView key={idx} id={doctor._id} name={doctor.name} phone={doctor.phone} email={doctor.email} address={doctor.address} specialty={doctor.specialty} />)
          }, this)
         }
       </div>

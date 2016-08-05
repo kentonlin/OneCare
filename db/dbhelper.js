@@ -65,26 +65,31 @@ var dbFunc = {
 	getScripts: function(username, res) {
 		Model.user.findOne({'username': username}).populate('scripts').exec(function (err, found) {
 			if(err){
-				console.log('error in fetching tasks', err);
+				console.log('error in fetching scripts', err);
 			}
 			console.log('these are the found scripts for harish', found.scripts)
 			res.send(found.scripts);
 		});
 	},
 
-  addDoc: function(data, res) {
-  	var newDoc = new Model.doctor(data);
+  addDoc: function(data, res, next) {
+		console.log("addDoc called with", data);
+  	var newDoc = new Model.doctor(data.doc);
   	newDoc.save(function(err) {
   		if (err) {
   			console.log(err);
   		}
-  		console.log("Doctor added!");
-  		res.send(newDoc);
+  		Model.user.update({"username": data.username}, {$push:{"doctors": newDoc}}, function(err){
+				if(err){
+					next(new Error("doctor added to user model"))
+				}
+				res.send(newDoc)
+			})
   	});
   },
 
   getDocs: function(username, res, next) {
-		Model.user.findOne({"username": username}, function(err, user){
+		Model.user.findOne({"username": username}).populate('doctors').exec(function(err, user){
 			if(err){
 				next(new Error(err));
 			}
@@ -92,6 +97,16 @@ var dbFunc = {
 			res.send(user.doctors)
 		})
   },
+
+	deleteDoc: function(id, res, next) {
+		Model.doctor.remove({"_id": id}, function(err){
+			if(err){
+				next("reminder not deleted", err);
+			}
+			next("doctor deleted");
+		})
+  },
+
 
 	/* AUTHENTICATION FUNCTIONS */
 
