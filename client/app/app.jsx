@@ -29,7 +29,7 @@ class App extends React.Component {
             <IndexRoute component={Signin} />
             {/* <Route path='/home' component={} /> */}
             <Route path='/remind' onEnter={this.authCheck} component={ScriptRemindView} />
-            {/* <Route path= '/alldoctors' component={Signup} /> */}
+            <Route path= '/alldoctors' component={DoctorListView} />
             <Route path='/newdoctor' onEnter={this.authCheck} component={DoctorEntryView} />
             <Route path='/recommend' onEnter={this.authCheck} component={SymptomEntry} />
             <Route path='/signin' component={Signin} />

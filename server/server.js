@@ -3,7 +3,7 @@ var bodyParser = require('body-parser');
 var dbHelpers = require('../db/dbhelper.js');
 var path = require('path');
 var app = express();
-var brain = require('./brain.js');
+// var brain = require('./brain.js');
 var twilio = require('twilio');
 
 app.use(express.static('public'));
@@ -35,9 +35,10 @@ app.get('/fuckDan', function(req, res){
   res.send(JSON.stringify({"message": "Fuck Dan"}));
 });
 
-app.post('/api/script/add', function(req, res) {
+app.post('/api/reminder/add', function(req, res, next) {
+  console.log('request received at addScriptReminder');
 	var newScript = req.body;
-	dbHelpers.addScript(newScript, res);
+	dbHelpers.addScript(newScript, res, next);
 });
 
 app.post('/api/script/find', function(req, res) {
