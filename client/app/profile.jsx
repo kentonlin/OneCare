@@ -14,12 +14,13 @@ export default class Profile extends React.Component {
     this.compileScripts = this.compileScripts.bind(this);
   }
 
+// functions for retrieving doctors and scripts
   // makeDocs(doctors) {
   //   this.setState({doctors: doctors});
   // }
 
-  compileScripts(scripts) {
-    this.setState({scripts: scripts});
+  compileScripts(data) {
+    this.setState({scripts: data});
   }
 
   componentDidMount() {
@@ -31,40 +32,41 @@ export default class Profile extends React.Component {
        "Content-Type": "application/json"
      },
      //  cache: false,
-     data: JSON.stringify({window.localStorage.username}),
+     data: JSON.stringify({username: window.localStorage.username}),
      success: function(data) {
        console.log('user scripts from AJAX request', data);
-     },
+       this.setState({scripts: data});
+     }.bind(this),
      error: function(err) {
        console.log('error in ajax request for user scripts', data);
      }
    });
-    // $.get("/api/doctor/find", this.makeDocs);
   }
 
   render() {
     return (
       <div>
       <h2> Profile {window.localStorage.username} </h2>
-      {/* <div className="doctor-list-view">
-        {
-         this.state.doctors.map((doctor, idx) => {
-          return (<DoctorView key={idx} name={doctor.name} phone={doctor.phone} fax={doctor.fax} address={doctor.address} specialty={doctor.specialty} />)
-         }, this)
-        }
-      </div>*/}
-      {/* </div> */}
 
-      <div className="script-list-view">
-        {
-          this.state.scripts.map((script, idx) => {
-            return (<ScriptView key={idx} name={script.name} dosage={script.dosage} frequency={script.frequency}
-               recur={script.recur} refill={script.refill} refillRemind={script.refillRemind} dailyRemind={script.dailyRemind}
-             phone={script.phone} />)
-          }, this)
-        }
-      </div>
+             {
+              this.state.scripts.map((script, idx) => {
+                return (
+                  <ul className="User-Scripts">
+                  <li> <span className="user-script"> Name: </span> {script.name} </li>
+                  <li> <span className="user-script"> Dosage: </span> {script.dosage} </li>
+                  <li> <span className="user-script"> Frequency </span> {script.frequency} </li>
+                  <li> <span className="user-script"> Recurring </span> {script.recur} </li>
+                  <li> <span className="user-script"> Refill Date </span> {script.refill} </li>
+                  <li> <span className="user-script"> Refill Reminder </span> {script.refillRemind} </li>
+                  <li> <span className="user-script"> Refill Reminder </span> {script.dailyRemind} </li>
+                 <li> <span className="user-script"> Phone: </span> {script.phone} </li>
+                 </ul>
+               )
+              }, this)
+            }
+
       </div>
     );
   }
+
 }
