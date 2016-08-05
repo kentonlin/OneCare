@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import FilteredMultiSelect from 'react-filtered-multiselect';
 import $ from 'jquery';
 import Navigate from './navigate.jsx';
+import Modal from 'react-modal';
+import SymptomEntryModal from './symptomEntryModal.jsx';
 
 
 var SYMPTOMS = [
@@ -383,12 +385,32 @@ export default class SymptomEntryView extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      selectedSymptoms: []
+      selectedSymptoms: [],
+      recs: [],
+      modalIsOpen: false
     };
     this.handleDeselect = this.handleDeselect.bind(this);
     this.handleSelectionChange = this.handleSelectionChange.bind(this);
     this.submitSymptoms = this.submitSymptoms.bind(this);
+    this.closeModal = this.closeModal.bind(this);
+    this.openModal = this.openModal.bind(this);
+    this.handleRecData = this.handleRecData.bind(this);
+    this.exitModal = this.exitModal.bind(this);
   };
+
+  closeModal() {
+    this.setState({modalIsOpen: false})
+  }
+
+  openModal() {
+    this.setState({modalIsOpen: true})
+  }
+
+  exitModal() {
+    this.setState({selectedSymptoms: []});
+    this.setState({recs: []});
+    this.closeModal();
+  }
 
   handleDeselect(index) {
     var selectedSymptoms = this.state.selectedSymptoms.slice();
@@ -396,12 +418,17 @@ export default class SymptomEntryView extends Component {
     this.setState({ selectedSymptoms });
   };
 
+  handleRecData(recData) {
+    this.setState( {recs: recData})
+  }
+
   handleSelectionChange(selectedSymptoms) {
     this.setState({ selectedSymptoms });
   };
 
   submitSymptoms() {
     console.log('you chose: ', this.state.selectedSymptoms);
+    this.openModal();
     $.ajax({
       type: 'POST',
       url: '/api/brain/recommend',
@@ -410,9 +437,7 @@ export default class SymptomEntryView extends Component {
         'Content-Type': 'application/json'
       },
       data: JSON.stringify(this.state.selectedSymptoms),
-      success: function(data) {
-        console.log('You have cancer!', data.pop());
-      },
+      success: this.handleRecData,
       error: function(err) {
         console.log('Congrats you are superhuman', err);
       }
@@ -611,6 +636,13 @@ export default class SymptomEntryView extends Component {
           </li>)}
         </ul>}
         <button onClick={this.submitSymptoms}>Submit!</button>
+        <Modal
+          isOpen={this.state.modalIsOpen}
+          shouldCloseOnOverlayClick={false}
+        > 
+          <SymptomEntryModal symptoms={this.state.selectedSymptoms} recommendations={this.state.recs} />
+          <button onClick={this.exitModal}>Exit</button>
+        </Modal>
       </div>
     );
   }

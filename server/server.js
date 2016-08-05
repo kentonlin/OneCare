@@ -3,7 +3,7 @@ var bodyParser = require('body-parser');
 var dbHelpers = require('../db/dbhelper.js');
 var path = require('path');
 var app = express();
-// var brain = require('./brain.js');
+var brain = require('./brain.js');
 var twilio = require('twilio');
 
 app.use(express.static('public'));
@@ -90,8 +90,8 @@ app.post('/api/brain/recommend', function(req, res) {
   var symptoms = req.body;
   // console.log("The brain shall now ponder: ", symptoms);
   var data = brain.OCBrain.activate(symptoms);
-  // console.log("The brain has decided to recommend: ", data);
-  res.send(data);
+  console.log("The brain has decided to recommend: ", data);
+  res.status(200).send(data);
 });
 
 app.get('/api/brain/save', function(req, res) {
@@ -101,10 +101,10 @@ app.get('/api/brain/save', function(req, res) {
 
 app.post('/api/brain/add', function(req, res) {
   var pair = req.body.pair;
-  res.send(brain.OCBrain.addTrainingPair(pair));
-  brain.OCBrain.train(10);
+  res.send(brain.OCBrain.addTrainingPair(pair))
+  brain.OCBrain.train(3);
   brain.OCBrain.save("MainBrain");
-});
+})
 
 app.get('/*', function(req, res) {
   res.sendFile(path.join(rootPath + "/index.html"));
