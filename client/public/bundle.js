@@ -69,7 +69,11 @@
 	
 	var _scriptRemind2 = _interopRequireDefault(_scriptRemind);
 	
+<<<<<<< HEAD
 	var _notFound = __webpack_require__(/*! ./notFound.jsx */ 606);
+=======
+	var _notFound = __webpack_require__(/*! ./notFound.jsx */ 470);
+>>>>>>> eb0e44c33f720213b273d72911e27b27072a3f83
 	
 	var _notFound2 = _interopRequireDefault(_notFound);
 	
@@ -77,7 +81,11 @@
 	
 	var _signin2 = _interopRequireDefault(_signin);
 	
+<<<<<<< HEAD
 	var _container = __webpack_require__(/*! ./container.jsx */ 607);
+=======
+	var _container = __webpack_require__(/*! ./container.jsx */ 471);
+>>>>>>> eb0e44c33f720213b273d72911e27b27072a3f83
 	
 	var _container2 = _interopRequireDefault(_container);
 	
@@ -97,10 +105,13 @@
 	
 	var _signup2 = _interopRequireDefault(_signup);
 	
+<<<<<<< HEAD
 	var _profile = __webpack_require__(/*! ./profile.jsx */ 608);
 	
 	var _profile2 = _interopRequireDefault(_profile);
 	
+=======
+>>>>>>> eb0e44c33f720213b273d72911e27b27072a3f83
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -122,10 +133,17 @@
 	    key: 'authCheck',
 	    value: function authCheck() {
 	      console.log("authcheck called");
+<<<<<<< HEAD
 	      if (!window.localStorage.token) {
 	        window.location = "/signin";
 	      } else {
 	        console.log('authenticated user!');
+=======
+	      if (!(window.localStorage.token && window.localStorage.username)) {
+	        window.location = "/signin";
+	      } else {
+	        console.log('else condition hit!');
+>>>>>>> eb0e44c33f720213b273d72911e27b27072a3f83
 	      }
 	    }
 	  }, {
@@ -139,13 +157,20 @@
 	          { path: '/', component: _container2.default },
 	          _react2.default.createElement(_reactRouter.IndexRoute, { component: _signin2.default }),
 	          _react2.default.createElement(_reactRouter.Route, { path: '/remind', onEnter: this.authCheck, component: _scriptRemind2.default }),
+<<<<<<< HEAD
 	          _react2.default.createElement(_reactRouter.Route, { path: '/alldoctors', onEnter: this.authCheck, component: _doctorListView2.default }),
 	          _react2.default.createElement(_reactRouter.Route, { path: '/profile', onEnter: this.authCheck, component: _profile2.default }),
+=======
+>>>>>>> eb0e44c33f720213b273d72911e27b27072a3f83
 	          _react2.default.createElement(_reactRouter.Route, { path: '/newdoctor', onEnter: this.authCheck, component: _doctorEntryView2.default }),
 	          _react2.default.createElement(_reactRouter.Route, { path: '/recommend', onEnter: this.authCheck, component: _symptomEntry2.default }),
 	          _react2.default.createElement(_reactRouter.Route, { path: '/signin', component: _signin2.default }),
 	          _react2.default.createElement(_reactRouter.Route, { path: '/signup', component: _signup2.default }),
+<<<<<<< HEAD
 	          _react2.default.createElement(_reactRouter.Route, { path: '/*', component: _notFound2.default })
+=======
+	          _react2.default.createElement(_reactRouter.Route, { path: '*', component: _notFound2.default })
+>>>>>>> eb0e44c33f720213b273d72911e27b27072a3f83
 	        )
 	      );
 	    }
@@ -38842,6 +38867,7 @@
 	var Navigate = function (_React$Component) {
 	  _inherits(Navigate, _React$Component);
 	
+<<<<<<< HEAD
 	  function Navigate(props) {
 	    _classCallCheck(this, Navigate);
 	
@@ -38852,6 +38878,12 @@
 	    };
 	
 	    return _this;
+=======
+	  function Navigate() {
+	    _classCallCheck(this, Navigate);
+	
+	    return _possibleConstructorReturn(this, Object.getPrototypeOf(Navigate).apply(this, arguments));
+>>>>>>> eb0e44c33f720213b273d72911e27b27072a3f83
 	  }
 	
 	  _createClass(Navigate, [{
@@ -38867,11 +38899,19 @@
 	        ),
 	        _react2.default.createElement(
 	          'div',
+<<<<<<< HEAD
 	          { className: 'navbar-button navbar-home' },
 	          _react2.default.createElement(
 	            _reactRouter.Link,
 	            { to: '/profile' },
 	            ' Profile '
+=======
+	          { className: 'navbar-button navbar-view-doctors' },
+	          _react2.default.createElement(
+	            _reactRouter.Link,
+	            { to: '/alldoctors' },
+	            ' Your Doctors '
+>>>>>>> eb0e44c33f720213b273d72911e27b27072a3f83
 	          )
 	        ),
 	        _react2.default.createElement(
@@ -38885,7 +38925,11 @@
 	        ),
 	        _react2.default.createElement(
 	          'div',
+<<<<<<< HEAD
 	          { className: 'navbar-button navbar-script-reminder' },
+=======
+	          { className: 'navbar-button navbar-enter-doctors' },
+>>>>>>> eb0e44c33f720213b273d72911e27b27072a3f83
 	          _react2.default.createElement(
 	            _reactRouter.Link,
 	            { to: '/remind' },
@@ -38894,7 +38938,11 @@
 	        ),
 	        _react2.default.createElement(
 	          'div',
+<<<<<<< HEAD
 	          { className: 'navbar-button navbar-recommend-doctors' },
+=======
+	          { className: 'navbar-button navbar-enter-doctors' },
+>>>>>>> eb0e44c33f720213b273d72911e27b27072a3f83
 	          _react2.default.createElement(
 	            _reactRouter.Link,
 	            { to: '/recommend' },
@@ -38968,7 +39016,10 @@
 	      doctors: []
 	    };
 	    _this.makeDocs = _this.makeDocs.bind(_this);
+<<<<<<< HEAD
 	    _this.componentDidMount = _this.componentDidMount.bind(_this);
+=======
+>>>>>>> eb0e44c33f720213b273d72911e27b27072a3f83
 	    return _this;
 	  }
 	
@@ -38976,12 +39027,17 @@
 	    key: 'makeDocs',
 	    value: function makeDocs(doctors) {
 	      this.setState({ doctors: doctors });
+<<<<<<< HEAD
 	      // console.log("current docs", this.state.doctors);
+=======
+	      console.log("current docs", this.state.doctors);
+>>>>>>> eb0e44c33f720213b273d72911e27b27072a3f83
 	    }
 	  }, {
 	    key: 'componentDidMount',
 	    value: function componentDidMount() {
 	      // console.log('doctor list view about to be mounted');
+<<<<<<< HEAD
 	      $.ajax({
 	        type: 'GET',
 	        url: '/api/doctor/find',
@@ -38992,16 +39048,26 @@
 	          console.log('I can\'t pill you...not today', err);
 	        }
 	      });
+=======
+	      $.get("/api/doctor/find", this.makeDocs);
+>>>>>>> eb0e44c33f720213b273d72911e27b27072a3f83
 	    }
 	  }, {
 	    key: 'render',
 	    value: function render() {
+<<<<<<< HEAD
 	      var doctors = this.state.doctors;
 	
 	      return _react2.default.createElement(
 	        'div',
 	        { className: 'doctor-list-view' },
 	        doctors.map(function (doctor, idx) {
+=======
+	      return _react2.default.createElement(
+	        'div',
+	        { className: 'doctor-list-view' },
+	        this.state.doctors.map(function (doctor, idx) {
+>>>>>>> eb0e44c33f720213b273d72911e27b27072a3f83
 	          return _react2.default.createElement(_doctorView2.default, { key: idx, name: doctor.name, phone: doctor.phone, fax: doctor.fax, address: doctor.address, specialty: doctor.specialty });
 	        }, this)
 	      );
@@ -42101,6 +42167,7 @@
 	
 	var _navigate2 = _interopRequireDefault(_navigate);
 	
+<<<<<<< HEAD
 	var _reactKronos = __webpack_require__(/*! react-kronos */ 470);
 	
 	var _reactKronos2 = _interopRequireDefault(_reactKronos);
@@ -42109,6 +42176,8 @@
 	
 	var _moment2 = _interopRequireDefault(_moment);
 	
+=======
+>>>>>>> eb0e44c33f720213b273d72911e27b27072a3f83
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -42130,8 +42199,12 @@
 	      "dosageAmt": 0,
 	      "dosageMeasure": 'mg',
 	      "date": date,
+<<<<<<< HEAD
 	      "reminderTime": null,
 	      "scheduleFreq": "1x",
+=======
+	      "scheduleFreq": "none",
+>>>>>>> eb0e44c33f720213b273d72911e27b27072a3f83
 	      "scheduleDayWeek": "day"
 	    };
 	    var date = new Date();
@@ -42142,7 +42215,10 @@
 	    _this.handleRefillDate = _this.handleRefillDate.bind(_this);
 	    _this.handleDoseMeasurement = _this.handleDoseMeasurement.bind(_this);
 	    _this.handleScheduleDayWeek = _this.handleScheduleDayWeek.bind(_this);
+<<<<<<< HEAD
 	    _this.handleReminderTime = _this.handleReminderTime.bind(_this);
+=======
+>>>>>>> eb0e44c33f720213b273d72911e27b27072a3f83
 	
 	    return _this;
 	  }
@@ -42186,13 +42262,17 @@
 	  }, {
 	    key: 'handleFrequency',
 	    value: function handleFrequency(frequency) {
+<<<<<<< HEAD
 	      console.log("current state", this.state);
+=======
+>>>>>>> eb0e44c33f720213b273d72911e27b27072a3f83
 	      console.log("handleFreq called with", frequency.target.value);
 	      this.setState({
 	        scheduleFreq: frequency.target.value
 	      });
 	    }
 	  }, {
+<<<<<<< HEAD
 	    key: 'handleReminderTime',
 	    value: function handleReminderTime(time) {
 	      console.log("handleReminderTime called with", (0, _moment2.default)(time).format('LT'));
@@ -42201,6 +42281,8 @@
 	      });
 	    }
 	  }, {
+=======
+>>>>>>> eb0e44c33f720213b273d72911e27b27072a3f83
 	    key: 'submitForm',
 	    value: function submitForm() {
 	      var script = {
@@ -42208,14 +42290,22 @@
 	        "dosage": this.state.dosageAmt + ' ' + this.state.dosageMeasure,
 	        "refill": this.state.date,
 	        "frequency": this.state.scheduleFreq + ' per ' + this.state.scheduleDayWeek,
+<<<<<<< HEAD
 	        "reminderTime": this.state.reminderTime,
 	        "username": window.localStorage.username
+=======
+	        "phone": "18108414628"
+>>>>>>> eb0e44c33f720213b273d72911e27b27072a3f83
 	      };
 	      console.log("submitForm called for: ", script);
 	
 	      _jquery2.default.ajax({
 	        type: 'POST',
+<<<<<<< HEAD
 	        url: '/api/reminder/add',
+=======
+	        url: '/api/script/add',
+>>>>>>> eb0e44c33f720213b273d72911e27b27072a3f83
 	        dataType: 'json',
 	        headers: {
 	          'Content-Type': 'application/json'
@@ -42243,11 +42333,14 @@
 	          _react2.default.createElement(
 	            'h1',
 	            null,
+<<<<<<< HEAD
 	            ' Set a Prescription Reminder '
 	          ),
 	          _react2.default.createElement(
 	            'h2',
 	            null,
+=======
+>>>>>>> eb0e44c33f720213b273d72911e27b27072a3f83
 	            ' Current Drug: ',
 	            this.state.currentDrug,
 	            ' '
@@ -42352,6 +42445,7 @@
 	          'div',
 	          null,
 	          _react2.default.createElement(
+<<<<<<< HEAD
 	            'h2',
 	            null,
 	            ' Reminder Time '
@@ -42362,6 +42456,8 @@
 	          'div',
 	          null,
 	          _react2.default.createElement(
+=======
+>>>>>>> eb0e44c33f720213b273d72911e27b27072a3f83
 	            'button',
 	            { className: 'remindBtn', onClick: this.submitForm },
 	            ' Remind Me '
@@ -42374,6 +42470,42 @@
 	  return ScriptRemindView;
 	}(_react2.default.Component);
 	
+<<<<<<< HEAD
+=======
+	/* const styles = StyleSheet.create({
+	  container: {
+	    flex: 1,
+	    justifyContent: 'center',
+	    alignItems: 'center',
+	    backgroundColor: '#F5FCFF',
+	  },
+	  welcome: {
+	    fontSize: 20,
+	    textAlign: 'center',
+	    margin: 10,
+	  },
+	  instructions: {
+	    textAlign: 'center',
+	    color: '#333333',
+	    marginBottom: 5,
+	  },
+	  topbar: {
+	  flexDirection: 'row',
+	  justifyContent: 'flex-end',
+	  backgroundColor: 'black',
+	  paddingHorizontal: 5,
+	  paddingVertical: 10
+	  },
+	  submit: {
+	    textAlign: 'center'
+	  },
+	
+	});
+	
+	*/
+	
+	
+>>>>>>> eb0e44c33f720213b273d72911e27b27072a3f83
 	exports.default = ScriptRemindView;
 
 /***/ },
@@ -60183,6 +60315,7 @@
 
 /***/ },
 /* 470 */
+<<<<<<< HEAD
 /*!***************************************!*\
   !*** ./~/react-kronos/dist/bundle.js ***!
   \***************************************/
@@ -60382,6 +60515,10 @@
 /* 473 */
 /*!*********************************!*\
   !*** ./~/jss/lib/StyleSheet.js ***!
+=======
+/*!*********************************!*\
+  !*** ./client/app/notFound.jsx ***!
+>>>>>>> eb0e44c33f720213b273d72911e27b27072a3f83
   \*********************************/
 /***/ function(module, exports, __webpack_require__) {
 
@@ -60391,6 +60528,7 @@
 	  value: true
 	});
 	
+<<<<<<< HEAD
 	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 	
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
@@ -60404,11 +60542,23 @@
 	var _findRenderer = __webpack_require__(/*! ./findRenderer */ 481);
 	
 	var _findRenderer2 = _interopRequireDefault(_findRenderer);
+=======
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+	
+	var _react = __webpack_require__(/*! react */ 1);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _reactDom = __webpack_require__(/*! react-dom */ 35);
+	
+	var _reactDom2 = _interopRequireDefault(_reactDom);
+>>>>>>> eb0e44c33f720213b273d72911e27b27072a3f83
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 	
+<<<<<<< HEAD
 	/**
 	 * StyleSheet model.
 	 *
@@ -60852,6 +61002,51 @@
 /*!*********************************!*\
   !*** ./~/jss/lib/createRule.js ***!
   \*********************************/
+=======
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+	
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+	
+	var NotFoundView = function (_React$Component) {
+	  _inherits(NotFoundView, _React$Component);
+	
+	  function NotFoundView() {
+	    _classCallCheck(this, NotFoundView);
+	
+	    return _possibleConstructorReturn(this, Object.getPrototypeOf(NotFoundView).apply(this, arguments));
+	  }
+	
+	  _createClass(NotFoundView, [{
+	    key: 'render',
+	    value: function render() {
+	      return _react2.default.createElement(
+	        'div',
+	        null,
+	        _react2.default.createElement(
+	          'h1',
+	          null,
+	          ' Sorry, that page is not found '
+	        ),
+	        _react2.default.createElement(
+	          'h2',
+	          null,
+	          ' .....fuck dan '
+	        )
+	      );
+	    }
+	  }]);
+	
+	  return NotFoundView;
+	}(_react2.default.Component);
+	
+	exports.default = NotFoundView;
+
+/***/ },
+/* 471 */
+/*!**********************************!*\
+  !*** ./client/app/container.jsx ***!
+  \**********************************/
+>>>>>>> eb0e44c33f720213b273d72911e27b27072a3f83
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -60859,6 +61054,7 @@
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
+<<<<<<< HEAD
 	exports.default = createRule;
 	
 	var _Rule = __webpack_require__(/*! ./rules/Rule */ 476);
@@ -69945,6 +70141,28 @@
 	}(_react2.default.Component);
 	
 	exports.default = Profile;
+=======
+	exports.Container = undefined;
+	
+	var _react = __webpack_require__(/*! react */ 1);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _navigate = __webpack_require__(/*! ./navigate.jsx */ 243);
+	
+	var _navigate2 = _interopRequireDefault(_navigate);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var Container = exports.Container = function Container(props) {
+	  return _react2.default.createElement(
+	    'div',
+	    null,
+	    _react2.default.createElement(_navigate2.default, null),
+	    props.children
+	  );
+	};
+>>>>>>> eb0e44c33f720213b273d72911e27b27072a3f83
 
 /***/ }
 /******/ ]);
