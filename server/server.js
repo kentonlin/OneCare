@@ -61,6 +61,14 @@ app.post('/api/doctors/get', function(req, res, next) {
   console.log("request received at getDoctors for", req.body.username)
   dbHelpers.getDocs(req.body.username, res, next);
 });
+//
+
+// Retrieve doctors from user model
+app.post('/api/user/doctors', function(req, res) {
+  var data = req.body;
+  dbHelpers.getDocs(data, res);
+});
+//
 
 // USER SIGNUP SIGNIN
 
