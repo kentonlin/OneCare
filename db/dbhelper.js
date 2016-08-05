@@ -83,6 +83,34 @@ var dbFunc = {
   	});
   },
 
+	addUserDoc: function(data, res) {
+		var username = data.username;
+		var doctor = data.doctor;
+		var newDoctor = new Model.doctor(doctor);
+
+		Model.doctor.find({}, function(err, docArray) {
+			if(!docArray.length){
+				newDoctor.save(function(err) {
+					if(err) {
+						console.log("error in saving doctor", err);
+					}
+					Model.user.update({"username": username}, {$push: {"doctors": newDoctor}},
+						function(err) {
+							if(err){
+								console.log("error in finding user", err);
+							}
+							console.log('new doctor to be pushed', newDoctor);
+							console.log('this is the users doctors', user.doctors);
+							res.send(newDoctor);
+						}
+				  );
+				});
+			}else {
+				console.log('there was a duplicate doctor', err); 
+			}
+		});
+	},
+
   getDocs: function(target, res) {
     Model.doctor.find({}, function(err, docs) {
       console.log(docs);

@@ -52,10 +52,20 @@ app.post('/api/doctor/add', function(req, res) {
   dbHelpers.addDoc(newDoc, res);
 });
 
-app.get('/api/doctor/find', function(req, res) {
-  var targetDocs = req.body;
-  dbHelpers.getDocs(targetDocs, res);
+// Add doctor to user model
+app.post('/api/user/doctor/add', function(req, res) {
+  var data = req.body;
+  console.log('this is the data that is being sent to helper', data);
+  dbHelpers.addUserDoc(data, res);
 });
+//
+
+// Retrieve doctors from user model
+app.post('/api/user/doctors', function(req, res) {
+  var data = req.body;
+  dbHelpers.getDocs(data, res);
+});
+//
 
 // USER SIGNUP SIGNIN
 

@@ -13,7 +13,6 @@ export default class Profile extends React.Component {
     this.compileScripts = this.compileScripts.bind(this);
   }
 
-// functions for retrieving doctors and scripts
   // makeDocs(doctors) {
   //   this.setState({doctors: doctors});
   // }
@@ -40,6 +39,11 @@ export default class Profile extends React.Component {
        console.log('error in ajax request for user scripts', data);
      }
    });
+   // 
+  //  $.ajax({
+  //    type: "POST",
+  //    url: "/api/user/doctors"
+  //  })
   }
 
   render() {
