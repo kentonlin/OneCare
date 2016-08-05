@@ -36,9 +36,15 @@ app.get('/fuckDan', function(req, res){
 });
 
 app.post('/api/reminder/add', function(req, res, next) {
-  console.log('request received at addScriptReminder');
+  console.log('request received at addScriptReminder with', req.body);
 	var newScript = req.body;
 	dbHelpers.addScript(newScript, res, next);
+});
+
+app.post('/api/reminder/delete', function(req, res, next){
+  console.log("request received at deleteReminder with", req.body);
+  var reminderID = req.body.reminderID;
+  dbHelpers.deleteReminder(reminderID, next)
 });
 
 app.post('/api/script/find', function(req, res) {
