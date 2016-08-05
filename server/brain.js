@@ -568,18 +568,22 @@ var SYMPTOMS = [
     dbHelpers.saveBrain(JSON.stringify(OneCareNeural.toJSON()), JSON.stringify(trainingSet), name);
   }
 
+  var resetBrain = function() {
+    console.log("Deleting everything!")
+    trainingSet = [];
+    OneCareNeural = initBrain();
+    saveBrain("MainBrain");
+  }
+
   return {
     network: OneCareNeural,
     trainer: BrainTrain,
     addTrainingPair: addTrainingPair,
     train: trainMyBrain, 
     activate: activateMyBrain,
-    save: saveBrain
+    save: saveBrain,
+    delete: resetBrain
   }
 };
 
 exports.OCBrain = Brain();
-
-
-
-

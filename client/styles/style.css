@@ -244,3 +244,6 @@ body {
   color: #F39C12;
 }
 /* END OF CALENDAR STYLES*/
+
+
+.hidden { display:none; }
