@@ -55,23 +55,25 @@ export default class SymptomEntryModal extends React.Component {
   render() {
     return(
         <div className="recommend-modal-container">
-          <h3>Your Selected Symptoms:</h3>
-          {
-          this.props.symptoms.map((symptom) => {
-            return (
-                <div key={symptom.id}>
-                  <div>{symptom.name}</div>
-                </div>
-              )
-            })  
-          }
+          <h3 className="title modal-header">Your Selected Symptoms:</h3>
+            <div className="modal-symptom-container">
+            {
+            this.props.symptoms.map((symptom) => {
+              return (
+                  <div key={symptom.id} className="modal-symptom-entry">
+                    <div>{symptom.name}</div>
+                  </div>
+                )
+              })  
+            }
+          </div>
           <h4>We recommend:</h4>
             {
               this.state.currentRec.name
             }
 
-          <button className={this.state.currentRec.id === 0 ? 'hidden' : ''} onClick={this.upvote}>Thanks!</button>
-          <button className={this.state.currentRec.id === 0 ? 'hidden' : ''} onClick={this.downvote}>Sorry, try again.</button>
+          <button className={(this.state.currentRec.id === 0 ? 'hidden' : '')+' modal-button'} onClick={this.upvote}>Thanks!</button>
+          <button className={(this.state.currentRec.id === 0 ? 'hidden' : '')+' modal-button'} onClick={this.downvote}>Sorry, try again.</button>
         </div>
       )
   }

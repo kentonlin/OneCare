@@ -2,6 +2,44 @@ import React, { Component } from 'react';
 import $ from 'jquery';
 import Navigate from './navigate.jsx';
 
+  var DOCTORS = [
+    {id: 1, name: 'Allergology'}, 
+    {id: 2, name: 'Andrology'},
+    {id: 3, name: 'Anesthesia'},
+    {id: 4, name: 'Angiology‎'},
+    {id: 5, name: 'Cardiology‎'},
+    {id: 6, name: 'Dentistry‎'},
+    {id: 7, name: 'Dermatology‎'},
+    {id: 8, name: 'Emergency medicine‎'},
+    {id: 9, name: 'Endocrinology‎'},
+    {id: 10, name: 'Family medicine‎'},
+    {id: 11, name: 'Gastroenterology‎'},
+    {id: 12, name: 'General practice‎'},
+    {id: 13, name: 'Geriatrics‎'},
+    {id: 14, name: 'Gynaecology‎'},
+    {id: 15, name: 'Hematology‎'},
+    {id: 16, name: 'Hepatology‎'},
+    {id: 17, name: 'Immunology‎'},
+    {id: 18, name: 'Internal medicine‎'},
+    {id: 19, name: 'Nephrology‎'},
+    {id: 20, name: 'Neurology‎'},
+    {id: 21, name: 'Obstetrics‎'},
+    {id: 22, name: 'Oncology‎'},
+    {id: 23, name: 'Ophthalmology‎'},
+    {id: 24, name: 'Ear, nose, and Throat'},
+    {id: 25, name: 'Palliative medicine‎'},
+    {id: 26, name: 'Pediatrics‎'},
+    {id: 27, name: 'Podiatry‎'},
+    {id: 28, name: 'Psychiatric'},
+    {id: 29, name: 'Pulmonology‎'},
+    {id: 30, name: 'Radiology‎'},
+    {id: 31, name: 'Rheumatology‎'},
+    {id: 32, name: 'Sleep medicine‎'},
+    {id: 33, name: 'Surgery‎'},
+    {id: 34, name: 'Toxicology‎'},
+    {id: 35, name: 'Urology‎'}
+  ]
+
 
 export default class DoctorEntryView extends React.Component {
   constructor(props) {
@@ -64,111 +102,17 @@ export default class DoctorEntryView extends React.Component {
           <div>Address</div><input id="address" type="text" onChange={this.handleChange}></input><br />
           <div>Specialty</div><select id="specialty" onChange={this.handleChange}>
             <option>::Select Specialty::</option>
-            <option>A</option>
-            <option>Allergology‎ </option>
-            <option>Andrology‎ </option>
-            <option>Anesthesia‎ </option>
-            <option>Angiology‎ </option>
-            <option>Aviation medicine‎ </option>
-            <option>B</option>
-            <option>Biomedicine‎ </option>
-            <option>C</option>
-            <option>Cardiology‎ </option>
-            <option>D</option>
-            <option>Dentistry‎ </option>
-            <option>Dentistry branches‎ </option>
-            <option>Dermatology‎ </option>
-            <option>Disaster medicine‎ </option>
-            <option>Sports physicians‎ </option>
-            <option>E</option>
-            <option>Emergency medicine‎ </option>
-            <option>Endocrinology‎ </option>
-            <option>F</option>
-            <option>Family medicine‎ </option>
-            <option>Fictional medical specialists‎ </option>
-            <option>G</option>
-            <option>Gastroenterology‎ </option>
-            <option>General practice‎ </option>
-            <option>Medical genetics‎ </option>
-            <option>Geriatrics‎ </option>
-            <option>Gerontology‎ </option>
-            <option>Gynaecology‎ </option>
-            <option>H</option>
-            <option>Hematology‎ </option>
-            <option>Hepatology‎ </option>
-            <option>I</option>
-            <option>Immunology‎ </option>
-            <option>Infectious diseases‎ </option>
-            <option>Intensive care medicine‎ </option>
-            <option>Internal medicine‎ </option>
-            <option>M</option>
-            <option>Men's health‎ </option>
-            <option>Military medicine‎ </option>
-            <option>N</option>
-            <option>Nephrology‎ </option>
-            <option>Neurology‎ </option>
-            <option>Nuclear medicine‎ </option>
-            <option>O</option>
-            <option>Obstetrics‎ </option>
-            <option>Oncology‎ </option>
-            <option>Ophthalmology‎ </option>
-            <option>Otorhinolaryngology‎ </option>
-            <option>P</option>
-            <option>Palliative medicine‎ </option>
-            <option>Pathology‎ </option>
-            <option>Pediatrics‎ </option>
-            <option>Podiatry‎ </option>
-            <option>Preventive medicine‎ </option>
-            <option>Prison medicine‎ </option>
-            <option>Psychiatric specialities‎ </option>
-            <option>Psychiatry‎ </option>
-            <option>Pulmonology‎ </option>
-            <option>R</option>
-            <option>Radiology‎ </option>
-            <option>Rehabilitation medicine‎ </option>
-            <option>Rheumatology‎ </option>
-            <option>S</option>
-            <option>Serology‎ </option>
-            <option>Sexual health‎ </option>
-            <option>Sleep medicine‎ </option>
-            <option>Space medicine‎ </option>
-            <option>Sports medicine‎ </option>
-            <option>Surgery‎ </option>
-            <option>Surgical specialties‎ </option>
-            <option>T</option>
-            <option>Toxicology‎ </option>
-            <option>Transplantation medicine‎ </option>
-            <option>Trichology‎ </option>
-            <option>Tropical medicine‎ </option>
-            <option>U</option>
-            <option>Urology‎ </option>
-            <option>W</option>
-            <option>Wilderness medicine‎ </option>
+            {
+              DOCTORS.map((doctor) => {
+                return (
+                  <option key={doctor.id} >{doctor.name}</option>
+                )
+              })
+            }
           </select>
           <button onClick={this.submitNewDoctor}>Submit!</button>
         </form>
         <hr />
-        <div>
-          <h3>Your current doctors: </h3>
-          <div onClick={() => {
-            $.ajax({
-              type: "POST",
-              url: "/api/brain/add",
-              headers: {
-                "content-type": "application/json"
-              },
-            data: JSON.stringify({pair: [[{id: 103, name: 'Propensity for cavities'},
-              {id: 104, name: 'Propensity for gum disease'},
-              {id: 105, name: 'Low, husky, hoarse voice'}],[{id: 12, name: 'Sports physicians‎'}]]}),
-            success: function(res) {
-              console.log("Brain activation success!  ", res);
-            },
-            error: function(err) {
-              console.error("You fuckd up da brain.  ", err);
-            }
-            })
-          }}>AJAX</div>
-        </div>
       </div>
     )
   }

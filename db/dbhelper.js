@@ -127,8 +127,6 @@ var dbFunc = {
 				next(new Error("username does not exist"));
 			}
 			else{ //if user found
-
-				console.log("*** this is the user", user);
 				user.comparePassword(reqUser.password, function(err, isMatch){
 					if(err) {
 						console.log("error occurred", err);
@@ -142,7 +140,6 @@ var dbFunc = {
 						var token = jwt.encode(user, 'secret'); //create new token
 						console.log('this is token',token);
 						var resultData = {"token": token, "user": {"id": user._id, "username": user.username}}
-						console.log('to be sent', resultData);
 						console.log(res);
 						// res.send({"token": token, "user": {"id": user._id, "username": user.username}});
 						// next(JSON.stringify({"token": token, "user": {"id": user._id, "username": user.username}}));

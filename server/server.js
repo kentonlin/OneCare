@@ -66,7 +66,6 @@ app.post('/api/signup', function(req, res, next) {
 
 app.post('/api/signin', function(req, res, next) {
   var userSignin = req.body;
-  console.log('usersignin server', userSignin);
   dbHelpers.signin(userSignin, res, next);
 });
 
