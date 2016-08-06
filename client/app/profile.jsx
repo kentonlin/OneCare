@@ -1,18 +1,25 @@
 import React, {Component} from 'react';
 import $ from 'jquery';
 import Navigate from './navigate.jsx';
+import ScriptRemind from './scriptRemind.jsx';
+import Modal from 'react-modal';
 
 export default class Profile extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       // doctors: [],
-      scripts: []
+      scripts: [],
+      modalIsOpen: false // or false
     };
-
+    // this.makeDocs = this.makeDocs.bind(this);
+    this.compileScripts = this.compileScripts.bind(this);
+    this.openModal = this.openModal.bind(this);
+    this.closeModal = this.closeModal.bind(this);
     this.getScripts = this.getScripts.bind(this);
     this.deleteReminder= this.deleteReminder.bind(this);
   }
+
 
   deleteReminder(index) {
     var id = this.state.scripts[index]._id;
@@ -36,7 +43,20 @@ export default class Profile extends React.Component {
    });
   }
 
-  getScripts(){
+  openModal() {
+    this.setState({
+      modalIsOpen: true
+    });
+  }
+
+ closeModal() {
+   this.setState({
+     modalIsOpen: false
+   });
+ }
+
+
+  componentDidMount() {
     $.ajax({
      type: "POST",
      url: "/api/script/find",
@@ -66,6 +86,18 @@ export default class Profile extends React.Component {
       <Navigate />
       <h1> My Profile </h1>
           <div className="allScripts">
+      <button onClick={this.openModal}> Enter New Prescription </button>
+
+      <Modal
+        isOpen={this.state.modalIsOpen}
+        shouldCloseOnOverlayClick={false}
+        >
+          <ScriptRemind />
+          <button onClick={this.closeModal}>Exit</button>
+      </Modal>
+
+      <h2> Profile {window.localStorage.username} </h2>
+
              {
               this.state.scripts.map((script, idx) => {
                 return (

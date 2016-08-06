@@ -22,9 +22,9 @@ export default class Navigate extends React.Component {
        <div className="navbar-button navbar-enter-doctors">
           <Link to='/newdoctor'> Enter New Doctor </Link>
        </div>
-       <div className="navbar-button navbar-script-reminder">
+       {/* <div className="navbar-button navbar-script-reminder">
         <Link to='/remind'> Prescription Reminder </Link>
-       </div>
+       </div> */}
        <div className="navbar-button navbar-recommend-doctors">
           <Link to='/recommend'> Physician Recommender </Link>
        </div>

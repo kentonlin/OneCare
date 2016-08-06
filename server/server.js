@@ -3,7 +3,7 @@ var bodyParser = require('body-parser');
 var dbHelpers = require('../db/dbhelper.js');
 var path = require('path');
 var app = express();
-var brain = require('./brain.js');
+// var brain = require('./brain.js');
 var twilio = require('twilio');
 
 app.use(express.static('public'));
@@ -61,6 +61,14 @@ app.post('/api/doctors/get', function(req, res, next) {
   console.log("request received at getDoctors for", req.body.username)
   dbHelpers.getDocs(req.body.username, res, next);
 });
+//
+
+// Retrieve doctors from user model
+app.post('/api/user/doctors', function(req, res) {
+  var data = req.body;
+  dbHelpers.getDocs(data, res);
+});
+//
 
 // USER SIGNUP SIGNIN
 

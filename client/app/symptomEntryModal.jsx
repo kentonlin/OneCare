@@ -38,8 +38,8 @@ export default class SymptomEntryModal extends React.Component {
         },
         error: function(err) {
           console.error("You rekt da brain.  ", err);
-      }
-      })
+        }
+    });
   }
 
   downvote() {
@@ -63,7 +63,7 @@ export default class SymptomEntryModal extends React.Component {
                   <div>{symptom.name}</div>
                 </div>
               )
-            })  
+            })
           }
           <h4>We recommend:</h4>
             {
