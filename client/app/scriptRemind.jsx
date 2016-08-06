@@ -22,7 +22,7 @@ export default class ScriptRemindView extends React.Component {
       "reminderTime": null,
       "scheduleFreq": "1x",
       "scheduleDayWeek": "day"
-    }
+    };
   var date = new Date();
   this.updateDrugName = this.updateDrugName.bind(this);
   this.submitForm = this.submitForm.bind(this);
@@ -45,27 +45,27 @@ export default class ScriptRemindView extends React.Component {
       console.log("selected date", date);
       this.setState({
         "date": date
-      })
+      });
 
     }
 
     handleScheduleDayWeek(dayWeek){
         this.setState({
           "scheduleDayWeek": dayWeek
-        })
+        });
     }
 
     handleDoseMeasurement(measure) {
       this.setState({
         dosageMeasure: measure.target.value
-      })
+      });
 
     }
 
     handleDoseAmount(amount) {
       this.setState({
         dosageAmt: amount.target.value
-      })
+      });
 
     }
 
@@ -74,17 +74,17 @@ export default class ScriptRemindView extends React.Component {
       console.log("handleFreq called with", frequency.target.value);
       this.setState({
         scheduleFreq: frequency.target.value
-      })
+      });
     }
 
     handleReminderTime(time){
       console.log("handleReminderTime called with", moment(time).format('LT'));
       this.setState({
         "reminderTime": moment(time).format('LT')
-      })
+      });
     }
 
-    submitForm () { 
+    submitForm () {
       var script = {
         "name": this.state.currentDrug,
         "dosage": this.state.dosageAmt + ' ' + this.state.dosageMeasure,
@@ -92,8 +92,8 @@ export default class ScriptRemindView extends React.Component {
         "frequency": this.state.scheduleFreq + ' per ' + this.state.scheduleDayWeek,
         "reminderTime": this.state.reminderTime,
         "username": window.localStorage.username
-      }
-      console.log("submitForm called for: ", script)
+      };
+      console.log("submitForm called for: ", script);
 
       $.ajax({
           type: 'POST',

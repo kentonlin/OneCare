@@ -36,7 +36,7 @@ var dbFunc = {
 			var hourString = hour.toString();
 			var cronConvert = minuteString + ' ' + hourString + ' ' + '* * *';
 			return cronConvert;
-		}
+		};
 
 		var cronTime = convertToCronTime(script.reminderTime);
 
@@ -67,7 +67,7 @@ var dbFunc = {
 			if(err){
 				console.log('error in fetching scripts', err);
 			}
-			console.log('these are the found scripts for harish', found.scripts)
+			console.log('these are the found scripts for user: ', found.scripts);
 			res.send(found.scripts);
 		});
 	},
@@ -81,10 +81,10 @@ var dbFunc = {
   		}
   		Model.user.update({"username": data.username}, {$push:{"doctors": newDoc}}, function(err){
 				if(err){
-					next(new Error("doctor added to user model"))
+					next(new Error("doctor added to user model"));
 				}
-				res.send(newDoc)
-			})
+				res.send(newDoc);
+			});
   	});
   },
 
@@ -94,8 +94,8 @@ var dbFunc = {
 				next(new Error(err));
 			}
 			console.log("?!?!", user);
-			res.send(user.doctors)
-		})
+			res.send(user.doctors);
+		});
   },
 
 	deleteDoc: function(id, res, next) {
@@ -104,7 +104,7 @@ var dbFunc = {
 				next("reminder not deleted", err);
 			}
 			next("doctor deleted");
-		})
+		});
   },
 
 
@@ -213,7 +213,7 @@ var dbFunc = {
 					//manager.add('next_job', '0 40 * * * *', function() { console.log('tick...')});
 					console.log("arguments...", scriptID.toString(), "at", time);
 					reminderManager.add(scriptID.toString(), time, function() {
-						console.log('this was the proper format!')
+						console.log('this was the proper format!');
 						client.sendMessage({
 							to: phoneNum,
 							from:"+16462332065",
@@ -228,7 +228,7 @@ var dbFunc = {
 
 					console.log("reminderManager", reminderManager);
 					next("Reminder successfully set");
-	})
+	});
 },
 
 deleteReminder: function(reminderID, next) {
@@ -238,10 +238,10 @@ deleteReminder: function(reminderID, next) {
 			next("reminder not deleted", err);
 		}
 		if(reminderManager.exists(reminderID.toString())) {
-			reminderManager.deleteJob(reminderID.toString())
+			reminderManager.deleteJob(reminderID.toString());
 		}
 		next("reminder deleted");
-	})
+	});
 },
 
 	saveBrain: function(brainState, trainingData, name) {

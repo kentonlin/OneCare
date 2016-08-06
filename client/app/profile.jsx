@@ -13,7 +13,6 @@ export default class Profile extends React.Component {
       modalIsOpen: false // or false
     };
     // this.makeDocs = this.makeDocs.bind(this);
-    this.compileScripts = this.compileScripts.bind(this);
     this.openModal = this.openModal.bind(this);
     this.closeModal = this.closeModal.bind(this);
     this.getScripts = this.getScripts.bind(this);
@@ -56,7 +55,7 @@ export default class Profile extends React.Component {
  }
 
 
-  componentDidMount() {
+  getScripts() {
     $.ajax({
      type: "POST",
      url: "/api/script/find",
@@ -101,7 +100,7 @@ export default class Profile extends React.Component {
              {
               this.state.scripts.map((script, idx) => {
                 return (
-                  <ul className="User-Scripts">
+                  <ul className="User-Scripts" key={idx}>
                   <div className="single-script">
                     <li> <span className="user-script"> Name: </span> {script.name} </li>
                     <li> <span className="user-script"> Dosage: </span> {script.dosage} </li>
