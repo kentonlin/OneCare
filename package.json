@@ -47,6 +47,7 @@
     "react-filtered-multiselect": "^0.4.2",
     "react-input-calendar": "^0.3.11",
     "react-kronos": "^1.4.1",
+    "react-modal": "^1.4.0",
     "react-router": "^2.6.1",
     "request": "^2.72.0",
     "synaptic": "^1.0.8",
