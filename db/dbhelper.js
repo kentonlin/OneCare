@@ -145,8 +145,6 @@ var dbFunc = {
 				next(new Error("username does not exist"));
 			}
 			else{ //if user found
-
-				console.log("*** this is the user", user);
 				user.comparePassword(reqUser.password, function(err, isMatch){
 					if(err) {
 						console.log("error occurred", err);
