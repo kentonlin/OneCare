@@ -28,9 +28,9 @@ class App extends React.Component {
       <Router history={browserHistory}>
         <Route path='/' component={Container}>
             <IndexRoute component={Signin} />
+            <Route path='/profile' onEnter={this.authCheck} component={Profile} />
             <Route path='/remind' onEnter={this.authCheck} component={ScriptRemindView} />
             <Route path= '/alldoctors' onEnter={this.authCheck} component={DoctorListView} />
-            <Route path='/profile' onEnter={this.authCheck} component={Profile} />
             <Route path='/newdoctor' onEnter={this.authCheck} component={DoctorEntryView} />
             <Route path='/recommend' onEnter={this.authCheck} component={SymptomEntry} />
             <Route path='/signin' component={Signin} />

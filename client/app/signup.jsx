@@ -39,7 +39,7 @@ export default class Signup extends React.Component {
           console.log('user signup successful! This is the data returned: ', data);
           window.localStorage.setItem("username", data.user.username);
           window.localStorage.setItem("token", data.token);
-          window.location = "/remind";
+          window.location = "/profile";
         },
         error: function(err){
           console.log('error in signup :', err);
