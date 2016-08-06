@@ -3,7 +3,7 @@ var bodyParser = require('body-parser');
 var dbHelpers = require('../db/dbhelper.js');
 var path = require('path');
 var app = express();
-// var brain = require('./brain.js');
+var brain = require('./brain.js');
 var twilio = require('twilio');
 
 app.use(express.static('public'));
@@ -79,7 +79,6 @@ app.post('/api/signup', function(req, res, next) {
 
 app.post('/api/signin', function(req, res, next) {
   var userSignin = req.body;
-  console.log('usersignin server', userSignin);
   dbHelpers.signin(userSignin, res, next);
 });
 
@@ -101,7 +100,7 @@ app.post('/api/symptomEntry/add', function(req, res) {
 
 app.post('/api/brain/recommend', function(req, res) {
   var symptoms = req.body;
-  // console.log("The brain shall now ponder: ", symptoms);
+  console.log("The brain shall now ponder: ", symptoms);
   var data = brain.OCBrain.activate(symptoms);
   console.log("The brain has decided to recommend: ", data);
   res.status(200).send(data);
