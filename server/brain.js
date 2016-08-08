@@ -226,7 +226,7 @@ var SYMPTOMS = [
   }
 
   var trainMyBrain = function(iter) {
-    if (trainingSet.length > 100) {
+    if (trainingSet.length > 50) {
       BrainTrain.train(trainingSet, {
         iterations: iter,
         log: 10
