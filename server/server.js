@@ -114,7 +114,7 @@ app.get('/api/brain/save', function(req, res) {
 app.post('/api/brain/add', function(req, res) {
   var pair = req.body.pair;
   res.send(brain.OCBrain.addTrainingPair(pair))
-  brain.OCBrain.train(3);
+  brain.OCBrain.train(1);
   brain.OCBrain.save("MainBrain");
 })
 
