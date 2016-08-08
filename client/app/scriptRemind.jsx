@@ -14,7 +14,7 @@ export default class ScriptRemindView extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      modalIsOpen: true, // or true
+      modalIsOpen: true,
       "currentDrug": "None",
       "dosageAmt": 0,
       "dosageMeasure": 'mg',
@@ -117,7 +117,6 @@ export default class ScriptRemindView extends React.Component {
   render() {
     return (
       <div>
-
         <div>
           <h1> Set a Prescription Reminder </h1>
           <h2> Current Drug: {this.state.currentDrug} </h2>
@@ -163,6 +162,7 @@ export default class ScriptRemindView extends React.Component {
           <Kronos time={this.state.reminderTime} value={''} placeholder={"Click to select a time"} onChangeDateTime={this.handleReminderTime}/>
         </div>
         <div>
+
           <button className= "remindBtn" onClick={this.submitForm}> Remind Me </button>
         </div>
       </div>

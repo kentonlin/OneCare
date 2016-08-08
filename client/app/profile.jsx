@@ -8,17 +8,41 @@ export default class Profile extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      // doctors: [],
+      doctors: [],
       scripts: [],
-      modalIsOpen: false // or false
+      modalIsOpen: false
     };
-    // this.makeDocs = this.makeDocs.bind(this);
     this.openModal = this.openModal.bind(this);
     this.closeModal = this.closeModal.bind(this);
     this.getScripts = this.getScripts.bind(this);
     this.deleteReminder= this.deleteReminder.bind(this);
+    // this.getDocs = this.getDocs.bind(this);
+    // this.deleteDoc = this.deleteDoc.bind(this);
   }
 
+
+  // deleteDoc(id){
+  //   console.log("docID", id);
+  //
+  //   $.ajax({
+  //    type: "POST",
+  //    url: "/api/doctor/delete",
+  //    dataType: 'json',
+  //    headers: {
+  //      "Content-Type": "application/json"
+  //    },
+  //    data: JSON.stringify({ "docID": id }),
+  //    success: function(data) {
+  //      console.log("Doctor deleted");
+  //      location.reload();
+  //    },
+  //    error: function(err) {
+  //      console.log('Doctor not deleted', err);
+  //      location.reload();
+  //    }
+  //  });
+  //
+  // }
 
   deleteReminder(index) {
     var id = this.state.scripts[index]._id;
@@ -75,8 +99,29 @@ export default class Profile extends React.Component {
 
   }
 
+  getDocs() {
+    $.ajax({
+      type: 'POST',
+      url: '/api/doctors/get',
+      headers: {
+        "content-type": "application/json"
+      },
+      data: JSON.stringify({"username": window.localStorage.username}),
+      success: function(docs) {
+        console.log("DOCTORS", docs);
+        this.setState({
+          doctors: docs
+        });
+      }.bind(this),
+      error: function(err) {
+        console.log('I can\'t pill you...not today', err);
+      }
+    });
+  }
+
   componentDidMount() {
     this.getScripts();
+    this.getDocs();
   }
 
   render() {
@@ -113,10 +158,26 @@ export default class Profile extends React.Component {
                   </div>
                  <button onClick={this.deleteReminder.bind(this, idx)} value={idx}>Delete</button>
                  </ul>
-               )
+               );
               }, this)
             }
           </div>
+
+          <h2> Your Doctors </h2>
+            {/* {
+              this.state.doctors.map((doctor, idx) => {
+                return (
+                  <div className="doctor-view-container" key={idx}>
+                  <div className="doctor-name">{doctor.name}</div>
+                  <div><span className="doctor-attribute">Phone: </span>{doctor.phone}</div>
+                  <div><span className="doctor-attribute">Email: </span>{doctor.email}</div>
+                  <div><span className="doctor-attribute">Address: </span>{doctor.address}</div>
+                  <div><span className="doctor-attribute">Specialty: </span>{doctor.specialty}</div>
+                  <button onClick={this.deleteDoc.bind(this, idx)}> Delete </button>
+                  </div>
+                );
+              }, this)
+            } */}
       </div>
     );
   }

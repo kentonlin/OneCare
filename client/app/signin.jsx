@@ -26,7 +26,7 @@ export default class Signin extends React.Component {
       "username": this.state.username,
       "password": this.state.password
     };
-
+    
     $.ajax({
       type: "POST",
       url: "/api/signin",
