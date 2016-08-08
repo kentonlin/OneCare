@@ -38248,7 +38248,7 @@
 	
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 	
-	var DOCTORS = [{ id: 1, name: 'Allergology' }, { id: 2, name: 'Andrology' }, { id: 3, name: 'Anesthesia' }, { id: 4, name: 'Angiology‎' }, { id: 5, name: 'Cardiology‎' }, { id: 6, name: 'Dentistry‎' }, { id: 7, name: 'Dermatology‎' }, { id: 8, name: 'Emergency medicine‎' }, { id: 9, name: 'Endocrinology‎' }, { id: 10, name: 'Family medicine‎' }, { id: 11, name: 'Gastroenterology‎' }, { id: 12, name: 'General practice‎' }, { id: 13, name: 'Geriatrics‎' }, { id: 14, name: 'Gynaecology‎' }, { id: 15, name: 'Hematology‎' }, { id: 16, name: 'Hepatology‎' }, { id: 17, name: 'Immunology‎' }, { id: 18, name: 'Internal medicine‎' }, { id: 19, name: 'Nephrology‎' }, { id: 20, name: 'Neurology‎' }, { id: 21, name: 'Obstetrics‎' }, { id: 22, name: 'Oncology‎' }, { id: 23, name: 'Ophthalmology‎' }, { id: 24, name: 'Ear, nose, and Throat' }, { id: 25, name: 'Palliative medicine‎' }, { id: 26, name: 'Pediatrics‎' }, { id: 27, name: 'Podiatry‎' }, { id: 28, name: 'Psychiatric' }, { id: 29, name: 'Pulmonology‎' }, { id: 30, name: 'Radiology‎' }, { id: 31, name: 'Rheumatology‎' }, { id: 32, name: 'Sleep medicine‎' }, { id: 33, name: 'Surgery‎' }, { id: 34, name: 'Toxicology‎' }, { id: 35, name: 'Urology‎' }];
+	var DOCTORS = [{ id: 1, name: 'Allergologist' }, { id: 2, name: 'Andrologist' }, { id: 3, name: 'Anesthesiologist' }, { id: 4, name: 'Angiologist‎' }, { id: 5, name: 'Cardiologist' }, { id: 6, name: 'Dentist' }, { id: 7, name: 'Dermatologist‎' }, { id: 8, name: 'Emergency Medicine‎ Specialist' }, { id: 9, name: 'Endocrinology‎' }, { id: 10, name: 'Family Medicine‎ Specialist' }, { id: 11, name: 'Gastroenterologist‎' }, { id: 12, name: 'General practitioner' }, { id: 13, name: 'Geriatrician' }, { id: 14, name: 'Gynaecologist' }, { id: 15, name: 'Hematologist' }, { id: 16, name: 'Hepatologyist' }, { id: 17, name: 'Immunologist‎' }, { id: 18, name: 'Internal Medical Specialist' }, { id: 19, name: 'Nephrologist‎' }, { id: 20, name: 'Neurologist' }, { id: 21, name: 'Obstetrician' }, { id: 22, name: 'Oncologist' }, { id: 23, name: 'Ophthalmologist' }, { id: 24, name: 'Ear, nose, and Throat Doctor' }, { id: 25, name: 'Palliative Medical Expert' }, { id: 26, name: 'Pediatrician‎' }, { id: 27, name: 'Podiatrist' }, { id: 28, name: 'Psychiatrist' }, { id: 29, name: 'Pulmonologist' }, { id: 30, name: 'Radiologist' }, { id: 31, name: 'Rheumatologist‎' }, { id: 32, name: 'Expert in Sleep Medicine‎' }, { id: 33, name: 'Surgeon‎' }, { id: 34, name: 'Toxicologist' }, { id: 35, name: 'Urologist' }];
 	
 	var DoctorEntryView = function (_React$Component) {
 	  _inherits(DoctorEntryView, _React$Component);
@@ -39151,6 +39151,31 @@
 	    var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(SymptomEntryView).call(this, props));
 	
 	    _this.state = {
+	      modalStyles: {
+	        overlay: {
+	          position: 'fixed',
+	          top: 0,
+	          left: 0,
+	          right: 0,
+	          bottom: 0,
+	          backgroundColor: 'rgba(255, 255, 255, 0.75)'
+	        },
+	        content: {
+	          position: 'absolute',
+	          top: '10%',
+	          left: '10%',
+	          right: '30%',
+	          bottom: '30%',
+	          border: '4px solid #ccc',
+	          background: '#fff',
+	          overflow: 'auto',
+	          WebkitOverflowScrolling: 'touch',
+	          borderRadius: '4px',
+	          outline: 'none',
+	          padding: '20px'
+	
+	        }
+	      },
 	      selectedSymptoms: [],
 	      recs: [],
 	      modalIsOpen: false
@@ -39236,7 +39261,7 @@
 	        _react2.default.createElement(
 	          'h2',
 	          null,
-	          'Choose your symptoms, weakling. They will appear at the bottom.'
+	          'Please select your symptoms from the list below.'
 	        ),
 	        _react2.default.createElement(
 	          'h4',
@@ -39279,7 +39304,8 @@
 	          _reactModal2.default,
 	          {
 	            isOpen: this.state.modalIsOpen,
-	            shouldCloseOnOverlayClick: false
+	            shouldCloseOnOverlayClick: false,
+	            style: this.state.modalStyles
 	          },
 	          _react2.default.createElement(_symptomEntryModal2.default, { symptoms: this.state.selectedSymptoms, recommendations: this.state.recs }),
 	          _react2.default.createElement(
@@ -41629,6 +41655,8 @@
 	
 	var _doctorView2 = _interopRequireDefault(_doctorView);
 	
+	var _reactRouter = __webpack_require__(/*! react-router */ 177);
+	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -41648,7 +41676,8 @@
 	    _this.state = {
 	      modalIsOpen: true,
 	      index: 2,
-	      currentRec: { id: 0, name: "Please wait.  Wey are determining your specialist." }
+	      currentRec: null,
+	      isInRolodex: false
 	    };
 	    _this.upvote = _this.upvote.bind(_this);
 	    _this.downvote = _this.downvote.bind(_this);
@@ -41660,13 +41689,18 @@
 	    value: function componentWillReceiveProps(nextProps) {
 	      if (nextProps.recommendations.length !== 0) {
 	        this.setState({ currentRec: nextProps.recommendations[nextProps.recommendations.length - 1] });
+	        if (nextProps.recommendations.specialty) {
+	          this.setState({ isInRolodex: true });
+	        } else {
+	          this.setState({ isInRolodex: false });
+	        }
 	      }
 	    }
 	  }, {
 	    key: 'upvote',
 	    value: function upvote() {
-	      console.log("upboated.");
-	      this.setState({ currentRec: { id: 0, name: "We're glad to be of service!" } });
+	      this.setState({ currentRec: null });
+	      this.setState({ isInRolodex: false });
 	      //training AJAX goes here!
 	      _jquery2.default.ajax({
 	        type: "POST",
@@ -41686,10 +41720,15 @@
 	  }, {
 	    key: 'downvote',
 	    value: function downvote() {
-	      console.log("downboated.");
 	      this.setState({ index: this.state.index + 1 });
 	      if (this.state.index < this.props.recommendations.length) {
-	        this.setState({ currentRec: this.props.recommendations[this.props.recommendations.length - this.state.index] });
+	        var rec = this.props.recommendations[this.props.recommendations.length - this.state.index];
+	        this.setState({ currentRec: rec });
+	        if (rec.specialty) {
+	          this.setState({ isInRolodex: true });
+	        } else {
+	          this.setState({ isInRolodex: false });
+	        }
 	      } else {
 	        this.setState({ currentRec: { id: 0, name: "We're sorry, but we have no more recommendations to give you!" } });
 	      }
@@ -41725,15 +41764,56 @@
 	          null,
 	          'We recommend:'
 	        ),
-	        _react2.default.createElement(_doctorView2.default, { name: this.state.currentRec.name, phone: this.state.currentRec.phone, email: this.state.currentRec.email, address: this.state.currentRec.address, specialty: this.state.currentRec.specialty }),
+	        _react2.default.createElement(
+	          'div',
+	          { className: !this.state.currentRec ? '' : 'hidden' },
+	          _react2.default.createElement('img', { src: './assets/spinner.gif' })
+	        ),
+	        _react2.default.createElement(
+	          'div',
+	          { className: this.state.isInRolodex ? '' : 'hidden' },
+	          _react2.default.createElement(_doctorView2.default, {
+	            name: this.state.currentRec ? this.state.currentRec.name : '',
+	            phone: this.state.currentRec ? this.state.currentRec.phone : '',
+	            email: this.state.currentRec ? this.state.currentRec.email : '',
+	            address: this.state.currentRec ? this.state.currentRec.address : '',
+	            specialty: this.state.currentRec ? this.state.currentRec.specialty : '' })
+	        ),
+	        _react2.default.createElement(
+	          'div',
+	          { className: this.state.currentRec && !this.state.isInRolodex ? '' : 'hidden' },
+	          _react2.default.createElement(
+	            'h3',
+	            null,
+	            'Oops...'
+	          ),
+	          _react2.default.createElement(
+	            'div',
+	            null,
+	            'We were about to recommend your ',
+	            _react2.default.createElement(
+	              'strong',
+	              null,
+	              this.state.currentRec ? this.state.currentRec.name : '**empty**'
+	            ),
+	            ', but it appears you do not have one listed.  ',
+	            _react2.default.createElement(
+	              _reactRouter.Link,
+	              { to: '/newdoctor' },
+	              'Click here to register a new ',
+	              this.state.currentRec ? this.state.currentRec.name : '**empty**',
+	              '!'
+	            )
+	          )
+	        ),
 	        _react2.default.createElement(
 	          'button',
-	          { className: (this.state.currentRec.id === 0 ? 'hidden' : '') + ' modal-button', onClick: this.upvote },
+	          { className: (!this.state.currentRec ? 'hidden' : '') + ' modal-button', onClick: this.upvote },
 	          'Thanks!'
 	        ),
 	        _react2.default.createElement(
 	          'button',
-	          { className: (this.state.currentRec.id === 0 ? 'hidden' : '') + ' modal-button', onClick: this.downvote },
+	          { className: (!this.state.currentRec ? 'hidden' : '') + ' modal-button', onClick: this.downvote },
 	          'Sorry, try again.'
 	        )
 	      );

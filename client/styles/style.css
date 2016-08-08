@@ -257,7 +257,8 @@ body {
 }
 
 .modal-button {
-  left: 200px;
+  float: right;
+  display: inline-block;
 }
 
 .hidden { display:none; }
