@@ -6,6 +6,8 @@ import Modal from 'react-modal';
 import SymptomEntryModal from './symptomEntryModal.jsx';
 
 
+
+
  var SYMPTOMS = [
   {id: 1, name: 'Dizziness'},
   {id: 2, name: 'Faintness'},
@@ -469,6 +471,31 @@ export default class SymptomEntryView extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      modalStyles: {
+        overlay : {
+          position          : 'fixed',
+          top               : 0,
+          left              : 0,
+          right             : 0,
+          bottom            : 0,
+          backgroundColor   : 'rgba(255, 255, 255, 0.75)'
+        },
+        content : {
+          position                   : 'absolute',
+          top                        : '10%',
+          left                       : '10%',
+          right                      : '30%',
+          bottom                     : '30%',
+          border                     : '4px solid #ccc',
+          background                 : '#fff',
+          overflow                   : 'auto',
+          WebkitOverflowScrolling    : 'touch',
+          borderRadius               : '4px',
+          outline                    : 'none',
+          padding                    : '20px'
+
+        }
+      },
       selectedSymptoms: [],
       recs: [],
       modalIsOpen: false
@@ -537,7 +564,7 @@ export default class SymptomEntryView extends Component {
     return (
       <div>
       <Navigate />
-        <h2>Choose your symptoms, weakling. They will appear at the bottom.</h2>
+        <h2>Please select your symptoms from the list below.</h2>
         <h4>Energy Level and Sleep</h4>
         <FilteredMultiSelect className="symptom-select"
           onChange={this.handleSelectionChange}
@@ -558,6 +585,7 @@ export default class SymptomEntryView extends Component {
         <Modal
           isOpen={this.state.modalIsOpen}
           shouldCloseOnOverlayClick={false}
+          style={this.state.modalStyles}
         > 
           <SymptomEntryModal symptoms={this.state.selectedSymptoms} recommendations={this.state.recs} />
           <button onClick={this.exitModal}>Exit</button>
