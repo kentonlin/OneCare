@@ -39151,6 +39151,31 @@
 	    var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(SymptomEntryView).call(this, props));
 	
 	    _this.state = {
+	      modalStyles: {
+	        overlay: {
+	          position: 'fixed',
+	          top: 0,
+	          left: 0,
+	          right: 0,
+	          bottom: 0,
+	          backgroundColor: 'rgba(255, 255, 255, 0.75)'
+	        },
+	        content: {
+	          position: 'absolute',
+	          top: '10%',
+	          left: '10%',
+	          right: '30%',
+	          bottom: '30%',
+	          border: '4px solid #ccc',
+	          background: '#fff',
+	          overflow: 'auto',
+	          WebkitOverflowScrolling: 'touch',
+	          borderRadius: '4px',
+	          outline: 'none',
+	          padding: '20px'
+	
+	        }
+	      },
 	      selectedSymptoms: [],
 	      recs: [],
 	      modalIsOpen: false
@@ -39236,7 +39261,7 @@
 	        _react2.default.createElement(
 	          'h2',
 	          null,
-	          'Choose your symptoms, weakling. They will appear at the bottom.'
+	          'Please select your symptoms from the list below.'
 	        ),
 	        _react2.default.createElement(
 	          'h4',
@@ -39279,7 +39304,8 @@
 	          _reactModal2.default,
 	          {
 	            isOpen: this.state.modalIsOpen,
-	            shouldCloseOnOverlayClick: false
+	            shouldCloseOnOverlayClick: false,
+	            style: this.state.modalStyles
 	          },
 	          _react2.default.createElement(_symptomEntryModal2.default, { symptoms: this.state.selectedSymptoms, recommendations: this.state.recs }),
 	          _react2.default.createElement(
@@ -41629,6 +41655,8 @@
 	
 	var _doctorView2 = _interopRequireDefault(_doctorView);
 	
+	var _reactRouter = __webpack_require__(/*! react-router */ 177);
+	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -41648,7 +41676,8 @@
 	    _this.state = {
 	      modalIsOpen: true,
 	      index: 2,
-	      currentRec: { id: 0, name: "Please wait.  Wey are determining your specialist." }
+	      currentRec: null,
+	      isInRolodex: false
 	    };
 	    _this.upvote = _this.upvote.bind(_this);
 	    _this.downvote = _this.downvote.bind(_this);
@@ -41660,13 +41689,18 @@
 	    value: function componentWillReceiveProps(nextProps) {
 	      if (nextProps.recommendations.length !== 0) {
 	        this.setState({ currentRec: nextProps.recommendations[nextProps.recommendations.length - 1] });
+	        if (nextProps.recommendations.specialty) {
+	          this.setState({ isInRolodex: true });
+	        } else {
+	          this.setState({ isInRolodex: false });
+	        }
 	      }
 	    }
 	  }, {
 	    key: 'upvote',
 	    value: function upvote() {
-	      console.log("upboated.");
-	      this.setState({ currentRec: { id: 0, name: "We're glad to be of service!" } });
+	      this.setState({ currentRec: null });
+	      this.setState({ isInRolodex: false });
 	      //training AJAX goes here!
 	      _jquery2.default.ajax({
 	        type: "POST",
@@ -41686,10 +41720,15 @@
 	  }, {
 	    key: 'downvote',
 	    value: function downvote() {
-	      console.log("downboated.");
 	      this.setState({ index: this.state.index + 1 });
 	      if (this.state.index < this.props.recommendations.length) {
-	        this.setState({ currentRec: this.props.recommendations[this.props.recommendations.length - this.state.index] });
+	        var rec = this.props.recommendations[this.props.recommendations.length - this.state.index];
+	        this.setState({ currentRec: rec });
+	        if (rec.specialty) {
+	          this.setState({ isInRolodex: true });
+	        } else {
+	          this.setState({ isInRolodex: false });
+	        }
 	      } else {
 	        this.setState({ currentRec: { id: 0, name: "We're sorry, but we have no more recommendations to give you!" } });
 	      }
@@ -41725,15 +41764,56 @@
 	          null,
 	          'We recommend:'
 	        ),
-	        _react2.default.createElement(_doctorView2.default, { name: this.state.currentRec.name, phone: this.state.currentRec.phone, email: this.state.currentRec.email, address: this.state.currentRec.address, specialty: this.state.currentRec.specialty }),
+	        _react2.default.createElement(
+	          'div',
+	          { className: !this.state.currentRec ? '' : 'hidden' },
+	          _react2.default.createElement('img', { src: './assets/spinner.gif' })
+	        ),
+	        _react2.default.createElement(
+	          'div',
+	          { className: this.state.isInRolodex ? '' : 'hidden' },
+	          _react2.default.createElement(_doctorView2.default, {
+	            name: this.state.currentRec ? this.state.currentRec.name : '',
+	            phone: this.state.currentRec ? this.state.currentRec.phone : '',
+	            email: this.state.currentRec ? this.state.currentRec.email : '',
+	            address: this.state.currentRec ? this.state.currentRec.address : '',
+	            specialty: this.state.currentRec ? this.state.currentRec.specialty : '' })
+	        ),
+	        _react2.default.createElement(
+	          'div',
+	          { className: this.state.currentRec && !this.state.isInRolodex ? '' : 'hidden' },
+	          _react2.default.createElement(
+	            'h3',
+	            null,
+	            'Oops...'
+	          ),
+	          _react2.default.createElement(
+	            'div',
+	            null,
+	            'We were about to recommend your ',
+	            _react2.default.createElement(
+	              'strong',
+	              null,
+	              this.state.currentRec ? this.state.currentRec.name : '**empty**'
+	            ),
+	            ', but it appears you do not have one listed.  ',
+	            _react2.default.createElement(
+	              _reactRouter.Link,
+	              { to: '/newdoctor' },
+	              'Click here to register a new ',
+	              this.state.currentRec ? this.state.currentRec.name : '**empty**',
+	              '!'
+	            )
+	          )
+	        ),
 	        _react2.default.createElement(
 	          'button',
-	          { className: (this.state.currentRec.id === 0 ? 'hidden' : '') + ' modal-button', onClick: this.upvote },
+	          { className: (!this.state.currentRec ? 'hidden' : '') + ' modal-button', onClick: this.upvote },
 	          'Thanks!'
 	        ),
 	        _react2.default.createElement(
 	          'button',
-	          { className: (this.state.currentRec.id === 0 ? 'hidden' : '') + ' modal-button', onClick: this.downvote },
+	          { className: (!this.state.currentRec ? 'hidden' : '') + ' modal-button', onClick: this.downvote },
 	          'Sorry, try again.'
 	        )
 	      );

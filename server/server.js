@@ -14,6 +14,7 @@ app.use("/node_modules",express.static(__dirname + "/../node_modules"));
 app.use("/styles", express.static(rootPath + "/styles"));
 app.use("/public", express.static(rootPath + '/public'));
 app.use("/server", express.static(__dirname + "/../server"));
+app.use("/assets", express.static(__dirname + "/../client/assets"));
 app.use(bodyParser.json());
 app.use(function(req, res, next) {
   res.header("Access-Control-Allow-Origin", "*");

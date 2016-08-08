@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import Modal from 'react-modal';
 import $ from 'jquery';
 import DoctorView from './doctorView.jsx';
+import { Link } from 'react-router';
 
 
 export default class SymptomEntryModal extends React.Component {
@@ -11,7 +12,8 @@ export default class SymptomEntryModal extends React.Component {
     this.state = {
       modalIsOpen: true,
       index: 2,
-      currentRec: {id: 0, name: "Please wait.  Wey are determining your specialist."}
+      currentRec: null,
+      isInRolodex: false
     };
     this.upvote = this.upvote.bind(this);
     this.downvote = this.downvote.bind(this);
@@ -20,12 +22,17 @@ export default class SymptomEntryModal extends React.Component {
   componentWillReceiveProps(nextProps) {
     if (nextProps.recommendations.length !== 0) {
       this.setState({currentRec: nextProps.recommendations[nextProps.recommendations.length-1]});
+      if(nextProps.recommendations.specialty) {
+        this.setState({isInRolodex: true});
+      } else {
+        this.setState({isInRolodex: false});
+      }
     }
   }
 
   upvote() {
-    console.log("upboated.");
-    this.setState({currentRec: {id: 0, name: "We're glad to be of service!"}});
+    this.setState({currentRec: null});
+    this.setState({isInRolodex: false});
     //training AJAX goes here!
     $.ajax({
         type: "POST",
@@ -44,10 +51,15 @@ export default class SymptomEntryModal extends React.Component {
   }
 
   downvote() {
-    console.log("downboated.");
     this.setState({index: this.state.index+1})
     if (this.state.index < this.props.recommendations.length) {
-      this.setState({currentRec: this.props.recommendations[this.props.recommendations.length - this.state.index]});
+      var rec = this.props.recommendations[this.props.recommendations.length - this.state.index]
+      this.setState({currentRec: rec});
+      if(rec.specialty) {
+        this.setState({isInRolodex: true});
+      } else {
+        this.setState({isInRolodex: false});
+      }
     } else {
       this.setState({currentRec: {id: 0, name: "We're sorry, but we have no more recommendations to give you!"}});
     }
@@ -69,12 +81,21 @@ export default class SymptomEntryModal extends React.Component {
             }
           </div>
           <h4>We recommend:</h4>
-            {
-              <DoctorView name={this.state.currentRec.name} phone={this.state.currentRec.phone} email={this.state.currentRec.email} address={this.state.currentRec.address} specialty={this.state.currentRec.specialty} />
-            }
-
-          <button className={(this.state.currentRec.id === 0 ? 'hidden' : '')+' modal-button'} onClick={this.upvote}>Thanks!</button>
-          <button className={(this.state.currentRec.id === 0 ? 'hidden' : '')+' modal-button'} onClick={this.downvote}>Sorry, try again.</button>
+            <div className={!this.state.currentRec ? '' : 'hidden'}><img src="./assets/spinner.gif"></img></div> 
+            <div className={this.state.isInRolodex ? '' : 'hidden'}>
+              <DoctorView
+                name={this.state.currentRec ? this.state.currentRec.name : ''} 
+                phone={this.state.currentRec ? this.state.currentRec.phone : ''} 
+                email={this.state.currentRec ? this.state.currentRec.email : ''} 
+                address={this.state.currentRec ? this.state.currentRec.address : ''} 
+                specialty={this.state.currentRec ? this.state.currentRec.specialty : ''} />
+            </div>
+            <div className={this.state.currentRec && !this.state.isInRolodex ? '' : 'hidden'}>
+              <h3>Oops...</h3>
+              <div>We were about to recommend your <strong>{this.state.currentRec ? this.state.currentRec.name : '**empty**'}</strong>, but it appears you do not have one listed.  <Link to='/newdoctor'>Click here to register a new {this.state.currentRec ? this.state.currentRec.name : '**empty**'}!</Link></div>
+            </div>
+          <button className={(!this.state.currentRec ? 'hidden' : '')+' modal-button'} onClick={this.upvote}>Thanks!</button>
+          <button className={(!this.state.currentRec ? 'hidden' : '')+' modal-button'} onClick={this.downvote}>Sorry, try again.</button>
         </div>
       )
   }
