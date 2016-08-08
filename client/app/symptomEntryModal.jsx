@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import Modal from 'react-modal';
 import $ from 'jquery';
+import DoctorView from './doctorView.jsx';
 
 
 export default class SymptomEntryModal extends React.Component {
@@ -10,7 +11,7 @@ export default class SymptomEntryModal extends React.Component {
     this.state = {
       modalIsOpen: true,
       index: 2,
-      currentRec: {id: 0, name: "Please wait.  We are determining your specialist."}
+      currentRec: {id: 0, name: "Please wait.  Wey are determining your specialist."}
     };
     this.upvote = this.upvote.bind(this);
     this.downvote = this.downvote.bind(this);
@@ -69,7 +70,7 @@ export default class SymptomEntryModal extends React.Component {
           </div>
           <h4>We recommend:</h4>
             {
-              this.state.currentRec.name
+              <DoctorView name={this.state.currentRec.name} phone={this.state.currentRec.phone} email={this.state.currentRec.email} address={this.state.currentRec.address} specialty={this.state.currentRec.specialty} />
             }
 
           <button className={(this.state.currentRec.id === 0 ? 'hidden' : '')+' modal-button'} onClick={this.upvote}>Thanks!</button>
