@@ -503,6 +503,7 @@ export default class SymptomEntryView extends Component {
   };
 
   handleRecData(recData) {
+    console.log(recData)
     this.setState( {recs: recData})
   }
 
@@ -520,7 +521,9 @@ export default class SymptomEntryView extends Component {
       headers: {
         'Content-Type': 'application/json'
       },
-      data: JSON.stringify(this.state.selectedSymptoms),
+      data: JSON.stringify({
+        username: window.localStorage.getItem("username"),
+        symptoms: this.state.selectedSymptoms}),
       success: this.handleRecData,
       error: function(err) {
         console.log('Congrats you are superhuman', err);
