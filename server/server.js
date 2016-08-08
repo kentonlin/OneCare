@@ -99,11 +99,13 @@ app.post('/api/symptomEntry/add', function(req, res) {
 });
 
 app.post('/api/brain/recommend', function(req, res) {
-  var symptoms = req.body;
+  var username = req.body.username
+  var symptoms = req.body.symptoms;
   console.log("The brain shall now ponder: ", symptoms);
   var data = brain.OCBrain.activate(symptoms);
   console.log("The brain has decided to recommend: ", data);
-  res.status(200).send(data);
+  //query db for user docs.
+  brain.OCBrain.doctors(username, data, function(list) {res.status(200).send(list)});
 });
 
 app.get('/api/brain/save', function(req, res) {
@@ -114,7 +116,7 @@ app.get('/api/brain/save', function(req, res) {
 app.post('/api/brain/add', function(req, res) {
   var pair = req.body.pair;
   res.send(brain.OCBrain.addTrainingPair(pair))
-  brain.OCBrain.train(3);
+  brain.OCBrain.train(1);
   brain.OCBrain.save("MainBrain");
 })
 

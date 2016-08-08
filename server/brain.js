@@ -208,14 +208,7 @@ var SYMPTOMS = [
 
   var interpretOutput = function(output) {
     return output.map(function(bit, index) {
-      if (bit > ACTIVATION_SPLIT) {
         return [bit, DOCTORS[index]];
-      } else {return bit;}
-    })
-    .filter(function(bit) {
-      if (bit <= ACTIVATION_SPLIT) {
-        return false;
-      } else {return true;}
     })
     .sort(function(a, b) {
       return a[0]-b[0];
@@ -226,7 +219,7 @@ var SYMPTOMS = [
   }
 
   var trainMyBrain = function(iter) {
-    if (trainingSet.length > 100) {
+    if (trainingSet.length > 50) {
       BrainTrain.train(trainingSet, {
         iterations: iter,
         log: 10
@@ -263,6 +256,26 @@ var SYMPTOMS = [
     saveBrain("MainBrain");
   }
 
+  var sortDocs = function(username, specialties, next) {
+    var finalList = [];
+    Model.user.findOne({"username": username}).populate('doctors').exec(function(err, user){
+      specialties.forEach(function(specialty) {
+        var found = false;
+        user.doctors.forEach(function(doctor) {
+          if (specialty.name === doctor.specialty) {
+            finalList.push(doctor);
+            found = true;
+          }
+        })
+        if (!found) {
+          finalList.push(specialty);
+        }
+      })
+      console.log("sorting docs: ", finalList);
+      next(finalList);
+    });
+  }
+
   return {
     network: OneCareNeural,
     trainer: BrainTrain,
@@ -270,7 +283,8 @@ var SYMPTOMS = [
     train: trainMyBrain, 
     activate: activateMyBrain,
     save: saveBrain,
-    delete: resetBrain
+    delete: resetBrain,
+    doctors: sortDocs
   }
 };
 

@@ -39192,6 +39192,7 @@
 	  }, {
 	    key: 'handleRecData',
 	    value: function handleRecData(recData) {
+	      console.log(recData);
 	      this.setState({ recs: recData });
 	    }
 	  }, {
@@ -39211,7 +39212,9 @@
 	        headers: {
 	          'Content-Type': 'application/json'
 	        },
-	        data: JSON.stringify(this.state.selectedSymptoms),
+	        data: JSON.stringify({
+	          username: window.localStorage.getItem("username"),
+	          symptoms: this.state.selectedSymptoms }),
 	        success: this.handleRecData,
 	        error: function error(err) {
 	          console.log('Congrats you are superhuman', err);
@@ -41622,6 +41625,10 @@
 	
 	var _jquery2 = _interopRequireDefault(_jquery);
 	
+	var _doctorView = __webpack_require__(/*! ./doctorView.jsx */ 245);
+	
+	var _doctorView2 = _interopRequireDefault(_doctorView);
+	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -41641,7 +41648,7 @@
 	    _this.state = {
 	      modalIsOpen: true,
 	      index: 2,
-	      currentRec: { id: 0, name: "Please wait.  We are determining your specialist." }
+	      currentRec: { id: 0, name: "Please wait.  Wey are determining your specialist." }
 	    };
 	    _this.upvote = _this.upvote.bind(_this);
 	    _this.downvote = _this.downvote.bind(_this);
@@ -41718,7 +41725,7 @@
 	          null,
 	          'We recommend:'
 	        ),
-	        this.state.currentRec.name,
+	        _react2.default.createElement(_doctorView2.default, { name: this.state.currentRec.name, phone: this.state.currentRec.phone, email: this.state.currentRec.email, address: this.state.currentRec.address, specialty: this.state.currentRec.specialty }),
 	        _react2.default.createElement(
 	          'button',
 	          { className: (this.state.currentRec.id === 0 ? 'hidden' : '') + ' modal-button', onClick: this.upvote },
