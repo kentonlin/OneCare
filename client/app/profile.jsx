@@ -168,8 +168,7 @@ export default class Profile extends React.Component {
       </Modal>
 
 
-
-      <h2> Profile {window.localStorage.username} </h2>
+      <h2> Prescriptions </h2>
 
              {
               this.state.scripts.map((script, idx) => {
@@ -178,12 +177,8 @@ export default class Profile extends React.Component {
                   <div className="single-script">
                     <li> <span className="user-script"> Name: </span> {script.name} </li>
                     <li> <span className="user-script"> Dosage: </span> {script.dosage} </li>
-                    <li> <span className="user-script"> Frequency </span> {script.frequency} </li>
-                    <li> <span className="user-script"> Recurring </span> {script.recur} </li>
-                    <li> <span className="user-script"> Refill Date </span> {script.refill} </li>
-                    <li> <span className="user-script"> Refill Reminder </span> {script.refillRemind} </li>
-                    <li> <span className="user-script"> Refill Reminder </span> {script.dailyRemind} </li>
-                    <li> <span className="user-script"> Phone: </span> {script.phone} </li>
+                    <li> <span className="user-script"> Frequency: </span> {script.frequency} </li>
+                    <li> <span className="user-script"> Refill Date: </span> {script.refill} </li>
                   </div>
                  <button onClick={this.deleteReminder.bind(this, idx)} >Delete</button>
                  </ul>

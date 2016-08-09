@@ -21,7 +21,9 @@ export default class ScriptRemindView extends React.Component {
       "date": date,
       "reminderTime": null,
       "scheduleFreq": "1x",
-      "scheduleDayWeek": "day"
+      "scheduleDayWeek": "day",
+      "invalidName": false,
+      "invalidReminderTime": false
     };
   var date = new Date();
   this.updateDrugName = this.updateDrugName.bind(this);
@@ -37,11 +39,13 @@ export default class ScriptRemindView extends React.Component {
 
     updateDrugName(event){
       this.setState({
-          currentDrug: event.target.value
+          currentDrug: event.target.value,
+          invalidName: true
         });
     }
 
     handleRefillDate(date) {
+      console.log("actual date format", date);
       console.log("selected date", date);
       this.setState({
         "date": date
@@ -78,40 +82,55 @@ export default class ScriptRemindView extends React.Component {
     }
 
     handleReminderTime(time){
+      console.log("actual time format", time);
       console.log("handleReminderTime called with", moment(time).format('LT'));
       this.setState({
-        "reminderTime": moment(time).format('LT')
+        "reminderTime": moment(time).format('LT'),
+        "invalidReminderTime": true
       });
     }
 
     submitForm () {
-      var script = {
-        "name": this.state.currentDrug,
-        "dosage": this.state.dosageAmt + ' ' + this.state.dosageMeasure,
-        "refill": this.state.date,
-        "frequency": this.state.scheduleFreq + ' per ' + this.state.scheduleDayWeek,
-        "reminderTime": this.state.reminderTime,
-        "username": window.localStorage.username
-      };
-      console.log("submitForm called for: ", script);
 
-      $.ajax({
-          type: 'POST',
-          url: '/api/reminder/add',
-          dataType: 'json',
-          headers: {
-            'Content-Type': 'application/json'
-          },
-          data: JSON.stringify(script),
-          success: function(data){
-            alert("Your prescription was saved.");
-            console.log('A reminder was set for: ', data);
-          },
-          error: function(err){
-            console.log('Reminder not set: ', err);
-          }
-        });
+      if(!this.state.invalidName && !this.state.invalidReminderTime){
+        alert("Please enter a prescription name and reminder time")
+      }
+      else if(!this.state.invalidName){
+        alert("Please enter a prescription name");
+      }
+      else if(!this.state.invalidReminderTime){
+        alert("Please enter a reminder time");
+      }
+      else {
+        var script = {
+          "name": this.state.currentDrug,
+          "dosage": this.state.dosageAmt + ' ' + this.state.dosageMeasure,
+          "refill": this.state.date,
+          "frequency": this.state.scheduleFreq + ' per ' + this.state.scheduleDayWeek,
+          "reminderTime": this.state.reminderTime,
+          "username": window.localStorage.username
+        };
+        console.log("submitForm called for: ", script);
 
+
+        $.ajax({
+            type: 'POST',
+            url: '/api/reminder/add',
+            dataType: 'json',
+            headers: {
+              'Content-Type': 'application/json'
+            },
+            data: JSON.stringify(script),
+            success: function(data){
+              alert("Your prescription was saved.");
+              console.log('A reminder was set for: ', data);
+            },
+            error: function(err){
+              alert("Your prescription was saved.");
+              console.log('Reminder not set: ', err);
+            }
+          });
+      }
     }
 
   render() {
@@ -124,6 +143,7 @@ export default class ScriptRemindView extends React.Component {
           onChange={this.updateDrugName}
           placeholder='Name'
           />
+          <h8 className='required'> (required) </h8>
         </div>
         <div>
           <input
@@ -160,10 +180,12 @@ export default class ScriptRemindView extends React.Component {
         <div>
           <h2> Reminder Time </h2>
           <Kronos time={this.state.reminderTime} value={''} placeholder={"Click to select a time"} onChangeDateTime={this.handleReminderTime}/>
+          <h8 className='required'> (required) </h8>
         </div>
         <div>
 
           <button className= "remindBtn" onClick={this.submitForm}> Remind Me </button>
+
         </div>
 
       </div>
