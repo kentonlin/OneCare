@@ -587,8 +587,8 @@ export default class SymptomEntryView extends Component {
           shouldCloseOnOverlayClick={false}
           style={this.state.modalStyles}
         > 
-          <SymptomEntryModal symptoms={this.state.selectedSymptoms} recommendations={this.state.recs} />
           <button onClick={this.exitModal}>Exit</button>
+          <SymptomEntryModal symptoms={this.state.selectedSymptoms} recommendations={this.state.recs} />
         </Modal>
       </div>
     );
