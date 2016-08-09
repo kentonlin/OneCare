@@ -38240,6 +38240,10 @@
 	
 	var _doctorListView2 = _interopRequireDefault(_doctorListView);
 	
+	var _reactModal = __webpack_require__(/*! react-modal */ 248);
+	
+	var _reactModal2 = _interopRequireDefault(_reactModal);
+	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -38259,6 +38263,7 @@
 	    var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(DoctorEntryView).call(this, props));
 	
 	    _this.state = {
+	      modalIsOpen: true,
 	      name: "",
 	      phone: "",
 	      email: "",
@@ -38454,15 +38459,6 @@
 	            _reactRouter.Link,
 	            { to: '/profile' },
 	            ' Profile '
-	          )
-	        ),
-	        _react2.default.createElement(
-	          'div',
-	          { className: 'navbar-button navbar-enter-doctors' },
-	          _react2.default.createElement(
-	            _reactRouter.Link,
-	            { to: '/newdoctor' },
-	            ' Enter New Doctor '
 	          )
 	        ),
 	        _react2.default.createElement(
@@ -41895,7 +41891,7 @@
 	    var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(ScriptRemindView).call(this, props));
 	
 	    _this.state = {
-	      modalIsOpen: true, // or true
+	      modalIsOpen: true,
 	      "currentDrug": "None",
 	      "dosageAmt": 0,
 	      "dosageMeasure": 'mg',
@@ -69529,6 +69525,10 @@
 	
 	var _reactModal2 = _interopRequireDefault(_reactModal);
 	
+	var _doctorEntryView = __webpack_require__(/*! ./doctorEntryView.jsx */ 242);
+	
+	var _doctorEntryView2 = _interopRequireDefault(_doctorEntryView);
+	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -69546,19 +69546,46 @@
 	    var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(Profile).call(this, props));
 	
 	    _this.state = {
-	      // doctors: [],
+	      doctors: [],
 	      scripts: [],
-	      modalIsOpen: false // or false
+	      scriptmodalIsOpen: false,
+	      docmodalIsOpen: false
 	    };
-	    // this.makeDocs = this.makeDocs.bind(this);
-	    _this.openModal = _this.openModal.bind(_this);
-	    _this.closeModal = _this.closeModal.bind(_this);
+	    _this.openModalScript = _this.openModalScript.bind(_this);
+	    _this.closeModalScript = _this.closeModalScript.bind(_this);
+	    _this.openModalDoctor = _this.openModalDoctor.bind(_this);
+	    _this.closeModalDoctor = _this.closeModalDoctor.bind(_this);
 	    _this.getScripts = _this.getScripts.bind(_this);
 	    _this.deleteReminder = _this.deleteReminder.bind(_this);
+	    _this.getDocs = _this.getDocs.bind(_this);
+	    _this.deleteDoc = _this.deleteDoc.bind(_this);
 	    return _this;
 	  }
 	
 	  _createClass(Profile, [{
+	    key: 'deleteDoc',
+	    value: function deleteDoc(id) {
+	      console.log("docID", id);
+	
+	      _jquery2.default.ajax({
+	        type: "POST",
+	        url: "/api/doctor/delete",
+	        dataType: 'json',
+	        headers: {
+	          "Content-Type": "application/json"
+	        },
+	        data: JSON.stringify({ "docID": id }),
+	        success: function success(data) {
+	          console.log("Doctor deleted");
+	          location.reload();
+	        },
+	        error: function error(err) {
+	          console.log('Doctor not deleted', err);
+	          location.reload();
+	        }
+	      });
+	    }
+	  }, {
 	    key: 'deleteReminder',
 	    value: function deleteReminder(index) {
 	      var id = this.state.scripts[index]._id;
@@ -69582,17 +69609,31 @@
 	      });
 	    }
 	  }, {
-	    key: 'openModal',
-	    value: function openModal() {
+	    key: 'openModalScript',
+	    value: function openModalScript() {
 	      this.setState({
-	        modalIsOpen: true
+	        scriptmodalIsOpen: true
 	      });
 	    }
 	  }, {
-	    key: 'closeModal',
-	    value: function closeModal() {
+	    key: 'openModalDoctor',
+	    value: function openModalDoctor() {
 	      this.setState({
-	        modalIsOpen: false
+	        docmodalIsOpen: true
+	      });
+	    }
+	  }, {
+	    key: 'closeModalScript',
+	    value: function closeModalScript() {
+	      this.setState({
+	        scriptmodalIsOpen: false
+	      });
+	    }
+	  }, {
+	    key: 'closeModalDoctor',
+	    value: function closeModalDoctor() {
+	      this.setState({
+	        docmodalIsOpen: false
 	      });
 	    }
 	  }, {
@@ -69616,9 +69657,31 @@
 	      });
 	    }
 	  }, {
+	    key: 'getDocs',
+	    value: function getDocs() {
+	      _jquery2.default.ajax({
+	        type: 'POST',
+	        url: '/api/doctors/get',
+	        headers: {
+	          "content-type": "application/json"
+	        },
+	        data: JSON.stringify({ "username": window.localStorage.username }),
+	        success: function (docs) {
+	          console.log("DOCTORS", docs);
+	          this.setState({
+	            doctors: docs
+	          });
+	        }.bind(this),
+	        error: function error(err) {
+	          console.log('I can\'t pill you...not today', err);
+	        }
+	      });
+	    }
+	  }, {
 	    key: 'componentDidMount',
 	    value: function componentDidMount() {
 	      this.getScripts();
+	      this.getDocs();
 	    }
 	  }, {
 	    key: 'render',
@@ -69639,19 +69702,39 @@
 	          { className: 'allScripts' },
 	          _react2.default.createElement(
 	            'button',
-	            { onClick: this.openModal },
+	            { onClick: this.openModalScript },
 	            ' Enter New Prescription '
+	          ),
+	          _react2.default.createElement(
+	            'button',
+	            { onClick: this.openModalDoctor },
+	            ' Enter New Doctor '
 	          ),
 	          _react2.default.createElement(
 	            _reactModal2.default,
 	            {
-	              isOpen: this.state.modalIsOpen,
+	              isOpen: this.state.scriptmodalIsOpen,
 	              shouldCloseOnOverlayClick: false
+	              // onRequestClose={this.closeModalScript}
 	            },
 	            _react2.default.createElement(_scriptRemind2.default, null),
 	            _react2.default.createElement(
 	              'button',
-	              { onClick: this.closeModal },
+	              { onClick: this.closeModalScript },
+	              'Exit'
+	            )
+	          ),
+	          _react2.default.createElement(
+	            _reactModal2.default,
+	            {
+	              isOpen: this.state.docmodalIsOpen,
+	              shouldCloseOnOverlayClick: false
+	              // onRequestClose={this.closeModalDoctor}
+	            },
+	            _react2.default.createElement(_doctorEntryView2.default, null),
+	            _react2.default.createElement(
+	              'button',
+	              { onClick: this.closeModalDoctor },
 	              'Exit'
 	            )
 	          ),
@@ -69776,12 +69859,73 @@
 	              ),
 	              _react2.default.createElement(
 	                'button',
-	                { onClick: _this2.deleteReminder.bind(_this2, idx), value: idx },
+	                { onClick: _this2.deleteReminder.bind(_this2, idx) },
 	                'Delete'
 	              )
 	            );
 	          }, this)
-	        )
+	        ),
+	        _react2.default.createElement(
+	          'h2',
+	          null,
+	          ' Your Doctors '
+	        ),
+	        this.state.doctors.map(function (doctor, idx) {
+	          return _react2.default.createElement(
+	            'div',
+	            { className: 'doctor-view-container', key: idx },
+	            _react2.default.createElement(
+	              'div',
+	              { className: 'doctor-name' },
+	              doctor.name
+	            ),
+	            _react2.default.createElement(
+	              'div',
+	              null,
+	              _react2.default.createElement(
+	                'span',
+	                { className: 'doctor-attribute' },
+	                'Phone: '
+	              ),
+	              doctor.phone
+	            ),
+	            _react2.default.createElement(
+	              'div',
+	              null,
+	              _react2.default.createElement(
+	                'span',
+	                { className: 'doctor-attribute' },
+	                'Email: '
+	              ),
+	              doctor.email
+	            ),
+	            _react2.default.createElement(
+	              'div',
+	              null,
+	              _react2.default.createElement(
+	                'span',
+	                { className: 'doctor-attribute' },
+	                'Address: '
+	              ),
+	              doctor.address
+	            ),
+	            _react2.default.createElement(
+	              'div',
+	              null,
+	              _react2.default.createElement(
+	                'span',
+	                { className: 'doctor-attribute' },
+	                'Specialty: '
+	              ),
+	              doctor.specialty
+	            ),
+	            _react2.default.createElement(
+	              'button',
+	              { onClick: _this2.deleteDoc.bind(_this2, idx) },
+	              ' Delete '
+	            )
+	          );
+	        }, this)
 	      );
 	    }
 	  }]);
