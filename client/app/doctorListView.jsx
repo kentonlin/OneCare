@@ -26,7 +26,7 @@ export default class DoctorListView extends React.Component {
         console.log("DOCTORS", docs);
         this.setState({
           doctors: docs
-        })
+        });
       }.bind(this),
       error: function(err) {
         console.log('I can\'t pill you...not today', err);
