@@ -37731,15 +37731,6 @@
 	        ),
 	        _react2.default.createElement(
 	          'div',
-	          { className: 'navbar-button navbar-enter-doctors' },
-	          _react2.default.createElement(
-	            _reactRouter.Link,
-	            { to: '/newdoctor' },
-	            ' Enter New Doctor '
-	          )
-	        ),
-	        _react2.default.createElement(
-	          'div',
 	          { className: 'navbar-button navbar-recommend-doctors' },
 	          _react2.default.createElement(
 	            _reactRouter.Link,
@@ -67733,28 +67724,16 @@
 	      scriptmodalIsOpen: false,
 	      docmodalIsOpen: false
 	    };
-	    // this.openModal = this.openModal.bind(this);
-	    // this.closeModal = this.closeModal.bind(this);
 	    _this.openModalScript = _this.openModalScript.bind(_this);
 	    _this.closeModalScript = _this.closeModalScript.bind(_this);
 	    _this.openModalDoctor = _this.openModalDoctor.bind(_this);
 	    _this.closeModalDoctor = _this.closeModalDoctor.bind(_this);
-
 	    _this.getScripts = _this.getScripts.bind(_this);
 	    _this.deleteReminder = _this.deleteReminder.bind(_this);
 	    _this.getDocs = _this.getDocs.bind(_this);
 	    _this.deleteDoc = _this.deleteDoc.bind(_this);
-	    // this.handleSessionClick = this.handleSessionClick.bind(this);
 	    return _this;
 	  }
-
-	  // handleSessionClick(session) {
-	  //   this.setState({
-	  //     isModalOpen: true,
-	  //     session
-	  //   });
-	  // }
-	  //
 
 	  _createClass(Profile, [{
 	    key: 'deleteDoc',
