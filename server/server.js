@@ -32,15 +32,9 @@ app.get('/fuckDan', function(req, res){
 });
 
 app.post('/api/reminder/add', function(req, res, next) {
-  console.log('request received at addScriptReminder with', req.body);
+  console.log('request received at addScriptReminder');
 	var newScript = req.body;
 	dbHelpers.addScript(newScript, res, next);
-});
-
-app.post('/api/reminder/delete', function(req, res, next){
-  console.log("request received at deleteReminder with", req.body);
-  var reminderID = req.body.reminderID;
-  dbHelpers.deleteReminder(reminderID, next)
 });
 
 app.post('/api/script/find', function(req, res) {
@@ -48,26 +42,23 @@ app.post('/api/script/find', function(req, res) {
 	dbHelpers.getScripts( username, res);
 });
 
-app.post('/api/doctor/add', function(req, res, next) {
-  console.log("POST request received at add Doctor", req.body);
-  dbHelpers.addDoc(req.body, res, next);
+app.post('/api/doctor/add', function(req, res) {
+  var newDoc = req.body;
+  dbHelpers.addDoc(newDoc, res);
 });
 
-app.post('/api/doctor/delete', function(req, res, next) {
-  console.log("POST request received at delete Doctor", req.body);
-  dbHelpers.deleteDoc(req.body.docID, res, next);
-});
-
-app.post('/api/doctors/get', function(req, res, next) {
-  console.log("request received at getDoctors for", req.body.username)
-  dbHelpers.getDocs(req.body.username, res, next);
+// Add doctor to user model
+app.post('/api/user/doctor/add', function(req, res) {
+  var data = req.body;
+  console.log('this is the data that is being sent to helper', data);
+  dbHelpers.addUserDoc(data, res);
 });
 //
 
 // Retrieve doctors from user model
-app.post('/api/user/doctors', function(req, res) {
-  var data = req.body;
-  dbHelpers.getDocs(data, res);
+app.post('/api/doctors/get', function(req, res, next) {
+  var data = req.body.username;
+  dbHelpers.getDocs(data, res, next);
 });
 //
 
@@ -119,7 +110,7 @@ app.post('/api/brain/add', function(req, res) {
   res.send(brain.OCBrain.addTrainingPair(pair))
   brain.OCBrain.train(1);
   brain.OCBrain.save("MainBrain");
-})
+});
 
 app.get('/*', function(req, res) {
   res.sendFile(path.join(rootPath + "/index.html"));
