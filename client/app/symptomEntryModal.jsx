@@ -13,7 +13,8 @@ export default class SymptomEntryModal extends React.Component {
       modalIsOpen: true,
       index: 2,
       currentRec: null,
-      isInRolodex: false
+      isInRolodex: true,
+      cloak: true
     };
     this.upvote = this.upvote.bind(this);
     this.downvote = this.downvote.bind(this);
@@ -21,17 +22,20 @@ export default class SymptomEntryModal extends React.Component {
 
   componentWillReceiveProps(nextProps) {
     if (nextProps.recommendations.length !== 0) {
-      this.setState({currentRec: nextProps.recommendations[nextProps.recommendations.length-1]});
-      if(nextProps.recommendations.specialty) {
+      console.log("de-cloaking", nextProps.recommendations[nextProps.recommendations.length-1].specialty)
+      if(nextProps.recommendations[nextProps.recommendations.length-1].specialty) {
         this.setState({isInRolodex: true});
+        this.setState({cloak: false});
       } else {
         this.setState({isInRolodex: false});
+        this.setState({cloak: false});
       }
+      this.setState({currentRec: nextProps.recommendations[nextProps.recommendations.length-1]});
     }
   }
 
   upvote() {
-    this.setState({currentRec: null});
+    this.setState({currentRec: {id: 1000, name:"success!"}});
     this.setState({isInRolodex: false});
     //training AJAX goes here!
     $.ajax({
@@ -67,7 +71,9 @@ export default class SymptomEntryModal extends React.Component {
 
   render() {
     return(
-        <div className="recommend-modal-container">
+      <div>
+        <div className={!this.state.currentRec ? '' : 'hidden'}><img src="./assets/spinner.gif"></img></div>
+        <div className={this.state.cloak ? 'hidden' : '' +" recommend-modal-container"}>
           <h3 className="title modal-header">Your Selected Symptoms:</h3>
             <div className="modal-symptom-container">
             {
@@ -81,7 +87,7 @@ export default class SymptomEntryModal extends React.Component {
             }
           </div>
           <h4>We recommend:</h4>
-            <div className={!this.state.currentRec ? '' : 'hidden'}><img src="./assets/spinner.gif"></img></div> 
+            <div className={this.state.currentRec && this.state.currentRec.id === 1000 ? '' : 'hidden'}>We're glad to have been of assistance!</div> 
             <div className={this.state.isInRolodex ? '' : 'hidden'}>
               <DoctorView
                 name={this.state.currentRec ? this.state.currentRec.name : ''} 
@@ -90,13 +96,14 @@ export default class SymptomEntryModal extends React.Component {
                 address={this.state.currentRec ? this.state.currentRec.address : ''} 
                 specialty={this.state.currentRec ? this.state.currentRec.specialty : ''} />
             </div>
-            <div className={this.state.currentRec && !this.state.isInRolodex ? '' : 'hidden'}>
+            <div className={this.state.currentRec && this.state.currentRec.id !== 1000 && !this.state.isInRolodex ? '' : 'hidden'}>
               <h3>Oops...</h3>
               <div>We were about to recommend your <strong>{this.state.currentRec ? this.state.currentRec.name : '**empty**'}</strong>, but it appears you do not have one listed.  <Link to='/newdoctor'>Click here to register a new {this.state.currentRec ? this.state.currentRec.name : '**empty**'}!</Link></div>
             </div>
-          <button className={(!this.state.currentRec ? 'hidden' : '')+' modal-button'} onClick={this.upvote}>Thanks!</button>
-          <button className={(!this.state.currentRec ? 'hidden' : '')+' modal-button'} onClick={this.downvote}>Sorry, try again.</button>
+          <button className={(this.state.currentRec && this.state.currentRec.id !== 1000 ? '' : 'hidden')+' modal-button'} onClick={this.upvote}>Thanks!</button>
+          <button className={(this.state.currentRec && this.state.currentRec.id !== 1000 ? '' : 'hidden')+' modal-button'} onClick={this.downvote}>Sorry, try again.</button>
         </div>
+      </div>
       )
   }
 }
