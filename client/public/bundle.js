@@ -39303,12 +39303,12 @@
 	            shouldCloseOnOverlayClick: false,
 	            style: this.state.modalStyles
 	          },
-	          _react2.default.createElement(_symptomEntryModal2.default, { symptoms: this.state.selectedSymptoms, recommendations: this.state.recs }),
 	          _react2.default.createElement(
 	            'button',
 	            { onClick: this.exitModal },
 	            'Exit'
-	          )
+	          ),
+	          _react2.default.createElement(_symptomEntryModal2.default, { symptoms: this.state.selectedSymptoms, recommendations: this.state.recs })
 	        )
 	      );
 	    }
@@ -41673,7 +41673,8 @@
 	      modalIsOpen: true,
 	      index: 2,
 	      currentRec: null,
-	      isInRolodex: false
+	      isInRolodex: true,
+	      cloak: true
 	    };
 	    _this.upvote = _this.upvote.bind(_this);
 	    _this.downvote = _this.downvote.bind(_this);
@@ -41684,18 +41685,21 @@
 	    key: 'componentWillReceiveProps',
 	    value: function componentWillReceiveProps(nextProps) {
 	      if (nextProps.recommendations.length !== 0) {
-	        this.setState({ currentRec: nextProps.recommendations[nextProps.recommendations.length - 1] });
-	        if (nextProps.recommendations.specialty) {
+	        console.log("de-cloaking", nextProps.recommendations[nextProps.recommendations.length - 1].specialty);
+	        if (nextProps.recommendations[nextProps.recommendations.length - 1].specialty) {
 	          this.setState({ isInRolodex: true });
+	          this.setState({ cloak: false });
 	        } else {
 	          this.setState({ isInRolodex: false });
+	          this.setState({ cloak: false });
 	        }
+	        this.setState({ currentRec: nextProps.recommendations[nextProps.recommendations.length - 1] });
 	      }
 	    }
 	  }, {
 	    key: 'upvote',
 	    value: function upvote() {
-	      this.setState({ currentRec: null });
+	      this.setState({ currentRec: { id: 1000, name: "success!" } });
 	      this.setState({ isInRolodex: false });
 	      //training AJAX goes here!
 	      _jquery2.default.ajax({
@@ -41734,32 +41738,7 @@
 	    value: function render() {
 	      return _react2.default.createElement(
 	        'div',
-	        { className: 'recommend-modal-container' },
-	        _react2.default.createElement(
-	          'h3',
-	          { className: 'title modal-header' },
-	          'Your Selected Symptoms:'
-	        ),
-	        _react2.default.createElement(
-	          'div',
-	          { className: 'modal-symptom-container' },
-	          this.props.symptoms.map(function (symptom) {
-	            return _react2.default.createElement(
-	              'div',
-	              { key: symptom.id, className: 'modal-symptom-entry' },
-	              _react2.default.createElement(
-	                'div',
-	                null,
-	                symptom.name
-	              )
-	            );
-	          })
-	        ),
-	        _react2.default.createElement(
-	          'h4',
-	          null,
-	          'We recommend:'
-	        ),
+	        null,
 	        _react2.default.createElement(
 	          'div',
 	          { className: !this.state.currentRec ? '' : 'hidden' },
@@ -41767,50 +41746,84 @@
 	        ),
 	        _react2.default.createElement(
 	          'div',
-	          { className: this.state.isInRolodex ? '' : 'hidden' },
-	          _react2.default.createElement(_doctorView2.default, {
-	            name: this.state.currentRec ? this.state.currentRec.name : '',
-	            phone: this.state.currentRec ? this.state.currentRec.phone : '',
-	            email: this.state.currentRec ? this.state.currentRec.email : '',
-	            address: this.state.currentRec ? this.state.currentRec.address : '',
-	            specialty: this.state.currentRec ? this.state.currentRec.specialty : '' })
-	        ),
-	        _react2.default.createElement(
-	          'div',
-	          { className: this.state.currentRec && !this.state.isInRolodex ? '' : 'hidden' },
+	          { className: this.state.cloak ? 'hidden' : '' + " recommend-modal-container" },
 	          _react2.default.createElement(
 	            'h3',
-	            null,
-	            'Oops...'
+	            { className: 'title modal-header' },
+	            'Your Selected Symptoms:'
 	          ),
 	          _react2.default.createElement(
 	            'div',
+	            { className: 'modal-symptom-container' },
+	            this.props.symptoms.map(function (symptom) {
+	              return _react2.default.createElement(
+	                'div',
+	                { key: symptom.id, className: 'modal-symptom-entry' },
+	                _react2.default.createElement(
+	                  'div',
+	                  null,
+	                  symptom.name
+	                )
+	              );
+	            })
+	          ),
+	          _react2.default.createElement(
+	            'h4',
 	            null,
-	            'We were about to recommend your ',
+	            'We recommend:'
+	          ),
+	          _react2.default.createElement(
+	            'div',
+	            { className: this.state.currentRec && this.state.currentRec.id === 1000 ? '' : 'hidden' },
+	            'We\'re glad to have been of assistance!'
+	          ),
+	          _react2.default.createElement(
+	            'div',
+	            { className: this.state.isInRolodex ? '' : 'hidden' },
+	            _react2.default.createElement(_doctorView2.default, {
+	              name: this.state.currentRec ? this.state.currentRec.name : '',
+	              phone: this.state.currentRec ? this.state.currentRec.phone : '',
+	              email: this.state.currentRec ? this.state.currentRec.email : '',
+	              address: this.state.currentRec ? this.state.currentRec.address : '',
+	              specialty: this.state.currentRec ? this.state.currentRec.specialty : '' })
+	          ),
+	          _react2.default.createElement(
+	            'div',
+	            { className: this.state.currentRec && this.state.currentRec.id !== 1000 && !this.state.isInRolodex ? '' : 'hidden' },
 	            _react2.default.createElement(
-	              'strong',
+	              'h3',
 	              null,
-	              this.state.currentRec ? this.state.currentRec.name : '**empty**'
+	              'Oops...'
 	            ),
-	            ', but it appears you do not have one listed.  ',
 	            _react2.default.createElement(
-	              _reactRouter.Link,
-	              { to: '/newdoctor' },
-	              'Click here to register a new ',
-	              this.state.currentRec ? this.state.currentRec.name : '**empty**',
-	              '!'
+	              'div',
+	              null,
+	              'We were about to recommend your ',
+	              _react2.default.createElement(
+	                'strong',
+	                null,
+	                this.state.currentRec ? this.state.currentRec.name : '**empty**'
+	              ),
+	              ', but it appears you do not have one listed.  ',
+	              _react2.default.createElement(
+	                _reactRouter.Link,
+	                { to: '/newdoctor' },
+	                'Click here to register a new ',
+	                this.state.currentRec ? this.state.currentRec.name : '**empty**',
+	                '!'
+	              )
 	            )
+	          ),
+	          _react2.default.createElement(
+	            'button',
+	            { className: (this.state.currentRec && this.state.currentRec.id !== 1000 ? '' : 'hidden') + ' modal-button', onClick: this.upvote },
+	            'Thanks!'
+	          ),
+	          _react2.default.createElement(
+	            'button',
+	            { className: (this.state.currentRec && this.state.currentRec.id !== 1000 ? '' : 'hidden') + ' modal-button', onClick: this.downvote },
+	            'Sorry, try again.'
 	          )
-	        ),
-	        _react2.default.createElement(
-	          'button',
-	          { className: (!this.state.currentRec ? 'hidden' : '') + ' modal-button', onClick: this.upvote },
-	          'Thanks!'
-	        ),
-	        _react2.default.createElement(
-	          'button',
-	          { className: (!this.state.currentRec ? 'hidden' : '') + ' modal-button', onClick: this.downvote },
-	          'Sorry, try again.'
 	        )
 	      );
 	    }
