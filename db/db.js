@@ -3,7 +3,7 @@ mongoose.Promise = global.Promise;
 var bcrypt = require('bcrypt');
 var Schema = mongoose.Schema;
 var SALT_WORK_FACTOR = 10;
-
+mongoose.Promise = global.Promise;
 mongoose.connect('mongodb://onecare:onecare1@ds031925.mlab.com:31925/onecare');
 
 // USER SCHEMA
@@ -35,8 +35,7 @@ var userSchema = new Schema({
 var doctorSchema = new Schema({
 	name: String,
 	phone: String,
-	fax: String,
-	Email: String,
+	email: String,
 	specialty: String,
 	address: String,
 	patients: [{type: Schema.Types.ObjectId, ref: 'User'}]

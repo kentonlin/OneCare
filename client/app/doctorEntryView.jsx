@@ -1,19 +1,54 @@
 import React, { Component } from 'react';
 import $ from 'jquery';
 import Navigate from './navigate.jsx';
+import DoctorListView from './doctorListView.jsx';
+
+  var DOCTORS = [
+    {id: 1, name: 'Allergologist'}, 
+    {id: 2, name: 'Andrologist'},
+    {id: 3, name: 'Anesthesiologist'},
+    {id: 4, name: 'Angiologist‎'},
+    {id: 5, name: 'Cardiologist'},
+    {id: 6, name: 'Dentist'},
+    {id: 7, name: 'Dermatologist‎'},
+    {id: 8, name: 'Emergency Medicine‎ Specialist'},
+    {id: 9, name: 'Endocrinology‎'},
+    {id: 10, name: 'Family Medicine‎ Specialist'},
+    {id: 11, name: 'Gastroenterologist‎'},
+    {id: 12, name: 'General practitioner'},
+    {id: 13, name: 'Geriatrician'},
+    {id: 14, name: 'Gynaecologist'},
+    {id: 15, name: 'Hematologist'},
+    {id: 16, name: 'Hepatologyist'},
+    {id: 17, name: 'Immunologist‎'},
+    {id: 18, name: 'Internal Medical Specialist'},
+    {id: 19, name: 'Nephrologist‎'},
+    {id: 20, name: 'Neurologist'},
+    {id: 21, name: 'Obstetrician'},
+    {id: 22, name: 'Oncologist'},
+    {id: 23, name: 'Ophthalmologist'},
+    {id: 24, name: 'Ear, nose, and Throat Doctor'},
+    {id: 25, name: 'Palliative Medical Expert'},
+    {id: 26, name: 'Pediatrician‎'},
+    {id: 27, name: 'Podiatrist'},
+    {id: 28, name: 'Psychiatrist'},
+    {id: 29, name: 'Pulmonologist'},
+    {id: 30, name: 'Radiologist'},
+    {id: 31, name: 'Rheumatologist‎'},
+    {id: 32, name: 'Expert in Sleep Medicine‎'},
+    {id: 33, name: 'Surgeon‎'},
+    {id: 34, name: 'Toxicologist'},
+    {id: 35, name: 'Urologist'}
+  ]
 
 
 export default class DoctorEntryView extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      // user: {
-      //   username: window.localStorage.get("username") || "default",
-      //   userId: window.localStorage.get("userId") || "default"
-      // },
       name: "",
       phone: "",
-      fax: "",
+      email: "",
       address: "",
       specialty: ""
     }
@@ -27,29 +62,31 @@ export default class DoctorEntryView extends React.Component {
       this.setState({name: event.target.value});
     } else if (stateVal === "phone") {
       this.setState({phone: event.target.value});
-    } else if (stateVal === "fax") {
-      this.setState({fax: event.target.value});
+    } else if (stateVal === "email") {
+      this.setState({email: event.target.value});
     } else if (stateVal === "address") {
       this.setState({address: event.target.value});
     } else if (stateVal === "specialty") {
       this.setState({specialty: event.target.value});
     }
   }
-  submitNewDoctor(formData) {
-    console.log("this.state is: ", this.state);
+  submitNewDoctor() {
+    var toSubmit = { "username": window.localStorage.username, "doc": this.state }
+
     $.ajax({
       type: "POST",
       url: "/api/doctor/add",
       headers: {
         "content-type": "application/json"
       },
-      data: JSON.stringify(this.state)
-    })
-    .then(function(res) {
-      console.log("Doctor registration success!  ");
-    })
-    .catch(function(err) {
-      console.error("Doctor not registered.  ", err);
+      data: JSON.stringify(toSubmit),
+      success: function(res) {
+        console.log(res, "has been added");
+        DoctorListView.getDocs();
+      },
+      error: function(err) {
+        console.error("Doctor not registered: ", err);
+      }
     });
   }
   render() {
@@ -60,115 +97,21 @@ export default class DoctorEntryView extends React.Component {
         <form className="doctor-entry-form">
           <div>Name</div><input id="name" type="text" onChange={this.handleChange} />
           <div>Phone</div><input id="phone" type="text" onChange={this.handleChange}></input><br />
-          <div>Fax</div><input id="fax" type="text" onChange={this.handleChange}></input><br />
+          <div>Email</div><input id="email" type="text" onChange={this.handleChange}></input><br />
           <div>Address</div><input id="address" type="text" onChange={this.handleChange}></input><br />
           <div>Specialty</div><select id="specialty" onChange={this.handleChange}>
             <option>::Select Specialty::</option>
-            <option>A</option>
-            <option>Allergology‎ </option>
-            <option>Andrology‎ </option>
-            <option>Anesthesia‎ </option>
-            <option>Angiology‎ </option>
-            <option>Aviation medicine‎ </option>
-            <option>B</option>
-            <option>Biomedicine‎ </option>
-            <option>C</option>
-            <option>Cardiology‎ </option>
-            <option>D</option>
-            <option>Dentistry‎ </option>
-            <option>Dentistry branches‎ </option>
-            <option>Dermatology‎ </option>
-            <option>Disaster medicine‎ </option>
-            <option>Sports physicians‎ </option>
-            <option>E</option>
-            <option>Emergency medicine‎ </option>
-            <option>Endocrinology‎ </option>
-            <option>F</option>
-            <option>Family medicine‎ </option>
-            <option>Fictional medical specialists‎ </option>
-            <option>G</option>
-            <option>Gastroenterology‎ </option>
-            <option>General practice‎ </option>
-            <option>Medical genetics‎ </option>
-            <option>Geriatrics‎ </option>
-            <option>Gerontology‎ </option>
-            <option>Gynaecology‎ </option>
-            <option>H</option>
-            <option>Hematology‎ </option>
-            <option>Hepatology‎ </option>
-            <option>I</option>
-            <option>Immunology‎ </option>
-            <option>Infectious diseases‎ </option>
-            <option>Intensive care medicine‎ </option>
-            <option>Internal medicine‎ </option>
-            <option>M</option>
-            <option>Men's health‎ </option>
-            <option>Military medicine‎ </option>
-            <option>N</option>
-            <option>Nephrology‎ </option>
-            <option>Neurology‎ </option>
-            <option>Nuclear medicine‎ </option>
-            <option>O</option>
-            <option>Obstetrics‎ </option>
-            <option>Oncology‎ </option>
-            <option>Ophthalmology‎ </option>
-            <option>Otorhinolaryngology‎ </option>
-            <option>P</option>
-            <option>Palliative medicine‎ </option>
-            <option>Pathology‎ </option>
-            <option>Pediatrics‎ </option>
-            <option>Podiatry‎ </option>
-            <option>Preventive medicine‎ </option>
-            <option>Prison medicine‎ </option>
-            <option>Psychiatric specialities‎ </option>
-            <option>Psychiatry‎ </option>
-            <option>Pulmonology‎ </option>
-            <option>R</option>
-            <option>Radiology‎ </option>
-            <option>Rehabilitation medicine‎ </option>
-            <option>Rheumatology‎ </option>
-            <option>S</option>
-            <option>Serology‎ </option>
-            <option>Sexual health‎ </option>
-            <option>Sleep medicine‎ </option>
-            <option>Space medicine‎ </option>
-            <option>Sports medicine‎ </option>
-            <option>Surgery‎ </option>
-            <option>Surgical specialties‎ </option>
-            <option>T</option>
-            <option>Toxicology‎ </option>
-            <option>Transplantation medicine‎ </option>
-            <option>Trichology‎ </option>
-            <option>Tropical medicine‎ </option>
-            <option>U</option>
-            <option>Urology‎ </option>
-            <option>W</option>
-            <option>Wilderness medicine‎ </option>
+            {
+              DOCTORS.map((doctor) => {
+                return (
+                  <option key={doctor.id} >{doctor.name}</option>
+                )
+              })
+            }
           </select>
           <button onClick={this.submitNewDoctor}>Submit!</button>
         </form>
         <hr />
-        <div>
-          <h3>Your current doctors: </h3>
-          <div onClick={() => {
-            $.ajax({
-              type: "POST",
-              url: "/api/brain/add",
-              headers: {
-                "content-type": "application/json"
-              },
-            data: JSON.stringify({pair: [[{id: 103, name: 'Propensity for cavities'},
-              {id: 104, name: 'Propensity for gum disease'},
-              {id: 105, name: 'Low, husky, hoarse voice'}],[{id: 12, name: 'Sports physicians‎'}]]}),
-            success: function(res) {
-              console.log("Brain activation success!  ", res);
-            },
-            error: function(err) {
-              console.error("You fuckd up da brain.  ", err);
-            }
-            })
-          }}>AJAX</div>
-        </div>
       </div>
     )
   }

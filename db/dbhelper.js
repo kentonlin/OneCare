@@ -4,9 +4,12 @@ var twilio = require('twilio')
 var Model = require('./db.js');
 var jwt  = require('jwt-simple');
 var client = new twilio.RestClient(accountSid, authToken);
+var ObjectId = require('mongoose').Types.ObjectId;
 var cron = require('cron');
 var cronJob = cron.CronJob;
-var ObjectId = require('mongoose').Types.ObjectId;
+var CronJobManager = require('cron-job-manager')
+var reminderManager = new CronJobManager();
+
 
 var dbFunc = {
 
@@ -18,13 +21,27 @@ var dbFunc = {
 				"dosage": '1 tablet',
 				"refill": '08-17-2016',
 				"frequency": '2x per day',
+				"reminderTime": '10:00 AM',
 				"username": 'harish'
 		}
 		*/
 		var message = "Time to take your " + script.name + ' (' + script.dosage + ')!';
-		//hard-coded time right now...need to change time to be based on frequency
-		var time = '36 19 * * *'
+
+		var convertToCronTime = function(time) {
+			var hour = Number(time.split('').splice(0, time.indexOf(":")).join(''));
+			var minuteString = time.split('').splice(time.indexOf(":") + 1, time.indexOf(":") + 1).join('');
+			if(time[time.length-2] === "P"){
+				hour +=12;
+			}
+			var hourString = hour.toString();
+			var cronConvert = minuteString + ' ' + hourString + ' ' + '* * *';
+			return cronConvert;
+		};
+
+		var cronTime = convertToCronTime(script.reminderTime);
+
 		var newScript = new Model.script(script);
+		console.log('newScript: ', newScript);
 		newScript.save(function(err){
 			if(err) {
 				console.log('error', err);
@@ -35,44 +52,61 @@ var dbFunc = {
 				if(err){
 					res.send(new Error("script not added to user document"));
 				}
-				// res.status(200).send("script added to user model");
 
 				//call set reminder function
-				this.setReminder(script.username, message, time, next);
+				this.setReminder(script.username, newScript._id, message, cronTime, next);
 
-			}.bind(this))
-		}.bind(this))
+			}.bind(this));
+		}.bind(this));
 
 	},
 
 
-	getScripts: function(scriptName, res) {
-		Model.script.findOne({'name':scriptName},function (err, found) {
+	getScripts: function(username, res) {
+		Model.user.findOne({'username': username}).populate('scripts').exec(function (err, found) {
 			if(err){
-				console.log('error in fetching tasks');
+				console.log('error in fetching scripts', err);
 			}
-			console.log(found);
-			res.send(found);
+			console.log('these are the found scripts for user: ', found.scripts);
+			res.send(found.scripts);
 		});
 	},
 
-  addDoc: function(data, res) {
-  	var newDoc = new Model.doctor(data);
+  addDoc: function(data, res, next) {
+		console.log("addDoc called with", data);
+  	var newDoc = new Model.doctor(data.doc);
   	newDoc.save(function(err) {
   		if (err) {
   			console.log(err);
   		}
-  		console.log("Doctor added!");
-  		res.send(newDoc);
+  		Model.user.update({"username": data.username}, {$push:{"doctors": newDoc}}, function(err){
+				if(err){
+					next(new Error("doctor added to user model"));
+				}
+				res.send(newDoc);
+			});
   	});
   },
 
-  getDocs: function(target, res) {
-    Model.doctor.find({}, function(err, docs) {
-      console.log(docs);
-      res.send(docs);
-    });
+  getDocs: function(username, res, next) {
+		Model.user.findOne({"username": username}).populate('doctors').exec(function(err, user){
+			if(err){
+				next(new Error(err));
+			}
+			console.log("?!?!", user);
+			res.send(user.doctors);
+		});
   },
+
+	deleteDoc: function(id, res, next) {
+		Model.doctor.remove({"_id": id}, function(err){
+			if(err){
+				next("reminder not deleted", err);
+			}
+			next("doctor deleted");
+		});
+  },
+
 
 	/* AUTHENTICATION FUNCTIONS */
 
@@ -111,8 +145,6 @@ var dbFunc = {
 				next(new Error("username does not exist"));
 			}
 			else{ //if user found
-
-				console.log("*** this is the user", user);
 				user.comparePassword(reqUser.password, function(err, isMatch){
 					if(err) {
 						console.log("error occurred", err);
@@ -126,10 +158,6 @@ var dbFunc = {
 						var token = jwt.encode(user, 'secret'); //create new token
 						console.log('this is token',token);
 						var resultData = {"token": token, "user": {"id": user._id, "username": user.username}}
-						console.log('to be sent', resultData);
-						console.log(res);
-						// res.send({"token": token, "user": {"id": user._id, "username": user.username}});
-						// next(JSON.stringify({"token": token, "user": {"id": user._id, "username": user.username}}));
 	          res.status(201).send(resultData); //send new token and user object
 					}
 				});
@@ -144,7 +172,6 @@ var dbFunc = {
 	  }
 	  else {
 	    var user = jwt.decode(token, 'secret');
-	    console.log("Decoded user:", user);
 	    Model.user.find(user, function(err, user){
 	    	if(err){
 	    		next("Error: ", error);
@@ -171,7 +198,7 @@ var dbFunc = {
 			});
 	},
 
-	setReminder: function(username, message, time, next) {
+	setReminder: function(username, scriptID, message, time, next) {
 		console.log("sendReminder called for", username, "with the message:", message);
 		// look up user object and find their phone number
 				Model.user.findOne({"username": username}, function(err, user){
@@ -180,21 +207,39 @@ var dbFunc = {
 					}
 					phoneNum = "+" + user.phone;
 					console.log("Number on file", phoneNum);
-				//set cron job for script reminder
-				var textJob = new cronJob(time, function(){ // Time format for cronJob: '03 19 * * *'
-				  client.sendMessage( {
-						to: phoneNum,
-						from:"+16462332065",
-						body: message,
-					}, function( err, data ) {
-						if(err){
-							console.log("CronJob not set: ", err);
-						}
-						next("Message sent.");
-					});
-				},  null, true);
-				next("Reminder successfully set");
-	})
+					//with manager
+					//manager.add('next_job', '0 40 * * * *', function() { console.log('tick...')});
+					console.log("arguments...", scriptID.toString(), "at", time);
+					reminderManager.add(scriptID.toString(), time, function() {
+						console.log('this was the proper format!');
+						client.sendMessage({
+							to: phoneNum,
+							from:"+16462332065",
+							body: message,
+						}, function( err, data) {
+							if(err){
+								console.log("CronJob not set: ", err);
+							}
+							next("Message sent.");
+						});
+					}, {"start": true});
+
+					console.log("reminderManager", reminderManager);
+					next("Reminder successfully set");
+	});
+},
+
+deleteReminder: function(reminderID, next) {
+	//REMOVES SCRIPT DOCUMENT (reference still persists in user doc but it won't reference anything)
+	Model.script.remove({"_id": reminderID}, function(err, user){
+		if(err){
+			next("reminder not deleted", err);
+		}
+		if(reminderManager.exists(reminderID.toString())) {
+			reminderManager.deleteJob(reminderID.toString());
+		}
+		next("reminder deleted");
+	});
 },
 
 	saveBrain: function(brainState, trainingData, name) {

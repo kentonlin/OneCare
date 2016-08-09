@@ -16,16 +16,16 @@ export default class Navigate extends React.Component {
     return(
      <div className="navbar-container">
        <h1 className="title">Welcome to OneCare, {this.state.username}!</h1>
-       <div className="navbar-button navbar-view-doctors">
-        <Link to='/alldoctors'> Your Doctors </Link>
+       <div className="navbar-button navbar-home">
+        <Link to='/profile'> Profile </Link>
        </div>
        <div className="navbar-button navbar-enter-doctors">
           <Link to='/newdoctor'> Enter New Doctor </Link>
        </div>
-       <div className="navbar-button navbar-enter-doctors">
+       {/* <div className="navbar-button navbar-script-reminder">
         <Link to='/remind'> Prescription Reminder </Link>
-       </div>
-       <div className="navbar-button navbar-enter-doctors">
+       </div> */}
+       <div className="navbar-button navbar-recommend-doctors">
           <Link to='/recommend'> Physician Recommender </Link>
        </div>
        <div className="navbar-enter-doctors right logout" onClick={() => {window.localStorage.removeItem("username"); window.localStorage.removeItem("token");}}>

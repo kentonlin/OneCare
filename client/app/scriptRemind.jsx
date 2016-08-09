@@ -1,22 +1,28 @@
 import React, { Component } from 'react';
 import Calendar from 'react-input-calendar'
 import $ from 'jquery';
+import ReactDOM from 'react-dom';
 import Dropdown from 'react-drop-down';
 import { Link } from 'react-router';
 import Navigate from './navigate.jsx';
+import Kronos from 'react-kronos';
+import moment from 'moment';
+import Modal from 'react-modal'
 
 export default class ScriptRemindView extends React.Component {
 
   constructor(props) {
     super(props);
     this.state = {
+      modalIsOpen: true, // or true
       "currentDrug": "None",
       "dosageAmt": 0,
       "dosageMeasure": 'mg',
       "date": date,
+      "reminderTime": null,
       "scheduleFreq": "1x",
       "scheduleDayWeek": "day"
-  }
+    };
   var date = new Date();
   this.updateDrugName = this.updateDrugName.bind(this);
   this.submitForm = this.submitForm.bind(this);
@@ -25,8 +31,9 @@ export default class ScriptRemindView extends React.Component {
   this.handleRefillDate = this.handleRefillDate.bind(this);
   this.handleDoseMeasurement = this.handleDoseMeasurement.bind(this);
   this.handleScheduleDayWeek = this.handleScheduleDayWeek.bind(this);
+  this.handleReminderTime = this.handleReminderTime.bind(this);
 
-}
+  }
 
     updateDrugName(event){
       this.setState({
@@ -38,35 +45,43 @@ export default class ScriptRemindView extends React.Component {
       console.log("selected date", date);
       this.setState({
         "date": date
-      })
+      });
 
     }
 
     handleScheduleDayWeek(dayWeek){
         this.setState({
           "scheduleDayWeek": dayWeek
-        })
+        });
     }
 
     handleDoseMeasurement(measure) {
       this.setState({
         dosageMeasure: measure.target.value
-      })
+      });
 
     }
 
     handleDoseAmount(amount) {
       this.setState({
         dosageAmt: amount.target.value
-      })
+      });
 
     }
 
     handleFrequency(frequency) {
+      console.log("current state", this.state);
       console.log("handleFreq called with", frequency.target.value);
       this.setState({
         scheduleFreq: frequency.target.value
-      })
+      });
+    }
+
+    handleReminderTime(time){
+      console.log("handleReminderTime called with", moment(time).format('LT'));
+      this.setState({
+        "reminderTime": moment(time).format('LT')
+      });
     }
 
     submitForm () {
@@ -75,9 +90,10 @@ export default class ScriptRemindView extends React.Component {
         "dosage": this.state.dosageAmt + ' ' + this.state.dosageMeasure,
         "refill": this.state.date,
         "frequency": this.state.scheduleFreq + ' per ' + this.state.scheduleDayWeek,
+        "reminderTime": this.state.reminderTime,
         "username": window.localStorage.username
-      }
-      console.log("submitForm called for: ", script)
+      };
+      console.log("submitForm called for: ", script);
 
       $.ajax({
           type: 'POST',
@@ -101,7 +117,7 @@ export default class ScriptRemindView extends React.Component {
   render() {
     return (
       <div>
-      <Navigate />
+
         <div>
           <h1> Set a Prescription Reminder </h1>
           <h2> Current Drug: {this.state.currentDrug} </h2>
@@ -143,6 +159,10 @@ export default class ScriptRemindView extends React.Component {
           </select>
         </div>
         <div>
+          <h2> Reminder Time </h2>
+          <Kronos time={this.state.reminderTime} value={''} placeholder={"Click to select a time"} onChangeDateTime={this.handleReminderTime}/>
+        </div>
+        <div>
           <button className= "remindBtn" onClick={this.submitForm}> Remind Me </button>
         </div>
       </div>
@@ -150,36 +170,3 @@ export default class ScriptRemindView extends React.Component {
     );
   }
 }
-
-
-/* const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#F5FCFF',
-  },
-  welcome: {
-    fontSize: 20,
-    textAlign: 'center',
-    margin: 10,
-  },
-  instructions: {
-    textAlign: 'center',
-    color: '#333333',
-    marginBottom: 5,
-  },
-  topbar: {
-  flexDirection: 'row',
-  justifyContent: 'flex-end',
-  backgroundColor: 'black',
-  paddingHorizontal: 5,
-  paddingVertical: 10
-  },
-  submit: {
-    textAlign: 'center'
-  },
-
-});
-
-*/

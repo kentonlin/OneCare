@@ -244,3 +244,25 @@ body {
   color: #F39C12;
 }
 /* END OF CALENDAR STYLES*/
+
+.modal-header {
+  background-color: #09096A;
+  border-radius:2px;
+  border:1px solid black;
+
+}
+
+.modal-symptom-container {
+
+}
+
+.modal-button {
+  float: right;
+  display: inline-block;
+}
+
+.hidden { display:none; }
+
+.symptom-select {
+  min-height: 200px;
+}
