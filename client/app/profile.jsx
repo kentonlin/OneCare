@@ -14,27 +14,15 @@ export default class Profile extends React.Component {
       scriptmodalIsOpen: false,
       docmodalIsOpen: false
     };
-    // this.openModal = this.openModal.bind(this);
-    // this.closeModal = this.closeModal.bind(this);
     this.openModalScript = this.openModalScript.bind(this);
     this.closeModalScript = this.closeModalScript.bind(this);
     this.openModalDoctor = this.openModalDoctor.bind(this);
     this.closeModalDoctor = this.closeModalDoctor.bind(this);
-
     this.getScripts = this.getScripts.bind(this);
     this.deleteReminder= this.deleteReminder.bind(this);
     this.getDocs = this.getDocs.bind(this);
     this.deleteDoc = this.deleteDoc.bind(this);
-    // this.handleSessionClick = this.handleSessionClick.bind(this);
   }
-
-  // handleSessionClick(session) {
-  //   this.setState({
-  //     isModalOpen: true,
-  //     session
-  //   });
-  // }
-  //
 
   deleteDoc(id){
     console.log("docID", id);

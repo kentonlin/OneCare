@@ -165,6 +165,7 @@ export default class ScriptRemindView extends React.Component {
 
           <button className= "remindBtn" onClick={this.submitForm}> Remind Me </button>
         </div>
+
       </div>
 
     );
