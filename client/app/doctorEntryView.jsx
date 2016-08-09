@@ -5,7 +5,7 @@ import DoctorListView from './doctorListView.jsx';
 import Modal from "react-modal";
 
   var DOCTORS = [
-    {id: 1, name: 'Allergologist'}, 
+    {id: 1, name: 'Allergologist'},
     {id: 2, name: 'Andrologist'},
     {id: 3, name: 'Anesthesiologist'},
     {id: 4, name: 'Angiologist‎'},
@@ -52,8 +52,10 @@ export default class DoctorEntryView extends React.Component {
       phone: "",
       email: "",
       address: "",
-      specialty: ""
-    };
+      specialty: "",
+      validPhone: false,
+      validSpecialty: false
+    }
     this.handleChange = this.handleChange.bind(this);
     this.submitNewDoctor = this.submitNewDoctor.bind(this);
   }
@@ -61,44 +63,76 @@ export default class DoctorEntryView extends React.Component {
   handleChange(event) {
     var stateVal = event.target.id;
     if (stateVal === "name") {
-      this.setState({name: event.target.value});
+      this.setState({name: event.target.value, validName:true});
     } else if (stateVal === "phone") {
-      this.setState({phone: event.target.value});
+      this.setState({phone: event.target.value, validPhone: event.target.value.match(/\d/g).length===11
+        });
     } else if (stateVal === "email") {
       this.setState({email: event.target.value});
     } else if (stateVal === "address") {
       this.setState({address: event.target.value});
     } else if (stateVal === "specialty") {
-      this.setState({specialty: event.target.value});
+      this.setState({specialty: event.target.value, validSpecialty:true});
     }
   }
-  submitNewDoctor() {
-    var toSubmit = { "username": window.localStorage.username, "doc": this.state };
 
-    $.ajax({
-      type: "POST",
-      url: "/api/doctor/add",
-      headers: {
-        "content-type": "application/json"
-      },
-      data: JSON.stringify(toSubmit),
-      success: function(res) {
-        console.log(res, "has been added");
-        DoctorListView.getDocs();
-      },
-      error: function(err) {
-        console.error("Doctor not registered: ", err);
-      }
-    });
+  submitNewDoctor(e) {
+    e.preventDefault();
+    if(!this.state.name.length && !this.state.validPhone && !this.state.validSpecialty){
+      alert("Please correct the following fields: name, phone, specialty");
+    }
+    else if(!this.state.validPhone && !this.state.validSpecialty){
+      alert("Please enter a valid phone and specialty");
+    }
+    else if(!this.state.name.length && !this.state.validSpecialty) {
+      alert("Please enter a valid name and specialty")
+    }
+    else if(!this.state.name.length && !this.state.validPhone){
+      alert("Please enter a valid name and phone");
+    }
+    else if(!this.state.name.length) {
+      alert("Please enter a name");
+    }
+    else if(!this.state.validPhone) {
+      alert("Please enter a valid phone");
+    }
+    else if(!this.state.validSpecialty) {
+      alert("Please enter a specialty");
+    }
+     else {
+      var toSubmit = { "username": window.localStorage.username, "doc": {
+        name: this.state.name,
+        phone: this.state.phone,
+        email: this.state.email,
+        address: this.state.address,
+        specialty: this.state.specialty
+      }}
+
+      $.ajax({
+        type: "POST",
+        url: "/api/doctor/add",
+        headers: {
+          "content-type": "application/json"
+        },
+        data: JSON.stringify(toSubmit),
+        success: function(res) {
+          console.log(res, "has been added");
+          DoctorListView.getDocs();
+        },
+        error: function(err) {
+          console.error("Doctor not registered: ", err);
+        }
+      });
+    }
   }
   render() {
     return (
       <div className="doctor-input">
       <Navigate />
-      <h2>Input a new doctor!</h2>
+      <h2>Input a new doctor</h2>
         <form className="doctor-entry-form">
           <div>Name</div><input id="name" type="text" onChange={this.handleChange} />
-          <div>Phone</div><input id="phone" type="text" onChange={this.handleChange}></input><br />
+          <div>Phone</div><input id="phone" type="text" onChange={this.handleChange}></input><h6 className={(this.state.validPhone ? 'hidden' : 'invalid')}> Phone number must be 11 digits</h6><br />
           <div>Email</div><input id="email" type="text" onChange={this.handleChange}></input><br />
           <div>Address</div><input id="address" type="text" onChange={this.handleChange}></input><br />
           <div>Specialty</div><select id="specialty" onChange={this.handleChange}>
