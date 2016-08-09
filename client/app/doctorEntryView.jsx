@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import $ from 'jquery';
 import Navigate from './navigate.jsx';
 import DoctorListView from './doctorListView.jsx';
+import Modal from "react-modal";
 
   var DOCTORS = [
     {id: 1, name: 'Allergologist'}, 
@@ -46,12 +47,13 @@ export default class DoctorEntryView extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      modalIsOpen: true,
       name: "",
       phone: "",
       email: "",
       address: "",
       specialty: ""
-    }
+    };
     this.handleChange = this.handleChange.bind(this);
     this.submitNewDoctor = this.submitNewDoctor.bind(this);
   }
@@ -71,7 +73,7 @@ export default class DoctorEntryView extends React.Component {
     }
   }
   submitNewDoctor() {
-    var toSubmit = { "username": window.localStorage.username, "doc": this.state }
+    var toSubmit = { "username": window.localStorage.username, "doc": this.state };
 
     $.ajax({
       type: "POST",

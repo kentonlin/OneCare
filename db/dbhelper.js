@@ -134,7 +134,6 @@ var dbFunc = {
 	},
 
 	signin: function(reqUser, res, next){
-		console.log("sign in called!!!")
 		var userPassword = reqUser.password;
 		Model.user.findOne({"username": reqUser.username}, function(err, user){
 
