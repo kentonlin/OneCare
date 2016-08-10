@@ -3,7 +3,7 @@ var bodyParser = require('body-parser');
 var dbHelpers = require('../db/dbhelper.js');
 var path = require('path');
 var app = express();
-var brain = require('./brain.js');
+// var brain = require('./brain.js');
 var twilio = require('twilio');
 
 app.use(express.static('public'));
@@ -21,6 +21,8 @@ app.use(function(req, res, next) {
   res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
   next();
 });
+
+
 
 app.listen(process.env.PORT || 3000, function(){
   console.log('Server is running');
@@ -111,6 +113,12 @@ app.get('/api/brain/save', function(req, res) {
   brain.OCBrain.save("MainBrain");
   res.send("huehuehue");
 });
+
+app.post('/api/reminder/delete', function(req, res, next){
+  console.log("request received at deleteScript");
+  var reminderID = req.body.reminderID;
+  dbHelpers.deleteReminder(reminderID, next);
+})
 
 app.post('/api/brain/add', function(req, res) {
   var pair = req.body.pair;

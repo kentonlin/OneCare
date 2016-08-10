@@ -37665,7 +37665,6 @@
 	      return _react2.default.createElement(
 	        'div',
 	        { className: 'doctor-input' },
-	        _react2.default.createElement(_navigate2.default, null),
 	        _react2.default.createElement(
 	          'h2',
 	          null,

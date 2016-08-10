@@ -128,8 +128,8 @@ export default class DoctorEntryView extends React.Component {
   render() {
     return (
       <div className="doctor-input">
-      <Navigate />
-      <h2>Input a new doctor</h2>
+      {/* <Navigate /> */}
+      <h2>Input a new doctor!</h2>
         <form className="doctor-entry-form">
           <div>Name</div><input id="name" type="text" onChange={this.handleChange} />
           <div>Phone</div><input id="phone" type="text" onChange={this.handleChange}></input><h6 className={(this.state.validPhone ? 'hidden' : 'invalid')}> Phone number must be 11 digits</h6><br />
