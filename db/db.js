@@ -3,7 +3,6 @@ mongoose.Promise = global.Promise;
 var bcrypt = require('bcrypt');
 var Schema = mongoose.Schema;
 var SALT_WORK_FACTOR = 10;
-mongoose.Promise = global.Promise;
 mongoose.connect('mongodb://onecare:onecare1@ds031925.mlab.com:31925/onecare');
 
 // USER SCHEMA

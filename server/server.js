@@ -22,6 +22,8 @@ app.use(function(req, res, next) {
   next();
 });
 
+
+
 app.listen(process.env.PORT || 3000, function(){
   console.log('Server is running');
 });
@@ -53,6 +55,11 @@ app.post('/api/doctor/add', function(req, res) {
   var newDoc = req.body;
   dbHelpers.addDoc(newDoc, res);
 });
+
+app.post('/api/doctor/delete', function(req, res, next) {
+  var docID = req.body.docID;
+  dbHelpers.deleteDoc(docID, res, next);
+}); 
 
 // Add doctor to user model
 app.post('/api/user/doctor/add', function(req, res) {
@@ -98,7 +105,7 @@ app.post('/api/symptomEntry/add', function(req, res) {
 });
 
 app.post('/api/brain/recommend', function(req, res) {
-  var username = req.body.username
+  var username = req.body.username;
   var symptoms = req.body.symptoms;
   console.log("The brain shall now ponder: ", symptoms);
   var data = brain.OCBrain.activate(symptoms);
@@ -111,6 +118,12 @@ app.get('/api/brain/save', function(req, res) {
   brain.OCBrain.save("MainBrain");
   res.send("huehuehue");
 });
+
+app.post('/api/reminder/delete', function(req, res, next){
+  console.log("request received at deleteScript");
+  var reminderID = req.body.reminderID;
+  dbHelpers.deleteReminder(reminderID, next);
+})
 
 app.post('/api/brain/add', function(req, res) {
   var pair = req.body.pair;

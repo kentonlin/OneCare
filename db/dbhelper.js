@@ -103,7 +103,7 @@ var dbFunc = {
   },
 
 
-	/* AUTHENTICATION FUNCTIONS */
+	/* AUTHENTICATION FUNCTION */
 
 	signup: function(newUser, res, next) {
 		Model.user.findOne({"username": newUser.username}, function(err, user){
@@ -151,7 +151,7 @@ var dbFunc = {
 					else{
 						console.log("password correct!");
 						var token = jwt.encode(user, 'secret'); //create new token
-						console.log('this is token',token);
+
 						var resultData = {"token": token, "user": {"id": user._id, "username": user.username}}
 	          res.status(201).send(resultData); //send new token and user object
 					}
@@ -247,7 +247,7 @@ deleteReminder: function(scriptID, next) {
 		if(err){next(new Error(err))}
 		console.log("ironID: ", script.reminderID);
 		var ironID = script.reminderID;
-		Model.script.remove({"_id": reminderID}, function(err){
+		Model.script.remove({"_id": scriptID}, function(err){
 			if(err){
 				next("reminder not deleted", err);
 			}

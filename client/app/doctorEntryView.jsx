@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import $ from 'jquery';
 import Navigate from './navigate.jsx';
-import DoctorListView from './doctorListView.jsx';
 import Modal from "react-modal";
 
   var DOCTORS = [
@@ -117,7 +116,6 @@ export default class DoctorEntryView extends React.Component {
         data: JSON.stringify(toSubmit),
         success: function(res) {
           console.log(res, "has been added");
-          DoctorListView.getDocs();
         },
         error: function(err) {
           console.error("Doctor not registered: ", err);
@@ -128,8 +126,8 @@ export default class DoctorEntryView extends React.Component {
   render() {
     return (
       <div className="doctor-input">
-      <Navigate />
-      <h2>Input a new doctor</h2>
+      {/* <Navigate /> */}
+      <h2>Input a new doctor!</h2>
         <form className="doctor-entry-form">
           <div>Name</div><input id="name" type="text" onChange={this.handleChange} />
           <div>Phone</div><input id="phone" type="text" onChange={this.handleChange}></input><h6 className={(this.state.validPhone ? 'hidden' : 'invalid')}> Phone number must be 11 digits</h6><br />
@@ -141,7 +139,7 @@ export default class DoctorEntryView extends React.Component {
               DOCTORS.map((doctor) => {
                 return (
                   <option key={doctor.id} >{doctor.name}</option>
-                )
+                );
               })
             }
           </select>
@@ -149,6 +147,6 @@ export default class DoctorEntryView extends React.Component {
         </form>
         <hr />
       </div>
-    )
+    );
   }
 }

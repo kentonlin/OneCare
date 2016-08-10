@@ -83,17 +83,17 @@ export default class SymptomEntryModal extends React.Component {
                     <div>{symptom.name}</div>
                   </div>
                 )
-              })  
+              })
             }
           </div>
           <h4>We recommend:</h4>
-            <div className={this.state.currentRec && this.state.currentRec.id === 1000 ? '' : 'hidden'}>We're glad to have been of assistance!</div> 
+            <div className={this.state.currentRec && this.state.currentRec.id === 1000 ? '' : 'hidden'}>We're glad to have been of assistance!</div>
             <div className={this.state.isInRolodex ? '' : 'hidden'}>
               <DoctorView
                 name={this.state.currentRec ? this.state.currentRec.name : ''} 
-                phone={this.state.currentRec ? this.state.currentRec.phone : ''} 
-                email={this.state.currentRec ? this.state.currentRec.email : ''} 
-                address={this.state.currentRec ? this.state.currentRec.address : ''} 
+                phone={this.state.currentRec ? this.state.currentRec.phone : ''}
+                email={this.state.currentRec ? this.state.currentRec.email : ''}
+                address={this.state.currentRec ? this.state.currentRec.address : ''}
                 specialty={this.state.currentRec ? this.state.currentRec.specialty : ''} />
             </div>
             <div className={this.state.currentRec && this.state.currentRec.id !== 1000 && !this.state.isInRolodex ? '' : 'hidden'}>

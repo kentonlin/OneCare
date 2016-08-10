@@ -1,4 +1,4 @@
-import React from 'react'; 
+import React from 'react';
 import { shallow } from 'enzyme'; // Method from enzyme which allows us to do shallow render
 import DoctorEntryView from '../client/app/doctorEntryView.jsx';
 

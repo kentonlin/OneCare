@@ -3,6 +3,13 @@ body {
   font-family: 'Lato', sans-serif;
 }
 
+/*.iframe {
+  width:"650";
+  height:"450";
+  frameborder:"0";
+  style:"border:0";
+}*/
+
 .title {
   color: #FFFFFF;
   padding-left: 15px;
