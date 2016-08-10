@@ -4,6 +4,7 @@ import Modal from 'react-modal';
 import $ from 'jquery';
 import DoctorView from './doctorView.jsx';
 import { Link } from 'react-router';
+import BrainView from './brainView.jsx'
 
 
 export default class SymptomEntryModal extends React.Component {
@@ -72,7 +73,7 @@ export default class SymptomEntryModal extends React.Component {
   render() {
     return(
       <div>
-        <div className={!this.state.currentRec ? '' : 'hidden'}><img src="./assets/spinner.gif"></img></div>
+        <div className={!this.state.currentRec ? '' : 'hidden'}><BrainView brainState={this.props.brainState} /></div>
         <div className={this.state.cloak ? 'hidden' : '' +" recommend-modal-container"}>
           <h3 className="title modal-header">Your Selected Symptoms:</h3>
             <div className="modal-symptom-container">

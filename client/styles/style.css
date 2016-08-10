@@ -291,3 +291,51 @@ body {
 .symptom-select {
   min-height: 200px;
 }
+
+//STYLES FOR PRINTING BRAIN
+.brain-print-container {
+  background-color:blue;
+  width: 200px;
+  margin: 0 auto; 
+  max-height:100px;
+}
+
+.brain-print-block {
+  display: inline-block;
+}
+
+.brain-print-block-show {
+  display: inline-block;
+  background:red;
+  margin: 4px;
+  width:10px;
+  height:10px;
+}
+
+.brain-print-block-hide {
+  display: inline-block;
+  background:white;
+  margin: 4px;
+  width:10px;
+  height:10px;
+}
+
+//REACT ANIMATION CSS
+
+.blink-enter {
+  opacity: 0.01;
+}
+
+.blink-enter .blink-enter-active {
+  opacity: 1;
+  transition: opacity 500ms ease-in;
+}
+
+.blink-leave {
+  opacity: 1;
+}
+
+.blink-leave .blink-leave-active {
+  opacity: 0.01;
+  transition: opacity 300ms ease-in;
+}
