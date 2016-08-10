@@ -49,6 +49,7 @@ var dbFunc = {
 					res.send(new Error("script not added to user document"));
 				}
 				//call set reminder function
+				console.log("set reminder about to be called");
 				this.setReminder(script.username, newScript._id, message, time, next); //need to format time in ISO format
 			}.bind(this));
 		}.bind(this));
@@ -193,21 +194,6 @@ var dbFunc = {
 	},
 
 	setReminder: function(username, scriptID, message, time, next) {
-		/* Example data object for request
-
-		{
-    "schedules": [
-        {
-        "code_name": "test_worker",
-        "payload": "{'phone':'+18108414628','message':'from POSTMAN'}", <--- try JSON.stringify()
-        "start_at": "2016-08-09T18:43:00.196Z", --> new Date().toISOString()
-        "run_every": 86400,
-        "run_times": 10
-        }
-    ]
-	}
-		*/
-
 		console.log("sendReminder called for", username, "with the message:", message);
 		// look up user object and find their phone number
 				Model.user.findOne({"username": username}, function(err, user){
@@ -229,30 +215,59 @@ var dbFunc = {
 					   { schedules:
 					      [ { code_name: 'test_worker',
 					          payload: JSON.stringify({phone: phoneNum, message: message}),
-					          start_at: new Date().toISOString(), //need to change the date to the ISO version new Date('09 August 2016 15:05').toISOString()
-					          run_every: 86400,
+					          start_at: '2016-08-09T20:30:00.196Z', //need to change the date to the ISO version new Date('09 August 2016 15:05').toISOString()
+					          run_every: 60,
 					          run_times: 10 } ] },
 					  				json: true };
 
 					request(options, function (error, response, body) {
 					  if (error) throw new Error(error);
-					  console.log(body);
+						console.log("RESPONSE body", body.schedules[0].id); //body.schedules[0].id needs to be saved to the script document
+						Model.script.findOneAndUpdate({"_id": scriptID}, {
+							$set: {
+								reminderID: body.schedules[0].id,
+							}
+						})
+						.then(function(res) {
+							console.log("script has been saved and the reminder ID is set!!");
+							next("reminder has been saved");
+
+						})
+						.catch(function(err) {
+							next(new Error("reminder has not been saved", err));
+						});
 					});
 
 	});
 },
 
-deleteReminder: function(reminderID, next) {
+deleteReminder: function(scriptID, next) {
 	//REMOVES SCRIPT DOCUMENT (reference still persists in user doc but it won't reference anything)
-	Model.script.remove({"_id": reminderID}, function(err, user){
-		if(err){
-			next("reminder not deleted", err);
-		}
-		if(reminderManager.exists(reminderID.toString())) {
-			reminderManager.deleteJob(reminderID.toString());
-		}
-		next("reminder deleted");
-	});
+	Model.script.findOne({"_id": scriptID}, function(err, script){
+		if(err){next(new Error(err))}
+		console.log("ironID: ", script.reminderID);
+		var ironID = script.reminderID;
+		Model.script.remove({"_id": reminderID}, function(err){
+			if(err){
+				next("reminder not deleted", err);
+			}
+			var options = {
+						method: 'POST',
+					  url: 'http://worker-aws-us-east-1.iron.io/2/projects/57a8f721bc022f00078da23f/schedules/'+ ironID + '/cancel',
+					  qs: { oauth: '0DHLF4oFfGZIbMcdg2W6' },
+					  headers:
+					   { 'cache-control': 'no-cache',
+					     'content-type': 'application/json',
+					     oauth: '0DHLF4oFfGZIbMcdg2W6' }
+						 };
+			request(options, function (error, response, body) {
+			  if (error) throw new Error(error);
+				console.log("response", body)
+			})
+			next("reminder deleted");
+		});
+	})
+
 },
 
 	saveBrain: function(brainState, trainingData, name) {
