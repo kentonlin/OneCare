@@ -5,13 +5,18 @@ export default class BrainBitView extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      halting: false,
       isOn: true
     }
   }
 
+  componentWillUnmount() {
+    this.setState({halting: true});
+  }
+
   componentDidMount() {
     setInterval(() => {
-      if (this.state.isOn) {
+      if (this.state.isOn && !this.state.halting) {
         this.setState({isOn: false});
       } else {
         this.setState({isOn: true});

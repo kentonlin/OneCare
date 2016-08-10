@@ -11,6 +11,11 @@ export default class BrainView extends React.Component {
       pulses: []
     };
   }
+ 
+  componentWillUnmount() {
+    this.setState({brainState: []})
+  }
+
   render() {
     return(
       <div className="brain-print-container">
