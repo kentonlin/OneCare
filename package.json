@@ -60,7 +60,8 @@
     "underscore": "^1.8.3",
     "webpack": "^1.13.1",
     "webpack-dev-server": "^1.14.1",
-    "yargs": "^4.8.1"
+    "yargs": "^4.8.1",
+    "yelp": "^1.0.1"
   },
   "devDependencies": {
     "babel-cli": "^6.6.5",
