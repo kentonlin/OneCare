@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import $ from 'jquery';
 import Navigate from './navigate.jsx';
-import DoctorListView from './doctorListView.jsx';
 import Modal from "react-modal";
 
   var DOCTORS = [
@@ -117,7 +116,6 @@ export default class DoctorEntryView extends React.Component {
         data: JSON.stringify(toSubmit),
         success: function(res) {
           console.log(res, "has been added");
-          DoctorListView.getDocs();
         },
         error: function(err) {
           console.error("Doctor not registered: ", err);
@@ -141,7 +139,7 @@ export default class DoctorEntryView extends React.Component {
               DOCTORS.map((doctor) => {
                 return (
                   <option key={doctor.id} >{doctor.name}</option>
-                ); 
+                );
               })
             }
           </select>

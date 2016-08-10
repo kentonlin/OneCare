@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
-import DoctorListView from './doctorListView.jsx'
 
 export default class DoctorView extends React.Component {
   constructor(props) {
     super(props);
+    this.deleteDoc = this.deleteDoc.bind(this);
   }
 
   deleteDoc(id){
@@ -19,11 +19,11 @@ export default class DoctorView extends React.Component {
      data: JSON.stringify({ "docID": id }),
      success: function(data) {
        console.log("Doctor deleted");
-       location.reload()
+       location.reload();
      },
      error: function(err) {
        console.log('Doctor not deleted', err);
-       location.reload()
+       location.reload();
      }
    });
 
@@ -40,6 +40,6 @@ export default class DoctorView extends React.Component {
         <div><span className="doctor-attribute">Specialty: </span>{this.props.specialty}</div>
         <button onClick={this.deleteDoc.bind(this, this.props.id)}>Delete</button>
       </div>
-      )
+    );
   }
 }

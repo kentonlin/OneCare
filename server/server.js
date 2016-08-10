@@ -3,7 +3,7 @@ var bodyParser = require('body-parser');
 var dbHelpers = require('../db/dbhelper.js');
 var path = require('path');
 var app = express();
-// var brain = require('./brain.js');
+var brain = require('./brain.js');
 var twilio = require('twilio');
 
 app.use(express.static('public'));
@@ -56,6 +56,11 @@ app.post('/api/doctor/add', function(req, res) {
   dbHelpers.addDoc(newDoc, res);
 });
 
+app.post('/api/doctor/delete', function(req, res, next) {
+  var docID = req.body.docID;
+  dbHelpers.deleteDoc(docID, res, next);
+}); 
+
 // Add doctor to user model
 app.post('/api/user/doctor/add', function(req, res) {
   var data = req.body;
@@ -100,7 +105,7 @@ app.post('/api/symptomEntry/add', function(req, res) {
 });
 
 app.post('/api/brain/recommend', function(req, res) {
-  var username = req.body.username; 
+  var username = req.body.username;
   var symptoms = req.body.symptoms;
   console.log("The brain shall now ponder: ", symptoms);
   var data = brain.OCBrain.activate(symptoms);

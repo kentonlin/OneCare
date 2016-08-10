@@ -24,8 +24,9 @@ export default class Profile extends React.Component {
     this.deleteDoc = this.deleteDoc.bind(this);
   }
 
-  deleteDoc(id){
-    console.log("docID", id);
+  deleteDoc(idx){
+    console.log("index", idx);
+    var id = this.state.doctors[idx]._id;
 
     $.ajax({
      type: "POST",
@@ -38,6 +39,7 @@ export default class Profile extends React.Component {
      success: function(data) {
        console.log("Doctor deleted");
        location.reload();
+       // delete doctor object from doctor state
      },
      error: function(err) {
        console.log('Doctor not deleted', err);
@@ -158,6 +160,7 @@ export default class Profile extends React.Component {
       </Modal>
 
       <Modal
+
         isOpen={this.state.docmodalIsOpen}
         shouldCloseOnOverlayClick={false}
       >
@@ -165,8 +168,18 @@ export default class Profile extends React.Component {
           <button onClick={this.closeModalDoctor}>Exit</button>
       </Modal>
 
+      <Modal
+        // isOpen={this.state.mapmodalIsOpen}
+        // shouldCloseOnOverlayClick={false}
+      >
+      {/* <googleMap />  */}
+        {/* <button onClick={this.closeModalMap}>Exit</button> */}
+      </Modal>
+      {/* <iframe class="iframe"
+      src="https://www.google.com/maps/embed/v1/search?key=AIzaSyBhG1RlpbrHkSrWanCqpBMyARNUXqZnz08&q=pharmacy+in+newyork+bayside" allowfullscreen>
+      </iframe> */}
 
-      <h2> Prescriptions </h2>
+      <h2> Profile {window.localStorage.username} </h2>
 
              {
               this.state.scripts.map((script, idx) => {
@@ -175,8 +188,12 @@ export default class Profile extends React.Component {
                   <div className="single-script">
                     <li> <span className="user-script"> Name: </span> {script.name} </li>
                     <li> <span className="user-script"> Dosage: </span> {script.dosage} </li>
-                    <li> <span className="user-script"> Frequency: </span> {script.frequency} </li>
-                    <li> <span className="user-script"> Refill Date: </span> {script.refill} </li>
+                    <li> <span className="user-script"> Frequency </span> {script.frequency} </li>
+                    <li> <span className="user-script"> Recurring </span> {script.recur} </li>
+                    <li> <span className="user-script"> Refill Date </span> {script.refill} </li>
+                    <li> <span className="user-script"> Refill Reminder </span> {script.refillRemind} </li>
+                    <li> <span className="user-script"> Refill Reminder </span> {script.dailyRemind} </li>
+                    <li> <span className="user-script"> Phone: </span> {script.phone} </li>
                   </div>
                  <button onClick={this.deleteReminder.bind(this, idx)} >Delete</button>
                  </ul>
