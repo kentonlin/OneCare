@@ -141,7 +141,7 @@ export default class DoctorEntryView extends React.Component {
               DOCTORS.map((doctor) => {
                 return (
                   <option key={doctor.id} >{doctor.name}</option>
-                )
+                ); 
               })
             }
           </select>
@@ -149,6 +149,6 @@ export default class DoctorEntryView extends React.Component {
         </form>
         <hr />
       </div>
-    )
+    );
   }
 }

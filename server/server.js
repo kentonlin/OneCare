@@ -100,7 +100,7 @@ app.post('/api/symptomEntry/add', function(req, res) {
 });
 
 app.post('/api/brain/recommend', function(req, res) {
-  var username = req.body.username
+  var username = req.body.username; 
   var symptoms = req.body.symptoms;
   console.log("The brain shall now ponder: ", symptoms);
   var data = brain.OCBrain.activate(symptoms);

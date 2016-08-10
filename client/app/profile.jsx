@@ -151,8 +151,7 @@ export default class Profile extends React.Component {
       <Modal
         isOpen={this.state.scriptmodalIsOpen}
         shouldCloseOnOverlayClick={false}
-        // onRequestClose={this.closeModalScript}
-        >
+      >
           <ScriptRemind />
           <button onClick={this.closeModalScript}>Exit</button>
 
@@ -161,8 +160,7 @@ export default class Profile extends React.Component {
       <Modal
         isOpen={this.state.docmodalIsOpen}
         shouldCloseOnOverlayClick={false}
-        // onRequestClose={this.closeModalDoctor}
-        >
+      >
           <DoctorEntryView />
           <button onClick={this.closeModalDoctor}>Exit</button>
       </Modal>
