@@ -140,9 +140,10 @@ app.post('/api/brain/add', function(req, res) {
 });
 
 app.get('/yelpshit', function(req, res) {
-  yelp.search({ term: 'doctor', location: 'New+York' })
+  yelp.search({ term: 'haircut', location: '10001' })
   .then(function(data) {
     console.log(data);
+    res.send('hayrish');
   })
   .catch(function(err) {
     console.error(err);
@@ -150,10 +151,10 @@ app.get('/yelpshit', function(req, res) {
 });
 
 var yelp = new Yelp({
-  consumer_key: 'KdzFVkM8FBBCGrbDDyxtwg',
-  consumer_secret: 'I8yoCqbXPUq6gm76SwManEl19Oo',
-  token: 'OUS1wKk36mJckzoMqbeBz7tKE16K3oSK',
-  token_secret: 'WYZ_atOGdkzRy3OnsegGf0JkonU'
+  consumer_key: '1GCGSst4AI3oOk0DnqltxA',
+  consumer_secret: 'O9ocbqwcV23tNrWIpXzqseTIFEE',
+  token: 'GDNZad3iIfLT1-gEoPfXpU7ultv9fTZx',
+  token_secret: '8w-B0W2XoCWds244gwpoBhbbeaM'
 });
 
 

@@ -193,6 +193,23 @@ var dbFunc = {
 	  }
 	},
 
+	getZip: function(username, res) {
+		if (!username.username) {
+			console.log('no usern@me found');
+		}
+		else {
+			Model.user.findOne({'username': username.username}, function(err, user) {
+				if (err) {
+					console.error(err);
+				}
+				else {
+					console.log('++++++++++++++>', user.zipcode);
+					res.status(200).send();
+				}
+			})
+		}
+	},
+
 	addSymptom: function(data, res) {
 		var newSymptom = new Model.symptom(data);
 			newSymptom.save(function(err) {

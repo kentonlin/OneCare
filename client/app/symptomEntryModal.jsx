@@ -18,6 +18,7 @@ export default class SymptomEntryModal extends React.Component {
     };
     this.upvote = this.upvote.bind(this);
     this.downvote = this.downvote.bind(this);
+    this.yalp = this.yalp.bind(this);
   };
 
   componentWillReceiveProps(nextProps) {
@@ -30,6 +31,7 @@ export default class SymptomEntryModal extends React.Component {
         this.setState({isInRolodex: false});
         this.setState({cloak: false});
       }
+      // list is in reverse order
       this.setState({currentRec: nextProps.recommendations[nextProps.recommendations.length-1]});
     }
   }
@@ -69,6 +71,11 @@ export default class SymptomEntryModal extends React.Component {
     }
   }
 
+  yalp() {
+    var lel = 'lel';
+    console.log(lel);
+  }
+
   render() {
     return(
       <div>
@@ -99,6 +106,8 @@ export default class SymptomEntryModal extends React.Component {
             <div className={this.state.currentRec && this.state.currentRec.id !== 1000 && !this.state.isInRolodex ? '' : 'hidden'}>
               <h3>Oops...</h3>
               <div>We were about to recommend your <strong>{this.state.currentRec ? this.state.currentRec.name : '**empty**'}</strong>, but it appears you do not have one listed.  <Link to='/newdoctor'>Click here to register a new {this.state.currentRec ? this.state.currentRec.name : '**empty**'}!</Link></div>
+              <div>Or check out some of these {this.state.currentRec ? this.state.currentRec.name : '**empty**'}s near HARDCODEDZIP****10001****HARDCODEDZIP</div>
+              <button className={(this.state.currentRec && this.state.currentRec.id !== 1000 ? '' : 'hidden')+' modal-button'} onClick={this.yalp}>Show me the money</button>
             </div>
           <button className={(this.state.currentRec && this.state.currentRec.id !== 1000 ? '' : 'hidden')+' modal-button'} onClick={this.upvote}>Thanks!</button>
           <button className={(this.state.currentRec && this.state.currentRec.id !== 1000 ? '' : 'hidden')+' modal-button'} onClick={this.downvote}>Sorry, try again.</button>
