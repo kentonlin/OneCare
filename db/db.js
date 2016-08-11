@@ -27,7 +27,8 @@ var userSchema = new Schema({
 	password: {type: String, required: true },
 	address: String,
 	phone: String,
-	zipcode: Number,
+	// zipcode: Number,
+	zipcode: String, 
 	scripts: [{type: Schema.Types.ObjectId, ref: 'Script'}],
 	doctors: [{type: Schema.Types.ObjectId, ref: 'Doctor'}]// script models for user
 });
