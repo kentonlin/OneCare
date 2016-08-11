@@ -37457,6 +37457,20 @@
 	  }
 
 	  _createClass(Navigate, [{
+	    key: 'componentDidMount',
+	    value: function componentDidMount() {
+	      if (!window.localStorage.latitude) {
+	        navigator.geolocation.getCurrentPosition(function (location) {
+	          window.localStorage.latitude = location.coords.latitude;
+	          window.localStorage.longitude = location.coords.longitude;
+
+	          console.log("lat", location.coords.latitude);
+	          console.log("long", location.coords.longitude);
+	          console.log("accur", location.coords.accuracy);
+	        });
+	      }
+	    }
+	  }, {
 	    key: 'render',
 	    value: function render() {
 	      return _react2.default.createElement(
