@@ -12,6 +12,7 @@ export default class Profile extends React.Component {
     this.state = {
       doctors: [],
       scripts: [],
+      // zipcode: null,
       scriptmodalIsOpen: false,
       docmodalIsOpen: false,
       mapmodalIsOpen: false,
@@ -51,6 +52,7 @@ export default class Profile extends React.Component {
     this.deleteDoc = this.deleteDoc.bind(this);
     this.openModalMap = this.openModalMap.bind(this);
     this.closeModalMap = this.closeModalMap.bind(this);
+    // this.getZip = this.getZip.bind(this);
   }
 
   deleteDoc(idx){
@@ -177,9 +179,32 @@ export default class Profile extends React.Component {
     });
   }
 
+  // getZip() {
+  //   $.ajax({
+  //     type: 'POST',
+  //     url: '/api/user/zip',
+  //     headers: {
+  //       "content-type": "application/json"
+  //     },
+  //     data: JSON.stringify({"username": window.localStorage.username}),
+  //     success: function(zipcode) {
+  //       console.log("USER zipcode", zipcode);
+  //       this.setState({
+  //         zipcode: zipcode
+  //       });
+  //     }.bind(this),
+  //     error: function(err) {
+  //       console.log('Could not retrieve user zipcode', err);
+  //     }
+  //   });
+  // }
+
+
+
   componentDidMount() {
     this.getScripts();
     this.getDocs();
+    // this.getZip();
   }
 
   render() {
@@ -188,9 +213,9 @@ export default class Profile extends React.Component {
       <Navigate />
       <h1> My Profile </h1>
           <div className="allScripts">
-      <button onClick={this.openModalScript}> Enter New Prescription </button>
-      <button onClick={this.openModalDoctor}> Enter New Doctor </button>
-      <button onClick={this.openModalMap}> Enter New Map </button>
+      <button onClick={this.openModalScript}> New Prescription </button>
+      <button onClick={this.openModalDoctor}> New Doctor </button>
+      <button onClick={this.openModalMap}> Nearest Pharmacy </button>
 
       <Modal
         isOpen={this.state.scriptmodalIsOpen}
@@ -214,7 +239,9 @@ export default class Profile extends React.Component {
         isOpen={this.state.mapmodalIsOpen}
         shouldCloseOnOverlayClick={false}
       >
-        <Map />
+        <Map
+        // zipcode = {this.state}
+        />
         <button onClick={this.closeModalMap}>Exit</button>
       </Modal>
 

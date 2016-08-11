@@ -39,7 +39,7 @@ import Modal from "react-modal";
     {id: 33, name: 'Surgeon‎'},
     {id: 34, name: 'Toxicologist'},
     {id: 35, name: 'Urologist'}
-  ]
+  ];
 
 
 export default class DoctorEntryView extends React.Component {
@@ -54,7 +54,7 @@ export default class DoctorEntryView extends React.Component {
       specialty: "",
       validPhone: false,
       validSpecialty: false
-    }
+    };
     this.handleChange = this.handleChange.bind(this);
     this.submitNewDoctor = this.submitNewDoctor.bind(this);
   }
@@ -84,7 +84,7 @@ export default class DoctorEntryView extends React.Component {
       alert("Please enter a valid phone and specialty");
     }
     else if(!this.state.name.length && !this.state.validSpecialty) {
-      alert("Please enter a valid name and specialty")
+      alert("Please enter a valid name and specialty");
     }
     else if(!this.state.name.length && !this.state.validPhone){
       alert("Please enter a valid name and phone");
@@ -105,7 +105,7 @@ export default class DoctorEntryView extends React.Component {
         email: this.state.email,
         address: this.state.address,
         specialty: this.state.specialty
-      }}
+      }};
 
       $.ajax({
         type: "POST",
@@ -116,6 +116,9 @@ export default class DoctorEntryView extends React.Component {
         data: JSON.stringify(toSubmit),
         success: function(res) {
           console.log(res, "has been added");
+          // function doctorlistview.adddoc() being called would render the page profile again.
+          // maybe try and call profile.getDocs() will rerender the profile.
+          
         },
         error: function(err) {
           console.error("Doctor not registered: ", err);

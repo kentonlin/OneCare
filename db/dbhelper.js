@@ -21,6 +21,16 @@ var request = require("request");
 
 
 var dbFunc = {
+	getZip: function(username, res) {
+		Model.user.findOne({"username": username}, function(err, user) {
+			if(err) {
+				console.log('username not found');
+			}
+			console.log('user object in get zip'); 	
+			console.log('zipcode for user found', user.zipcode);
+			res.send(user.zipcode);
+		})
+	}
 
 	addScript: function(script, res, next) {
 		/*
