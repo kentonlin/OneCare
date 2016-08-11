@@ -19,11 +19,15 @@ export default class ScriptRemindView extends React.Component {
       "dosageAmt": 0,
       "dosageMeasure": 'mg',
       "date": date,
-      "reminderTime": null,
+      "reminderTime1": null,
+      "reminderTime2": null,
+      "reminderTime3": null,
       "scheduleFreq": "1x",
       "scheduleDayWeek": "day",
       "invalidName": false,
-      "invalidReminderTime": false
+      "invalidReminderTime": false,
+      "hasTwo": false,
+      "hasThree": false
     };
   var date = new Date();
   this.updateDrugName = this.updateDrugName.bind(this);
@@ -33,7 +37,10 @@ export default class ScriptRemindView extends React.Component {
   this.handleRefillDate = this.handleRefillDate.bind(this);
   this.handleDoseMeasurement = this.handleDoseMeasurement.bind(this);
   this.handleScheduleDayWeek = this.handleScheduleDayWeek.bind(this);
-  this.handleReminderTime = this.handleReminderTime.bind(this);
+  this.handleReminderTime1 = this.handleReminderTime1.bind(this);
+  this.handleReminderTime2 = this.handleReminderTime2.bind(this);
+  this.handleReminderTime3 = this.handleReminderTime3.bind(this);
+
 
   }
 
@@ -76,18 +83,42 @@ export default class ScriptRemindView extends React.Component {
     handleFrequency(frequency) {
       console.log("current state", this.state);
       console.log("handleFreq called with", frequency.target.value);
+      if(frequency.target.value === '2x'){
+        this.setState({
+          hasTwo: true,
+          hasThree: false
+        })
+      }
+      if(frequency.target.value === '3x'){
+        this.setState({
+          hasTwo: true,
+          hasThree: true
+        })
+      }
+      if(frequency.target.value === '1x'){
+        this.setState({
+          hasTwo: false,
+          hasThree: false
+        })
+      }
       this.setState({
         scheduleFreq: frequency.target.value
       });
     }
 
-    handleReminderTime(time){
-      console.log("actual time format", time);
-      console.log("handleReminderTime called with", moment(time).format('LT'));
+    handleReminderTime1(time){
       this.setState({
-        "reminderTime": moment(time).format('LT'),
-        "invalidReminderTime": true
-      });
+        reminderTime1: new Date(moment(time).format()).toISOString()
+      })
+    }
+    handleReminderTime2(time){
+      this.setState({
+        reminderTime2: new Date(moment(time).format()).toISOString()
+      })
+    }handleReminderTime3(time){
+      this.setState({
+        reminderTime3: new Date(moment(time).format()).toISOString()
+      })
     }
 
     submitForm () {
@@ -98,16 +129,16 @@ export default class ScriptRemindView extends React.Component {
       else if(!this.state.invalidName){
         alert("Please enter a prescription name");
       }
-      else if(!this.state.invalidReminderTime){
-        alert("Please enter a reminder time");
-      }
+      // else if(!this.state.invalidReminderTime){
+      //   alert("Please enter a reminder time");
+      // }
       else {
         var script = {
           "name": this.state.currentDrug,
           "dosage": this.state.dosageAmt + ' ' + this.state.dosageMeasure,
-          "refill": this.state.date,
+          "refill": new Date(moment(this.state.date).format()).toISOString(),
           "frequency": this.state.scheduleFreq + ' per ' + this.state.scheduleDayWeek,
-          "reminderTime": this.state.reminderTime,
+          "reminderTime": [this.state.reminderTime1, this.state.reminderTime2, this.state.reminderTime3],
           "username": window.localStorage.username
         };
         console.log("submitForm called for: ", script);
@@ -178,14 +209,24 @@ export default class ScriptRemindView extends React.Component {
           </select>
         </div>
         <div>
-          <h2> Reminder Time </h2>
-          <Kronos time={this.state.reminderTime} value={''} placeholder={"Click to select a time"} onChangeDateTime={this.handleReminderTime}/>
+        <div className="reminder">
+          <h2> Reminder Time 1</h2>
+          <Kronos time={this.state.reminderTime1} value='' placeholder={"Click to select a time"} onChangeDateTime={this.handleReminderTime1}/>
           <h8 className='required'> (required) </h8>
         </div>
-        <div>
-
+        <div className={(this.state.hasTwo ? 'reminder' : 'hidden')}>
+          <h2> Reminder Time 2</h2>
+          <Kronos time={this.state.reminderTime2} value='' placeholder={"Click to select a time"} onChangeDateTime={this.handleReminderTime2}/>
+          <h8 className='required'> (required) </h8>
+        </div>
+        <div className={this.state.hasThree ? 'reminder' : 'hidden'}>
+          <h2> Reminder Time 3</h2>
+          <Kronos time={this.state.reminderTime3} value='' placeholder={"Click to select a time"} onChangeDateTime={this.handleReminderTime3}/>
+          <h8 className='required'> (required) </h8>
+        </div>
+        </div>
+        <div className='clear'>
           <button className= "remindBtn" onClick={this.submitForm}> Remind Me </button>
-
         </div>
 
       </div>

@@ -5,6 +5,7 @@ import ScriptRemind from './scriptRemind.jsx';
 import Modal from 'react-modal';
 import DoctorEntryView from './doctorEntryView.jsx';
 import Map from './map.jsx';
+import _ from 'lodash';
 
 export default class Profile extends React.Component {
   constructor(props) {
@@ -149,8 +150,8 @@ export default class Profile extends React.Component {
      },
      data: JSON.stringify({username: window.localStorage.username}),
      success: function(data) {
-       console.log('user scripts from AJAX request', data);
-       this.setState({scripts: data});
+       var sorted  = _.sortBy(data, 'refill'); //sorts scripts by refill date
+       this.setState({scripts: sorted});
      }.bind(this),
      error: function(err) {
        console.log('error in ajax request for user scripts', data);
@@ -245,30 +246,26 @@ export default class Profile extends React.Component {
         <button onClick={this.closeModalMap}>Exit</button>
       </Modal>
 
-      <h2> Profile {window.localStorage.username} </h2>
-
+      <h2> My Profile </h2>
+      <h3> Your Scripts </h3>
              {
               this.state.scripts.map((script, idx) => {
                 return (
                   <ul className="User-Scripts" key={idx}>
                   <div className="single-script">
-                    <li> <span className="user-script"> Name: </span> {script.name} </li>
-                    <li> <span className="user-script"> Dosage: </span> {script.dosage} </li>
-                    <li> <span className="user-script"> Frequency </span> {script.frequency} </li>
-                    <li> <span className="user-script"> Recurring </span> {script.recur} </li>
-                    <li> <span className="user-script"> Refill Date </span> {script.refill} </li>
-                    <li> <span className="user-script"> Refill Reminder </span> {script.refillRemind} </li>
-                    <li> <span className="user-script"> Refill Reminder </span> {script.dailyRemind} </li>
-                    <li> <span className="user-script"> Phone: </span> {script.phone} </li>
+                  <div className="script-name"> Name:{script.name} </div>
+                  <div> <span className="script-attribute"> Dosage: </span> {script.dosage} </div>
+                  <div> <span className="script-attribute"> Frequency: </span> {script.frequency} </div>
+                  <div> <span className="script-attribute"> Refill Date: </span> {String(new Date(script.refill)).split('').slice(0, 15).join('')} </div>
+                  <button onClick={this.deleteReminder.bind(this, idx)} >Delete</button>
                   </div>
-                 <button onClick={this.deleteReminder.bind(this, idx)} >Delete</button>
                  </ul>
                );
               }, this)
             }
           </div>
 
-          <h2> Your Doctors </h2>
+          <h3> Your Doctors </h3>
 
             {
               this.state.doctors.map((doctor, idx) => {

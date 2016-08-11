@@ -65,6 +65,7 @@ app.post('/api/doctor/delete', function(req, res, next) {
   dbHelpers.deleteDoc(docID, res, next);
 });
 
+
 // Add doctor to user model
 app.post('/api/user/doctor/add', function(req, res) {
   var data = req.body;

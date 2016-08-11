@@ -3,6 +3,10 @@ body {
   font-family: 'Lato', sans-serif;
 }
 
+ul {
+  list-style-type: none;
+}
+
 .title {
   color: #FFFFFF;
   padding-left: 15px;
@@ -57,6 +61,23 @@ body {
   border:1px solid black;
 }
 
+.single-script {
+  padding: 5px;
+  border-radius:2px;
+  background-color: #FFFFFF;
+  border:1px solid black;
+}
+
+.script-name {
+  font-size: 18pt;
+  font-weight: bold;
+}
+
+.script-attribute {
+  font-weight: bold;
+}
+
+
 .navbar-container {
   border-radius:2px;
   border:1px solid black;
@@ -106,6 +127,15 @@ body {
 
 .signup-container {
   padding-left: 10px;
+}
+
+.reminder {
+  float: left;
+  margin-right: 30px;
+}
+
+.clear {
+  clear: both;
 }
 
 /* STYLES FOR CALENDAR IN SCRIPT REMIND VIEW */
@@ -290,7 +320,7 @@ body {
 
 /*.STYLES FOR PRINTING BRAIN*/
 .brain-print-container {
-  margin: 0 auto; 
+  margin: 0 auto;
   width: 200px;
   height:100px;
 }
@@ -353,7 +383,7 @@ body {
   display:block;
   min-width: 50%;
 }
- 
+
  .symptom-select-select {
   display:inline-block;
   min-width: 50%;

@@ -5,24 +5,16 @@ var Model = require('./db.js');
 var jwt  = require('jwt-simple');
 var client = new twilio.RestClient(accountSid, authToken);
 var ObjectId = require('mongoose').Types.ObjectId;
-var cron = require('cron');
-var cronJob = cron.CronJob;
-var CronJobManager = require('cron-job-manager')
-var reminderManager = new CronJobManager();
 var http = require('http');
 var request = require("request");
 
-//
-//
-// var iron_worker = require('iron_worker');
-// var worker = new iron_worker.Client({token: "0DHLF4oFfGZIbMcdg2W6", project_id: "57a8f721bc022f00078da23f"});
 
 
 
 
 var dbFunc = {
 
-	// GET USER ZIP CODE // SEND USERNAME STRING 
+	// GET USER ZIP CODE // SEND USERNAME STRING
 	getZip: function(username, res) {
 		Model.user.findOne({"username": username}, function(err, user) {
 			if(err) {
@@ -42,12 +34,11 @@ var dbFunc = {
 				"dosage": '1 tablet',
 				"refill": '08-17-2016',
 				"frequency": '2x per day',
-				"reminderTime": '10:00 AM',
+				"reminderTime": '2016-08-10T20:00:00.000Z',
 				"username": 'harish'
 		}
 		*/
 		var message = "Time to take your " + script.name + ' (' + script.dosage + ')!';
-		var time = '';
 		var newScript = new Model.script(script);
 		console.log('newScript: ', newScript);
 		newScript.save(function(err){
@@ -62,7 +53,7 @@ var dbFunc = {
 				}
 				//call set reminder function
 				console.log("set reminder about to be called");
-				this.setReminder(script.username, newScript._id, message, time, next); //need to format time in ISO format
+				this.setReminder(script.username, newScript._id, message, script.reminderTime, script.refill, script.name, next); //script.reminderTime is an array of times
 			}.bind(this));
 		}.bind(this));
 
@@ -115,6 +106,7 @@ var dbFunc = {
 
 
 	/* AUTHENTICATION FUNCTION */
+
 
 	signup: function(newUser, res, next) {
 		Model.user.findOne({"username": newUser.username}, function(err, user){
@@ -204,7 +196,7 @@ var dbFunc = {
 			});
 	},
 
-	setReminder: function(username, scriptID, message, time, next) {
+	setReminder: function(username, scriptID, message, time, refillDate, drugName, next) { //time is an array
 		console.log("sendReminder called for", username, "with the message:", message);
 		// look up user object and find their phone number
 				Model.user.findOne({"username": username}, function(err, user){
@@ -215,40 +207,77 @@ var dbFunc = {
 					console.log("Number on file", phoneNum);
 					console.log("payload", JSON.stringify({phone: phoneNum, message: message}));
 
-					var options = { method: 'POST',
-					  url: 'http://worker-aws-us-east-1.iron.io/2/projects/57a8f721bc022f00078da23f/schedules',
-					  qs: { oauth: '0DHLF4oFfGZIbMcdg2W6' },
-					  headers:
-					   { 'cache-control': 'no-cache',
-					     'content-type': 'application/json',
-					     oauth: '0DHLF4oFfGZIbMcdg2W6' },
-					  body:
-					   { schedules:
-					      [ { code_name: 'test_worker',
-					          payload: JSON.stringify({phone: phoneNum, message: message}),
-					          start_at: '2016-08-09T20:30:00.196Z', //need to change the date to the ISO version new Date('09 August 2016 15:05').toISOString()
-					          run_every: 60,
-					          run_times: 10 } ] },
-					  				json: true };
+					for(let i = 0; i < time.length; i++) {
+						if(time[i] !== null){
+							var options = {
+								method: 'POST',
+							  url: 'http://worker-aws-us-east-1.iron.io/2/projects/57a8f721bc022f00078da23f/schedules',
+							  qs: { oauth: '0DHLF4oFfGZIbMcdg2W6' },
+							  headers:
+							   { 'cache-control': 'no-cache',
+							     'content-type': 'application/json',
+							     oauth: '0DHLF4oFfGZIbMcdg2W6'
+								 },
+							  body:
+							   { schedules:
+							      [ { code_name: 'test_worker',
+							          payload: JSON.stringify({phone: phoneNum, message: message}),
+							          start_at: time[i], //need to change the date to the ISO version new Date('09 August 2016 15:05').toISOString()
+							          run_every: 60, //interval in seconds
+							          run_times: 10  //how many times until stopped
+										} ]
+								},
+							  json: true
+							};
+							console.log("parameters so far", i, refillDate, time[i]);
+							request(options, function (error, response, body) { //POST to Iron Worker to schedule the recurring texts
+							  if (error) throw new Error(error);
+								console.log("RESPONSE body", body.schedules[0].id); //body.schedules[0].id needs to be saved to the script document
+								Model.script.findOneAndUpdate({"_id": scriptID}, { //add ironID to script document
+									$push: {
+										reminderID: body.schedules[0].id,
+									}
+								})
+								.then(function(res) {
+									console.log("script has been saved and the reminder ID is set!!");
+									next("reminder has been saved");
 
-					request(options, function (error, response, body) {
-					  if (error) throw new Error(error);
-						console.log("RESPONSE body", body.schedules[0].id); //body.schedules[0].id needs to be saved to the script document
-						Model.script.findOneAndUpdate({"_id": scriptID}, {
-							$set: {
-								reminderID: body.schedules[0].id,
-							}
-						})
-						.then(function(res) {
-							console.log("script has been saved and the reminder ID is set!!");
-							next("reminder has been saved");
+								})
+								.catch(function(err) {
+									next(new Error("reminder has not been saved", err));
+								});
+							});
+					}
+				}
 
-						})
-						.catch(function(err) {
-							next(new Error("reminder has not been saved", err));
+					//set refill reminder
+
+					if(refillDate){
+						var options = {
+							method: 'POST',
+							url: 'http://worker-aws-us-east-1.iron.io/2/projects/57a8f721bc022f00078da23f/schedules',
+							qs: { oauth: '0DHLF4oFfGZIbMcdg2W6' },
+							headers:
+							 { 'cache-control': 'no-cache',
+								 'content-type': 'application/json',
+								 oauth: '0DHLF4oFfGZIbMcdg2W6'
+							 },
+							body:
+							 { schedules:
+									[ { code_name: 'test_worker',
+											payload: JSON.stringify({phone: phoneNum, message: 'Hello from OneCare! Remember to refill your ' + drugName + ' today.' }),
+											start_at: refillDate, //need to change the date to the ISO version new Date('09 August 2016 15:05').toISOString()
+											run_every: null, //interval in seconds
+											run_times: 1  //how many times until stopped
+									} ]
+							},
+							json: true
+						};
+
+						request(options, function (error, response, body) { //POST to Iron Worker to schedule the recurring texts
+							if (error) throw new Error(error);
 						});
-					});
-
+				}
 	});
 },
 
@@ -257,24 +286,29 @@ deleteReminder: function(scriptID, next) {
 	Model.script.findOne({"_id": scriptID}, function(err, script){
 		if(err){next(new Error(err))}
 		console.log("ironID: ", script.reminderID);
-		var ironID = script.reminderID;
+		var ironIDs = script.reminderID;
+		for(let i = 0; i < ironIDs.length; i++){
+			if(ironIDs[i] !== null){
+				var options = {
+					method: 'POST',
+					url: 'http://worker-aws-us-east-1.iron.io/2/projects/57a8f721bc022f00078da23f/schedules/'+ ironIDs[i] + '/cancel',
+					qs: { oauth: '0DHLF4oFfGZIbMcdg2W6' },
+					headers:
+					 { 'cache-control': 'no-cache',
+						 'content-type': 'application/json',
+						 oauth: '0DHLF4oFfGZIbMcdg2W6'
+					 }
+				};
+				request(options, function (error, response, body) {
+					if (error) throw new Error(error);
+					console.log("response", body)
+				})
+			}
+		}
 		Model.script.remove({"_id": scriptID}, function(err){
 			if(err){
 				next("reminder not deleted", err);
 			}
-			var options = {
-						method: 'POST',
-					  url: 'http://worker-aws-us-east-1.iron.io/2/projects/57a8f721bc022f00078da23f/schedules/'+ ironID + '/cancel',
-					  qs: { oauth: '0DHLF4oFfGZIbMcdg2W6' },
-					  headers:
-					   { 'cache-control': 'no-cache',
-					     'content-type': 'application/json',
-					     oauth: '0DHLF4oFfGZIbMcdg2W6' }
-						 };
-			request(options, function (error, response, body) {
-			  if (error) throw new Error(error);
-				console.log("response", body)
-			})
 			next("reminder deleted");
 		});
 	})
