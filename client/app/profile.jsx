@@ -252,7 +252,7 @@ export default class Profile extends React.Component {
                 return (
                   <ul className="User-Scripts" key={idx}>
                   <div className="single-script">
-                    <li> <span className="user-script"> Name: </span> {script.name} </li>
+                    <li> <span className="user-script"> Name: </span> {script.name} <a target="_blank" href={"https://simple.wikipedia.org/wiki/" + script.name}>(get more info)</a></li>
                     <li> <span className="user-script"> Dosage: </span> {script.dosage} </li>
                     <li> <span className="user-script"> Frequency </span> {script.frequency} </li>
                     <li> <span className="user-script"> Recurring </span> {script.recur} </li>
@@ -274,7 +274,7 @@ export default class Profile extends React.Component {
               this.state.doctors.map((doctor, idx) => {
                 return (
                   <div className="doctor-view-container" key={idx }>
-                  <div className="doctor-name">{doctor.name}</div>
+                  <div className="doctor-name">{doctor.name}</div> <a target="_blank" href={"http://www.google.com/search?q=" + doctor.name + "&btnI"}>(get more info)</a>
                   <div><span className="doctor-attribute">Phone: </span>{doctor.phone}</div>
                   <div><span className="doctor-attribute">Email: </span>{doctor.email}</div>
                   <div><span className="doctor-attribute">Address: </span>{doctor.address}</div>

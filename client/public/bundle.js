@@ -41264,9 +41264,14 @@
 	
 	    var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(DoctorView).call(this, props));
 	
+	    _this.state = {
+	      url: "http://www.google.com/search?q=" + _this.props.name + "&btnI"
+	    };
 	    _this.deleteDoc = _this.deleteDoc.bind(_this);
 	    return _this;
 	  }
+	
+	  // <a target="_blank" href={"http://www.google.com/search?q=" + this.props.name + "&btnI"}>(get more info)</a>
 	
 	  _createClass(DoctorView, [{
 	    key: "deleteDoc",
@@ -41300,7 +41305,13 @@
 	        _react2.default.createElement(
 	          "div",
 	          { className: "doctor-name" },
+	          " ",
 	          this.props.name
+	        ),
+	        _react2.default.createElement(
+	          "a",
+	          { target: "_blank", href: this.state.url },
+	          "(get more info)"
 	        ),
 	        _react2.default.createElement(
 	          "div",
@@ -42738,7 +42749,12 @@
 	                  ),
 	                  ' ',
 	                  script.name,
-	                  ' '
+	                  ' ',
+	                  _react2.default.createElement(
+	                    'a',
+	                    { target: '_blank', href: "https://simple.wikipedia.org/wiki/" + script.name },
+	                    '(get more info)'
+	                  )
 	                ),
 	                _react2.default.createElement(
 	                  'li',
@@ -42853,6 +42869,12 @@
 	              'div',
 	              { className: 'doctor-name' },
 	              doctor.name
+	            ),
+	            ' ',
+	            _react2.default.createElement(
+	              'a',
+	              { target: '_blank', href: "http://www.google.com/search?q=" + doctor.name + "&btnI" },
+	              '(get more info)'
 	            ),
 	            _react2.default.createElement(
 	              'div',

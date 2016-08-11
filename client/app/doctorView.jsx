@@ -3,8 +3,13 @@ import React, { Component } from 'react';
 export default class DoctorView extends React.Component {
   constructor(props) {
     super(props);
+    this.state = {
+      url: "http://www.google.com/search?q=" + this.props.name + "&btnI"
+    }
     this.deleteDoc = this.deleteDoc.bind(this);
   }
+
+   // <a target="_blank" href={"http://www.google.com/search?q=" + this.props.name + "&btnI"}>(get more info)</a>
 
   deleteDoc(id){
     console.log("docID", id);
@@ -33,7 +38,7 @@ export default class DoctorView extends React.Component {
   render() {
     return (
       <div className="doctor-view-container">
-        <div className="doctor-name">{this.props.name}</div>
+        <div className="doctor-name"> {this.props.name}</div><a target="_blank" href={this.state.url}>(get more info)</a>
         <div><span className="doctor-attribute">Phone: </span>{this.props.phone}</div>
         <div><span className="doctor-attribute">Email: </span>{this.props.email}</div>
         <div><span className="doctor-attribute">Address: </span>{this.props.address}</div>
@@ -43,3 +48,4 @@ export default class DoctorView extends React.Component {
     );
   }
 }
+
