@@ -28,23 +28,16 @@ app.listen(process.env.PORT || 3000, function(){
   console.log('Server is running');
 });
 
-// app.post('/api/user/zip', function(req, res) {
-//   var username = req.body.username;
-//   dbHelpers.getZip(username);
-// });
-
-// app.get('/fuckDan', function(req, res){
-//   console.log('request received at /fuckDan');
-//   res.send(JSON.stringify({"message": "Fuck Dan"}));
-// });
+// GET USER ZIPCODE
+app.post('/api/user/zip', function(req, res) {
+  // SAMPLE POST REQUEST POSTMAN
+  // {"username": "kenton"}
+  var username = req.body.username;
+  dbHelpers.getZip(username, res);
+});
 
 // Add a new reminder to the reminder collection
 app.post('/api/reminder/add', function(req, res, next) {
-  /* sample request
-        {
-
-        }
-  */
 
   console.log('request received at addScriptReminder');
 	var newScript = req.body;
@@ -91,6 +84,7 @@ app.post('/api/doctors/get', function(req, res, next) {
 
 app.post('/api/signup', function(req, res, next) {
   var userSignup = req.body;
+  console.log(userSignup);
   dbHelpers.signup(userSignup, res, next);
 });
 
