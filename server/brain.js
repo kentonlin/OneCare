@@ -311,7 +311,8 @@ var SYMPTOMS = [
     activate: activateMyBrain,
     save: saveBrain,
     delete: resetBrain,
-    doctors: sortDocs
+    doctors: sortDocs,
+    print: printBrain
   }
 };
 

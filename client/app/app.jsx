@@ -8,6 +8,7 @@ import DoctorEntryView from './doctorEntryView.jsx';
 import SymptomEntry from './symptomEntry.jsx';
 import Signup from './signup.jsx';
 import Profile from './profile.jsx';
+import BrainView from './brainView.jsx';
 
 class App extends React.Component {
 
@@ -30,6 +31,7 @@ class App extends React.Component {
             <Route path='/recommend' onEnter={this.authCheck} component={SymptomEntry} />
             <Route path='/signin' component={Signin} />
             <Route path='/signup' component={Signup} />
+            <Route path='/brain' component={BrainView} />
             <Route path='/*' component={NotFoundView} />
           </Route>
       </Router>

@@ -137,6 +137,10 @@ app.post('/api/brain/add', function(req, res) {
   brain.OCBrain.save("MainBrain");
 });
 
+app.get('/api/brain/print', function(req, res) {
+  res.send(brain.OCBrain.print());
+});
+
 app.get('/*', function(req, res) {
   res.sendFile(path.join(rootPath + "/index.html"));
 });
