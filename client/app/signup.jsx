@@ -10,7 +10,7 @@ export default class Signup extends React.Component {
       password: "",
       address: "",
       phone: "",
-      zipcode: "",
+      zipcode: 0,
       email: "",
       invalidPhone: false,
       invalidEmail: false
@@ -26,10 +26,10 @@ export default class Signup extends React.Component {
       alert("Please input a valid phone number and email");
     }
     else if (!this.state.invalidPhone) {
-      alert("Please input a valid phone number")
+      alert("Please input a valid phone number");
     }
     else if (!this.state.invalidEmail) {
-      alert("Please input a valid email")
+      alert("Please input a valid email");
     }
     else {
       window.localStorage.removeItem("currentPage");
@@ -68,16 +68,16 @@ export default class Signup extends React.Component {
   validatePhone(phone) {
     this.setState({
       invalidPhone: phone.match(/\d/g).length===10
-    })
+    }); 
   }
 
   validateEmail(email) {
     var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     console.log("test", re.test(email));
-    console.log("state", this.state.invalidEmail)
+    console.log("state", this.state.invalidEmail);
     this.setState({
       invalidEmail: re.test(email)
-    })
+    });
   }
 
   render() {
