@@ -1,6 +1,6 @@
 var accountSid = 'AC5e784cc0b718fb1573cdc572e67f4914';
 var authToken = 'e222367896ed8b225294cd28b6097fd0';
-var twilio = require('twilio')
+var twilio = require('twilio');
 var Model = require('./db.js');
 var jwt  = require('jwt-simple');
 var client = new twilio.RestClient(accountSid, authToken);

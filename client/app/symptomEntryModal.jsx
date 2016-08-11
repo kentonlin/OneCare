@@ -6,7 +6,6 @@ import DoctorView from './doctorView.jsx';
 import { Link } from 'react-router';
 import BrainView from './brainView.jsx'
 
-
 export default class SymptomEntryModal extends React.Component {
   constructor(props) {
     super(props);
@@ -19,6 +18,7 @@ export default class SymptomEntryModal extends React.Component {
     };
     this.upvote = this.upvote.bind(this);
     this.downvote = this.downvote.bind(this);
+    this.drx = this.drx.bind(this);
   };
 
   componentWillReceiveProps(nextProps) {
@@ -70,6 +70,28 @@ export default class SymptomEntryModal extends React.Component {
     }
   }
 
+  drx() {
+    var api_key = '87b39c90783391ac6ce972736d117741';
+    var query = 'rheumatology';
+    var latitude = 40.7466538;
+    var longitude = -73.9906954;
+    var location = latitude+'%2C'+longitude;
+    var resource_url = 'https://api.betterdoctor.com/2016-03-01/doctors?query='+query+'&user_location='+location+'&skip=0&limit=10&user_key='+api_key;
+
+    $.ajax({
+      type: 'GET',
+      url: resource_url,
+      success: function(data) {
+        console.log(data);
+      },
+      error: function(err) {
+        console.log('not quite right');
+      }
+    });
+
+    console.log('===============>', resource_url);
+  }
+
   render() {
     return(
       <div>
@@ -100,6 +122,8 @@ export default class SymptomEntryModal extends React.Component {
             <div className={this.state.currentRec && this.state.currentRec.id !== 1000 && !this.state.isInRolodex ? '' : 'hidden'}>
               <h3>Oops...</h3>
               <div>We were about to recommend your <strong>{this.state.currentRec ? this.state.currentRec.name : '**empty**'}</strong>, but it appears you do not have one listed.  <Link to='/newdoctor'>Click here to register a new {this.state.currentRec ? this.state.currentRec.name : '**empty**'}!</Link></div>
+              <div>Or, check out some {this.state.currentRec ? this.state.currentRec.name : '**empty**'}s near you. Click the MONEY button!</div>
+              <button onClick={this.drx}>Show me the MONEY</button>
             </div>
           <button className={(this.state.currentRec && this.state.currentRec.id !== 1000 ? '' : 'hidden')+' modal-button'} onClick={this.upvote}>Thanks!</button>
           <button className={(this.state.currentRec && this.state.currentRec.id !== 1000 ? '' : 'hidden')+' modal-button'} onClick={this.downvote}>Sorry, try again.</button>

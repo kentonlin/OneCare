@@ -22,8 +22,6 @@ app.use(function(req, res, next) {
   next();
 });
 
-
-
 app.listen(process.env.PORT || 3000, function(){
   console.log('Server is running');
 });
@@ -106,7 +104,7 @@ app.post('/api/script/remind', function(req, res, next) {
 
 app.post('/api/symptomEntry/add', function(req, res) {
   var newSympson = req.body;
-  console.log(newSympson);
+  // console.log(newSympson);
   dbHelpers.addSymptom(newSympson, res);
 });
 
@@ -115,7 +113,7 @@ app.post('/api/brain/recommend', function(req, res) {
   var symptoms = req.body.symptoms;
   console.log("The brain shall now ponder: ", symptoms);
   var data = brain.OCBrain.activate(symptoms);
-  console.log("The Brain has made its recommendation.");
+  // console.log("The brain has decided to recommend: ", data);
   //query db for user docs.
   brain.OCBrain.doctors(username, data, function(list) {res.status(200).send(list)});
 });
@@ -133,7 +131,7 @@ app.post('/api/reminder/delete', function(req, res, next){
 
 app.post('/api/brain/add', function(req, res) {
   var pair = req.body.pair;
-  res.send(brain.OCBrain.addTrainingPair(pair))
+  res.send(brain.OCBrain.addTrainingPair(pair));
   brain.OCBrain.train(1);
   brain.OCBrain.save("MainBrain");
 });
