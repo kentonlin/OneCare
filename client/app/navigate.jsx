@@ -12,6 +12,19 @@ export default class Navigate extends React.Component {
 
 }
 
+componentDidMount(){
+  if(!window.localStorage.latitude) {
+    navigator.geolocation.getCurrentPosition(function(location) {
+      window.localStorage.latitude = location.coords.latitude;
+      window.localStorage.longitude = location.coords.longitude;
+
+      console.log("lat", location.coords.latitude);
+      console.log("long", location.coords.longitude);
+      console.log("accur", location.coords.accuracy);
+    });
+  }
+}
+
   render() {
     return(
      <div className="navbar-container">
