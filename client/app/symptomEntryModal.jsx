@@ -72,7 +72,7 @@ export default class SymptomEntryModal extends React.Component {
 
   drx() {
     var api_key = '87b39c90783391ac6ce972736d117741';
-    var query = 'rheumatology';
+    var query = (this.state.currentRec ? this.state.currentRec.name : '**empty**').split(' ').join('%20');
     var latitude = 40.7466538;
     var longitude = -73.9906954;
     var location = latitude+'%2C'+longitude;
@@ -82,6 +82,8 @@ export default class SymptomEntryModal extends React.Component {
       type: 'GET',
       url: resource_url,
       success: function(data) {
+        console.log('++++++++++++++++',query);
+        console.log(window.localStorage.latitude, window.localStorage.longitude);
         console.log(data);
       },
       error: function(err) {
