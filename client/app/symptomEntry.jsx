@@ -134,10 +134,7 @@ export default class SymptomEntryView extends Component {
     this.handleRecData = this.handleRecData.bind(this);
     this.exitModal = this.exitModal.bind(this);
     this.setBrainState = this.setBrainState.bind(this);
-<<<<<<< HEAD
-=======
     this.clearSymptoms = this.clearSymptoms.bind(this);
->>>>>>> brain
   };
 
   componentDidMount() {
