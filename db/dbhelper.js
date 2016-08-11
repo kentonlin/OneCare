@@ -1,6 +1,6 @@
 var accountSid = 'AC5e784cc0b718fb1573cdc572e67f4914';
 var authToken = 'e222367896ed8b225294cd28b6097fd0';
-var twilio = require('twilio')
+var twilio = require('twilio');
 var Model = require('./db.js');
 var jwt  = require('jwt-simple');
 var client = new twilio.RestClient(accountSid, authToken);
@@ -182,6 +182,23 @@ var dbFunc = {
 	    	}
 	    });
 	  }
+	},
+
+	getZip: function(username, res) {
+		if (!username.username) {
+			console.log('no usern@me found');
+		}
+		else {
+			Model.user.findOne({'username': username.username}, function(err, user) {
+				if (err) {
+					console.error(err);
+				}
+				else {
+					console.log('++++++++++++++>', user.zipcode);
+					res.status(200).send();
+				}
+			})
+		}
 	},
 
 	addSymptom: function(data, res) {

@@ -20,7 +20,7 @@ export default class Map extends React.Component {
       height="450"
       // frameborder="0"
       // style="border:0"
-      src={"https://www.google.com/maps/embed/v1/search?key=AIzaSyCnPK2o-dXX9hTQdMA4dTXIezhxyIzfRB0&q=pharmacy+near+"+this.props. zipcode}>
+      src={"https://www.google.com/maps/embed/v1/search?key=AIzaSyCnPK2o-dXX9hTQdMA4dTXIezhxyIzfRB0&q=pharmacy+near+"+this.props.zipcode}>
       </iframe>
     );
   }

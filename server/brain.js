@@ -298,7 +298,7 @@ var SYMPTOMS = [
           finalList.push(specialty);
         }
       })
-      console.log("sorting docs.");
+      // console.log("sorting docs: ", finalList);
       next(finalList);
     });
   }

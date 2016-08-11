@@ -5,6 +5,8 @@ var path = require('path');
 var app = express();
 var brain = require('./brain.js');
 var twilio = require('twilio');
+var Yelp = require('yelp');
+
 
 app.use(express.static('public'));
 
@@ -22,8 +24,6 @@ app.use(function(req, res, next) {
   next();
 });
 
-
-
 app.listen(process.env.PORT || 3000, function(){
   console.log('Server is running');
 });
@@ -40,8 +40,8 @@ app.post('/api/user/zip', function(req, res) {
 app.post('/api/reminder/add', function(req, res, next) {
 
   console.log('request received at addScriptReminder');
-	var newScript = req.body;
-	dbHelpers.addScript(newScript, res, next);
+  var newScript = req.body;
+  dbHelpers.addScript(newScript, res, next);
 });
 
 app.post('/api/reminder/delete', function(req, res, next){
@@ -51,8 +51,8 @@ app.post('/api/reminder/delete', function(req, res, next){
 });
 
 app.post('/api/script/find', function(req, res) {
-	var username = req.body.username;
-	dbHelpers.getScripts( username, res);
+  var username = req.body.username;
+  dbHelpers.getScripts( username, res);
 });
 
 app.post('/api/doctor/add', function(req, res) {
@@ -106,7 +106,7 @@ app.post('/api/script/remind', function(req, res, next) {
 
 app.post('/api/symptomEntry/add', function(req, res) {
   var newSympson = req.body;
-  console.log(newSympson);
+  // console.log(newSympson);
   dbHelpers.addSymptom(newSympson, res);
 });
 
@@ -115,7 +115,7 @@ app.post('/api/brain/recommend', function(req, res) {
   var symptoms = req.body.symptoms;
   console.log("The brain shall now ponder: ", symptoms);
   var data = brain.OCBrain.activate(symptoms);
-  console.log("The Brain has made its recommendation.");
+  // console.log("The brain has decided to recommend: ", data);
   //query db for user docs.
   brain.OCBrain.doctors(username, data, function(list) {res.status(200).send(list)});
 });
@@ -133,7 +133,7 @@ app.post('/api/reminder/delete', function(req, res, next){
 
 app.post('/api/brain/add', function(req, res) {
   var pair = req.body.pair;
-  res.send(brain.OCBrain.addTrainingPair(pair))
+  res.send(brain.OCBrain.addTrainingPair(pair));
   brain.OCBrain.train(1);
   brain.OCBrain.save("MainBrain");
 });
@@ -145,3 +145,4 @@ app.get('/api/brain/print', function(req, res) {
 app.get('/*', function(req, res) {
   res.sendFile(path.join(rootPath + "/index.html"));
 });
+

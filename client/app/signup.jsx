@@ -10,7 +10,7 @@ export default class Signup extends React.Component {
       password: "",
       address: "",
       phone: "",
-      zipcode: 0,
+      zipcode: 10001,
       email: "",
       invalidPhone: false,
       invalidEmail: false

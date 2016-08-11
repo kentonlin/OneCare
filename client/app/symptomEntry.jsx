@@ -89,8 +89,7 @@ import SymptomEntryModal from './symptomEntryModal.jsx';
   {id: 80, name: 'Irregular/skipped heartbeat'},
   {id: 81, name: 'Rapid/pounding heartbeat'},
   {id: 82, name: 'Numbness/tingling in hands'}
-]
-
+];
 
 export default class SymptomEntryView extends Component {
   constructor(props) {
