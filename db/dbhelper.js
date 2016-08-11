@@ -22,7 +22,7 @@ var request = require("request");
 
 var dbFunc = {
 
-	// GET USER ZIP CODE // SEND USERNAME STRING 
+	// GET USER ZIP CODE // SEND USERNAME STRING
 	getZip: function(username, res) {
 		Model.user.findOne({"username": username}, function(err, user) {
 			if(err) {
