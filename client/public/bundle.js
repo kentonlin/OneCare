@@ -22052,7 +22052,217 @@
 	module.exports = ReactMount.renderSubtreeIntoContainer;
 
 /***/ },
+<<<<<<< c03b158db561c603ec9a04c7db63c4109bc2db2f
 /* 175 */,
+=======
+/* 175 */
+/*!**********************************!*\
+  !*** ./client/app/navigator.jsx ***!
+  \**********************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+	
+	var _react = __webpack_require__(/*! react */ 1);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _reactDom = __webpack_require__(/*! react-dom */ 35);
+	
+	var _reactDom2 = _interopRequireDefault(_reactDom);
+	
+	var _signin = __webpack_require__(/*! ./signin.jsx */ 176);
+	
+	var _signin2 = _interopRequireDefault(_signin);
+	
+	var _signup = __webpack_require__(/*! ./signup.jsx */ 241);
+	
+	var _signup2 = _interopRequireDefault(_signup);
+	
+	var _doctorEntryView = __webpack_require__(/*! ./doctorEntryView.jsx */ 242);
+	
+	var _doctorEntryView2 = _interopRequireDefault(_doctorEntryView);
+	
+	var _doctorListView = __webpack_require__(/*! ./doctorListView.jsx */ 244);
+	
+	var _doctorListView2 = _interopRequireDefault(_doctorListView);
+	
+	var _symptomEntry = __webpack_require__(/*! ./symptomEntry.jsx */ 266);
+	
+	var _symptomEntry2 = _interopRequireDefault(_symptomEntry);
+	
+	var _scriptRemind = __webpack_require__(/*! ./scriptRemind.jsx */ 267);
+	
+	var _scriptRemind2 = _interopRequireDefault(_scriptRemind);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+	
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+	
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; } // THIS FILE IS USELESS !!!!!!!!!!!!!!!!!!!!!!!!!!!
+	
+	
+	var Navigator = function (_React$Component) {
+	  _inherits(Navigator, _React$Component);
+	
+	  function Navigator(props) {
+	    _classCallCheck(this, Navigator);
+	
+	    var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(Navigator).call(this, props));
+	
+	    _this.state = {
+	      $mainRender: document.getElementById("main-render"),
+	      username: window.localStorage.username || "none",
+	      token: window.localStorage.token || "none"
+	    };
+	    _this.viewDocs = _this.viewDocs.bind(_this);
+	    _this.enterDocs = _this.enterDocs.bind(_this);
+	    _this.scriptReminder = _this.scriptReminder.bind(_this);
+	    _this.authCheck = _this.authCheck.bind(_this);
+	    _this.enterSympsons = _this.enterSympsons.bind(_this);
+	    return _this;
+	  }
+	
+	  //
+	
+	
+	  _createClass(Navigator, [{
+	    key: 'componentDidMount',
+	    value: function componentDidMount() {
+	      this.setState({ $mainRender: document.getElementById("main-render") });
+	      console.log("username", this.state.username, "token", this.state.token);
+	      this.authCheck(function (username, token) {
+	        console.log("authentication complete!");
+	        // this.enterDocs();
+	      });
+	    }
+	  }, {
+	    key: 'authCheck',
+	    value: function authCheck(cb) {
+	      if (this.state.username === "none" || this.state.token === "none") {
+	        var FUCK = window.localStorage.currentPage ? window.localStorage.currentPage : 'signin';
+	        window.localStorage.setItem("currentPage", FUCK);
+	        var $nextPage = window.localStorage.currentPage === 'signin' ? _react2.default.createElement(_signin2.default, null) : _react2.default.createElement(_signup2.default, null);
+	        // re-route to login page
+	        console.log("first condition hit!");
+	        _reactDom2.default.render(_react2.default.createElement(
+	          'div',
+	          null,
+	          $nextPage
+	        ), document.getElementById("app"));
+	      } else {
+	        console.log("second condition hit!");
+	        cb(this.state.username, this.state.token);
+	      }
+	    }
+	  }, {
+	    key: 'enterDocs',
+	    value: function enterDocs() {
+	      var $target = this.state.$mainRender;
+	      console.log($target);
+	      _reactDom2.default.render(_react2.default.createElement(
+	        'div',
+	        null,
+	        _react2.default.createElement(_doctorEntryView2.default, null)
+	      ), $target);
+	      console.log("Narf!");
+	    }
+	  }, {
+	    key: 'viewDocs',
+	    value: function viewDocs() {
+	      var $target = this.state.$mainRender;
+	      console.log($target);
+	      _reactDom2.default.render(_react2.default.createElement(
+	        'div',
+	        null,
+	        _react2.default.createElement(_doctorListView2.default, null)
+	      ), $target);
+	      console.log("troz!");
+	    }
+	  }, {
+	    key: 'scriptReminder',
+	    value: function scriptReminder() {
+	      var $target = this.state.$mainRender;
+	      console.log($target);
+	      _reactDom2.default.render(_react2.default.createElement(
+	        'div',
+	        null,
+	        _react2.default.createElement(_scriptRemind2.default, null)
+	      ), $target);
+	    }
+	  }, {
+	    key: 'enterSympsons',
+	    value: function enterSympsons() {
+	      var $target = this.state.$mainRender;
+	      console.log($target);
+	      _reactDom2.default.render(_react2.default.createElement(
+	        'div',
+	        null,
+	        _react2.default.createElement(_symptomEntry2.default, null)
+	      ), $target);
+	      console.log("nuts!");
+	    }
+	  }, {
+	    key: 'render',
+	    value: function render() {
+	      return _react2.default.createElement(
+	        'div',
+	        { className: 'navbar-container' },
+	        _react2.default.createElement(
+	          'h1',
+	          { className: 'title' },
+	          'Welcome to OneCare!'
+	        ),
+	        _react2.default.createElement(
+	          'div',
+	          { className: 'navbar-button-container' },
+	          _react2.default.createElement(
+	            'div',
+	            { className: 'navbar-button navbar-view-doctors', onClick: this.viewDocs },
+	            ' View Your Doctors '
+	          ),
+	          _react2.default.createElement(
+	            'div',
+	            { className: 'navbar-button navbar-enter-doctors', onClick: this.enterDocs },
+	            ' Enter New Doctor '
+	          ),
+	          _react2.default.createElement(
+	            'div',
+	            { className: 'navbar-button navbar-enter-doctors', onClick: this.scriptReminder },
+	            ' Prescription Reminder '
+	          ),
+	          _react2.default.createElement(
+	            'div',
+	            { className: 'navbar-button navbar-enter-doctors', onClick: this.enterSympsons },
+	            ' Physician Recommender '
+	          ),
+	          _react2.default.createElement(
+	            'div',
+	            { className: 'navbar-enter-doctors right logout', onClick: function onClick() {
+	                window.localStorage.removeItem("username");window.localStorage.removeItem("token");window.localStorage.removeItem("currentPage");location.reload();
+	              } },
+	            ' Logout '
+	          )
+	        )
+	      );
+	    }
+	  }]);
+	
+	  return Navigator;
+	}(_react2.default.Component);
+	
+	exports.default = Navigator;
+
+/***/ },
+>>>>>>> rebase
 /* 176 */
 /*!*******************************!*\
   !*** ./client/app/signin.jsx ***!
@@ -70489,6 +70699,7 @@
 	
 	exports.default = SymptomEntryModal;
 
+<<<<<<< c03b158db561c603ec9a04c7db63c4109bc2db2f
 /***/ },
 /* 618 */
 /*!****************************!*\
@@ -70556,6 +70767,8 @@
 	
 	exports.default = Map;
 
+=======
+>>>>>>> rebase
 /***/ }
 /******/ ]);
 //# sourceMappingURL=bundle.js.map
