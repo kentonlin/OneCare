@@ -44,7 +44,7 @@ app.post('/api/reminder/delete', function(req, res, next){
   console.log("request received at deleteScript");
   var reminderID = req.body.reminderID;
   dbHelpers.deleteReminder(reminderID, next);
-})
+}); 
 
 app.post('/api/script/find', function(req, res) {
 	var username = req.body.username;
@@ -59,7 +59,7 @@ app.post('/api/doctor/add', function(req, res) {
 app.post('/api/doctor/delete', function(req, res, next) {
   var docID = req.body.docID;
   dbHelpers.deleteDoc(docID, res, next);
-}); 
+});
 
 // Add doctor to user model
 app.post('/api/user/doctor/add', function(req, res) {
@@ -123,7 +123,7 @@ app.post('/api/reminder/delete', function(req, res, next){
   console.log("request received at deleteScript");
   var reminderID = req.body.reminderID;
   dbHelpers.deleteReminder(reminderID, next);
-})
+});
 
 app.post('/api/brain/add', function(req, res) {
   var pair = req.body.pair;
