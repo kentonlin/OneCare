@@ -31,6 +31,7 @@ export default class SymptomEntryModal extends React.Component {
         this.setState({isInRolodex: false});
         this.setState({cloak: false});
       }
+      // list is in reverse order
       this.setState({currentRec: nextProps.recommendations[nextProps.recommendations.length-1]});
     }
   }

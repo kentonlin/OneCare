@@ -5,6 +5,8 @@ var path = require('path');
 var app = express();
 var brain = require('./brain.js');
 var twilio = require('twilio');
+var Yelp = require('yelp');
+
 
 app.use(express.static('public'));
 
@@ -38,8 +40,8 @@ app.post('/api/user/zip', function(req, res) {
 app.post('/api/reminder/add', function(req, res, next) {
 
   console.log('request received at addScriptReminder');
-	var newScript = req.body;
-	dbHelpers.addScript(newScript, res, next);
+  var newScript = req.body;
+  dbHelpers.addScript(newScript, res, next);
 });
 
 app.post('/api/reminder/delete', function(req, res, next){
@@ -49,8 +51,8 @@ app.post('/api/reminder/delete', function(req, res, next){
 });
 
 app.post('/api/script/find', function(req, res) {
-	var username = req.body.username;
-	dbHelpers.getScripts( username, res);
+  var username = req.body.username;
+  dbHelpers.getScripts( username, res);
 });
 
 app.post('/api/doctor/add', function(req, res) {
@@ -143,3 +145,4 @@ app.get('/api/brain/print', function(req, res) {
 app.get('/*', function(req, res) {
   res.sendFile(path.join(rootPath + "/index.html"));
 });
+
