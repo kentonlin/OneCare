@@ -38195,7 +38195,7 @@
 	        navigator.geolocation.getCurrentPosition(function (location) {
 	          window.localStorage.latitude = location.coords.latitude;
 	          window.localStorage.longitude = location.coords.longitude;
-
+	
 	          console.log("lat", location.coords.latitude);
 	          console.log("long", location.coords.longitude);
 	          console.log("accur", location.coords.accuracy);
@@ -41148,8 +41148,8 @@
 	    value: function drx() {
 	      var api_key = '87b39c90783391ac6ce972736d117741';
 	      var query = (this.state.currentRec ? this.state.currentRec.name : '**empty**').split(' ').join('%20');
-	      var latitude = 40.7466538;
-	      var longitude = -73.9906954;
+	      var latitude = window.localStorage.latitude;
+	      var longitude = window.localStorage.longitude;
 	      var location = latitude + '%2C' + longitude;
 	      var resource_url = 'https://api.betterdoctor.com/2016-03-01/doctors?query=' + query + '&user_location=' + location + '&skip=0&limit=10&user_key=' + api_key;
 	
@@ -41158,7 +41158,6 @@
 	        url: resource_url,
 	        success: function success(data) {
 	          console.log('++++++++++++++++', query);
-	          console.log(window.localStorage.latitude, window.localStorage.longitude);
 	          console.log(data);
 	        },
 	        error: function error(err) {
