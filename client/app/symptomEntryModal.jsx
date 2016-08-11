@@ -73,7 +73,7 @@ export default class SymptomEntryModal extends React.Component {
   render() {
     return(
       <div>
-        <div className={!this.state.currentRec ? '' : 'hidden'}><BrainView brainState={this.props.brainState} /></div>
+        <div className={(!this.state.currentRec ? '' : 'hidden ') + 'brain-print-container'}><BrainView brainState={this.props.brainState} /></div>
         <div className={this.state.cloak ? 'hidden' : '' +" recommend-modal-container"}>
           <h3 className="title modal-header">Your Selected Symptoms:</h3>
             <div className="modal-symptom-container">

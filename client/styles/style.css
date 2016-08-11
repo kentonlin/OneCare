@@ -288,16 +288,11 @@ body {
 
 .hidden { display:none; }
 
-.symptom-select {
-  min-height: 200px;
-}
-
-//STYLES FOR PRINTING BRAIN
+/*.STYLES FOR PRINTING BRAIN*/
 .brain-print-container {
-  background-color:blue;
-  width: 200px;
   margin: 0 auto; 
-  max-height:100px;
+  width: 200px;
+  height:100px;
 }
 
 .brain-print-block {
@@ -306,8 +301,8 @@ body {
 
 .brain-print-block-show {
   display: inline-block;
-  background:red;
-  margin: 4px;
+  background: #6871C4;
+  margin: 2px;
   width:10px;
   height:10px;
 }
@@ -320,7 +315,7 @@ body {
   height:10px;
 }
 
-//REACT ANIMATION CSS
+/*REACT ANIMATION CSS*/
 
 .blink-enter {
   opacity: 0.01;
@@ -339,3 +334,27 @@ body {
   opacity: 0.01;
   transition: opacity 300ms ease-in;
 }
+
+/*STYLES FOR MODAL*/
+
+.symptom-select-button--inactive {
+  display: block;
+  min-width: 50%;
+}
+
+.symptom-select-button--active {
+  background-color: #09096A;
+  color: white;
+  display:block;
+  min-width: 50%;
+}
+
+.symptom-select-filter {
+  display:block;
+  min-width: 50%;
+}
+ 
+ .symptom-select-select {
+  display:inline-block;
+  min-width: 50%;
+ }

@@ -6,8 +6,6 @@ import Modal from 'react-modal';
 import SymptomEntryModal from './symptomEntryModal.jsx';
 
 
-
-
  var SYMPTOMS = [
   {id: 1, name: 'Dizziness'},
   {id: 2, name: 'Faintness'},
@@ -136,6 +134,10 @@ export default class SymptomEntryView extends Component {
     this.handleRecData = this.handleRecData.bind(this);
     this.exitModal = this.exitModal.bind(this);
     this.setBrainState = this.setBrainState.bind(this);
+<<<<<<< HEAD
+=======
+    this.clearSymptoms = this.clearSymptoms.bind(this);
+>>>>>>> brain
   };
 
   componentDidMount() {
@@ -147,6 +149,10 @@ export default class SymptomEntryView extends Component {
         'Content-Type': 'application/json'
       },
     }).then(this.setBrainState)
+  }
+
+  clearSymptoms() {
+    this.setState({selectedSymptoms: []})
   }
 
   setBrainState(state) {
@@ -208,14 +214,21 @@ export default class SymptomEntryView extends Component {
     return (
       <div>
       <Navigate />
-        <h2>Please select your symptoms from the list below.</h2>
-        <h4>Energy Level and Sleep</h4>
-        <FilteredMultiSelect className="symptom-select"
+        <h4>Please select your symptoms from the list below.</h4>
+        <FilteredMultiSelect 
+          classNames={{
+            buttonActive: 'symptom-select-button--active',
+            button: 'symptom-select-button--inactive',
+            filter: 'symptom-select-filter',
+            select: 'symptom-select-select'
+          }}
           onChange={this.handleSelectionChange}
           options={SYMPTOMS}
           selectedOptions={selectedSymptoms}
           textProp='name'
+          size={20}
           valueProp='id' />
+          
         {selectedSymptoms.length === 0 && <p>(nothing selected yet)</p>}
         {selectedSymptoms.length > 0 && <ul>
           {selectedSymptoms.map((symptom, i) => <li key={symptom.id}>
@@ -225,6 +238,7 @@ export default class SymptomEntryView extends Component {
             </button>
           </li>)}
         </ul>}
+        <button onClick={this.clearSymptoms}>Clear all</button>
         <button onClick={this.submitSymptoms}>Submit!</button>
         <Modal
           isOpen={this.state.modalIsOpen}

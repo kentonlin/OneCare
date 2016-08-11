@@ -11,9 +11,10 @@ export default class BrainView extends React.Component {
       pulses: []
     };
   }
+
   render() {
     return(
-      <div className="brain-print-container">
+      <div className={this.state.brainState ? "brain-print-container" : ""}>
         {
           this.state.brainState.output.map((val, idx) => { 
             return (
