@@ -11,7 +11,6 @@ var request = require("request");
 
 
 
-
 var dbFunc = {
 
 	// GET USER ZIP CODE // SEND USERNAME STRING
@@ -197,16 +196,17 @@ var dbFunc = {
 	},
 
 	setReminder: function(username, scriptID, message, time, refillDate, drugName, next) { //time is an array
+
 		console.log("sendReminder called for", username, "with the message:", message);
 		// look up user object and find their phone number
 				Model.user.findOne({"username": username}, function(err, user){
+										"use strict";
 					if(err){
 						next(new Error(err));
 					}
-					phoneNum = "+" + user.phone;
+					var phoneNum = "+" + user.phone;
 					console.log("Number on file", phoneNum);
 					console.log("payload", JSON.stringify({phone: phoneNum, message: message}));
-
 					for(let i = 0; i < time.length; i++) {
 						if(time[i] !== null){
 							var options = {
@@ -284,10 +284,12 @@ var dbFunc = {
 deleteReminder: function(scriptID, next) {
 	//REMOVES SCRIPT DOCUMENT (reference still persists in user doc but it won't reference anything)
 	Model.script.findOne({"_id": scriptID}, function(err, script){
+		"use strict";
 		if(err){next(new Error(err))}
 		console.log("ironID: ", script.reminderID);
 		var ironIDs = script.reminderID;
 		for(let i = 0; i < ironIDs.length; i++){
+			"use strict";
 			if(ironIDs[i] !== null){
 				var options = {
 					method: 'POST',
