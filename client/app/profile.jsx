@@ -13,7 +13,7 @@ export default class Profile extends React.Component {
     this.state = {
       doctors: [],
       scripts: [],
-      // zipcode: null,
+      inputZip: null,
       scriptmodalIsOpen: false,
       docmodalIsOpen: false,
       mapmodalIsOpen: false,
@@ -211,40 +211,43 @@ export default class Profile extends React.Component {
   render() {
     return (
       <div>
-      <Navigate />
-      <h1> My Profile </h1>
+        <Navigate />
+        <h1> My Profile </h1>
           <div className="allScripts">
-      <button onClick={this.openModalScript}> New Prescription </button>
-      <button onClick={this.openModalDoctor}> New Doctor </button>
-      <button onClick={this.openModalMap}> Nearest Pharmacy </button>
+        <button onClick={this.openModalScript}> New Prescription </button>
+        <button onClick={this.openModalDoctor}> New Doctor </button>
+        <div>
+          <input type="text" onChange={(event) => {this.setState({inputZip: event.target.value})}}/>
+          <button onClick={this.openModalMap}> Nearest Pharmacy </button>
+        </div>
 
-      <Modal
-        isOpen={this.state.scriptmodalIsOpen}
-        shouldCloseOnOverlayClick={false}
-      >
-          <ScriptRemind />
-          <button onClick={this.closeModalScript}>Exit</button>
+        <Modal
+          isOpen={this.state.scriptmodalIsOpen}
+          shouldCloseOnOverlayClick={false}
+        >
+            <ScriptRemind />
+            <button onClick={this.closeModalScript}>Exit</button>
 
-      </Modal>
+        </Modal>
 
-      <Modal
+        <Modal
 
-        isOpen={this.state.docmodalIsOpen}
-        shouldCloseOnOverlayClick={false}
-      >
-          <DoctorEntryView />
-          <button onClick={this.closeModalDoctor}>Exit</button>
-      </Modal>
+          isOpen={this.state.docmodalIsOpen}
+          shouldCloseOnOverlayClick={false}
+        >
+            <DoctorEntryView />
+            <button onClick={this.closeModalDoctor}>Exit</button>
+        </Modal>
 
-      <Modal
-        isOpen={this.state.mapmodalIsOpen}
-        shouldCloseOnOverlayClick={false}
-      >
-        <Map
-        // zipcode = {this.state}
-        />
-        <button onClick={this.closeModalMap}>Exit</button>
-      </Modal>
+        <Modal
+          isOpen={this.state.mapmodalIsOpen}
+          shouldCloseOnOverlayClick={false}
+        >
+          <Map
+          zipcode = {this.state.inputZip}
+          />
+          <button onClick={this.closeModalMap}>Exit</button>
+        </Modal>
 
       <h2> My Profile </h2>
       <h3> Your Scripts </h3>
@@ -267,20 +270,20 @@ export default class Profile extends React.Component {
 
           <h3> Your Doctors </h3>
 
-            {
-              this.state.doctors.map((doctor, idx) => {
-                return (
-                  <div className="doctor-view-container" key={idx }>
-                  <div className="doctor-name">{doctor.name}</div>
-                  <div><span className="doctor-attribute">Phone: </span>{doctor.phone}</div>
-                  <div><span className="doctor-attribute">Email: </span>{doctor.email}</div>
-                  <div><span className="doctor-attribute">Address: </span>{doctor.address}</div>
-                  <div><span className="doctor-attribute">Specialty: </span>{doctor.specialty}</div>
-                  <button onClick={this.deleteDoc.bind(this, idx)}> Delete </button>
-                  </div>
-                );
-              }, this)
-            }
+              {
+                this.state.doctors.map((doctor, idx) => {
+                  return (
+                    <div className="doctor-view-container" key={idx }>
+                    <div className="doctor-name">{doctor.name}</div>
+                    <div><span className="doctor-attribute">Phone: </span>{doctor.phone}</div>
+                    <div><span className="doctor-attribute">Email: </span>{doctor.email}</div>
+                    <div><span className="doctor-attribute">Address: </span>{doctor.address}</div>
+                    <div><span className="doctor-attribute">Specialty: </span>{doctor.specialty}</div>
+                    <button onClick={this.deleteDoc.bind(this, idx)}> Delete </button>
+                    </div>
+                  );
+                }, this)
+              }
       </div>
     );
   }

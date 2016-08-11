@@ -41601,7 +41601,7 @@
 	    _this.state = {
 	      doctors: [],
 	      scripts: [],
-	      // zipcode: null,
+	      inputZip: null,
 	      scriptmodalIsOpen: false,
 	      docmodalIsOpen: false,
 	      mapmodalIsOpen: false,
@@ -41833,9 +41833,16 @@
 	            ' New Doctor '
 	          ),
 	          _react2.default.createElement(
-	            'button',
-	            { onClick: this.openModalMap },
-	            ' Nearest Pharmacy '
+	            'div',
+	            null,
+	            _react2.default.createElement('input', { type: 'text', onChange: function onChange(event) {
+	                _this2.setState({ inputZip: event.target.value });
+	              } }),
+	            _react2.default.createElement(
+	              'button',
+	              { onClick: this.openModalMap },
+	              ' Nearest Pharmacy '
+	            )
 	          ),
 	          _react2.default.createElement(
 	            _reactModal2.default,
@@ -41870,9 +41877,9 @@
 	              isOpen: this.state.mapmodalIsOpen,
 	              shouldCloseOnOverlayClick: false
 	            },
-	            _react2.default.createElement(_map2.default
-	            // zipcode = {this.state}
-	            , null),
+	            _react2.default.createElement(_map2.default, {
+	              zipcode: this.state.inputZip
+	            }),
 	            _react2.default.createElement(
 	              'button',
 	              { onClick: this.closeModalMap },
@@ -68715,8 +68722,7 @@
 	    var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(Map).call(this, props));
 
 	    _this.state = {
-	      modalIsOpen: true,
-	      inputzipcode: 0
+	      modalIsOpen: true
 	    };
 	    return _this;
 	  }
@@ -68726,13 +68732,13 @@
 	    value: function render() {
 	      return (
 	        // var srcURL = "https://www.google.com/maps/embed/v1/search?key=AIzaSyCnPK2o-dXX9hTQdMA4dTXIezhxyIzfRB0&q=pharmacy+near+" + {this.state.zipcode}
-	        // if inputzipcode state is 0 then use the users zipcode, otherwise use the inputzipcode 
+	        // if inputzipcode state is 0 then use the users zipcode, otherwise use the inputzipcode
 	        _react2.default.createElement('iframe', {
 	          width: '650',
 	          height: '450'
 	          // frameborder="0"
 	          // style="border:0"
-	          , src: 'https://www.google.com/maps/embed/v1/search?key=AIzaSyCnPK2o-dXX9hTQdMA4dTXIezhxyIzfRB0&q=pharmacy+near+10001', allowfullscreen: true })
+	          , src: "https://www.google.com/maps/embed/v1/search?key=AIzaSyCnPK2o-dXX9hTQdMA4dTXIezhxyIzfRB0&q=pharmacy+near+" + this.props.zipcode })
 	      );
 	    }
 	  }]);
