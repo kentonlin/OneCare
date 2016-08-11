@@ -4,6 +4,7 @@ import Navigate from './navigate.jsx';
 import ScriptRemind from './scriptRemind.jsx';
 import Modal from 'react-modal';
 import DoctorEntryView from './doctorEntryView.jsx';
+import Map from './map.jsx';
 
 export default class Profile extends React.Component {
   constructor(props) {
@@ -11,8 +12,35 @@ export default class Profile extends React.Component {
     this.state = {
       doctors: [],
       scripts: [],
+      // zipcode: null,
       scriptmodalIsOpen: false,
-      docmodalIsOpen: false
+      docmodalIsOpen: false,
+      mapmodalIsOpen: false,
+      modalStyles: {
+        overlay : {
+          position          : 'fixed',
+          top               : 0,
+          left              : 0,
+          right             : 0,
+          bottom            : 0,
+          backgroundColor   : 'rgba(255, 255, 255, 0.75)'
+        },
+        content : {
+          position                   : 'absolute',
+          top                        : '10%',
+          left                       : '10%',
+          right                      : '30%',
+          bottom                     : '30%',
+          border                     : '4px solid #ccc',
+          background                 : '#fff',
+          overflow                   : 'auto',
+          WebkitOverflowScrolling    : 'touch',
+          borderRadius               : '4px',
+          outline                    : 'none',
+          padding                    : '20px'
+
+        }
+      },
     };
     this.openModalScript = this.openModalScript.bind(this);
     this.closeModalScript = this.closeModalScript.bind(this);
@@ -22,6 +50,9 @@ export default class Profile extends React.Component {
     this.deleteReminder= this.deleteReminder.bind(this);
     this.getDocs = this.getDocs.bind(this);
     this.deleteDoc = this.deleteDoc.bind(this);
+    this.openModalMap = this.openModalMap.bind(this);
+    this.closeModalMap = this.closeModalMap.bind(this);
+    // this.getZip = this.getZip.bind(this);
   }
 
   deleteDoc(idx){
@@ -83,6 +114,12 @@ export default class Profile extends React.Component {
     });
   }
 
+  openModalMap() {
+    this.setState({
+      mapmodalIsOpen: true
+    });
+  }
+
  closeModalScript() {
    this.setState({
      scriptmodalIsOpen: false
@@ -92,6 +129,12 @@ export default class Profile extends React.Component {
  closeModalDoctor() {
    this.setState({
      docmodalIsOpen: false
+   });
+ }
+
+ closeModalMap() {
+   this.setState({
+     mapmodalIsOpen: false
    });
  }
 
@@ -136,9 +179,32 @@ export default class Profile extends React.Component {
     });
   }
 
+  // getZip() {
+  //   $.ajax({
+  //     type: 'POST',
+  //     url: '/api/user/zip',
+  //     headers: {
+  //       "content-type": "application/json"
+  //     },
+  //     data: JSON.stringify({"username": window.localStorage.username}),
+  //     success: function(zipcode) {
+  //       console.log("USER zipcode", zipcode);
+  //       this.setState({
+  //         zipcode: zipcode
+  //       });
+  //     }.bind(this),
+  //     error: function(err) {
+  //       console.log('Could not retrieve user zipcode', err);
+  //     }
+  //   });
+  // }
+
+
+
   componentDidMount() {
     this.getScripts();
     this.getDocs();
+    // this.getZip();
   }
 
   render() {
@@ -147,8 +213,9 @@ export default class Profile extends React.Component {
       <Navigate />
       <h1> My Profile </h1>
           <div className="allScripts">
-      <button onClick={this.openModalScript}> Enter New Prescription </button>
-      <button onClick={this.openModalDoctor}> Enter New Doctor </button>
+      <button onClick={this.openModalScript}> New Prescription </button>
+      <button onClick={this.openModalDoctor}> New Doctor </button>
+      <button onClick={this.openModalMap}> Nearest Pharmacy </button>
 
       <Modal
         isOpen={this.state.scriptmodalIsOpen}
@@ -169,15 +236,14 @@ export default class Profile extends React.Component {
       </Modal>
 
       <Modal
-        // isOpen={this.state.mapmodalIsOpen}
-        // shouldCloseOnOverlayClick={false}
+        isOpen={this.state.mapmodalIsOpen}
+        shouldCloseOnOverlayClick={false}
       >
-      {/* <googleMap />  */}
-        {/* <button onClick={this.closeModalMap}>Exit</button> */}
+        <Map
+        // zipcode = {this.state}
+        />
+        <button onClick={this.closeModalMap}>Exit</button>
       </Modal>
-      {/* <iframe class="iframe"
-      src="https://www.google.com/maps/embed/v1/search?key=AIzaSyBhG1RlpbrHkSrWanCqpBMyARNUXqZnz08&q=pharmacy+in+newyork+bayside" allowfullscreen>
-      </iframe> */}
 
       <h2> Profile {window.localStorage.username} </h2>
 
