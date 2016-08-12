@@ -3,8 +3,10 @@ import ReactDOM from 'react-dom';
 import Modal from 'react-modal';
 import $ from 'jquery';
 import DoctorView from './doctorView.jsx';
+import BrainView from './brainView.jsx';
+import DRXView from './DRXView.jsx';
 import { Link } from 'react-router';
-import BrainView from './brainView.jsx'
+
 
 export default class SymptomEntryModal extends React.Component {
   constructor(props) {
@@ -14,11 +16,13 @@ export default class SymptomEntryModal extends React.Component {
       index: 2,
       currentRec: null,
       isInRolodex: true,
-      cloak: true
+      cloak: true,
+      drxs: []
     };
     this.upvote = this.upvote.bind(this);
     this.downvote = this.downvote.bind(this);
     this.drx = this.drx.bind(this);
+    this.assignDrx = this.assignDrx.bind(this);
   };
 
   componentWillReceiveProps(nextProps) {
@@ -57,9 +61,10 @@ export default class SymptomEntryModal extends React.Component {
   }
 
   downvote() {
-    this.setState({index: this.state.index+1})
+    this.setState({index: this.state.index+1});
+    this.setState({drxs: []});
     if (this.state.index < this.props.recommendations.length) {
-      var rec = this.props.recommendations[this.props.recommendations.length - this.state.index]
+      var rec = this.props.recommendations[this.props.recommendations.length - this.state.index];
       this.setState({currentRec: rec});
       if(rec.specialty) {
         this.setState({isInRolodex: true});
@@ -71,27 +76,32 @@ export default class SymptomEntryModal extends React.Component {
     }
   }
 
+  // MAKES AJAX CALL TO BETTER DOCTORS API
   drx() {
     var api_key = '87b39c90783391ac6ce972736d117741';
     var query = (this.state.currentRec ? this.state.currentRec.name : '**empty**').split(' ').join('%20');
     var latitude = window.localStorage.latitude;
     var longitude = window.localStorage.longitude;
     var location = latitude+'%2C'+longitude;
-    var resource_url = 'https://api.betterdoctor.com/2016-03-01/doctors?query='+query+'&user_location='+location+'&skip=0&limit=10&user_key='+api_key;
+    var resource_url = 'https://api.betterdoctor.com/2016-03-01/doctors?query='+query+'&user_location='+location+'&skip=0&limit=3&user_key='+api_key;
 
     $.ajax({
       type: 'GET',
       url: resource_url,
-      success: function(data) {
-        console.log('++++++++++++++++',query);
-        console.log(data);
-      },
+      success: this.assignDrx,
       error: function(err) {
         console.log('not quite right');
       }
     });
 
     console.log('===============>', resource_url);
+  }
+
+  // UPDATES DRXS STATE FROM SUCCESSFUL AJAX CALL
+  assignDrx(drxs) {
+    this.setState({
+      drxs: drxs.data
+    });
   }
 
   render() {
@@ -126,6 +136,7 @@ export default class SymptomEntryModal extends React.Component {
               <div>We were about to recommend your <strong>{this.state.currentRec ? this.state.currentRec.name : '**empty**'}</strong>, but it appears you do not have one listed.  <Link to='/newdoctor'>Click here to register a new {this.state.currentRec ? this.state.currentRec.name : '**empty**'}!</Link></div>
               <div>Or, check out some {this.state.currentRec ? this.state.currentRec.name : '**empty**'}s near you. Click the MONEY button!</div>
               <button onClick={this.drx}>Show me the MONEY</button>
+              {this.state.drxs.map((doctrx, i) => <DRXView info={doctrx}/>)}
             </div>
           <button className={(this.state.currentRec && this.state.currentRec.id !== 1000 ? '' : 'hidden')+' modal-button'} onClick={this.upvote}>Thanks!</button>
           <button className={(this.state.currentRec && this.state.currentRec.id !== 1000 ? '' : 'hidden')+' modal-button'} onClick={this.downvote}>Sorry, try again.</button>
