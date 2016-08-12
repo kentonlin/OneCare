@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import $ from 'jquery';
 import BrainBitView from './brainBitView.jsx';
 
-
 export default class BrainView extends React.Component {
   constructor(props) {
     super(props);

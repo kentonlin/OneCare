@@ -37934,7 +37934,7 @@
 	      password: "",
 	      address: "",
 	      phone: "",
-	      zipcode: 0,
+	      zipcode: 10001,
 	      email: "",
 	      invalidPhone: false,
 	      invalidEmail: false
@@ -41103,6 +41103,7 @@
 	          this.setState({ isInRolodex: false });
 	          this.setState({ cloak: false });
 	        }
+	        // list is in reverse order
 	        this.setState({ currentRec: nextProps.recommendations[nextProps.recommendations.length - 1] });
 	      }
 	    }
@@ -41329,9 +41330,14 @@
 	
 	    var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(DoctorView).call(this, props));
 	
+	    _this.state = {
+	      url: "http://www.google.com/search?q=" + _this.props.name + "&btnI"
+	    };
 	    _this.deleteDoc = _this.deleteDoc.bind(_this);
 	    return _this;
 	  }
+	
+	  // <a target="_blank" href={"http://www.google.com/search?q=" + this.props.name + "&btnI"}>(get more info)</a>
 	
 	  _createClass(DoctorView, [{
 	    key: "deleteDoc",
@@ -41364,7 +41370,13 @@
 	        _react2.default.createElement(
 	          "div",
 	          { className: "doctor-name" },
+	          " ",
 	          this.props.name
+	        ),
+	        _react2.default.createElement(
+	          "a",
+	          { target: "_blank", href: this.state.url },
+	          "(get more info)"
 	        ),
 	        _react2.default.createElement(
 	          "div",
@@ -42915,19 +42927,30 @@
 	                'div',
 	                { className: 'single-script' },
 	                _react2.default.createElement(
-	                  'div',
-	                  { className: 'script-name' },
-	                  ' Name:',
-	                  script.name,
-	                  ' '
-	                ),
-	                _react2.default.createElement(
-	                  'div',
+	                  'li',
 	                  null,
 	                  ' ',
 	                  _react2.default.createElement(
 	                    'span',
-	                    { className: 'script-attribute' },
+	                    { className: 'user-script' },
+	                    ' Name: '
+	                  ),
+	                  ' ',
+	                  script.name,
+	                  ' ',
+	                  _react2.default.createElement(
+	                    'a',
+	                    { target: '_blank', href: "https://simple.wikipedia.org/wiki/" + script.name },
+	                    '(get more info)'
+	                  )
+	                ),
+	                _react2.default.createElement(
+	                  'li',
+	                  null,
+	                  ' ',
+	                  _react2.default.createElement(
+	                    'span',
+	                    { className: 'user-script' },
 	                    ' Dosage: '
 	                  ),
 	                  ' ',
@@ -42935,35 +42958,82 @@
 	                  ' '
 	                ),
 	                _react2.default.createElement(
-	                  'div',
+	                  'li',
 	                  null,
 	                  ' ',
 	                  _react2.default.createElement(
 	                    'span',
-	                    { className: 'script-attribute' },
-	                    ' Frequency: '
+	                    { className: 'user-script' },
+	                    ' Frequency '
 	                  ),
 	                  ' ',
 	                  script.frequency,
 	                  ' '
 	                ),
 	                _react2.default.createElement(
-	                  'div',
+	                  'li',
 	                  null,
 	                  ' ',
 	                  _react2.default.createElement(
 	                    'span',
-	                    { className: 'script-attribute' },
-	                    ' Refill Date: '
+	                    { className: 'user-script' },
+	                    ' Recurring '
 	                  ),
 	                  ' ',
-	                  String(new Date(script.refill)).split('').slice(0, 15).join(''),
+	                  script.recur,
 	                  ' '
 	                ),
 	                _react2.default.createElement(
-	                  'button',
-	                  { onClick: _this2.deleteReminder.bind(_this2, idx) },
-	                  'Delete'
+	                  'li',
+	                  null,
+	                  ' ',
+	                  _react2.default.createElement(
+	                    'span',
+	                    { className: 'user-script' },
+	                    ' Refill Date '
+	                  ),
+	                  ' ',
+	                  script.refill,
+	                  ' '
+	                ),
+	                _react2.default.createElement(
+	                  'li',
+	                  null,
+	                  ' ',
+	                  _react2.default.createElement(
+	                    'span',
+	                    { className: 'user-script' },
+	                    ' Refill Reminder '
+	                  ),
+	                  ' ',
+	                  script.refillRemind,
+	                  ' '
+	                ),
+	                _react2.default.createElement(
+	                  'li',
+	                  null,
+	                  ' ',
+	                  _react2.default.createElement(
+	                    'span',
+	                    { className: 'user-script' },
+	                    ' Refill Reminder '
+	                  ),
+	                  ' ',
+	                  script.dailyRemind,
+	                  ' '
+	                ),
+	                _react2.default.createElement(
+	                  'li',
+	                  null,
+	                  ' ',
+	                  _react2.default.createElement(
+	                    'span',
+	                    { className: 'user-script' },
+	                    ' Phone: '
+	                  ),
+	                  ' ',
+	                  script.phone,
+	                  ' '
 	                )
 	              )
 	            );
