@@ -124,13 +124,13 @@ export default class Profile extends React.Component {
  closeModalScript() {
    this.setState({
      scriptmodalIsOpen: false
-   });
+   }, this.getScripts)
  }
 
  closeModalDoctor() {
    this.setState({
      docmodalIsOpen: false
-   });
+   }, this.getDocs)
  }
 
  closeModalMap() {
@@ -139,8 +139,8 @@ export default class Profile extends React.Component {
    });
  }
 
-
   getScripts() {
+    console.log("get scripts has been called!");
     $.ajax({
      type: "POST",
      url: "/api/script/find",
@@ -150,6 +150,7 @@ export default class Profile extends React.Component {
      },
      data: JSON.stringify({username: window.localStorage.username}),
      success: function(data) {
+       console.log("data!!!!", data);
        var sorted  = _.sortBy(data, 'refill'); //sorts scripts by refill date
        this.setState({scripts: sorted});
      }.bind(this),
@@ -201,8 +202,8 @@ export default class Profile extends React.Component {
   // }
 
 
-
   componentDidMount() {
+    console.log("component has mounteD!!!");
     this.getScripts();
     this.getDocs();
     // this.getZip();
@@ -215,9 +216,9 @@ export default class Profile extends React.Component {
         <h1> My Profile </h1>
           <div className="allScripts">
         <button onClick={this.openModalScript}> New Prescription </button>
-        <button onClick={this.openModalDoctor}> New Doctor </button>
+        <button onClick={this.openModalDoctor}> New Doctor </button> <br/><br/>
         <div>
-          <input type="text" onChange={(event) => {this.setState({inputZip: event.target.value})}}/>
+          <div> Input Zipcode</div><input type="text" onChange={(event) => {this.setState({inputZip: event.target.value})}}/>
           <button onClick={this.openModalMap}> Nearest Pharmacy </button>
         </div>
 
@@ -225,7 +226,8 @@ export default class Profile extends React.Component {
           isOpen={this.state.scriptmodalIsOpen}
           shouldCloseOnOverlayClick={false}
         >
-            <ScriptRemind />
+            <ScriptRemind
+            closeFn={this.closeModalScript} />
             <button onClick={this.closeModalScript}>Exit</button>
 
         </Modal>
@@ -235,7 +237,8 @@ export default class Profile extends React.Component {
           isOpen={this.state.docmodalIsOpen}
           shouldCloseOnOverlayClick={false}
         >
-            <DoctorEntryView />
+            <DoctorEntryView
+            closeFn={this.closeModalDoctor} />
             <button onClick={this.closeModalDoctor}>Exit</button>
         </Modal>
 

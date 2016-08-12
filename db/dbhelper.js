@@ -249,20 +249,22 @@ var dbFunc = {
 							console.log("parameters so far", i, refillDate, time[i]);
 							request(options, function (error, response, body) { //POST to Iron Worker to schedule the recurring texts
 							  if (error) throw new Error(error);
-								console.log("RESPONSE body", body.schedules[0].id); //body.schedules[0].id needs to be saved to the script document
-								Model.script.findOneAndUpdate({"_id": scriptID}, { //add ironID to script document
-									$push: {
-										reminderID: body.schedules[0].id,
-									}
-								})
-								.then(function(res) {
-									console.log("script has been saved and the reminder ID is set!!");
-									next("reminder has been saved");
+								console.log("HOT BODY", body);
+								if(body.schedules){
+									Model.script.findOneAndUpdate({"_id": scriptID}, { //add ironID to script document
+										$push: {
+											reminderID: body.schedules[0].id,
+										}
+									})
+									.then(function(res) {
+										console.log("script has been saved and the reminder ID is set!!");
+										next("reminder has been saved");
 
-								})
-								.catch(function(err) {
-									next(new Error("reminder has not been saved", err));
-								});
+									})
+									.catch(function(err) {
+										next(new Error("reminder has not been saved", err));
+									});
+								}
 							});
 					}
 				}

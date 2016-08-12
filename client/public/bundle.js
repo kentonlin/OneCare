@@ -38368,14 +38368,8 @@
 	            "content-type": "application/json"
 	          },
 	          data: JSON.stringify(toSubmit),
-	          success: function success(res) {
-	            console.log(res, "has been added");
-	            // function doctorlistview.adddoc() being called would render the page profile again.
-	            // maybe try and call profile.getDocs() will rerender the profile.
-	          },
-	          error: function error(err) {
-	            console.error("Doctor not registered: ", err);
-	          }
+	          success: this.props.closeFn(),
+	          error: this.props.closeFn()
 	        });
 	      }
 	    }
@@ -42607,14 +42601,14 @@
 	    value: function closeModalScript() {
 	      this.setState({
 	        scriptmodalIsOpen: false
-	      });
+	      }, this.getScripts);
 	    }
 	  }, {
 	    key: 'closeModalDoctor',
 	    value: function closeModalDoctor() {
 	      this.setState({
 	        docmodalIsOpen: false
-	      });
+	      }, this.getDocs);
 	    }
 	  }, {
 	    key: 'closeModalMap',
@@ -42626,6 +42620,7 @@
 	  }, {
 	    key: 'getScripts',
 	    value: function getScripts() {
+	      console.log("get scripts has been called!");
 	      _jquery2.default.ajax({
 	        type: "POST",
 	        url: "/api/script/find",
@@ -42635,6 +42630,7 @@
 	        },
 	        data: JSON.stringify({ username: window.localStorage.username }),
 	        success: function (data) {
+	          console.log("data!!!!", data);
 	          var sorted = _lodash2.default.sortBy(data, 'refill'); //sorts scripts by refill date
 	          this.setState({ scripts: sorted });
 	        }.bind(this),
@@ -42689,6 +42685,7 @@
 	  }, {
 	    key: 'componentDidMount',
 	    value: function componentDidMount() {
+	      console.log("component has mounteD!!!");
 	      this.getScripts();
 	      this.getDocs();
 	      // this.getZip();
@@ -42720,9 +42717,17 @@
 	            { onClick: this.openModalDoctor },
 	            ' New Doctor '
 	          ),
+	          ' ',
+	          _react2.default.createElement('br', null),
+	          _react2.default.createElement('br', null),
 	          _react2.default.createElement(
 	            'div',
 	            null,
+	            _react2.default.createElement(
+	              'div',
+	              null,
+	              ' Input Zipcode'
+	            ),
 	            _react2.default.createElement('input', { type: 'text', onChange: function onChange(event) {
 	                _this2.setState({ inputZip: event.target.value });
 	              } }),
@@ -42738,7 +42743,8 @@
 	              isOpen: this.state.scriptmodalIsOpen,
 	              shouldCloseOnOverlayClick: false
 	            },
-	            _react2.default.createElement(_scriptRemind2.default, null),
+	            _react2.default.createElement(_scriptRemind2.default, {
+	              closeFn: this.closeModalScript }),
 	            _react2.default.createElement(
 	              'button',
 	              { onClick: this.closeModalScript },
@@ -42752,7 +42758,8 @@
 	              isOpen: this.state.docmodalIsOpen,
 	              shouldCloseOnOverlayClick: false
 	            },
-	            _react2.default.createElement(_doctorEntryView2.default, null),
+	            _react2.default.createElement(_doctorEntryView2.default, {
+	              closeFn: this.closeModalDoctor }),
 	            _react2.default.createElement(
 	              'button',
 	              { onClick: this.closeModalDoctor },
@@ -43133,14 +43140,8 @@
 	              'Content-Type': 'application/json'
 	            },
 	            data: JSON.stringify(script),
-	            success: function success(data) {
-	              alert("Your prescription was saved.");
-	              console.log('A reminder was set for: ', data);
-	            },
-	            error: function error(err) {
-	              alert("Your prescription was saved.");
-	              console.log('Reminder not set: ', err);
-	            }
+	            success: this.props.closeFn(),
+	            error: this.props.closeFn()
 	          });
 	        }
 	    }

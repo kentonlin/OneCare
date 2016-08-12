@@ -143,7 +143,6 @@ export default class ScriptRemindView extends React.Component {
         };
         console.log("submitForm called for: ", script);
 
-
         $.ajax({
             type: 'POST',
             url: '/api/reminder/add',
@@ -152,14 +151,8 @@ export default class ScriptRemindView extends React.Component {
               'Content-Type': 'application/json'
             },
             data: JSON.stringify(script),
-            success: function(data){
-              alert("Your prescription was saved.");
-              console.log('A reminder was set for: ', data);
-            },
-            error: function(err){
-              alert("Your prescription was saved.");
-              console.log('Reminder not set: ', err);
-            }
+            success: this.props.closeFn(),
+            error: this.props.closeFn()
           });
       }
     }
