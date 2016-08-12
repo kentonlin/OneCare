@@ -114,15 +114,8 @@ export default class DoctorEntryView extends React.Component {
           "content-type": "application/json"
         },
         data: JSON.stringify(toSubmit),
-        success: function(res) {
-          console.log(res, "has been added");
-          // function doctorlistview.adddoc() being called would render the page profile again.
-          // maybe try and call profile.getDocs() will rerender the profile.
-          
-        },
-        error: function(err) {
-          console.error("Doctor not registered: ", err);
-        }
+        success: this.props.closeFn(),
+        error: this.props.closeFn()
       });
     }
   }
