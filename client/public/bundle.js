@@ -37934,7 +37934,7 @@
 	      password: "",
 	      address: "",
 	      phone: "",
-	      zipcode: 0,
+	      zipcode: 10001,
 	      email: "",
 	      invalidPhone: false,
 	      invalidEmail: false
@@ -38189,6 +38189,20 @@
 	  }
 	
 	  _createClass(Navigate, [{
+	    key: 'componentDidMount',
+	    value: function componentDidMount() {
+	      if (!window.localStorage.latitude) {
+	        navigator.geolocation.getCurrentPosition(function (location) {
+	          window.localStorage.latitude = location.coords.latitude;
+	          window.localStorage.longitude = location.coords.longitude;
+	
+	          console.log("lat", location.coords.latitude);
+	          console.log("long", location.coords.longitude);
+	          console.log("accur", location.coords.accuracy);
+	        });
+	      }
+	    }
+	  }, {
 	    key: 'render',
 	    value: function render() {
 	      return _react2.default.createElement(
@@ -38354,14 +38368,8 @@
 	            "content-type": "application/json"
 	          },
 	          data: JSON.stringify(toSubmit),
-	          success: function success(res) {
-	            console.log(res, "has been added");
-	            // function doctorlistview.adddoc() being called would render the page profile again.
-	            // maybe try and call profile.getDocs() will rerender the profile.
-	          },
-	          error: function error(err) {
-	            console.error("Doctor not registered: ", err);
-	          }
+	          success: this.props.closeFn(),
+	          error: this.props.closeFn()
 	        });
 	      }
 	    }
@@ -41078,11 +41086,8 @@
 	    };
 	    _this.upvote = _this.upvote.bind(_this);
 	    _this.downvote = _this.downvote.bind(_this);
-<<<<<<< HEAD
-=======
 	    _this.drx = _this.drx.bind(_this);
 	    _this.assignDrx = _this.assignDrx.bind(_this);
->>>>>>> 0996f9fe646f1671021d0f696e63df956c029a4b
 	    return _this;
 	  }
 	
@@ -41098,6 +41103,7 @@
 	          this.setState({ isInRolodex: false });
 	          this.setState({ cloak: false });
 	        }
+	        // list is in reverse order
 	        this.setState({ currentRec: nextProps.recommendations[nextProps.recommendations.length - 1] });
 	      }
 	    }
@@ -41143,8 +41149,6 @@
 	    // MAKES AJAX CALL TO BETTER DOCTORS API
 	
 	  }, {
-<<<<<<< HEAD
-=======
 	    key: 'drx',
 	    value: function drx() {
 	      var api_key = '87b39c90783391ac6ce972736d117741';
@@ -41176,7 +41180,6 @@
 	      });
 	    }
 	  }, {
->>>>>>> 0996f9fe646f1671021d0f696e63df956c029a4b
 	    key: 'render',
 	    value: function render() {
 	      return _react2.default.createElement(
@@ -41255,9 +41258,6 @@
 	                this.state.currentRec ? this.state.currentRec.name : '**empty**',
 	                '!'
 	              )
-<<<<<<< HEAD
-	            )
-=======
 	            ),
 	            _react2.default.createElement(
 	              'div',
@@ -41274,7 +41274,6 @@
 	            this.state.drxs.map(function (doctrx, i) {
 	              return _react2.default.createElement(_DRXView2.default, { info: doctrx });
 	            })
->>>>>>> 0996f9fe646f1671021d0f696e63df956c029a4b
 	          ),
 	          _react2.default.createElement(
 	            'button',
@@ -41344,7 +41343,6 @@
 	    key: "deleteDoc",
 	    value: function deleteDoc(id) {
 	      console.log("docID", id);
-	
 	      $.ajax({
 	        type: "POST",
 	        url: "/api/doctor/delete",
@@ -42590,13 +42588,10 @@
 	
 	var _map2 = _interopRequireDefault(_map);
 	
-<<<<<<< HEAD
-=======
 	var _lodash = __webpack_require__(/*! lodash */ 618);
 	
 	var _lodash2 = _interopRequireDefault(_lodash);
 	
->>>>>>> 0996f9fe646f1671021d0f696e63df956c029a4b
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -42616,7 +42611,7 @@
 	    _this.state = {
 	      doctors: [],
 	      scripts: [],
-	      // zipcode: null,
+	      inputZip: null,
 	      scriptmodalIsOpen: false,
 	      docmodalIsOpen: false,
 	      mapmodalIsOpen: false,
@@ -42734,14 +42729,14 @@
 	    value: function closeModalScript() {
 	      this.setState({
 	        scriptmodalIsOpen: false
-	      });
+	      }, this.getScripts);
 	    }
 	  }, {
 	    key: 'closeModalDoctor',
 	    value: function closeModalDoctor() {
 	      this.setState({
 	        docmodalIsOpen: false
-	      });
+	      }, this.getDocs);
 	    }
 	  }, {
 	    key: 'closeModalMap',
@@ -42753,6 +42748,7 @@
 	  }, {
 	    key: 'getScripts',
 	    value: function getScripts() {
+	      console.log("get scripts has been called!");
 	      _jquery2.default.ajax({
 	        type: "POST",
 	        url: "/api/script/find",
@@ -42762,8 +42758,9 @@
 	        },
 	        data: JSON.stringify({ username: window.localStorage.username }),
 	        success: function (data) {
-	          console.log('user scripts from AJAX request', data);
-	          this.setState({ scripts: data });
+	          console.log("data!!!!", data);
+	          var sorted = _lodash2.default.sortBy(data, 'refill'); //sorts scripts by refill date
+	          this.setState({ scripts: sorted });
 	        }.bind(this),
 	        error: function error(err) {
 	          console.log('error in ajax request for user scripts', data);
@@ -42816,6 +42813,7 @@
 	  }, {
 	    key: 'componentDidMount',
 	    value: function componentDidMount() {
+	      console.log("component has mounteD!!!");
 	      this.getScripts();
 	      this.getDocs();
 	      // this.getZip();
@@ -42847,10 +42845,25 @@
 	            { onClick: this.openModalDoctor },
 	            ' New Doctor '
 	          ),
+	          ' ',
+	          _react2.default.createElement('br', null),
+	          _react2.default.createElement('br', null),
 	          _react2.default.createElement(
-	            'button',
-	            { onClick: this.openModalMap },
-	            ' Nearest Pharmacy '
+	            'div',
+	            null,
+	            _react2.default.createElement(
+	              'div',
+	              null,
+	              ' Input Zipcode'
+	            ),
+	            _react2.default.createElement('input', { type: 'text', onChange: function onChange(event) {
+	                _this2.setState({ inputZip: event.target.value });
+	              } }),
+	            _react2.default.createElement(
+	              'button',
+	              { onClick: this.openModalMap },
+	              ' Nearest Pharmacy '
+	            )
 	          ),
 	          _react2.default.createElement(
 	            _reactModal2.default,
@@ -42858,7 +42871,8 @@
 	              isOpen: this.state.scriptmodalIsOpen,
 	              shouldCloseOnOverlayClick: false
 	            },
-	            _react2.default.createElement(_scriptRemind2.default, null),
+	            _react2.default.createElement(_scriptRemind2.default, {
+	              closeFn: this.closeModalScript }),
 	            _react2.default.createElement(
 	              'button',
 	              { onClick: this.closeModalScript },
@@ -42872,7 +42886,8 @@
 	              isOpen: this.state.docmodalIsOpen,
 	              shouldCloseOnOverlayClick: false
 	            },
-	            _react2.default.createElement(_doctorEntryView2.default, null),
+	            _react2.default.createElement(_doctorEntryView2.default, {
+	              closeFn: this.closeModalDoctor }),
 	            _react2.default.createElement(
 	              'button',
 	              { onClick: this.closeModalDoctor },
@@ -42885,9 +42900,9 @@
 	              isOpen: this.state.mapmodalIsOpen,
 	              shouldCloseOnOverlayClick: false
 	            },
-	            _react2.default.createElement(_map2.default
-	            // zipcode = {this.state}
-	            , null),
+	            _react2.default.createElement(_map2.default, {
+	              zipcode: this.state.inputZip
+	            }),
 	            _react2.default.createElement(
 	              'button',
 	              { onClick: this.closeModalMap },
@@ -42897,9 +42912,12 @@
 	          _react2.default.createElement(
 	            'h2',
 	            null,
-	            ' Profile ',
-	            window.localStorage.username,
-	            ' '
+	            ' My Profile '
+	          ),
+	          _react2.default.createElement(
+	            'h3',
+	            null,
+	            ' Your Scripts '
 	          ),
 	          this.state.scripts.map(function (script, idx) {
 	            return _react2.default.createElement(
@@ -43017,17 +43035,12 @@
 	                  script.phone,
 	                  ' '
 	                )
-	              ),
-	              _react2.default.createElement(
-	                'button',
-	                { onClick: _this2.deleteReminder.bind(_this2, idx) },
-	                'Delete'
 	              )
 	            );
 	          }, this)
 	        ),
 	        _react2.default.createElement(
-	          'h2',
+	          'h3',
 	          null,
 	          ' Your Doctors '
 	        ),
@@ -43171,11 +43184,15 @@
 	      "dosageAmt": 0,
 	      "dosageMeasure": 'mg',
 	      "date": date,
-	      "reminderTime": null,
+	      "reminderTime1": null,
+	      "reminderTime2": null,
+	      "reminderTime3": null,
 	      "scheduleFreq": "1x",
 	      "scheduleDayWeek": "day",
 	      "invalidName": false,
-	      "invalidReminderTime": false
+	      "invalidReminderTime": false,
+	      "hasTwo": false,
+	      "hasThree": false
 	    };
 	    var date = new Date();
 	    _this.updateDrugName = _this.updateDrugName.bind(_this);
@@ -43185,7 +43202,9 @@
 	    _this.handleRefillDate = _this.handleRefillDate.bind(_this);
 	    _this.handleDoseMeasurement = _this.handleDoseMeasurement.bind(_this);
 	    _this.handleScheduleDayWeek = _this.handleScheduleDayWeek.bind(_this);
-	    _this.handleReminderTime = _this.handleReminderTime.bind(_this);
+	    _this.handleReminderTime1 = _this.handleReminderTime1.bind(_this);
+	    _this.handleReminderTime2 = _this.handleReminderTime2.bind(_this);
+	    _this.handleReminderTime3 = _this.handleReminderTime3.bind(_this);
 	
 	    return _this;
 	  }
@@ -43233,18 +43252,47 @@
 	    value: function handleFrequency(frequency) {
 	      console.log("current state", this.state);
 	      console.log("handleFreq called with", frequency.target.value);
+	      if (frequency.target.value === '2x') {
+	        this.setState({
+	          hasTwo: true,
+	          hasThree: false
+	        });
+	      }
+	      if (frequency.target.value === '3x') {
+	        this.setState({
+	          hasTwo: true,
+	          hasThree: true
+	        });
+	      }
+	      if (frequency.target.value === '1x') {
+	        this.setState({
+	          hasTwo: false,
+	          hasThree: false
+	        });
+	      }
 	      this.setState({
 	        scheduleFreq: frequency.target.value
 	      });
 	    }
 	  }, {
-	    key: 'handleReminderTime',
-	    value: function handleReminderTime(time) {
-	      console.log("actual time format", time);
-	      console.log("handleReminderTime called with", (0, _moment2.default)(time).format('LT'));
+	    key: 'handleReminderTime1',
+	    value: function handleReminderTime1(time) {
 	      this.setState({
-	        "reminderTime": (0, _moment2.default)(time).format('LT'),
-	        "invalidReminderTime": true
+	        reminderTime1: new Date((0, _moment2.default)(time).format()).toISOString()
+	      });
+	    }
+	  }, {
+	    key: 'handleReminderTime2',
+	    value: function handleReminderTime2(time) {
+	      this.setState({
+	        reminderTime2: new Date((0, _moment2.default)(time).format()).toISOString()
+	      });
+	    }
+	  }, {
+	    key: 'handleReminderTime3',
+	    value: function handleReminderTime3(time) {
+	      this.setState({
+	        reminderTime3: new Date((0, _moment2.default)(time).format()).toISOString()
 	      });
 	    }
 	  }, {
@@ -43255,37 +43303,33 @@
 	        alert("Please enter a prescription name and reminder time");
 	      } else if (!this.state.invalidName) {
 	        alert("Please enter a prescription name");
-	      } else if (!this.state.invalidReminderTime) {
-	        alert("Please enter a reminder time");
-	      } else {
-	        var script = {
-	          "name": this.state.currentDrug,
-	          "dosage": this.state.dosageAmt + ' ' + this.state.dosageMeasure,
-	          "refill": this.state.date,
-	          "frequency": this.state.scheduleFreq + ' per ' + this.state.scheduleDayWeek,
-	          "reminderTime": this.state.reminderTime,
-	          "username": window.localStorage.username
-	        };
-	        console.log("submitForm called for: ", script);
-	
-	        _jquery2.default.ajax({
-	          type: 'POST',
-	          url: '/api/reminder/add',
-	          dataType: 'json',
-	          headers: {
-	            'Content-Type': 'application/json'
-	          },
-	          data: JSON.stringify(script),
-	          success: function success(data) {
-	            alert("Your prescription was saved.");
-	            console.log('A reminder was set for: ', data);
-	          },
-	          error: function error(err) {
-	            alert("Your prescription was saved.");
-	            console.log('Reminder not set: ', err);
-	          }
-	        });
 	      }
+	      // else if(!this.state.invalidReminderTime){
+	      //   alert("Please enter a reminder time");
+	      // }
+	      else {
+	          var script = {
+	            "name": this.state.currentDrug,
+	            "dosage": this.state.dosageAmt + ' ' + this.state.dosageMeasure,
+	            "refill": new Date((0, _moment2.default)(this.state.date).format()).toISOString(),
+	            "frequency": this.state.scheduleFreq + ' per ' + this.state.scheduleDayWeek,
+	            "reminderTime": [this.state.reminderTime1, this.state.reminderTime2, this.state.reminderTime3],
+	            "username": window.localStorage.username
+	          };
+	          console.log("submitForm called for: ", script);
+	
+	          _jquery2.default.ajax({
+	            type: 'POST',
+	            url: '/api/reminder/add',
+	            dataType: 'json',
+	            headers: {
+	              'Content-Type': 'application/json'
+	            },
+	            data: JSON.stringify(script),
+	            success: this.props.closeFn(),
+	            error: this.props.closeFn()
+	          });
+	        }
 	    }
 	  }, {
 	    key: 'render',
@@ -43413,20 +43457,54 @@
 	          'div',
 	          null,
 	          _react2.default.createElement(
-	            'h2',
-	            null,
-	            ' Reminder Time '
+	            'div',
+	            { className: 'reminder' },
+	            _react2.default.createElement(
+	              'h2',
+	              null,
+	              ' Reminder Time 1'
+	            ),
+	            _react2.default.createElement(_reactKronos2.default, { time: this.state.reminderTime1, value: '', placeholder: "Click to select a time", onChangeDateTime: this.handleReminderTime1 }),
+	            _react2.default.createElement(
+	              'h8',
+	              { className: 'required' },
+	              ' (required) '
+	            )
 	          ),
-	          _react2.default.createElement(_reactKronos2.default, { time: this.state.reminderTime, value: '', placeholder: "Click to select a time", onChangeDateTime: this.handleReminderTime }),
 	          _react2.default.createElement(
-	            'h8',
-	            { className: 'required' },
-	            ' (required) '
+	            'div',
+	            { className: this.state.hasTwo ? 'reminder' : 'hidden' },
+	            _react2.default.createElement(
+	              'h2',
+	              null,
+	              ' Reminder Time 2'
+	            ),
+	            _react2.default.createElement(_reactKronos2.default, { time: this.state.reminderTime2, value: '', placeholder: "Click to select a time", onChangeDateTime: this.handleReminderTime2 }),
+	            _react2.default.createElement(
+	              'h8',
+	              { className: 'required' },
+	              ' (required) '
+	            )
+	          ),
+	          _react2.default.createElement(
+	            'div',
+	            { className: this.state.hasThree ? 'reminder' : 'hidden' },
+	            _react2.default.createElement(
+	              'h2',
+	              null,
+	              ' Reminder Time 3'
+	            ),
+	            _react2.default.createElement(_reactKronos2.default, { time: this.state.reminderTime3, value: '', placeholder: "Click to select a time", onChangeDateTime: this.handleReminderTime3 }),
+	            _react2.default.createElement(
+	              'h8',
+	              { className: 'required' },
+	              ' (required) '
+	            )
 	          )
 	        ),
 	        _react2.default.createElement(
 	          'div',
-	          null,
+	          { className: 'clear' },
 	          _react2.default.createElement(
 	            'button',
 	            { className: 'remindBtn', onClick: this.submitForm },
@@ -70733,8 +70811,7 @@
 	    var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(Map).call(this, props));
 	
 	    _this.state = {
-	      modalIsOpen: true,
-	      inputzipcode: 0
+	      modalIsOpen: true
 	    };
 	    return _this;
 	  }
@@ -70744,13 +70821,13 @@
 	    value: function render() {
 	      return (
 	        // var srcURL = "https://www.google.com/maps/embed/v1/search?key=AIzaSyCnPK2o-dXX9hTQdMA4dTXIezhxyIzfRB0&q=pharmacy+near+" + {this.state.zipcode}
-	        // if inputzipcode state is 0 then use the users zipcode, otherwise use the inputzipcode 
+	        // if inputzipcode state is 0 then use the users zipcode, otherwise use the inputzipcode
 	        _react2.default.createElement('iframe', {
 	          width: '650',
 	          height: '450'
 	          // frameborder="0"
 	          // style="border:0"
-	          , src: 'https://www.google.com/maps/embed/v1/search?key=AIzaSyCnPK2o-dXX9hTQdMA4dTXIezhxyIzfRB0&q=pharmacy+near+10001', allowfullscreen: true })
+	          , src: "https://www.google.com/maps/embed/v1/search?key=AIzaSyCnPK2o-dXX9hTQdMA4dTXIezhxyIzfRB0&q=pharmacy+near+" + this.props.zipcode })
 	      );
 	    }
 	  }]);
@@ -70760,8 +70837,6 @@
 	
 	exports.default = Map;
 
-<<<<<<< HEAD
-=======
 /***/ },
 /* 618 */
 /*!****************************!*\
@@ -87379,7 +87454,6 @@
 	
 	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }()), __webpack_require__(/*! ./../webpack/buildin/module.js */ 370)(module)))
 
->>>>>>> 0996f9fe646f1671021d0f696e63df956c029a4b
 /***/ }
 /******/ ]);
 //# sourceMappingURL=bundle.js.map
