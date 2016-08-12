@@ -274,7 +274,7 @@ export default class Profile extends React.Component {
               this.state.doctors.map((doctor, idx) => {
                 return (
                   <div className="doctor-view-container" key={idx }>
-                  <div className="doctor-name">{doctor.name}</div> <a target="_blank" href={"http://www.google.com/search?q=" + doctor.name + "&btnI"}>(get more info)</a>
+                  <div className="doctor-name">{doctor.name}</div> 
                   <div><span className="doctor-attribute">Phone: </span>{doctor.phone}</div>
                   <div><span className="doctor-attribute">Email: </span>{doctor.email}</div>
                   <div><span className="doctor-attribute">Address: </span>{doctor.address}</div>

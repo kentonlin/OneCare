@@ -42870,12 +42870,6 @@
 	              { className: 'doctor-name' },
 	              doctor.name
 	            ),
-	            ' ',
-	            _react2.default.createElement(
-	              'a',
-	              { target: '_blank', href: "http://www.google.com/search?q=" + doctor.name + "&btnI" },
-	              '(get more info)'
-	            ),
 	            _react2.default.createElement(
 	              'div',
 	              null,
