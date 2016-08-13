@@ -11,6 +11,17 @@ ul {
   color: #FFFFFF;
   padding-left: 15px;
 }
+.navbar-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.top {
+  display: flex;
+  justify-content: center;
+  color: yellow;
+}
 
 .right {
     position: absolute;
@@ -23,6 +34,12 @@ ul {
 
 .navbar-button-container {
   padding-left: 5px;
+}
+
+.logo {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
 }
 
 .profile-container {
