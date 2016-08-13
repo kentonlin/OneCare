@@ -2,10 +2,10 @@ import React, {Component} from 'react';
 import $ from 'jquery';
 import Navigate from './navigate.jsx';
 import ScriptRemind from './scriptRemind.jsx';
-import Modal from 'react-modal';
 import DoctorEntryView from './doctorEntryView.jsx';
 import Map from './map.jsx';
 import _ from 'lodash';
+import { Modal, Button, ButtonToolbar } from 'react-bootstrap';
 
 export default class Profile extends React.Component {
   constructor(props) {
@@ -48,7 +48,7 @@ export default class Profile extends React.Component {
     this.openModalDoctor = this.openModalDoctor.bind(this);
     this.closeModalDoctor = this.closeModalDoctor.bind(this);
     this.getScripts = this.getScripts.bind(this);
-    this.deleteReminder= this.deleteReminder.bind(this);
+    this.deleteScript= this.deleteScript.bind(this);
     this.getDocs = this.getDocs.bind(this);
     this.deleteDoc = this.deleteDoc.bind(this);
     this.openModalMap = this.openModalMap.bind(this);
@@ -68,20 +68,14 @@ export default class Profile extends React.Component {
        "Content-Type": "application/json"
      },
      data: JSON.stringify({ "docID": id }),
-     success: function(data) {
-       console.log("Doctor deleted");
-       location.reload();
-       // delete doctor object from doctor state
-     },
-     error: function(err) {
-       console.log('Doctor not deleted', err);
-       location.reload();
-     }
+     success: this.getDocs(),
+     error: this.getDocs()
    });
 
   }
 
-  deleteReminder(index) {
+  deleteScript(index) {
+    console.log("deleteReminder called!!");
     var id = this.state.scripts[index]._id;
     console.log("reminderID", id);
     $.ajax({
@@ -92,18 +86,13 @@ export default class Profile extends React.Component {
        "Content-Type": "application/json"
      },
      data: JSON.stringify({ "reminderID": id }),
-     success: function(data) {
-       console.log("Script deleted");
-       this.getScripts();
-     }.bind(this),
-     error: function(err) {
-       console.log('script not deleted', err);
-       this.getScripts();
-     }.bind(this)
+     success: this.getScripts(),
+     error: this.getScripts()
    });
   }
 
   openModalScript() {
+    console.log("open modal script called");
     this.setState({
       scriptmodalIsOpen: true
     });
@@ -155,7 +144,7 @@ export default class Profile extends React.Component {
        this.setState({scripts: sorted});
      }.bind(this),
      error: function(err) {
-       console.log('error in ajax request for user scripts', data);
+       console.log('error in ajax request for user scripts', err);
      }
    });
 
@@ -203,7 +192,7 @@ export default class Profile extends React.Component {
 
 
   componentDidMount() {
-    console.log("component has mounteD!!!");
+    console.log("component has mounted!!!");
     this.getScripts();
     this.getDocs();
     // this.getZip();
@@ -211,84 +200,81 @@ export default class Profile extends React.Component {
 
   render() {
     return (
-      <div>
+      <div className='profile-container'>
         <Navigate />
         <h1> My Profile </h1>
-          <div className="allScripts">
-        <button onClick={this.openModalScript}> New Prescription </button>
-        <button onClick={this.openModalDoctor}> New Doctor </button> <br/><br/>
         <div>
-          <div> Input Zipcode</div><input type="text" onChange={(event) => {this.setState({inputZip: event.target.value})}}/>
-          <button onClick={this.openModalMap}> Nearest Pharmacy </button>
+          <input placeholder='Input Zipcode' type="text" onChange={(event) => {this.setState({inputZip: event.target.value})}}/>
+          <Button bsStyle="info" onClick={this.openModalMap}> Nearest Pharmacy </Button>
         </div>
 
         <Modal
-          isOpen={this.state.scriptmodalIsOpen}
-          shouldCloseOnOverlayClick={false}
+          show={this.state.scriptmodalIsOpen}
+          // shouldCloseOnOverlayClick={false}
         >
             <ScriptRemind
             closeFn={this.closeModalScript} />
-            <button onClick={this.closeModalScript}>Exit</button>
+            <Button onClick={this.closeModalScript}>Exit</Button>
 
         </Modal>
 
         <Modal
-
-          isOpen={this.state.docmodalIsOpen}
-          shouldCloseOnOverlayClick={false}
+          show={this.state.docmodalIsOpen}
+          bsSize='small'
         >
             <DoctorEntryView
             closeFn={this.closeModalDoctor} />
-            <button onClick={this.closeModalDoctor}>Exit</button>
+            <Button onClick={this.closeModalDoctor}>Exit</Button>
         </Modal>
 
         <Modal
-          isOpen={this.state.mapmodalIsOpen}
+          show={this.state.mapmodalIsOpen}
           shouldCloseOnOverlayClick={false}
         >
           <Map
           zipcode = {this.state.inputZip}
           />
-          <button onClick={this.closeModalMap}>Exit</button>
+          <Button onClick={this.closeModalMap}>Exit</Button>
         </Modal>
-
-      <h2> My Profile </h2>
-      <h3> Your Scripts </h3>
+      <div className="scripts-doctors">
+      <div className='scripts-container'>
+      <div className='scripts-header'>
+        <div className='scripts-title'> Scripts </div>
+        <Button bsStyle="success" bsSize='small' onClick={this.openModalScript}> <div> <i className="fa fa-plus-circle" aria-hidden="true"></i> Prescription </div> </Button>
+      </div>
              {
               this.state.scripts.map((script, idx) => {
                 return (
-                  <ul className="User-Scripts" key={idx}>
-                  <div className="single-script">
-                    <li> <span className="user-script"> Name: </span> {script.name} <a target="_blank" href={"https://simple.wikipedia.org/wiki/" + script.name}>(get more info)</a></li>
-                    <li> <span className="user-script"> Dosage: </span> {script.dosage} </li>
-                    <li> <span className="user-script"> Frequency </span> {script.frequency} </li>
-                    <li> <span className="user-script"> Recurring </span> {script.recur} </li>
-                    <li> <span className="user-script"> Refill Date </span> {script.refill} </li>
-                    <li> <span className="user-script"> Refill Reminder </span> {script.refillRemind} </li>
-                    <li> <span className="user-script"> Refill Reminder </span> {script.dailyRemind} </li>
-                    <li> <span className="user-script"> Phone: </span> {script.phone} </li>
-                  </div>
-                 </ul>
+                  <div className="scripts-view-container" key={idx}>
+                  <div className="script-top-bar"><div><p className="script-name"> {script.name}</p><a target="_blank" href={"https://simple.wikipedia.org/wiki/" + script.name}>(get more info)</a></div><i className="fa fa-times" aria-hidden="true" onClick={this.deleteScript.bind(this, idx)}></i></div>
+                  <div> <i className="fa fa-heart" aria-hidden="true"></i> Dosage: {script.dosage} </div>
+                  <div> <i className="fa fa-bell" aria-hidden="true"></i> Reminder: {script.frequency} </div>
+                  <div> <i className="fa fa-calendar" aria-hidden="true"></i> Refill: {String(new Date(script.refill)).split('').slice(0, 15).join('')} </div>
+                 </div>
                );
               }, this)
             }
           </div>
-
-          <h3> Your Doctors </h3>
+        <div className='doctors-container'>
+        <div className='doctors-header'>
+          <div className='doctors-title'> Doctors </div>
+          <Button bsStyle="success" bsSize='small' onClick={this.openModalDoctor}> <div> <i className="fa fa-plus-circle" aria-hidden="true"></i> Doctor </div> </Button>
+        </div>
               {
                 this.state.doctors.map((doctor, idx) => {
                   return (
-                    <div className="doctor-view-container" key={idx }>
-                    <div className="doctor-name">{doctor.name}</div>
-                    <div><span className="doctor-attribute">Phone: </span>{doctor.phone}</div>
-                    <div><span className="doctor-attribute">Email: </span>{doctor.email}</div>
-                    <div><span className="doctor-attribute">Address: </span>{doctor.address}</div>
-                    <div><span className="doctor-attribute">Specialty: </span>{doctor.specialty}</div>
-                    <button onClick={this.deleteDoc.bind(this, idx)}> Delete </button>
+                    <div className=" doctor-view-container" key={idx }>
+                    <div className="doctor-top-bar"><p className='doctor-name'>{doctor.name}</p><i className="fa fa-times" aria-hidden="true" onClick={this.deleteDoc.bind(this, idx)}></i></div>
+                    <div><i className="fa fa-phone" aria-hidden="true"></i>  {doctor.phone}</div>
+                    <div><i className="fa fa-envelope" aria-hidden="true"></i>  {doctor.email}</div>
+                    <div><i className="fa fa-map-marker" aria-hidden="true"></i>  {doctor.address}</div>
+                    <div><i className="fa fa-stethoscope" aria-hidden="true"></i>  {doctor.specialty}</div>
                     </div>
                   );
                 }, this)
               }
+      </div>
+      </div>
       </div>
     );
   }
