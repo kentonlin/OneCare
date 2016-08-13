@@ -41956,7 +41956,7 @@
 	  }, {
 	    key: 'componentDidMount',
 	    value: function componentDidMount() {
-	      console.log("component has mounteD!!!");
+	      console.log("component has mounted!!!");
 	      this.getScripts();
 	      this.getDocs();
 	      // this.getZip();
@@ -41976,30 +41976,9 @@
 	          ' My Profile '
 	        ),
 	        _react2.default.createElement(
-	          _reactBootstrap.ButtonToolbar,
-	          null,
-	          _react2.default.createElement(
-	            _reactBootstrap.Button,
-	            { bsStyle: 'success', onClick: this.openModalScript },
-	            ' New Prescription '
-	          ),
-	          _react2.default.createElement(
-	            _reactBootstrap.Button,
-	            { bsStyle: 'success', onClick: this.openModalDoctor },
-	            ' New Doctor '
-	          )
-	        ),
-	        _react2.default.createElement('br', null),
-	        _react2.default.createElement('br', null),
-	        _react2.default.createElement(
 	          'div',
 	          null,
-	          _react2.default.createElement(
-	            'div',
-	            null,
-	            ' Input Zipcode'
-	          ),
-	          _react2.default.createElement('input', { type: 'text', onChange: function onChange(event) {
+	          _react2.default.createElement('input', { placeholder: 'Input Zipcode', type: 'text', onChange: function onChange(event) {
 	              _this2.setState({ inputZip: event.target.value });
 	            } }),
 	          _react2.default.createElement(
@@ -42058,9 +42037,26 @@
 	            'div',
 	            { className: 'scripts-container' },
 	            _react2.default.createElement(
-	              'h3',
-	              { className: 'scripts-title' },
-	              ' Scripts '
+	              'div',
+	              { className: 'scripts-header' },
+	              _react2.default.createElement(
+	                'div',
+	                { className: 'scripts-title' },
+	                ' Scripts '
+	              ),
+	              _react2.default.createElement(
+	                _reactBootstrap.Button,
+	                { bsStyle: 'success', bsSize: 'small', onClick: this.openModalScript },
+	                ' ',
+	                _react2.default.createElement(
+	                  'div',
+	                  null,
+	                  ' ',
+	                  _react2.default.createElement('i', { className: 'fa fa-plus-circle', 'aria-hidden': 'true' }),
+	                  ' Prescription '
+	                ),
+	                ' '
+	              )
 	            ),
 	            this.state.scripts.map(function (script, idx) {
 	              return _react2.default.createElement(
@@ -42120,9 +42116,26 @@
 	            'div',
 	            { className: 'doctors-container' },
 	            _react2.default.createElement(
-	              'h3',
-	              { className: 'doctors-title' },
-	              ' Doctors '
+	              'div',
+	              { className: 'doctors-header' },
+	              _react2.default.createElement(
+	                'div',
+	                { className: 'doctors-title' },
+	                ' Doctors '
+	              ),
+	              _react2.default.createElement(
+	                _reactBootstrap.Button,
+	                { bsStyle: 'success', bsSize: 'small', onClick: this.openModalDoctor },
+	                ' ',
+	                _react2.default.createElement(
+	                  'div',
+	                  null,
+	                  ' ',
+	                  _react2.default.createElement('i', { className: 'fa fa-plus-circle', 'aria-hidden': 'true' }),
+	                  ' Doctor '
+	                ),
+	                ' '
+	              )
 	            ),
 	            this.state.doctors.map(function (doctor, idx) {
 	              return _react2.default.createElement(
