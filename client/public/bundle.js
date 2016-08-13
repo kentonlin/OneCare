@@ -37474,38 +37474,23 @@
 	        { className: 'navbar-container' },
 	        _react2.default.createElement(
 	          'h1',
-	          { className: 'title' },
-	          'Welcome to OneCare, ',
-	          this.state.username,
-	          '!'
+	          { className: 'top' },
+	          'OneCare'
 	        ),
 	        _react2.default.createElement(
 	          'div',
-	          { className: 'navbar-button navbar-home' },
-	          _react2.default.createElement(
-	            _reactRouter.Link,
-	            { to: '/profile' },
-	            ' Profile '
-	          )
+	          { className: 'top' },
+	          _react2.default.createElement('img', { className: 'logo', src: 'https://scontent-lga3-1.xx.fbcdn.net/v/t1.0-9/12316641_10105768042772978_923906279489141499_n.jpg?oh=bbb5b2be0e9bba21d5b33d879a199c4e&oe=58574F1F' })
 	        ),
 	        _react2.default.createElement(
 	          'div',
-	          { className: 'navbar-button navbar-recommend-doctors' },
+	          null,
 	          _react2.default.createElement(
-	            _reactRouter.Link,
-	            { to: '/recommend' },
-	            ' Physician Recommender '
-	          )
-	        ),
-	        _react2.default.createElement(
-	          'div',
-	          { className: 'navbar-enter-doctors right logout', onClick: function onClick() {
-	              window.localStorage.removeItem("username");window.localStorage.removeItem("token");
-	            } },
-	          _react2.default.createElement(
-	            _reactRouter.Link,
-	            { to: '/signin' },
-	            ' Logout '
+	            'h1',
+	            { className: 'top', href: '/signin', onClick: function onClick() {
+	                window.localStorage.removeItem("username");window.localStorage.removeItem("token");
+	              } },
+	            'Logout'
 	          )
 	        )
 	      );
