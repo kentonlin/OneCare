@@ -7,7 +7,6 @@ import BrainView from './brainView.jsx';
 import DRXView from './DRXView.jsx';
 import { Link } from 'react-router';
 
-
 export default class SymptomEntryModal extends React.Component {
   constructor(props) {
     super(props);

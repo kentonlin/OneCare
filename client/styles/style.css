@@ -8,32 +8,33 @@ ul {
 }
 
 .title {
+  font-family: 'Lato';
   color: #FFFFFF;
   padding-left: 15px;
-}
-.navbar-container {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
 }
 
 .top {
   display: flex;
-  justify-content: center;
+  flex-direction: row;
+}
+
+.topName {
   color: yellow;
 }
 
+.btns {
+  display: flex;
+  align-self: flex-start;
+  justify-content: flex-end;
+}
+
 .right {
-    position: absolute;
-    right: 10px;
+  position: absolute;
+  right: 10px;
 }
 
 .required {
   color: red;
-}
-
-.navbar-button-container {
-  padding-left: 5px;
 }
 
 .logo {
@@ -44,15 +45,6 @@ ul {
 
 .profile-container {
   padding-left: 10px;
-}
-
-.logout {
-  padding: 3px;
-  padding-right: 2px;
-  box-shadow: 3px 3px 2px grey;
-  background-color: #E50606;
-  border:1px solid black;
-  display: inline-block;
 }
 
 .dosageInput {
@@ -196,6 +188,9 @@ ul {
   border-radius:2px;
   border:1px solid black;
   background-color: #09096A;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
 }
 
 .navbar-button {
@@ -203,7 +198,6 @@ ul {
   box-shadow: 3px 3px 2px grey;
   background-color: #D2D2DB;
   border:1px solid black;
-  display: inline-block;
 }
 
 .navbar-button-container {
