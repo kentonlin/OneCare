@@ -38,7 +38,7 @@ export default class Profile extends React.Component {
           bottom                     : '30%',
           border                     : '4px solid #ccc',
           background                 : '#333333',
-          color                      :  'white', 
+          color                      :  'white',
           overflow                   : 'auto',
           WebkitOverflowScrolling    : 'touch',
           borderRadius               : '4px',
@@ -235,7 +235,6 @@ export default class Profile extends React.Component {
     return (
       <div className='profile-container'>
         <Navigate />
-        <h1> My Profile </h1>
 
         <Modal show={this.state.scriptmodalIsOpen}>
             <div className="modal-button-close-container">
@@ -273,23 +272,23 @@ export default class Profile extends React.Component {
             <div className="modal-button-close-container">
               <div className='modal-button-close' onClick={this.closeModalBrain}><i className="fa fa-times-circle" aria-hidden="true"></i></div>
             </div>
-            <SymptomEntryModal 
+            <SymptomEntryModal
             brainState
-            symptoms 
-            recommendations 
+            symptoms
+            recommendations
             closeFn={this.closeModalDoctor} />
         </Modal>
 
       <div className="scripts-doctors">
       <div className='scripts-container'>
-      <div className='scripts-header'>
-        <div className='scripts-title'> Scripts </div>
-        <Button bsStyle="success" bsSize='small' onClick={this.openModalScript}> <div> <i className="fa fa-plus-circle" aria-hidden="true"></i> Prescription </div> </Button>
-        <span>
-          <input className="zip-input" placeholder='Enter zip' type="text" onChange={(event) => {this.setState({inputZip: event.target.value})}}/>
-          <Button bsStyle="info" onClick={this.openModalMap}> <i className="fa fa-search" aria-hidden="true"></i> </Button>
-        </span>
-      </div>
+      <div className='scripts-title'> Scripts </div>
+        <div className='scripts-header'>
+            <div>
+              <input className='zipcode-input' placeholder='Zipcode' type="text" onChange={(event) => {this.setState({inputZip: event.target.value})}}/>
+              <Button bsStyle="info" onClick={this.openModalMap}> <div> <i className="fa fa-search" aria-hidden="true"></i> Pharmacy </div> </Button>
+            </div>
+            <Button bsStyle="success" onClick={this.openModalScript}> <div> <i className="fa fa-plus-circle" aria-hidden="true"></i> Prescription </div> </Button>
+        </div>
              {
               this.state.scripts.map((script, idx) => {
                 return (
