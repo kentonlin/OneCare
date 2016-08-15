@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom'
 import { Router, Route, Link, browserHistory } from 'react-router';
+import { Button, PageHeader } from 'react-bootstrap';
 
 
 export default class Navigate extends React.Component {
@@ -27,18 +28,16 @@ componentDidMount(){
 
   render() {
     return(
-     <div className="navbar-container">
-       <h1 className="title">Welcome to OneCare, {this.state.username}!</h1>
-       <div className="navbar-button navbar-home">
-        <Link to='/profile'> Profile </Link>
-       </div>
-       <div className="navbar-button navbar-recommend-doctors">
-          <Link to='/recommend'> Physician Recommender </Link>
-       </div>
-       <div className="navbar-enter-doctors right logout" onClick={() => {window.localStorage.removeItem("username"); window.localStorage.removeItem("token");}}>
-          <Link to='/signin'> Logout </Link>
-       </div>
-     </div>
-   );
+      <div className="navbar-container">
+        <PageHeader className='topName'>OneCare</PageHeader>
+        <div className="top"> 
+          <img className='logo' src='https://scontent-lga3-1.xx.fbcdn.net/v/t1.0-9/12316641_10105768042772978_923906279489141499_n.jpg?oh=bbb5b2be0e9bba21d5b33d879a199c4e&oe=58574F1F'></img>
+        </div>
+        <div onClick={() => {window.localStorage.removeItem("username"); window.localStorage.removeItem("token");}}>
+          <Link to='/signin'><Button bsSize='large' bsStyle='danger' >Logout</Button></Link>
+        </div>
+      </div>
+    );
   }
 }
+
