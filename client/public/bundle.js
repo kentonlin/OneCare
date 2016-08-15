@@ -38121,7 +38121,7 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _navigate = __webpack_require__(/*! ./navigate.jsx */ 243);
+	var _navigate = __webpack_require__(!(function webpackMissingModule() { var e = new Error("Cannot find module \"./navigate.jsx\""); e.code = 'MODULE_NOT_FOUND'; throw e; }()));
 	
 	var _navigate2 = _interopRequireDefault(_navigate);
 	
@@ -38137,110 +38137,7 @@
 	};
 
 /***/ },
-/* 243 */
-/*!*********************************!*\
-  !*** ./client/app/navigate.jsx ***!
-  \*********************************/
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	
-	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-	
-	var _react = __webpack_require__(/*! react */ 1);
-	
-	var _react2 = _interopRequireDefault(_react);
-	
-	var _reactDom = __webpack_require__(/*! react-dom */ 35);
-	
-	var _reactDom2 = _interopRequireDefault(_reactDom);
-	
-	var _reactRouter = __webpack_require__(/*! react-router */ 175);
-	
-	var _reactBootstrap = __webpack_require__(/*! react-bootstrap */ 244);
-	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-	
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-	
-	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-	
-	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-	
-	var Navigate = function (_React$Component) {
-	  _inherits(Navigate, _React$Component);
-	
-	  function Navigate(props) {
-	    _classCallCheck(this, Navigate);
-	
-	    var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(Navigate).call(this, props));
-	
-	    _this.state = {
-	      "username": window.localStorage.username
-	    };
-	
-	    return _this;
-	  }
-	
-	  _createClass(Navigate, [{
-	    key: 'componentDidMount',
-	    value: function componentDidMount() {
-	      if (!window.localStorage.latitude) {
-	        navigator.geolocation.getCurrentPosition(function (location) {
-	          window.localStorage.latitude = location.coords.latitude;
-	          window.localStorage.longitude = location.coords.longitude;
-	
-	          console.log("lat", location.coords.latitude);
-	          console.log("long", location.coords.longitude);
-	          console.log("accur", location.coords.accuracy);
-	        });
-	      }
-	    }
-	  }, {
-	    key: 'render',
-	    value: function render() {
-	      return _react2.default.createElement(
-	        'div',
-	        { className: 'navbar-container' },
-	        _react2.default.createElement(
-	          _reactBootstrap.PageHeader,
-	          { className: 'topName' },
-	          'OneCare'
-	        ),
-	        _react2.default.createElement(
-	          'div',
-	          { className: 'top' },
-	          _react2.default.createElement('img', { className: 'logo', src: 'https://scontent-lga3-1.xx.fbcdn.net/v/t1.0-9/12316641_10105768042772978_923906279489141499_n.jpg?oh=bbb5b2be0e9bba21d5b33d879a199c4e&oe=58574F1F' })
-	        ),
-	        _react2.default.createElement(
-	          'div',
-	          { onClick: function onClick() {
-	              window.localStorage.removeItem("username");window.localStorage.removeItem("token");
-	            } },
-	          _react2.default.createElement(
-	            _reactRouter.Link,
-	            { to: '/signin' },
-	            _react2.default.createElement(
-	              _reactBootstrap.Button,
-	              { bsSize: 'large', bsStyle: 'danger' },
-	              'Logout'
-	            )
-	          )
-	        )
-	      );
-	    }
-	  }]);
-	
-	  return Navigate;
-	}(_react2.default.Component);
-	
-	exports.default = Navigate;
-
-/***/ },
+/* 243 */,
 /* 244 */
 /*!****************************************!*\
   !*** ./~/react-bootstrap/lib/index.js ***!
@@ -57692,7 +57589,7 @@
 	
 	var _jquery2 = _interopRequireDefault(_jquery);
 	
-	var _navigate = __webpack_require__(/*! ./navigate.jsx */ 243);
+	var _navigate = __webpack_require__(!(function webpackMissingModule() { var e = new Error("Cannot find module \"./navigate.jsx\""); e.code = 'MODULE_NOT_FOUND'; throw e; }()));
 	
 	var _navigate2 = _interopRequireDefault(_navigate);
 	
@@ -59926,7 +59823,7 @@
 	
 	var _jquery2 = _interopRequireDefault(_jquery);
 	
-	var _navigate = __webpack_require__(/*! ./navigate.jsx */ 243);
+	var _navigate = __webpack_require__(!(function webpackMissingModule() { var e = new Error("Cannot find module \"./navigate.jsx\""); e.code = 'MODULE_NOT_FOUND'; throw e; }()));
 	
 	var _navigate2 = _interopRequireDefault(_navigate);
 	
@@ -61978,7 +61875,7 @@
 	
 	var _jquery2 = _interopRequireDefault(_jquery);
 	
-	var _navigate = __webpack_require__(/*! ./navigate.jsx */ 243);
+	var _navigate = __webpack_require__(!(function webpackMissingModule() { var e = new Error("Cannot find module \"./navigate.jsx\""); e.code = 'MODULE_NOT_FOUND'; throw e; }()));
 	
 	var _navigate2 = _interopRequireDefault(_navigate);
 	
@@ -62575,7 +62472,7 @@
 	
 	var _reactRouter = __webpack_require__(/*! react-router */ 175);
 	
-	var _navigate = __webpack_require__(/*! ./navigate.jsx */ 243);
+	var _navigate = __webpack_require__(!(function webpackMissingModule() { var e = new Error("Cannot find module \"./navigate.jsx\""); e.code = 'MODULE_NOT_FOUND'; throw e; }()));
 	
 	var _navigate2 = _interopRequireDefault(_navigate);
 	
