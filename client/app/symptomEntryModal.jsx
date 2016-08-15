@@ -107,7 +107,6 @@ export default class SymptomEntryModal extends React.Component {
   render() {
     return(
       <div>
-        <div className={(!this.state.currentRec ? '' : 'hidden ') + 'brain-print-container'}><BrainView brainState={this.props.brainState} /></div>
         <div className={this.state.cloak ? 'hidden' : '' +" recommend-modal-container"}>
           <h3 className="title modal-header">Your Selected Symptoms:</h3>
             <div className="modal-symptom-container">
@@ -138,8 +137,10 @@ export default class SymptomEntryModal extends React.Component {
               <button onClick={this.drx}>Show me the MONEY</button>
               {this.state.drxs.map((doctrx, i) => <DRXView info={doctrx}/>)}
             </div>
-          <button className={(this.state.currentRec && this.state.currentRec.id !== 1000 ? '' : 'hidden')+' modal-button'} onClick={this.upvote}>Thanks!</button>
-          <button className={(this.state.currentRec && this.state.currentRec.id !== 1000 ? '' : 'hidden')+' modal-button'} onClick={this.downvote}>Sorry, try again.</button>
+          <div className="symptom-modal-voting">
+            <span className={(this.state.currentRec && this.state.currentRec.id !== 1000 ? '' : 'hidden')+' modal-button'} onClick={this.upvote}><i className="fa fa-thumbs-o-up" aria-hidden="true"></i></span>
+            <span className={(this.state.currentRec && this.state.currentRec.id !== 1000 ? '' : 'hidden')+' modal-button'} onClick={this.downvote}><i className="fa fa-thumbs-o-down" aria-hidden="true"></i></span>
+          </div>
         </div>
       </div>
       )

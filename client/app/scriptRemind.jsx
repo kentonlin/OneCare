@@ -8,6 +8,7 @@ import Navigate from './navigate.jsx';
 import Kronos from 'react-kronos';
 import moment from 'moment';
 import Modal from 'react-modal'
+import {Button, ButtonToolbar } from 'react-bootstrap';
 
 export default class ScriptRemindView extends React.Component {
 
@@ -160,68 +161,76 @@ export default class ScriptRemindView extends React.Component {
   render() {
     return (
       <div>
+        <h1> Set a Prescription Reminder </h1>
         <div>
-          <h1> Set a Prescription Reminder </h1>
-          <h2> Current Drug: {this.state.currentDrug} </h2>
-          <input
-          onChange={this.updateDrugName}
-          placeholder='Name'
-          />
-          <h8 className='required'> (required) </h8>
-        </div>
-        <div>
-          <input
-          className='dosageInput'
-          onChange={this.handleDoseAmount}
-          placeholder='Dosage (e.g. if "Take 1 tablet", type "1")'
-          />
-
-          <select className="dropdown-replacement" value={this.state.dosageMeasure} onChange={this.handleDoseMeasurement}>
-            <option>mg</option>
-            <option>mL</option>
-            <option>tablet</option>
-          </select>
-      </div>
-        <div>
-            <h1> Refill Date</h1>
-            <div>
-              <Calendar format='MM/DD/YYYY' date={this.state.date} onChange= {this.handleRefillDate}/>
-              <h3> You selected {this.state.date} </h3>
+          <div className="script-form-frame">
+            <h3> Current Drug: {this.state.currentDrug} </h3>
+            <div  className="script-form-fields">
+              <input
+              onChange={this.updateDrugName}
+              placeholder='Name'
+              />
+              <h8 className='required'> (required) </h8>
             </div>
+          </div>
+          <div className="script-form-frame">
+            <h3>Dosage</h3>
+            <div className="script-form-fields">
+              <input
+              className='dosageInput'
+              onChange={this.handleDoseAmount}
+              placeholder='Dosage (e.g. if "Take 1 tablet", type "1")'
+              />
+              <select className="dropdown-replacement" value={this.state.dosageMeasure} onChange={this.handleDoseMeasurement}>
+                <option>mg</option>
+                <option>mL</option>
+                <option>tablet</option>
+              </select>
+            </div>
+          </div>
+          <div className="script-form-frame">
+              <h3> Refill Date</h3>
+              <div  className="script-form-fields">
+                <Calendar format='MM/DD/YYYY' date={this.state.date} onChange= {this.handleRefillDate}/>
+                <span className={this.state.date ? "" : "hidden"}>You selected {this.state.date}</span>
+              </div>
+          </div>
+          <div className="script-form-frame">
+            <h3>Frequency</h3>
+            <div className="script-form-fields">
+              <select className="dropdown-replacement" value={this.state.scheduleFreq} onChange={this.handleFrequency}>
+                <option>1x</option>
+                <option>2x</option>
+                <option>3x</option>
+              </select>
+                per
+              <select className="dropdown-replacement" value={this.state.scheduleDayWeek} onChange={this.handleScheduleDayWeek}>
+                <option>day</option>
+                <option>week</option>
+              </select>
+            </div>
+          </div>
+          <div className="script-form-frame">
+            <div className="reminder">
+              <h3> Reminder Time 1</h3>
+              <Kronos time={this.state.reminderTime1} value='' placeholder={"Click to select a time"} onChangeDateTime={this.handleReminderTime1}/>
+              <h8 className='required'> (required) </h8>
+            </div>
+            <div className={(this.state.hasTwo ? 'reminder' : 'hidden')}>
+              <h3> Reminder Time 2</h3>
+              <Kronos time={this.state.reminderTime2} value='' placeholder={"Click to select a time"} onChangeDateTime={this.handleReminderTime2}/>
+              <h8 className='required'> (required) </h8>
+            </div>
+            <div className={this.state.hasThree ? 'reminder' : 'hidden'}>
+              <h3> Reminder Time 3</h3>
+              <Kronos time={this.state.reminderTime3} value='' placeholder={"Click to select a time"} onChangeDateTime={this.handleReminderTime3}/>
+              <h8 className='required'> (required) </h8>
+            </div>
+            <div className='clear'>
+              <Button bsStyle="info" onClick={this.submitForm}> Remind Me </Button>
+            </div>
+          </div>
         </div>
-        <div>
-          <select className="dropdown-replacement" value={this.state.scheduleFreq} onChange={this.handleFrequency}>
-            <option>1x</option>
-            <option>2x</option>
-            <option>3x</option>
-          </select>
-          <h3> per </h3>
-          <select className="dropdown-replacement" value={this.state.scheduleDayWeek} onChange={this.handleScheduleDayWeek}>
-            <option>day</option>
-            <option>week</option>
-          </select>
-        </div>
-        <div>
-        <div className="reminder">
-          <h2> Reminder Time 1</h2>
-          <Kronos time={this.state.reminderTime1} value='' placeholder={"Click to select a time"} onChangeDateTime={this.handleReminderTime1}/>
-          <h8 className='required'> (required) </h8>
-        </div>
-        <div className={(this.state.hasTwo ? 'reminder' : 'hidden')}>
-          <h2> Reminder Time 2</h2>
-          <Kronos time={this.state.reminderTime2} value='' placeholder={"Click to select a time"} onChangeDateTime={this.handleReminderTime2}/>
-          <h8 className='required'> (required) </h8>
-        </div>
-        <div className={this.state.hasThree ? 'reminder' : 'hidden'}>
-          <h2> Reminder Time 3</h2>
-          <Kronos time={this.state.reminderTime3} value='' placeholder={"Click to select a time"} onChangeDateTime={this.handleReminderTime3}/>
-          <h8 className='required'> (required) </h8>
-        </div>
-        </div>
-        <div className='clear'>
-          <button className= "remindBtn" onClick={this.submitForm}> Remind Me </button>
-        </div>
-
       </div>
 
     );

@@ -4,6 +4,8 @@ import $ from 'jquery';
 import Navigate from './navigate.jsx';
 import Modal from 'react-modal';
 import SymptomEntryModal from './symptomEntryModal.jsx';
+import {Button, ButtonToolbar } from 'react-bootstrap';
+
 
 
  var SYMPTOMS = [
@@ -178,6 +180,7 @@ export default class SymptomEntryView extends Component {
   handleRecData(recData) {
     console.log(recData)
     this.setState( {recs: recData})
+    this.openModal();
   }
 
   handleSelectionChange(selectedSymptoms) {
@@ -186,7 +189,6 @@ export default class SymptomEntryView extends Component {
 
   submitSymptoms() {
     console.log('you chose: ', this.state.selectedSymptoms);
-    this.openModal();
     $.ajax({
       type: 'POST',
       url: '/api/brain/recommend',
@@ -208,42 +210,39 @@ export default class SymptomEntryView extends Component {
     var { selectedSymptoms } = this.state;
 
     return (
-      <div>
-      <Navigate />
-        <h4>Please select your symptoms from the list below.</h4>
-        <FilteredMultiSelect 
-          classNames={{
-            buttonActive: 'symptom-select-button--active',
-            button: 'symptom-select-button--inactive',
-            filter: 'symptom-select-filter',
-            select: 'symptom-select-select'
-          }}
-          onChange={this.handleSelectionChange}
-          options={SYMPTOMS}
-          selectedOptions={selectedSymptoms}
-          textProp='name'
-          size={20}
-          valueProp='id' />
-          
-        {selectedSymptoms.length === 0 && <p>(nothing selected yet)</p>}
-        {selectedSymptoms.length > 0 && <ul>
-          {selectedSymptoms.map((symptom, i) => <li key={symptom.id}>
-            {`${symptom.name} `}
-            <button type='button' onClick={this.handleDeselect.bind(null, i)}>
-              &times;
-            </button>
-          </li>)}
-        </ul>}
-        <button onClick={this.clearSymptoms}>Clear all</button>
-        <button onClick={this.submitSymptoms}>Submit!</button>
-        <Modal
-          isOpen={this.state.modalIsOpen}
-          shouldCloseOnOverlayClick={false}
-          style={this.state.modalStyles}
-        > 
-          <button onClick={this.exitModal}>Exit</button>
+      <div className="symptom-container">
+        <div className={!this.state.modalIsOpen ? "" : "hidden"}>
+          <h4>Please select your symptoms from the list below.</h4>
+          <FilteredMultiSelect 
+            classNames={{
+              buttonActive: 'symptom-select-button--active',
+              button: 'symptom-select-button--inactive',
+              filter: 'symptom-select-filter',
+              select: 'symptom-select-select'
+            }}
+            onChange={this.handleSelectionChange}
+            options={SYMPTOMS}
+            selectedOptions={selectedSymptoms}
+            textProp='name'
+            size={20}
+            valueProp='id' />
+          <div className="selected-symptoms-container">  
+            {selectedSymptoms.length === 0 && <p>(nothing selected yet)</p>}
+            {selectedSymptoms.length > 0 && <ul className="selected-symptoms">
+              {selectedSymptoms.map((symptom, i) => 
+              <Button key={symptom.id} bsStyle="primary" bsSize='small' onClick={this.handleDeselect.bind(null, i)}> 
+                <div> 
+                  {`${symptom.name} `}  <i className="fa fa-times-circle" aria-hidden="true"></i>
+                </div>
+              </Button>)}
+            </ul>}
+          </div>
+          <Button bsStyle="danger"  bsSize="sm" onClick={this.clearSymptoms}>Clear all</Button>
+          <Button bsStyle="success"  bsSize="sm" onClick={this.submitSymptoms}>Submit!</Button>
+        </div>
+        <div className={"brain-container " + this.state.modalIsOpen ? "" : "hidden"}> 
           <SymptomEntryModal brainState={this.state.brainState} symptoms={this.state.selectedSymptoms} recommendations={this.state.recs} />
-        </Modal>
+        </div>
       </div>
     );
   }
