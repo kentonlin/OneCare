@@ -259,6 +259,7 @@ var dbFunc = {
 									.then(function(res) {
 										console.log("script has been saved and the reminder ID is set!!");
 										next("reminder has been saved");
+							      res.send("success");
 
 									})
 									.catch(function(err) {

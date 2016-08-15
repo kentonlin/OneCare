@@ -51,8 +51,6 @@ export default class ScriptRemindView extends React.Component {
     }
 
     handleRefillDate(date) {
-      console.log("actual date format", date);
-      console.log("selected date", date);
       this.setState({
         "date": date
       });
@@ -80,8 +78,6 @@ export default class ScriptRemindView extends React.Component {
     }
 
     handleFrequency(frequency) {
-      console.log("current state", this.state);
-      console.log("handleFreq called with", frequency.target.value);
       if(frequency.target.value === '2x'){
         this.setState({
           hasTwo: true,
@@ -135,12 +131,11 @@ export default class ScriptRemindView extends React.Component {
         var script = {
           "name": this.state.currentDrug,
           "dosage": this.state.dosageAmt + ' ' + this.state.dosageMeasure,
-          "refill": new Date(moment(this.state.date).format()).toISOString(),
+          "refill": new Date(moment(this.state.date, "MM-DD-YYYY")).toISOString(),
           "frequency": this.state.scheduleFreq + ' per ' + this.state.scheduleDayWeek,
           "reminderTime": [this.state.reminderTime1, this.state.reminderTime2, this.state.reminderTime3],
           "username": window.localStorage.username
         };
-        console.log("submitForm called for: ", script);
 
         $.ajax({
             type: 'POST',

@@ -38,8 +38,7 @@ app.post('/api/user/zip', function(req, res) {
 
 // Add a new reminder to the reminder collection
 app.post('/api/reminder/add', function(req, res, next) {
-
-  console.log('request received at addScriptReminder');
+  console.log('request received at addScriptReminder: ', req.body);
   var newScript = req.body;
   dbHelpers.addScript(newScript, res, next);
 });
