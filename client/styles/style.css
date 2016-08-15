@@ -7,6 +7,14 @@ ul {
   list-style-type: none;
 }
 
+input {
+  border-radius: 7px;
+}
+
+.dropdown-replacement {
+  border-radius: 7px;
+}
+
 .title {
   color: #FFFFFF;
   padding-left: 15px;
@@ -99,6 +107,7 @@ ul {
   margin-bottom: 10px;
   border-radius:2px;
   background-color: #FFFFFF;
+  color: black;
 }
 
 
@@ -115,8 +124,11 @@ ul {
 
 }
 
-
 /*********** SCRIPTS ***********/
+
+.zip-input {
+  max-width: 40%;
+}
 
 .scripts-header{
   display: flex;
@@ -124,8 +136,8 @@ ul {
   align-items: center;
   padding-left: 15px;
   padding-right: 15px;
-
 }
+
 .scripts-doctors {
   display: flex;
   justify-content: space-around;
@@ -168,6 +180,21 @@ ul {
   font-weight: bold;
 }
 
+.script-form-frame {
+  display: flex;
+  flex-flow: column wrap;
+  align-content: center;
+  background-color: white;
+  color: black;
+  border-radius: 7px;
+  padding: 10px;
+  margin: 10px;
+}
+
+.script-form-fields {
+  display: flex;
+  flex-flow: row nowrap;
+}
 
 /* NAV */
 
@@ -397,16 +424,50 @@ ul {
 
 }
 
-.modal-symptom-container {
-
+.modal-content {
+  background-color: #333333;
+  color: #ffffff;
 }
 
 .modal-button {
-  float: right;
-  display: inline-block;
+  display:flex;
+  width: 100px;
+  height: 100px;
+  justify-content: center;
+  background-color: blue;
+  border-radius: 50%;
+  margin: 10px;
+  padding: 20px;
+  font-size: 60px;
+  color: white;
 }
 
 .hidden { display:none; }
+
+.symptom-modal-voting {
+  display: flex;
+  justify-content: center;
+  flex-flow: row nowrap;
+}
+
+.symptom-container {
+  display: flex;
+  justify-content: center;
+}
+
+.modal-button-close-container {
+  display: flex;
+  justify-content: flex-end;
+  padding: 5px;
+}
+
+.modal-button-close {
+  display:flex;
+  color: #ffffff;
+  border-radius: 50%;
+  justify-content: flex-end;
+  margin: 10px;
+}
 
 /*.STYLES FOR PRINTING BRAIN*/
 .brain-print-container {
@@ -457,24 +518,47 @@ ul {
 
 /*STYLES FOR MODAL*/
 
+.FilteredMultiSelect {
+  display: flex;
+  flex-flow: column nowrap;
+  align-items: center;
+}
+
 .symptom-select-button--inactive {
   display: block;
-  min-width: 50%;
+  border-radius: 7px;
+  padding: 5px;
+  width: 90%;
+  color: #333333;
 }
 
 .symptom-select-button--active {
   background-color: #09096A;
   color: white;
   display:block;
-  min-width: 50%;
+  width: 90%;
 }
 
 .symptom-select-filter {
   display:block;
-  min-width: 50%;
+  width: 90%;
+  color: #333333;
 }
 
  .symptom-select-select {
-  display:inline-block;
-  min-width: 50%;
+  display:block;
+  width: 90%;
+  color: #333333;
  }
+
+.selected-symptoms {
+  display: flex;
+  flex-flow: column wrap;
+  color: black;
+}
+
+
+
+.map-container {
+  padding: 10px;
+}
