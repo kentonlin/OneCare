@@ -303,7 +303,6 @@ export default class Profile extends React.Component {
             }
           </div>
         <div className='doctors-container'>
-        <div className='doctors-title'> Doctors </div>
         <div className='doctors-header'>
           <div className='doctors-title'> Doctors </div>
           <Button bsStyle="success" bsSize='small' onClick={this.openModalSymptom}> <div> <i className="fa fa-plus-circle" aria-hidden="true"></i> Recommend </div></Button>
