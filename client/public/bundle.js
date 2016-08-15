@@ -60815,38 +60815,33 @@
 	                      { className: 'script-name' },
 	                      ' ',
 	                      script.name
-	                    ),
-	                    _react2.default.createElement(
-	                      'a',
-	                      { target: '_blank', href: "https://simple.wikipedia.org/wiki/" + script.name },
-	                      '(get more info)'
 	                    )
 	                  ),
 	                  _react2.default.createElement('i', { className: 'fa fa-times', 'aria-hidden': 'true', onClick: _this2.deleteScript.bind(_this2, idx) })
 	                ),
 	                _react2.default.createElement(
 	                  'div',
-	                  null,
+	                  { className: 'script-attribute' },
 	                  ' ',
-	                  _react2.default.createElement('i', { className: 'fa fa-heart', 'aria-hidden': 'true' }),
+	                  _react2.default.createElement('i', { className: 'fa fa-heart red', 'aria-hidden': 'true' }),
 	                  ' Dosage: ',
 	                  script.dosage,
 	                  ' '
 	                ),
 	                _react2.default.createElement(
 	                  'div',
-	                  null,
+	                  { className: 'script-attribute' },
 	                  ' ',
-	                  _react2.default.createElement('i', { className: 'fa fa-bell', 'aria-hidden': 'true' }),
+	                  _react2.default.createElement('i', { className: 'fa fa-bell gold', 'aria-hidden': 'true' }),
 	                  ' Reminder: ',
 	                  script.frequency,
 	                  ' '
 	                ),
 	                _react2.default.createElement(
 	                  'div',
-	                  null,
+	                  { className: 'script-attribute' },
 	                  ' ',
-	                  _react2.default.createElement('i', { className: 'fa fa-calendar', 'aria-hidden': 'true' }),
+	                  _react2.default.createElement('i', { className: 'fa fa-calendar royal-blue', 'aria-hidden': 'true' }),
 	                  ' Refill: ',
 	                  String(new Date(script.refill)).split('').slice(0, 15).join(''),
 	                  ' '
@@ -60859,12 +60854,12 @@
 	            { className: 'doctors-container' },
 	            _react2.default.createElement(
 	              'div',
+	              { className: 'doctors-title' },
+	              ' Doctors '
+	            ),
+	            _react2.default.createElement(
+	              'div',
 	              { className: 'doctors-header' },
-	              _react2.default.createElement(
-	                'div',
-	                { className: 'doctors-title' },
-	                ' Doctors '
-	              ),
 	              _react2.default.createElement(
 	                _reactBootstrap.Button,
 	                { bsStyle: 'success', bsSize: 'small', onClick: this.openModalSymptom },
@@ -60907,28 +60902,28 @@
 	                ),
 	                _react2.default.createElement(
 	                  'div',
-	                  null,
-	                  _react2.default.createElement('i', { className: 'fa fa-phone', 'aria-hidden': 'true' }),
+	                  { className: 'doctor-attribute' },
+	                  _react2.default.createElement('i', { className: 'fa fa-phone phone-green', 'aria-hidden': 'true' }),
 	                  '  ',
 	                  doctor.phone
 	                ),
 	                _react2.default.createElement(
 	                  'div',
-	                  null,
+	                  { className: 'doctor-attribute' },
 	                  _react2.default.createElement('i', { className: 'fa fa-envelope', 'aria-hidden': 'true' }),
 	                  '  ',
 	                  doctor.email
 	                ),
 	                _react2.default.createElement(
 	                  'div',
-	                  null,
-	                  _react2.default.createElement('i', { className: 'fa fa-map-marker', 'aria-hidden': 'true' }),
+	                  { className: 'doctor-attribute' },
+	                  _react2.default.createElement('i', { className: 'fa fa-map-marker red', 'aria-hidden': 'true' }),
 	                  '  ',
 	                  doctor.address
 	                ),
 	                _react2.default.createElement(
 	                  'div',
-	                  null,
+	                  { className: 'doctor-attribute' },
 	                  _react2.default.createElement('i', { className: 'fa fa-stethoscope', 'aria-hidden': 'true' }),
 	                  '  ',
 	                  doctor.specialty
