@@ -212,8 +212,6 @@ input {
 /* NAV */
 
 .navbar-container {
-  border-radius:2px;
-  border:1px solid black;
   background-color: #09096A;
   display: flex;
   flex-direction: row;
