@@ -10,8 +10,9 @@ import moment from 'moment';
 import Modal from 'react-modal'
 import {Button, ButtonToolbar } from 'react-bootstrap';
 
-export default class ScriptRemindView extends React.Component {
+var date = new Date().toISOString();
 
+export default class ScriptRemindView extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -30,19 +31,16 @@ export default class ScriptRemindView extends React.Component {
       "hasTwo": false,
       "hasThree": false
     };
-  var date = new Date();
-  this.updateDrugName = this.updateDrugName.bind(this);
-  this.submitForm = this.submitForm.bind(this);
-  this.handleFrequency = this.handleFrequency.bind(this);
-  this.handleDoseAmount = this.handleDoseAmount.bind(this);
-  this.handleRefillDate = this.handleRefillDate.bind(this);
-  this.handleDoseMeasurement = this.handleDoseMeasurement.bind(this);
-  this.handleScheduleDayWeek = this.handleScheduleDayWeek.bind(this);
-  this.handleReminderTime1 = this.handleReminderTime1.bind(this);
-  this.handleReminderTime2 = this.handleReminderTime2.bind(this);
-  this.handleReminderTime3 = this.handleReminderTime3.bind(this);
-
-
+    this.updateDrugName = this.updateDrugName.bind(this);
+    this.submitForm = this.submitForm.bind(this);
+    this.handleFrequency = this.handleFrequency.bind(this);
+    this.handleDoseAmount = this.handleDoseAmount.bind(this);
+    this.handleRefillDate = this.handleRefillDate.bind(this);
+    this.handleDoseMeasurement = this.handleDoseMeasurement.bind(this);
+    this.handleScheduleDayWeek = this.handleScheduleDayWeek.bind(this);
+    this.handleReminderTime1 = this.handleReminderTime1.bind(this);
+    this.handleReminderTime2 = this.handleReminderTime2.bind(this);
+    this.handleReminderTime3 = this.handleReminderTime3.bind(this);
   }
 
     updateDrugName(event){
