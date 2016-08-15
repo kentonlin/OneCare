@@ -40519,6 +40519,8 @@
 	
 	var _symptomEntryModal2 = _interopRequireDefault(_symptomEntryModal);
 	
+	var _reactBootstrap = __webpack_require__(/*! react-bootstrap */ 619);
+	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -40631,6 +40633,7 @@
 	    value: function handleRecData(recData) {
 	      console.log(recData);
 	      this.setState({ recs: recData });
+	      this.openModal();
 	    }
 	  }, {
 	    key: 'handleSelectionChange',
@@ -40641,7 +40644,6 @@
 	    key: 'submitSymptoms',
 	    value: function submitSymptoms() {
 	      console.log('you chose: ', this.state.selectedSymptoms);
-	      this.openModal();
 	      _jquery2.default.ajax({
 	        type: 'POST',
 	        url: '/api/brain/recommend',
@@ -40668,69 +40670,68 @@
 	
 	      return _react2.default.createElement(
 	        'div',
-	        null,
-	        _react2.default.createElement(_navigate2.default, null),
+	        { className: 'symptom-container' },
 	        _react2.default.createElement(
-	          'h4',
-	          null,
-	          'Please select your symptoms from the list below.'
-	        ),
-	        _react2.default.createElement(_reactFilteredMultiselect2.default, {
-	          classNames: {
-	            buttonActive: 'symptom-select-button--active',
-	            button: 'symptom-select-button--inactive',
-	            filter: 'symptom-select-filter',
-	            select: 'symptom-select-select'
-	          },
-	          onChange: this.handleSelectionChange,
-	          options: SYMPTOMS,
-	          selectedOptions: selectedSymptoms,
-	          textProp: 'name',
-	          size: 20,
-	          valueProp: 'id' }),
-	        selectedSymptoms.length === 0 && _react2.default.createElement(
-	          'p',
-	          null,
-	          '(nothing selected yet)'
-	        ),
-	        selectedSymptoms.length > 0 && _react2.default.createElement(
-	          'ul',
-	          null,
-	          selectedSymptoms.map(function (symptom, i) {
-	            return _react2.default.createElement(
-	              'li',
-	              { key: symptom.id },
-	              symptom.name + ' ',
-	              _react2.default.createElement(
-	                'button',
-	                { type: 'button', onClick: _this2.handleDeselect.bind(null, i) },
-	                '×'
-	              )
-	            );
-	          })
-	        ),
-	        _react2.default.createElement(
-	          'button',
-	          { onClick: this.clearSymptoms },
-	          'Clear all'
-	        ),
-	        _react2.default.createElement(
-	          'button',
-	          { onClick: this.submitSymptoms },
-	          'Submit!'
-	        ),
-	        _react2.default.createElement(
-	          _reactModal2.default,
-	          {
-	            isOpen: this.state.modalIsOpen,
-	            shouldCloseOnOverlayClick: false,
-	            style: this.state.modalStyles
-	          },
+	          'div',
+	          { className: !this.state.modalIsOpen ? "" : "hidden" },
 	          _react2.default.createElement(
-	            'button',
-	            { onClick: this.exitModal },
-	            'Exit'
+	            'h4',
+	            null,
+	            'Please select your symptoms from the list below.'
 	          ),
+	          _react2.default.createElement(_reactFilteredMultiselect2.default, {
+	            classNames: {
+	              buttonActive: 'symptom-select-button--active',
+	              button: 'symptom-select-button--inactive',
+	              filter: 'symptom-select-filter',
+	              select: 'symptom-select-select'
+	            },
+	            onChange: this.handleSelectionChange,
+	            options: SYMPTOMS,
+	            selectedOptions: selectedSymptoms,
+	            textProp: 'name',
+	            size: 20,
+	            valueProp: 'id' }),
+	          _react2.default.createElement(
+	            'div',
+	            { className: 'selected-symptoms-container' },
+	            selectedSymptoms.length === 0 && _react2.default.createElement(
+	              'p',
+	              null,
+	              '(nothing selected yet)'
+	            ),
+	            selectedSymptoms.length > 0 && _react2.default.createElement(
+	              'ul',
+	              { className: 'selected-symptoms' },
+	              selectedSymptoms.map(function (symptom, i) {
+	                return _react2.default.createElement(
+	                  _reactBootstrap.Button,
+	                  { key: symptom.id, bsStyle: 'primary', bsSize: 'small', onClick: _this2.handleDeselect.bind(null, i) },
+	                  _react2.default.createElement(
+	                    'div',
+	                    null,
+	                    symptom.name + ' ',
+	                    '  ',
+	                    _react2.default.createElement('i', { className: 'fa fa-times-circle', 'aria-hidden': 'true' })
+	                  )
+	                );
+	              })
+	            )
+	          ),
+	          _react2.default.createElement(
+	            _reactBootstrap.Button,
+	            { bsStyle: 'danger', bsSize: 'sm', onClick: this.clearSymptoms },
+	            'Clear all'
+	          ),
+	          _react2.default.createElement(
+	            _reactBootstrap.Button,
+	            { bsStyle: 'success', bsSize: 'sm', onClick: this.submitSymptoms },
+	            'Submit!'
+	          )
+	        ),
+	        _react2.default.createElement(
+	          'div',
+	          { className:  true ? "" : "hidden" },
 	          _react2.default.createElement(_symptomEntryModal2.default, { brainState: this.state.brainState, symptoms: this.state.selectedSymptoms, recommendations: this.state.recs })
 	        )
 	      );
@@ -41183,11 +41184,6 @@
 	        null,
 	        _react2.default.createElement(
 	          'div',
-	          { className: (!this.state.currentRec ? '' : 'hidden ') + 'brain-print-container' },
-	          _react2.default.createElement(_brainView2.default, { brainState: this.props.brainState })
-	        ),
-	        _react2.default.createElement(
-	          'div',
 	          { className: this.state.cloak ? 'hidden' : '' + " recommend-modal-container" },
 	          _react2.default.createElement(
 	            'h3',
@@ -41272,14 +41268,18 @@
 	            })
 	          ),
 	          _react2.default.createElement(
-	            'button',
-	            { className: (this.state.currentRec && this.state.currentRec.id !== 1000 ? '' : 'hidden') + ' modal-button', onClick: this.upvote },
-	            'Thanks!'
-	          ),
-	          _react2.default.createElement(
-	            'button',
-	            { className: (this.state.currentRec && this.state.currentRec.id !== 1000 ? '' : 'hidden') + ' modal-button', onClick: this.downvote },
-	            'Sorry, try again.'
+	            'div',
+	            { className: 'symptom-modal-voting' },
+	            _react2.default.createElement(
+	              'span',
+	              { className: (this.state.currentRec && this.state.currentRec.id !== 1000 ? '' : 'hidden') + ' modal-button', onClick: this.upvote },
+	              _react2.default.createElement('i', { className: 'fa fa-thumbs-o-up', 'aria-hidden': 'true' })
+	            ),
+	            _react2.default.createElement(
+	              'span',
+	              { className: (this.state.currentRec && this.state.currentRec.id !== 1000 ? '' : 'hidden') + ' modal-button', onClick: this.downvote },
+	              _react2.default.createElement('i', { className: 'fa fa-thumbs-o-down', 'aria-hidden': 'true' })
+	            )
 	          )
 	        )
 	      );
@@ -42576,6 +42576,14 @@
 	
 	var _doctorEntryView2 = _interopRequireDefault(_doctorEntryView);
 	
+	var _symptomEntry = __webpack_require__(/*! ./symptomEntry.jsx */ 265);
+	
+	var _symptomEntry2 = _interopRequireDefault(_symptomEntry);
+	
+	var _symptomEntryModal = __webpack_require__(/*! ./symptomEntryModal.jsx */ 267);
+	
+	var _symptomEntryModal2 = _interopRequireDefault(_symptomEntryModal);
+	
 	var _map = __webpack_require__(/*! ./map.jsx */ 617);
 	
 	var _map2 = _interopRequireDefault(_map);
@@ -42609,6 +42617,8 @@
 	      scriptmodalIsOpen: false,
 	      docmodalIsOpen: false,
 	      mapmodalIsOpen: false,
+	      symptomModalIsOpen: false,
+	      brainModalIsOpen: false,
 	      modalStyles: {
 	        overlay: {
 	          position: 'fixed',
@@ -42616,7 +42626,7 @@
 	          left: 0,
 	          right: 0,
 	          bottom: 0,
-	          backgroundColor: 'rgba(255, 255, 255, 0.75)'
+	          backgroundColor: '#333333'
 	        },
 	        content: {
 	          position: 'absolute',
@@ -42625,7 +42635,8 @@
 	          right: '30%',
 	          bottom: '30%',
 	          border: '4px solid #ccc',
-	          background: '#fff',
+	          background: '#333333',
+	          color: 'white',
 	          overflow: 'auto',
 	          WebkitOverflowScrolling: 'touch',
 	          borderRadius: '4px',
@@ -42645,6 +42656,10 @@
 	    _this.deleteDoc = _this.deleteDoc.bind(_this);
 	    _this.openModalMap = _this.openModalMap.bind(_this);
 	    _this.closeModalMap = _this.closeModalMap.bind(_this);
+	    _this.openModalSymptom = _this.openModalSymptom.bind(_this);
+	    _this.closeModalSymptom = _this.closeModalSymptom.bind(_this);
+	    _this.openModalBrain = _this.openModalBrain.bind(_this);
+	    _this.closeModalBrain = _this.closeModalBrain.bind(_this);
 	    // this.getZip = this.getZip.bind(this);
 	    return _this;
 	  }
@@ -42708,6 +42723,20 @@
 	      });
 	    }
 	  }, {
+	    key: 'openModalSymptom',
+	    value: function openModalSymptom() {
+	      this.setState({
+	        symptomModalIsOpen: true
+	      });
+	    }
+	  }, {
+	    key: 'openModalBrain',
+	    value: function openModalBrain() {
+	      this.setState({
+	        brainModalIsOpen: true
+	      });
+	    }
+	  }, {
 	    key: 'closeModalScript',
 	    value: function closeModalScript() {
 	      this.setState({
@@ -42726,6 +42755,20 @@
 	    value: function closeModalMap() {
 	      this.setState({
 	        mapmodalIsOpen: false
+	      });
+	    }
+	  }, {
+	    key: 'closeModalSymptom',
+	    value: function closeModalSymptom() {
+	      this.setState({
+	        symptomModalIsOpen: false
+	      });
+	    }
+	  }, {
+	    key: 'closeModalBrain',
+	    value: function closeModalBrain() {
+	      this.setState({
+	        brainModalIsOpen: false
 	      });
 	    }
 	  }, {
@@ -42816,59 +42859,82 @@
 	          ' My Profile '
 	        ),
 	        _react2.default.createElement(
-	          'div',
-	          null,
-	          _react2.default.createElement('input', { placeholder: 'Input Zipcode', type: 'text', onChange: function onChange(event) {
-	              _this2.setState({ inputZip: event.target.value });
-	            } }),
-	          _react2.default.createElement(
-	            _reactBootstrap.Button,
-	            { bsStyle: 'info', onClick: this.openModalMap },
-	            ' Nearest Pharmacy '
-	          )
-	        ),
-	        _react2.default.createElement(
 	          _reactBootstrap.Modal,
-	          {
-	            show: this.state.scriptmodalIsOpen
-	            // shouldCloseOnOverlayClick={false}
-	          },
+	          { show: this.state.scriptmodalIsOpen },
+	          _react2.default.createElement(
+	            'div',
+	            { className: 'modal-button-close-container' },
+	            _react2.default.createElement(
+	              'div',
+	              { className: 'modal-button-close', onClick: this.closeModalScript },
+	              _react2.default.createElement('i', { className: 'fa fa-times-circle', 'aria-hidden': 'true' })
+	            )
+	          ),
 	          _react2.default.createElement(_scriptRemind2.default, {
-	            closeFn: this.closeModalScript }),
-	          _react2.default.createElement(
-	            _reactBootstrap.Button,
-	            { onClick: this.closeModalScript },
-	            'Exit'
-	          )
+	            closeFn: this.closeModalScript })
 	        ),
 	        _react2.default.createElement(
 	          _reactBootstrap.Modal,
-	          {
-	            show: this.state.docmodalIsOpen,
-	            bsSize: 'small'
-	          },
+	          { show: this.state.docmodalIsOpen, bsSize: 'small' },
+	          _react2.default.createElement(
+	            'div',
+	            { className: 'modal-button-close-container' },
+	            _react2.default.createElement(
+	              'div',
+	              { className: 'modal-button-close', onClick: this.closeModalDoctor },
+	              _react2.default.createElement('i', { className: 'fa fa-times-circle', 'aria-hidden': 'true' })
+	            )
+	          ),
 	          _react2.default.createElement(_doctorEntryView2.default, {
-	            closeFn: this.closeModalDoctor }),
-	          _react2.default.createElement(
-	            _reactBootstrap.Button,
-	            { onClick: this.closeModalDoctor },
-	            'Exit'
-	          )
+	            closeFn: this.closeModalDoctor })
 	        ),
 	        _react2.default.createElement(
 	          _reactBootstrap.Modal,
-	          {
-	            show: this.state.mapmodalIsOpen,
-	            shouldCloseOnOverlayClick: false
-	          },
+	          { show: this.state.mapmodalIsOpen, style: this.state.modalStyles },
+	          _react2.default.createElement(
+	            'div',
+	            { className: 'modal-button-close-container' },
+	            _react2.default.createElement(
+	              'div',
+	              { className: 'modal-button-close', onClick: this.closeModalMap },
+	              _react2.default.createElement('i', { className: 'fa fa-times-circle', 'aria-hidden': 'true' })
+	            )
+	          ),
 	          _react2.default.createElement(_map2.default, {
 	            zipcode: this.state.inputZip
-	          }),
+	          })
+	        ),
+	        _react2.default.createElement(
+	          _reactBootstrap.Modal,
+	          { show: this.state.symptomModalIsOpen, style: this.state.modalStyles },
 	          _react2.default.createElement(
-	            _reactBootstrap.Button,
-	            { onClick: this.closeModalMap },
-	            'Exit'
-	          )
+	            'div',
+	            { className: 'modal-button-close-container' },
+	            _react2.default.createElement(
+	              'div',
+	              { className: 'modal-button-close', onClick: this.closeModalSymptom },
+	              _react2.default.createElement('i', { className: 'fa fa-times-circle', 'aria-hidden': 'true' })
+	            )
+	          ),
+	          _react2.default.createElement(_symptomEntry2.default, { closeFn: this.closeModalSymptom })
+	        ),
+	        _react2.default.createElement(
+	          _reactBootstrap.Modal,
+	          { show: this.state.brainModalIsOpen, bsSize: 'small' },
+	          _react2.default.createElement(
+	            'div',
+	            { className: 'modal-button-close-container' },
+	            _react2.default.createElement(
+	              'div',
+	              { className: 'modal-button-close', onClick: this.closeModalBrain },
+	              _react2.default.createElement('i', { className: 'fa fa-times-circle', 'aria-hidden': 'true' })
+	            )
+	          ),
+	          _react2.default.createElement(_symptomEntryModal2.default, {
+	            brainState: true,
+	            symptoms: true,
+	            recommendations: true,
+	            closeFn: this.closeModalDoctor })
 	        ),
 	        _react2.default.createElement(
 	          'div',
@@ -42896,6 +42962,20 @@
 	                  ' Prescription '
 	                ),
 	                ' '
+	              ),
+	              _react2.default.createElement(
+	                'span',
+	                null,
+	                _react2.default.createElement('input', { className: 'zip-input', placeholder: 'Enter zip', type: 'text', onChange: function onChange(event) {
+	                    _this2.setState({ inputZip: event.target.value });
+	                  } }),
+	                _react2.default.createElement(
+	                  _reactBootstrap.Button,
+	                  { bsStyle: 'info', onClick: this.openModalMap },
+	                  ' ',
+	                  _react2.default.createElement('i', { className: 'fa fa-search', 'aria-hidden': 'true' }),
+	                  ' '
+	                )
 	              )
 	            ),
 	            this.state.scripts.map(function (script, idx) {
@@ -42962,6 +43042,18 @@
 	                'div',
 	                { className: 'doctors-title' },
 	                ' Doctors '
+	              ),
+	              _react2.default.createElement(
+	                _reactBootstrap.Button,
+	                { bsStyle: 'success', bsSize: 'small', onClick: this.openModalSymptom },
+	                ' ',
+	                _react2.default.createElement(
+	                  'div',
+	                  null,
+	                  ' ',
+	                  _react2.default.createElement('i', { className: 'fa fa-plus-circle', 'aria-hidden': 'true' }),
+	                  ' Recommend '
+	                )
 	              ),
 	              _react2.default.createElement(
 	                _reactBootstrap.Button,
@@ -43084,6 +43176,8 @@
 	var _reactModal = __webpack_require__(/*! react-modal */ 245);
 	
 	var _reactModal2 = _interopRequireDefault(_reactModal);
+	
+	var _reactBootstrap = __webpack_require__(/*! react-bootstrap */ 619);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
@@ -43261,177 +43355,198 @@
 	        'div',
 	        null,
 	        _react2.default.createElement(
-	          'div',
+	          'h1',
 	          null,
-	          _react2.default.createElement(
-	            'h1',
-	            null,
-	            ' Set a Prescription Reminder '
-	          ),
-	          _react2.default.createElement(
-	            'h2',
-	            null,
-	            ' Current Drug: ',
-	            this.state.currentDrug,
-	            ' '
-	          ),
-	          _react2.default.createElement('input', {
-	            onChange: this.updateDrugName,
-	            placeholder: 'Name'
-	          }),
-	          _react2.default.createElement(
-	            'h8',
-	            { className: 'required' },
-	            ' (required) '
-	          )
+	          ' Set a Prescription Reminder '
 	        ),
 	        _react2.default.createElement(
 	          'div',
 	          null,
-	          _react2.default.createElement('input', {
-	            className: 'dosageInput',
-	            onChange: this.handleDoseAmount,
-	            placeholder: 'Dosage (e.g. if "Take 1 tablet", type "1")'
-	          }),
-	          _react2.default.createElement(
-	            'select',
-	            { className: 'dropdown-replacement', value: this.state.dosageMeasure, onChange: this.handleDoseMeasurement },
-	            _react2.default.createElement(
-	              'option',
-	              null,
-	              'mg'
-	            ),
-	            _react2.default.createElement(
-	              'option',
-	              null,
-	              'mL'
-	            ),
-	            _react2.default.createElement(
-	              'option',
-	              null,
-	              'tablet'
-	            )
-	          )
-	        ),
-	        _react2.default.createElement(
-	          'div',
-	          null,
-	          _react2.default.createElement(
-	            'h1',
-	            null,
-	            ' Refill Date'
-	          ),
 	          _react2.default.createElement(
 	            'div',
-	            null,
-	            _react2.default.createElement(_reactInputCalendar2.default, { format: 'MM/DD/YYYY', date: this.state.date, onChange: this.handleRefillDate }),
+	            { className: 'script-form-frame' },
 	            _react2.default.createElement(
 	              'h3',
 	              null,
-	              ' You selected ',
-	              this.state.date,
+	              ' Current Drug: ',
+	              this.state.currentDrug,
 	              ' '
-	            )
-	          )
-	        ),
-	        _react2.default.createElement(
-	          'div',
-	          null,
-	          _react2.default.createElement(
-	            'select',
-	            { className: 'dropdown-replacement', value: this.state.scheduleFreq, onChange: this.handleFrequency },
-	            _react2.default.createElement(
-	              'option',
-	              null,
-	              '1x'
 	            ),
 	            _react2.default.createElement(
-	              'option',
-	              null,
-	              '2x'
-	            ),
-	            _react2.default.createElement(
-	              'option',
-	              null,
-	              '3x'
-	            )
-	          ),
-	          _react2.default.createElement(
-	            'h3',
-	            null,
-	            ' per '
-	          ),
-	          _react2.default.createElement(
-	            'select',
-	            { className: 'dropdown-replacement', value: this.state.scheduleDayWeek, onChange: this.handleScheduleDayWeek },
-	            _react2.default.createElement(
-	              'option',
-	              null,
-	              'day'
-	            ),
-	            _react2.default.createElement(
-	              'option',
-	              null,
-	              'week'
-	            )
-	          )
-	        ),
-	        _react2.default.createElement(
-	          'div',
-	          null,
-	          _react2.default.createElement(
-	            'div',
-	            { className: 'reminder' },
-	            _react2.default.createElement(
-	              'h2',
-	              null,
-	              ' Reminder Time 1'
-	            ),
-	            _react2.default.createElement(_reactKronos2.default, { time: this.state.reminderTime1, value: '', placeholder: "Click to select a time", onChangeDateTime: this.handleReminderTime1 }),
-	            _react2.default.createElement(
-	              'h8',
-	              { className: 'required' },
-	              ' (required) '
+	              'div',
+	              { className: 'script-form-fields' },
+	              _react2.default.createElement('input', {
+	                onChange: this.updateDrugName,
+	                placeholder: 'Name'
+	              }),
+	              _react2.default.createElement(
+	                'h8',
+	                { className: 'required' },
+	                ' (required) '
+	              )
 	            )
 	          ),
 	          _react2.default.createElement(
 	            'div',
-	            { className: this.state.hasTwo ? 'reminder' : 'hidden' },
+	            { className: 'script-form-frame' },
 	            _react2.default.createElement(
-	              'h2',
+	              'h3',
 	              null,
-	              ' Reminder Time 2'
+	              'Dosage'
 	            ),
-	            _react2.default.createElement(_reactKronos2.default, { time: this.state.reminderTime2, value: '', placeholder: "Click to select a time", onChangeDateTime: this.handleReminderTime2 }),
 	            _react2.default.createElement(
-	              'h8',
-	              { className: 'required' },
-	              ' (required) '
+	              'div',
+	              { className: 'script-form-fields' },
+	              _react2.default.createElement('input', {
+	                className: 'dosageInput',
+	                onChange: this.handleDoseAmount,
+	                placeholder: 'Dosage (e.g. if "Take 1 tablet", type "1")'
+	              }),
+	              _react2.default.createElement(
+	                'select',
+	                { className: 'dropdown-replacement', value: this.state.dosageMeasure, onChange: this.handleDoseMeasurement },
+	                _react2.default.createElement(
+	                  'option',
+	                  null,
+	                  'mg'
+	                ),
+	                _react2.default.createElement(
+	                  'option',
+	                  null,
+	                  'mL'
+	                ),
+	                _react2.default.createElement(
+	                  'option',
+	                  null,
+	                  'tablet'
+	                )
+	              )
 	            )
 	          ),
 	          _react2.default.createElement(
 	            'div',
-	            { className: this.state.hasThree ? 'reminder' : 'hidden' },
+	            { className: 'script-form-frame' },
 	            _react2.default.createElement(
-	              'h2',
+	              'h3',
 	              null,
-	              ' Reminder Time 3'
+	              ' Refill Date'
 	            ),
-	            _react2.default.createElement(_reactKronos2.default, { time: this.state.reminderTime3, value: '', placeholder: "Click to select a time", onChangeDateTime: this.handleReminderTime3 }),
 	            _react2.default.createElement(
-	              'h8',
-	              { className: 'required' },
-	              ' (required) '
+	              'div',
+	              { className: 'script-form-fields' },
+	              _react2.default.createElement(_reactInputCalendar2.default, { format: 'MM/DD/YYYY', date: this.state.date, onChange: this.handleRefillDate }),
+	              _react2.default.createElement(
+	                'span',
+	                { className: this.state.date ? "" : "hidden" },
+	                'You selected ',
+	                this.state.date
+	              )
 	            )
-	          )
-	        ),
-	        _react2.default.createElement(
-	          'div',
-	          { className: 'clear' },
+	          ),
 	          _react2.default.createElement(
-	            'button',
-	            { className: 'remindBtn', onClick: this.submitForm },
-	            ' Remind Me '
+	            'div',
+	            { className: 'script-form-frame' },
+	            _react2.default.createElement(
+	              'h3',
+	              null,
+	              'Frequency'
+	            ),
+	            _react2.default.createElement(
+	              'div',
+	              { className: 'script-form-fields' },
+	              _react2.default.createElement(
+	                'select',
+	                { className: 'dropdown-replacement', value: this.state.scheduleFreq, onChange: this.handleFrequency },
+	                _react2.default.createElement(
+	                  'option',
+	                  null,
+	                  '1x'
+	                ),
+	                _react2.default.createElement(
+	                  'option',
+	                  null,
+	                  '2x'
+	                ),
+	                _react2.default.createElement(
+	                  'option',
+	                  null,
+	                  '3x'
+	                )
+	              ),
+	              'per',
+	              _react2.default.createElement(
+	                'select',
+	                { className: 'dropdown-replacement', value: this.state.scheduleDayWeek, onChange: this.handleScheduleDayWeek },
+	                _react2.default.createElement(
+	                  'option',
+	                  null,
+	                  'day'
+	                ),
+	                _react2.default.createElement(
+	                  'option',
+	                  null,
+	                  'week'
+	                )
+	              )
+	            )
+	          ),
+	          _react2.default.createElement(
+	            'div',
+	            { className: 'script-form-frame' },
+	            _react2.default.createElement(
+	              'div',
+	              { className: 'reminder' },
+	              _react2.default.createElement(
+	                'h3',
+	                null,
+	                ' Reminder Time 1'
+	              ),
+	              _react2.default.createElement(_reactKronos2.default, { time: this.state.reminderTime1, value: '', placeholder: "Click to select a time", onChangeDateTime: this.handleReminderTime1 }),
+	              _react2.default.createElement(
+	                'h8',
+	                { className: 'required' },
+	                ' (required) '
+	              )
+	            ),
+	            _react2.default.createElement(
+	              'div',
+	              { className: this.state.hasTwo ? 'reminder' : 'hidden' },
+	              _react2.default.createElement(
+	                'h3',
+	                null,
+	                ' Reminder Time 2'
+	              ),
+	              _react2.default.createElement(_reactKronos2.default, { time: this.state.reminderTime2, value: '', placeholder: "Click to select a time", onChangeDateTime: this.handleReminderTime2 }),
+	              _react2.default.createElement(
+	                'h8',
+	                { className: 'required' },
+	                ' (required) '
+	              )
+	            ),
+	            _react2.default.createElement(
+	              'div',
+	              { className: this.state.hasThree ? 'reminder' : 'hidden' },
+	              _react2.default.createElement(
+	                'h3',
+	                null,
+	                ' Reminder Time 3'
+	              ),
+	              _react2.default.createElement(_reactKronos2.default, { time: this.state.reminderTime3, value: '', placeholder: "Click to select a time", onChangeDateTime: this.handleReminderTime3 }),
+	              _react2.default.createElement(
+	                'h8',
+	                { className: 'required' },
+	                ' (required) '
+	              )
+	            ),
+	            _react2.default.createElement(
+	              'div',
+	              { className: 'clear' },
+	              _react2.default.createElement(
+	                _reactBootstrap.Button,
+	                { bsStyle: 'info', onClick: this.submitForm },
+	                ' Remind Me '
+	              )
+	            )
 	          )
 	        )
 	      );
@@ -70745,12 +70860,16 @@
 	      return (
 	        // var srcURL = "https://www.google.com/maps/embed/v1/search?key=AIzaSyCnPK2o-dXX9hTQdMA4dTXIezhxyIzfRB0&q=pharmacy+near+" + {this.state.zipcode}
 	        // if inputzipcode state is 0 then use the users zipcode, otherwise use the inputzipcode
-	        _react2.default.createElement('iframe', {
-	          width: '650',
-	          height: '450'
-	          // frameborder="0"
-	          // style="border:0"
-	          , src: "https://www.google.com/maps/embed/v1/search?key=AIzaSyCnPK2o-dXX9hTQdMA4dTXIezhxyIzfRB0&q=pharmacy+near+" + this.props.zipcode })
+	        _react2.default.createElement(
+	          'div',
+	          { className: 'map-container' },
+	          _react2.default.createElement('iframe', {
+	            width: '95%',
+	            height: '400'
+	            // frameborder="0"
+	            // style="border:0"
+	            , src: "https://www.google.com/maps/embed/v1/search?key=AIzaSyCnPK2o-dXX9hTQdMA4dTXIezhxyIzfRB0&q=pharmacy+near+" + this.props.zipcode })
+	        )
 	      );
 	    }
 	  }]);

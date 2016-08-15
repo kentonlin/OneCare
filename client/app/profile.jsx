@@ -3,6 +3,8 @@ import $ from 'jquery';
 import Navigate from './navigate.jsx';
 import ScriptRemind from './scriptRemind.jsx';
 import DoctorEntryView from './doctorEntryView.jsx';
+import SymptomEntry from './symptomEntry.jsx';
+import SymptomEntryModal from './symptomEntryModal.jsx';
 import Map from './map.jsx';
 import _ from 'lodash';
 import { Modal, Button, ButtonToolbar } from 'react-bootstrap';
@@ -17,6 +19,8 @@ export default class Profile extends React.Component {
       scriptmodalIsOpen: false,
       docmodalIsOpen: false,
       mapmodalIsOpen: false,
+      symptomModalIsOpen: false,
+      brainModalIsOpen: false,
       modalStyles: {
         overlay : {
           position          : 'fixed',
@@ -24,7 +28,7 @@ export default class Profile extends React.Component {
           left              : 0,
           right             : 0,
           bottom            : 0,
-          backgroundColor   : 'rgba(255, 255, 255, 0.75)'
+          backgroundColor   : '#333333'
         },
         content : {
           position                   : 'absolute',
@@ -33,7 +37,8 @@ export default class Profile extends React.Component {
           right                      : '30%',
           bottom                     : '30%',
           border                     : '4px solid #ccc',
-          background                 : '#fff',
+          background                 : '#333333',
+          color                      :  'white', 
           overflow                   : 'auto',
           WebkitOverflowScrolling    : 'touch',
           borderRadius               : '4px',
@@ -53,6 +58,10 @@ export default class Profile extends React.Component {
     this.deleteDoc = this.deleteDoc.bind(this);
     this.openModalMap = this.openModalMap.bind(this);
     this.closeModalMap = this.closeModalMap.bind(this);
+    this.openModalSymptom = this.openModalSymptom.bind(this);
+    this.closeModalSymptom = this.closeModalSymptom.bind(this);
+    this.openModalBrain = this.openModalBrain.bind(this);
+    this.closeModalBrain = this.closeModalBrain.bind(this);
     // this.getZip = this.getZip.bind(this);
   }
 
@@ -110,23 +119,47 @@ export default class Profile extends React.Component {
     });
   }
 
+  openModalSymptom() {
+    this.setState({
+      symptomModalIsOpen: true
+    });
+  }
+
+  openModalBrain() {
+    this.setState({
+      brainModalIsOpen: true
+    });
+  }
+
  closeModalScript() {
    this.setState({
      scriptmodalIsOpen: false
    }, this.getScripts)
  }
 
- closeModalDoctor() {
-   this.setState({
-     docmodalIsOpen: false
-   }, this.getDocs)
- }
+  closeModalDoctor() {
+    this.setState({
+      docmodalIsOpen: false
+    }, this.getDocs)
+  }
 
- closeModalMap() {
-   this.setState({
-     mapmodalIsOpen: false
-   });
- }
+  closeModalMap() {
+    this.setState({
+      mapmodalIsOpen: false
+    });
+  }
+
+  closeModalSymptom() {
+    this.setState({
+      symptomModalIsOpen: false
+    });
+  }
+
+  closeModalBrain() {
+    this.setState({
+      brainModalIsOpen: false
+    });
+  }
 
   getScripts() {
     console.log("get scripts has been called!");
@@ -203,44 +236,59 @@ export default class Profile extends React.Component {
       <div className='profile-container'>
         <Navigate />
         <h1> My Profile </h1>
-        <div>
-          <input placeholder='Input Zipcode' type="text" onChange={(event) => {this.setState({inputZip: event.target.value})}}/>
-          <Button bsStyle="info" onClick={this.openModalMap}> Nearest Pharmacy </Button>
-        </div>
 
-        <Modal
-          show={this.state.scriptmodalIsOpen}
-          // shouldCloseOnOverlayClick={false}
-        >
+        <Modal show={this.state.scriptmodalIsOpen}>
+            <div className="modal-button-close-container">
+              <div className='modal-button-close' onClick={this.closeModalScript}><i className="fa fa-times-circle" aria-hidden="true"></i></div>
+            </div>
             <ScriptRemind
-            closeFn={this.closeModalScript} />
-            <Button onClick={this.closeModalScript}>Exit</Button>
-
+              closeFn={this.closeModalScript} />
         </Modal>
 
-        <Modal
-          show={this.state.docmodalIsOpen}
-          bsSize='small'
-        >
+        <Modal show={this.state.docmodalIsOpen} bsSize='small'>
+            <div className="modal-button-close-container">
+              <div className='modal-button-close' onClick={this.closeModalDoctor}><i className="fa fa-times-circle" aria-hidden="true"></i></div>
+            </div>
             <DoctorEntryView
             closeFn={this.closeModalDoctor} />
-            <Button onClick={this.closeModalDoctor}>Exit</Button>
         </Modal>
 
-        <Modal
-          show={this.state.mapmodalIsOpen}
-          shouldCloseOnOverlayClick={false}
-        >
-          <Map
+        <Modal show={this.state.mapmodalIsOpen} style={this.state.modalStyles}>
+            <div className="modal-button-close-container">
+              <div className='modal-button-close' onClick={this.closeModalMap}><i className="fa fa-times-circle" aria-hidden="true"></i></div>
+            </div>
+            <Map
           zipcode = {this.state.inputZip}
           />
-          <Button onClick={this.closeModalMap}>Exit</Button>
         </Modal>
+
+        <Modal show={this.state.symptomModalIsOpen} style={this.state.modalStyles}>
+            <div className="modal-button-close-container">
+              <div className='modal-button-close' onClick={this.closeModalSymptom}><i className="fa fa-times-circle" aria-hidden="true"></i></div>
+            </div>
+            <SymptomEntry closeFn={this.closeModalSymptom} />
+        </Modal>
+
+        <Modal show={this.state.brainModalIsOpen} bsSize='small'>
+            <div className="modal-button-close-container">
+              <div className='modal-button-close' onClick={this.closeModalBrain}><i className="fa fa-times-circle" aria-hidden="true"></i></div>
+            </div>
+            <SymptomEntryModal 
+            brainState
+            symptoms 
+            recommendations 
+            closeFn={this.closeModalDoctor} />
+        </Modal>
+
       <div className="scripts-doctors">
       <div className='scripts-container'>
       <div className='scripts-header'>
         <div className='scripts-title'> Scripts </div>
         <Button bsStyle="success" bsSize='small' onClick={this.openModalScript}> <div> <i className="fa fa-plus-circle" aria-hidden="true"></i> Prescription </div> </Button>
+        <span>
+          <input className="zip-input" placeholder='Enter zip' type="text" onChange={(event) => {this.setState({inputZip: event.target.value})}}/>
+          <Button bsStyle="info" onClick={this.openModalMap}> <i className="fa fa-search" aria-hidden="true"></i> </Button>
+        </span>
       </div>
              {
               this.state.scripts.map((script, idx) => {
@@ -258,6 +306,7 @@ export default class Profile extends React.Component {
         <div className='doctors-container'>
         <div className='doctors-header'>
           <div className='doctors-title'> Doctors </div>
+          <Button bsStyle="success" bsSize='small' onClick={this.openModalSymptom}> <div> <i className="fa fa-plus-circle" aria-hidden="true"></i> Recommend </div></Button>
           <Button bsStyle="success" bsSize='small' onClick={this.openModalDoctor}> <div> <i className="fa fa-plus-circle" aria-hidden="true"></i> Doctor </div> </Button>
         </div>
               {
