@@ -1,6 +1,6 @@
 body {
   background-color: #FFFFFF;
-  font-family: 'Lato', sans-serif;
+  font-family: 'Roboto', sans-serif;
 }
 
 ul {
@@ -32,9 +32,10 @@ input {
   color: yellow;
 }
 
-.top {
-  display: flex;
-  flex-direction: row;
+/*****  COLORS  *****/
+
+.red {
+  color: #CD0000;
 }
 
 .topName {
@@ -67,6 +68,36 @@ input {
   right: 10px;
 }
 
+.orange {
+  background-color: #d35400;
+}
+
+.btn {
+color: #FFFFFF;
+display: inline-block;
+padding: 6px 12px;
+margin-bottom: 0;
+font-size: 14px;
+font-weight: 400;
+line-height: 1.42857143;
+text-align: center;
+white-space: nowrap;
+vertical-align: middle;
+-ms-touch-action: manipulation;
+touch-action: manipulation;
+cursor: pointer;
+-webkit-user-select: none;
+-moz-user-select: none;
+-ms-user-select: none;
+user-select: none;
+background-image: none;
+border: 1px solid transparent;
+border-radius: 4px;
+}
+
+
+
+/* END OF COLORS */
 .required {
   color: red;
 }
@@ -111,10 +142,11 @@ input {
 
 .doctors-header {
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-end;
   align-items: center;
   padding-left: 15px;
   padding-right: 15px;
+  padding-bottom: 8px;
 }
 
 .doctor-attribute {
@@ -140,7 +172,9 @@ input {
   margin-top: 10px;
   margin-left: 20px;
   padding: 10px;
-  background-color: #333333;
+  background-color: #3498db;
+  border-radius: 7px;
+   padding:5px;
 }
 
 .doctor-top-bar {
@@ -149,13 +183,13 @@ input {
 }
 
 .doctor-view-container {
-  padding: 10px;
+  padding: 25px;
   margin-right: 15px;
   margin-left: 15px;
   margin-bottom: 10px;
   border-radius:2px;
   background-color: #FFFFFF;
-  color: black;
+  border-radius: 7px;
 }
 
 
@@ -196,7 +230,8 @@ input {
 
 .scripts-doctors {
   display: flex;
-  justify-content: space-around;
+  justify-content: center;
+  background-color: #ecf0f1;
 }
 .scripts-container {
   float:left;
@@ -204,7 +239,7 @@ input {
   margin-top: 10px;
   margin-right: 20px;
   padding: 10px;
-  background-color: #191970;
+  background-color: #3498db;
   border-radius: 7px;
    padding:5px;
 }
@@ -222,12 +257,13 @@ input {
 }
 
 .scripts-view-container {
-  padding: 10px;
+  padding: 25px;
   margin-right: 15px;
   margin-left: 15px;
   margin-bottom: 10px;
   border-radius:2px;
   background-color: #FFFFFF;
+  border-radius: 7px;
 }
 
 .script-name {
