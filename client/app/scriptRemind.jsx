@@ -10,8 +10,9 @@ import moment from 'moment';
 import Modal from 'react-modal'
 import {Button, ButtonToolbar } from 'react-bootstrap';
 
-export default class ScriptRemindView extends React.Component {
+var date = new Date().toISOString();
 
+export default class ScriptRemindView extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -30,19 +31,16 @@ export default class ScriptRemindView extends React.Component {
       "hasTwo": false,
       "hasThree": false
     };
-  var date = new Date();
-  this.updateDrugName = this.updateDrugName.bind(this);
-  this.submitForm = this.submitForm.bind(this);
-  this.handleFrequency = this.handleFrequency.bind(this);
-  this.handleDoseAmount = this.handleDoseAmount.bind(this);
-  this.handleRefillDate = this.handleRefillDate.bind(this);
-  this.handleDoseMeasurement = this.handleDoseMeasurement.bind(this);
-  this.handleScheduleDayWeek = this.handleScheduleDayWeek.bind(this);
-  this.handleReminderTime1 = this.handleReminderTime1.bind(this);
-  this.handleReminderTime2 = this.handleReminderTime2.bind(this);
-  this.handleReminderTime3 = this.handleReminderTime3.bind(this);
-
-
+    this.updateDrugName = this.updateDrugName.bind(this);
+    this.submitForm = this.submitForm.bind(this);
+    this.handleFrequency = this.handleFrequency.bind(this);
+    this.handleDoseAmount = this.handleDoseAmount.bind(this);
+    this.handleRefillDate = this.handleRefillDate.bind(this);
+    this.handleDoseMeasurement = this.handleDoseMeasurement.bind(this);
+    this.handleScheduleDayWeek = this.handleScheduleDayWeek.bind(this);
+    this.handleReminderTime1 = this.handleReminderTime1.bind(this);
+    this.handleReminderTime2 = this.handleReminderTime2.bind(this);
+    this.handleReminderTime3 = this.handleReminderTime3.bind(this);
   }
 
     updateDrugName(event){
@@ -53,8 +51,6 @@ export default class ScriptRemindView extends React.Component {
     }
 
     handleRefillDate(date) {
-      console.log("actual date format", date);
-      console.log("selected date", date);
       this.setState({
         "date": date
       });
@@ -82,8 +78,6 @@ export default class ScriptRemindView extends React.Component {
     }
 
     handleFrequency(frequency) {
-      console.log("current state", this.state);
-      console.log("handleFreq called with", frequency.target.value);
       if(frequency.target.value === '2x'){
         this.setState({
           hasTwo: true,
@@ -137,12 +131,11 @@ export default class ScriptRemindView extends React.Component {
         var script = {
           "name": this.state.currentDrug,
           "dosage": this.state.dosageAmt + ' ' + this.state.dosageMeasure,
-          "refill": new Date(moment(this.state.date).format()).toISOString(),
+          "refill": new Date(moment(this.state.date, "MM-DD-YYYY")).toISOString(),
           "frequency": this.state.scheduleFreq + ' per ' + this.state.scheduleDayWeek,
           "reminderTime": [this.state.reminderTime1, this.state.reminderTime2, this.state.reminderTime3],
           "username": window.localStorage.username
         };
-        console.log("submitForm called for: ", script);
 
         $.ajax({
             type: 'POST',
