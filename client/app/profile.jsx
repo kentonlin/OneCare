@@ -66,7 +66,6 @@ export default class Profile extends React.Component {
   }
 
   deleteDoc(idx){
-    console.log("index", idx);
     var id = this.state.doctors[idx]._id;
 
     $.ajax({
@@ -84,9 +83,7 @@ export default class Profile extends React.Component {
   }
 
   deleteScript(index) {
-    console.log("deleteReminder called!!");
     var id = this.state.scripts[index]._id;
-    console.log("reminderID", id);
     $.ajax({
      type: "POST",
      url: "/api/reminder/delete",
@@ -96,12 +93,13 @@ export default class Profile extends React.Component {
      },
      data: JSON.stringify({ "reminderID": id }),
      success: this.getScripts(),
-     error: this.getScripts()
+     error: function(err) {
+      console.error(err);
+     }
    });
   }
 
   openModalScript() {
-    console.log("open modal script called");
     this.setState({
       scriptmodalIsOpen: true
     });
@@ -162,7 +160,6 @@ export default class Profile extends React.Component {
   }
 
   getScripts() {
-    console.log("get scripts has been called!");
     $.ajax({
      type: "POST",
      url: "/api/script/find",
@@ -172,12 +169,11 @@ export default class Profile extends React.Component {
      },
      data: JSON.stringify({username: window.localStorage.username}),
      success: function(data) {
-       console.log("data!!!!", data);
        var sorted  = _.sortBy(data, 'refill'); //sorts scripts by refill date
        this.setState({scripts: sorted});
      }.bind(this),
      error: function(err) {
-       console.log('error in ajax request for user scripts', err);
+       console.error('error in ajax request for user scripts', err);
      }
    });
 
@@ -192,13 +188,12 @@ export default class Profile extends React.Component {
       },
       data: JSON.stringify({"username": window.localStorage.username}),
       success: function(docs) {
-        console.log("DOCTORS", docs);
         this.setState({
           doctors: docs
         });
       }.bind(this),
       error: function(err) {
-        console.log('I can\'t pill you...not today', err);
+        console.error('I can\'t pill you...not today', err);
       }
     });
   }
@@ -225,7 +220,6 @@ export default class Profile extends React.Component {
 
 
   componentDidMount() {
-    console.log("component has mounted!!!");
     this.getScripts();
     this.getDocs();
     // this.getZip();

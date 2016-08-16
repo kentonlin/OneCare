@@ -19,13 +19,11 @@ var dbFunc = {
 			if(err) {
 				console.log('username not found');
 			}
-			console.log('user object in get zip');
-			console.log('zipcode for user found', user.zipcode);
 			res.send(user.zipcode);
 		});
 	},
 
-	addScript: function(script, res, next) {
+	addScript: function(script, res) {
 		/*
 			Script Format
 			{
@@ -39,7 +37,6 @@ var dbFunc = {
 		*/
 		var message = "Time to take your " + script.name + ' (' + script.dosage + ')!';
 		var newScript = new Model.script(script);
-		console.log('newScript: ', newScript);
 		newScript.save(function(err){
 			if(err) {
 				console.log('error', err);
@@ -51,8 +48,7 @@ var dbFunc = {
 					res.send(new Error("script not added to user document"));
 				}
 				//call set reminder function
-				console.log("set reminder about to be called");
-				this.setReminder(script.username, newScript._id, message, script.reminderTime, script.refill, script.name, next); //script.reminderTime is an array of times
+				this.setReminder(script.username, newScript._id, message, script.reminderTime, script.refill, script.name); //script.reminderTime is an array of times
 			}.bind(this));
 		}.bind(this));
 
@@ -64,13 +60,11 @@ var dbFunc = {
 			if(err){
 				console.log('error in fetching scripts', err);
 			}
-			console.log('these are the found scripts for user: ', found.scripts);
 			res.send(found.scripts);
 		});
 	},
 
   addDoc: function(data, res, next) {
-		console.log("addDoc called with", data);
   	var newDoc = new Model.doctor(data.doc);
   	newDoc.save(function(err) {
   		if (err) {
@@ -118,7 +112,6 @@ var dbFunc = {
 					if(err) {
 						console.log("new user not saved", err);
 					}
-				console.log("new user saved");
 				var token = jwt.encode(user, 'secret'); //create new token
 	      res.json({"token": token, "user": {"id": user._id, "username": user.username}}); //send new token and user object
 			});
@@ -151,7 +144,6 @@ var dbFunc = {
 						next(new Error("Incorrect password")); //will send an error if incorrect password
 					}
 					else{
-						console.log("password correct!");
 						var token = jwt.encode(user, 'secret'); //create new token
 
 						var resultData = {"token": token, "user": {"id": user._id, "username": user.username}}
@@ -177,7 +169,6 @@ var dbFunc = {
 	    		res.status(401).send();
 	    	}
 	    	else{ //token decoded and user found in database
-	    		console.log("user authenticated");
 	    		res.status(200).send();
 	    	}
 	    });
@@ -194,7 +185,6 @@ var dbFunc = {
 					console.error(err);
 				}
 				else {
-					console.log('++++++++++++++>', user.zipcode);
 					res.status(200).send();
 				}
 			})
@@ -207,14 +197,11 @@ var dbFunc = {
 				if (err) {
 					console.log(err);
 				}
-				console.log('New sympson added!');
 				res.send(newSymptom);
 			});
 	},
 
-	setReminder: function(username, scriptID, message, time, refillDate, drugName, next) { //time is an array
-
-		console.log("sendReminder called for", username, "with the message:", message);
+	setReminder: function(username, scriptID, message, time, refillDate, drugName) { //time is an array
 		// look up user object and find their phone number
 				Model.user.findOne({"username": username}, function(err, user){
 										"use strict";
@@ -222,8 +209,6 @@ var dbFunc = {
 						next(new Error(err));
 					}
 					var phoneNum = "+" + user.phone;
-					console.log("Number on file", phoneNum);
-					console.log("payload", JSON.stringify({phone: phoneNum, message: message}));
 					for(let i = 0; i < time.length; i++) {
 						if(time[i] !== null){
 							var options = {
@@ -246,10 +231,8 @@ var dbFunc = {
 								},
 							  json: true
 							};
-							console.log("parameters so far", i, refillDate, time[i]);
 							request(options, function (error, response, body) { //POST to Iron Worker to schedule the recurring texts
 							  if (error) throw new Error(error);
-								console.log("HOT BODY", body);
 								if(body.schedules){
 									Model.script.findOneAndUpdate({"_id": scriptID}, { //add ironID to script document
 										$push: {
@@ -257,11 +240,10 @@ var dbFunc = {
 										}
 									})
 									.then(function(res) {
-										console.log("script has been saved and the reminder ID is set!!");
-										next("reminder has been saved");
+										console.log("reminder has been saved");
 									})
 									.catch(function(err) {
-										next(new Error("reminder has not been saved", err));
+										console.log(new Error("reminder has not been saved", err));
 									});
 								}
 							});
@@ -321,7 +303,6 @@ deleteReminder: function(scriptID, res, next) {
 				};
 				request(options, function (error, response, body) {
 					if (error) throw new Error(error);
-					console.log("response", body)
 				})
 			}
 		}
@@ -331,7 +312,7 @@ deleteReminder: function(scriptID, res, next) {
 			}
 		});
 	})
-
+  res.status(202).send("successfully deleted.")
 },
 
 	saveBrain: function(brainState, trainingData, name) {

@@ -37,14 +37,12 @@ app.post('/api/user/zip', function(req, res) {
 });
 
 // Add a new reminder to the reminder collection
-app.post('/api/reminder/add', function(req, res, next) {
-  console.log('request received at addScriptReminder: ', req.body);
+app.post('/api/reminder/add', function(req, res) {
   var newScript = req.body;
-  dbHelpers.addScript(newScript, res, next);
+  dbHelpers.addScript(newScript, res);
 });
 
 app.post('/api/reminder/delete', function(req, res, next){
-  console.log("request received at deleteScript");
   var reminderID = req.body.reminderID;
   dbHelpers.deleteReminder(reminderID, res, next);
   res.send("U DID IT M8")
@@ -85,7 +83,6 @@ app.post('/api/doctors/get', function(req, res, next) {
 
 app.post('/api/signup', function(req, res, next) {
   var userSignup = req.body;
-  console.log(userSignup);
   dbHelpers.signup(userSignup, res, next);
 });
 
@@ -95,7 +92,6 @@ app.post('/api/signin', function(req, res, next) {
 });
 
 app.post('/api/script/remind', function(req, res, next) {
-  console.log("request received at setReminder route");
   var username = req.body.username;
   var message = req.body.message;
   //phone will not be a parameter in final version, we'll look it up based on the username
@@ -106,16 +102,13 @@ app.post('/api/script/remind', function(req, res, next) {
 
 app.post('/api/symptomEntry/add', function(req, res) {
   var newSympson = req.body;
-  // console.log(newSympson);
   dbHelpers.addSymptom(newSympson, res);
 });
 
 app.post('/api/brain/recommend', function(req, res) {
   var username = req.body.username;
   var symptoms = req.body.symptoms;
-  console.log("The brain shall now ponder: ", symptoms);
   var data = brain.OCBrain.activate(symptoms);
-  // console.log("The brain has decided to recommend: ", data);
   //query db for user docs.
   brain.OCBrain.doctors(username, data, function(list) {res.status(200).send(list)});
 });
@@ -126,7 +119,6 @@ app.get('/api/brain/save', function(req, res) {
 });
 
 app.post('/api/reminder/delete', function(req, res, next){
-  console.log("request received at deleteScript");
   var reminderID = req.body.reminderID;
   dbHelpers.deleteReminder(reminderID, next);
 });

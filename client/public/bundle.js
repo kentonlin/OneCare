@@ -62095,7 +62095,6 @@
 	  _createClass(Profile, [{
 	    key: 'deleteDoc',
 	    value: function deleteDoc(idx) {
-	      console.log("index", idx);
 	      var id = this.state.doctors[idx]._id;
 	
 	      _jquery2.default.ajax({
@@ -62113,9 +62112,7 @@
 	  }, {
 	    key: 'deleteScript',
 	    value: function deleteScript(index) {
-	      console.log("deleteReminder called!!");
 	      var id = this.state.scripts[index]._id;
-	      console.log("reminderID", id);
 	      _jquery2.default.ajax({
 	        type: "POST",
 	        url: "/api/reminder/delete",
@@ -62125,13 +62122,14 @@
 	        },
 	        data: JSON.stringify({ "reminderID": id }),
 	        success: this.getScripts(),
-	        error: this.getScripts()
+	        error: function error(err) {
+	          console.error(err);
+	        }
 	      });
 	    }
 	  }, {
 	    key: 'openModalScript',
 	    value: function openModalScript() {
-	      console.log("open modal script called");
 	      this.setState({
 	        scriptmodalIsOpen: true
 	      });
@@ -62202,7 +62200,6 @@
 	  }, {
 	    key: 'getScripts',
 	    value: function getScripts() {
-	      console.log("get scripts has been called!");
 	      _jquery2.default.ajax({
 	        type: "POST",
 	        url: "/api/script/find",
@@ -62212,12 +62209,11 @@
 	        },
 	        data: JSON.stringify({ username: window.localStorage.username }),
 	        success: function (data) {
-	          console.log("data!!!!", data);
 	          var sorted = _lodash2.default.sortBy(data, 'refill'); //sorts scripts by refill date
 	          this.setState({ scripts: sorted });
 	        }.bind(this),
 	        error: function error(err) {
-	          console.log('error in ajax request for user scripts', err);
+	          console.error('error in ajax request for user scripts', err);
 	        }
 	      });
 	    }
@@ -62232,13 +62228,12 @@
 	        },
 	        data: JSON.stringify({ "username": window.localStorage.username }),
 	        success: function (docs) {
-	          console.log("DOCTORS", docs);
 	          this.setState({
 	            doctors: docs
 	          });
 	        }.bind(this),
 	        error: function error(err) {
-	          console.log('I can\'t pill you...not today', err);
+	          console.error('I can\'t pill you...not today', err);
 	        }
 	      });
 	    }
@@ -62267,7 +62262,6 @@
 	  }, {
 	    key: 'componentDidMount',
 	    value: function componentDidMount() {
-	      console.log("component has mounted!!!");
 	      this.getScripts();
 	      this.getDocs();
 	      // this.getZip();
