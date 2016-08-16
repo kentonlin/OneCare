@@ -79,6 +79,9 @@ export default class SymptomEntryModal extends React.Component {
   drx() {
     var api_key = '87b39c90783391ac6ce972736d117741';
     var query = (this.state.currentRec ? this.state.currentRec.name : '**empty**').split(' ').join('%20');
+    if (query.charCodeAt(query.length-1) === 8206) {
+      query = query.slice(0, query.length-1);
+    };
     var latitude = window.localStorage.latitude;
     var longitude = window.localStorage.longitude;
     var location = latitude+'%2C'+longitude;
@@ -94,6 +97,7 @@ export default class SymptomEntryModal extends React.Component {
     });
 
     console.log('===============>', resource_url);
+    console.log('+++++++++++++++>', query);
   }
 
   // UPDATES DRXS STATE FROM SUCCESSFUL AJAX CALL
@@ -101,6 +105,8 @@ export default class SymptomEntryModal extends React.Component {
     this.setState({
       drxs: drxs.data
     });
+      console.log('this works');
+    console.log('+++++++++++++++>', drxs);
   }
 
   render() {
