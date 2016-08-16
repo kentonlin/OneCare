@@ -62033,6 +62033,10 @@
 	      mapmodalIsOpen: false,
 	      symptomModalIsOpen: false,
 	      brainModalIsOpen: false,
+	      openNotes: {
+	        doctor: '',
+	        notes: []
+	      },
 	      modalStyles: {
 	        overlay: {
 	          position: 'fixed',
@@ -62074,6 +62078,7 @@
 	    _this.closeModalSymptom = _this.closeModalSymptom.bind(_this);
 	    _this.openModalBrain = _this.openModalBrain.bind(_this);
 	    _this.closeModalBrain = _this.closeModalBrain.bind(_this);
+	    _this.doctorNotes = _this.doctorNotes.bind(_this);
 	    // this.getZip = this.getZip.bind(this);
 	    return _this;
 	  }
@@ -62220,6 +62225,29 @@
 	        }.bind(this),
 	        error: function error(err) {
 	          console.error('I can\'t pill you...not today', err);
+	        }
+	      });
+	    }
+	  }, {
+	    key: 'doctorNotes',
+	    value: function doctorNotes(doctor) {
+	      var url = '/api/note/' + doctor._id;
+	      console.log(doctor);
+	      _jquery2.default.ajax({
+	        type: 'GET',
+	        url: url,
+	        headers: {
+	          "content-type": "application/json"
+	        },
+	        success: function (data) {
+	          console.log(data);
+	          this.setState({ openNotes: {
+	              doctor: doctor._id,
+	              notes: data
+	            } });
+	        }.bind(this),
+	        error: function error(err) {
+	          console.error("Couldn't get doctor's notes: ", err);
 	        }
 	      });
 	    }
@@ -62514,6 +62542,26 @@
 	                  _react2.default.createElement('i', { className: 'fa fa-stethoscope', 'aria-hidden': 'true' }),
 	                  '  ',
 	                  doctor.specialty
+	                ),
+	                _react2.default.createElement(
+	                  'div',
+	                  { className: 'doctor-attribute' },
+	                  _react2.default.createElement(
+	                    _reactBootstrap.Button,
+	                    { bsStyle: 'info', bsSize: 'small', onClick: _this2.doctorNotes.bind(_this2, doctor) },
+	                    ' (view notes) '
+	                  ),
+	                  _react2.default.createElement(
+	                    'div',
+	                    { className: _this2.state.openNotes.doctor === doctor._id ? "doctor-notes-container" : "hidden" },
+	                    _this2.state.openNotes.notes.map(function (note, idx) {
+	                      return _react2.default.createElement(
+	                        'div',
+	                        { key: idx, className: 'doctor-notes-entry' },
+	                        note.body
+	                      );
+	                    })
+	                  )
 	                )
 	              );
 	            }, this)
