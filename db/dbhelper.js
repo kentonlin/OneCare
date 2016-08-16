@@ -19,13 +19,11 @@ var dbFunc = {
 			if(err) {
 				console.log('username not found');
 			}
-			console.log('user object in get zip');
-			console.log('zipcode for user found', user.zipcode);
 			res.send(user.zipcode);
 		});
 	},
 
-	addScript: function(script, res, next) {
+	addScript: function(script, res) {
 		/*
 			Script Format
 			{
@@ -39,7 +37,6 @@ var dbFunc = {
 		*/
 		var message = "Time to take your " + script.name + ' (' + script.dosage + ')!';
 		var newScript = new Model.script(script);
-		console.log('newScript: ', newScript);
 		newScript.save(function(err){
 			if(err) {
 				console.log('error', err);
@@ -51,7 +48,7 @@ var dbFunc = {
 					res.send(new Error("script not added to user document"));
 				}
 				//call set reminder function
-				this.setReminder(script.username, newScript._id, message, script.reminderTime, script.refill, script.name, next); //script.reminderTime is an array of times
+				this.setReminder(script.username, newScript._id, message, script.reminderTime, script.refill, script.name); //script.reminderTime is an array of times
 			}.bind(this));
 		}.bind(this));
 
@@ -68,7 +65,6 @@ var dbFunc = {
 	},
 
   addDoc: function(data, res, next) {
-		console.log("addDoc called with", data);
   	var newDoc = new Model.doctor(data.doc);
   	newDoc.save(function(err) {
   		if (err) {
@@ -116,7 +112,6 @@ var dbFunc = {
 					if(err) {
 						console.log("new user not saved", err);
 					}
-				console.log("new user saved");
 				var token = jwt.encode(user, 'secret'); //create new token
 	      res.json({"token": token, "user": {"id": user._id, "username": user.username}}); //send new token and user object
 			});
@@ -149,7 +144,6 @@ var dbFunc = {
 						next(new Error("Incorrect password")); //will send an error if incorrect password
 					}
 					else{
-						console.log("password correct!");
 						var token = jwt.encode(user, 'secret'); //create new token
 
 						var resultData = {"token": token, "user": {"id": user._id, "username": user.username}}
@@ -175,7 +169,6 @@ var dbFunc = {
 	    		res.status(401).send();
 	    	}
 	    	else{ //token decoded and user found in database
-	    		console.log("user authenticated");
 	    		res.status(200).send();
 	    	}
 	    });
@@ -192,7 +185,6 @@ var dbFunc = {
 					console.error(err);
 				}
 				else {
-					console.log('++++++++++++++>', user.zipcode);
 					res.status(200).send();
 				}
 			})
@@ -209,7 +201,7 @@ var dbFunc = {
 			});
 	},
 
-	setReminder: function(username, scriptID, message, time, refillDate, drugName, next) { //time is an array
+	setReminder: function(username, scriptID, message, time, refillDate, drugName) { //time is an array
 		// look up user object and find their phone number
 				Model.user.findOne({"username": username}, function(err, user){
 										"use strict";
@@ -217,7 +209,6 @@ var dbFunc = {
 						next(new Error(err));
 					}
 					var phoneNum = "+" + user.phone;
-					console.log("Number on file", phoneNum);
 					for(let i = 0; i < time.length; i++) {
 						if(time[i] !== null){
 							var options = {
@@ -249,10 +240,10 @@ var dbFunc = {
 										}
 									})
 									.then(function(res) {
-										next("reminder has been saved");
+										console.log("reminder has been saved");
 									})
 									.catch(function(err) {
-										next(new Error("reminder has not been saved", err));
+										console.log(new Error("reminder has not been saved", err));
 									});
 								}
 							});
@@ -304,7 +295,7 @@ var dbFunc = {
 	});
 },
 
-deleteReminder: function(scriptID, next) {
+deleteReminder: function(scriptID, res, next) {
 	//REMOVES SCRIPT DOCUMENT (reference still persists in user doc but it won't reference anything)
 	Model.script.findOne({"_id": scriptID}, function(err, script){
 		"use strict";
@@ -326,7 +317,6 @@ deleteReminder: function(scriptID, next) {
 				};
 				request(options, function (error, response, body) {
 					if (error) throw new Error(error);
-					console.log("response", body)
 				})
 			}
 		}
@@ -334,11 +324,35 @@ deleteReminder: function(scriptID, next) {
 			if(err){
 				next("reminder not deleted", err);
 			}
-			next("reminder deleted");
 		});
 	})
-
+  res.status(202).send("successfully deleted.")
 },
+
+	addNote: function(data, res) {
+  	var newNote = new Model.note(data);
+  	newNote.save(function(err) {
+  		if (err) {
+  			console.log(err);
+  		}
+  		Model.doctor.update({"_id": data.doctor}, {$push:{"notes": newNote}}, function(err){
+				if(err){
+					next(new Error("note added to doctor model"));
+				}
+				res.status(201).send(newNote);
+			});
+  	});
+  },
+
+  getNotes: function(doctor, res) {
+  	Model.doctor.findOne({"_id": doctor}).populate('notes').exec(function(err, found) {
+  		if (err) {
+  			res.status(404).send(err);
+  		} else {
+        res.status(200).send(found.notes);
+  		}
+  	})
+  },
 
 	saveBrain: function(brainState, trainingData, name) {
 		var success = Model.brain.findOneAndUpdate({"_id": ObjectId("57a3a316dcba0f71400f021a")}, {
