@@ -6,6 +6,7 @@ var app = express();
 var brain = require('./brain.js');
 var twilio = require('twilio');
 var Yelp = require('yelp');
+var ObjectId = require('mongoose').Types.ObjectId; 
 
 
 app.use(express.static('public'));
@@ -133,6 +134,24 @@ app.post('/api/brain/add', function(req, res) {
 app.get('/api/brain/print', function(req, res) {
   res.send(brain.OCBrain.print());
 });
+
+app.post('/api/note/add/*', function(req, res) {
+  var doctorID = ObjectId(req.url.split('/').pop());
+  var data = {
+    seen: false,
+    hidden: false,
+    body: req.body.message,
+    user: ObjectId(req.body.user),
+    doctor: doctorID
+  }
+  dbHelpers.addNote(data, res);
+})
+
+app.get('/api/note/*', function(req, res) {
+  //retrieves all notes for specified doctor
+  var doctorID = ObjectId(req.url.split('/').pop());
+  dbHelpers.getNotes(doctorID, res);
+})
 
 app.get('/*', function(req, res) {
   res.sendFile(path.join(rootPath + "/index.html"));

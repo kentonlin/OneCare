@@ -21,6 +21,10 @@ export default class Profile extends React.Component {
       mapmodalIsOpen: false,
       symptomModalIsOpen: false,
       brainModalIsOpen: false,
+      openNotes: {
+        doctor: '',
+        notes: []
+      },
       modalStyles: {
         overlay : {
           position          : 'fixed',
@@ -62,6 +66,7 @@ export default class Profile extends React.Component {
     this.closeModalSymptom = this.closeModalSymptom.bind(this);
     this.openModalBrain = this.openModalBrain.bind(this);
     this.closeModalBrain = this.closeModalBrain.bind(this);
+    this.doctorNotes = this.doctorNotes.bind(this);
     // this.getZip = this.getZip.bind(this);
   }
 
@@ -198,6 +203,28 @@ export default class Profile extends React.Component {
     });
   }
 
+  doctorNotes(doctor) {
+    var url = '/api/note/'+doctor._id;
+    console.log(doctor);
+    $.ajax({
+      type: 'GET',
+      url: url,
+      headers: {
+        "content-type": "application/json"
+      },
+      success: function(data) {
+        console.log(data);
+        this.setState({openNotes: {
+          doctor: doctor._id,
+          notes: data
+        }})
+      }.bind(this),
+      error: function(err) {
+        console.error("Couldn't get doctor's notes: ", err)
+      }
+    })
+  }
+
   // getZip() {
   //   $.ajax({
   //     type: 'POST',
@@ -311,6 +338,14 @@ export default class Profile extends React.Component {
                     <div className='doctor-attribute'><i className="fa fa-envelope" aria-hidden="true"></i>  {doctor.email}</div>
                     <div className='doctor-attribute'><i className="fa fa-map-marker red" aria-hidden="true"></i>  {doctor.address}</div>
                     <div className='doctor-attribute'><i className="fa fa-stethoscope" aria-hidden="true"></i>  {doctor.specialty}</div>
+                    <div className='doctor-attribute'><Button bsStyle="info" bsSize='small' onClick={this.doctorNotes.bind(this, doctor)}> (view notes) </Button>
+                      <div className={this.state.openNotes.doctor === doctor._id ? "doctor-notes-container" : "hidden"}>
+                        {this.state.openNotes.notes.map((note, idx) => (
+                            <div key={idx} className="doctor-notes-entry">{note.body}</div>
+                          )
+                        )}
+                      </div>
+                    </div>
                     </div>
                   );
                 }, this)
