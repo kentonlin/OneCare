@@ -38,7 +38,7 @@ export default class Profile extends React.Component {
           bottom                     : '30%',
           border                     : '4px solid #ccc',
           background                 : '#333333',
-          color                      :  'white', 
+          color                      :  'white',
           overflow                   : 'auto',
           WebkitOverflowScrolling    : 'touch',
           borderRadius               : '4px',
@@ -235,7 +235,6 @@ export default class Profile extends React.Component {
     return (
       <div className='profile-container'>
         <Navigate />
-        <h1> My Profile </h1>
 
         <Modal show={this.state.scriptmodalIsOpen}>
             <div className="modal-button-close-container">
@@ -273,51 +272,51 @@ export default class Profile extends React.Component {
             <div className="modal-button-close-container">
               <div className='modal-button-close' onClick={this.closeModalBrain}><i className="fa fa-times-circle" aria-hidden="true"></i></div>
             </div>
-            <SymptomEntryModal 
+            <SymptomEntryModal
             brainState
-            symptoms 
-            recommendations 
+            symptoms
+            recommendations
             closeFn={this.closeModalDoctor} />
         </Modal>
 
       <div className="scripts-doctors">
       <div className='scripts-container'>
-      <div className='scripts-header'>
-        <div className='scripts-title'> Scripts </div>
-        <Button bsStyle="success" bsSize='small' onClick={this.openModalScript}> <div> <i className="fa fa-plus-circle" aria-hidden="true"></i> Prescription </div> </Button>
-        <span>
-          <input className="zip-input" placeholder='Enter zip' type="text" onChange={(event) => {this.setState({inputZip: event.target.value})}}/>
-          <Button bsStyle="info" onClick={this.openModalMap}> <i className="fa fa-search" aria-hidden="true"></i> </Button>
-        </span>
-      </div>
+      <div className='scripts-title'> Prescriptions </div>
+        <div className='scripts-header'>
+            <div>
+              <input className='zipcode-input' placeholder='Zipcode' type="text" onChange={(event) => {this.setState({inputZip: event.target.value})}}/>
+              <Button bsStyle="info" onClick={this.openModalMap}> <div> <i className="fa fa-search" aria-hidden="true"></i> Pharmacy </div> </Button>
+            </div>
+            <Button bsClass='btn orange' onClick={this.openModalScript}> <div> <i className="fa fa-plus-circle" aria-hidden="true"></i> Prescription </div> </Button>
+        </div>
              {
               this.state.scripts.map((script, idx) => {
                 return (
                   <div className="scripts-view-container" key={idx}>
-                  <div className="script-top-bar"><div><p className="script-name"> {script.name}</p><a target="_blank" href={"https://simple.wikipedia.org/wiki/" + script.name}>(get more info)</a></div><i className="fa fa-times" aria-hidden="true" onClick={this.deleteScript.bind(this, idx)}></i></div>
-                  <div> <i className="fa fa-heart" aria-hidden="true"></i> Dosage: {script.dosage} </div>
-                  <div> <i className="fa fa-bell" aria-hidden="true"></i> Reminder: {script.frequency} </div>
-                  <div> <i className="fa fa-calendar" aria-hidden="true"></i> Refill: {String(new Date(script.refill)).split('').slice(0, 15).join('')} </div>
+                  <div className="script-top-bar"><div><p className="script-name"> {script.name}</p>{/* <a target="_blank" href={"https://simple.wikipedia.org/wiki/" + script.name}>(get more info)</a>*/}</div><i className="fa fa-times" aria-hidden="true" onClick={this.deleteScript.bind(this, idx)}></i></div>
+                  <div className='script-attribute'> <i className="fa fa-heart red" aria-hidden="true"></i> Dosage: {script.dosage} </div>
+                  <div className='script-attribute'> <i className="fa fa-bell gold" aria-hidden="true"></i> Reminder: {script.frequency} </div>
+                  <div className='script-attribute'> <i className="fa fa-calendar royal-blue" aria-hidden="true"></i> Refill: {String(new Date(script.refill)).split('').slice(0, 15).join('')} </div>
                  </div>
                );
               }, this)
             }
           </div>
         <div className='doctors-container'>
+        <div className='doctors-title'> Doctors </div>
         <div className='doctors-header'>
-          <div className='doctors-title'> Doctors </div>
           <Button bsStyle="success" bsSize='small' onClick={this.openModalSymptom}> <div> <i className="fa fa-plus-circle" aria-hidden="true"></i> Recommend </div></Button>
-          <Button bsStyle="success" bsSize='small' onClick={this.openModalDoctor}> <div> <i className="fa fa-plus-circle" aria-hidden="true"></i> Doctor </div> </Button>
+          <Button bsClass='btn orange' onClick={this.openModalDoctor}> <div> <i className="fa fa-plus-circle" aria-hidden="true"></i> Doctor </div> </Button>
         </div>
               {
                 this.state.doctors.map((doctor, idx) => {
                   return (
                     <div className=" doctor-view-container" key={idx }>
                     <div className="doctor-top-bar"><p className='doctor-name'>{doctor.name}</p><i className="fa fa-times" aria-hidden="true" onClick={this.deleteDoc.bind(this, idx)}></i></div>
-                    <div><i className="fa fa-phone" aria-hidden="true"></i>  {doctor.phone}</div>
-                    <div><i className="fa fa-envelope" aria-hidden="true"></i>  {doctor.email}</div>
-                    <div><i className="fa fa-map-marker" aria-hidden="true"></i>  {doctor.address}</div>
-                    <div><i className="fa fa-stethoscope" aria-hidden="true"></i>  {doctor.specialty}</div>
+                    <div className='doctor-attribute'><i className="fa fa-phone phone-green" aria-hidden="true"></i>  {doctor.phone}</div>
+                    <div className='doctor-attribute'><i className="fa fa-envelope" aria-hidden="true"></i>  {doctor.email}</div>
+                    <div className='doctor-attribute'><i className="fa fa-map-marker red" aria-hidden="true"></i>  {doctor.address}</div>
+                    <div className='doctor-attribute'><i className="fa fa-stethoscope" aria-hidden="true"></i>  {doctor.specialty}</div>
                     </div>
                   );
                 }, this)
