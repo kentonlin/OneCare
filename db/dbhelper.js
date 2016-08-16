@@ -259,8 +259,6 @@ var dbFunc = {
 									.then(function(res) {
 										console.log("script has been saved and the reminder ID is set!!");
 										next("reminder has been saved");
-							      res.send("success");
-
 									})
 									.catch(function(err) {
 										next(new Error("reminder has not been saved", err));
@@ -301,7 +299,7 @@ var dbFunc = {
 	});
 },
 
-deleteReminder: function(scriptID, next) {
+deleteReminder: function(scriptID, res, next) {
 	//REMOVES SCRIPT DOCUMENT (reference still persists in user doc but it won't reference anything)
 	Model.script.findOne({"_id": scriptID}, function(err, script){
 		"use strict";
@@ -331,7 +329,6 @@ deleteReminder: function(scriptID, next) {
 			if(err){
 				next("reminder not deleted", err);
 			}
-			next("reminder deleted");
 		});
 	})
 

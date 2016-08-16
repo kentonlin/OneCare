@@ -46,7 +46,8 @@ app.post('/api/reminder/add', function(req, res, next) {
 app.post('/api/reminder/delete', function(req, res, next){
   console.log("request received at deleteScript");
   var reminderID = req.body.reminderID;
-  dbHelpers.deleteReminder(reminderID, next);
+  dbHelpers.deleteReminder(reminderID, res, next);
+  res.send("U DID IT M8")
 });
 
 app.post('/api/script/find', function(req, res) {
