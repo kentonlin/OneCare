@@ -329,6 +329,31 @@ deleteReminder: function(scriptID, res, next) {
   res.status(202).send("successfully deleted.")
 },
 
+	addNote: function(data, res) {
+  	var newNote = new Model.note(data);
+  	newNote.save(function(err) {
+  		if (err) {
+  			console.log(err);
+  		}
+  		Model.doctor.update({"_id": data.doctor}, {$push:{"notes": newNote}}, function(err){
+				if(err){
+					next(new Error("note added to doctor model"));
+				}
+				res.status(201).send(newNote);
+			});
+  	});
+  },
+
+  getNotes: function(doctor, res) {
+  	Model.doctor.findOne({"_id": doctor}).populate('notes').exec(function(err, found) {
+  		if (err) {
+  			res.status(404).send(err);
+  		} else {
+        res.status(200).send(found.notes);
+  		}
+  	})
+  },
+
 	saveBrain: function(brainState, trainingData, name) {
 		var success = Model.brain.findOneAndUpdate({"_id": ObjectId("57a3a316dcba0f71400f021a")}, {
 			$set: {
