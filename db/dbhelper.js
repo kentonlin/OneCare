@@ -48,11 +48,7 @@ var dbFunc = {
 					res.send(new Error("script not added to user document"));
 				}
 				//call set reminder function
-<<<<<<< HEAD
-				this.setReminder(script.username, newScript._id, message, script.reminderTime, script.refill, script.name, next); //script.reminderTime is an array of times
-=======
 				this.setReminder(script.username, newScript._id, message, script.reminderTime, script.refill, script.name); //script.reminderTime is an array of times
->>>>>>> bugFix
 			}.bind(this));
 		}.bind(this));
 
@@ -205,11 +201,7 @@ var dbFunc = {
 			});
 	},
 
-<<<<<<< HEAD
-	setReminder: function(username, scriptID, message, time, refillDate, drugName, next) { //time is an array
-=======
 	setReminder: function(username, scriptID, message, time, refillDate, drugName) { //time is an array
->>>>>>> bugFix
 		// look up user object and find their phone number
 				Model.user.findOne({"username": username}, function(err, user){
 										"use strict";
@@ -217,10 +209,6 @@ var dbFunc = {
 						next(new Error(err));
 					}
 					var phoneNum = "+" + user.phone;
-<<<<<<< HEAD
-					console.log("Number on file", phoneNum);
-=======
->>>>>>> bugFix
 					for(let i = 0; i < time.length; i++) {
 						if(time[i] !== null){
 							var options = {
@@ -252,11 +240,7 @@ var dbFunc = {
 										}
 									})
 									.then(function(res) {
-<<<<<<< HEAD
-										next("reminder has been saved");
-=======
 										console.log("reminder has been saved");
->>>>>>> bugFix
 									})
 									.catch(function(err) {
 										console.log(new Error("reminder has not been saved", err));
