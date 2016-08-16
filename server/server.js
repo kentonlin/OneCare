@@ -37,6 +37,11 @@ app.post('/api/user/zip', function(req, res) {
   dbHelpers.getZip(username, res);
 });
 
+
+app.post('/api/email/send', function(req, res, next){
+  console.log("request recieved at sendEmail");
+  dbHelpers.sendEmail(res);
+})
 // Add a new reminder to the reminder collection
 app.post('/api/reminder/add', function(req, res) {
   var newScript = req.body;
@@ -156,4 +161,3 @@ app.get('/api/note/*', function(req, res) {
 app.get('/*', function(req, res) {
   res.sendFile(path.join(rootPath + "/index.html"));
 });
-
