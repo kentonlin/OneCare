@@ -149,8 +149,8 @@ app.post('/api/note/add/*', function(req, res) {
 
 app.get('/api/note/*', function(req, res) {
   //retrieves all notes for specified doctor
-    var doctorID = ObjectId(req.url.split('/').pop());
-    dbHelpers.getNotes(doctorID, res);
+  var doctorID = ObjectId(req.url.split('/').pop());
+  dbHelpers.getNotes(doctorID, res);
 })
 
 app.get('/*', function(req, res) {
