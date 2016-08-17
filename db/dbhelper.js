@@ -7,11 +7,53 @@ var client = new twilio.RestClient(accountSid, authToken);
 var ObjectId = require('mongoose').Types.ObjectId;
 var http = require('http');
 var request = require("request");
+var api_key = 'key-417e9083f77969e4e9cf916a2ef8769c';
+var domain = 'app25011ddcdf3a4f38b11f9b60d62e1106.mailgun.org';
+var mailgun = require('mailgun-js')({apiKey: api_key, domain: domain});
 
 
 
 
 var dbFunc = {
+
+	receiveEmail: function(message, docEmail, userID, res){
+		console.log("receiveEmail called with...", message, docEmail, userID);
+
+		Model.doctor.findOne({'email': docEmail}, function(err, doc){
+			if(err){
+				console.log("doctor not found", err);
+			}
+			var note = {
+				seen: false,
+				hidden: false,
+				body: message,
+				user: userID,
+				doctor: doc._id
+			}
+			this.addNote(note, res);
+		}.bind(this))
+	},
+
+	sendEmail: function(patientName, patientUserID, docEmail, res){
+
+		var message = "Your patient, " + patientName + " has added you as a doctor in their OneCare network. If you would like to add any notes for this patient, simply reply to this email. Please DO NOT change the subject of this email thread";
+
+		var data = {
+		  from: 'OneCare <onecare@app25011ddcdf3a4f38b11f9b60d62e1106.mailgun.org>',
+		  to: docEmail, //can only send to email addresses we registed with Mailgun
+		  subject: patientUserID,
+		  text: message
+		};
+
+		mailgun.messages().send(data, function (error, body) {
+			if(error){
+				console.log("Doctor not contacted", error);
+			}
+			console.log('email sent!', body);
+			res.sendStatus(200);
+		});
+
+	},
 
 	// GET USER ZIP CODE // SEND USERNAME STRING
 	getZip: function(username, res) {
@@ -74,9 +116,14 @@ var dbFunc = {
 				if(err){
 					next(new Error("doctor added to user model"));
 				}
-				res.send(newDoc);
-			});
-  	});
+				if(newDoc.email){ //email doctor if patient provided email address
+					this.sendEmail(data.first_last, data.userID, newDoc.email, res)
+				}
+				else{
+					res.status(201).send(newDoc);
+				}
+			}.bind(this));
+  	}.bind(this));
   },
 
   getDocs: function(username, res, next) {
@@ -111,9 +158,12 @@ var dbFunc = {
 				user.save(function(err){
 					if(err) {
 						console.log("new user not saved", err);
+						next(new Error("err"));
 					}
-				var token = jwt.encode(user, 'secret'); //create new token
-	      res.json({"token": token, "user": {"id": user._id, "username": user.username}}); //send new token and user object
+					else{
+						var token = jwt.encode(user, 'secret'); //create new token
+			      res.json({"token": token, "user": {"id": user._id, "username": user.username}}); //send new token and user object
+					}
 			});
 
 			}
@@ -145,8 +195,9 @@ var dbFunc = {
 					}
 					else{
 						var token = jwt.encode(user, 'secret'); //create new token
-
-						var resultData = {"token": token, "user": {"id": user._id, "username": user.username}}
+						console.log("USER to be signed in", user);
+						var resultData = {"token": token, "user": {"id": user._id, "username": user.username, "first_last": user.firstName + ' ' + user.lastName}}
+						console.log("RESULT DATA", resultData);
 	          res.status(201).send(resultData); //send new token and user object
 					}
 				});
@@ -324,16 +375,19 @@ deleteReminder: function(scriptID, res, next) {
 			if(err){
 				next("reminder not deleted", err);
 			}
+			else{
+				res.status(202).send("REMINDER successfully deleted");
+			}
 		});
 	})
-  res.status(202).send("successfully deleted.")
 },
 
 	addNote: function(data, res) {
+		console.log("NOTE about to be created: ", data);
   	var newNote = new Model.note(data);
   	newNote.save(function(err) {
   		if (err) {
-  			console.log(err);
+  			console.log("NEW NOTE not SAVED", err);
   		}
   		Model.doctor.update({"_id": data.doctor}, {$push:{"notes": newNote}}, function(err){
 				if(err){

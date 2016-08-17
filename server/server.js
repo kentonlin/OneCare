@@ -6,7 +6,7 @@ var app = express();
 var brain = require('./brain.js');
 var twilio = require('twilio');
 var Yelp = require('yelp');
-var ObjectId = require('mongoose').Types.ObjectId; 
+var ObjectId = require('mongoose').Types.ObjectId;
 
 
 app.use(express.static('public'));
@@ -18,6 +18,9 @@ app.use("/styles", express.static(rootPath + "/styles"));
 app.use("/public", express.static(rootPath + '/public'));
 app.use("/server", express.static(__dirname + "/../server"));
 app.use("/assets", express.static(__dirname + "/../client/assets"));
+app.use(bodyParser.urlencoded({
+    extended: true
+}));
 app.use(bodyParser.json());
 app.use(function(req, res, next) {
   res.header("Access-Control-Allow-Origin", "*");
@@ -37,6 +40,18 @@ app.post('/api/user/zip', function(req, res) {
   dbHelpers.getZip(username, res);
 });
 
+app.post('/api/email/receive', function(req, res){
+  console.log("FULL BODY", req.body);
+  var message = req.body['stripped-text']; //wrong property, need to change
+  var docEmail = req.body['sender']; //format: 'hckilaru@gmail.com'
+  var userID = req.body['Subject'].slice(4); //format: 'Re: 57abc05eaeefbd68ee3183ea'
+  console.log("Args to be passed", message, docEmail, userID);
+  dbHelpers.receiveEmail(message, docEmail, userID, res);
+})
+app.post('/api/email/send', function(req, res, next){
+  console.log("request recieved at sendEmail");
+  dbHelpers.sendEmail(req.body.name, res);
+})
 // Add a new reminder to the reminder collection
 app.post('/api/reminder/add', function(req, res) {
   var newScript = req.body;
@@ -46,7 +61,6 @@ app.post('/api/reminder/add', function(req, res) {
 app.post('/api/reminder/delete', function(req, res, next){
   var reminderID = req.body.reminderID;
   dbHelpers.deleteReminder(reminderID, res, next);
-  res.send("U DID IT M8")
 });
 
 app.post('/api/script/find', function(req, res) {
@@ -156,4 +170,3 @@ app.get('/api/note/*', function(req, res) {
 app.get('/*', function(req, res) {
   res.sendFile(path.join(rootPath + "/index.html"));
 });
-

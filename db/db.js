@@ -23,12 +23,13 @@ var scriptSchema = new Schema({
 });
 
 var userSchema = new Schema({
+	firstName:{type: String, required: true},
+	lastName: {type: String, required: true},
 	username: {type: String, required: true, index: {unique: true} },
 	password: {type: String, required: true },
 	address: String,
 	phone: String,
-	// zipcode: Number,
-	zipcode: String, 
+	zipcode: String,
 	scripts: [{type: Schema.Types.ObjectId, ref: 'Script'}],
 	doctors: [{type: Schema.Types.ObjectId, ref: 'Doctor'}]// script models for user
 });

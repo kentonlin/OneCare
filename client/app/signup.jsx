@@ -6,6 +6,8 @@ export default class Signup extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      firstName:"",
+      lastName: "",
       username: "",
       password: "",
       address: "",
@@ -35,6 +37,8 @@ export default class Signup extends React.Component {
       window.localStorage.removeItem("currentPage");
       e.preventDefault();
       var newUser = {
+        firstName: this.state.firstName,
+        lastName: this.state.lastName,
         username: this.state.username,
         password: this.state.password,
         address: this.state.address,
@@ -42,7 +46,6 @@ export default class Signup extends React.Component {
         zipcode: this.state.zipcode,
         email: this.state.email
       };
-      // console.log("this is the newUser", newUser);
 
       $.ajax({
         type: 'POST',
@@ -59,7 +62,7 @@ export default class Signup extends React.Component {
             window.location = "/profile";
           },
           error: function(err){
-            alert("Sorry! That username already exists");
+            alert("Sorry! We were unable to sign you up. Please complete the empty fields. If all fields are complete, please select a different username");
             console.log('error in signup :', err);
           }
       });
@@ -86,6 +89,8 @@ export default class Signup extends React.Component {
       <div className= "signup-container">
         <h1> Sign-up </h1>
         <form>
+          <div className='signup-cat'>First Name</div><input type="text" onChange={(event) => {this.setState({firstName: event.target.value})}}/><br/>
+          <div className='signup-cat'>Last Name</div><input type="text" onChange={(event) => {this.setState({lastName: event.target.value})}}/><br/>
           <div className='signup-cat'>username</div><input type="text" onChange={(event) => {this.setState({username: event.target.value})}}/><br/>
           <div className='signup-cat'>password</div><input type="password" onChange={(event) => {this.setState({password: event.target.value})}}/><br />
           <div className='signup-cat'>address</div><input type="text" onChange={(event) => {this.setState({address: event.target.value})}}/><br/>
