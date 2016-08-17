@@ -26,7 +26,7 @@ export default class Signin extends React.Component {
       "username": this.state.username,
       "password": this.state.password
     };
-    
+
     $.ajax({
       type: "POST",
       url: "/api/signin",
@@ -38,6 +38,8 @@ export default class Signin extends React.Component {
       success: function(data){
         window.localStorage.setItem("username", data.user.username);
         window.localStorage.setItem("token", data.token);
+        window.localStorage.setItem("first_last", data.user.first_last);
+        window.localStorage.setItem("userID", data.user.id);
         window.location = '/profile';
       },
       error: function(err){

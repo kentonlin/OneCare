@@ -99,7 +99,7 @@ export default class DoctorEntryView extends React.Component {
       alert("Please enter a specialty");
     }
      else {
-      var toSubmit = { "username": window.localStorage.username, "doc": {
+      var toSubmit = { "username": window.localStorage.username, "first_last": window.localStorage.first_last, "userID": window.localStorage.userID, "doc": {
         name: this.state.name,
         phone: this.state.phone,
         email: this.state.email,
