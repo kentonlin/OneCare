@@ -6,7 +6,7 @@ var app = express();
 var brain = require('./brain.js');
 var twilio = require('twilio');
 var Yelp = require('yelp');
-var ObjectId = require('mongoose').Types.ObjectId; 
+var ObjectId = require('mongoose').Types.ObjectId;
 
 
 app.use(express.static('public'));
@@ -41,10 +41,12 @@ app.post('/api/user/zip', function(req, res) {
 });
 
 app.post('/api/email/receive', function(req, res){
+  console.log("FULL BODY", req.body);
   var message = req.body['stripped-text'];
-  console.log("stripped text message", message);
-  console.log("from who?", req.body['From']);
-  dbHelpers.receiveEmail(message, res);
+  var docEmail = req.body['From']; //format: Harish Kilaru <hckilaru@gmail.com>
+  var userID = req.body['Subject']; //need to confirm format
+  console.log("PatientID", userID);
+  dbHelpers.receiveEmail(message, docEmail, userID, res);
 })
 app.post('/api/email/send', function(req, res, next){
   console.log("request recieved at sendEmail");

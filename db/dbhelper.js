@@ -16,23 +16,37 @@ var mailgun = require('mailgun-js')({apiKey: api_key, domain: domain});
 
 var dbFunc = {
 
-	receiveEmail: function(message, res){
-		console.log("receiveEmail called!!");
-		this.sendEmail(message, res);
+	receiveEmail: function(message, docEmail, userID, res){
+		console.log("receiveEmail called with...", message, docEmail, userID);
+
+		Model.doctor.findOne({'email': docEmail}, function(err, doc){
+			var note = {
+				seen: false,
+				hidden: false,
+				body: req.body.message,
+				user: userID,
+				doctor: doc._id
+			}
+			this.addNote(note, res);
+		})
 	},
 
 	sendEmail: function(message, res){
-		console.log("message before JSONString", message);
+
+		var message = "Your patient, " + patientName + " has added you as a doctor in their OneCare network. If you would like to add any notes for this patient, simply reply to this email. Please DO NOT change the subject of this email thread";
+
+		//need to access patient's MongoID and send it as the subject of the email
+
 		var data = {
-		  from: 'Excited User <harish@app25011ddcdf3a4f38b11f9b60d62e1106.mailgun.org>',
-		  to: 'hckilaru@gmail.com',
-		  subject: 'ONECARE',
-		  text: JSON.stringify(message)
+		  from: 'OneCare <harish@app25011ddcdf3a4f38b11f9b60d62e1106.mailgun.org>',
+		  to: 'hckilaru@gmail.com', //need to change to doctor's email (can only send to registered emails)
+		  subject: '57abc05eaeefbd68ee3183ea', //need to change to MongoID
+		  text: message
 		};
 
 		mailgun.messages().send(data, function (error, body) {
 			if(error){
-				console.log("FUCK THIS", error);
+				console.log("Doctor not contacted", error);
 			}
 			console.log('email sent!', body);
 			res.sendStatus(200);
