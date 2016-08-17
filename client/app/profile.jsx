@@ -9,6 +9,8 @@ import Map from './map.jsx';
 import _ from 'lodash';
 import { Modal, Button, ButtonToolbar } from 'react-bootstrap';
 
+import EditScriptRemindModal from './editScript.jsx';
+
 export default class Profile extends React.Component {
   constructor(props) {
     super(props);
@@ -22,6 +24,7 @@ export default class Profile extends React.Component {
       mapmodalIsOpen: false,
       symptomModalIsOpen: false,
       brainModalIsOpen: false,
+      editModalIsOpen: false,
       openNotes: {
         doctor: '',
         notes: []
@@ -69,6 +72,9 @@ export default class Profile extends React.Component {
     this.closeModalBrain = this.closeModalBrain.bind(this);
     this.doctorNotes = this.doctorNotes.bind(this);
     // this.getZip = this.getZip.bind(this);
+
+    this.openEditModalScript = this.openEditModalScript.bind(this);
+    this.closeEditModalScript = this.closeEditModalScript.bind(this);
   }
 
   deleteDoc(idx){
@@ -113,23 +119,41 @@ export default class Profile extends React.Component {
       scriptmodalIsOpen: true
     });
   }
-
-  editModalScript(idx) {
+  //
+  // editModalScript(idx) {
+  //   var scriptModal = this.state.scripts[idx];
+  //
+  //   this.setState({
+  //     editScript: scriptModal
+  //   }, function(){
+  //     console.log("STATE", this.state);
+  //   });
+  //
+  //   this.setState({
+  //     scriptmodalIsOpen: true
+  //   });
+  // }
+  openEditModalScript(idx) {
     var scriptModal = this.state.scripts[idx];
-
-    console.log('this is the script modal drug name', scriptModal.name)
-
     this.setState({
       editScript: scriptModal
+    }, function(){
+      console.log('this is the script modal sent over', scriptModal);
     });
-
-    console.log('this is the editscript', this.state);
-    console.log('this is the script modal after setstate', scriptModal);
-
     this.setState({
-      scriptmodalIsOpen: true
+      editModalIsOpen: true
     });
   }
+
+  closeEditModalScript() {
+    this.setState({
+      editModalIsOpen: false
+    });
+  }
+
+
+
+
 
   openModalDoctor() {
     this.setState({
@@ -283,7 +307,10 @@ export default class Profile extends React.Component {
               <div className='modal-button-close' onClick={this.closeModalScript}><i className="fa fa-times-circle" aria-hidden="true"></i></div>
             </div>
             <ScriptRemind
-              closeFn={this.closeModalScript} />
+            // data={this.state.editScript}
+            closeFn={this.closeModalScript} />
+            <Button onClick={this.closeModalScript}>Exit</Button>
+
         </Modal>
 
         <Modal show={this.state.docmodalIsOpen} bsSize='small'>
@@ -321,6 +348,16 @@ export default class Profile extends React.Component {
             closeFn={this.closeModalDoctor} />
         </Modal>
 
+        <Modal show={this.state.editModalIsOpen} bsSize='small'>
+            <div className="modal-button-close-container">
+              <div className='modal-button-close' onClick={this.closeEditModalScript}><i className="fa fa-times-circle" aria-hidden="true"></i></div>
+            </div>
+            <EditScriptRemindModal
+            data={this.state.editScript}
+            closeFn={this.closeEditModalScript} />
+            <Button onClick={this.closeEditModalScript}>Exit</Button>
+        </Modal>
+
       <div className="scripts-doctors">
       <div className='scripts-container'>
       <div className='scripts-title'> Prescriptions </div>
@@ -335,6 +372,7 @@ export default class Profile extends React.Component {
               this.state.scripts.map((script, idx) => {
                 return (
                   <div className="scripts-view-container" key={idx}>
+                  <button onClick={this.openEditModalScript.bind(this,idx)}> Edit Script </button>
                   <div className="script-top-bar"><div><p className="script-name"> {script.name}</p>{/* <a target="_blank" href={"https://simple.wikipedia.org/wiki/" + script.name}>(get more info)</a>*/}</div><i className="fa fa-times" aria-hidden="true" onClick={this.deleteScript.bind(this, idx)}></i></div>
                   <div className='script-attribute'> <i className="fa fa-heart red" aria-hidden="true"></i> Dosage: {script.dosage} </div>
                   <div className='script-attribute'> <i className="fa fa-bell gold" aria-hidden="true"></i> Reminder: {script.frequency} </div>

@@ -42,32 +42,7 @@ export default class ScriptRemindView extends React.Component {
       "hasTwo": false,
       "hasThree": false
     };
-    this.updateDrugName = this.updateDrugName.bind(this);
-    this.submitForm = this.submitForm.bind(this);
-    this.handleFrequency = this.handleFrequency.bind(this);
-    this.handleDoseAmount = this.handleDoseAmount.bind(this);
-    this.handleRefillDate = this.handleRefillDate.bind(this);
-    this.handleDoseMeasurement = this.handleDoseMeasurement.bind(this);
-    this.handleScheduleDayWeek = this.handleScheduleDayWeek.bind(this);
-    this.handleReminderTime1 = this.handleReminderTime1.bind(this);
-    this.handleReminderTime2 = this.handleReminderTime2.bind(this);
-    this.handleReminderTime3 = this.handleReminderTime3.bind(this);
-  }
 
-  componentWillReceiveProps(nextProps) {
-    console.log(nextProps.data)
-    // if(nextProps.data){
-    //   this.setState({
-    //     currentDrug: nextProps.data.name,
-    //     dosageAmt: nextProps.data.dosage.split(" ")[0],
-    //     dosageMeasure: nextProps.data.dosage.split(" ")[1],
-    //     date: nextProps.data.refill,
-    //     reminderTime1: nextProps.data.reminderTime[0],
-    //     reminderTime2: nextProps.data.reminderTime[1],
-    //     reminderTime3: nextProps.data.reminderTime[1],
-    //   });
-    // }
-=======
   var date = new Date();
   this.updateDrugName = this.updateDrugName.bind(this);
   this.submitForm = this.submitForm.bind(this);
@@ -80,7 +55,6 @@ export default class ScriptRemindView extends React.Component {
   this.handleReminderTime2 = this.handleReminderTime2.bind(this);
   this.handleReminderTime3 = this.handleReminderTime3.bind(this);
 
->>>>>>> almost finished edit
   }
 
     updateDrugName(event){
