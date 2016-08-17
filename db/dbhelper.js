@@ -20,6 +20,9 @@ var dbFunc = {
 		console.log("receiveEmail called with...", message, docEmail, userID);
 
 		Model.doctor.findOne({'email': docEmail}, function(err, doc){
+			if(err){
+				console.log("doctor not found", err);
+			}
 			var note = {
 				seen: false,
 				hidden: false,
@@ -28,7 +31,7 @@ var dbFunc = {
 				doctor: doc._id
 			}
 			this.addNote(note, res);
-		})
+		}.bind(this))
 	},
 
 	sendEmail: function(patientName, res){

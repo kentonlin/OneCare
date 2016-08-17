@@ -45,7 +45,7 @@ app.post('/api/email/receive', function(req, res){
   var message = req.body['stripped-text'];
   var docEmail = req.body['sender']; //format: 'hckilaru@gmail.com'
   var userID = req.body['Subject']; //need to confirm format
-  console.log("PatientID", userID);
+  console.log("Args to be passed", message, docEmail, userID);
   dbHelpers.receiveEmail(message, docEmail, userID, res);
 })
 app.post('/api/email/send', function(req, res, next){
