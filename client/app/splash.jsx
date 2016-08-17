@@ -35,7 +35,14 @@ export default class Splash extends React.Component {
     return (
       <div>
 
+
+
         <div className= "splashHeader">
+
+          <video autoPlay loop id="video-background">
+            <source id="mp4" src="https://fpdl.vimeocdn.com/vimeo-prod-skyfire-std-us/01/3524/5/142623920/428365276.mp4?token=57b2102c_0x72f2cf429c3eaefc2c1b516326b1bcb63a9fe0b4" type="video/mp4"/>
+          </video>
+
           <div className= "splashName">
             <h2> OneCare </h2>
           </div>
@@ -48,7 +55,6 @@ export default class Splash extends React.Component {
             <Link to='/signup'> Signup </Link>
           </div>
         </div>
-        <Image src="/assets/onecare.jpg" responsive />
 
 
         <div className= "appDescribe">
