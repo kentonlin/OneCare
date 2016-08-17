@@ -23,7 +23,7 @@ var dbFunc = {
 			var note = {
 				seen: false,
 				hidden: false,
-				body: req.body.message,
+				body: message,
 				user: userID,
 				doctor: doc._id
 			}
@@ -31,7 +31,7 @@ var dbFunc = {
 		})
 	},
 
-	sendEmail: function(message, res){
+	sendEmail: function(patientName, res){
 
 		var message = "Your patient, " + patientName + " has added you as a doctor in their OneCare network. If you would like to add any notes for this patient, simply reply to this email. Please DO NOT change the subject of this email thread";
 

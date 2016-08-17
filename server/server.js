@@ -43,14 +43,14 @@ app.post('/api/user/zip', function(req, res) {
 app.post('/api/email/receive', function(req, res){
   console.log("FULL BODY", req.body);
   var message = req.body['stripped-text'];
-  var docEmail = req.body['From']; //format: Harish Kilaru <hckilaru@gmail.com>
+  var docEmail = req.body['sender']; //format: 'hckilaru@gmail.com'
   var userID = req.body['Subject']; //need to confirm format
   console.log("PatientID", userID);
   dbHelpers.receiveEmail(message, docEmail, userID, res);
 })
 app.post('/api/email/send', function(req, res, next){
   console.log("request recieved at sendEmail");
-  dbHelpers.sendEmail(req.body.message, res);
+  dbHelpers.sendEmail(req.body.name, res);
 })
 // Add a new reminder to the reminder collection
 app.post('/api/reminder/add', function(req, res) {
