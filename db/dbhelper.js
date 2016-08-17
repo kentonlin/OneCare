@@ -375,9 +375,11 @@ deleteReminder: function(scriptID, res, next) {
 			if(err){
 				next("reminder not deleted", err);
 			}
+			else{
+				res.status(202).send("REMINDER successfully deleted");
+			}
 		});
 	})
-  res.status(202).send("successfully deleted.")
 },
 
 	addNote: function(data, res) {

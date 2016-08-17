@@ -61,7 +61,6 @@ app.post('/api/reminder/add', function(req, res) {
 app.post('/api/reminder/delete', function(req, res, next){
   var reminderID = req.body.reminderID;
   dbHelpers.deleteReminder(reminderID, res, next);
-  res.send("U DID IT M8")
 });
 
 app.post('/api/script/find', function(req, res) {

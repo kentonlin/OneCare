@@ -165,6 +165,7 @@ export default class Profile extends React.Component {
   }
 
   getScripts() {
+    console.log("get scripts called");
     $.ajax({
      type: "POST",
      url: "/api/script/find",
