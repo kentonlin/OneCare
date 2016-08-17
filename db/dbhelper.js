@@ -351,7 +351,7 @@ deleteReminder: function(scriptID, res, next) {
 	Model.script.findOne({"_id": scriptID}, function(err, script){
 		"use strict";
 		if(err){next(new Error(err))}
-		console.log("ironID: ", script.reminderID);
+		// console.log("ironID: ", script.reminderID);
 		var ironIDs = script.reminderID;
 		for(let i = 0; i < ironIDs.length; i++){
 			"use strict";

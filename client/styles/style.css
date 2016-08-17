@@ -7,12 +7,46 @@ ul {
   list-style-type: none;
 }
 
+
 input {
   border-radius: 7px;
 }
 
+#video-background {
+/*  making the video fullscreen  */
+  position: fixed;
+  background-size: cover;
+  height: 700px;
+  width: auto;
+  /*right: 0;
+  bottom: 0;
+  min-width: 100%;
+  min-height: 100%;
+  /*height: auto;*/
+  z-index: -100;
+}
+
 .dropdown-replacement {
   border-radius: 7px;
+}
+.splashName {
+  position: absolute;
+  top:0;
+  left:20px;
+  margin-top: 5px;
+}
+.signInSplash {
+  position: absolute;
+  text-align: center;
+  left: 50%;
+/*margin: auto;*/
+}
+.signUpSplash {
+  position: absolute;
+}
+.appDescribe {
+  position: relative;
+  /*margin-bottom: 100px;*/
 }
 
 /*****  COLORS  *****/
