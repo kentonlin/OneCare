@@ -60411,6 +60411,10 @@
 
 	var _symptomEntryModal2 = _interopRequireDefault(_symptomEntryModal);
 
+	var _editScript = __webpack_require__(791);
+
+	var _editScript2 = _interopRequireDefault(_editScript);
+
 	var _map = __webpack_require__(789);
 
 	var _map2 = _interopRequireDefault(_map);
@@ -60421,9 +60425,9 @@
 
 	var _reactBootstrap = __webpack_require__(244);
 
-	var _editScript = __webpack_require__(791);
+	var _editDoctor = __webpack_require__(792);
 
-	var _editScript2 = _interopRequireDefault(_editScript);
+	var _editDoctor2 = _interopRequireDefault(_editDoctor);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -60446,6 +60450,10 @@
 	      scripts: [],
 	      inputZip: null,
 	      editScript: null,
+
+	      editDoctor: null,
+	      editModalDoctorIsOpen: false,
+
 	      scriptmodalIsOpen: false,
 	      docmodalIsOpen: false,
 	      mapmodalIsOpen: false,
@@ -60497,11 +60505,14 @@
 	    _this.closeModalSymptom = _this.closeModalSymptom.bind(_this);
 	    _this.openModalBrain = _this.openModalBrain.bind(_this);
 	    _this.closeModalBrain = _this.closeModalBrain.bind(_this);
+	    _this.openEditModalScript = _this.openEditModalScript.bind(_this);
+	    _this.closeEditModalScript = _this.closeEditModalScript.bind(_this);
 	    _this.doctorNotes = _this.doctorNotes.bind(_this);
 	    // this.getZip = this.getZip.bind(this);
 
-	    _this.openEditModalScript = _this.openEditModalScript.bind(_this);
-	    _this.closeEditModalScript = _this.closeEditModalScript.bind(_this);
+	    _this.openEditModalDoctor = _this.openEditModalDoctor.bind(_this);
+	    _this.closeEditModalDoctor = _this.closeEditModalDoctor.bind(_this);
+
 	    return _this;
 	  }
 
@@ -60550,29 +60561,14 @@
 	        scriptmodalIsOpen: true
 	      });
 	    }
-	    //
-	    // editModalScript(idx) {
-	    //   var scriptModal = this.state.scripts[idx];
-	    //
-	    //   this.setState({
-	    //     editScript: scriptModal
-	    //   }, function(){
-	    //     console.log("STATE", this.state);
-	    //   });
-	    //
-	    //   this.setState({
-	    //     scriptmodalIsOpen: true
-	    //   });
-	    // }
-
 	  }, {
 	    key: 'openEditModalScript',
 	    value: function openEditModalScript(idx) {
-	      var scriptModal = this.state.scripts[idx];
+	      var script = this.state.scripts[idx];
 	      this.setState({
-	        editScript: scriptModal
+	        editScript: script
 	      }, function () {
-	        console.log('this is the script modal sent over', scriptModal);
+	        console.log('this is the script modal sent over', script);
 	      });
 	      this.setState({
 	        editModalIsOpen: true
@@ -60583,6 +60579,26 @@
 	    value: function closeEditModalScript() {
 	      this.setState({
 	        editModalIsOpen: false
+	      });
+	    }
+	  }, {
+	    key: 'openEditModalDoctor',
+	    value: function openEditModalDoctor(idx) {
+	      var doctor = this.state.doctors[idx];
+	      this.setState({
+	        editDoctor: doctor
+	      }, function () {
+	        console.log('this is the doctor model being sent over', doctor);
+	      });
+	      this.setState({
+	        editModalDoctorIsOpen: true
+	      });
+	    }
+	  }, {
+	    key: 'closeEditModalDoctor',
+	    value: function closeEditModalDoctor() {
+	      this.setState({
+	        editModalDoctorIsOpen: false
 	      });
 	    }
 	  }, {
@@ -60738,7 +60754,6 @@
 	    value: function componentDidMount() {
 	      this.getScripts();
 	      this.getDocs();
-	      // this.getZip();
 	    }
 	  }, {
 	    key: 'render',
@@ -60761,14 +60776,8 @@
 	              _react2.default.createElement('i', { className: 'fa fa-times-circle', 'aria-hidden': 'true' })
 	            )
 	          ),
-	          _react2.default.createElement(_scriptRemind2.default
-	          // data={this.state.editScript}
-	          , { closeFn: this.closeModalScript }),
-	          _react2.default.createElement(
-	            _reactBootstrap.Button,
-	            { onClick: this.closeModalScript },
-	            'Exit'
-	          )
+	          _react2.default.createElement(_scriptRemind2.default, {
+	            closeFn: this.closeModalScript })
 	        ),
 	        _react2.default.createElement(
 	          _reactBootstrap.Modal,
@@ -60847,12 +60856,23 @@
 	          ),
 	          _react2.default.createElement(_editScript2.default, {
 	            data: this.state.editScript,
-	            closeFn: this.closeEditModalScript }),
+	            closeFn: this.closeEditModalScript })
+	        ),
+	        _react2.default.createElement(
+	          _reactBootstrap.Modal,
+	          { show: this.state.editModalDoctorIsOpen, bsSize: 'small' },
 	          _react2.default.createElement(
-	            _reactBootstrap.Button,
-	            { onClick: this.closeEditModalScript },
-	            'Exit'
-	          )
+	            'div',
+	            { className: 'modal-button-close-container' },
+	            _react2.default.createElement(
+	              'div',
+	              { className: 'modal-button-close', onClick: this.closeEditModalDoctor },
+	              _react2.default.createElement('i', { className: 'fa fa-times-circle', 'aria-hidden': 'true' })
+	            )
+	          ),
+	          _react2.default.createElement(_editDoctor2.default, {
+	            data: this.state.editDoctor,
+	            closeFn: this.closeEditModalDoctor })
 	        ),
 	        _react2.default.createElement(
 	          'div',
@@ -60999,8 +61019,8 @@
 	                { className: ' doctor-view-container', key: idx },
 	                _react2.default.createElement(
 	                  'button',
-	                  { className: 'doctor-edit', onClick: _this2.openModalDoctor },
-	                  ' Edit '
+	                  { className: 'doctor-edit', onClick: _this2.openEditModalDoctor.bind(_this2, idx) },
+	                  ' Edit Doctor '
 	                ),
 	                _react2.default.createElement(
 	                  'div',
@@ -103428,6 +103448,205 @@
 	}(_react2.default.Component);
 
 	exports.default = EditScriptRemindModal;
+
+/***/ },
+/* 792 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _jquery = __webpack_require__(240);
+
+	var _jquery2 = _interopRequireDefault(_jquery);
+
+	var _navigate = __webpack_require__(243);
+
+	var _navigate2 = _interopRequireDefault(_navigate);
+
+	var _reactModal = __webpack_require__(496);
+
+	var _reactModal2 = _interopRequireDefault(_reactModal);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var DOCTORS = [{ id: 1, name: 'Allergologist' }, { id: 2, name: 'Andrologist' }, { id: 3, name: 'Anesthesiologist' }, { id: 4, name: 'Angiologist‎' }, { id: 5, name: 'Cardiologist' }, { id: 6, name: 'Dentist' }, { id: 7, name: 'Dermatologist‎' }, { id: 8, name: 'Emergency Medicine‎ Specialist' }, { id: 9, name: 'Endocrinology‎' }, { id: 10, name: 'Family Medicine‎ Specialist' }, { id: 11, name: 'Gastroenterologist‎' }, { id: 12, name: 'General practitioner' }, { id: 13, name: 'Geriatrician' }, { id: 14, name: 'Gynaecologist' }, { id: 15, name: 'Hematologist' }, { id: 16, name: 'Hepatologyist' }, { id: 17, name: 'Immunologist‎' }, { id: 18, name: 'Internal Medical Specialist' }, { id: 19, name: 'Nephrologist‎' }, { id: 20, name: 'Neurologist' }, { id: 21, name: 'Obstetrician' }, { id: 22, name: 'Oncologist' }, { id: 23, name: 'Ophthalmologist' }, { id: 24, name: 'Ear, nose, and Throat Doctor' }, { id: 25, name: 'Palliative Medical Expert' }, { id: 26, name: 'Pediatrician‎' }, { id: 27, name: 'Podiatrist' }, { id: 28, name: 'Psychiatrist' }, { id: 29, name: 'Pulmonologist' }, { id: 30, name: 'Radiologist' }, { id: 31, name: 'Rheumatologist‎' }, { id: 32, name: 'Expert in Sleep Medicine‎' }, { id: 33, name: 'Surgeon‎' }, { id: 34, name: 'Toxicologist' }, { id: 35, name: 'Urologist' }];
+
+	var EditDoctorModal = function (_React$Component) {
+	  _inherits(EditDoctorModal, _React$Component);
+
+	  function EditDoctorModal(props) {
+	    _classCallCheck(this, EditDoctorModal);
+
+	    var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(EditDoctorModal).call(this, props));
+
+	    _this.state = {
+	      modalIsOpen: true,
+	      name: _this.props.data.name ? _this.props.data.name : "",
+	      phone: _this.props.data.phone ? _this.props.data.phone : "",
+	      email: _this.props.data.email ? _this.props.data.email : "",
+	      address: _this.props.data.address ? _this.props.data.address : "",
+	      specialty: _this.props.data.specialty ? _this.props.data.specialty : "",
+	      validPhone: false,
+	      validSpecialty: false
+	    };
+	    _this.handleChange = _this.handleChange.bind(_this);
+	    _this.submitNewDoctor = _this.submitNewDoctor.bind(_this);
+	    return _this;
+	  }
+
+	  _createClass(EditDoctorModal, [{
+	    key: 'handleChange',
+	    value: function handleChange(event) {
+	      var stateVal = event.target.id;
+	      if (stateVal === "name") {
+	        this.setState({ name: event.target.value, validName: true });
+	      } else if (stateVal === "phone") {
+	        this.setState({ phone: event.target.value, validPhone: event.target.value.match(/\d/g).length === 11
+	        });
+	      } else if (stateVal === "email") {
+	        this.setState({ email: event.target.value });
+	      } else if (stateVal === "address") {
+	        this.setState({ address: event.target.value });
+	      } else if (stateVal === "specialty") {
+	        this.setState({ specialty: event.target.value, validSpecialty: true });
+	      }
+	    }
+	  }, {
+	    key: 'submitNewDoctor',
+	    value: function submitNewDoctor(e) {
+	      e.preventDefault();
+	      if (!this.state.name.length && !this.state.validPhone && !this.state.validSpecialty) {
+	        alert("Please correct the following fields: name, phone, specialty");
+	      } else if (!this.state.validPhone && !this.state.validSpecialty) {
+	        alert("Please enter a valid phone and specialty");
+	      } else if (!this.state.name.length && !this.state.validSpecialty) {
+	        alert("Please enter a valid name and specialty");
+	      } else if (!this.state.name.length && !this.state.validPhone) {
+	        alert("Please enter a valid name and phone");
+	      } else if (!this.state.name.length) {
+	        alert("Please enter a name");
+	      } else if (!this.state.validPhone) {
+	        alert("Please enter a valid phone");
+	      } else if (!this.state.validSpecialty) {
+	        alert("Please enter a specialty");
+	      } else {
+	        var toSubmit = { "username": window.localStorage.username, "doc": {
+	            name: this.state.name,
+	            phone: this.state.phone,
+	            email: this.state.email,
+	            address: this.state.address,
+	            specialty: this.state.specialty
+	          } };
+
+	        _jquery2.default.ajax({
+	          type: "POST",
+	          url: "/api/doctor/add",
+	          headers: {
+	            "content-type": "application/json"
+	          },
+	          data: JSON.stringify(toSubmit),
+	          success: this.props.closeFn(),
+	          error: this.props.closeFn()
+	        });
+	      }
+	    }
+	  }, {
+	    key: 'render',
+	    value: function render() {
+	      return _react2.default.createElement(
+	        'div',
+	        { className: 'script-form-frame' },
+	        _react2.default.createElement(
+	          'h2',
+	          null,
+	          'Edit Doctor!!!'
+	        ),
+	        _react2.default.createElement(
+	          'form',
+	          { className: 'doctor-entry-form' },
+	          _react2.default.createElement(
+	            'div',
+	            null,
+	            'Name'
+	          ),
+	          _react2.default.createElement('input', { id: 'name', type: 'text', value: this.state.name, onChange: this.handleChange }),
+	          _react2.default.createElement(
+	            'div',
+	            null,
+	            'Phone'
+	          ),
+	          _react2.default.createElement('input', { id: 'phone', type: 'text', value: this.state.phone, onChange: this.handleChange }),
+	          _react2.default.createElement(
+	            'h6',
+	            { className: this.state.validPhone ? 'hidden' : 'invalid' },
+	            ' Phone number must be 11 digits'
+	          ),
+	          _react2.default.createElement('br', null),
+	          _react2.default.createElement(
+	            'div',
+	            null,
+	            'Email'
+	          ),
+	          _react2.default.createElement('input', { id: 'email', type: 'text', value: this.state.email, onChange: this.handleChange }),
+	          _react2.default.createElement('br', null),
+	          _react2.default.createElement(
+	            'div',
+	            null,
+	            'Address'
+	          ),
+	          _react2.default.createElement('input', { id: 'address', type: 'text', value: this.state.address, onChange: this.handleChange }),
+	          _react2.default.createElement('br', null),
+	          _react2.default.createElement(
+	            'div',
+	            null,
+	            'Specialty'
+	          ),
+	          _react2.default.createElement(
+	            'select',
+	            { id: 'specialty', value: this.state.speciality, onChange: this.handleChange },
+	            _react2.default.createElement(
+	              'option',
+	              null,
+	              '::Select Specialty::'
+	            ),
+	            DOCTORS.map(function (doctor) {
+	              return _react2.default.createElement(
+	                'option',
+	                { key: doctor.id },
+	                doctor.name
+	              );
+	            })
+	          ),
+	          _react2.default.createElement(
+	            'button',
+	            { onClick: this.submitNewDoctor },
+	            'Submit!'
+	          )
+	        )
+	      );
+	    }
+	  }]);
+
+	  return EditDoctorModal;
+	}(_react2.default.Component);
+
+	exports.default = EditDoctorModal;
 
 /***/ }
 /******/ ]);

@@ -5,11 +5,13 @@ import ScriptRemind from './scriptRemind.jsx';
 import DoctorEntryView from './doctorEntryView.jsx';
 import SymptomEntry from './symptomEntry.jsx';
 import SymptomEntryModal from './symptomEntryModal.jsx';
+import EditScriptRemindModal from './editScript.jsx';
 import Map from './map.jsx';
 import _ from 'lodash';
 import { Modal, Button, ButtonToolbar } from 'react-bootstrap';
 
-import EditScriptRemindModal from './editScript.jsx';
+import EditDoctorModal from './editDoctor.jsx';
+
 
 export default class Profile extends React.Component {
   constructor(props) {
@@ -19,6 +21,11 @@ export default class Profile extends React.Component {
       scripts: [],
       inputZip: null,
       editScript: null,
+
+      editDoctor: null,
+      editModalDoctorIsOpen: false,
+
+
       scriptmodalIsOpen: false,
       docmodalIsOpen: false,
       mapmodalIsOpen: false,
@@ -70,11 +77,14 @@ export default class Profile extends React.Component {
     this.closeModalSymptom = this.closeModalSymptom.bind(this);
     this.openModalBrain = this.openModalBrain.bind(this);
     this.closeModalBrain = this.closeModalBrain.bind(this);
+    this.openEditModalScript = this.openEditModalScript.bind(this);
+    this.closeEditModalScript = this.closeEditModalScript.bind(this);
     this.doctorNotes = this.doctorNotes.bind(this);
     // this.getZip = this.getZip.bind(this);
 
-    this.openEditModalScript = this.openEditModalScript.bind(this);
-    this.closeEditModalScript = this.closeEditModalScript.bind(this);
+    this.openEditModalDoctor = this.openEditModalDoctor.bind(this);
+    this.closeEditModalDoctor = this.closeEditModalDoctor.bind(this);
+
   }
 
   deleteDoc(idx){
@@ -119,26 +129,13 @@ export default class Profile extends React.Component {
       scriptmodalIsOpen: true
     });
   }
-  //
-  // editModalScript(idx) {
-  //   var scriptModal = this.state.scripts[idx];
-  //
-  //   this.setState({
-  //     editScript: scriptModal
-  //   }, function(){
-  //     console.log("STATE", this.state);
-  //   });
-  //
-  //   this.setState({
-  //     scriptmodalIsOpen: true
-  //   });
-  // }
+
   openEditModalScript(idx) {
-    var scriptModal = this.state.scripts[idx];
+    var script = this.state.scripts[idx];
     this.setState({
-      editScript: scriptModal
+      editScript: script
     }, function(){
-      console.log('this is the script modal sent over', scriptModal);
+      console.log('this is the script modal sent over', script);
     });
     this.setState({
       editModalIsOpen: true
@@ -151,7 +148,23 @@ export default class Profile extends React.Component {
     });
   }
 
+  openEditModalDoctor(idx) {
+    var doctor = this.state.doctors[idx];
+    this.setState({
+      editDoctor: doctor
+    }, function() {
+      console.log('this is the doctor model being sent over', doctor);
+    });
+    this.setState({
+      editModalDoctorIsOpen: true
+    });
+  }
 
+  closeEditModalDoctor(){
+    this.setState({
+      editModalDoctorIsOpen: false
+    });
+  }
 
 
 
@@ -182,13 +195,13 @@ export default class Profile extends React.Component {
  closeModalScript() {
    this.setState({
      scriptmodalIsOpen: false
-   }, this.getScripts)
+   }, this.getScripts);
  }
 
   closeModalDoctor() {
     this.setState({
       docmodalIsOpen: false
-    }, this.getDocs)
+    }, this.getDocs);
   }
 
   closeModalMap() {
@@ -263,12 +276,12 @@ export default class Profile extends React.Component {
         this.setState({openNotes: {
           doctor: doctor._id,
           notes: data
-        }})
+        }});
       }.bind(this),
       error: function(err) {
-        console.error("Couldn't get doctor's notes: ", err)
+        console.error("Couldn't get doctor's notes: ", err);
       }
-    })
+    });
   }
 
   // getZip() {
@@ -295,7 +308,6 @@ export default class Profile extends React.Component {
   componentDidMount() {
     this.getScripts();
     this.getDocs();
-    // this.getZip();
   }
 
   render() {
@@ -307,9 +319,8 @@ export default class Profile extends React.Component {
               <div className='modal-button-close' onClick={this.closeModalScript}><i className="fa fa-times-circle" aria-hidden="true"></i></div>
             </div>
             <ScriptRemind
-            // data={this.state.editScript}
             closeFn={this.closeModalScript} />
-            <Button onClick={this.closeModalScript}>Exit</Button>
+            {/* <Button onClick={this.closeModalScript}>Exit</Button> */}
 
         </Modal>
 
@@ -355,7 +366,18 @@ export default class Profile extends React.Component {
             <EditScriptRemindModal
             data={this.state.editScript}
             closeFn={this.closeEditModalScript} />
-            <Button onClick={this.closeEditModalScript}>Exit</Button>
+            {/* <Button onClick={this.closeEditModalScript}>Exit</Button> */}
+        </Modal>
+
+        <Modal show={this.state.editModalDoctorIsOpen} bsSize='small'>
+          <div className="modal-button-close-container">
+            <div className='modal-button-close' onClick={this.closeEditModalDoctor}><i className="fa fa-times-circle" aria-hidden="true"></i></div>
+          </div>
+          <EditDoctorModal
+          data={this.state.editDoctor}
+          closeFn={this.closeEditModalDoctor} />
+          {/* <Button onClick={this.closeEditModalScript}>Exit</Button> */}
+
         </Modal>
 
       <div className="scripts-doctors">
@@ -392,7 +414,7 @@ export default class Profile extends React.Component {
                 this.state.doctors.map((doctor, idx) => {
                   return (
                     <div className=" doctor-view-container" key={idx }>
-                    <button className="doctor-edit" onClick={this.openModalDoctor}> Edit </button>
+                    <button className="doctor-edit" onClick={this.openEditModalDoctor.bind(this,idx)}> Edit Doctor </button>
                     <div className="doctor-top-bar"><p className='doctor-name'>{doctor.name}</p><i className="fa fa-times" aria-hidden="true" onClick={this.deleteDoc.bind(this, idx)}></i></div>
                     <div className='doctor-attribute'><i className="fa fa-phone phone-green" aria-hidden="true"></i>  {doctor.phone}</div>
                     <div className='doctor-attribute'><i className="fa fa-envelope" aria-hidden="true"></i>  {doctor.email}</div>
