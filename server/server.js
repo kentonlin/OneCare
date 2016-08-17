@@ -5,6 +5,9 @@ var path = require('path');
 var app = express();
 var brain = require('./brain.js');
 var twilio = require('twilio');
+var Yelp = require('yelp');
+var ObjectId = require('mongoose').Types.ObjectId;
+
 
 app.use(express.static('public'));
 
@@ -15,6 +18,9 @@ app.use("/styles", express.static(rootPath + "/styles"));
 app.use("/public", express.static(rootPath + '/public'));
 app.use("/server", express.static(__dirname + "/../server"));
 app.use("/assets", express.static(__dirname + "/../client/assets"));
+app.use(bodyParser.urlencoded({
+    extended: true
+}));
 app.use(bodyParser.json());
 app.use(function(req, res, next) {
   res.header("Access-Control-Allow-Origin", "*");
@@ -26,26 +32,52 @@ app.listen(process.env.PORT || 3000, function(){
   console.log('Server is running');
 });
 
-app.get('/fuckDan', function(req, res){
-  console.log('request received at /fuckDan');
-  res.send(JSON.stringify({"message": "Fuck Dan"}));
+// GET USER ZIPCODE
+app.post('/api/user/zip', function(req, res) {
+  // SAMPLE POST REQUEST POSTMAN
+  // {"username": "kenton"}
+  var username = req.body.username;
+  dbHelpers.getZip(username, res);
 });
 
-app.post('/api/reminder/add', function(req, res, next) {
-  console.log('request received at addScriptReminder');
-	var newScript = req.body;
-	dbHelpers.addScript(newScript, res, next);
+app.post('/api/email/receive', function(req, res){
+  console.log("FULL BODY", req.body);
+  var message = req.body['stripped-text']; //wrong property, need to change
+  var docEmail = req.body['sender']; //format: 'hckilaru@gmail.com'
+  var userID = req.body['Subject'].slice(4); //format: 'Re: 57abc05eaeefbd68ee3183ea'
+  console.log("Args to be passed", message, docEmail, userID);
+  dbHelpers.receiveEmail(message, docEmail, userID, res);
+})
+app.post('/api/email/send', function(req, res, next){
+  console.log("request recieved at sendEmail");
+  dbHelpers.sendEmail(req.body.name, res);
+})
+// Add a new reminder to the reminder collection
+app.post('/api/reminder/add', function(req, res) {
+  var newScript = req.body;
+  dbHelpers.addScript(newScript, res);
+});
+
+app.post('/api/reminder/delete', function(req, res, next){
+  var reminderID = req.body.reminderID;
+  dbHelpers.deleteReminder(reminderID, res, next);
 });
 
 app.post('/api/script/find', function(req, res) {
-	var username = req.body.username;
-	dbHelpers.getScripts( username, res);
+  var username = req.body.username;
+  dbHelpers.getScripts( username, res);
 });
 
 app.post('/api/doctor/add', function(req, res) {
   var newDoc = req.body;
   dbHelpers.addDoc(newDoc, res);
 });
+
+app.post('/api/doctor/delete', function(req, res, next) {
+  var docID = req.body.docID;
+  dbHelpers.deleteDoc(docID, res, next);
+});
+
 
 // Add doctor to user model
 app.post('/api/user/doctor/add', function(req, res) {
@@ -75,27 +107,23 @@ app.post('/api/signin', function(req, res, next) {
 });
 
 app.post('/api/script/remind', function(req, res, next) {
-  console.log("request received at setReminder route");
   var username = req.body.username;
   var message = req.body.message;
   //phone will not be a parameter in final version, we'll look it up based on the username
   var phone = req.body.phone;
   var time = req.body.time;
-  dbHelpers.setReminder(username, message, phone, time, next);
+  dbHelpers.setReminder(username, message, phone, time, res);
 });
 
 app.post('/api/symptomEntry/add', function(req, res) {
   var newSympson = req.body;
-  console.log(newSympson);
   dbHelpers.addSymptom(newSympson, res);
 });
 
 app.post('/api/brain/recommend', function(req, res) {
-  var username = req.body.username
+  var username = req.body.username;
   var symptoms = req.body.symptoms;
-  console.log("The brain shall now ponder: ", symptoms);
   var data = brain.OCBrain.activate(symptoms);
-  console.log("The brain has decided to recommend: ", data);
   //query db for user docs.
   brain.OCBrain.doctors(username, data, function(list) {res.status(200).send(list)});
 });
@@ -105,12 +133,39 @@ app.get('/api/brain/save', function(req, res) {
   res.send("huehuehue");
 });
 
+app.post('/api/reminder/delete', function(req, res, next){
+  var reminderID = req.body.reminderID;
+  dbHelpers.deleteReminder(reminderID, next);
+});
+
 app.post('/api/brain/add', function(req, res) {
   var pair = req.body.pair;
-  res.send(brain.OCBrain.addTrainingPair(pair))
+  res.send(brain.OCBrain.addTrainingPair(pair));
   brain.OCBrain.train(1);
   brain.OCBrain.save("MainBrain");
 });
+
+app.get('/api/brain/print', function(req, res) {
+  res.send(brain.OCBrain.print());
+});
+
+app.post('/api/note/add/*', function(req, res) {
+  var doctorID = ObjectId(req.url.split('/').pop());
+  var data = {
+    seen: false,
+    hidden: false,
+    body: req.body.message,
+    user: ObjectId(req.body.user),
+    doctor: doctorID
+  }
+  dbHelpers.addNote(data, res);
+})
+
+app.get('/api/note/*', function(req, res) {
+  //retrieves all notes for specified doctor
+  var doctorID = ObjectId(req.url.split('/').pop());
+  dbHelpers.getNotes(doctorID, res);
+})
 
 app.get('/*', function(req, res) {
   res.sendFile(path.join(rootPath + "/index.html"));

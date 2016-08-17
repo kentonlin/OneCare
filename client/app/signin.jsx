@@ -26,7 +26,7 @@ export default class Signin extends React.Component {
       "username": this.state.username,
       "password": this.state.password
     };
-    
+
     $.ajax({
       type: "POST",
       url: "/api/signin",
@@ -38,6 +38,8 @@ export default class Signin extends React.Component {
       success: function(data){
         window.localStorage.setItem("username", data.user.username);
         window.localStorage.setItem("token", data.token);
+        window.localStorage.setItem("first_last", data.user.first_last);
+        window.localStorage.setItem("userID", data.user.id);
         window.location = '/profile';
       },
       error: function(err){
@@ -52,8 +54,8 @@ export default class Signin extends React.Component {
       <div className="signin-container">
         <h1>Sign in to OneCare</h1>
         <form>
-          <span>username</span><input type="text" onChange={(event) => {this.setState({username: event.target.value})}}></input><br />
-          <span>password</span><input type="password" onChange={(event) => {this.setState({password: event.target.value})}}></input><br />
+          <span className='signin-cat'>username</span><input type="text" onChange={(event) => {this.setState({username: event.target.value})}}></input><br />
+          <span className='signin-cat'>password</span><input type="password" onChange={(event) => {this.setState({password: event.target.value})}}></input><br />
           <div className='signup'>
             <Link to='/signup'> Signup </Link>
           </div>

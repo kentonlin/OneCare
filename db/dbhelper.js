@@ -1,19 +1,71 @@
 var accountSid = 'AC5e784cc0b718fb1573cdc572e67f4914';
 var authToken = 'e222367896ed8b225294cd28b6097fd0';
-var twilio = require('twilio')
+var twilio = require('twilio');
 var Model = require('./db.js');
 var jwt  = require('jwt-simple');
 var client = new twilio.RestClient(accountSid, authToken);
 var ObjectId = require('mongoose').Types.ObjectId;
-var cron = require('cron');
-var cronJob = cron.CronJob;
-var CronJobManager = require('cron-job-manager')
-var reminderManager = new CronJobManager();
+var http = require('http');
+var request = require("request");
+var api_key = 'key-417e9083f77969e4e9cf916a2ef8769c';
+var domain = 'app25011ddcdf3a4f38b11f9b60d62e1106.mailgun.org';
+var mailgun = require('mailgun-js')({apiKey: api_key, domain: domain});
+
+
 
 
 var dbFunc = {
 
-	addScript: function(script, res, next) {
+	receiveEmail: function(message, docEmail, userID, res){
+		console.log("receiveEmail called with...", message, docEmail, userID);
+
+		Model.doctor.findOne({'email': docEmail}, function(err, doc){
+			if(err){
+				console.log("doctor not found", err);
+			}
+			var note = {
+				seen: false,
+				hidden: false,
+				body: message,
+				user: userID,
+				doctor: doc._id
+			}
+			this.addNote(note, res);
+		}.bind(this))
+	},
+
+	sendEmail: function(patientName, patientUserID, docEmail, res){
+
+		var message = "Your patient, " + patientName + " has added you as a doctor in their OneCare network. If you would like to add any notes for this patient, simply reply to this email. Please DO NOT change the subject of this email thread";
+
+		var data = {
+		  from: 'OneCare <onecare@app25011ddcdf3a4f38b11f9b60d62e1106.mailgun.org>',
+		  to: docEmail, //can only send to email addresses we registed with Mailgun
+		  subject: patientUserID,
+		  text: message
+		};
+
+		mailgun.messages().send(data, function (error, body) {
+			if(error){
+				console.log("Doctor not contacted", error);
+			}
+			console.log('email sent!', body);
+			res.sendStatus(200);
+		});
+
+	},
+
+	// GET USER ZIP CODE // SEND USERNAME STRING
+	getZip: function(username, res) {
+		Model.user.findOne({"username": username}, function(err, user) {
+			if(err) {
+				console.log('username not found');
+			}
+			res.send(user.zipcode);
+		});
+	},
+
+	addScript: function(script, res) {
 		/*
 			Script Format
 			{
@@ -21,27 +73,12 @@ var dbFunc = {
 				"dosage": '1 tablet',
 				"refill": '08-17-2016',
 				"frequency": '2x per day',
-				"reminderTime": '10:00 AM',
+				"reminderTime": '2016-08-10T20:00:00.000Z',
 				"username": 'harish'
 		}
 		*/
 		var message = "Time to take your " + script.name + ' (' + script.dosage + ')!';
-
-		var convertToCronTime = function(time) {
-			var hour = Number(time.split('').splice(0, time.indexOf(":")).join(''));
-			var minuteString = time.split('').splice(time.indexOf(":") + 1, time.indexOf(":") + 1).join('');
-			if(time[time.length-2] === "P"){
-				hour +=12;
-			}
-			var hourString = hour.toString();
-			var cronConvert = minuteString + ' ' + hourString + ' ' + '* * *';
-			return cronConvert;
-		};
-
-		var cronTime = convertToCronTime(script.reminderTime);
-
 		var newScript = new Model.script(script);
-		console.log('newScript: ', newScript);
 		newScript.save(function(err){
 			if(err) {
 				console.log('error', err);
@@ -52,10 +89,8 @@ var dbFunc = {
 				if(err){
 					res.send(new Error("script not added to user document"));
 				}
-
 				//call set reminder function
-				this.setReminder(script.username, newScript._id, message, cronTime, next);
-
+				this.setReminder(script.username, newScript._id, message, script.reminderTime, script.refill, script.name); //script.reminderTime is an array of times
 			}.bind(this));
 		}.bind(this));
 
@@ -67,13 +102,11 @@ var dbFunc = {
 			if(err){
 				console.log('error in fetching scripts', err);
 			}
-			console.log('these are the found scripts for user: ', found.scripts);
 			res.send(found.scripts);
 		});
 	},
 
   addDoc: function(data, res, next) {
-		console.log("addDoc called with", data);
   	var newDoc = new Model.doctor(data.doc);
   	newDoc.save(function(err) {
   		if (err) {
@@ -83,9 +116,14 @@ var dbFunc = {
 				if(err){
 					next(new Error("doctor added to user model"));
 				}
-				res.send(newDoc);
-			});
-  	});
+				if(newDoc.email){ //email doctor if patient provided email address
+					this.sendEmail(data.first_last, data.userID, newDoc.email, res)
+				}
+				else{
+					res.status(201).send(newDoc);
+				}
+			}.bind(this));
+  	}.bind(this));
   },
 
   getDocs: function(username, res, next) {
@@ -93,7 +131,6 @@ var dbFunc = {
 			if(err){
 				next(new Error(err));
 			}
-			console.log("?!?!", user);
 			res.send(user.doctors);
 		});
   },
@@ -108,7 +145,8 @@ var dbFunc = {
   },
 
 
-	/* AUTHENTICATION FUNCTIONS */
+	/* AUTHENTICATION FUNCTION */
+
 
 	signup: function(newUser, res, next) {
 		Model.user.findOne({"username": newUser.username}, function(err, user){
@@ -120,10 +158,12 @@ var dbFunc = {
 				user.save(function(err){
 					if(err) {
 						console.log("new user not saved", err);
+						next(new Error("err"));
 					}
-				console.log("new user saved");
-				var token = jwt.encode(user, 'secret'); //create new token
-	      res.json({"token": token, "user": {"id": user._id, "username": user.username}}); //send new token and user object
+					else{
+						var token = jwt.encode(user, 'secret'); //create new token
+			      res.json({"token": token, "user": {"id": user._id, "username": user.username}}); //send new token and user object
+					}
 			});
 
 			}
@@ -154,10 +194,10 @@ var dbFunc = {
 						next(new Error("Incorrect password")); //will send an error if incorrect password
 					}
 					else{
-						console.log("password correct!");
 						var token = jwt.encode(user, 'secret'); //create new token
-						console.log('this is token',token);
-						var resultData = {"token": token, "user": {"id": user._id, "username": user.username}}
+						console.log("USER to be signed in", user);
+						var resultData = {"token": token, "user": {"id": user._id, "username": user.username, "first_last": user.firstName + ' ' + user.lastName}}
+						console.log("RESULT DATA", resultData);
 	          res.status(201).send(resultData); //send new token and user object
 					}
 				});
@@ -180,11 +220,26 @@ var dbFunc = {
 	    		res.status(401).send();
 	    	}
 	    	else{ //token decoded and user found in database
-	    		console.log("user authenticated");
 	    		res.status(200).send();
 	    	}
 	    });
 	  }
+	},
+
+	getZip: function(username, res) {
+		if (!username.username) {
+			console.log('no usern@me found');
+		}
+		else {
+			Model.user.findOne({'username': username.username}, function(err, user) {
+				if (err) {
+					console.error(err);
+				}
+				else {
+					res.status(200).send();
+				}
+			})
+		}
 	},
 
 	addSymptom: function(data, res) {
@@ -193,54 +248,165 @@ var dbFunc = {
 				if (err) {
 					console.log(err);
 				}
-				console.log('New sympson added!');
 				res.send(newSymptom);
 			});
 	},
 
-	setReminder: function(username, scriptID, message, time, next) {
-		console.log("sendReminder called for", username, "with the message:", message);
+	setReminder: function(username, scriptID, message, time, refillDate, drugName) { //time is an array
 		// look up user object and find their phone number
 				Model.user.findOne({"username": username}, function(err, user){
+										"use strict";
 					if(err){
 						next(new Error(err));
 					}
-					phoneNum = "+" + user.phone;
-					console.log("Number on file", phoneNum);
-					//with manager
-					//manager.add('next_job', '0 40 * * * *', function() { console.log('tick...')});
-					console.log("arguments...", scriptID.toString(), "at", time);
-					reminderManager.add(scriptID.toString(), time, function() {
-						console.log('this was the proper format!');
-						client.sendMessage({
-							to: phoneNum,
-							from:"+16462332065",
-							body: message,
-						}, function( err, data) {
-							if(err){
-								console.log("CronJob not set: ", err);
+					var phoneNum = "+" + user.phone;
+					for(let i = 0; i < time.length; i++) {
+						if(time[i] !== null){
+							var options = {
+								method: 'POST',
+							  url: 'http://worker-aws-us-east-1.iron.io/2/projects/57a8f721bc022f00078da23f/schedules',
+							  qs: { oauth: '0DHLF4oFfGZIbMcdg2W6' },
+							  headers:
+							   { 'cache-control': 'no-cache',
+							     'content-type': 'application/json',
+							     oauth: '0DHLF4oFfGZIbMcdg2W6'
+								 },
+							  body:
+							   { schedules:
+							      [ { code_name: 'test_worker',
+							          payload: JSON.stringify({phone: phoneNum, message: message}),
+							          start_at: time[i], //need to change the date to the ISO version new Date('09 August 2016 15:05').toISOString()
+							          run_every: 60, //interval in seconds
+							          run_times: 10  //how many times until stopped
+										} ]
+								},
+							  json: true
+							};
+							request(options, function (error, response, body) { //POST to Iron Worker to schedule the recurring texts
+							  if (error) throw new Error(error);
+								if(body.schedules){
+									Model.script.findOneAndUpdate({"_id": scriptID}, { //add ironID to script document
+										$push: {
+											reminderID: body.schedules[0].id,
+										}
+									})
+									.then(function(res) {
+										console.log("reminder has been saved");
+									})
+									.catch(function(err) {
+										console.log(new Error("reminder has not been saved", err));
+									});
+								}
+							});
+					}
+				}
+
+					//set refill reminder
+
+					if(refillDate){
+						var options = {
+							method: 'POST',
+							url: 'http://worker-aws-us-east-1.iron.io/2/projects/57a8f721bc022f00078da23f/schedules',
+							qs: { oauth: '0DHLF4oFfGZIbMcdg2W6' },
+							headers:
+							 { 'cache-control': 'no-cache',
+								 'content-type': 'application/json',
+								 oauth: '0DHLF4oFfGZIbMcdg2W6'
+							 },
+							body:
+							 { schedules:
+									[ { code_name: 'test_worker',
+											payload: JSON.stringify({phone: phoneNum, message: 'Hello from OneCare! Remember to refill your ' + drugName + ' today.' }),
+											start_at: refillDate, //need to change the date to the ISO version new Date('09 August 2016 15:05').toISOString()
+											run_every: null, //interval in seconds
+											run_times: 1  //how many times until stopped
+									} ]
+							},
+							json: true
+						};
+
+						request(options, function (error, response, body) { //POST to Iron Worker to schedule the recurring texts
+							if (error) throw new Error(error);
+							if(body.schedules){
+								Model.script.findOneAndUpdate({"_id": scriptID}, { //add ironID to script document
+									$push: {
+										reminderID: body.schedules[0].id,
+									}
+								})
+								.then(function(){
+									console.log("reminderID for DATE added");
+								})
+								.catch(function(err){
+									console.log("reminderID for DATE not added", err);
+								})
+
 							}
-							next("Message sent.");
 						});
-					}, {"start": true});
-
-					console.log("reminderManager", reminderManager);
-					next("Reminder successfully set");
+				}
 	});
 },
 
-deleteReminder: function(reminderID, next) {
+deleteReminder: function(scriptID, res, next) {
 	//REMOVES SCRIPT DOCUMENT (reference still persists in user doc but it won't reference anything)
-	Model.script.remove({"_id": reminderID}, function(err, user){
-		if(err){
-			next("reminder not deleted", err);
+	Model.script.findOne({"_id": scriptID}, function(err, script){
+		"use strict";
+		if(err){next(new Error(err))}
+		console.log("ironID: ", script.reminderID);
+		var ironIDs = script.reminderID;
+		for(let i = 0; i < ironIDs.length; i++){
+			"use strict";
+			if(ironIDs[i] !== null){
+				var options = {
+					method: 'POST',
+					url: 'http://worker-aws-us-east-1.iron.io/2/projects/57a8f721bc022f00078da23f/schedules/'+ ironIDs[i] + '/cancel',
+					qs: { oauth: '0DHLF4oFfGZIbMcdg2W6' },
+					headers:
+					 { 'cache-control': 'no-cache',
+						 'content-type': 'application/json',
+						 oauth: '0DHLF4oFfGZIbMcdg2W6'
+					 }
+				};
+				request(options, function (error, response, body) {
+					if (error) throw new Error(error);
+				})
+			}
 		}
-		if(reminderManager.exists(reminderID.toString())) {
-			reminderManager.deleteJob(reminderID.toString());
-		}
-		next("reminder deleted");
-	});
+		Model.script.remove({"_id": scriptID}, function(err){
+			if(err){
+				next("reminder not deleted", err);
+			}
+			else{
+				res.status(202).send("REMINDER successfully deleted");
+			}
+		});
+	})
 },
+
+	addNote: function(data, res) {
+		console.log("NOTE about to be created: ", data);
+  	var newNote = new Model.note(data);
+  	newNote.save(function(err) {
+  		if (err) {
+  			console.log("NEW NOTE not SAVED", err);
+  		}
+  		Model.doctor.update({"_id": data.doctor}, {$push:{"notes": newNote}}, function(err){
+				if(err){
+					next(new Error("note added to doctor model"));
+				}
+				res.status(201).send(newNote);
+			});
+  	});
+  },
+
+  getNotes: function(doctor, res) {
+  	Model.doctor.findOne({"_id": doctor}).populate('notes').exec(function(err, found) {
+  		if (err) {
+  			res.status(404).send(err);
+  		} else {
+        res.status(200).send(found.notes);
+  		}
+  	})
+  },
 
 	saveBrain: function(brainState, trainingData, name) {
 		var success = Model.brain.findOneAndUpdate({"_id": ObjectId("57a3a316dcba0f71400f021a")}, {

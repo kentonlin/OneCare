@@ -240,6 +240,33 @@ var SYMPTOMS = [
     return pair;
   }
 
+  var printBrain = function() {
+    var input = [];
+    var hidden = [];
+    var output = [];
+    var allNeurons = OneCareNeural.neurons();
+    allNeurons.forEach(function(neuron){
+      if (neuron.layer === "input") {
+        input.push(neuron.neuron);
+      } else if (neuron.layer === "0") {
+        hidden.push(neuron.neuron);
+      } else {
+        output.push(neuron.neuron);
+      }
+    });
+    return {
+      input: input.map(function(neuron) {
+        return neuron.state;
+      }),
+      hidden: hidden.map(function(neuron) {
+        return neuron.state;
+      }),
+      output: output.map(function(neuron) {
+        return neuron.state;
+      })
+    }
+  }
+
   var activateMyBrain = function(input) {
     return interpretOutput(OneCareNeural.activate(makeIO(input)));
   }
@@ -271,7 +298,7 @@ var SYMPTOMS = [
           finalList.push(specialty);
         }
       })
-      console.log("sorting docs: ", finalList);
+      // console.log("sorting docs: ", finalList);
       next(finalList);
     });
   }
@@ -284,7 +311,8 @@ var SYMPTOMS = [
     activate: activateMyBrain,
     save: saveBrain,
     delete: resetBrain,
-    doctors: sortDocs
+    doctors: sortDocs,
+    print: printBrain
   }
 };
 
