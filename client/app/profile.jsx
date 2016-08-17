@@ -16,7 +16,15 @@ export default class Profile extends React.Component {
       doctors: [],
       scripts: [],
       inputZip: null,
-      editScript: null,
+      editScript:
+      {
+        name: undefined,
+        dosage: undefined,
+        frequency: undefined,
+        refill: undefined,
+        reminderID: undefined,
+        reminderTime: undefined
+      },
       scriptmodalIsOpen: false,
       docmodalIsOpen: false,
       mapmodalIsOpen: false,
@@ -106,10 +114,15 @@ export default class Profile extends React.Component {
   }
 
   openModalScript() {
+<<<<<<< 946addfa6371c98b48e448c5c1adeaf6e5fbd84c
 <<<<<<< 59fd33d9e7fbc01a2484638e926f2e65a78df595
 =======
     console.log("open modal script called");
     console.log('this is the editscript', this.state.editScript);
+=======
+    // console.log("open modal script called");
+    // console.log('this is the editscript', this.state.editScript);
+>>>>>>> rebase4
     this.setState({
       scriptmodalIsOpen: true
     });
@@ -118,15 +131,18 @@ export default class Profile extends React.Component {
   editModalScript(idx) {
     var scriptModal = this.state.scripts[idx];
 
-    console.log('this is the script modal drug name', scriptModal.name)
-
     this.setState({
       editScript: scriptModal
+    }, function(){
+      console.log("STATE", this.state);
     });
 
+<<<<<<< 946addfa6371c98b48e448c5c1adeaf6e5fbd84c
     console.log('this is the editscript', this.state);
     console.log('this is the script modal after setstate', scriptModal);
 >>>>>>> rebase 3
+=======
+>>>>>>> rebase4
     this.setState({
       scriptmodalIsOpen: true
     });
@@ -284,7 +300,10 @@ export default class Profile extends React.Component {
               <div className='modal-button-close' onClick={this.closeModalScript}><i className="fa fa-times-circle" aria-hidden="true"></i></div>
             </div>
             <ScriptRemind
-              closeFn={this.closeModalScript} />
+            data={this.state.editScript}
+            closeFn={this.closeModalScript} />
+            <Button onClick={this.closeModalScript}>Exit</Button>
+
         </Modal>
 
         <Modal show={this.state.docmodalIsOpen} bsSize='small'>

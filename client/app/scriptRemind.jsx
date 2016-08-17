@@ -13,17 +13,25 @@ import {Button, ButtonToolbar } from 'react-bootstrap';
 var date = new Date().toISOString();
 
 export default class ScriptRemindView extends React.Component {
+  // _id
+  // dosage
+  // frequency
+  // name
+  // refill
+  // reminderID
+  // reminderTime
+
   constructor(props) {
     super(props);
     this.state = {
       modalIsOpen: true,
-      "currentDrug": "None",
-      "dosageAmt": 0,
-      "dosageMeasure": 'mg',
-      "date": date,
-      "reminderTime1": null,
-      "reminderTime2": null,
-      "reminderTime3": null,
+      "currentDrug": this.props.data.name || "None",
+      "dosageAmt": this.props.data.dosage ? this.props.data.dosage.split(" ")[0] : 0,
+      "dosageMeasure": this.props.data.dosage ? this.props.data.dosage.split(" ")[1] : 'mg',
+      "date": this.props.data.refill || date,
+      "reminderTime1": this.props.data.reminderTime ? this.props.data.reminderTime[0] : null,
+      "reminderTime2": this.props.data.reminderTime ? this.props.data.reminderTime[1] : null,
+      "reminderTime3": this.props.data.reminderTime ? this.props.data.reminderTime[2] : null,
       "scheduleFreq": "1x",
       "scheduleDayWeek": "day",
       "invalidName": false,
@@ -41,6 +49,21 @@ export default class ScriptRemindView extends React.Component {
     this.handleReminderTime1 = this.handleReminderTime1.bind(this);
     this.handleReminderTime2 = this.handleReminderTime2.bind(this);
     this.handleReminderTime3 = this.handleReminderTime3.bind(this);
+  }
+
+  componentWillReceiveProps(nextProps) {
+    console.log(nextProps.data)
+    // if(nextProps.data){
+    //   this.setState({
+    //     currentDrug: nextProps.data.name,
+    //     dosageAmt: nextProps.data.dosage.split(" ")[0],
+    //     dosageMeasure: nextProps.data.dosage.split(" ")[1],
+    //     date: nextProps.data.refill,
+    //     reminderTime1: nextProps.data.reminderTime[0],
+    //     reminderTime2: nextProps.data.reminderTime[1],
+    //     reminderTime3: nextProps.data.reminderTime[1],
+    //   });
+    // }
   }
 
     updateDrugName(event){
@@ -156,14 +179,34 @@ export default class ScriptRemindView extends React.Component {
       <div>
         <h1> Set a Prescription Reminder </h1>
         <div>
-          <div className="script-form-frame">
-            <h3> Current Drug: {this.state.currentDrug} </h3>
-            <div  className="script-form-fields">
-              <input
-              onChange={this.updateDrugName}
-              placeholder='Name'
-              />
-              <h8 className='required'> (required) </h8>
+          <h1> Set a Prescription Reminder </h1>
+          <h2> Current Drug: {this.state.currentDrug} </h2>
+          <input
+          onChange={this.updateDrugName}
+          placeholder='name'
+          // placeholder={this.state.currentDrug}
+          />
+          <h8 className='required'> (required) </h8>
+        </div>
+        <div>
+          <input
+          className='dosageInput'
+          onChange={this.handleDoseAmount}
+          placeholder= {this.state.dosageAmt}
+          // || 'Dosage (e.g. if "Take 1 tablet", type "1")'
+          />
+
+          <select className="dropdown-replacement" value={this.state.dosageMeasure} onChange={this.handleDoseMeasurement}>
+            <option>mg</option>
+            <option>mL</option>
+            <option>tablet</option>
+          </select>
+      </div>
+        <div>
+            <h1> Refill Date</h1>
+            <div>
+              <Calendar format='MM/DD/YYYY' date={this.state.date} onChange= {this.handleRefillDate}/>
+              <h3> You selected {this.state.date} </h3>
             </div>
           </div>
           <div className="script-form-frame">
