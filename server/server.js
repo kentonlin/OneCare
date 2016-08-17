@@ -42,9 +42,9 @@ app.post('/api/user/zip', function(req, res) {
 
 app.post('/api/email/receive', function(req, res){
   console.log("FULL BODY", req.body);
-  var message = req.body['stripped-text'];
+  var message = req.body['stripped-text']; //wrong property, need to change
   var docEmail = req.body['sender']; //format: 'hckilaru@gmail.com'
-  var userID = req.body['Subject']; //need to confirm format
+  var userID = req.body['Subject']; //format: '57abc05eaeefbd68ee3183ea'
   console.log("Args to be passed", message, docEmail, userID);
   dbHelpers.receiveEmail(message, docEmail, userID, res);
 })
