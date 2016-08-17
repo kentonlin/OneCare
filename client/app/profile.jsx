@@ -9,6 +9,7 @@ import EditScriptRemindModal from './editScript.jsx';
 import Map from './map.jsx';
 import _ from 'lodash';
 import { Modal, Button, ButtonToolbar } from 'react-bootstrap';
+import { FlipCard } from 'react-flipcard';
 
 import EditDoctorModal from './editDoctor.jsx';
 
@@ -222,6 +223,31 @@ export default class Profile extends React.Component {
     });
   }
 
+  // FLIP CARD SET STATE FUNCTIONS
+  showBack() {
+    this.setState({
+      isFlipped: true
+    });
+  };
+
+  showFront() {
+    this.setState({
+      isFlipped: false
+    });
+  };
+
+  handleOnFlip(flipped) {
+    if (flipped) {
+      this.refs.backButten.getDOMNode().focus();
+    }
+  };
+
+  handleKeyDown(e) {
+    if (this.state.isFlipped && e.keyCode === 27) {
+      this.showFront();
+    }
+  };
+
   getScripts() {
     console.log("get scripts called");
     $.ajax({
@@ -240,7 +266,6 @@ export default class Profile extends React.Component {
        console.error('error in ajax request for user scripts', err);
      }
    });
-
   }
 
   getDocs() {
@@ -283,27 +308,6 @@ export default class Profile extends React.Component {
       }
     });
   }
-
-  // getZip() {
-  //   $.ajax({
-  //     type: 'POST',
-  //     url: '/api/user/zip',
-  //     headers: {
-  //       "content-type": "application/json"
-  //     },
-  //     data: JSON.stringify({"username": window.localStorage.username}),
-  //     success: function(zipcode) {
-  //       console.log("USER zipcode", zipcode);
-  //       this.setState({
-  //         zipcode: zipcode
-  //       });
-  //     }.bind(this),
-  //     error: function(err) {
-  //       console.log('Could not retrieve user zipcode', err);
-  //     }
-  //   });
-  // }
-
 
   componentDidMount() {
     this.getScripts();
@@ -432,10 +436,10 @@ export default class Profile extends React.Component {
                   );
                 }, this)
               }
+
       </div>
       </div>
       </div>
     );
   }
-
 }
