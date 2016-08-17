@@ -40,25 +40,25 @@ export default class Splash extends React.Component {
         <div className= "splashHeader">
 
           <video autoPlay loop id="video-background">
-            <source id="mp4" src="https://fpdl.vimeocdn.com/vimeo-prod-skyfire-std-us/01/3524/5/142623920/428365276.mp4?token=57b2102c_0x72f2cf429c3eaefc2c1b516326b1bcb63a9fe0b4" type="video/mp4"/>
+            <source id="mp4" src="https://fpdl.vimeocdn.com/vimeo-prod-skyfire-std-us/01/100/7/175500373/569208137.mp4?token=57b25a16_0xfdc99155ee316c0a3bb1c89cbc3e2d07e2bb4488" type="video/mp4"/>
           </video>
 
           <div className= "splashName">
             <h2> OneCare </h2>
           </div>
 
-          <div>
+          <div className= "signInSplash">
             <Link to='/signin'> Login </Link>
           </div>
 
-          <div>
+          <div className= "signUpSplash">
             <Link to='/signup'> Signup </Link>
           </div>
         </div>
 
 
         <div className= "appDescribe">
-          <h2> Prescription Reminder</h2>
+          <div> Prescription Reminder</div>
           <h3> Text Reminders </h3>
           <h3> Remind by day/week/month </h3>
           <br/>

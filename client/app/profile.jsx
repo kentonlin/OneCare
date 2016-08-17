@@ -16,6 +16,7 @@ export default class Profile extends React.Component {
       doctors: [],
       scripts: [],
       inputZip: null,
+      editScript: null,
       scriptmodalIsOpen: false,
       docmodalIsOpen: false,
       mapmodalIsOpen: false,
@@ -105,6 +106,27 @@ export default class Profile extends React.Component {
   }
 
   openModalScript() {
+<<<<<<< 59fd33d9e7fbc01a2484638e926f2e65a78df595
+=======
+    console.log("open modal script called");
+    console.log('this is the editscript', this.state.editScript);
+    this.setState({
+      scriptmodalIsOpen: true
+    });
+  }
+
+  editModalScript(idx) {
+    var scriptModal = this.state.scripts[idx];
+
+    console.log('this is the script modal drug name', scriptModal.name)
+
+    this.setState({
+      editScript: scriptModal
+    });
+
+    console.log('this is the editscript', this.state);
+    console.log('this is the script modal after setstate', scriptModal);
+>>>>>>> rebase 3
     this.setState({
       scriptmodalIsOpen: true
     });
@@ -333,6 +355,7 @@ export default class Profile extends React.Component {
                 this.state.doctors.map((doctor, idx) => {
                   return (
                     <div className=" doctor-view-container" key={idx }>
+                    <button className="doctor-edit" onClick={this.openModalDoctor}> Edit </button>
                     <div className="doctor-top-bar"><p className='doctor-name'>{doctor.name}</p><i className="fa fa-times" aria-hidden="true" onClick={this.deleteDoc.bind(this, idx)}></i></div>
                     <div className='doctor-attribute'><i className="fa fa-phone phone-green" aria-hidden="true"></i>  {doctor.phone}</div>
                     <div className='doctor-attribute'><i className="fa fa-envelope" aria-hidden="true"></i>  {doctor.email}</div>
