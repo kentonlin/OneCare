@@ -29,11 +29,14 @@ export default class ScriptRemindView extends React.Component {
       "dosageAmt": this.props.data.dosage ? this.props.data.dosage.split(" ")[0] : 0,
       "dosageMeasure": this.props.data.dosage ? this.props.data.dosage.split(" ")[1] : 'mg',
       "date": this.props.data.refill || date,
-      "reminderTime1": this.props.data.reminderTime ? this.props.data.reminderTime[0] : null,
-      "reminderTime2": this.props.data.reminderTime ? this.props.data.reminderTime[1] : null,
-      "reminderTime3": this.props.data.reminderTime ? this.props.data.reminderTime[2] : null,
-      "scheduleFreq": "1x",
-      "scheduleDayWeek": "day",
+      // "reminderTime1": this.props.data.reminderTime ? this.props.data.reminderTime[0] : null,
+      // "reminderTime2": this.props.data.reminderTime ? this.props.data.reminderTime[1] : null,
+      // "reminderTime3": this.props.data.reminderTime ? this.props.data.reminderTime[2] : null,
+      "reminderTime1": null,
+      "reminderTime2": null,
+      "reminderTime3": null,
+      "scheduleFreq": this.props.data.frequency ? this.props.data.frequency.slice(0,2) : "1x",
+      "scheduleDayWeek": this.props.data.frequency ? this.props.data.frequency.split(" ")[this.props.data.frequency.length -1] : "day",
       "invalidName": false,
       "invalidReminderTime": false,
       "hasTwo": false,
@@ -64,6 +67,20 @@ export default class ScriptRemindView extends React.Component {
     //     reminderTime3: nextProps.data.reminderTime[1],
     //   });
     // }
+=======
+  var date = new Date();
+  this.updateDrugName = this.updateDrugName.bind(this);
+  this.submitForm = this.submitForm.bind(this);
+  this.handleFrequency = this.handleFrequency.bind(this);
+  this.handleDoseAmount = this.handleDoseAmount.bind(this);
+  this.handleRefillDate = this.handleRefillDate.bind(this);
+  this.handleDoseMeasurement = this.handleDoseMeasurement.bind(this);
+  this.handleScheduleDayWeek = this.handleScheduleDayWeek.bind(this);
+  this.handleReminderTime1 = this.handleReminderTime1.bind(this);
+  this.handleReminderTime2 = this.handleReminderTime2.bind(this);
+  this.handleReminderTime3 = this.handleReminderTime3.bind(this);
+
+>>>>>>> almost finished edit
   }
 
     updateDrugName(event){
@@ -177,7 +194,6 @@ export default class ScriptRemindView extends React.Component {
   render() {
     return (
       <div>
-        <h1> Set a Prescription Reminder </h1>
         <div>
           <h1> Set a Prescription Reminder </h1>
           <h2> Current Drug: {this.state.currentDrug} </h2>
@@ -185,37 +201,18 @@ export default class ScriptRemindView extends React.Component {
           onChange={this.updateDrugName}
           placeholder='name'
           // placeholder={this.state.currentDrug}
+          defaultValue={this.state.currentDrug}
           />
           <h8 className='required'> (required) </h8>
         </div>
-        <div>
-          <input
-          className='dosageInput'
-          onChange={this.handleDoseAmount}
-          placeholder= {this.state.dosageAmt}
-          // || 'Dosage (e.g. if "Take 1 tablet", type "1")'
-          />
-
-          <select className="dropdown-replacement" value={this.state.dosageMeasure} onChange={this.handleDoseMeasurement}>
-            <option>mg</option>
-            <option>mL</option>
-            <option>tablet</option>
-          </select>
-      </div>
-        <div>
-            <h1> Refill Date</h1>
-            <div>
-              <Calendar format='MM/DD/YYYY' date={this.state.date} onChange= {this.handleRefillDate}/>
-              <h3> You selected {this.state.date} </h3>
-            </div>
-          </div>
           <div className="script-form-frame">
             <h3>Dosage</h3>
             <div className="script-form-fields">
               <input
               className='dosageInput'
               onChange={this.handleDoseAmount}
-              placeholder='Dosage (e.g. if "Take 1 tablet", type "1")'
+              defaultValue={this.state.dosageAmt}
+              // placeholder='Dosage (e.g. if "Take 1 tablet", type "1")'
               />
               <select className="dropdown-replacement" value={this.state.dosageMeasure} onChange={this.handleDoseMeasurement}>
                 <option>mg</option>
@@ -228,7 +225,8 @@ export default class ScriptRemindView extends React.Component {
               <h3> Refill Date</h3>
               <div  className="script-form-fields">
                 <Calendar format='MM/DD/YYYY' date={this.state.date} onChange= {this.handleRefillDate}/>
-                <span className={this.state.date ? "" : "hidden"}>You selected {this.state.date}</span>
+                <span className={this.state.date ? "" : "hidden"}></span>
+                {/* <span className={this.state.date ? "" : "hidden"}>You selected {this.state.date}</span> */}
               </div>
           </div>
           <div className="script-form-frame">
@@ -247,27 +245,26 @@ export default class ScriptRemindView extends React.Component {
             </div>
           </div>
           <div className="script-form-frame">
-            <div className="reminder">
-              <h3> Reminder Time 1</h3>
-              <Kronos time={this.state.reminderTime1} value='' placeholder={"Click to select a time"} onChangeDateTime={this.handleReminderTime1}/>
-              <h8 className='required'> (required) </h8>
-            </div>
-            <div className={(this.state.hasTwo ? 'reminder' : 'hidden')}>
-              <h3> Reminder Time 2</h3>
-              <Kronos time={this.state.reminderTime2} value='' placeholder={"Click to select a time"} onChangeDateTime={this.handleReminderTime2}/>
-              <h8 className='required'> (required) </h8>
-            </div>
-            <div className={this.state.hasThree ? 'reminder' : 'hidden'}>
-              <h3> Reminder Time 3</h3>
-              <Kronos time={this.state.reminderTime3} value='' placeholder={"Click to select a time"} onChangeDateTime={this.handleReminderTime3}/>
-              <h8 className='required'> (required) </h8>
-            </div>
-            <div className='clear'>
-              <Button bsStyle="info" onClick={this.submitForm}> Remind Me </Button>
-            </div>
+             <div className="reminder">
+               <h3> Reminder Time 1</h3>
+               <Kronos time={this.state.reminderTime1} value='' placeholder={"Click to select a time"} onChangeDateTime={this.handleReminderTime1}/>
+               <h8 className='required'> (required) </h8>
+             </div>
+             <div className={(this.state.hasTwo ? 'reminder' : 'hidden')}>
+               <h3> Reminder Time 2</h3>
+               <Kronos time={this.state.reminderTime2} value='' placeholder={"Click to select a time"} onChangeDateTime={this.handleReminderTime2}/>
+               <h8 className='required'> (required) </h8>
+             </div>
+             <div className={this.state.hasThree ? 'reminder' : 'hidden'}>
+               <h3> Reminder Time 3</h3>
+               <Kronos time={this.state.reminderTime3} value='' placeholder={"Click to select a time"} onChangeDateTime={this.handleReminderTime3}/>
+               <h8 className='required'> (required) </h8>
+             </div>
+             <div className='clear'>
+               <Button bsStyle="info" onClick={this.submitForm}> Remind Me </Button>
+             </div>
           </div>
         </div>
-      </div>
 
     );
   }
