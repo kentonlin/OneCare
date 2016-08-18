@@ -314,6 +314,12 @@ border-radius: 4px;
   font-size: 22px;
 }
 
+.note-delete {
+  padding-right: 8px;
+}
+
+
+
 
 .specialty-tag {
   background-color: #228b22;

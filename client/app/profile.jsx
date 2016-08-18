@@ -532,11 +532,11 @@ export default class Profile extends React.Component {
                         <div className='show-notes'>
                             <OverlayTrigger placement='top' overlay={<Tooltip id="tooltip"> Click to view doctor's notes</Tooltip>}>
                               <div className={this.state.notesOpen ? 'hidden': 'note-icon'}>
-                                <i className="fa fa-angle-double-down orange" aria-hidden="true" onClick={this.doctorNotes.bind(this, doctor)}></i>
+                                <i className="fa fa-angle-double-down phone-green" aria-hidden="true" onClick={this.doctorNotes.bind(this, doctor)}></i>
                               </div>
                             </OverlayTrigger>
                             <div className={this.state.notesOpen ? 'note-icon': 'hidden'}>
-                              <i className="fa fa-angle-double-up orange" aria-hidden="true" onClick={this.doctorNotes.bind(this, doctor)}></i>
+                              <i className="fa fa-angle-double-up phone-green" aria-hidden="true" onClick={this.doctorNotes.bind(this, doctor)}></i>
                             </div>
                           </div>
                           <div className={this.state.openNotes.doctor === doctor._id ? "doctor-notes-container" : "hidden"}>
@@ -546,7 +546,7 @@ export default class Profile extends React.Component {
                             ))
                             .map((note, idx) => (
                             <div key={idx} className={"doctor-notes-entry" + (note.seen ? "" : " highlight")}>
-                              <span className="note-delete"><i className="fa fa-times" aria-hidden="true" onClick={this.hideNote.bind(this, note)}></i></span>
+                              <span className="note-delete"><i className="fa fa-trash" aria-hidden="true" onClick={this.hideNote.bind(this, note)}></i></span>
                               {note.body}
                             </div>
                             )
