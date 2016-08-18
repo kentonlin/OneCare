@@ -326,25 +326,25 @@ export default class Profile extends React.Component {
     }})
   }
 
-  // getZip() {
-  //   $.ajax({
-  //     type: 'POST',
-  //     url: '/api/user/zip',
-  //     headers: {
-  //       "content-type": "application/json"
-  //     },
-  //     data: JSON.stringify({"username": window.localStorage.username}),
-  //     success: function(zipcode) {
-  //       console.log("USER zipcode", zipcode);
-  //       this.setState({
-  //         zipcode: zipcode
-  //       });
-  //     }.bind(this),
-  //     error: function(err) {
-  //       console.log('Could not retrieve user zipcode', err);
-  //     }
-  //   });
-  // }
+  getZip() {
+    $.ajax({
+      type: 'POST',
+      url: '/api/user/zip',
+      headers: {
+        "content-type": "application/json"
+      },
+      data: JSON.stringify({"username": window.localStorage.username}),
+      success: function(zipcode) {
+        console.log("USER zipcode", zipcode);
+        this.setState({
+          zipcode: zipcode
+        });
+      }.bind(this),
+      error: function(err) {
+        console.log('Could not retrieve user zipcode', err);
+      }
+    });
+  }
 
   componentDidMount() {
     this.getScripts();
