@@ -57853,6 +57853,12 @@
 	          _react2.default.createElement('input', { id: 'email', type: 'text', onChange: this.handleChange }),
 	          _react2.default.createElement('br', null),
 	          _react2.default.createElement(
+	            'h6',
+	            { className: 'invalid' },
+	            ' (Your doctor will receive notification that you have registered with them!) '
+	          ),
+	          _react2.default.createElement('br', null),
+	          _react2.default.createElement(
 	            'div',
 	            null,
 	            'Address'
