@@ -60011,6 +60011,7 @@
 	      selectedSymptoms: [],
 	      recs: [],
 	      modalIsOpen: false,
+	      // zipcode: this.props.zipcode,
 	      brainState: {}
 	    };
 	    _this.handleDeselect = _this.handleDeselect.bind(_this);
@@ -60175,7 +60176,7 @@
 	        _react2.default.createElement(
 	          'div',
 	          { className:  true ? "" : "hidden" },
-	          _react2.default.createElement(_symptomEntryModal2.default, { brainState: this.state.brainState, symptoms: this.state.selectedSymptoms, recommendations: this.state.recs })
+	          _react2.default.createElement(_symptomEntryModal2.default, { closeFn: this.props.closeFn, zipcode: this.props.zipcode, brainState: this.state.brainState, symptoms: this.state.selectedSymptoms, recommendations: this.state.recs })
 	        )
 	      );
 	    }
@@ -60500,6 +60501,8 @@
 	
 	var _reactRouter = __webpack_require__(/*! react-router */ 175);
 	
+	var _reactBootstrap = __webpack_require__(/*! react-bootstrap */ 244);
+	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -60622,12 +60625,13 @@
 	      this.setState({
 	        drxs: drxs.data
 	      });
-	      console.log('this works');
 	      console.log('+++++++++++++++>', drxs);
 	    }
 	  }, {
 	    key: 'render',
 	    value: function render() {
+	      var _this2 = this;
+	
 	      return _react2.default.createElement(
 	        'div',
 	        null,
@@ -60703,17 +60707,19 @@
 	            _react2.default.createElement(
 	              'div',
 	              null,
-	              'Or, check out some ',
+	              'Or, click below to find some ',
 	              this.state.currentRec ? this.state.currentRec.name : '**empty**',
-	              's near you. Click the MONEY button!'
+	              's near you!'
 	            ),
 	            _react2.default.createElement(
-	              'button',
-	              { onClick: this.drx },
-	              'Show me the MONEY'
+	              _reactBootstrap.Button,
+	              { onClick: this.drx, bsStyle: 'primary', bsSize: 'small' },
+	              'Find ',
+	              this.state.currentRec ? this.state.currentRec.name : '**empty**',
+	              's'
 	            ),
 	            this.state.drxs.map(function (doctrx, i) {
-	              return _react2.default.createElement(_DRXView2.default, { info: doctrx });
+	              return _react2.default.createElement(_DRXView2.default, { closeFn: _this2.props.closeFn, zipcode: _this2.props.zipcode, info: doctrx });
 	            })
 	          ),
 	          _react2.default.createElement(
@@ -61929,13 +61935,82 @@
 	  function DRXView(props) {
 	    _classCallCheck(this, DRXView);
 	
-	    return _possibleConstructorReturn(this, Object.getPrototypeOf(DRXView).call(this, props));
+	    // this.yalp = this.yalp.bind(this);
+	    var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(DRXView).call(this, props));
+	
+	    _this.findDrx = _this.findDrx.bind(_this);
+	    return _this;
 	  }
 	
 	  _createClass(DRXView, [{
+	    key: 'findDrx',
+	
+	
+	    // no longer needed :(
+	    // yalp() {
+	    //   $.ajax({
+	    //     type: 'POST',
+	    //     url: '/api/yelp',
+	    //     headers: {
+	    //       "content-type": "application/json"
+	    //     },
+	    //     data: JSON.stringify({ name: this.props.info.profile.first_name+' '+this.props.info.profile.last_name, zip: this.props.zipcode }),
+	    //     success: function(searchTerm) {
+	    //       console.log(searchTerm);
+	    //     }.bind(this),
+	    //     error: function(err) {
+	    //       console.error('no yelp', err);
+	    //     }
+	    //   });
+	    // }
+	
+	    value: function findDrx() {
+	      var npiUrl = 'https://api.betterdoctor.com/2016-03-01/doctors/npi/' + this.props.info.npi + '?user_key=87b39c90783391ac6ce972736d117741';
+	      console.log(npiUrl);
+	      console.log('PROPS:', this.props);
+	      $.ajax({
+	        type: 'GET',
+	        url: npiUrl,
+	        success: function (npiData) {
+	          console.log('name:', npiData.data.practices[0].name);
+	          console.log('phone:', npiData.data.practices[0].phones[0].number);
+	          console.log('addy:' + '\n', npiData.data.practices[0].visit_address.street + '\n', npiData.data.practices[0].visit_address.city + '\n', npiData.data.practices[0].visit_address.state + '\n', npiData.data.practices[0].visit_address.zip);
+	          console.log('spec:', npiData.data.specialties[0].actor);
+	
+	          var toSubmit = {
+	            "username": window.localStorage.username,
+	            "first_last": window.localStorage.first_last,
+	            "userID": window.localStorage.userID,
+	            "doc": {
+	              name: npiData.data.practices[0].name,
+	              phone: '1' + npiData.data.practices[0].phones[0].number,
+	              email: 'N/A',
+	              address: npiData.data.practices[0].visit_address.street + ' ' + npiData.data.practices[0].visit_address.city + ', ' + npiData.data.practices[0].visit_address.state,
+	              specialty: npiData.data.specialties[0].actor
+	            }
+	          };
+	
+	          $.ajax({
+	            type: 'POST',
+	            url: '/api/doctor/add',
+	            headers: {
+	              'content-type': 'application/json'
+	            },
+	            data: JSON.stringify(toSubmit),
+	            success: this.props.closeFn(),
+	            error: function error(err) {
+	              console.log('inner error', err);
+	            }
+	          });
+	        }.bind(this),
+	        error: function error(err) {
+	          console.log('outer error', err);
+	        }
+	      });
+	    }
+	  }, {
 	    key: 'render',
 	    value: function render() {
-	      console.log(this.props.info);
 	      return _react2.default.createElement(
 	        'div',
 	        { className: 'card-wrap' },
@@ -61943,6 +62018,15 @@
 	          'div',
 	          { className: 'profile_pic-wrap' },
 	          _react2.default.createElement('img', { src: this.props.info.profile.image_url, alt: '' })
+	        ),
+	        _react2.default.createElement(
+	          'div',
+	          null,
+	          _react2.default.createElement(
+	            _reactBootstrap.Button,
+	            { onClick: this.findDrx, bsStyle: 'primary', bsSize: 'xsmall' },
+	            'SAVE TO ROLODEX'
+	          )
 	        ),
 	        _react2.default.createElement(
 	          'div',
@@ -62019,21 +62103,21 @@
 	
 	var _symptomEntryModal2 = _interopRequireDefault(_symptomEntryModal);
 	
-	var _editScript = __webpack_require__(/*! ./editScript.jsx */ 795);
+	var _editScript = __webpack_require__(/*! ./editScript.jsx */ 789);
 	
 	var _editScript2 = _interopRequireDefault(_editScript);
 	
-	var _map = __webpack_require__(/*! ./map.jsx */ 789);
+	var _map = __webpack_require__(/*! ./map.jsx */ 790);
 	
 	var _map2 = _interopRequireDefault(_map);
 	
-	var _lodash = __webpack_require__(/*! lodash */ 790);
+	var _lodash = __webpack_require__(/*! lodash */ 791);
 	
 	var _lodash2 = _interopRequireDefault(_lodash);
 	
 	var _reactBootstrap = __webpack_require__(/*! react-bootstrap */ 244);
 	
-	var _reactFlipcard = __webpack_require__(/*! react-flipcard */ 791);
+	var _reactFlipcard = __webpack_require__(/*! react-flipcard */ 792);
 	
 	var _editDoctor = __webpack_require__(/*! ./editDoctor.jsx */ 796);
 	
@@ -62058,12 +62142,11 @@
 	    _this.state = {
 	      doctors: [],
 	      scripts: [],
+	      zipcode: null,
 	      inputZip: null,
 	      editScript: null,
-	
 	      editDoctor: null,
 	      editModalDoctorIsOpen: false,
-	
 	      scriptmodalIsOpen: false,
 	      docmodalIsOpen: false,
 	      mapmodalIsOpen: false,
@@ -62097,7 +62180,6 @@
 	          borderRadius: '4px',
 	          outline: 'none',
 	          padding: '20px'
-	
 	        }
 	      }
 	    };
@@ -62118,8 +62200,7 @@
 	    _this.openEditModalScript = _this.openEditModalScript.bind(_this);
 	    _this.closeEditModalScript = _this.closeEditModalScript.bind(_this);
 	    _this.doctorNotes = _this.doctorNotes.bind(_this);
-	    // this.getZip = this.getZip.bind(this);
-	
+	    _this.getZip = _this.getZip.bind(_this);
 	    _this.openEditModalDoctor = _this.openEditModalDoctor.bind(_this);
 	    _this.closeEditModalDoctor = _this.closeEditModalDoctor.bind(_this);
 	
@@ -62164,7 +62245,6 @@
 	  }, {
 	    key: 'openModalScript',
 	    value: function openModalScript() {
-	
 	      console.log("open modal script called");
 	      console.log('this is the editscript', this.state.editScript);
 	      this.setState({
@@ -62230,6 +62310,8 @@
 	    value: function openModalSymptom() {
 	      this.setState({
 	        symptomModalIsOpen: true
+	      }, function () {
+	        console.log(this.state.zipcode);
 	      });
 	    }
 	  }, {
@@ -62273,37 +62355,6 @@
 	      this.setState({
 	        brainModalIsOpen: false
 	      });
-	    }
-	
-	    // FLIP CARD SET STATE FUNCTIONS
-	
-	  }, {
-	    key: 'showBack',
-	    value: function showBack() {
-	      this.setState({
-	        isFlipped: true
-	      });
-	    }
-	  }, {
-	    key: 'showFront',
-	    value: function showFront() {
-	      this.setState({
-	        isFlipped: false
-	      });
-	    }
-	  }, {
-	    key: 'handleOnFlip',
-	    value: function handleOnFlip(flipped) {
-	      if (flipped) {
-	        this.refs.backButten.getDOMNode().focus();
-	      }
-	    }
-	  }, {
-	    key: 'handleKeyDown',
-	    value: function handleKeyDown(e) {
-	      if (this.state.isFlipped && e.keyCode === 27) {
-	        this.showFront();
-	      }
 	    }
 	  }, {
 	    key: 'getScripts',
@@ -62370,10 +62421,32 @@
 	      });
 	    }
 	  }, {
+	    key: 'getZip',
+	    value: function getZip() {
+	      _jquery2.default.ajax({
+	        type: 'POST',
+	        url: '/api/user/zip',
+	        headers: {
+	          "content-type": "application/json"
+	        },
+	        data: JSON.stringify({ "username": window.localStorage.username }),
+	        success: function (zipcode) {
+	          console.log("USER zipcode", zipcode);
+	          this.setState({
+	            zipcode: zipcode
+	          });
+	        }.bind(this),
+	        error: function error(err) {
+	          console.log('Could not retrieve user zipcode', err);
+	        }
+	      });
+	    }
+	  }, {
 	    key: 'componentDidMount',
 	    value: function componentDidMount() {
 	      this.getScripts();
 	      this.getDocs();
+	      this.getZip();
 	    }
 	  }, {
 	    key: 'render',
@@ -62427,8 +62500,7 @@
 	            )
 	          ),
 	          _react2.default.createElement(_map2.default, {
-	            zipcode: this.state.inputZip
-	          })
+	            zipcode: this.state.inputZip })
 	        ),
 	        _react2.default.createElement(
 	          _reactBootstrap.Modal,
@@ -62442,7 +62514,9 @@
 	              _react2.default.createElement('i', { className: 'fa fa-times-circle', 'aria-hidden': 'true' })
 	            )
 	          ),
-	          _react2.default.createElement(_symptomEntry2.default, { closeFn: this.closeModalSymptom })
+	          _react2.default.createElement(_symptomEntry2.default, {
+	            zipcode: this.state.zipcode,
+	            closeFn: this.closeModalSymptom })
 	        ),
 	        _react2.default.createElement(
 	          _reactBootstrap.Modal,
@@ -62710,22 +62784,6 @@
 	
 	  return Profile;
 	}(_react2.default.Component);
-	// <FlipCard 
-	//   disabled={true}
-	//   flipped={this.state.isFlipped}
-	//   onFlip={this.handleOnFlip}
-	//   onKeyDown={this.handleKeyDown}
-	// >
-	//   <div>
-	//     <div>Front</div>
-	//     <button type='button' onClick={this.showBack}>Show me the money</button>
-	//   </div>
-	//   <div>
-	//     <div>Back</div>
-	//     <button type='button' ref='backButton' onClick={this.showFront}>No mo money</button>
-	//   </div>
-	// </FlipCard>
-	
 	
 	exports.default = Profile;
 
@@ -88689,6 +88747,500 @@
 
 /***/ },
 /* 789 */
+/*!***********************************!*\
+  !*** ./client/app/editScript.jsx ***!
+  \***********************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+	
+	var _react = __webpack_require__(/*! react */ 1);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _reactInputCalendar = __webpack_require__(/*! react-input-calendar */ 532);
+	
+	var _reactInputCalendar2 = _interopRequireDefault(_reactInputCalendar);
+	
+	var _jquery = __webpack_require__(/*! jquery */ 240);
+	
+	var _jquery2 = _interopRequireDefault(_jquery);
+	
+	var _reactDom = __webpack_require__(/*! react-dom */ 35);
+	
+	var _reactDom2 = _interopRequireDefault(_reactDom);
+	
+	var _reactDropDown = __webpack_require__(/*! react-drop-down */ 652);
+	
+	var _reactDropDown2 = _interopRequireDefault(_reactDropDown);
+	
+	var _reactRouter = __webpack_require__(/*! react-router */ 175);
+	
+	var _navigate = __webpack_require__(/*! ./navigate.jsx */ 243);
+	
+	var _navigate2 = _interopRequireDefault(_navigate);
+	
+	var _reactKronos = __webpack_require__(/*! react-kronos */ 653);
+	
+	var _reactKronos2 = _interopRequireDefault(_reactKronos);
+	
+	var _moment = __webpack_require__(/*! moment */ 541);
+	
+	var _moment2 = _interopRequireDefault(_moment);
+	
+	var _reactModal = __webpack_require__(/*! react-modal */ 496);
+	
+	var _reactModal2 = _interopRequireDefault(_reactModal);
+	
+	var _reactBootstrap = __webpack_require__(/*! react-bootstrap */ 244);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+	
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+	
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+	
+	var EditScriptRemindModal = function (_React$Component) {
+	  _inherits(EditScriptRemindModal, _React$Component);
+	
+	  function EditScriptRemindModal(props) {
+	    _classCallCheck(this, EditScriptRemindModal);
+	
+	    var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(EditScriptRemindModal).call(this, props));
+	
+	    _this.state = {
+	      "currentDrug": _this.props.data.name || "None",
+	      "dosageAmt": _this.props.data.dosage ? _this.props.data.dosage.split(" ")[0] : 0,
+	      "dosageMeasure": _this.props.data.dosage ? _this.props.data.dosage.split(" ")[1] : 'mg',
+	      "date": _this.props.data.refill || date,
+	      "reminderTime1": _this.props.data.reminderTime[0] !== null ? _this.props.data.reminderTime[0] : null,
+	      "reminderTime2": _this.props.data.reminderTime[1] !== null ? _this.props.data.reminderTime[1] : null,
+	      "reminderTime3": _this.props.data.reminderTime[2] !== null ? _this.props.data.reminderTime[2] : null,
+	      "scheduleFreq": _this.props.data.frequency ? _this.props.data.frequency.slice(0, 2) : "1x",
+	      "scheduleDayWeek": _this.props.data.frequency ? _this.props.data.frequency.split(" ")[_this.props.data.frequency.length - 1] : "day",
+	      "invalidName": false,
+	      "invalidReminderTime": false,
+	      "hasTwo": false,
+	      "hasThree": false
+	    };
+	    var date = new Date();
+	    _this.updateDrugName = _this.updateDrugName.bind(_this);
+	    _this.submitForm = _this.submitForm.bind(_this);
+	    _this.handleFrequency = _this.handleFrequency.bind(_this);
+	    _this.handleDoseAmount = _this.handleDoseAmount.bind(_this);
+	    _this.handleRefillDate = _this.handleRefillDate.bind(_this);
+	    _this.handleDoseMeasurement = _this.handleDoseMeasurement.bind(_this);
+	    _this.handleScheduleDayWeek = _this.handleScheduleDayWeek.bind(_this);
+	    _this.handleReminderTime1 = _this.handleReminderTime1.bind(_this);
+	    _this.handleReminderTime2 = _this.handleReminderTime2.bind(_this);
+	    _this.handleReminderTime3 = _this.handleReminderTime3.bind(_this);
+	    // this.clearData = this.clearData.bind(this);
+	
+	    return _this;
+	  }
+	
+	  _createClass(EditScriptRemindModal, [{
+	    key: 'componentDidMount',
+	    value: function componentDidMount() {
+	      this.changeFrequency();
+	    }
+	    //
+	
+	  }, {
+	    key: 'changeFrequency',
+	    value: function changeFrequency() {
+	      if (this.props.data.reminderTime[1] !== null && !this.props.data.reminderTime[2]) {
+	        this.setState({
+	          hasTwo: true
+	        });
+	      } else if (this.props.data.reminderTime[2] !== null) {
+	        this.setState({
+	          hasTwo: true,
+	          hasThree: true
+	        });
+	      } else if (this.props.data.reminderTime[0] !== null) {
+	        this.setState({
+	          hasTwo: true
+	        });
+	      }
+	
+	      // this.setState({
+	      //   scheduleFreq: freq
+	      // });
+	    }
+	    // clearData(){
+	    //   this.setState({
+	    //     "currentDrug": "None",
+	    //     "dosageAmt": 0,
+	    //     "dosageMeasure": 'mg',
+	    //     "date": date,
+	    //     "reminderTime1": null,
+	    //     "reminderTime2": null,
+	    //     "reminderTime3": null,
+	    //     "scheduleFreq": "1x",
+	    //     "scheduleDayWeek": "day",
+	    //     "invalidName": false,
+	    //     "invalidReminderTime": false,
+	    //     "hasTwo": false,
+	    //     "hasThree": false
+	    //   })
+	    // }
+	
+	
+	  }, {
+	    key: 'updateDrugName',
+	    value: function updateDrugName(event) {
+	      this.setState({
+	        currentDrug: event.target.value,
+	        invalidName: true
+	      });
+	    }
+	  }, {
+	    key: 'handleRefillDate',
+	    value: function handleRefillDate(date) {
+	      console.log("actual date format", date);
+	      console.log("selected date", date);
+	      this.setState({
+	        "date": date
+	      });
+	    }
+	  }, {
+	    key: 'handleScheduleDayWeek',
+	    value: function handleScheduleDayWeek(dayWeek) {
+	      this.setState({
+	        "scheduleDayWeek": dayWeek
+	      });
+	    }
+	  }, {
+	    key: 'handleDoseMeasurement',
+	    value: function handleDoseMeasurement(measure) {
+	      this.setState({
+	        dosageMeasure: measure.target.value
+	      });
+	    }
+	  }, {
+	    key: 'handleDoseAmount',
+	    value: function handleDoseAmount(amount) {
+	      this.setState({
+	        dosageAmt: amount.target.value
+	      });
+	    }
+	  }, {
+	    key: 'handleFrequency',
+	    value: function handleFrequency(e) {
+	      console.log("current state", this.state);
+	      var frequency = e ? e.target.value : this.props.data.frequency;
+	      // console.log("handleFreq called with", frequency.target.value);
+	      console.log('handleFreq prop data', this.props.data.reminderTime);
+	      if (e.target.value === '2x') {
+	        this.setState({
+	          hasTwo: true,
+	          hasThree: false
+	        });
+	      }
+	      if (e.target.value === '3x') {
+	        this.setState({
+	          hasTwo: true,
+	          hasThree: true
+	        });
+	      }
+	      if (e.target.value === '1x') {
+	        this.setState({
+	          hasTwo: false,
+	          hasThree: false
+	        });
+	      }
+	      this.setState({
+	        scheduleFreq: frequency
+	      });
+	    }
+	  }, {
+	    key: 'handleReminderTime1',
+	    value: function handleReminderTime1(time) {
+	      console.log(' this is the format of time !!!!!!', time);
+	      this.setState({
+	        reminderTime1: new Date((0, _moment2.default)(time).format()).toISOString()
+	      });
+	    }
+	  }, {
+	    key: 'handleReminderTime2',
+	    value: function handleReminderTime2(time) {
+	      this.setState({
+	        reminderTime2: new Date((0, _moment2.default)(time).format()).toISOString()
+	      });
+	    }
+	  }, {
+	    key: 'handleReminderTime3',
+	    value: function handleReminderTime3(time) {
+	      this.setState({
+	        reminderTime3: new Date((0, _moment2.default)(time).format()).toISOString()
+	      });
+	    }
+	  }, {
+	    key: 'submitForm',
+	    value: function submitForm() {
+	
+	      if (!this.state.invalidName && !this.state.invalidReminderTime) {
+	        alert("Please enter a prescription name and reminder time");
+	      } else if (!this.state.invalidName) {
+	        alert("Please enter a prescription name");
+	      }
+	      // else if(!this.state.invalidReminderTime){
+	      //   alert("Please enter a reminder time");
+	      // }
+	      else {
+	          var script = {
+	            "name": this.state.currentDrug,
+	            "dosage": this.state.dosageAmt + ' ' + this.state.dosageMeasure,
+	            "refill": new Date((0, _moment2.default)(this.state.date).format()).toISOString(),
+	            "frequency": this.state.scheduleFreq + ' per ' + this.state.scheduleDayWeek,
+	            "reminderTime": [this.state.reminderTime1, this.state.reminderTime2, this.state.reminderTime3],
+	            "username": window.localStorage.username
+	          };
+	          console.log("submitForm called for: ", script);
+	          // console.log("deleteReminder called!!");
+	          var id = this.props.data._id;
+	          console.log("reminderID", id);
+	          _jquery2.default.ajax({
+	            type: "POST",
+	            url: "/api/reminder/delete",
+	            dataType: 'json',
+	            headers: {
+	              "Content-Type": "application/json"
+	            },
+	            data: JSON.stringify({ "reminderID": id }),
+	            success: _jquery2.default.ajax({
+	              type: 'POST',
+	              url: '/api/reminder/add',
+	              dataType: 'json',
+	              headers: {
+	                'Content-Type': 'application/json'
+	              },
+	              data: JSON.stringify(script),
+	              success: this.props.closeFn(),
+	              error: this.props.closeFn()
+	            }),
+	            error: console.log('error')
+	          });
+	        }
+	    }
+	  }, {
+	    key: 'render',
+	    value: function render() {
+	      return _react2.default.createElement(
+	        'div',
+	        null,
+	        _react2.default.createElement(
+	          'h1',
+	          null,
+	          ' Edit Prescription Reminder '
+	        ),
+	        _react2.default.createElement(
+	          'div',
+	          null,
+	          _react2.default.createElement(
+	            'div',
+	            { className: 'script-form-frame' },
+	            _react2.default.createElement(
+	              'h3',
+	              null,
+	              ' Current Drug: ',
+	              this.state.currentDrug,
+	              ' '
+	            ),
+	            _react2.default.createElement(
+	              'div',
+	              { className: 'script-form-fields' },
+	              _react2.default.createElement('input', {
+	                onChange: this.updateDrugName,
+	                defaultValue: this.state.currentDrug
+	                // placeholder='Name'
+	              }),
+	              _react2.default.createElement(
+	                'h8',
+	                { className: 'required' },
+	                ' (required) '
+	              )
+	            )
+	          ),
+	          _react2.default.createElement(
+	            'div',
+	            { className: 'script-form-frame' },
+	            _react2.default.createElement(
+	              'h3',
+	              null,
+	              'Dosage'
+	            ),
+	            _react2.default.createElement(
+	              'div',
+	              { className: 'script-form-fields' },
+	              _react2.default.createElement('input', {
+	                className: 'dosageInput',
+	                onChange: this.handleDoseAmount,
+	                defaultValue: this.state.dosageAmt
+	                // placeholder='Dosage (e.g. if "Take 1 tablet", type "1")'
+	              }),
+	              _react2.default.createElement(
+	                'select',
+	                { className: 'dropdown-replacement', value: this.state.dosageMeasure, onChange: this.handleDoseMeasurement },
+	                _react2.default.createElement(
+	                  'option',
+	                  null,
+	                  'mg'
+	                ),
+	                _react2.default.createElement(
+	                  'option',
+	                  null,
+	                  'mL'
+	                ),
+	                _react2.default.createElement(
+	                  'option',
+	                  null,
+	                  'tablet'
+	                )
+	              )
+	            )
+	          ),
+	          _react2.default.createElement(
+	            'div',
+	            { className: 'script-form-frame' },
+	            _react2.default.createElement(
+	              'h3',
+	              null,
+	              ' Refill Date'
+	            ),
+	            _react2.default.createElement(
+	              'div',
+	              { className: 'script-form-fields' },
+	              _react2.default.createElement(_reactInputCalendar2.default, { format: 'MM/DD/YYYY', date: this.state.date, onChange: this.handleRefillDate }),
+	              _react2.default.createElement('span', { className: this.state.date ? "" : "hidden" })
+	            )
+	          ),
+	          _react2.default.createElement(
+	            'div',
+	            { className: 'script-form-frame' },
+	            _react2.default.createElement(
+	              'h3',
+	              null,
+	              'Frequency'
+	            ),
+	            _react2.default.createElement(
+	              'div',
+	              { className: 'script-form-fields' },
+	              _react2.default.createElement(
+	                'select',
+	                { className: 'dropdown-replacement', value: this.state.scheduleFreq, onChange: this.handleFrequency },
+	                _react2.default.createElement(
+	                  'option',
+	                  null,
+	                  '1x'
+	                ),
+	                _react2.default.createElement(
+	                  'option',
+	                  null,
+	                  '2x'
+	                ),
+	                _react2.default.createElement(
+	                  'option',
+	                  null,
+	                  '3x'
+	                )
+	              ),
+	              'per',
+	              _react2.default.createElement(
+	                'select',
+	                { className: 'dropdown-replacement', value: this.state.scheduleDayWeek, onChange: this.handleScheduleDayWeek },
+	                _react2.default.createElement(
+	                  'option',
+	                  null,
+	                  'day'
+	                ),
+	                _react2.default.createElement(
+	                  'option',
+	                  null,
+	                  'week'
+	                )
+	              )
+	            )
+	          ),
+	          _react2.default.createElement(
+	            'div',
+	            { className: 'script-form-frame' },
+	            _react2.default.createElement(
+	              'div',
+	              { className: 'reminder' },
+	              _react2.default.createElement(
+	                'h3',
+	                null,
+	                ' Reminder Time 1'
+	              ),
+	              _react2.default.createElement(_reactKronos2.default, { time: this.state.reminderTime1, defaultValue: this.state.reminderTime1, placeholder: "Click to select a time", onChangeDateTime: this.handleReminderTime1 }),
+	              _react2.default.createElement(
+	                'h8',
+	                { className: 'required' },
+	                ' (required) '
+	              )
+	            ),
+	            _react2.default.createElement(
+	              'div',
+	              { className: this.state.hasTwo ? 'reminder' : 'hidden' },
+	              _react2.default.createElement(
+	                'h3',
+	                null,
+	                ' Reminder Time 2'
+	              ),
+	              _react2.default.createElement(_reactKronos2.default, { time: this.state.reminderTime2, defaultValue: this.state.reminderTime2, placeholder: "Click to select a time", onChangeDateTime: this.handleReminderTime2 }),
+	              _react2.default.createElement(
+	                'h8',
+	                { className: 'required' },
+	                ' (required) '
+	              )
+	            ),
+	            _react2.default.createElement(
+	              'div',
+	              { className: this.state.hasThree ? 'reminder' : 'hidden' },
+	              _react2.default.createElement(
+	                'h3',
+	                null,
+	                ' Reminder Time 3'
+	              ),
+	              _react2.default.createElement(_reactKronos2.default, { time: this.state.reminderTime3, defaultValue: this.state.reminderTime3, placeholder: "Click to select a time", onChangeDateTime: this.handleReminderTime3 }),
+	              _react2.default.createElement(
+	                'h8',
+	                { className: 'required' },
+	                ' (required) '
+	              )
+	            ),
+	            _react2.default.createElement(
+	              'div',
+	              { className: 'clear' },
+	              _react2.default.createElement(
+	                _reactBootstrap.Button,
+	                { bsStyle: 'info', onClick: this.submitForm },
+	                ' Remind Me '
+	              )
+	            )
+	          )
+	        )
+	      );
+	    }
+	  }]);
+	
+	  return EditScriptRemindModal;
+	}(_react2.default.Component);
+	
+	exports.default = EditScriptRemindModal;
+
+/***/ },
+/* 790 */
 /*!****************************!*\
   !*** ./client/app/map.jsx ***!
   \****************************/
@@ -88758,7 +89310,7 @@
 	exports.default = Map;
 
 /***/ },
-/* 790 */
+/* 791 */
 /*!****************************!*\
   !*** ./~/lodash/lodash.js ***!
   \****************************/
@@ -105375,7 +105927,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }()), __webpack_require__(/*! ./../webpack/buildin/module.js */ 542)(module)))
 
 /***/ },
-/* 791 */
+/* 792 */
 /*!**************************************!*\
   !*** ./~/react-flipcard/lib/main.js ***!
   \**************************************/
@@ -105383,10 +105935,10 @@
 
 	'use strict';
 	
-	module.exports = __webpack_require__(/*! ./components/FlipCard */ 792);
+	module.exports = __webpack_require__(/*! ./components/FlipCard */ 793);
 
 /***/ },
-/* 792 */
+/* 793 */
 /*!*****************************************************!*\
   !*** ./~/react-flipcard/lib/components/FlipCard.js ***!
   \*****************************************************/
@@ -105410,11 +105962,11 @@
 	
 	var _classnames2 = _interopRequireDefault(_classnames);
 	
-	var _helpersContains = __webpack_require__(/*! ../helpers/contains */ 793);
+	var _helpersContains = __webpack_require__(/*! ../helpers/contains */ 794);
 	
 	var _helpersContains2 = _interopRequireDefault(_helpersContains);
 	
-	var _helpersInjectStyle = __webpack_require__(/*! ../helpers/injectStyle */ 794);
+	var _helpersInjectStyle = __webpack_require__(/*! ../helpers/injectStyle */ 795);
 	
 	var _helpersInjectStyle2 = _interopRequireDefault(_helpersInjectStyle);
 	
@@ -105597,7 +106149,7 @@
 	module.exports = exports['default'];
 
 /***/ },
-/* 793 */
+/* 794 */
 /*!**************************************************!*\
   !*** ./~/react-flipcard/lib/helpers/contains.js ***!
   \**************************************************/
@@ -105617,7 +106169,7 @@
 	};
 
 /***/ },
-/* 794 */
+/* 795 */
 /*!*****************************************************!*\
   !*** ./~/react-flipcard/lib/helpers/injectStyle.js ***!
   \*****************************************************/
@@ -105642,500 +106194,6 @@
 	};
 	
 	module.exports = exports['default'];
-
-/***/ },
-/* 795 */
-/*!***********************************!*\
-  !*** ./client/app/editScript.jsx ***!
-  \***********************************/
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	
-	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-	
-	var _react = __webpack_require__(/*! react */ 1);
-	
-	var _react2 = _interopRequireDefault(_react);
-	
-	var _reactInputCalendar = __webpack_require__(/*! react-input-calendar */ 532);
-	
-	var _reactInputCalendar2 = _interopRequireDefault(_reactInputCalendar);
-	
-	var _jquery = __webpack_require__(/*! jquery */ 240);
-	
-	var _jquery2 = _interopRequireDefault(_jquery);
-	
-	var _reactDom = __webpack_require__(/*! react-dom */ 35);
-	
-	var _reactDom2 = _interopRequireDefault(_reactDom);
-	
-	var _reactDropDown = __webpack_require__(/*! react-drop-down */ 652);
-	
-	var _reactDropDown2 = _interopRequireDefault(_reactDropDown);
-	
-	var _reactRouter = __webpack_require__(/*! react-router */ 175);
-	
-	var _navigate = __webpack_require__(/*! ./navigate.jsx */ 243);
-	
-	var _navigate2 = _interopRequireDefault(_navigate);
-	
-	var _reactKronos = __webpack_require__(/*! react-kronos */ 653);
-	
-	var _reactKronos2 = _interopRequireDefault(_reactKronos);
-	
-	var _moment = __webpack_require__(/*! moment */ 541);
-	
-	var _moment2 = _interopRequireDefault(_moment);
-	
-	var _reactModal = __webpack_require__(/*! react-modal */ 496);
-	
-	var _reactModal2 = _interopRequireDefault(_reactModal);
-	
-	var _reactBootstrap = __webpack_require__(/*! react-bootstrap */ 244);
-	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-	
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-	
-	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-	
-	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-	
-	var EditScriptRemindModal = function (_React$Component) {
-	  _inherits(EditScriptRemindModal, _React$Component);
-	
-	  function EditScriptRemindModal(props) {
-	    _classCallCheck(this, EditScriptRemindModal);
-	
-	    var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(EditScriptRemindModal).call(this, props));
-	
-	    _this.state = {
-	      "currentDrug": _this.props.data.name || "None",
-	      "dosageAmt": _this.props.data.dosage ? _this.props.data.dosage.split(" ")[0] : 0,
-	      "dosageMeasure": _this.props.data.dosage ? _this.props.data.dosage.split(" ")[1] : 'mg',
-	      "date": _this.props.data.refill || date,
-	      "reminderTime1": _this.props.data.reminderTime[0] !== null ? _this.props.data.reminderTime[0] : null,
-	      "reminderTime2": _this.props.data.reminderTime[1] !== null ? _this.props.data.reminderTime[1] : null,
-	      "reminderTime3": _this.props.data.reminderTime[2] !== null ? _this.props.data.reminderTime[2] : null,
-	      "scheduleFreq": _this.props.data.frequency ? _this.props.data.frequency.slice(0, 2) : "1x",
-	      "scheduleDayWeek": _this.props.data.frequency ? _this.props.data.frequency.split(" ")[_this.props.data.frequency.length - 1] : "day",
-	      "invalidName": false,
-	      "invalidReminderTime": false,
-	      "hasTwo": false,
-	      "hasThree": false
-	    };
-	    var date = new Date();
-	    _this.updateDrugName = _this.updateDrugName.bind(_this);
-	    _this.submitForm = _this.submitForm.bind(_this);
-	    _this.handleFrequency = _this.handleFrequency.bind(_this);
-	    _this.handleDoseAmount = _this.handleDoseAmount.bind(_this);
-	    _this.handleRefillDate = _this.handleRefillDate.bind(_this);
-	    _this.handleDoseMeasurement = _this.handleDoseMeasurement.bind(_this);
-	    _this.handleScheduleDayWeek = _this.handleScheduleDayWeek.bind(_this);
-	    _this.handleReminderTime1 = _this.handleReminderTime1.bind(_this);
-	    _this.handleReminderTime2 = _this.handleReminderTime2.bind(_this);
-	    _this.handleReminderTime3 = _this.handleReminderTime3.bind(_this);
-	    // this.clearData = this.clearData.bind(this);
-	
-	    return _this;
-	  }
-	
-	  _createClass(EditScriptRemindModal, [{
-	    key: 'componentDidMount',
-	    value: function componentDidMount() {
-	      this.changeFrequency();
-	    }
-	    //
-	
-	  }, {
-	    key: 'changeFrequency',
-	    value: function changeFrequency() {
-	      if (this.props.data.reminderTime[1] !== null && !this.props.data.reminderTime[2]) {
-	        this.setState({
-	          hasTwo: true
-	        });
-	      } else if (this.props.data.reminderTime[2] !== null) {
-	        this.setState({
-	          hasTwo: true,
-	          hasThree: true
-	        });
-	      } else if (this.props.data.reminderTime[0] !== null) {
-	        this.setState({
-	          hasTwo: true
-	        });
-	      }
-	
-	      // this.setState({
-	      //   scheduleFreq: freq
-	      // });
-	    }
-	    // clearData(){
-	    //   this.setState({
-	    //     "currentDrug": "None",
-	    //     "dosageAmt": 0,
-	    //     "dosageMeasure": 'mg',
-	    //     "date": date,
-	    //     "reminderTime1": null,
-	    //     "reminderTime2": null,
-	    //     "reminderTime3": null,
-	    //     "scheduleFreq": "1x",
-	    //     "scheduleDayWeek": "day",
-	    //     "invalidName": false,
-	    //     "invalidReminderTime": false,
-	    //     "hasTwo": false,
-	    //     "hasThree": false
-	    //   })
-	    // }
-	
-	
-	  }, {
-	    key: 'updateDrugName',
-	    value: function updateDrugName(event) {
-	      this.setState({
-	        currentDrug: event.target.value,
-	        invalidName: true
-	      });
-	    }
-	  }, {
-	    key: 'handleRefillDate',
-	    value: function handleRefillDate(date) {
-	      console.log("actual date format", date);
-	      console.log("selected date", date);
-	      this.setState({
-	        "date": date
-	      });
-	    }
-	  }, {
-	    key: 'handleScheduleDayWeek',
-	    value: function handleScheduleDayWeek(dayWeek) {
-	      this.setState({
-	        "scheduleDayWeek": dayWeek
-	      });
-	    }
-	  }, {
-	    key: 'handleDoseMeasurement',
-	    value: function handleDoseMeasurement(measure) {
-	      this.setState({
-	        dosageMeasure: measure.target.value
-	      });
-	    }
-	  }, {
-	    key: 'handleDoseAmount',
-	    value: function handleDoseAmount(amount) {
-	      this.setState({
-	        dosageAmt: amount.target.value
-	      });
-	    }
-	  }, {
-	    key: 'handleFrequency',
-	    value: function handleFrequency(e) {
-	      console.log("current state", this.state);
-	      var frequency = e ? e.target.value : this.props.data.frequency;
-	      // console.log("handleFreq called with", frequency.target.value);
-	      console.log('handleFreq prop data', this.props.data.reminderTime);
-	      if (e.target.value === '2x') {
-	        this.setState({
-	          hasTwo: true,
-	          hasThree: false
-	        });
-	      }
-	      if (e.target.value === '3x') {
-	        this.setState({
-	          hasTwo: true,
-	          hasThree: true
-	        });
-	      }
-	      if (e.target.value === '1x') {
-	        this.setState({
-	          hasTwo: false,
-	          hasThree: false
-	        });
-	      }
-	      this.setState({
-	        scheduleFreq: frequency
-	      });
-	    }
-	  }, {
-	    key: 'handleReminderTime1',
-	    value: function handleReminderTime1(time) {
-	      console.log(' this is the format of time !!!!!!', time);
-	      this.setState({
-	        reminderTime1: new Date((0, _moment2.default)(time).format()).toISOString()
-	      });
-	    }
-	  }, {
-	    key: 'handleReminderTime2',
-	    value: function handleReminderTime2(time) {
-	      this.setState({
-	        reminderTime2: new Date((0, _moment2.default)(time).format()).toISOString()
-	      });
-	    }
-	  }, {
-	    key: 'handleReminderTime3',
-	    value: function handleReminderTime3(time) {
-	      this.setState({
-	        reminderTime3: new Date((0, _moment2.default)(time).format()).toISOString()
-	      });
-	    }
-	  }, {
-	    key: 'submitForm',
-	    value: function submitForm() {
-	
-	      if (!this.state.invalidName && !this.state.invalidReminderTime) {
-	        alert("Please enter a prescription name and reminder time");
-	      } else if (!this.state.invalidName) {
-	        alert("Please enter a prescription name");
-	      }
-	      // else if(!this.state.invalidReminderTime){
-	      //   alert("Please enter a reminder time");
-	      // }
-	      else {
-	          var script = {
-	            "name": this.state.currentDrug,
-	            "dosage": this.state.dosageAmt + ' ' + this.state.dosageMeasure,
-	            "refill": new Date((0, _moment2.default)(this.state.date).format()).toISOString(),
-	            "frequency": this.state.scheduleFreq + ' per ' + this.state.scheduleDayWeek,
-	            "reminderTime": [this.state.reminderTime1, this.state.reminderTime2, this.state.reminderTime3],
-	            "username": window.localStorage.username
-	          };
-	          console.log("submitForm called for: ", script);
-	          // console.log("deleteReminder called!!");
-	          var id = this.props.data._id;
-	          console.log("reminderID", id);
-	          _jquery2.default.ajax({
-	            type: "POST",
-	            url: "/api/reminder/delete",
-	            dataType: 'json',
-	            headers: {
-	              "Content-Type": "application/json"
-	            },
-	            data: JSON.stringify({ "reminderID": id }),
-	            success: _jquery2.default.ajax({
-	              type: 'POST',
-	              url: '/api/reminder/add',
-	              dataType: 'json',
-	              headers: {
-	                'Content-Type': 'application/json'
-	              },
-	              data: JSON.stringify(script),
-	              success: this.props.closeFn(),
-	              error: this.props.closeFn()
-	            }),
-	            error: console.log('error')
-	          });
-	        }
-	    }
-	  }, {
-	    key: 'render',
-	    value: function render() {
-	      return _react2.default.createElement(
-	        'div',
-	        null,
-	        _react2.default.createElement(
-	          'h1',
-	          null,
-	          ' Edit Prescription Reminder '
-	        ),
-	        _react2.default.createElement(
-	          'div',
-	          null,
-	          _react2.default.createElement(
-	            'div',
-	            { className: 'script-form-frame' },
-	            _react2.default.createElement(
-	              'h3',
-	              null,
-	              ' Current Drug: ',
-	              this.state.currentDrug,
-	              ' '
-	            ),
-	            _react2.default.createElement(
-	              'div',
-	              { className: 'script-form-fields' },
-	              _react2.default.createElement('input', {
-	                onChange: this.updateDrugName,
-	                defaultValue: this.state.currentDrug
-	                // placeholder='Name'
-	              }),
-	              _react2.default.createElement(
-	                'h8',
-	                { className: 'required' },
-	                ' (required) '
-	              )
-	            )
-	          ),
-	          _react2.default.createElement(
-	            'div',
-	            { className: 'script-form-frame' },
-	            _react2.default.createElement(
-	              'h3',
-	              null,
-	              'Dosage'
-	            ),
-	            _react2.default.createElement(
-	              'div',
-	              { className: 'script-form-fields' },
-	              _react2.default.createElement('input', {
-	                className: 'dosageInput',
-	                onChange: this.handleDoseAmount,
-	                defaultValue: this.state.dosageAmt
-	                // placeholder='Dosage (e.g. if "Take 1 tablet", type "1")'
-	              }),
-	              _react2.default.createElement(
-	                'select',
-	                { className: 'dropdown-replacement', value: this.state.dosageMeasure, onChange: this.handleDoseMeasurement },
-	                _react2.default.createElement(
-	                  'option',
-	                  null,
-	                  'mg'
-	                ),
-	                _react2.default.createElement(
-	                  'option',
-	                  null,
-	                  'mL'
-	                ),
-	                _react2.default.createElement(
-	                  'option',
-	                  null,
-	                  'tablet'
-	                )
-	              )
-	            )
-	          ),
-	          _react2.default.createElement(
-	            'div',
-	            { className: 'script-form-frame' },
-	            _react2.default.createElement(
-	              'h3',
-	              null,
-	              ' Refill Date'
-	            ),
-	            _react2.default.createElement(
-	              'div',
-	              { className: 'script-form-fields' },
-	              _react2.default.createElement(_reactInputCalendar2.default, { format: 'MM/DD/YYYY', date: this.state.date, onChange: this.handleRefillDate }),
-	              _react2.default.createElement('span', { className: this.state.date ? "" : "hidden" })
-	            )
-	          ),
-	          _react2.default.createElement(
-	            'div',
-	            { className: 'script-form-frame' },
-	            _react2.default.createElement(
-	              'h3',
-	              null,
-	              'Frequency'
-	            ),
-	            _react2.default.createElement(
-	              'div',
-	              { className: 'script-form-fields' },
-	              _react2.default.createElement(
-	                'select',
-	                { className: 'dropdown-replacement', value: this.state.scheduleFreq, onChange: this.handleFrequency },
-	                _react2.default.createElement(
-	                  'option',
-	                  null,
-	                  '1x'
-	                ),
-	                _react2.default.createElement(
-	                  'option',
-	                  null,
-	                  '2x'
-	                ),
-	                _react2.default.createElement(
-	                  'option',
-	                  null,
-	                  '3x'
-	                )
-	              ),
-	              'per',
-	              _react2.default.createElement(
-	                'select',
-	                { className: 'dropdown-replacement', value: this.state.scheduleDayWeek, onChange: this.handleScheduleDayWeek },
-	                _react2.default.createElement(
-	                  'option',
-	                  null,
-	                  'day'
-	                ),
-	                _react2.default.createElement(
-	                  'option',
-	                  null,
-	                  'week'
-	                )
-	              )
-	            )
-	          ),
-	          _react2.default.createElement(
-	            'div',
-	            { className: 'script-form-frame' },
-	            _react2.default.createElement(
-	              'div',
-	              { className: 'reminder' },
-	              _react2.default.createElement(
-	                'h3',
-	                null,
-	                ' Reminder Time 1'
-	              ),
-	              _react2.default.createElement(_reactKronos2.default, { time: this.state.reminderTime1, defaultValue: this.state.reminderTime1, placeholder: "Click to select a time", onChangeDateTime: this.handleReminderTime1 }),
-	              _react2.default.createElement(
-	                'h8',
-	                { className: 'required' },
-	                ' (required) '
-	              )
-	            ),
-	            _react2.default.createElement(
-	              'div',
-	              { className: this.state.hasTwo ? 'reminder' : 'hidden' },
-	              _react2.default.createElement(
-	                'h3',
-	                null,
-	                ' Reminder Time 2'
-	              ),
-	              _react2.default.createElement(_reactKronos2.default, { time: this.state.reminderTime2, defaultValue: this.state.reminderTime2, placeholder: "Click to select a time", onChangeDateTime: this.handleReminderTime2 }),
-	              _react2.default.createElement(
-	                'h8',
-	                { className: 'required' },
-	                ' (required) '
-	              )
-	            ),
-	            _react2.default.createElement(
-	              'div',
-	              { className: this.state.hasThree ? 'reminder' : 'hidden' },
-	              _react2.default.createElement(
-	                'h3',
-	                null,
-	                ' Reminder Time 3'
-	              ),
-	              _react2.default.createElement(_reactKronos2.default, { time: this.state.reminderTime3, defaultValue: this.state.reminderTime3, placeholder: "Click to select a time", onChangeDateTime: this.handleReminderTime3 }),
-	              _react2.default.createElement(
-	                'h8',
-	                { className: 'required' },
-	                ' (required) '
-	              )
-	            ),
-	            _react2.default.createElement(
-	              'div',
-	              { className: 'clear' },
-	              _react2.default.createElement(
-	                _reactBootstrap.Button,
-	                { bsStyle: 'info', onClick: this.submitForm },
-	                ' Remind Me '
-	              )
-	            )
-	          )
-	        )
-	      );
-	    }
-	  }]);
-	
-	  return EditScriptRemindModal;
-	}(_react2.default.Component);
-	
-	exports.default = EditScriptRemindModal;
 
 /***/ },
 /* 796 */

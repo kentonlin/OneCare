@@ -125,6 +125,7 @@ export default class SymptomEntryView extends Component {
       selectedSymptoms: [],
       recs: [],
       modalIsOpen: false,
+      // zipcode: this.props.zipcode,
       brainState: {}
     };
     this.handleDeselect = this.handleDeselect.bind(this);
@@ -179,7 +180,7 @@ export default class SymptomEntryView extends Component {
 
   handleRecData(recData) {
     console.log(recData)
-    this.setState( {recs: recData})
+    this.setState({recs: recData});
     this.openModal();
   }
 
@@ -241,7 +242,7 @@ export default class SymptomEntryView extends Component {
           <Button bsStyle="success"  bsSize="sm" onClick={this.submitSymptoms}>Submit!</Button>
         </div>
         <div className={"brain-container " + this.state.modalIsOpen ? "" : "hidden"}> 
-          <SymptomEntryModal brainState={this.state.brainState} symptoms={this.state.selectedSymptoms} recommendations={this.state.recs} />
+          <SymptomEntryModal closeFn={this.props.closeFn} zipcode={this.props.zipcode} brainState={this.state.brainState} symptoms={this.state.selectedSymptoms} recommendations={this.state.recs} />
         </div>
       </div>
     );
