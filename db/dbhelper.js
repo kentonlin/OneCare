@@ -226,17 +226,17 @@ var dbFunc = {
 	  }
 	},
 
-	getZip: function(username, res) {
-		if (!username.username) {
+	getZip: function(user, res) {
+		if (!user.username) {
 			console.log('no usern@me found');
 		}
 		else {
-			Model.user.findOne({'username': username.username}, function(err, user) {
+			Model.user.findOne({'username': user.username}, function(err, user) {
 				if (err) {
 					console.error(err);
 				}
 				else {
-					res.status(200).send();
+					res.status(200).send(user.zipcode);
 				}
 			})
 		}

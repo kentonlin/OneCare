@@ -6,6 +6,7 @@ import DoctorView from './doctorView.jsx';
 import BrainView from './brainView.jsx';
 import DRXView from './DRXView.jsx';
 import { Link } from 'react-router';
+import { Button } from 'react-bootstrap';
 
 export default class SymptomEntryModal extends React.Component {
   constructor(props) {
@@ -26,7 +27,7 @@ export default class SymptomEntryModal extends React.Component {
 
   componentWillReceiveProps(nextProps) {
     if (nextProps.recommendations.length !== 0) {
-      console.log("de-cloaking", nextProps.recommendations[nextProps.recommendations.length-1].specialty)
+      console.log("de-cloaking", nextProps.recommendations[nextProps.recommendations.length-1].specialty);
       if(nextProps.recommendations[nextProps.recommendations.length-1].specialty) {
         this.setState({isInRolodex: true});
         this.setState({cloak: false});
@@ -105,7 +106,6 @@ export default class SymptomEntryModal extends React.Component {
     this.setState({
       drxs: drxs.data
     });
-      console.log('this works');
     console.log('+++++++++++++++>', drxs);
   }
 
@@ -138,9 +138,9 @@ export default class SymptomEntryModal extends React.Component {
             <div className={this.state.currentRec && this.state.currentRec.id !== 1000 && !this.state.isInRolodex ? '' : 'hidden'}>
               <h3>Oops...</h3>
               <div>We were about to recommend your <strong>{this.state.currentRec ? this.state.currentRec.name : '**empty**'}</strong>, but it appears you do not have one listed.  <Link to='/newdoctor'>Click here to register a new {this.state.currentRec ? this.state.currentRec.name : '**empty**'}!</Link></div>
-              <div>Or, check out some {this.state.currentRec ? this.state.currentRec.name : '**empty**'}s near you. Click the MONEY button!</div>
-              <button onClick={this.drx}>Show me the MONEY</button>
-              {this.state.drxs.map((doctrx, i) => <DRXView info={doctrx}/>)}
+              <div>Or, click below to find some {this.state.currentRec ? this.state.currentRec.name : '**empty**'}s near you!</div>
+              <Button onClick={this.drx} bsStyle='primary' bsSize='small'>Find {this.state.currentRec ? this.state.currentRec.name : '**empty**'}s</Button>
+              {this.state.drxs.map((doctrx, i) => <DRXView closeFn={this.props.closeFn} zipcode={this.props.zipcode} info={doctrx}/>)}
             </div>
           <div className="symptom-modal-voting">
             <span className={(this.state.currentRec && this.state.currentRec.id !== 1000 ? '' : 'hidden')+' modal-button'} onClick={this.upvote}><i className="fa fa-thumbs-o-up" aria-hidden="true"></i></span>

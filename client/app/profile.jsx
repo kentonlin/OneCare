@@ -9,8 +9,6 @@ import EditScriptRemindModal from './editScript.jsx';
 import Map from './map.jsx';
 import _ from 'lodash';
 import { Modal, Button, ButtonToolbar, Tooltip, OverlayTrigger } from 'react-bootstrap';
-import FlipCard from 'react-flop-card';
-
 import EditDoctorModal from './editDoctor.jsx';
 
 
@@ -20,13 +18,11 @@ export default class Profile extends React.Component {
     this.state = {
       doctors: [],
       scripts: [],
+      zipcode: null,
       inputZip: null,
       editScript: null,
-
       editDoctor: null,
       editModalDoctorIsOpen: false,
-
-
       scriptmodalIsOpen: false,
       docmodalIsOpen: false,
       mapmodalIsOpen: false,
@@ -61,7 +57,6 @@ export default class Profile extends React.Component {
           borderRadius               : '4px',
           outline                    : 'none',
           padding                    : '20px'
-
         }
       },
     };
@@ -82,8 +77,7 @@ export default class Profile extends React.Component {
     this.openEditModalScript = this.openEditModalScript.bind(this);
     this.closeEditModalScript = this.closeEditModalScript.bind(this);
     this.doctorNotes = this.doctorNotes.bind(this);
-    // this.getZip = this.getZip.bind(this);
-
+    this.getZip = this.getZip.bind(this);
     this.openEditModalDoctor = this.openEditModalDoctor.bind(this);
     this.closeEditModalDoctor = this.closeEditModalDoctor.bind(this);
 
@@ -124,7 +118,6 @@ export default class Profile extends React.Component {
   }
 
   openModalScript() {
-
     console.log("open modal script called");
     console.log('this is the editscript', this.state.editScript);
     this.setState({
@@ -168,8 +161,6 @@ export default class Profile extends React.Component {
     });
   }
 
-
-
   openModalDoctor() {
     this.setState({
       docmodalIsOpen: true
@@ -185,7 +176,7 @@ export default class Profile extends React.Component {
   openModalSymptom() {
     this.setState({
       symptomModalIsOpen: true
-    });
+    }, function() {console.log(this.state.zipcode)});
   }
 
   openModalBrain() {
@@ -242,7 +233,6 @@ export default class Profile extends React.Component {
        console.error('error in ajax request for user scripts', err);
      }
    });
-
   }
 
   getDocs() {
@@ -339,30 +329,30 @@ export default class Profile extends React.Component {
     }})
   }
 
-  // getZip() {
-  //   $.ajax({
-  //     type: 'POST',
-  //     url: '/api/user/zip',
-  //     headers: {
-  //       "content-type": "application/json"
-  //     },
-  //     data: JSON.stringify({"username": window.localStorage.username}),
-  //     success: function(zipcode) {
-  //       console.log("USER zipcode", zipcode);
-  //       this.setState({
-  //         zipcode: zipcode
-  //       });
-  //     }.bind(this),
-  //     error: function(err) {
-  //       console.log('Could not retrieve user zipcode', err);
-  //     }
-  //   });
-  // }
-
+  getZip() {
+    $.ajax({
+      type: 'POST',
+      url: '/api/user/zip',
+      headers: {
+        "content-type": "application/json"
+      },
+      data: JSON.stringify({"username": window.localStorage.username}),
+      success: function(zipcode) {
+        console.log("USER zipcode", zipcode);
+        this.setState({
+          zipcode: zipcode
+        });
+      }.bind(this),
+      error: function(err) {
+        console.log('Could not retrieve user zipcode', err);
+      }
+    });
+  }
 
   componentDidMount() {
     this.getScripts();
     this.getDocs();
+    this.getZip();
   }
 
   render() {
@@ -392,15 +382,16 @@ export default class Profile extends React.Component {
               <div className='modal-button-close' onClick={this.closeModalMap}><i className="fa fa-times-circle" aria-hidden="true"></i></div>
             </div>
             <Map
-          zipcode = {this.state.inputZip}
-          />
+          zipcode={this.state.inputZip} />
         </Modal>
 
         <Modal show={this.state.symptomModalIsOpen} style={this.state.modalStyles}>
             <div className="modal-button-close-container">
               <div className='modal-button-close' onClick={this.closeModalSymptom}><i className="fa fa-times-circle" aria-hidden="true"></i></div>
             </div>
-            <SymptomEntry closeFn={this.closeModalSymptom} />
+            <SymptomEntry 
+            zipcode={this.state.zipcode}
+            closeFn={this.closeModalSymptom} />
         </Modal>
 
         <Modal show={this.state.brainModalIsOpen} bsSize='small'>
@@ -561,5 +552,4 @@ export default class Profile extends React.Component {
       </div>
     );
   }
-
 }
