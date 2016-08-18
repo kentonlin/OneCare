@@ -68,7 +68,7 @@ input {
 }
 
 .orange {
-  background-color: #d35400;
+  color: #d35400;
 }
 
 .nephritis {
@@ -79,8 +79,13 @@ input {
   background-color: #2c3e50;
 }
 
+.white {
+  color: #FFFFFF;
+}
+
 /* END OF COLORS */
 
+/* GENERAL (NOT APPLICABLE TO ONE PARTICULAR COMPONENT) */
 
 .topName {
   color: yellow;
@@ -112,9 +117,6 @@ input {
   right: 10px;
 }
 
-.orange {
-  background-color: #d35400;
-}
 
 .btn {
 color: #FFFFFF;
@@ -139,6 +141,28 @@ border: 1px solid transparent;
 border-radius: 4px;
 }
 
+.btn:hover {
+  color:
+}
+
+.add-btn {
+  font-size: 28px;
+}
+
+.add:hover {
+  color: #00B300;
+}
+
+.info {
+  background-color: #d35400;
+  border-radius: 25px;
+  font-size: 12px;
+  display: inline-block;
+  padding-bottom: 20px;
+  font-weight: lighter;
+  height: 15px;
+}
+
 .required {
   color: red;
 }
@@ -155,22 +179,27 @@ border-radius: 4px;
   border-radius: 50%;
 }
 
-.profile-container {
-  padding-left: 10px;
-}
-
-.dosageInput {
-  margin-top: 10px;
-  width: 210px;
-}
 .remindBtn {
   margin-top: 10px;
+}
+
+.envelope {
+  padding-right: 2px;
+}
+
+.pencil {
+  padding-left: 10px;
+  padding-top: 14px;
+}
+.edit-icon {
+  font-size: 18px;
 }
 
 /* PROFILE */
 
 .profile-container {
   background-color: #D8D8D8;
+  padding-left: 10px;
 }
 
 /********* DOCTORS *********/
@@ -196,17 +225,27 @@ border-radius: 4px;
   font-weight: bold;
 }
 
+.doc-top-first-half {
+  display: inline-flex;
+}
+
 .doctor-input {
   border-radius:2px;
   background-color: #FFFFFF;
   border:1px solid black;
 }
 
-
+.email-specialist-container {
+  display: flex;
+  justify-content: space-between;
+}
 .doctor-controls {
   text-align: right;
 }
 
+.rec-btn {
+  margin-right: 180px;
+}
 .doctors-container {
   float:right;
   width: 550px;
@@ -224,13 +263,24 @@ border-radius: 4px;
 }
 
 .doctor-view-container {
-  padding: 25px;
+  padding-left: 25px;
+  padding-right: 25px;
+  padding-top: 25px;
+  padding-bottom: 2px;
   margin-right: 15px;
   margin-left: 15px;
-  margin-bottom: 10px;
+  margin-bottom: 14px;
   border-radius:2px;
   background-color: #FFFFFF;
   border-radius: 7px;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+  -webkit-transition: all 0.6s cubic-bezier(0.165, 0.84, 0.44, 1);
+  transition: all 0.6s cubic-bezier(0.165, 0.84, 0.44, 1);
+}
+
+.doctor-view-container:hover{
+  -webkit-transform: scale(1.10, 1.10);
+   transform:translate(0px,-10px);
 }
 
 
@@ -239,12 +289,47 @@ border-radius: 4px;
 }
 
 .doctors-title {
-  font-size: 26pt;
+  font-size: 30pt;
   margin-left: 5px;
   text-align: center;
   color: white;
   font-weight: lighter;
 
+}
+
+.doctor-footer {
+  display: flex;
+  justify-content: space-between;
+}
+
+.delete-doc {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 9px;
+}
+
+.show-notes {
+  display: flex;
+  justify-content: center;
+  font-size: 22px;
+}
+
+.note-delete {
+  padding-right: 8px;
+}
+
+
+
+
+.specialty-tag {
+  background-color: #228b22;
+  border-radius: 25px;
+  color: #FFFFFF;
+  display: inline-block;
+  padding: 8px;
+  font-size: 12px;
+  font-weight: lighter;
+  height: 30px;
 }
 
 /*********** SCRIPTS ***********/
@@ -301,10 +386,18 @@ border-radius: 4px;
   padding: 25px;
   margin-right: 15px;
   margin-left: 15px;
-  margin-bottom: 10px;
+  margin-bottom: 14px;
   border-radius:2px;
   background-color: #FFFFFF;
   border-radius: 7px;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+  -webkit-transition: all 0.6s cubic-bezier(0.165, 0.84, 0.44, 1);
+  transition: all 0.6s cubic-bezier(0.165, 0.84, 0.44, 1);
+}
+
+.scripts-view-container:hover{
+  -webkit-transform: scale(1.10, 1.10);
+   transform:translate(0px,-10px);
 }
 
 .script-name {
@@ -333,6 +426,11 @@ border-radius: 4px;
 .script-form-fields {
   display: flex;
   flex-flow: row nowrap;
+}
+
+.dosageInput {
+  margin-top: 10px;
+  width: 210px;
 }
 
 /******** NAVIGATION ********/
@@ -603,6 +701,9 @@ border-radius: 4px;
 }
 
 .hidden { display:none; }
+.highlight {
+  background-color: green;
+}
 
 .symptom-modal-voting {
   display: flex;
@@ -727,3 +828,30 @@ border-radius: 4px;
   display:inline-block;
   min-width: 50%;
  }
+
+.ReactFlipCard {
+    margin: 25px;
+    text-align: center;
+  }
+  .ReactFlipCard,
+  .ReactFlipCard__Front,
+  .ReactFlipCard__Back {
+    box-sizing: border-box;
+    width: 250px;
+    height: 300px;
+  }
+  .ReactFlipCard__Front,
+  .ReactFlipCard__Back {
+    border-radius: 10px;
+    border: 1px solid #ccc;
+    padding: 25px;
+  }
+  .ReactFlipCard__Front {
+    background-color: #eee;
+  }
+  .ReactFlipCard__Back {
+    background-color: #cef;
+  }
+  #example {
+    text-align: center;
+  }

@@ -8,7 +8,6 @@ var twilio = require('twilio');
 var Yelp = require('yelp');
 var ObjectId = require('mongoose').Types.ObjectId;
 
-
 app.use(express.static('public'));
 
 var rootPath = path.normalize(__dirname + '/../client');
@@ -36,15 +35,16 @@ app.listen(process.env.PORT || 3000, function(){
 app.post('/api/user/zip', function(req, res) {
   // SAMPLE POST REQUEST POSTMAN
   // {"username": "kenton"}
-  var username = req.body.username;
-  dbHelpers.getZip(username, res);
+  var user = req.body;
+  dbHelpers.getZip(user, res);
 });
 
 app.post('/api/email/receive', function(req, res){
   console.log("FULL BODY", req.body);
   var message = req.body['stripped-text']; //wrong property, need to change
   var docEmail = req.body['sender']; //format: 'hckilaru@gmail.com'
-  var userID = req.body['Subject'].slice(4); //format: 'Re: 57abc05eaeefbd68ee3183ea'
+  var userID = '';
+  req.body['Subject'][0] === 'R' ? userID = req.body['Subject'].slice(4) : userID = req.body['Subject'] //depending on email client, Subject could include "Re:" at beginning
   console.log("Args to be passed", message, docEmail, userID);
   dbHelpers.receiveEmail(message, docEmail, userID, res);
 })
@@ -157,14 +157,48 @@ app.post('/api/note/add/*', function(req, res) {
     body: req.body.message,
     user: ObjectId(req.body.user),
     doctor: doctorID
-  }
+  };
   dbHelpers.addNote(data, res);
-})
+});
 
-app.get('/api/note/*', function(req, res) {
+app.get('/api/note/getAll/*', function(req, res) {
   //retrieves all notes for specified doctor
   var doctorID = ObjectId(req.url.split('/').pop());
   dbHelpers.getNotes(doctorID, res);
+});
+  
+// fun learning exp!
+// var yelp = new Yelp({
+//   consumer_key: '1GCGSst4AI3oOk0DnqltxA',
+//   consumer_secret: 'O9ocbqwcV23tNrWIpXzqseTIFEE',
+//   token: 'GDNZad3iIfLT1-gEoPfXpU7ultv9fTZx',
+//   token_secret: '8w-B0W2XoCWds244gwpoBhbbeaM'
+// });
+
+// app.post('/api/yelp', function(req, res) {
+//   yelp.search({ term: req.body.name, location:  req.body.zip })
+//   .then(function(data) {
+//     console.log(req.body);
+//     res.status(200).send(data);
+//   })
+//   .catch(function(err) {
+//     console.log(req.body.name, req.body.zip);
+//     res.sendStatus(400);
+//   });
+// });
+
+app.put('/api/note/getAll/*', function(req, res) {
+  //retrieves all notes for specified doctor
+  var doctorID = ObjectId(req.url.split('/').pop());
+  var edit = req.body;
+  console.log(edit);
+  dbHelpers.editAllNotes(doctorID, edit, res);
+})
+
+app.put('/api/note/edit/*', function(req, res) {
+  var targetNoteID = ObjectId(req.url.split('/').pop());
+  var edit = req.body;
+  dbHelpers.editNote(targetNoteID, edit, res);
 })
 
 app.get('/*', function(req, res) {

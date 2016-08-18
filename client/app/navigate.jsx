@@ -4,7 +4,7 @@ import { Router, Route, Link, browserHistory } from 'react-router';
 import { Button, PageHeader } from 'react-bootstrap';
 
 
-export default class Navigate extends React.Component {
+export default class NavigateView extends React.Component {
   constructor(props) {
     super(props);
     this.state = {

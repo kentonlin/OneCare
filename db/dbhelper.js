@@ -226,17 +226,17 @@ var dbFunc = {
 	  }
 	},
 
-	getZip: function(username, res) {
-		if (!username.username) {
+	getZip: function(user, res) {
+		if (!user.username) {
 			console.log('no usern@me found');
 		}
 		else {
-			Model.user.findOne({'username': username.username}, function(err, user) {
+			Model.user.findOne({'username': user.username}, function(err, user) {
 				if (err) {
 					console.error(err);
 				}
 				else {
-					res.status(200).send();
+					res.status(200).send(user.zipcode);
 				}
 			})
 		}
@@ -398,14 +398,43 @@ deleteReminder: function(scriptID, res, next) {
   	});
   },
 
-  getNotes: function(doctor, res) {
-  	Model.doctor.findOne({"_id": doctor}).populate('notes').exec(function(err, found) {
+  getNotes: function(doctorID, res) {
+  	Model.doctor.findOne({"_id": doctorID}).populate('notes').exec(function(err, found) {
   		if (err) {
   			res.status(404).send(err);
   		} else {
         res.status(200).send(found.notes);
   		}
   	})
+  },
+
+  editNote(targetNoteID, edit, res) {
+    var success = Model.note.findOneAndUpdate({"_id": targetNoteID}, {$set: edit})
+    .then(function(found) {
+    	if (res) {
+        res.status(200).send("note updated: ", found);
+    	}
+    })
+    .catch(function(err) {
+    	console.error("failed to update note", found)
+    	if (res) {
+	    	res.sendStatus(500);
+    	}
+    })
+  },
+
+  editAllNotes(doctorID, edit, res) {
+  	var editOne = this.editNote;
+    Model.doctor.findOne({"_id": doctorID}).populate('notes').exec(function(err, found) {
+      found.notes.forEach(function(note) {
+      	editOne(ObjectId(note._id), edit);
+      });
+      if (err) {
+      	res.status(500).send("error: ", err);
+      } else {
+	      res.status(200).send("All doctors notes updated!");
+      }
+    })
   },
 
 	saveBrain: function(brainState, trainingData, name) {
