@@ -127,7 +127,7 @@ export default class DoctorEntryView extends React.Component {
         <form className="doctor-entry-form">
           <div>Name</div><input id="name" type="text" onChange={this.handleChange} />
           <div>Phone</div><input id="phone" type="text" onChange={this.handleChange}></input><h6 className={(this.state.validPhone ? 'hidden' : 'invalid')}> Phone number must be 11 digits</h6><br />
-          <div>Email</div><input id="email" type="text" onChange={this.handleChange}></input><br />
+          <div>Email</div><input id="email" type="text" onChange={this.handleChange}></input><br /><h6 className="invalid"> (Your doctor will receive notification that you have registered with them!) </h6><br />
           <div>Address</div><input id="address" type="text" onChange={this.handleChange}></input><br />
           <div>Specialty</div><select id="specialty" onChange={this.handleChange}>
             <option>::Select Specialty::</option>
