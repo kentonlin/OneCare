@@ -28,7 +28,7 @@ app.use(function(req, res, next) {
   next();
 });
 
-app.listen(process.env.PORT || 3000, function(){
+app.listen(process.env.PORT || 3001, function(){
   console.log('Server is running');
 });
 
@@ -44,7 +44,8 @@ app.post('/api/email/receive', function(req, res){
   console.log("FULL BODY", req.body);
   var message = req.body['stripped-text']; //wrong property, need to change
   var docEmail = req.body['sender']; //format: 'hckilaru@gmail.com'
-  var userID = req.body['Subject'].slice(4); //format: 'Re: 57abc05eaeefbd68ee3183ea'
+  var userID = '';
+  req.body['Subject'][0] === 'R' ? userID = req.body['Subject'].slice(4) : userID = req.body['Subject'] //depending on email client, Subject could include "Re:" at beginning
   console.log("Args to be passed", message, docEmail, userID);
   dbHelpers.receiveEmail(message, docEmail, userID, res);
 })
