@@ -62325,7 +62325,7 @@
 	  }, {
 	    key: 'doctorNotes',
 	    value: function doctorNotes(doctor) {
-	      var url = '/api/note/' + doctor._id;
+	      var url = '/api/note/getAll/' + doctor._id;
 	      _jquery2.default.ajax({
 	        type: 'GET',
 	        url: url,
@@ -62333,12 +62333,37 @@
 	          "content-type": "application/json"
 	        },
 	        success: function (data) {
+	          //update current notes on db.
+	          _jquery2.default.ajax({
+	            type: 'PUT',
+	            url: url,
+	            data: JSON.stringify({ seen: true }),
+	            headers: {
+	              "content-type": "application/json"
+	            },
+	            success: function success() {
+	              console.log('notes marked as seen');
+	            },
+	            error: function error() {
+	              console.log('notes not marked as seen');
+	            }
+	          });
+	          //change currrent notes to clicked doctor.
 	          if (this.state.openNotes.doctor === doctor._id) {
 	            this.setState({ openNotes: {
 	                doctor: '',
 	                notes: []
 	              } });
 	          } else {
+	            data = data.sort(function (a, b) {
+	              if (a.seen && !b.seen) {
+	                return 1;
+	              } else if (!a.seen && b.seen) {
+	                return -1;
+	              } else {
+	                return 0;
+	              }
+	            });
 	            this.setState({ openNotes: {
 	                doctor: doctor._id,
 	                notes: data
@@ -62353,11 +62378,12 @@
 	  }, {
 	    key: 'hideNote',
 	    value: function hideNote(note) {
-	      var url = '/api/reminder/hide/' + note._id;
+	      var url = '/api/note/edit/' + note._id;
 	      //toggle note.hidden in database
 	      _jquery2.default.ajax({
 	        type: 'PUT',
 	        url: url,
+	        data: JSON.stringify({ hidden: true }),
 	        headers: {
 	          "content-type": "application/json"
 	        },
@@ -62726,7 +62752,7 @@
 	                    }).map(function (note, idx) {
 	                      return _react2.default.createElement(
 	                        'div',
-	                        { key: idx, className: 'doctor-notes-entry' },
+	                        { key: idx, className: "doctor-notes-entry" + (note.seen ? "" : " highlight") },
 	                        _react2.default.createElement(
 	                          'span',
 	                          { className: 'note-delete' },

@@ -263,7 +263,7 @@ export default class Profile extends React.Component {
   }
 
   doctorNotes(doctor) {
-    var url = '/api/note/'+doctor._id;
+    var url = '/api/note/getAll/'+doctor._id;
     $.ajax({
       type: 'GET',
       url: url,
@@ -271,12 +271,33 @@ export default class Profile extends React.Component {
         "content-type": "application/json"
       },
       success: function(data) {
+        //update current notes on db.
+        $.ajax({
+          type: 'PUT',
+          url: url,
+          data: JSON.stringify({seen: true}),
+          headers: {
+            "content-type": "application/json"
+          },
+          success: function() {console.log('notes marked as seen')},
+          error: function() {console.log('notes not marked as seen')}
+        })
+        //change currrent notes to clicked doctor.
         if (this.state.openNotes.doctor === doctor._id) {
           this.setState({openNotes: {
             doctor: '',
             notes: []
           }});
         } else {
+          data = data.sort((a, b) => {
+            if (a.seen && !b.seen) {
+              return 1;
+            } else if (!a.seen && b.seen) {
+              return -1;
+            } else {
+              return 0;
+            }
+          })
           this.setState({openNotes: {
             doctor: doctor._id,
             notes: data
@@ -290,11 +311,12 @@ export default class Profile extends React.Component {
   }
 
   hideNote(note) {
-    var url = '/api/reminder/hide/'+note._id;
+    var url = '/api/note/edit/'+note._id;
     //toggle note.hidden in database
     $.ajax({
       type: 'PUT',
       url: url,
+      data: JSON.stringify({hidden: true}),
       headers: {
         "content-type": "application/json"
       },
@@ -454,7 +476,7 @@ export default class Profile extends React.Component {
                             !note.hidden
                           ))
                           .map((note, idx) => (                  
-                          <div key={idx} className="doctor-notes-entry">
+                          <div key={idx} className={"doctor-notes-entry" + (note.seen ? "" : " highlight")}>
                             <span className="note-delete"><i className="fa fa-times" aria-hidden="true" onClick={this.hideNote.bind(this, note)}></i></span>
                             {note.body}
                           </div>
