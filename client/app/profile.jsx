@@ -33,6 +33,7 @@ export default class Profile extends React.Component {
       symptomModalIsOpen: false,
       brainModalIsOpen: false,
       editModalIsOpen: false,
+      notesOpen: false,
       openNotes: {
         doctor: '',
         notes: []
@@ -264,6 +265,10 @@ export default class Profile extends React.Component {
   }
 
   doctorNotes(doctor) {
+    this.setState({
+      notesOpen: !this.state.notesOpen
+    })
+
     var url = '/api/note/getAll/'+doctor._id;
     $.ajax({
       type: 'GET',
@@ -525,11 +530,14 @@ export default class Profile extends React.Component {
                           </div>
                         </div>
                         <div className='show-notes'>
-                          <OverlayTrigger placement='top' overlay={<Tooltip id="tooltip"> Click to view doctor's notes</Tooltip>}>
-                            <div className='note-icon'>
-                              <i className="fa fa-angle-double-down orange" aria-hidden="true" onClick={this.doctorNotes.bind(this, doctor)}></i>
+                            <OverlayTrigger placement='top' overlay={<Tooltip id="tooltip"> Click to view doctor's notes</Tooltip>}>
+                              <div className={this.state.notesOpen ? 'hidden': 'note-icon'}>
+                                <i className="fa fa-angle-double-down orange" aria-hidden="true" onClick={this.doctorNotes.bind(this, doctor)}></i>
+                              </div>
+                            </OverlayTrigger>
+                            <div className={this.state.notesOpen ? 'note-icon': 'hidden'}>
+                              <i className="fa fa-angle-double-up orange" aria-hidden="true" onClick={this.doctorNotes.bind(this, doctor)}></i>
                             </div>
-                          </OverlayTrigger>
                           </div>
                           <div className={this.state.openNotes.doctor === doctor._id ? "doctor-notes-container" : "hidden"}>
                           {this.state.openNotes.notes

@@ -60494,6 +60494,7 @@
 	      symptomModalIsOpen: false,
 	      brainModalIsOpen: false,
 	      editModalIsOpen: false,
+	      notesOpen: false,
 	      openNotes: {
 	        doctor: '',
 	        notes: []
@@ -60742,6 +60743,10 @@
 	  }, {
 	    key: 'doctorNotes',
 	    value: function doctorNotes(doctor) {
+	      this.setState({
+	        notesOpen: !this.state.notesOpen
+	      });
+
 	      var url = '/api/note/getAll/' + doctor._id;
 	      _jquery2.default.ajax({
 	        type: 'GET',
@@ -61207,9 +61212,14 @@
 	                      ) },
 	                    _react2.default.createElement(
 	                      'div',
-	                      { className: 'note-icon' },
+	                      { className: _this2.state.notesOpen ? 'hidden' : 'note-icon' },
 	                      _react2.default.createElement('i', { className: 'fa fa-angle-double-down orange', 'aria-hidden': 'true', onClick: _this2.doctorNotes.bind(_this2, doctor) })
 	                    )
+	                  ),
+	                  _react2.default.createElement(
+	                    'div',
+	                    { className: _this2.state.notesOpen ? 'note-icon' : 'hidden' },
+	                    _react2.default.createElement('i', { className: 'fa fa-angle-double-up orange', 'aria-hidden': 'true', onClick: _this2.doctorNotes.bind(_this2, doctor) })
 	                  )
 	                ),
 	                _react2.default.createElement(
