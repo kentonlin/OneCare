@@ -62326,7 +62326,6 @@
 	    key: 'doctorNotes',
 	    value: function doctorNotes(doctor) {
 	      var url = '/api/note/' + doctor._id;
-	      console.log(doctor);
 	      _jquery2.default.ajax({
 	        type: 'GET',
 	        url: url,
@@ -62334,15 +62333,12 @@
 	          "content-type": "application/json"
 	        },
 	        success: function (data) {
-	          console.log(data);
 	          if (this.state.openNotes.doctor === doctor._id) {
-	            console.log("toggle me off.");
 	            this.setState({ openNotes: {
 	                doctor: '',
 	                notes: []
 	              } });
 	          } else {
-	            console.log("toggle me on.");
 	            this.setState({ openNotes: {
 	                doctor: doctor._id,
 	                notes: data
@@ -62353,6 +62349,33 @@
 	          console.error("Couldn't get doctor's notes: ", err);
 	        }
 	      });
+	    }
+	  }, {
+	    key: 'hideNote',
+	    value: function hideNote(note) {
+	      var url = '/api/reminder/hide/' + note._id;
+	      //toggle note.hidden in database
+	      _jquery2.default.ajax({
+	        type: 'PUT',
+	        url: url,
+	        headers: {
+	          "content-type": "application/json"
+	        },
+	        success: function success(data) {
+	          console.log("note deleted: ", data);
+	        },
+	        error: function error(err) {
+	          console.error("error in AJAX call: ", err);
+	        }
+	      });
+	      //hide div on DOM
+	      var newNotes = this.state.openNotes.notes.filter(function (curNote) {
+	        return curNote !== note;
+	      });
+	      this.setState({ openNotes: {
+	          doctor: this.state.openNotes.doctor,
+	          notes: newNotes
+	        } });
 	    }
 	
 	    // getZip() {
@@ -62698,10 +62721,17 @@
 	                  _react2.default.createElement(
 	                    'div',
 	                    { className: _this2.state.openNotes.doctor === doctor._id ? "doctor-notes-container" : "hidden" },
-	                    _this2.state.openNotes.notes.map(function (note, idx) {
+	                    _this2.state.openNotes.notes.filter(function (note) {
+	                      return !note.hidden;
+	                    }).map(function (note, idx) {
 	                      return _react2.default.createElement(
 	                        'div',
 	                        { key: idx, className: 'doctor-notes-entry' },
+	                        _react2.default.createElement(
+	                          'span',
+	                          { className: 'note-delete' },
+	                          _react2.default.createElement('i', { className: 'fa fa-times', 'aria-hidden': 'true', onClick: _this2.hideNote.bind(_this2, note) })
+	                        ),
 	                        note.body
 	                      );
 	                    })

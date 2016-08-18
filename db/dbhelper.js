@@ -408,6 +408,17 @@ deleteReminder: function(scriptID, res, next) {
   	})
   },
 
+  hideNote(targetNoteID, res) {
+    var success = Model.note.findOneAndUpdate({"_id": targetNoteID}, {$set: {hidden: true}})
+    .then(function(found) {
+      res.status(200).send("note updated: ", found);
+    })
+    .catch(function(err) {
+    	console.error("failed to hide note", found)
+    	res.sendStatus(500);
+    })
+  },
+
 	saveBrain: function(brainState, trainingData, name) {
 		var success = Model.brain.findOneAndUpdate({"_id": ObjectId("57a3a316dcba0f71400f021a")}, {
 			$set: {

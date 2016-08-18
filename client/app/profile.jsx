@@ -264,7 +264,6 @@ export default class Profile extends React.Component {
 
   doctorNotes(doctor) {
     var url = '/api/note/'+doctor._id;
-    console.log(doctor);
     $.ajax({
       type: 'GET',
       url: url,
@@ -272,15 +271,12 @@ export default class Profile extends React.Component {
         "content-type": "application/json"
       },
       success: function(data) {
-        console.log(data);
         if (this.state.openNotes.doctor === doctor._id) {
-          console.log("toggle me off.");
           this.setState({openNotes: {
             doctor: '',
             notes: []
           }});
         } else {
-          console.log("toggle me on.");
           this.setState({openNotes: {
             doctor: doctor._id,
             notes: data
@@ -291,6 +287,28 @@ export default class Profile extends React.Component {
         console.error("Couldn't get doctor's notes: ", err);
       }
     });
+  }
+
+  hideNote(note) {
+    var url = '/api/reminder/hide/'+note._id;
+    //toggle note.hidden in database
+    $.ajax({
+      type: 'PUT',
+      url: url,
+      headers: {
+        "content-type": "application/json"
+      },
+      success: (data) => {console.log("note deleted: ", data)},
+      error: (err) => {console.error("error in AJAX call: ", err)}
+    })
+    //hide div on DOM
+    var newNotes = this.state.openNotes.notes.filter((curNote) => {
+       return curNote !== note;
+    })
+    this.setState({openNotes: {
+      doctor: this.state.openNotes.doctor,
+      notes: newNotes
+    }})
   }
 
   // getZip() {
@@ -431,8 +449,15 @@ export default class Profile extends React.Component {
                     <div className='doctor-attribute'><i className="fa fa-stethoscope" aria-hidden="true"></i>  {doctor.specialty}</div>
                     <div className='doctor-attribute'><Button bsStyle="info" bsSize='small' onClick={this.doctorNotes.bind(this, doctor)}> (view notes) </Button>
                       <div className={this.state.openNotes.doctor === doctor._id ? "doctor-notes-container" : "hidden"}>
-                        {this.state.openNotes.notes.map((note, idx) => (
-                            <div key={idx} className="doctor-notes-entry">{note.body}</div>
+                        {this.state.openNotes.notes
+                          .filter((note) => (
+                            !note.hidden
+                          ))
+                          .map((note, idx) => (                  
+                          <div key={idx} className="doctor-notes-entry">
+                            <span className="note-delete"><i className="fa fa-times" aria-hidden="true" onClick={this.hideNote.bind(this, note)}></i></span>
+                            {note.body}
+                          </div>
                           )
                         )}
                       </div>

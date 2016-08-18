@@ -167,6 +167,11 @@ app.get('/api/note/*', function(req, res) {
   dbHelpers.getNotes(doctorID, res);
 })
 
+app.put('/api/reminder/hide/*', function(req, res) {
+  var targetNoteID = ObjectId(req.url.split('/').pop());
+  dbHelpers.hideNote(targetNoteID, res);
+})
+
 app.get('/*', function(req, res) {
   res.sendFile(path.join(rootPath + "/index.html"));
 });
