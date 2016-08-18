@@ -62865,7 +62865,7 @@
 	
 	    _this.state = {
 	      modalIsOpen: true,
-	      "currentDrug": "None",
+	      "currentDrug": "",
 	      "dosageAmt": 0,
 	      "dosageMeasure": 'mg',
 	      "date": date,
@@ -62874,10 +62874,12 @@
 	      "reminderTime3": null,
 	      "scheduleFreq": "1x",
 	      "scheduleDayWeek": "day",
-	      "invalidName": false,
-	      "invalidReminderTime": false,
 	      "hasTwo": false,
-	      "hasThree": false
+	      "hasThree": false,
+	      "nameIsValid": false,
+	      "dosageIsValid": false,
+	      "refillDateIsValid": false,
+	      "formIsValid": true
 	    };
 	
 	    var date = new Date();
@@ -62898,17 +62900,35 @@
 	  _createClass(ScriptRemindView, [{
 	    key: 'updateDrugName',
 	    value: function updateDrugName(event) {
-	      this.setState({
-	        currentDrug: event.target.value,
-	        invalidName: true
-	      });
+	      if (event.target.value.length > 0) {
+	        this.setState({
+	          currentDrug: event.target.value,
+	          nameIsValid: true
+	        });
+	      } else {
+	        this.setState({
+	          currentDrug: event.target.value,
+	          nameIsValid: false
+	        });
+	      }
 	    }
 	  }, {
 	    key: 'handleRefillDate',
 	    value: function handleRefillDate(date) {
-	      this.setState({
-	        "date": date
-	      });
+	      var then = (0, _moment2.default)(date, "MM-DD-YYYY");
+	      var now = (0, _moment2.default)(new Date()).format("MM-DD-YYYY");
+	      console.log(then.isAfter(now));
+	      if (then.isAfter(now)) {
+	        this.setState({
+	          "date": date,
+	          "refillDateIsValid": true
+	        });
+	      } else {
+	        this.setState({
+	          "date": date,
+	          "refillDateIsValid": false
+	        });
+	      }
 	    }
 	  }, {
 	    key: 'handleScheduleDayWeek',
@@ -62927,9 +62947,16 @@
 	  }, {
 	    key: 'handleDoseAmount',
 	    value: function handleDoseAmount(amount) {
-	      this.setState({
-	        dosageAmt: amount.target.value
-	      });
+	      if (!Number.isNaN(Number(amount.target.value))) {
+	        this.setState({
+	          dosageAmt: amount.target.value,
+	          dosageIsValid: true
+	        });
+	      } else {
+	        this.setState({
+	          dosageIsValid: false
+	        });
+	      }
 	    }
 	  }, {
 	    key: 'handleFrequency',
@@ -62981,36 +63008,30 @@
 	    key: 'submitForm',
 	    value: function submitForm() {
 	
-	      if (!this.state.invalidName && !this.state.invalidReminderTime) {
-	        alert("Please enter a prescription name and reminder time");
-	      } else if (!this.state.invalidName) {
-	        alert("Please enter a prescription name");
-	      }
-	      // else if(!this.state.invalidReminderTime){
-	      //   alert("Please enter a reminder time");
-	      // }
-	      else {
-	          var script = {
-	            "name": this.state.currentDrug,
-	            "dosage": this.state.dosageAmt + ' ' + this.state.dosageMeasure,
-	            "refill": new Date((0, _moment2.default)(this.state.date, "MM-DD-YYYY")).toISOString(),
-	            "frequency": this.state.scheduleFreq + ' per ' + this.state.scheduleDayWeek,
-	            "reminderTime": [this.state.reminderTime1, this.state.reminderTime2, this.state.reminderTime3],
-	            "username": window.localStorage.username
-	          };
+	      if (!this.state.nameIsValid && !this.state.refillDateIsValid && !this.state.dosageIsValid) {
+	        this.setState({ formIsValid: false });
+	      } else {
+	        var script = {
+	          "name": this.state.currentDrug,
+	          "dosage": this.state.dosageAmt + ' ' + this.state.dosageMeasure,
+	          "refill": new Date((0, _moment2.default)(this.state.date, "MM-DD-YYYY")).toISOString(),
+	          "frequency": this.state.scheduleFreq + ' per ' + this.state.scheduleDayWeek,
+	          "reminderTime": [this.state.reminderTime1, this.state.reminderTime2, this.state.reminderTime3],
+	          "username": window.localStorage.username
+	        };
 	
-	          _jquery2.default.ajax({
-	            type: 'POST',
-	            url: '/api/reminder/add',
-	            dataType: 'json',
-	            headers: {
-	              'Content-Type': 'application/json'
-	            },
-	            data: JSON.stringify(script),
-	            success: this.props.closeFn(),
-	            error: this.props.closeFn()
-	          });
-	        }
+	        _jquery2.default.ajax({
+	          type: 'POST',
+	          url: '/api/reminder/add',
+	          dataType: 'json',
+	          headers: {
+	            'Content-Type': 'application/json'
+	          },
+	          data: JSON.stringify(script),
+	          success: this.props.closeFn(),
+	          error: this.props.closeFn()
+	        });
+	      }
 	    }
 	  }, {
 	    key: 'render',
@@ -63018,6 +63039,11 @@
 	      return _react2.default.createElement(
 	        'div',
 	        null,
+	        _react2.default.createElement(
+	          'div',
+	          { className: this.state.formIsValid ? "hidden" : "invalid" },
+	          'Please enter valid data below.'
+	        ),
 	        _react2.default.createElement(
 	          'div',
 	          null,
@@ -63043,6 +63069,11 @@
 	            'h8',
 	            { className: 'required' },
 	            ' (required) '
+	          ),
+	          _react2.default.createElement(
+	            'div',
+	            { className: this.state.nameIsValid ? "hidden" : "invalid" },
+	            ' Please enter valid input '
 	          )
 	        ),
 	        _react2.default.createElement(
@@ -63080,6 +63111,11 @@
 	                null,
 	                'tablet'
 	              )
+	            ),
+	            _react2.default.createElement(
+	              'div',
+	              { className: this.state.dosageIsValid ? "hidden" : "invalid" },
+	              ' Please enter valid input '
 	            )
 	          )
 	        ),
@@ -63096,6 +63132,11 @@
 	            { className: 'script-form-fields' },
 	            _react2.default.createElement(_reactInputCalendar2.default, { format: 'MM/DD/YYYY', date: this.state.date, onChange: this.handleRefillDate }),
 	            _react2.default.createElement('span', { className: this.state.date ? "" : "hidden" })
+	          ),
+	          _react2.default.createElement(
+	            'div',
+	            { className: this.state.refillDateIsValid ? "hidden" : "invalid" },
+	            ' Please enter valid input '
 	          )
 	        ),
 	        _react2.default.createElement(
