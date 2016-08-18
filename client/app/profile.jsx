@@ -8,7 +8,8 @@ import SymptomEntryModal from './symptomEntryModal.jsx';
 import EditScriptRemindModal from './editScript.jsx';
 import Map from './map.jsx';
 import _ from 'lodash';
-import { Modal, Button, ButtonToolbar } from 'react-bootstrap';
+import { Modal, Button, ButtonToolbar, Tooltip, OverlayTrigger } from 'react-bootstrap';
+import FlipCard from 'react-flop-card';
 
 import EditDoctorModal from './editDoctor.jsx';
 
@@ -443,10 +444,26 @@ export default class Profile extends React.Component {
               this.state.scripts.map((script, idx) => {
                 return (
                   <div className="scripts-view-container" key={idx}>
-                  <div className="script-top-bar"><div className="doc-top-first-half"><p className="script-name"> {script.name}</p><div className='edit-icon'><i className="fa fa-pencil-square-o pencil" aria-hidden="true" onClick={this.openEditModalScript.bind(this,idx)}></i></div>{/* <a target="_blank" href={"https://simple.wikipedia.org/wiki/" + script.name}>(get more info)</a>*/}</div><i className="fa fa-times" aria-hidden="true" onClick={this.deleteScript.bind(this, idx)}></i></div>
-                  <div className='script-attribute'> <i className="fa fa-heart red" aria-hidden="true"></i> Dosage: {script.dosage} </div>
-                  <div className='script-attribute'> <i className="fa fa-bell gold" aria-hidden="true"></i> Reminder: {script.frequency} </div>
-                  <div className='script-attribute'> <i className="fa fa-calendar royal-blue" aria-hidden="true"></i> Refill: {String(new Date(script.refill)).split('').slice(0, 15).join('')} </div>
+                    <div className="script-top-bar">
+                      <div className="doc-top-first-half">
+                        <p className="script-name"> {script.name}</p>
+                        <OverlayTrigger placement='top' overlay={<Tooltip id="tooltip"> Click to edit card.</Tooltip>}>
+                          <div className='edit-icon'>
+                            <i className="fa fa-pencil-square-o pencil" aria-hidden="true" onClick={this.openEditModalScript.bind(this,idx)}></i>
+                          </div>{/* <a target="_blank" href={"https://simple.wikipedia.org/wiki/" + script.name}>(get more info)</a>*/}
+                        </OverlayTrigger>
+                      </div>
+                      <i className="fa fa-times" aria-hidden="true" onClick={this.deleteScript.bind(this, idx)}></i>
+                    </div>
+                    <div className='script-attribute'>
+                      <i className="fa fa-heart red" aria-hidden="true"></i> Dosage: {script.dosage}
+                    </div>
+                    <div className='script-attribute'>
+                      <i className="fa fa-bell gold" aria-hidden="true"></i> Reminder: {script.frequency}
+                    </div>
+                    <div className='script-attribute'>
+                      <i className="fa fa-calendar royal-blue" aria-hidden="true"></i> Refill: {String(new Date(script.refill)).split('').slice(0, 15).join('')}
+                    </div>
                  </div>
                );
               }, this)
@@ -462,35 +479,66 @@ export default class Profile extends React.Component {
                 this.state.doctors.map((doctor, idx) => {
                   return (
                       <div className=" doctor-view-container" key={idx}>
-                      <div>
-                          <div className='delete-doc'><i className="fa fa-times" aria-hidden="true" onClick={this.deleteDoc.bind(this, idx)}></i></div>
-                          <div className="doctor-top-bar"><div className="doc-top-first-half"><p className='doctor-name'>{doctor.name}</p><div className='edit-icon'><i className="fa fa-pencil-square-o pencil" aria-hidden="true" onClick={this.openEditModalDoctor.bind(this,idx)}></i></div></div><div className='specialty-tag'><i className="fa fa-stethoscope" aria-hidden="true"></i> {doctor.specialty}</div></div>
-                          <div className='doctor-attribute'><i className="fa fa-phone phone-green" aria-hidden="true"></i>  {doctor.phone}</div>
-                          <div className='doctor-attribute'><i className="fa fa-envelope envelope" aria-hidden="true"></i>  {doctor.email}</div>
-                          <div className='doctor-footer'> <div className='doctor-attribute'><i className="fa fa-map-marker red" aria-hidden="true"></i>  {doctor.address}</div><div className='doctor-attribute'><div className='note-info'><Button bsClass="btn info" bsSize='xsmall' onClick={this.doctorNotes.bind(this, doctor)}> (view notes) </Button> </div>
-                            <div className={this.state.openNotes.doctor === doctor._id ? "doctor-notes-container" : "hidden"}>
-                            {this.state.openNotes.notes
-                              .filter((note) => (
-                                !note.hidden
-                              ))
-                              .map((note, idx) => (
-                              <div key={idx} className={"doctor-notes-entry" + (note.seen ? "" : " highlight")}>
-                                <span className="note-delete"><i className="fa fa-times" aria-hidden="true" onClick={this.hideNote.bind(this, note)}></i></span>
-                                {note.body}
+                        <div className="doc-info">
+                            <div className="doctor-top-bar">
+                              <div className="doc-top-first-half">
+                                <p className='doctor-name'>{doctor.name}</p>
+                                <OverlayTrigger placement='top' overlay={<Tooltip id="tooltip"> Click to edit card.</Tooltip>}>
+                                <div className='edit-icon'>
+                                  <i className="fa fa-pencil-square-o pencil" aria-hidden="true" onClick={this.openEditModalDoctor.bind(this,idx)}></i>
+                                </div>
+                                </OverlayTrigger>
                               </div>
-                              )
-                            )}
+                              <div className='delete-doc'>
+                                <i className="fa fa-times" aria-hidden="true" onClick={this.deleteDoc.bind(this, idx)}></i>
+                              </div>
                             </div>
-                          </div></div>
-
+                            <div className='doctor-attribute'>
+                              <i className="fa fa-phone phone-green" aria-hidden="true"></i> {doctor.phone}
+                            </div>
+                            <div className='doctor-attribute'>
+                              <div className="email-specialist-container">
+                                <div>
+                                  <i className="fa fa-envelope envelope" aria-hidden="true"></i>  {doctor.email}
+                                </div>
+                              </div>
+                            </div>
+                            <div className='doctor-footer'>
+                              <div className='doctor-attribute'>
+                                <i className="fa fa-map-marker red" aria-hidden="true"></i>  {doctor.address}
+                              </div>
+                              <div className='doctor-attribute'>
+                                <div className='specialty-tag'>
+                                  <i className="fa fa-stethoscope" aria-hidden="true"></i> {doctor.specialty}
+                                </div>
+                            </div>
+                          </div>
                         </div>
+                        <div className='show-notes'>
+                          <OverlayTrigger placement='top' overlay={<Tooltip id="tooltip"> Click to view doctor's notes.</Tooltip>}>
+                            <div className='note-icon'>
+                              <i className="fa fa-angle-double-down orange" aria-hidden="true" onClick={this.doctorNotes.bind(this, doctor)}></i>
+                            </div>
+                          </OverlayTrigger>
+                          </div>
+                          <div className={this.state.openNotes.doctor === doctor._id ? "doctor-notes-container" : "hidden"}>
+                          {this.state.openNotes.notes
+                            .filter((note) => (
+                              !note.hidden
+                            ))
+                            .map((note, idx) => (
+                            <div key={idx} className={"doctor-notes-entry" + (note.seen ? "" : " highlight")}>
+                              <span className="note-delete"><i className="fa fa-times" aria-hidden="true" onClick={this.hideNote.bind(this, note)}></i></span>
+                              {note.body}
+                            </div>
+                            )
+                          )}
+                          </div>
                       </div>
-                    </div>
-                    </div>
-                  );
+                    );
                 }, this)
               }
-      </div>
+          </div>
       </div>
       </div>
     );

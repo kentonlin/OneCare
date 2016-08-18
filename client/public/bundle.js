@@ -56365,6 +56365,12 @@
 	          _react2.default.createElement('input', { id: 'email', type: 'text', onChange: this.handleChange }),
 	          _react2.default.createElement('br', null),
 	          _react2.default.createElement(
+	            'h6',
+	            { className: 'invalid' },
+	            ' (Your doctor will receive notification that you have registered with them!) '
+	          ),
+	          _react2.default.createElement('br', null),
+	          _react2.default.createElement(
 	            'div',
 	            null,
 	            'Address'
@@ -60736,8 +60742,7 @@
 	  }, {
 	    key: 'doctorNotes',
 	    value: function doctorNotes(doctor) {
-	      var url = '/api/note/' + doctor._id;
-	      console.log(doctor);
+	      var url = '/api/note/getAll/' + doctor._id;
 	      _jquery2.default.ajax({
 	        type: 'GET',
 	        url: url,
@@ -60745,16 +60750,75 @@
 	          "content-type": "application/json"
 	        },
 	        success: function (data) {
-	          console.log(data);
-	          this.setState({ openNotes: {
-	              doctor: doctor._id,
-	              notes: data
-	            } });
+	          //update current notes on db.
+	          _jquery2.default.ajax({
+	            type: 'PUT',
+	            url: url,
+	            data: JSON.stringify({ seen: true }),
+	            headers: {
+	              "content-type": "application/json"
+	            },
+	            success: function success() {
+	              console.log('notes marked as seen');
+	            },
+	            error: function error() {
+	              console.log('notes not marked as seen');
+	            }
+	          });
+	          //change currrent notes to clicked doctor.
+	          if (this.state.openNotes.doctor === doctor._id) {
+	            this.setState({ openNotes: {
+	                doctor: '',
+	                notes: []
+	              } });
+	          } else {
+	            data = data.sort(function (a, b) {
+	              if (a.seen && !b.seen) {
+	                return 1;
+	              } else if (!a.seen && b.seen) {
+	                return -1;
+	              } else {
+	                return 0;
+	              }
+	            });
+	            this.setState({ openNotes: {
+	                doctor: doctor._id,
+	                notes: data
+	              } });
+	          }
 	        }.bind(this),
 	        error: function error(err) {
 	          console.error("Couldn't get doctor's notes: ", err);
 	        }
 	      });
+	    }
+	  }, {
+	    key: 'hideNote',
+	    value: function hideNote(note) {
+	      var url = '/api/note/edit/' + note._id;
+	      //toggle note.hidden in database
+	      _jquery2.default.ajax({
+	        type: 'PUT',
+	        url: url,
+	        data: JSON.stringify({ hidden: true }),
+	        headers: {
+	          "content-type": "application/json"
+	        },
+	        success: function success(data) {
+	          console.log("note deleted: ", data);
+	        },
+	        error: function error(err) {
+	          console.error("error in AJAX call: ", err);
+	        }
+	      });
+	      //hide div on DOM
+	      var newNotes = this.state.openNotes.notes.filter(function (curNote) {
+	        return curNote !== note;
+	      });
+	      this.setState({ openNotes: {
+	          doctor: this.state.openNotes.doctor,
+	          notes: newNotes
+	        } });
 	    }
 
 	    // getZip() {
@@ -60968,9 +61032,17 @@
 	                      script.name
 	                    ),
 	                    _react2.default.createElement(
-	                      'div',
-	                      { className: 'edit-icon' },
-	                      _react2.default.createElement('i', { className: 'fa fa-pencil-square-o pencil', 'aria-hidden': 'true', onClick: _this2.openEditModalScript.bind(_this2, idx) })
+	                      _reactBootstrap.OverlayTrigger,
+	                      { placement: 'top', overlay: _react2.default.createElement(
+	                          _reactBootstrap.Tooltip,
+	                          { id: 'tooltip' },
+	                          ' Click to edit card.'
+	                        ) },
+	                      _react2.default.createElement(
+	                        'div',
+	                        { className: 'edit-icon' },
+	                        _react2.default.createElement('i', { className: 'fa fa-pencil-square-o pencil', 'aria-hidden': 'true', onClick: _this2.openEditModalScript.bind(_this2, idx) })
+	                      )
 	                    )
 	                  ),
 	                  _react2.default.createElement('i', { className: 'fa fa-times', 'aria-hidden': 'true', onClick: _this2.deleteScript.bind(_this2, idx) })
@@ -60978,29 +61050,23 @@
 	                _react2.default.createElement(
 	                  'div',
 	                  { className: 'script-attribute' },
-	                  ' ',
 	                  _react2.default.createElement('i', { className: 'fa fa-heart red', 'aria-hidden': 'true' }),
 	                  ' Dosage: ',
-	                  script.dosage,
-	                  ' '
+	                  script.dosage
 	                ),
 	                _react2.default.createElement(
 	                  'div',
 	                  { className: 'script-attribute' },
-	                  ' ',
 	                  _react2.default.createElement('i', { className: 'fa fa-bell gold', 'aria-hidden': 'true' }),
 	                  ' Reminder: ',
-	                  script.frequency,
-	                  ' '
+	                  script.frequency
 	                ),
 	                _react2.default.createElement(
 	                  'div',
 	                  { className: 'script-attribute' },
-	                  ' ',
 	                  _react2.default.createElement('i', { className: 'fa fa-calendar royal-blue', 'aria-hidden': 'true' }),
 	                  ' Refill: ',
-	                  String(new Date(script.refill)).split('').slice(0, 15).join(''),
-	                  ' '
+	                  String(new Date(script.refill)).split('').slice(0, 15).join('')
 	                )
 	              );
 	            }, this)
@@ -61048,12 +61114,7 @@
 	                { className: ' doctor-view-container', key: idx },
 	                _react2.default.createElement(
 	                  'div',
-	                  null,
-	                  _react2.default.createElement(
-	                    'div',
-	                    { className: 'delete-doc' },
-	                    _react2.default.createElement('i', { className: 'fa fa-times', 'aria-hidden': 'true', onClick: _this2.deleteDoc.bind(_this2, idx) })
-	                  ),
+	                  { className: 'doc-info' },
 	                  _react2.default.createElement(
 	                    'div',
 	                    { className: 'doctor-top-bar' },
@@ -61066,37 +61127,50 @@
 	                        doctor.name
 	                      ),
 	                      _react2.default.createElement(
-	                        'div',
-	                        { className: 'edit-icon' },
-	                        _react2.default.createElement('i', { className: 'fa fa-pencil-square-o pencil', 'aria-hidden': 'true', onClick: _this2.openEditModalDoctor.bind(_this2, idx) })
+	                        _reactBootstrap.OverlayTrigger,
+	                        { placement: 'top', overlay: _react2.default.createElement(
+	                            _reactBootstrap.Tooltip,
+	                            { id: 'tooltip' },
+	                            ' Click to edit card.'
+	                          ) },
+	                        _react2.default.createElement(
+	                          'div',
+	                          { className: 'edit-icon' },
+	                          _react2.default.createElement('i', { className: 'fa fa-pencil-square-o pencil', 'aria-hidden': 'true', onClick: _this2.openEditModalDoctor.bind(_this2, idx) })
+	                        )
 	                      )
 	                    ),
 	                    _react2.default.createElement(
 	                      'div',
-	                      { className: 'specialty-tag' },
-	                      _react2.default.createElement('i', { className: 'fa fa-stethoscope', 'aria-hidden': 'true' }),
-	                      ' ',
-	                      doctor.specialty
+	                      { className: 'delete-doc' },
+	                      _react2.default.createElement('i', { className: 'fa fa-times', 'aria-hidden': 'true', onClick: _this2.deleteDoc.bind(_this2, idx) })
 	                    )
 	                  ),
 	                  _react2.default.createElement(
 	                    'div',
 	                    { className: 'doctor-attribute' },
 	                    _react2.default.createElement('i', { className: 'fa fa-phone phone-green', 'aria-hidden': 'true' }),
-	                    '  ',
+	                    ' ',
 	                    doctor.phone
 	                  ),
 	                  _react2.default.createElement(
 	                    'div',
 	                    { className: 'doctor-attribute' },
-	                    _react2.default.createElement('i', { className: 'fa fa-envelope envelope', 'aria-hidden': 'true' }),
-	                    '  ',
-	                    doctor.email
+	                    _react2.default.createElement(
+	                      'div',
+	                      { className: 'email-specialist-container' },
+	                      _react2.default.createElement(
+	                        'div',
+	                        null,
+	                        _react2.default.createElement('i', { className: 'fa fa-envelope envelope', 'aria-hidden': 'true' }),
+	                        '  ',
+	                        doctor.email
+	                      )
+	                    )
 	                  ),
 	                  _react2.default.createElement(
 	                    'div',
 	                    { className: 'doctor-footer' },
-	                    ' ',
 	                    _react2.default.createElement(
 	                      'div',
 	                      { className: 'doctor-attribute' },
@@ -61109,27 +61183,48 @@
 	                      { className: 'doctor-attribute' },
 	                      _react2.default.createElement(
 	                        'div',
-	                        { className: 'note-info' },
-	                        _react2.default.createElement(
-	                          _reactBootstrap.Button,
-	                          { bsClass: 'btn info', bsSize: 'xsmall', onClick: _this2.doctorNotes.bind(_this2, doctor) },
-	                          ' (view notes) '
-	                        ),
-	                        ' '
-	                      ),
-	                      _react2.default.createElement(
-	                        'div',
-	                        { className: _this2.state.openNotes.doctor === doctor._id ? "doctor-notes-container" : "hidden" },
-	                        _this2.state.openNotes.notes.map(function (note, idx) {
-	                          return _react2.default.createElement(
-	                            'div',
-	                            { key: idx, className: 'doctor-notes-entry' },
-	                            note.body
-	                          );
-	                        })
+	                        { className: 'specialty-tag' },
+	                        _react2.default.createElement('i', { className: 'fa fa-stethoscope', 'aria-hidden': 'true' }),
+	                        ' ',
+	                        doctor.specialty
 	                      )
 	                    )
 	                  )
+	                ),
+	                _react2.default.createElement(
+	                  'div',
+	                  { className: 'show-notes' },
+	                  _react2.default.createElement(
+	                    _reactBootstrap.OverlayTrigger,
+	                    { placement: 'top', overlay: _react2.default.createElement(
+	                        _reactBootstrap.Tooltip,
+	                        { id: 'tooltip' },
+	                        ' Click to view doctor\'s notes.'
+	                      ) },
+	                    _react2.default.createElement(
+	                      'div',
+	                      { className: 'note-icon' },
+	                      _react2.default.createElement('i', { className: 'fa fa-angle-double-down orange', 'aria-hidden': 'true', onClick: _this2.doctorNotes.bind(_this2, doctor) })
+	                    )
+	                  )
+	                ),
+	                _react2.default.createElement(
+	                  'div',
+	                  { className: _this2.state.openNotes.doctor === doctor._id ? "doctor-notes-container" : "hidden" },
+	                  _this2.state.openNotes.notes.filter(function (note) {
+	                    return !note.hidden;
+	                  }).map(function (note, idx) {
+	                    return _react2.default.createElement(
+	                      'div',
+	                      { key: idx, className: "doctor-notes-entry" + (note.seen ? "" : " highlight") },
+	                      _react2.default.createElement(
+	                        'span',
+	                        { className: 'note-delete' },
+	                        _react2.default.createElement('i', { className: 'fa fa-times', 'aria-hidden': 'true', onClick: _this2.hideNote.bind(_this2, note) })
+	                      ),
+	                      note.body
+	                    );
+	                  })
 	                )
 	              );
 	            }, this)
