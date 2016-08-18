@@ -62123,11 +62123,7 @@
 	
 	var _reactBootstrap = __webpack_require__(/*! react-bootstrap */ 244);
 	
-	var _reactFlopCard = __webpack_require__(!(function webpackMissingModule() { var e = new Error("Cannot find module \"react-flop-card\""); e.code = 'MODULE_NOT_FOUND'; throw e; }()));
-	
-	var _reactFlopCard2 = _interopRequireDefault(_reactFlopCard);
-	
-	var _editDoctor = __webpack_require__(/*! ./editDoctor.jsx */ 796);
+	var _editDoctor = __webpack_require__(/*! ./editDoctor.jsx */ 792);
 	
 	var _editDoctor2 = _interopRequireDefault(_editDoctor);
 	
@@ -106060,11 +106056,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }()), __webpack_require__(/*! ./../webpack/buildin/module.js */ 542)(module)))
 
 /***/ },
-/* 792 */,
-/* 793 */,
-/* 794 */,
-/* 795 */,
-/* 796 */
+/* 792 */
 /*!***********************************!*\
   !*** ./client/app/editDoctor.jsx ***!
   \***********************************/

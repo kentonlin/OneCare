@@ -9,8 +9,6 @@ import EditScriptRemindModal from './editScript.jsx';
 import Map from './map.jsx';
 import _ from 'lodash';
 import { Modal, Button, ButtonToolbar, Tooltip, OverlayTrigger } from 'react-bootstrap';
-import FlipCard from 'react-flop-card';
-
 import EditDoctorModal from './editDoctor.jsx';
 
 
