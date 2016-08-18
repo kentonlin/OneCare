@@ -62335,10 +62335,19 @@
 	        },
 	        success: function (data) {
 	          console.log(data);
-	          this.setState({ openNotes: {
-	              doctor: doctor._id,
-	              notes: data
-	            } });
+	          if (this.state.openNotes.doctor === doctor._id) {
+	            console.log("toggle me off.");
+	            this.setState({ openNotes: {
+	                doctor: '',
+	                notes: []
+	              } });
+	          } else {
+	            console.log("toggle me on.");
+	            this.setState({ openNotes: {
+	                doctor: doctor._id,
+	                notes: data
+	              } });
+	          }
 	        }.bind(this),
 	        error: function error(err) {
 	          console.error("Couldn't get doctor's notes: ", err);
