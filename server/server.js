@@ -160,7 +160,7 @@ app.post('/api/note/add/*', function(req, res) {
   dbHelpers.addNote(data, res);
 });
 
-app.get('/api/note/*', function(req, res) {
+app.get('/api/note/getAll/*', function(req, res) {
   //retrieves all notes for specified doctor
   var doctorID = ObjectId(req.url.split('/').pop());
   dbHelpers.getNotes(doctorID, res);
@@ -185,6 +185,20 @@ app.get('/api/note/*', function(req, res) {
 //     res.sendStatus(400);
 //   });
 // });
+
+app.put('/api/note/getAll/*', function(req, res) {
+  //retrieves all notes for specified doctor
+  var doctorID = ObjectId(req.url.split('/').pop());
+  var edit = req.body;
+  console.log(edit);
+  dbHelpers.editAllNotes(doctorID, edit, res);
+})
+
+app.put('/api/note/edit/*', function(req, res) {
+  var targetNoteID = ObjectId(req.url.split('/').pop());
+  var edit = req.body;
+  dbHelpers.editNote(targetNoteID, edit, res);
+})
 
 app.get('/*', function(req, res) {
   res.sendFile(path.join(rootPath + "/index.html"));
