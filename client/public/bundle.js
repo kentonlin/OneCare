@@ -37936,12 +37936,25 @@
 	      phone: "",
 	      zipcode: 10001,
 	      email: "",
-	      invalidPhone: false,
-	      invalidEmail: false
+	      //form validation
+	      firstnameIsValid: false,
+	      lastnameIsValid: false,
+	      usernameIsValid: false,
+	      passwordIsValid: false,
+	      phoneIsValid: false,
+	      emailIsValid: false,
+	      zipcodeIsValid: false,
+	      formIsValid: true
 	    };
 	    _this.submitUser = _this.submitUser.bind(_this);
-	    _this.validatePhone = _this.validatePhone.bind(_this);
-	    _this.validateEmail = _this.validateEmail.bind(_this);
+	    _this.handleFirstName = _this.handleFirstName.bind(_this);
+	    _this.handleLastName = _this.handleLastName.bind(_this);
+	    _this.handleUsername = _this.handleUsername.bind(_this);
+	    _this.handlePassword = _this.handlePassword.bind(_this);
+	    _this.handleAddress = _this.handleAddress.bind(_this);
+	    _this.handleZipcode = _this.handleZipcode.bind(_this);
+	    _this.handlePhone = _this.handlePhone.bind(_this);
+	    _this.handleEmail = _this.handleEmail.bind(_this);
 	    return _this;
 	  }
 	
@@ -37949,24 +37962,20 @@
 	    key: 'submitUser',
 	    value: function submitUser(e) {
 	
-	      if (!this.state.invalidPhone && !this.state.invalidEmail) {
-	        alert("Please input a valid phone number and email");
-	      } else if (!this.state.invalidPhone) {
-	        alert("Please input a valid phone number");
-	      } else if (!this.state.invalidEmail) {
-	        alert("Please input a valid email");
+	      if (!this.state.phoneIsValid || !this.state.emailIsValid || !this.state.zipcodeIsValid || !this.state.firstnameIsValid || !this.state.lastnameIsValid || !this.state.usernameIsValid || !this.state.passwordIsValid) {
+	        this.setState({ formIsValid: false });
 	      } else {
 	        window.localStorage.removeItem("currentPage");
 	        e.preventDefault();
 	        var newUser = {
-	          firstName: this.state.firstName,
-	          lastName: this.state.lastName,
-	          username: this.state.username,
-	          password: this.state.password,
+	          firstName: this.state.firstName, //length 2
+	          lastName: this.state.lastName, //length 2
+	          username: this.state.username, //length 4
+	          password: this.state.password, //length 4
 	          address: this.state.address,
-	          phone: this.state.phone,
-	          zipcode: this.state.zipcode,
-	          email: this.state.email
+	          phone: this.state.phone, //
+	          zipcode: this.state.zipcode, //exactly 5 digits
+	          email: this.state.email //
 	        };
 	
 	        _jquery2.default.ajax({
@@ -37991,27 +38000,84 @@
 	      }
 	    }
 	  }, {
-	    key: 'validatePhone',
-	    value: function validatePhone(phone) {
-	      this.setState({
-	        invalidPhone: phone.match(/\d/g).length === 10
-	      });
+	    key: 'handleFirstName',
+	    value: function handleFirstName(e) {
+	      this.setState({ firstName: e.target.value });
+	      if (e.target.value.length >= 2) {
+	        this.setState({ firstnameIsValid: true });
+	      } else {
+	        this.setState({ firstnameIsValid: false });
+	      }
 	    }
 	  }, {
-	    key: 'validateEmail',
-	    value: function validateEmail(email) {
+	    key: 'handleLastName',
+	    value: function handleLastName(e) {
+	      this.setState({ lastName: e.target.value });
+	      if (e.target.value.length >= 2) {
+	        this.setState({ lastnameIsValid: true });
+	      } else {
+	        this.setState({ lastnameIsValid: false });
+	      }
+	    }
+	  }, {
+	    key: 'handleUsername',
+	    value: function handleUsername(e) {
+	      this.setState({ username: e.target.value });
+	      if (e.target.value.length >= 4) {
+	        this.setState({ usernameIsValid: true });
+	      } else {
+	        this.setState({ usernameIsValid: false });
+	      }
+	    }
+	  }, {
+	    key: 'handlePassword',
+	    value: function handlePassword(e) {
+	      this.setState({ password: e.target.value });
+	      if (e.target.value.length >= 4) {
+	        this.setState({ passwordIsValid: true });
+	      } else {
+	        this.setState({ passwordIsValid: false });
+	      }
+	    }
+	  }, {
+	    key: 'handleAddress',
+	    value: function handleAddress(e) {
+	      this.setState({ address: e.target.value });
+	    }
+	  }, {
+	    key: 'handleZipcode',
+	    value: function handleZipcode(e) {
+	      this.setState({ zipcode: e.target.value });
+	      if (e.target.value.match(/\d/g).length === 5) {
+	        this.setState({ zipcodeIsValid: true });
+	      } else {
+	        this.setState({ zipcodeIsValid: false });
+	      }
+	    }
+	  }, {
+	    key: 'handlePhone',
+	    value: function handlePhone(e) {
+	      this.setState({ phone: e.target.value });
+	      if (e.target.value.match(/\d/g).length === 10) {
+	        this.setState({ phoneIsValid: true });
+	      } else {
+	        this.setState({ phoneIsValid: false });
+	      }
+	    }
+	  }, {
+	    key: 'handleEmail',
+	    value: function handleEmail(e) {
 	      var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-	      console.log("test", re.test(email));
-	      console.log("state", this.state.invalidEmail);
-	      this.setState({
-	        invalidEmail: re.test(email)
-	      });
+	      this.setState({ email: e.target.value });
+	      if (re.test(e.target.value)) {
+	        this.setState({ emailIsValid: true });
+	      } else {
+	        this.setState({ emailIsValid: false });
+	      }
 	    }
 	  }, {
 	    key: 'render',
 	    value: function render() {
-	      var _this2 = this;
-	
 	      return _react2.default.createElement(
 	        'div',
 	        { className: 'signup-container' },
@@ -38021,101 +38087,108 @@
 	          ' Sign-up '
 	        ),
 	        _react2.default.createElement(
-	          'form',
-	          null,
-	          _react2.default.createElement(
-	            'div',
-	            { className: 'signup-cat' },
-	            'First Name'
-	          ),
-	          _react2.default.createElement('input', { type: 'text', onChange: function onChange(event) {
-	              _this2.setState({ firstName: event.target.value });
-	            } }),
-	          _react2.default.createElement('br', null),
-	          _react2.default.createElement(
-	            'div',
-	            { className: 'signup-cat' },
-	            'Last Name'
-	          ),
-	          _react2.default.createElement('input', { type: 'text', onChange: function onChange(event) {
-	              _this2.setState({ lastName: event.target.value });
-	            } }),
-	          _react2.default.createElement('br', null),
-	          _react2.default.createElement(
-	            'div',
-	            { className: 'signup-cat' },
-	            'username'
-	          ),
-	          _react2.default.createElement('input', { type: 'text', onChange: function onChange(event) {
-	              _this2.setState({ username: event.target.value });
-	            } }),
-	          _react2.default.createElement('br', null),
-	          _react2.default.createElement(
-	            'div',
-	            { className: 'signup-cat' },
-	            'password'
-	          ),
-	          _react2.default.createElement('input', { type: 'password', onChange: function onChange(event) {
-	              _this2.setState({ password: event.target.value });
-	            } }),
-	          _react2.default.createElement('br', null),
-	          _react2.default.createElement(
-	            'div',
-	            { className: 'signup-cat' },
-	            'address'
-	          ),
-	          _react2.default.createElement('input', { type: 'text', onChange: function onChange(event) {
-	              _this2.setState({ address: event.target.value });
-	            } }),
-	          _react2.default.createElement('br', null),
-	          _react2.default.createElement(
-	            'div',
-	            { className: 'signup-cat' },
-	            'zip code'
-	          ),
-	          _react2.default.createElement('input', { type: 'text', onChange: function onChange(event) {
-	              _this2.setState({ zipcode: event.target.value });
-	            } }),
-	          _react2.default.createElement('br', null),
-	          _react2.default.createElement(
-	            'div',
-	            { className: 'signup-cat' },
-	            'phone'
-	          ),
-	          _react2.default.createElement('input', { type: 'text', onChange: function onChange(event) {
-	              _this2.setState({ phone: event.target.value });
-	              _this2.validatePhone(_this2.state.phone);
-	            } }),
-	          ' ',
-	          _react2.default.createElement(
-	            'h6',
-	            { className: this.state.invalidPhone ? 'hidden' : 'invalid' },
-	            ' Phone number must be 11 digits'
-	          ),
-	          _react2.default.createElement(
-	            'div',
-	            { className: 'signup-cat' },
-	            'email'
-	          ),
-	          _react2.default.createElement('input', { type: 'text', onChange: function onChange(event) {
-	              _this2.setState({ email: event.target.value });
-	              _this2.validateEmail(_this2.state.email);
-	            } }),
-	          _react2.default.createElement(
-	            'h6',
-	            { className: this.state.invalidEmail ? 'hidden' : 'invalid' },
-	            ' Enter a valid email'
-	          ),
-	          _react2.default.createElement(
-	            'button',
-	            { className: 'signup-cat', onClick: this.submitUser },
-	            'Submit'
-	          )
+	          'div',
+	          { className: 'signup-cat' },
+	          'First Name'
+	        ),
+	        _react2.default.createElement('input', { type: 'text', onChange: this.handleFirstName }),
+	        _react2.default.createElement('br', null),
+	        _react2.default.createElement(
+	          'h6',
+	          { className: this.state.firstnameIsValid ? 'hidden' : 'invalid' },
+	          ' Name must be at least two letters. '
+	        ),
+	        _react2.default.createElement(
+	          'div',
+	          { className: 'signup-cat' },
+	          'Last Name'
+	        ),
+	        _react2.default.createElement('input', { type: 'text', onChange: this.handleLastName }),
+	        _react2.default.createElement('br', null),
+	        _react2.default.createElement(
+	          'h6',
+	          { className: this.state.lastnameIsValid ? 'hidden' : 'invalid' },
+	          ' Name must be at least two letters. '
+	        ),
+	        _react2.default.createElement(
+	          'div',
+	          { className: 'signup-cat' },
+	          'username'
+	        ),
+	        _react2.default.createElement('input', { type: 'text', onChange: this.handleUsername }),
+	        _react2.default.createElement('br', null),
+	        _react2.default.createElement(
+	          'h6',
+	          { className: this.state.usernameIsValid ? 'hidden' : 'invalid' },
+	          ' Username must be at least four letters. '
+	        ),
+	        _react2.default.createElement(
+	          'div',
+	          { className: 'signup-cat' },
+	          'password'
+	        ),
+	        _react2.default.createElement('input', { type: 'password', onChange: this.handlePassword }),
+	        _react2.default.createElement('br', null),
+	        _react2.default.createElement(
+	          'h6',
+	          { className: this.state.passwordIsValid ? 'hidden' : 'invalid' },
+	          ' Password must be at least four letters. '
+	        ),
+	        _react2.default.createElement(
+	          'div',
+	          { className: 'signup-cat' },
+	          'address'
+	        ),
+	        _react2.default.createElement('input', { type: 'text', onChange: this.handleAddress }),
+	        _react2.default.createElement('br', null),
+	        _react2.default.createElement(
+	          'div',
+	          { className: 'signup-cat' },
+	          'zip code'
+	        ),
+	        _react2.default.createElement('input', { type: 'text', onChange: this.handleZipcode }),
+	        _react2.default.createElement('br', null),
+	        _react2.default.createElement(
+	          'h6',
+	          { className: this.state.zipcodeIsValid ? 'hidden' : 'invalid' },
+	          ' Please enter a valid zipcode '
+	        ),
+	        _react2.default.createElement(
+	          'div',
+	          { className: 'signup-cat' },
+	          'phone'
+	        ),
+	        _react2.default.createElement('input', { type: 'text', onChange: this.handlePhone }),
+	        _react2.default.createElement(
+	          'h6',
+	          { className: this.state.phoneIsValid ? 'hidden' : 'invalid' },
+	          ' Phone number must be 11 digits'
+	        ),
+	        _react2.default.createElement(
+	          'div',
+	          { className: 'signup-cat' },
+	          'email'
+	        ),
+	        _react2.default.createElement('input', { type: 'text', onChange: this.handleEmail }),
+	        _react2.default.createElement(
+	          'h6',
+	          { className: this.state.emailIsValid ? 'hidden' : 'invalid' },
+	          ' Please enter a valid email '
+	        ),
+	        _react2.default.createElement(
+	          'button',
+	          { className: 'signup-cat', onClick: this.submitUser },
+	          'Submit'
+	        ),
+	        _react2.default.createElement(
+	          'h6',
+	          { className: this.state.formIsValid ? 'hidden' : 'invalid' },
+	          ' Some of your data is not valid.  Please check above. '
 	        ),
 	        _react2.default.createElement(
 	          _reactRouter.Link,
 	          { to: '/signin' },
-	          'Return to Sign-in '
+	          ' Return to Sign-in '
 	        )
 	      );
 	    }
@@ -38194,13 +38267,13 @@
 	
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 	
-	var NavigateView = function (_React$Component) {
-	  _inherits(NavigateView, _React$Component);
+	var Navigate = function (_React$Component) {
+	  _inherits(Navigate, _React$Component);
 	
-	  function NavigateView(props) {
-	    _classCallCheck(this, NavigateView);
+	  function Navigate(props) {
+	    _classCallCheck(this, Navigate);
 	
-	    var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(NavigateView).call(this, props));
+	    var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(Navigate).call(this, props));
 	
 	    _this.state = {
 	      "username": window.localStorage.username
@@ -38209,7 +38282,7 @@
 	    return _this;
 	  }
 	
-	  _createClass(NavigateView, [{
+	  _createClass(Navigate, [{
 	    key: 'componentDidMount',
 	    value: function componentDidMount() {
 	      if (!window.localStorage.latitude) {
@@ -38259,10 +38332,10 @@
 	    }
 	  }]);
 	
-	  return NavigateView;
+	  return Navigate;
 	}(_react2.default.Component);
 	
-	exports.default = NavigateView;
+	exports.default = Navigate;
 
 /***/ },
 /* 244 */
@@ -57749,49 +57822,74 @@
 	      email: "",
 	      address: "",
 	      specialty: "",
-	      validPhone: false,
-	      validSpecialty: false
+	      //validation
+	      phoneIsValid: false,
+	      specialtyIsValid: false,
+	      nameIsValid: false,
+	      emailIsValid: false,
+	      formIsValid: true
 	    };
-	    _this.handleChange = _this.handleChange.bind(_this);
 	    _this.submitNewDoctor = _this.submitNewDoctor.bind(_this);
+	    _this.handlePhone = _this.handlePhone.bind(_this);
+	    _this.handleSpecialty = _this.handleSpecialty.bind(_this);
+	    _this.handleName = _this.handleName.bind(_this);
+	    _this.handleEmail = _this.handleEmail.bind(_this);
+	    _this.handleAddress = _this.handleAddress.bind(_this);
 	    return _this;
 	  }
 	
 	  _createClass(DoctorEntryView, [{
-	    key: 'handleChange',
-	    value: function handleChange(event) {
-	      var stateVal = event.target.id;
-	      if (stateVal === "name") {
-	        this.setState({ name: event.target.value, validName: true });
-	      } else if (stateVal === "phone") {
-	        this.setState({ phone: event.target.value, validPhone: event.target.value.match(/\d/g).length === 11
-	        });
-	      } else if (stateVal === "email") {
-	        this.setState({ email: event.target.value });
-	      } else if (stateVal === "address") {
-	        this.setState({ address: event.target.value });
-	      } else if (stateVal === "specialty") {
-	        this.setState({ specialty: event.target.value, validSpecialty: true });
+	    key: 'handlePhone',
+	    value: function handlePhone(e) {
+	      this.setState({ phone: e.target.value });
+	      if (e.target.value.match(/\d/g).length === 11) {
+	        this.setState({ phoneIsValid: true });
+	      } else {
+	        this.setState({ phoneIsValid: false });
 	      }
+	    }
+	  }, {
+	    key: 'handleSpecialty',
+	    value: function handleSpecialty(e) {
+	      this.setState({ specialty: e.target.value });
+	      if (e.target.value !== "::Select Specialty::") {
+	        this.setState({ specialtyIsValid: true });
+	      } else {
+	        this.setState({ specialtyIsValid: false });
+	      }
+	    }
+	  }, {
+	    key: 'handleName',
+	    value: function handleName(e) {
+	      this.setState({ name: e.target.value });
+	      if (e.target.value.length > 2) {
+	        this.setState({ nameIsValid: true });
+	      } else {
+	        this.setState({ nameIsValid: false });
+	      }
+	    }
+	  }, {
+	    key: 'handleEmail',
+	    value: function handleEmail(e) {
+	      var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+	      this.setState({ email: e.target.value });
+	      if (re.test(e.target.value)) {
+	        this.setState({ emailIsValid: true });
+	      } else {
+	        this.setState({ emailIsValid: false });
+	      }
+	    }
+	  }, {
+	    key: 'handleAddress',
+	    value: function handleAddress(e) {
+	      this.setState({ address: e.target.value });
 	    }
 	  }, {
 	    key: 'submitNewDoctor',
 	    value: function submitNewDoctor(e) {
 	      e.preventDefault();
-	      if (!this.state.name.length && !this.state.validPhone && !this.state.validSpecialty) {
-	        alert("Please correct the following fields: name, phone, specialty");
-	      } else if (!this.state.validPhone && !this.state.validSpecialty) {
-	        alert("Please enter a valid phone and specialty");
-	      } else if (!this.state.name.length && !this.state.validSpecialty) {
-	        alert("Please enter a valid name and specialty");
-	      } else if (!this.state.name.length && !this.state.validPhone) {
-	        alert("Please enter a valid name and phone");
-	      } else if (!this.state.name.length) {
-	        alert("Please enter a name");
-	      } else if (!this.state.validPhone) {
-	        alert("Please enter a valid phone");
-	      } else if (!this.state.validSpecialty) {
-	        alert("Please enter a specialty");
+	      if (!this.state.nameIsValid || !this.state.phoneIsValid || !this.state.emailIsValid || !this.state.specialtyIsValid) {
+	        this.setState({ formIsValid: false });
 	      } else {
 	        var toSubmit = { "username": window.localStorage.username, "first_last": window.localStorage.first_last, "userID": window.localStorage.userID, "doc": {
 	            name: this.state.name,
@@ -57825,33 +57923,43 @@
 	          'Input a new doctor!'
 	        ),
 	        _react2.default.createElement(
-	          'form',
+	          'div',
 	          { className: 'doctor-entry-form' },
 	          _react2.default.createElement(
 	            'div',
 	            null,
 	            'Name'
 	          ),
-	          _react2.default.createElement('input', { id: 'name', type: 'text', onChange: this.handleChange }),
+	          _react2.default.createElement('input', { id: 'name', type: 'text', onChange: this.handleName }),
+	          _react2.default.createElement(
+	            'div',
+	            { className: this.state.nameIsValid ? "hidden" : "invalid" },
+	            ' Name must be at least 2 characters. '
+	          ),
 	          _react2.default.createElement(
 	            'div',
 	            null,
 	            'Phone'
 	          ),
-	          _react2.default.createElement('input', { id: 'phone', type: 'text', onChange: this.handleChange }),
-	          _react2.default.createElement(
-	            'h6',
-	            { className: this.state.validPhone ? 'hidden' : 'invalid' },
-	            ' Phone number must be 11 digits'
-	          ),
+	          _react2.default.createElement('input', { id: 'phone', type: 'text', onChange: this.handlePhone }),
 	          _react2.default.createElement('br', null),
+	          _react2.default.createElement(
+	            'div',
+	            { className: this.state.phoneIsValid ? "hidden" : "invalid" },
+	            ' Phone numbers must be 11 digits long. '
+	          ),
 	          _react2.default.createElement(
 	            'div',
 	            null,
 	            'Email'
 	          ),
-	          _react2.default.createElement('input', { id: 'email', type: 'text', onChange: this.handleChange }),
+	          _react2.default.createElement('input', { id: 'email', type: 'text', onChange: this.handleEmail }),
 	          _react2.default.createElement('br', null),
+	          _react2.default.createElement(
+	            'div',
+	            { className: this.state.emailIsValid ? "hidden" : "invalid" },
+	            ' Please enter a valid email. '
+	          ),
 	          _react2.default.createElement(
 	            'h6',
 	            { className: 'invalid' },
@@ -57863,7 +57971,7 @@
 	            null,
 	            'Address'
 	          ),
-	          _react2.default.createElement('input', { id: 'address', type: 'text', onChange: this.handleChange }),
+	          _react2.default.createElement('input', { id: 'address', type: 'text', onChange: this.handleAddress }),
 	          _react2.default.createElement('br', null),
 	          _react2.default.createElement(
 	            'div',
@@ -57872,7 +57980,7 @@
 	          ),
 	          _react2.default.createElement(
 	            'select',
-	            { id: 'specialty', onChange: this.handleChange },
+	            { id: 'specialty', onChange: this.handleSpecialty },
 	            _react2.default.createElement(
 	              'option',
 	              null,
@@ -57887,9 +57995,19 @@
 	            })
 	          ),
 	          _react2.default.createElement(
+	            'div',
+	            { className: this.state.specialtyIsValid ? "hidden" : "invalid" },
+	            ' Select a specialty. '
+	          ),
+	          _react2.default.createElement(
 	            'button',
 	            { onClick: this.submitNewDoctor },
 	            'Submit!'
+	          ),
+	          _react2.default.createElement(
+	            'h6',
+	            { className: this.state.formIsValid ? 'hidden' : 'invalid' },
+	            ' Some of your data is not valid.  Please check above. '
 	          )
 	        )
 	      );
@@ -60017,7 +60135,6 @@
 	      selectedSymptoms: [],
 	      recs: [],
 	      modalIsOpen: false,
-	      // zipcode: this.props.zipcode,
 	      brainState: {}
 	    };
 	    _this.handleDeselect = _this.handleDeselect.bind(_this);
@@ -60182,7 +60299,7 @@
 	        _react2.default.createElement(
 	          'div',
 	          { className:  true ? "" : "hidden" },
-	          _react2.default.createElement(_symptomEntryModal2.default, { closeFn: this.props.closeFn, zipcode: this.props.zipcode, brainState: this.state.brainState, symptoms: this.state.selectedSymptoms, recommendations: this.state.recs })
+	          _react2.default.createElement(_symptomEntryModal2.default, { brainState: this.state.brainState, symptoms: this.state.selectedSymptoms, recommendations: this.state.recs })
 	        )
 	      );
 	    }
@@ -60507,8 +60624,6 @@
 	
 	var _reactRouter = __webpack_require__(/*! react-router */ 175);
 	
-	var _reactBootstrap = __webpack_require__(/*! react-bootstrap */ 244);
-	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -60631,13 +60746,12 @@
 	      this.setState({
 	        drxs: drxs.data
 	      });
+	      console.log('this works');
 	      console.log('+++++++++++++++>', drxs);
 	    }
 	  }, {
 	    key: 'render',
 	    value: function render() {
-	      var _this2 = this;
-	
 	      return _react2.default.createElement(
 	        'div',
 	        null,
@@ -60713,19 +60827,17 @@
 	            _react2.default.createElement(
 	              'div',
 	              null,
-	              'Or, click below to find some ',
+	              'Or, check out some ',
 	              this.state.currentRec ? this.state.currentRec.name : '**empty**',
-	              's near you!'
+	              's near you. Click the MONEY button!'
 	            ),
 	            _react2.default.createElement(
-	              _reactBootstrap.Button,
-	              { onClick: this.drx, bsStyle: 'primary', bsSize: 'small' },
-	              'Find ',
-	              this.state.currentRec ? this.state.currentRec.name : '**empty**',
-	              's'
+	              'button',
+	              { onClick: this.drx },
+	              'Show me the MONEY'
 	            ),
 	            this.state.drxs.map(function (doctrx, i) {
-	              return _react2.default.createElement(_DRXView2.default, { closeFn: _this2.props.closeFn, zipcode: _this2.props.zipcode, info: doctrx });
+	              return _react2.default.createElement(_DRXView2.default, { info: doctrx });
 	            })
 	          ),
 	          _react2.default.createElement(
@@ -61913,7 +62025,7 @@
   \********************************/
 /***/ function(module, exports, __webpack_require__) {
 
-	'use strict';
+	"use strict";
 	
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
@@ -61924,8 +62036,6 @@
 	var _react = __webpack_require__(/*! react */ 1);
 	
 	var _react2 = _interopRequireDefault(_react);
-	
-	var _reactBootstrap = __webpack_require__(/*! react-bootstrap */ 244);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
@@ -61941,118 +62051,44 @@
 	  function DRXView(props) {
 	    _classCallCheck(this, DRXView);
 	
-	    // this.yalp = this.yalp.bind(this);
-	    var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(DRXView).call(this, props));
-	
-	    _this.findDrx = _this.findDrx.bind(_this);
-	    return _this;
+	    return _possibleConstructorReturn(this, Object.getPrototypeOf(DRXView).call(this, props));
 	  }
 	
+	  // this line of code will display insurance taken of each doctor, which is an array:
+	  // <div><span className="drx-attribute">Bio: </span>{this.props.info.insurances[i].insurance_provider.name}</div>
+	
+	
 	  _createClass(DRXView, [{
-	    key: 'findDrx',
-	
-	
-	    // no longer needed :(
-	    // yalp() {
-	    //   $.ajax({
-	    //     type: 'POST',
-	    //     url: '/api/yelp',
-	    //     headers: {
-	    //       "content-type": "application/json"
-	    //     },
-	    //     data: JSON.stringify({ name: this.props.info.profile.first_name+' '+this.props.info.profile.last_name, zip: this.props.zipcode }),
-	    //     success: function(searchTerm) {
-	    //       console.log(searchTerm);
-	    //     }.bind(this),
-	    //     error: function(err) {
-	    //       console.error('no yelp', err);
-	    //     }
-	    //   });
-	    // }
-	
-	    value: function findDrx() {
-	      var npiUrl = 'https://api.betterdoctor.com/2016-03-01/doctors/npi/' + this.props.info.npi + '?user_key=87b39c90783391ac6ce972736d117741';
-	      console.log(npiUrl);
-	      console.log('PROPS:', this.props);
-	      $.ajax({
-	        type: 'GET',
-	        url: npiUrl,
-	        success: function (npiData) {
-	          console.log('name:', npiData.data.practices[0].name);
-	          console.log('phone:', npiData.data.practices[0].phones[0].number);
-	          console.log('addy:' + '\n', npiData.data.practices[0].visit_address.street + '\n', npiData.data.practices[0].visit_address.city + '\n', npiData.data.practices[0].visit_address.state + '\n', npiData.data.practices[0].visit_address.zip);
-	          console.log('spec:', npiData.data.specialties[0].actor);
-	
-	          var toSubmit = {
-	            "username": window.localStorage.username,
-	            "first_last": window.localStorage.first_last,
-	            "userID": window.localStorage.userID,
-	            "doc": {
-	              name: npiData.data.practices[0].name,
-	              phone: '1' + npiData.data.practices[0].phones[0].number,
-	              email: 'N/A',
-	              address: npiData.data.practices[0].visit_address.street + ' ' + npiData.data.practices[0].visit_address.city + ', ' + npiData.data.practices[0].visit_address.state,
-	              specialty: npiData.data.specialties[0].actor
-	            }
-	          };
-	
-	          $.ajax({
-	            type: 'POST',
-	            url: '/api/doctor/add',
-	            headers: {
-	              'content-type': 'application/json'
-	            },
-	            data: JSON.stringify(toSubmit),
-	            success: this.props.closeFn(),
-	            error: function error(err) {
-	              console.log('inner error', err);
-	            }
-	          });
-	        }.bind(this),
-	        error: function error(err) {
-	          console.log('outer error', err);
-	        }
-	      });
-	    }
-	  }, {
-	    key: 'render',
+	    key: "render",
 	    value: function render() {
+	      console.log(this.props.info);
 	      return _react2.default.createElement(
-	        'div',
-	        { className: 'card-wrap' },
+	        "div",
+	        { className: "card-wrap" },
 	        _react2.default.createElement(
-	          'div',
-	          { className: 'profile_pic-wrap' },
-	          _react2.default.createElement('img', { src: this.props.info.profile.image_url, alt: '' })
+	          "div",
+	          { className: "profile_pic-wrap" },
+	          _react2.default.createElement("img", { src: this.props.info.profile.image_url, alt: "" })
 	        ),
 	        _react2.default.createElement(
-	          'div',
+	          "div",
 	          null,
 	          _react2.default.createElement(
-	            _reactBootstrap.Button,
-	            { onClick: this.findDrx, bsStyle: 'primary', bsSize: 'xsmall' },
-	            'SAVE TO ROLODEX'
-	          )
-	        ),
-	        _react2.default.createElement(
-	          'div',
-	          null,
-	          _react2.default.createElement(
-	            'p',
+	            "p",
 	            null,
 	            this.props.info.ratings[0] ? this.props.info.ratings[0].rating + ' stars' : 'No rating found'
 	          )
 	        ),
 	        _react2.default.createElement(
-	          'div',
-	          { className: 'info-wrap' },
+	          "div",
+	          { className: "info-wrap" },
 	          _react2.default.createElement(
-	            'h3',
-	            { className: 'user-name' },
+	            "h3",
+	            { className: "user-name" },
 	            this.props.info.profile.first_name + ' ' + this.props.info.profile.last_name
 	          ),
 	          _react2.default.createElement(
-	            'p',
+	            "p",
 	            null,
 	            this.props.info.profile.bio
 	          )
@@ -62063,6 +62099,13 @@
 	
 	  return DRXView;
 	}(_react2.default.Component);
+	// <div className="drx-view-container">
+	//   <div><span className="drx-attribute">Image: </span><img src={this.props.info.profile.image_url}></img></div>
+	//   <div><span className="drx-attribute">Rating: </span>{this.props.info.ratings[0] ? this.props.info.ratings[0].rating+' stars' : 'No rating found'}</div>
+	//   <div><span className="drx-attribute">Name: </span>{this.props.info.profile.first_name+' '+this.props.info.profile.last_name}</div>
+	//   <div><span className="drx-attribute">Bio: </span>{this.props.info.profile.bio}</div>
+	// </div>
+	
 	
 	exports.default = DRXView;
 
@@ -62146,18 +62189,18 @@
 	    _this.state = {
 	      doctors: [],
 	      scripts: [],
-	      zipcode: null,
 	      inputZip: null,
 	      editScript: null,
+	
 	      editDoctor: null,
 	      editModalDoctorIsOpen: false,
+	
 	      scriptmodalIsOpen: false,
 	      docmodalIsOpen: false,
 	      mapmodalIsOpen: false,
 	      symptomModalIsOpen: false,
 	      brainModalIsOpen: false,
 	      editModalIsOpen: false,
-	      notesOpen: false,
 	      openNotes: {
 	        doctor: '',
 	        notes: []
@@ -62185,6 +62228,7 @@
 	          borderRadius: '4px',
 	          outline: 'none',
 	          padding: '20px'
+	
 	        }
 	      }
 	    };
@@ -62205,7 +62249,8 @@
 	    _this.openEditModalScript = _this.openEditModalScript.bind(_this);
 	    _this.closeEditModalScript = _this.closeEditModalScript.bind(_this);
 	    _this.doctorNotes = _this.doctorNotes.bind(_this);
-	    _this.getZip = _this.getZip.bind(_this);
+	    // this.getZip = this.getZip.bind(this);
+	
 	    _this.openEditModalDoctor = _this.openEditModalDoctor.bind(_this);
 	    _this.closeEditModalDoctor = _this.closeEditModalDoctor.bind(_this);
 	
@@ -62250,6 +62295,7 @@
 	  }, {
 	    key: 'openModalScript',
 	    value: function openModalScript() {
+	
 	      console.log("open modal script called");
 	      console.log('this is the editscript', this.state.editScript);
 	      this.setState({
@@ -62315,8 +62361,6 @@
 	    value: function openModalSymptom() {
 	      this.setState({
 	        symptomModalIsOpen: true
-	      }, function () {
-	        console.log(this.state.zipcode);
 	      });
 	    }
 	  }, {
@@ -62405,10 +62449,6 @@
 	  }, {
 	    key: 'doctorNotes',
 	    value: function doctorNotes(doctor) {
-	      this.setState({
-	        notesOpen: !this.state.notesOpen
-	      });
-	
 	      var url = '/api/note/getAll/' + doctor._id;
 	      _jquery2.default.ajax({
 	        type: 'GET',
@@ -62487,33 +62527,33 @@
 	          notes: newNotes
 	        } });
 	    }
-	  }, {
-	    key: 'getZip',
-	    value: function getZip() {
-	      _jquery2.default.ajax({
-	        type: 'POST',
-	        url: '/api/user/zip',
-	        headers: {
-	          "content-type": "application/json"
-	        },
-	        data: JSON.stringify({ "username": window.localStorage.username }),
-	        success: function (zipcode) {
-	          console.log("USER zipcode", zipcode);
-	          this.setState({
-	            zipcode: zipcode
-	          });
-	        }.bind(this),
-	        error: function error(err) {
-	          console.log('Could not retrieve user zipcode', err);
-	        }
-	      });
-	    }
+	
+	    // getZip() {
+	    //   $.ajax({
+	    //     type: 'POST',
+	    //     url: '/api/user/zip',
+	    //     headers: {
+	    //       "content-type": "application/json"
+	    //     },
+	    //     data: JSON.stringify({"username": window.localStorage.username}),
+	    //     success: function(zipcode) {
+	    //       console.log("USER zipcode", zipcode);
+	    //       this.setState({
+	    //         zipcode: zipcode
+	    //       });
+	    //     }.bind(this),
+	    //     error: function(err) {
+	    //       console.log('Could not retrieve user zipcode', err);
+	    //     }
+	    //   });
+	    // }
+	
+	
 	  }, {
 	    key: 'componentDidMount',
 	    value: function componentDidMount() {
 	      this.getScripts();
 	      this.getDocs();
-	      this.getZip();
 	    }
 	  }, {
 	    key: 'render',
@@ -62567,7 +62607,8 @@
 	            )
 	          ),
 	          _react2.default.createElement(_map2.default, {
-	            zipcode: this.state.inputZip })
+	            zipcode: this.state.inputZip
+	          })
 	        ),
 	        _react2.default.createElement(
 	          _reactBootstrap.Modal,
@@ -62581,9 +62622,7 @@
 	              _react2.default.createElement('i', { className: 'fa fa-times-circle', 'aria-hidden': 'true' })
 	            )
 	          ),
-	          _react2.default.createElement(_symptomEntry2.default, {
-	            zipcode: this.state.zipcode,
-	            closeFn: this.closeModalSymptom })
+	          _react2.default.createElement(_symptomEntry2.default, { closeFn: this.closeModalSymptom })
 	        ),
 	        _react2.default.createElement(
 	          _reactBootstrap.Modal,
@@ -62643,12 +62682,12 @@
 	            { className: 'scripts-container' },
 	            _react2.default.createElement(
 	              'div',
+	              { className: 'scripts-title' },
+	              ' Prescriptions '
+	            ),
+	            _react2.default.createElement(
+	              'div',
 	              { className: 'scripts-header' },
-	              _react2.default.createElement(
-	                'div',
-	                { className: 'scripts-title' },
-	                ' Prescriptions '
-	              ),
 	              _react2.default.createElement(
 	                'div',
 	                null,
@@ -62656,31 +62695,31 @@
 	                    _this2.setState({ inputZip: event.target.value });
 	                  } }),
 	                _react2.default.createElement(
-	                  _reactBootstrap.OverlayTrigger,
-	                  { placement: 'top', overlay: _react2.default.createElement(
-	                      _reactBootstrap.Tooltip,
-	                      { id: 'tooltip' },
-	                      ' Find a nearby pharmacy'
-	                    ) },
+	                  _reactBootstrap.Button,
+	                  { bsStyle: 'success', onClick: this.openModalMap },
+	                  ' ',
 	                  _react2.default.createElement(
-	                    _reactBootstrap.Button,
-	                    { bsStyle: 'info', onClick: this.openModalMap },
+	                    'div',
+	                    null,
 	                    ' ',
-	                    _react2.default.createElement(
-	                      'div',
-	                      null,
-	                      ' ',
-	                      _react2.default.createElement('i', { className: 'fa fa-search', 'aria-hidden': 'true' }),
-	                      ' Pharmacy '
-	                    ),
-	                    ' '
-	                  )
+	                    _react2.default.createElement('i', { className: 'fa fa-search', 'aria-hidden': 'true' }),
+	                    ' Pharmacy '
+	                  ),
+	                  ' '
 	                )
 	              ),
 	              _react2.default.createElement(
-	                'div',
-	                { className: 'add-btn' },
-	                _react2.default.createElement('i', { className: 'fa fa-plus-circle white add', onClick: this.openModalScript, 'aria-hidden': 'true' })
+	                _reactBootstrap.Button,
+	                { bsClass: 'btn midnight-blue', onClick: this.openModalScript },
+	                ' ',
+	                _react2.default.createElement(
+	                  'div',
+	                  null,
+	                  ' ',
+	                  _react2.default.createElement('i', { className: 'fa fa-plus-circle', 'aria-hidden': 'true' }),
+	                  ' Prescription '
+	                ),
+	                ' '
 	              )
 	            ),
 	            this.state.scripts.map(function (script, idx) {
@@ -62688,29 +62727,21 @@
 	                'div',
 	                { className: 'scripts-view-container', key: idx },
 	                _react2.default.createElement(
+	                  'button',
+	                  { onClick: _this2.openEditModalScript.bind(_this2, idx) },
+	                  ' Edit Script '
+	                ),
+	                _react2.default.createElement(
 	                  'div',
 	                  { className: 'script-top-bar' },
 	                  _react2.default.createElement(
 	                    'div',
-	                    { className: 'doc-top-first-half' },
+	                    null,
 	                    _react2.default.createElement(
 	                      'p',
 	                      { className: 'script-name' },
 	                      ' ',
 	                      script.name
-	                    ),
-	                    _react2.default.createElement(
-	                      _reactBootstrap.OverlayTrigger,
-	                      { placement: 'top', overlay: _react2.default.createElement(
-	                          _reactBootstrap.Tooltip,
-	                          { id: 'tooltip' },
-	                          ' Click to edit card'
-	                        ) },
-	                      _react2.default.createElement(
-	                        'div',
-	                        { className: 'edit-icon' },
-	                        _react2.default.createElement('i', { className: 'fa fa-pencil-square-o pencil', 'aria-hidden': 'true', onClick: _this2.openEditModalScript.bind(_this2, idx) })
-	                      )
 	                    )
 	                  ),
 	                  _react2.default.createElement('i', { className: 'fa fa-times', 'aria-hidden': 'true', onClick: _this2.deleteScript.bind(_this2, idx) })
@@ -62718,23 +62749,29 @@
 	                _react2.default.createElement(
 	                  'div',
 	                  { className: 'script-attribute' },
+	                  ' ',
 	                  _react2.default.createElement('i', { className: 'fa fa-heart red', 'aria-hidden': 'true' }),
 	                  ' Dosage: ',
-	                  script.dosage
+	                  script.dosage,
+	                  ' '
 	                ),
 	                _react2.default.createElement(
 	                  'div',
 	                  { className: 'script-attribute' },
+	                  ' ',
 	                  _react2.default.createElement('i', { className: 'fa fa-bell gold', 'aria-hidden': 'true' }),
 	                  ' Reminder: ',
-	                  script.frequency
+	                  script.frequency,
+	                  ' '
 	                ),
 	                _react2.default.createElement(
 	                  'div',
 	                  { className: 'script-attribute' },
+	                  ' ',
 	                  _react2.default.createElement('i', { className: 'fa fa-calendar royal-blue', 'aria-hidden': 'true' }),
 	                  ' Refill: ',
-	                  String(new Date(script.refill)).split('').slice(0, 15).join('')
+	                  String(new Date(script.refill)).split('').slice(0, 15).join(''),
+	                  ' '
 	                )
 	              );
 	            }, this)
@@ -62744,40 +62781,36 @@
 	            { className: 'doctors-container' },
 	            _react2.default.createElement(
 	              'div',
+	              { className: 'doctors-title' },
+	              ' Doctors '
+	            ),
+	            _react2.default.createElement(
+	              'div',
 	              { className: 'doctors-header' },
 	              _react2.default.createElement(
-	                'div',
-	                { className: 'doctors-title' },
-	                ' Doctors '
-	              ),
-	              _react2.default.createElement(
-	                _reactBootstrap.OverlayTrigger,
-	                { placement: 'top', overlay: _react2.default.createElement(
-	                    _reactBootstrap.Tooltip,
-	                    { id: 'tooltip' },
-	                    ' Feeling sick? OneCare can recommend a specialist '
-	                  ) },
+	                _reactBootstrap.Button,
+	                { bsStyle: 'success', bsSize: 'small', onClick: this.openModalSymptom },
+	                ' ',
 	                _react2.default.createElement(
 	                  'div',
-	                  { className: 'rec-btn' },
-	                  _react2.default.createElement(
-	                    _reactBootstrap.Button,
-	                    { bsStyle: 'info', bsSize: 'small', onClick: this.openModalSymptom },
-	                    ' ',
-	                    _react2.default.createElement(
-	                      'div',
-	                      null,
-	                      ' ',
-	                      _react2.default.createElement('i', { className: 'fa fa-stethoscope', 'aria-hidden': 'true' }),
-	                      ' Recommend '
-	                    )
-	                  )
+	                  null,
+	                  ' ',
+	                  _react2.default.createElement('i', { className: 'fa fa-stethoscope', 'aria-hidden': 'true' }),
+	                  ' Recommend '
 	                )
 	              ),
 	              _react2.default.createElement(
-	                'div',
-	                { className: 'add-btn' },
-	                _react2.default.createElement('i', { className: 'fa fa-plus-circle white add', onClick: this.openModalDoctor, 'aria-hidden': 'true' })
+	                _reactBootstrap.Button,
+	                { bsClass: 'btn midnight-blue', onClick: this.openModalDoctor },
+	                ' ',
+	                _react2.default.createElement(
+	                  'div',
+	                  null,
+	                  ' ',
+	                  _react2.default.createElement('i', { className: 'fa fa-plus-circle', 'aria-hidden': 'true' }),
+	                  ' Doctor '
+	                ),
+	                ' '
 	              )
 	            ),
 	            this.state.doctors.map(function (doctor, idx) {
@@ -62785,123 +62818,74 @@
 	                'div',
 	                { className: ' doctor-view-container', key: idx },
 	                _react2.default.createElement(
+	                  'button',
+	                  { className: 'doctor-edit', onClick: _this2.openEditModalDoctor.bind(_this2, idx) },
+	                  ' Edit Doctor '
+	                ),
+	                _react2.default.createElement(
 	                  'div',
-	                  { className: 'doc-info' },
+	                  { className: 'doctor-top-bar' },
+	                  _react2.default.createElement(
+	                    'p',
+	                    { className: 'doctor-name' },
+	                    doctor.name
+	                  ),
+	                  _react2.default.createElement('i', { className: 'fa fa-times', 'aria-hidden': 'true', onClick: _this2.deleteDoc.bind(_this2, idx) })
+	                ),
+	                _react2.default.createElement(
+	                  'div',
+	                  { className: 'doctor-attribute' },
+	                  _react2.default.createElement('i', { className: 'fa fa-phone phone-green', 'aria-hidden': 'true' }),
+	                  '  ',
+	                  doctor.phone
+	                ),
+	                _react2.default.createElement(
+	                  'div',
+	                  { className: 'doctor-attribute' },
+	                  _react2.default.createElement('i', { className: 'fa fa-envelope', 'aria-hidden': 'true' }),
+	                  '  ',
+	                  doctor.email
+	                ),
+	                _react2.default.createElement(
+	                  'div',
+	                  { className: 'doctor-attribute' },
+	                  _react2.default.createElement('i', { className: 'fa fa-map-marker red', 'aria-hidden': 'true' }),
+	                  '  ',
+	                  doctor.address
+	                ),
+	                _react2.default.createElement(
+	                  'div',
+	                  { className: 'doctor-attribute' },
+	                  _react2.default.createElement('i', { className: 'fa fa-stethoscope', 'aria-hidden': 'true' }),
+	                  '  ',
+	                  doctor.specialty
+	                ),
+	                _react2.default.createElement(
+	                  'div',
+	                  { className: 'doctor-attribute' },
+	                  _react2.default.createElement(
+	                    _reactBootstrap.Button,
+	                    { bsStyle: 'info', bsSize: 'small', onClick: _this2.doctorNotes.bind(_this2, doctor) },
+	                    ' (view notes) '
+	                  ),
 	                  _react2.default.createElement(
 	                    'div',
-	                    { className: 'doctor-top-bar' },
-	                    _react2.default.createElement(
-	                      'div',
-	                      { className: 'doc-top-first-half' },
-	                      _react2.default.createElement(
-	                        'p',
-	                        { className: 'doctor-name' },
-	                        doctor.name
-	                      ),
-	                      _react2.default.createElement(
-	                        _reactBootstrap.OverlayTrigger,
-	                        { placement: 'top', overlay: _react2.default.createElement(
-	                            _reactBootstrap.Tooltip,
-	                            { id: 'tooltip' },
-	                            ' Click to edit card'
-	                          ) },
+	                    { className: _this2.state.openNotes.doctor === doctor._id ? "doctor-notes-container" : "hidden" },
+	                    _this2.state.openNotes.notes.filter(function (note) {
+	                      return !note.hidden;
+	                    }).map(function (note, idx) {
+	                      return _react2.default.createElement(
+	                        'div',
+	                        { key: idx, className: "doctor-notes-entry" + (note.seen ? "" : " highlight") },
 	                        _react2.default.createElement(
-	                          'div',
-	                          { className: 'edit-icon' },
-	                          _react2.default.createElement('i', { className: 'fa fa-pencil-square-o pencil', 'aria-hidden': 'true', onClick: _this2.openEditModalDoctor.bind(_this2, idx) })
-	                        )
-	                      )
-	                    ),
-	                    _react2.default.createElement(
-	                      'div',
-	                      { className: 'delete-doc' },
-	                      _react2.default.createElement('i', { className: 'fa fa-times', 'aria-hidden': 'true', onClick: _this2.deleteDoc.bind(_this2, idx) })
-	                    )
-	                  ),
-	                  _react2.default.createElement(
-	                    'div',
-	                    { className: 'doctor-attribute' },
-	                    _react2.default.createElement('i', { className: 'fa fa-phone phone-green', 'aria-hidden': 'true' }),
-	                    ' ',
-	                    doctor.phone
-	                  ),
-	                  _react2.default.createElement(
-	                    'div',
-	                    { className: 'doctor-attribute' },
-	                    _react2.default.createElement(
-	                      'div',
-	                      { className: 'email-specialist-container' },
-	                      _react2.default.createElement(
-	                        'div',
-	                        null,
-	                        _react2.default.createElement('i', { className: 'fa fa-envelope envelope', 'aria-hidden': 'true' }),
-	                        '  ',
-	                        doctor.email
-	                      )
-	                    )
-	                  ),
-	                  _react2.default.createElement(
-	                    'div',
-	                    { className: 'doctor-footer' },
-	                    _react2.default.createElement(
-	                      'div',
-	                      { className: 'doctor-attribute' },
-	                      _react2.default.createElement('i', { className: 'fa fa-map-marker red', 'aria-hidden': 'true' }),
-	                      '  ',
-	                      doctor.address
-	                    ),
-	                    _react2.default.createElement(
-	                      'div',
-	                      { className: 'doctor-attribute' },
-	                      _react2.default.createElement(
-	                        'div',
-	                        { className: 'specialty-tag' },
-	                        _react2.default.createElement('i', { className: 'fa fa-stethoscope', 'aria-hidden': 'true' }),
-	                        ' ',
-	                        doctor.specialty
-	                      )
-	                    )
+	                          'span',
+	                          { className: 'note-delete' },
+	                          _react2.default.createElement('i', { className: 'fa fa-times', 'aria-hidden': 'true', onClick: _this2.hideNote.bind(_this2, note) })
+	                        ),
+	                        note.body
+	                      );
+	                    })
 	                  )
-	                ),
-	                _react2.default.createElement(
-	                  'div',
-	                  { className: 'show-notes' },
-	                  _react2.default.createElement(
-	                    _reactBootstrap.OverlayTrigger,
-	                    { placement: 'top', overlay: _react2.default.createElement(
-	                        _reactBootstrap.Tooltip,
-	                        { id: 'tooltip' },
-	                        ' Click to view doctor\'s notes'
-	                      ) },
-	                    _react2.default.createElement(
-	                      'div',
-	                      { className: _this2.state.notesOpen ? 'hidden' : 'note-icon' },
-	                      _react2.default.createElement('i', { className: 'fa fa-angle-double-down phone-green', 'aria-hidden': 'true', onClick: _this2.doctorNotes.bind(_this2, doctor) })
-	                    )
-	                  ),
-	                  _react2.default.createElement(
-	                    'div',
-	                    { className: _this2.state.notesOpen ? 'note-icon' : 'hidden' },
-	                    _react2.default.createElement('i', { className: 'fa fa-angle-double-up phone-green', 'aria-hidden': 'true', onClick: _this2.doctorNotes.bind(_this2, doctor) })
-	                  )
-	                ),
-	                _react2.default.createElement(
-	                  'div',
-	                  { className: _this2.state.openNotes.doctor === doctor._id ? "doctor-notes-container" : "hidden" },
-	                  _this2.state.openNotes.notes.filter(function (note) {
-	                    return !note.hidden;
-	                  }).map(function (note, idx) {
-	                    return _react2.default.createElement(
-	                      'div',
-	                      { key: idx, className: "doctor-notes-entry" + (note.seen ? "" : " highlight") },
-	                      _react2.default.createElement(
-	                        'span',
-	                        { className: 'note-delete' },
-	                        _react2.default.createElement('i', { className: 'fa fa-trash', 'aria-hidden': 'true', onClick: _this2.hideNote.bind(_this2, note) })
-	                      ),
-	                      note.body
-	                    );
-	                  })
 	                )
 	              );
 	            }, this)
@@ -62999,7 +62983,7 @@
 	
 	    _this.state = {
 	      modalIsOpen: true,
-	      "currentDrug": "None",
+	      "currentDrug": "",
 	      "dosageAmt": 0,
 	      "dosageMeasure": 'mg',
 	      "date": date,
@@ -63008,13 +62992,15 @@
 	      "reminderTime3": null,
 	      "scheduleFreq": "1x",
 	      "scheduleDayWeek": "day",
-	      "invalidName": false,
-	      "invalidReminderTime": false,
 	      "hasTwo": false,
-	      "hasThree": false
+	      "hasThree": false,
+	      "nameIsValid": false,
+	      "dosageIsValid": false,
+	      "refillDateIsValid": false,
+	      "formIsValid": true
 	    };
 	
-	    var date = new Date();
+	    var date = (0, _moment2.default)(new Date()).format("MM-DD-YYYY");
 	    _this.updateDrugName = _this.updateDrugName.bind(_this);
 	    _this.submitForm = _this.submitForm.bind(_this);
 	    _this.handleFrequency = _this.handleFrequency.bind(_this);
@@ -63032,17 +63018,35 @@
 	  _createClass(ScriptRemindView, [{
 	    key: 'updateDrugName',
 	    value: function updateDrugName(event) {
-	      this.setState({
-	        currentDrug: event.target.value,
-	        invalidName: true
-	      });
+	      if (event.target.value.length > 0) {
+	        this.setState({
+	          currentDrug: event.target.value,
+	          nameIsValid: true
+	        });
+	      } else {
+	        this.setState({
+	          currentDrug: event.target.value,
+	          nameIsValid: false
+	        });
+	      }
 	    }
 	  }, {
 	    key: 'handleRefillDate',
 	    value: function handleRefillDate(date) {
-	      this.setState({
-	        "date": date
-	      });
+	      var then = (0, _moment2.default)(date, "MM-DD-YYYY");
+	      var now = (0, _moment2.default)(new Date()).format("MM-DD-YYYY");
+	      console.log(then.isAfter(now));
+	      if (then.isAfter(now)) {
+	        this.setState({
+	          "date": date,
+	          "refillDateIsValid": true
+	        });
+	      } else {
+	        this.setState({
+	          "date": date,
+	          "refillDateIsValid": false
+	        });
+	      }
 	    }
 	  }, {
 	    key: 'handleScheduleDayWeek',
@@ -63061,9 +63065,16 @@
 	  }, {
 	    key: 'handleDoseAmount',
 	    value: function handleDoseAmount(amount) {
-	      this.setState({
-	        dosageAmt: amount.target.value
-	      });
+	      if (!Number.isNaN(Number(amount.target.value))) {
+	        this.setState({
+	          dosageAmt: amount.target.value,
+	          dosageIsValid: true
+	        });
+	      } else {
+	        this.setState({
+	          dosageIsValid: false
+	        });
+	      }
 	    }
 	  }, {
 	    key: 'handleFrequency',
@@ -63115,36 +63126,30 @@
 	    key: 'submitForm',
 	    value: function submitForm() {
 	
-	      if (!this.state.invalidName && !this.state.invalidReminderTime) {
-	        alert("Please enter a prescription name and reminder time");
-	      } else if (!this.state.invalidName) {
-	        alert("Please enter a prescription name");
-	      }
-	      // else if(!this.state.invalidReminderTime){
-	      //   alert("Please enter a reminder time");
-	      // }
-	      else {
-	          var script = {
-	            "name": this.state.currentDrug,
-	            "dosage": this.state.dosageAmt + ' ' + this.state.dosageMeasure,
-	            "refill": new Date((0, _moment2.default)(this.state.date, "MM-DD-YYYY")).toISOString(),
-	            "frequency": this.state.scheduleFreq + ' per ' + this.state.scheduleDayWeek,
-	            "reminderTime": [this.state.reminderTime1, this.state.reminderTime2, this.state.reminderTime3],
-	            "username": window.localStorage.username
-	          };
+	      if (!this.state.nameIsValid || !this.state.refillDateIsValid || !this.state.dosageIsValid) {
+	        this.setState({ formIsValid: false });
+	      } else {
+	        var script = {
+	          "name": this.state.currentDrug,
+	          "dosage": this.state.dosageAmt + ' ' + this.state.dosageMeasure,
+	          "refill": new Date((0, _moment2.default)(this.state.date, "MM-DD-YYYY")).toISOString(),
+	          "frequency": this.state.scheduleFreq + ' per ' + this.state.scheduleDayWeek,
+	          "reminderTime": [this.state.reminderTime1, this.state.reminderTime2, this.state.reminderTime3],
+	          "username": window.localStorage.username
+	        };
 	
-	          _jquery2.default.ajax({
-	            type: 'POST',
-	            url: '/api/reminder/add',
-	            dataType: 'json',
-	            headers: {
-	              'Content-Type': 'application/json'
-	            },
-	            data: JSON.stringify(script),
-	            success: this.props.closeFn(),
-	            error: this.props.closeFn()
-	          });
-	        }
+	        _jquery2.default.ajax({
+	          type: 'POST',
+	          url: '/api/reminder/add',
+	          dataType: 'json',
+	          headers: {
+	            'Content-Type': 'application/json'
+	          },
+	          data: JSON.stringify(script),
+	          success: this.props.closeFn(),
+	          error: this.props.closeFn()
+	        });
+	      }
 	    }
 	  }, {
 	    key: 'render',
@@ -63177,6 +63182,11 @@
 	            'h8',
 	            { className: 'required' },
 	            ' (required) '
+	          ),
+	          _react2.default.createElement(
+	            'div',
+	            { className: this.state.nameIsValid ? "hidden" : "invalid" },
+	            ' Please enter valid input '
 	          )
 	        ),
 	        _react2.default.createElement(
@@ -63214,6 +63224,11 @@
 	                null,
 	                'tablet'
 	              )
+	            ),
+	            _react2.default.createElement(
+	              'div',
+	              { className: this.state.dosageIsValid ? "hidden" : "invalid" },
+	              ' Please enter valid input '
 	            )
 	          )
 	        ),
@@ -63230,6 +63245,11 @@
 	            { className: 'script-form-fields' },
 	            _react2.default.createElement(_reactInputCalendar2.default, { format: 'MM/DD/YYYY', date: this.state.date, onChange: this.handleRefillDate }),
 	            _react2.default.createElement('span', { className: this.state.date ? "" : "hidden" })
+	          ),
+	          _react2.default.createElement(
+	            'div',
+	            { className: this.state.refillDateIsValid ? "hidden" : "invalid" },
+	            ' Please enter valid input '
 	          )
 	        ),
 	        _react2.default.createElement(
@@ -63334,6 +63354,11 @@
 	              _reactBootstrap.Button,
 	              { bsStyle: 'info', onClick: this.submitForm },
 	              ' Remind Me '
+	            ),
+	            _react2.default.createElement(
+	              'h6',
+	              { className: this.state.formIsValid ? 'hidden' : 'invalid' },
+	              ' Some of your data is not valid.  Please check above. '
 	            )
 	          )
 	        )
