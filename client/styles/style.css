@@ -256,16 +256,9 @@ border-radius: 4px;
   margin-right: 180px;
 }
 .doctors-container {
-<<<<<<< HEAD
-<<<<<<< HEAD
   float: right;
-=======
-=======
->>>>>>> default
   display: flex;
   flex-flow: column nowrap;
-  float:right;
->>>>>>> default
   width: 550px;
   margin-top: 10px;
   margin-left: 20px;
@@ -925,7 +918,6 @@ border-radius: 4px;
     font-size: 2em;
     text-shadow: 3px 3px 8px black;
     color: grey;
-    padding-left: 80px;
   }
 
   .doctors-empty {
@@ -934,5 +926,4 @@ border-radius: 4px;
     font-size: 2em;
     text-shadow: 3px 3px 8px black;
     color: grey;
-    padding-left: 80px;
   }
