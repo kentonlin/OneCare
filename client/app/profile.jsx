@@ -470,6 +470,7 @@ export default class Profile extends React.Component {
                );
               }, this)
             }
+            <div onClick={this.openModalScript} className={this.state.scripts.length === 0 ? "scripts-empty" : "hidden"}>Please schedule some reminders!</div>
           </div>
         <div className='doctors-container'>
         <div className='doctors-header'>
@@ -549,6 +550,7 @@ export default class Profile extends React.Component {
                     );
                 }, this)
               }
+              <div onClick={this.openModalDoctor} className={this.state.doctors.length === 0 ? "doctors-empty" : "hidden"}>Please register some doctors!</div>
           </div>
       </div>
       </div>
