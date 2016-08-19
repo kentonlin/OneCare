@@ -93,6 +93,10 @@
 	
 	var _brainView2 = _interopRequireDefault(_brainView);
 	
+	var _splash = __webpack_require__(/*! ./splash.jsx */ 793);
+	
+	var _splash2 = _interopRequireDefault(_splash);
+	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -136,6 +140,7 @@
 	          _react2.default.createElement(_reactRouter.Route, { path: '/signin', component: _signin2.default }),
 	          _react2.default.createElement(_reactRouter.Route, { path: '/signup', component: _signup2.default }),
 	          _react2.default.createElement(_reactRouter.Route, { path: '/brain', component: _brainView2.default }),
+	          _react2.default.createElement(_reactRouter.Route, { path: '/splash', component: _splash2.default }),
 	          _react2.default.createElement(_reactRouter.Route, { path: '/*', component: _notFound2.default })
 	        )
 	      );
@@ -27947,6 +27952,8 @@
 	
 	var _signup2 = _interopRequireDefault(_signup);
 	
+	var _reactBootstrap = __webpack_require__(/*! react-bootstrap */ 244);
+	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -28010,48 +28017,107 @@
 	    value: function render() {
 	      var _this2 = this;
 	
-	      return _react2.default.createElement(
-	        'div',
-	        { className: 'signin-container' },
+	      return (
+	        //      <Form horizontal>
+	        //   <FormGroup controlId="formHorizontalEmail">
+	        //     <Col componentClass={ControlLabel} sm={2}>
+	        //       Username
+	        //     </Col>
+	        //     <Col sm={10}>
+	        //       <FormControl type="text" onChange={(event) => {this.setState({username: event.target.value})}}/>
+	        //     </Col>
+	        //   </FormGroup>
+	        //
+	        //   <FormGroup controlId="formHorizontalPassword">
+	        //     <Col componentClass={ControlLabel} sm={2}>
+	        //       Password
+	        //     </Col>
+	        //     <Col sm={10}>
+	        //       <FormControl type="password" onChange={(event) => {this.setState({password: event.target.value})}}/>
+	        //     </Col>
+	        //   </FormGroup>
+	        //
+	        //   <FormGroup>
+	        //     <Col smOffset={2} sm={10}>
+	        //       <Checkbox>Remember me</Checkbox>
+	        //     </Col>
+	        //   </FormGroup>
+	        //
+	        //   <FormGroup>
+	        //     <Col smOffset={2} sm={10}>
+	        //       <Button onClick={this.submitLogin}>
+	        //         Sign in
+	        //       </Button>
+	        //     </Col>
+	        //   </FormGroup>
+	        // </Form>
 	        _react2.default.createElement(
-	          'h1',
-	          null,
-	          'Sign in to OneCare'
-	        ),
-	        _react2.default.createElement(
-	          'form',
-	          null,
+	          'div',
+	          { className: 'signin-container' },
 	          _react2.default.createElement(
-	            'span',
-	            { className: 'signin-cat' },
-	            'username'
-	          ),
-	          _react2.default.createElement('input', { type: 'text', onChange: function onChange(event) {
-	              _this2.setState({ username: event.target.value });
-	            } }),
-	          _react2.default.createElement('br', null),
-	          _react2.default.createElement(
-	            'span',
-	            { className: 'signin-cat' },
-	            'password'
-	          ),
-	          _react2.default.createElement('input', { type: 'password', onChange: function onChange(event) {
-	              _this2.setState({ password: event.target.value });
-	            } }),
-	          _react2.default.createElement('br', null),
-	          _react2.default.createElement(
-	            'div',
-	            { className: 'signup' },
+	            _reactBootstrap.Grid,
+	            null,
 	            _react2.default.createElement(
-	              _reactRouter.Link,
-	              { to: '/signup' },
-	              ' Signup '
+	              _reactBootstrap.Row,
+	              null,
+	              _react2.default.createElement(
+	                'h1',
+	                null,
+	                'Sign in to OneCare'
+	              )
+	            ),
+	            _react2.default.createElement(
+	              _reactBootstrap.Row,
+	              null,
+	              _react2.default.createElement(
+	                _reactBootstrap.Form,
+	                null,
+	                _react2.default.createElement(
+	                  'div',
+	                  { className: 'signin-cat' },
+	                  ' ',
+	                  _react2.default.createElement(
+	                    'span',
+	                    { className: 'signin-username' },
+	                    'Username'
+	                  ),
+	                  '  ',
+	                  _react2.default.createElement('input', { type: 'text', onChange: function onChange(event) {
+	                      _this2.setState({ username: event.target.value });
+	                    } })
+	                ),
+	                _react2.default.createElement('br', null),
+	                _react2.default.createElement(
+	                  'div',
+	                  { className: 'signin-cat2' },
+	                  ' ',
+	                  _react2.default.createElement(
+	                    'span',
+	                    { className: 'signin-password' },
+	                    'Password'
+	                  ),
+	                  '  ',
+	                  _react2.default.createElement('input', { type: 'password', onChange: function onChange(event) {
+	                      _this2.setState({ password: event.target.value });
+	                    } })
+	                ),
+	                _react2.default.createElement('br', null),
+	                _react2.default.createElement(
+	                  _reactBootstrap.Button,
+	                  { bsStyle: 'success', onClick: this.submitLogin },
+	                  'Submit'
+	                ),
+	                _react2.default.createElement(
+	                  'div',
+	                  { className: 'signup' },
+	                  _react2.default.createElement(
+	                    _reactRouter.Link,
+	                    { to: '/signup' },
+	                    ' Signup '
+	                  )
+	                )
+	              )
 	            )
-	          ),
-	          _react2.default.createElement(
-	            'button',
-	            { onClick: this.submitLogin },
-	            'Submit'
 	          )
 	        )
 	      );
@@ -37911,6 +37977,8 @@
 	
 	var _jquery2 = _interopRequireDefault(_jquery);
 	
+	var _reactBootstrap = __webpack_require__(/*! react-bootstrap */ 244);
+	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -38082,113 +38150,165 @@
 	        'div',
 	        { className: 'signup-container' },
 	        _react2.default.createElement(
-	          'h1',
+	          _reactBootstrap.Grid,
 	          null,
-	          ' Sign-up '
-	        ),
-	        _react2.default.createElement(
-	          'div',
-	          { className: 'signup-cat' },
-	          'First Name'
-	        ),
-	        _react2.default.createElement('input', { type: 'text', onChange: this.handleFirstName }),
-	        _react2.default.createElement('br', null),
-	        _react2.default.createElement(
-	          'h6',
-	          { className: this.state.firstnameIsValid ? 'hidden' : 'invalid' },
-	          ' Name must be at least two letters. '
-	        ),
-	        _react2.default.createElement(
-	          'div',
-	          { className: 'signup-cat' },
-	          'Last Name'
-	        ),
-	        _react2.default.createElement('input', { type: 'text', onChange: this.handleLastName }),
-	        _react2.default.createElement('br', null),
-	        _react2.default.createElement(
-	          'h6',
-	          { className: this.state.lastnameIsValid ? 'hidden' : 'invalid' },
-	          ' Name must be at least two letters. '
-	        ),
-	        _react2.default.createElement(
-	          'div',
-	          { className: 'signup-cat' },
-	          'username'
-	        ),
-	        _react2.default.createElement('input', { type: 'text', onChange: this.handleUsername }),
-	        _react2.default.createElement('br', null),
-	        _react2.default.createElement(
-	          'h6',
-	          { className: this.state.usernameIsValid ? 'hidden' : 'invalid' },
-	          ' Username must be at least four letters. '
-	        ),
-	        _react2.default.createElement(
-	          'div',
-	          { className: 'signup-cat' },
-	          'password'
-	        ),
-	        _react2.default.createElement('input', { type: 'password', onChange: this.handlePassword }),
-	        _react2.default.createElement('br', null),
-	        _react2.default.createElement(
-	          'h6',
-	          { className: this.state.passwordIsValid ? 'hidden' : 'invalid' },
-	          ' Password must be at least four letters. '
-	        ),
-	        _react2.default.createElement(
-	          'div',
-	          { className: 'signup-cat' },
-	          'address'
-	        ),
-	        _react2.default.createElement('input', { type: 'text', onChange: this.handleAddress }),
-	        _react2.default.createElement('br', null),
-	        _react2.default.createElement(
-	          'div',
-	          { className: 'signup-cat' },
-	          'zip code'
-	        ),
-	        _react2.default.createElement('input', { type: 'text', onChange: this.handleZipcode }),
-	        _react2.default.createElement('br', null),
-	        _react2.default.createElement(
-	          'h6',
-	          { className: this.state.zipcodeIsValid ? 'hidden' : 'invalid' },
-	          ' Please enter a valid zipcode '
-	        ),
-	        _react2.default.createElement(
-	          'div',
-	          { className: 'signup-cat' },
-	          'phone'
-	        ),
-	        _react2.default.createElement('input', { type: 'text', onChange: this.handlePhone }),
-	        _react2.default.createElement(
-	          'h6',
-	          { className: this.state.phoneIsValid ? 'hidden' : 'invalid' },
-	          ' Phone number must be 11 digits'
-	        ),
-	        _react2.default.createElement(
-	          'div',
-	          { className: 'signup-cat' },
-	          'email'
-	        ),
-	        _react2.default.createElement('input', { type: 'text', onChange: this.handleEmail }),
-	        _react2.default.createElement(
-	          'h6',
-	          { className: this.state.emailIsValid ? 'hidden' : 'invalid' },
-	          ' Please enter a valid email '
-	        ),
-	        _react2.default.createElement(
-	          'button',
-	          { className: 'signup-cat', onClick: this.submitUser },
-	          'Submit'
-	        ),
-	        _react2.default.createElement(
-	          'h6',
-	          { className: this.state.formIsValid ? 'hidden' : 'invalid' },
-	          ' Some of your data is not valid.  Please check above. '
-	        ),
-	        _react2.default.createElement(
-	          _reactRouter.Link,
-	          { to: '/signin' },
-	          ' Return to Sign-in '
+	          _react2.default.createElement(
+	            _reactBootstrap.Row,
+	            null,
+	            _react2.default.createElement(
+	              'h1',
+	              null,
+	              ' Sign-up '
+	            )
+	          ),
+	          _react2.default.createElement(
+	            _reactBootstrap.Row,
+	            null,
+	            _react2.default.createElement(
+	              _reactBootstrap.Form,
+	              null,
+	              _react2.default.createElement(
+	                'div',
+	                { className: 'signup-cat' },
+	                _react2.default.createElement(
+	                  'span',
+	                  null,
+	                  'First Name'
+	                ),
+	                ' ',
+	                _react2.default.createElement('input', { className: 'signup-input', type: 'text', onChange: this.handleFirstName })
+	              ),
+	              _react2.default.createElement('br', null),
+	              _react2.default.createElement(
+	                'h6',
+	                { className: this.state.firstnameIsValid ? 'hidden' : 'invalid' },
+	                ' Name must be at least two letters. '
+	              ),
+	              _react2.default.createElement(
+	                'div',
+	                { className: 'signup-cat' },
+	                _react2.default.createElement(
+	                  'span',
+	                  null,
+	                  'Last Name'
+	                ),
+	                _react2.default.createElement('input', { className: 'signup-input', type: 'text', onChange: this.handleLastName })
+	              ),
+	              _react2.default.createElement('br', null),
+	              _react2.default.createElement(
+	                'h6',
+	                { className: this.state.lastnameIsValid ? 'hidden' : 'invalid' },
+	                ' Name must be at least two letters. '
+	              ),
+	              _react2.default.createElement(
+	                'div',
+	                { className: 'signup-cat' },
+	                _react2.default.createElement(
+	                  'span',
+	                  null,
+	                  'Username'
+	                ),
+	                _react2.default.createElement('input', { className: 'signup-input', type: 'text', onChange: this.handleUsername })
+	              ),
+	              _react2.default.createElement('br', null),
+	              _react2.default.createElement(
+	                'h6',
+	                { className: this.state.usernameIsValid ? 'hidden' : 'invalid' },
+	                ' Username must be at least four letters. '
+	              ),
+	              _react2.default.createElement(
+	                'div',
+	                { className: 'signup-cat' },
+	                _react2.default.createElement(
+	                  'span',
+	                  null,
+	                  'Password'
+	                ),
+	                ' ',
+	                _react2.default.createElement('input', { className: 'signup-input', type: 'password', onChange: this.handlePassword })
+	              ),
+	              _react2.default.createElement('br', null),
+	              _react2.default.createElement(
+	                'h6',
+	                { className: this.state.passwordIsValid ? 'hidden' : 'invalid' },
+	                ' Password must be at least four letters. '
+	              ),
+	              _react2.default.createElement(
+	                'div',
+	                { className: 'signup-cat' },
+	                _react2.default.createElement(
+	                  'span',
+	                  null,
+	                  'Address'
+	                ),
+	                _react2.default.createElement('input', { className: 'signup-input', type: 'text', onChange: this.handleAddress })
+	              ),
+	              _react2.default.createElement('br', null),
+	              _react2.default.createElement(
+	                'div',
+	                { className: 'signup-cat' },
+	                _react2.default.createElement(
+	                  'span',
+	                  null,
+	                  'Zip code'
+	                ),
+	                _react2.default.createElement('input', { className: 'signup-input', type: 'text', onChange: this.handleZipcode })
+	              ),
+	              _react2.default.createElement('br', null),
+	              _react2.default.createElement(
+	                'h6',
+	                { className: this.state.zipcodeIsValid ? 'hidden' : 'invalid' },
+	                ' Please enter a valid zipcode '
+	              ),
+	              _react2.default.createElement(
+	                'div',
+	                { className: 'signup-cat' },
+	                _react2.default.createElement(
+	                  'span',
+	                  null,
+	                  'Phone'
+	                ),
+	                ' ',
+	                _react2.default.createElement('input', { className: 'signup-input', type: 'text', onChange: this.handlePhone })
+	              ),
+	              _react2.default.createElement(
+	                'h6',
+	                { className: this.state.phoneIsValid ? 'hidden' : 'invalid' },
+	                ' Phone number must be 11 digits'
+	              ),
+	              _react2.default.createElement(
+	                'div',
+	                { className: 'signup-cat' },
+	                _react2.default.createElement(
+	                  'span',
+	                  null,
+	                  'Email'
+	                ),
+	                ' ',
+	                _react2.default.createElement('input', { className: 'signup-input', type: 'text', onChange: this.handleEmail })
+	              ),
+	              _react2.default.createElement(
+	                'h6',
+	                { className: this.state.emailIsValid ? 'hidden' : 'invalid' },
+	                ' Please enter a valid email '
+	              ),
+	              _react2.default.createElement(
+	                'button',
+	                { className: 'signup-cat', onClick: this.submitUser },
+	                'Submit'
+	              ),
+	              _react2.default.createElement(
+	                'h6',
+	                { className: this.state.formIsValid ? 'hidden' : 'invalid' },
+	                ' Some of your data is not valid.  Please check above. '
+	              ),
+	              _react2.default.createElement(
+	                _reactRouter.Link,
+	                { to: '/signin' },
+	                ' Return to Sign-in '
+	              )
+	            )
+	          )
 	        )
 	      );
 	    }
@@ -60722,7 +60842,7 @@
 	      var query = (this.state.currentRec ? this.state.currentRec.name : '**empty**').split(' ').join('%20');
 	      if (query.charCodeAt(query.length - 1) === 8206) {
 	        query = query.slice(0, query.length - 1);
-	      };
+	      }
 	      var latitude = window.localStorage.latitude;
 	      var longitude = window.localStorage.longitude;
 	      var location = latitude + '%2C' + longitude;
@@ -62674,7 +62794,7 @@
 	        ),
 	        _react2.default.createElement(
 	          _reactBootstrap.Modal,
-	          { show: this.state.mapmodalIsOpen, style: this.state.modalStyles },
+	          { show: this.state.mapmodalIsOpen },
 	          _react2.default.createElement(
 	            'div',
 	            { className: 'modal-button-close-container' },
@@ -62689,7 +62809,7 @@
 	        ),
 	        _react2.default.createElement(
 	          _reactBootstrap.Modal,
-	          { show: this.state.symptomModalIsOpen, style: this.state.modalStyles },
+	          { show: this.state.symptomModalIsOpen, style: this.state.modalStyles, bsClass: 'modal' },
 	          _react2.default.createElement(
 	            'div',
 	            { className: 'modal-button-close-container' },
@@ -89573,6 +89693,11 @@
 	  }
 	
 	  _createClass(Map, [{
+	    key: 'componentDidMount',
+	    value: function componentDidMount() {
+	      console.log(this.props);
+	    }
+	  }, {
 	    key: 'render',
 	    value: function render() {
 	      return (
@@ -106270,8 +106395,8 @@
 	      email: _this.props.data.email ? _this.props.data.email : "",
 	      address: _this.props.data.address ? _this.props.data.address : "",
 	      specialty: _this.props.data.specialty ? _this.props.data.specialty : "",
-	      validPhone: false,
-	      validSpecialty: false
+	      validPhone: _this.props.data.phone.length === 11 ? true : false,
+	      validSpecialty: _this.props.data.specialty ? true : false
 	    };
 	    _this.handleChange = _this.handleChange.bind(_this);
 	    _this.submitNewDoctor = _this.submitNewDoctor.bind(_this);
@@ -106322,15 +106447,27 @@
 	            specialty: this.state.specialty
 	          } };
 	
+	        var id = this.props.data._id;
+	
 	        _jquery2.default.ajax({
 	          type: "POST",
-	          url: "/api/doctor/add",
+	          url: "/api/doctor/delete",
+	          dataType: 'json',
 	          headers: {
-	            "content-type": "application/json"
+	            "Content-Type": "application/json"
 	          },
-	          data: JSON.stringify(toSubmit),
-	          success: this.props.closeFn(),
-	          error: this.props.closeFn()
+	          data: JSON.stringify({ "docID": id }),
+	          success: _jquery2.default.ajax({
+	            type: "POST",
+	            url: "/api/doctor/add",
+	            headers: {
+	              "content-type": "application/json"
+	            },
+	            data: JSON.stringify(toSubmit),
+	            success: this.props.closeFn(),
+	            error: this.props.closeFn()
+	          }),
+	          error: console.log('error in edit of doctor')
 	        });
 	      }
 	    }
@@ -106387,7 +106524,7 @@
 	          ),
 	          _react2.default.createElement(
 	            'select',
-	            { id: 'specialty', value: this.state.speciality, onChange: this.handleChange },
+	            { id: 'specialty', value: this.state.specialty, onChange: this.handleChange },
 	            _react2.default.createElement(
 	              'option',
 	              null,
@@ -106415,6 +106552,159 @@
 	}(_react2.default.Component);
 	
 	exports.default = EditDoctorModal;
+
+/***/ },
+/* 793 */
+/*!*******************************!*\
+  !*** ./client/app/splash.jsx ***!
+  \*******************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+	
+	var _react = __webpack_require__(/*! react */ 1);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _reactRouter = __webpack_require__(/*! react-router */ 175);
+	
+	var _reactBootstrap = __webpack_require__(/*! react-bootstrap */ 244);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+	
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+	
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+	// impor  t $ from 'jquery';
+	
+	
+	// import {ButtonGroup} from 'react-bootstrap';
+	// import {Button} from 'react-bootstrap';
+	// import {DropdownButton} from 'react-bootstrap';
+	// import {MenuItem} from 'react-bootstrap';
+	
+	var Splash = function (_React$Component) {
+	  _inherits(Splash, _React$Component);
+	
+	  function Splash(props) {
+	    _classCallCheck(this, Splash);
+	
+	    return _possibleConstructorReturn(this, Object.getPrototypeOf(Splash).call(this, props));
+	    // this.state= {
+	    //   openSignup: false,
+	    //   openLogin: false
+	    // };
+	    // this.openSignupPage = this.openSignupPage.bind(this);
+	    // this.openLoginPage = this.openLoginPage.bind(this);
+	  }
+	
+	  // openSignupPage() {
+	  //   this.setState({
+	  //     openSignup: true
+	  //   });
+	  // }
+	  //
+	  // openLoginPage() {
+	  //   this.setState({
+	  //     openLoginPage: true
+	  //   })
+	  // }
+	
+	
+	  _createClass(Splash, [{
+	    key: 'render',
+	    value: function render() {
+	      return _react2.default.createElement(
+	        'div',
+	        null,
+	        _react2.default.createElement(
+	          'div',
+	          { className: 'splashHeader' },
+	          _react2.default.createElement(
+	            'video',
+	            { autoPlay: true, loop: true, id: 'video-background' },
+	            _react2.default.createElement('source', { id: 'mp4', src: 'https://fpdl.vimeocdn.com/vimeo-prod-skyfire-std-us/01/4528/6/172644004/557095694.mp4?token=57b5142f_0x33fefb0a9c04f360f3eb118144c0fdfe4cd333dd', type: 'video/mp4' })
+	          ),
+	          _react2.default.createElement(
+	            'div',
+	            { className: 'splashName' },
+	            _react2.default.createElement(
+	              'h2',
+	              null,
+	              ' OneCare '
+	            )
+	          ),
+	          _react2.default.createElement(
+	            'div',
+	            { className: 'signInSplash' },
+	            _react2.default.createElement(
+	              _reactRouter.Link,
+	              { to: '/signin' },
+	              ' Login '
+	            )
+	          ),
+	          _react2.default.createElement(
+	            'div',
+	            { className: 'signUpSplash' },
+	            _react2.default.createElement(
+	              _reactRouter.Link,
+	              { to: '/signup' },
+	              ' Signup '
+	            )
+	          )
+	        ),
+	        _react2.default.createElement(
+	          'div',
+	          { className: 'appDescribe' },
+	          _react2.default.createElement(
+	            'div',
+	            null,
+	            ' Prescription Reminder'
+	          ),
+	          _react2.default.createElement(
+	            'h3',
+	            null,
+	            ' Text Reminders '
+	          ),
+	          _react2.default.createElement(
+	            'h3',
+	            null,
+	            ' Remind by day/week/month '
+	          ),
+	          _react2.default.createElement('br', null),
+	          _react2.default.createElement('br', null),
+	          _react2.default.createElement(
+	            'h2',
+	            null,
+	            ' Doctor Recommender '
+	          ),
+	          _react2.default.createElement(
+	            'h3',
+	            null,
+	            ' Recommend a specialist '
+	          ),
+	          _react2.default.createElement(
+	            'h3',
+	            null,
+	            ' Search for nearby specialists '
+	          )
+	        )
+	      );
+	    }
+	  }]);
+	
+	  return Splash;
+	}(_react2.default.Component);
+	
+	exports.default = Splash;
 
 /***/ }
 /******/ ]);
