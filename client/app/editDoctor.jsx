@@ -52,8 +52,8 @@ export default class EditDoctorModal extends React.Component {
       email: this.props.data.email ? this.props.data.email : "",
       address: this.props.data.address ? this.props.data.address : "",
       specialty: this.props.data.specialty ? this.props.data.specialty : "",
-      validPhone: false,
-      validSpecialty: false
+      validPhone: this.props.data.phone.length === 11 ? true : false,
+      validSpecialty: this.props.data.specialty ? true : false
     };
     this.handleChange = this.handleChange.bind(this);
     this.submitNewDoctor = this.submitNewDoctor.bind(this);
@@ -107,16 +107,30 @@ export default class EditDoctorModal extends React.Component {
         specialty: this.state.specialty
       }};
 
+      var id = this.props.data._id;
+
       $.ajax({
-        type: "POST",
-        url: "/api/doctor/add",
-        headers: {
-          "content-type": "application/json"
-        },
-        data: JSON.stringify(toSubmit),
-        success: this.props.closeFn(),
-        error: this.props.closeFn()
-      });
+       type: "POST",
+       url: "/api/doctor/delete",
+       dataType: 'json',
+       headers: {
+         "Content-Type": "application/json"
+       },
+       data: JSON.stringify({ "docID": id }),
+       success:
+         $.ajax({
+           type: "POST",
+           url: "/api/doctor/add",
+           headers: {
+             "content-type": "application/json"
+           },
+           data: JSON.stringify(toSubmit),
+           success: this.props.closeFn(),
+           error: this.props.closeFn()
+         }),
+       error: console.log('error in edit of doctor')
+     });
+
     }
   }
   render() {
@@ -129,7 +143,7 @@ export default class EditDoctorModal extends React.Component {
           <div>Phone</div><input id="phone" type="text" value= {this.state.phone} onChange={this.handleChange}></input><h6 className={(this.state.validPhone ? 'hidden' : 'invalid')}> Phone number must be 11 digits</h6><br />
           <div>Email</div><input id="email" type="text" value= {this.state.email} onChange={this.handleChange}></input><br />
           <div>Address</div><input id="address" type="text" value= {this.state.address} onChange={this.handleChange}></input><br />
-          <div>Specialty</div><select id="specialty" value= {this.state.speciality} onChange={this.handleChange}>
+          <div>Specialty</div><select id="specialty" value= {this.state.specialty} onChange={this.handleChange}>
             <option>::Select Specialty::</option>
             {
               DOCTORS.map((doctor) => {

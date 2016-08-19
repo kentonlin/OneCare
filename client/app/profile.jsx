@@ -379,7 +379,8 @@ export default class Profile extends React.Component {
             closeFn={this.closeModalDoctor} />
         </Modal>
 
-        <Modal show={this.state.mapmodalIsOpen} style={this.state.modalStyles}>
+        {/* <Modal show={this.state.mapmodalIsOpen} style={this.state.modalStyles}> */}
+        <Modal show={this.state.mapmodalIsOpen}>
             <div className="modal-button-close-container">
               <div className='modal-button-close' onClick={this.closeModalMap}><i className="fa fa-times-circle" aria-hidden="true"></i></div>
             </div>
@@ -387,11 +388,12 @@ export default class Profile extends React.Component {
           zipcode={this.state.inputZip} />
         </Modal>
 
-        <Modal show={this.state.symptomModalIsOpen} style={this.state.modalStyles}>
+        <Modal show={this.state.symptomModalIsOpen} style={this.state.modalStyles} bsClass='modal' >
+        {/* bsSize='small' */}
             <div className="modal-button-close-container">
               <div className='modal-button-close' onClick={this.closeModalSymptom}><i className="fa fa-times-circle" aria-hidden="true"></i></div>
             </div>
-            <SymptomEntry 
+            <SymptomEntry
             zipcode={this.state.zipcode}
             closeFn={this.closeModalSymptom} />
         </Modal>
@@ -404,7 +406,7 @@ export default class Profile extends React.Component {
             brainState
             symptoms
             recommendations
-            closeFn={this.closeModalDoctor} />
+            closeFn={this.closeModalDoctor}/>
         </Modal>
 
         <Modal show={this.state.editModalIsOpen} bsSize='small'>

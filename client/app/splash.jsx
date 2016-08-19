@@ -40,7 +40,7 @@ export default class Splash extends React.Component {
         <div className= "splashHeader">
 
           <video autoPlay loop id="video-background">
-            <source id="mp4" src="https://fpdl.vimeocdn.com/vimeo-prod-skyfire-std-us/01/100/7/175500373/569208137.mp4?token=57b25a16_0xfdc99155ee316c0a3bb1c89cbc3e2d07e2bb4488" type="video/mp4"/>
+            <source id="mp4" src="https://fpdl.vimeocdn.com/vimeo-prod-skyfire-std-us/01/4528/6/172644004/557095694.mp4?token=57b5142f_0x33fefb0a9c04f360f3eb118144c0fdfe4cd333dd" type="video/mp4"/>
           </video>
 
           <div className= "splashName">
