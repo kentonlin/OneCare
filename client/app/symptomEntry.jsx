@@ -151,15 +151,15 @@ export default class SymptomEntryView extends Component {
   }
 
   clearSymptoms() {
-    this.setState({selectedSymptoms: []})
+    this.setState({selectedSymptoms: []});
   }
 
   setBrainState(state) {
-    this.setState({brainState: state})
+    this.setState({brainState: state});
   }
 
   closeModal() {
-    this.setState({modalIsOpen: false})
+    this.setState({modalIsOpen: false}); 
   }
 
   openModal() {
@@ -214,7 +214,7 @@ export default class SymptomEntryView extends Component {
       <div className="symptom-container">
         <div className={!this.state.modalIsOpen ? "" : "hidden"}>
           <h4>Please select your symptoms from the list below.</h4>
-          <FilteredMultiSelect 
+          <FilteredMultiSelect
             classNames={{
               buttonActive: 'symptom-select-button--active',
               button: 'symptom-select-button--inactive',
@@ -227,12 +227,12 @@ export default class SymptomEntryView extends Component {
             textProp='name'
             size={20}
             valueProp='id' />
-          <div className="selected-symptoms-container">  
+          <div className="selected-symptoms-container">
             {selectedSymptoms.length === 0 && <p>(nothing selected yet)</p>}
             {selectedSymptoms.length > 0 && <ul className="selected-symptoms">
-              {selectedSymptoms.map((symptom, i) => 
-              <Button key={symptom.id} bsStyle="primary" bsSize='small' onClick={this.handleDeselect.bind(null, i)}> 
-                <div> 
+              {selectedSymptoms.map((symptom, i) =>
+              <Button key={symptom.id} bsStyle="primary" bsSize='small' onClick={this.handleDeselect.bind(null, i)}>
+                <div>
                   {`${symptom.name} `}  <i className="fa fa-times-circle" aria-hidden="true"></i>
                 </div>
               </Button>)}
@@ -241,7 +241,7 @@ export default class SymptomEntryView extends Component {
           <Button bsStyle="danger"  bsSize="sm" onClick={this.clearSymptoms}>Clear all</Button>
           <Button bsStyle="success"  bsSize="sm" onClick={this.submitSymptoms}>Submit!</Button>
         </div>
-        <div className={"brain-container " + this.state.modalIsOpen ? "" : "hidden"}> 
+        <div className={"brain-container " + this.state.modalIsOpen ? "" : "hidden"}>
           <SymptomEntryModal closeFn={this.props.closeFn} zipcode={this.props.zipcode} brainState={this.state.brainState} symptoms={this.state.selectedSymptoms} recommendations={this.state.recs} />
         </div>
       </div>

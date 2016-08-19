@@ -1,6 +1,11 @@
+html {
+  height: 100%;
+}
+
 body {
   background-color: #FFFFFF;
   font-family: 'Roboto', sans-serif;
+  height: 100%;
 }
 
 ul {
@@ -119,7 +124,7 @@ input {
 
 
 .btn {
-color: #FFFFFF;
+/*color: #FFFFFF;*/
 display: inline-block;
 padding: 6px 12px;
 margin-bottom: 0;
@@ -476,14 +481,11 @@ border-radius: 4px;
 /* Sign-in & Sign-up */
 
 .signin-container {
-  padding-left: 10px;
-  border-radius:2px;
-  background-color: #FFFFFF;
-  border:1px solid black;
-}
-
-.signin-cat {
-  padding-right: 5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  margin-top: 15%;
 }
 
 .signin-button {
@@ -493,10 +495,21 @@ border-radius: 4px;
   display: inline-block;
 }
 
+.signup-input {
+  width: 25%;
+}
 .signup-container {
-  padding-left: 10px;
+  /*padding-left: 10px;*/
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  margin-top: 5%;
 }
 
+/*.signup-cat {
+  text-align: center;
+}*/
 /* OTHER  */
 .invalid {
   color: red;
@@ -675,8 +688,15 @@ border-radius: 4px;
 }
 /* END OF CALENDAR STYLES*/
 
+.modal-container {
+  position: relative;
+  border-radius: 50px;
+  background-color: #7FFF00;
+}
+
 .modal-header {
-  background-color: #09096A;
+  /*background-color: #09096A;*/
+  background-color:#4169E1;
   border-radius:2px;
   border:1px solid black;
 
@@ -684,7 +704,10 @@ border-radius: 4px;
 
 .modal-content {
   background-color: #2c3e50;
+  /*background-color: #	#00FF7F;*/
   color: #ffffff;
+  border-radius: 20px;
+  width: 500px;
 }
 
 .modal-button {
@@ -715,13 +738,19 @@ border-radius: 4px;
   display: flex;
   justify-content: center;
   background-color: #2c3e50;
+  border-radius: 20px;
+  width: 500px;
+  /*margin: 100px;*/
+  /*background-color: #ffffff;*/
 }
 
 .modal-button-close-container {
   display: flex;
   justify-content: flex-end;
   padding: 5px;
+  border-radius: 20px;
   background-color: #2c3e50;
+  width: 500px
 }
 
 .modal-button-close {
@@ -732,6 +761,12 @@ border-radius: 4px;
   margin: 10px;
 }
 
+
+.model-content {
+  border-radius: 50px;
+  color: #f0ffff;
+
+}
 /*.STYLES FOR PRINTING BRAIN*/
 .brain-print-container {
   margin: 0 auto;
@@ -825,9 +860,9 @@ border-radius: 4px;
 .map-container {
   padding: 10px;
 }
-  display:inline-block;
+  /*display:inline-block;
   min-width: 50%;
- }
+ }*/
 
 .ReactFlipCard {
     margin: 25px;

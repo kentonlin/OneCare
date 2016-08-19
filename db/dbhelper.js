@@ -117,7 +117,7 @@ var dbFunc = {
 					next(new Error("doctor added to user model"));
 				}
 				if(newDoc.email){ //email doctor if patient provided email address
-					this.sendEmail(data.first_last, data.userID, newDoc.email, res)
+					this.sendEmail(data.first_last, data.userID, newDoc.email, res);
 				}
 				else{
 					res.status(201).send(newDoc);
@@ -138,11 +138,35 @@ var dbFunc = {
 	deleteDoc: function(id, res, next) {
 		Model.doctor.remove({"_id": id}, function(err){
 			if(err){
-				next("reminder not deleted", err);
+				next("doctor not deleted", err);
 			}
-			next("doctor deleted");
+			// console.log('delete doctor 500 ');
+			res.status(200).send("doctor deleted");
 		});
   },
+
+	updateDoc: function(doctor, res) {
+		Model.doctor.findOneAndUpdate({"_id": doctor._id}, {
+			// name: String,
+			// phone: String,
+			// email: String,
+			// specialty: String,
+			// address: String,
+			// patients: [{type: Schema.Types.ObjectId, ref: 'User'}],
+			// notes: [{type: Schema.Types.ObjectId, ref: 'Note'}]
+			$set: {
+				name: doctor.name,
+		  	phone: doctor.phone,
+				email: doctor.email,
+				specialty: doctor.specialty,
+				address: doctor.address
+			}
+		}).then(function(doc, err){
+			console.log('doctor updated', doc);
+		}).then(function(){
+			console.log('error in updating doctor');
+		});
+	},
 
 
 	/* AUTHENTICATION FUNCTION */
@@ -227,6 +251,7 @@ var dbFunc = {
 	},
 
 	getZip: function(user, res) {
+
 		if (!user.username) {
 			console.log('no usern@me found');
 		}
@@ -238,7 +263,7 @@ var dbFunc = {
 				else {
 					res.status(200).send(user.zipcode);
 				}
-			})
+			});
 		}
 	},
 
@@ -338,7 +363,7 @@ var dbFunc = {
 								})
 								.catch(function(err){
 									console.log("reminderID for DATE not added", err);
-								})
+								});
 
 							}
 						});
@@ -368,7 +393,7 @@ deleteReminder: function(scriptID, res, next) {
 				};
 				request(options, function (error, response, body) {
 					if (error) throw new Error(error);
-				})
+				});
 			}
 		}
 		Model.script.remove({"_id": scriptID}, function(err){
@@ -379,7 +404,7 @@ deleteReminder: function(scriptID, res, next) {
 				res.status(202).send("REMINDER successfully deleted");
 			}
 		});
-	})
+	});
 },
 
 	addNote: function(data, res) {
@@ -405,7 +430,7 @@ deleteReminder: function(scriptID, res, next) {
   		} else {
         res.status(200).send(found.notes);
   		}
-  	})
+  	});
   },
 
   editNote(targetNoteID, edit, res) {
