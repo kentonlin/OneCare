@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import $ from 'jquery';
 import Navigate from './navigate.jsx';
-import Modal from "react-modal";
+import Modal from 'react-modal';
+import { Button } from 'react-bootstrap';
 
   var DOCTORS = [
     {id: 1, name: 'Allergologist'},
@@ -139,7 +140,6 @@ export default class DoctorEntryView extends React.Component {
     return (
       <div className="script-form-frame">
         {/* <Navigate /> */}
-        <h2>Input a new doctor!</h2>
         <div className="doctor-entry-form">
           <div>Name</div><input id="name" type="text" onChange={this.handleName} />
           <div className={this.state.nameIsValid ? "hidden" : "invalid"}> Name must be at least 2 characters. </div>
@@ -160,7 +160,7 @@ export default class DoctorEntryView extends React.Component {
             }
           </select>
           <div className={this.state.specialtyIsValid ? "hidden" : "invalid"}> Select a specialty. </div>
-          <button onClick={this.submitNewDoctor}>Submit!</button>
+          <Button bsStyle='info' onClick={this.submitNewDoctor}>Save Doctor</Button>
           <h6 className={(this.state.formIsValid ? 'hidden' : 'invalid')}> Some of your data is not valid.  Please check above. </h6>
         </div>
       </div>

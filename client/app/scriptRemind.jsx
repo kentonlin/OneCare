@@ -182,10 +182,9 @@ export default class ScriptRemindView extends React.Component {
 
   render() {
     return (
-      <div>
+      <div className='script-form-frame'>
         <div>
-          <h1> Set a Prescription Reminder </h1>
-          <h2> Current Drug: {this.state.currentDrug} </h2>
+          <h3>Prescription name</h3>
           <input
           onChange={this.updateDrugName}
           placeholder='name'
@@ -194,83 +193,70 @@ export default class ScriptRemindView extends React.Component {
           />
           <h8 className='required'> (required) </h8>
           <div className={this.state.nameIsValid ? "hidden" : "invalid"}> Please enter valid input </div>
-
         </div>
-
-
-          <div className="script-form-frame">
-            <h3>Dosage</h3>
-            <div className="script-form-fields">
-              <input
-              className='dosageInput'
-              onChange={this.handleDoseAmount}
-              defaultValue={this.state.dosageAmt}
-              // placeholder='Dosage (e.g. if "Take 1 tablet", type "1")'
-              />
-              <select className="dropdown-replacement" value={this.state.dosageMeasure} onChange={this.handleDoseMeasurement}>
-                <option>mg</option>
-                <option>mL</option>
-                <option>tablet</option>
-              </select>
-              <div className={this.state.dosageIsValid ? "hidden" : "invalid"}> Please enter valid input </div>
-            </div>
+        <div>
+          <h3>Dosage</h3>
+          <div>
+            <input
+            className='dosageInput'
+            onChange={this.handleDoseAmount}
+            defaultValue={this.state.dosageAmt}
+            // placeholder='Dosage (e.g. if "Take 1 tablet", type "1")'
+            />
+            <select className="dropdown-replacement" value={this.state.dosageMeasure} onChange={this.handleDoseMeasurement}>
+              <option>mg</option>
+              <option>mL</option>
+              <option>tablet</option>
+            </select>
+            <div className={this.state.dosageIsValid ? "hidden" : "invalid"}> Please enter valid input </div>
           </div>
-
-
-          <div className="script-form-frame">
-              <h3> Refill Date</h3>
-              <div  className="script-form-fields">
-                <Calendar format='MM/DD/YYYY' date={this.state.date} onChange= {this.handleRefillDate}/>
-                <span className={this.state.date ? "" : "hidden"}></span>
-                {/* <span className={this.state.date ? "" : "hidden"}>You selected {this.state.date}</span> */}
-              </div>
-              <div className={this.state.refillDateIsValid ? "hidden" : "invalid"}> Please enter valid input </div>
-          </div>
-
-
-          <div className="script-form-frame">
-            <h3>Frequency</h3>
-            <div className="script-form-fields">
-              <select className="dropdown-replacement" value={this.state.scheduleFreq} onChange={this.handleFrequency}>
-                <option>1x</option>
-                <option>2x</option>
-                <option>3x</option>
-              </select>
-                per
-              <select className="dropdown-replacement" value={this.state.scheduleDayWeek} onChange={this.handleScheduleDayWeek}>
-                <option>day</option>
-                <option>week</option>
-              </select>
-            </div>
-          </div>
-
-
-          <div className="script-form-frame">
-             <div className="reminder">
-               <h3> Reminder Time 1</h3>
-               <Kronos time={this.state.reminderTime1} value='' placeholder={"Click to select a time"} onChangeDateTime={this.handleReminderTime1}/>
-               <h8 className='required'> (required) </h8>
-             </div>
-             <div className={(this.state.hasTwo ? 'reminder' : 'hidden')}>
-               <h3> Reminder Time 2</h3>
-               <Kronos time={this.state.reminderTime2} value='' placeholder={"Click to select a time"} onChangeDateTime={this.handleReminderTime2}/>
-               <h8 className='required'> (required) </h8>
-             </div>
-             <div className={this.state.hasThree ? 'reminder' : 'hidden'}>
-               <h3> Reminder Time 3</h3>
-               <Kronos time={this.state.reminderTime3} value='' placeholder={"Click to select a time"} onChangeDateTime={this.handleReminderTime3}/>
-               <h8 className='required'> (required) </h8>
-             </div>
-             <div className='clear'>
-               <Button bsStyle="info" onClick={this.submitForm}> Remind Me </Button>
-               <h6 className={(this.state.formIsValid ? 'hidden' : 'invalid')}> Some of your data is not valid.  Please check above. </h6>
-
-             </div>
-          </div>
-
-
         </div>
-
+        <div>
+            <h3> Refill Date</h3>
+            <div>
+              <Calendar format='MM/DD/YYYY' date={this.state.date} onChange= {this.handleRefillDate}/>
+              <span className={this.state.date ? "" : "hidden"}></span>
+              {/* <span className={this.state.date ? "" : "hidden"}>You selected {this.state.date}</span> */}
+            </div>
+            <div className={this.state.refillDateIsValid ? "hidden" : "invalid"}> Please enter valid input </div>
+        </div>
+        <div>
+          <h3>Frequency</h3>
+          <div>
+            <select className="dropdown-replacement" value={this.state.scheduleFreq} onChange={this.handleFrequency}>
+              <option>1x</option>
+              <option>2x</option>
+              <option>3x</option>
+            </select>
+              per
+            <select className="dropdown-replacement" value={this.state.scheduleDayWeek} onChange={this.handleScheduleDayWeek}>
+              <option>day</option>
+              <option>week</option>
+            </select>
+          </div>
+        </div>
+        <div>
+           <div className="reminder">
+             <h3> Reminder Time 1</h3>
+             <Kronos time={this.state.reminderTime1} value='' placeholder={"Click to select a time"} onChangeDateTime={this.handleReminderTime1}/>
+             <h8 className='required'> (required) </h8>
+           </div>
+           <div className={(this.state.hasTwo ? 'reminder' : 'hidden')}>
+             <h3> Reminder Time 2</h3>
+             <Kronos time={this.state.reminderTime2} value='' placeholder={"Click to select a time"} onChangeDateTime={this.handleReminderTime2}/>
+             <h8 className='required'> (required) </h8>
+           </div>
+           <div className={this.state.hasThree ? 'reminder' : 'hidden'}>
+             <h3> Reminder Time 3</h3>
+             <Kronos time={this.state.reminderTime3} value='' placeholder={"Click to select a time"} onChangeDateTime={this.handleReminderTime3}/>
+             <h8 className='required'> (required) </h8>
+           </div>
+           <div className='clear'>
+             <Button bsStyle="info" onClick={this.submitForm}>Remind Me</Button>
+             <h6 className={(this.state.formIsValid ? 'hidden' : 'invalid')}> Some of your data is not valid.  Please check above. </h6>
+           </div>
+        </div>
+      </div>
     );
   }
 }

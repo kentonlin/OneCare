@@ -361,6 +361,7 @@ export default class Profile extends React.Component {
         <Navigate />
         <Modal show={this.state.scriptmodalIsOpen}>
             <div className="modal-button-close-container">
+              <h2>Input new prescription</h2>
               <div className='modal-button-close' onClick={this.closeModalScript}><i className="fa fa-times-circle" aria-hidden="true"></i></div>
             </div>
             <ScriptRemind
@@ -368,9 +369,9 @@ export default class Profile extends React.Component {
             {/* <Button onClick={this.closeModalScript}>Exit</Button> */}
 
         </Modal>
-
         <Modal show={this.state.docmodalIsOpen} bsSize='small'>
             <div className="modal-button-close-container">
+              <h2>Input new doctor</h2>
               <div className='modal-button-close' onClick={this.closeModalDoctor}><i className="fa fa-times-circle" aria-hidden="true"></i></div>
             </div>
             <DoctorEntryView
@@ -380,6 +381,7 @@ export default class Profile extends React.Component {
         {/* <Modal show={this.state.mapmodalIsOpen} style={this.state.modalStyles}> */}
         <Modal show={this.state.mapmodalIsOpen}>
             <div className="modal-button-close-container">
+            <h2>Pharmacies near {this.state.inputZip}</h2>
               <div className='modal-button-close' onClick={this.closeModalMap}><i className="fa fa-times-circle" aria-hidden="true"></i></div>
             </div>
             <Map
@@ -389,6 +391,7 @@ export default class Profile extends React.Component {
         <Modal show={this.state.symptomModalIsOpen} style={this.state.modalStyles} bsClass='modal' >
         {/* bsSize='small' */}
             <div className="modal-button-close-container">
+            <h4>Please select your symptoms from the list below.</h4>
               <div className='modal-button-close' onClick={this.closeModalSymptom}><i className="fa fa-times-circle" aria-hidden="true"></i></div>
             </div>
             <SymptomEntry
