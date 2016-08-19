@@ -493,13 +493,21 @@ border-radius: 4px;
   display: inline-block;
 }
 
+.signup-input {
+  width: 25%;
+}
 .signup-container {
-  padding-left: 10px;
+  /*padding-left: 10px;*/
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
+  text-align: center;
+  margin-top: 5%;
 }
 
+/*.signup-cat {
+  text-align: center;
+}*/
 /* OTHER  */
 .invalid {
   color: red;
@@ -828,9 +836,9 @@ border-radius: 4px;
 .map-container {
   padding: 10px;
 }
-  display:inline-block;
+  /*display:inline-block;
   min-width: 50%;
- }
+ }*/
 
 .ReactFlipCard {
     margin: 25px;

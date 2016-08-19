@@ -15,7 +15,7 @@ export default class Signup extends React.Component {
       zipcode: 10001,
       email: "",
       //form validation
-      firstnameIsValid: false, 
+      firstnameIsValid: false,
       lastnameIsValid: false,
       usernameIsValid: false,
       passwordIsValid: false,
@@ -149,25 +149,33 @@ export default class Signup extends React.Component {
   render() {
     return (
       <div className= "signup-container">
-        <h1> Sign-up </h1>
-          <div className='signup-cat'>First Name</div><input type="text" onChange={this.handleFirstName} /><br/>
-          <h6 className={(this.state.firstnameIsValid ? 'hidden' : 'invalid')}> Name must be at least two letters. </h6>
-          <div className='signup-cat'>Last Name</div><input type="text" onChange={this.handleLastName}/><br/>
-          <h6 className={(this.state.lastnameIsValid ? 'hidden' : 'invalid')}> Name must be at least two letters. </h6>
-          <div className='signup-cat'>username</div><input type="text" onChange={this.handleUsername}/><br/>
-          <h6 className={(this.state.usernameIsValid ? 'hidden' : 'invalid')}> Username must be at least four letters. </h6>
-          <div className='signup-cat'>password</div><input type="password" onChange={this.handlePassword}/><br />
-          <h6 className={(this.state.passwordIsValid ? 'hidden' : 'invalid')}> Password must be at least four letters. </h6>
-          <div className='signup-cat'>address</div><input type="text" onChange={this.handleAddress}/><br/>
-          <div className='signup-cat'>zip code</div><input type="text" onChange={this.handleZipcode}/><br/>
-          <h6 className={(this.state.zipcodeIsValid ? 'hidden' : 'invalid')}> Please enter a valid zipcode </h6>
-          <div className='signup-cat'>phone</div><input type="text" onChange={this.handlePhone}/>
-          <h6 className={(this.state.phoneIsValid ? 'hidden' : 'invalid')}> Phone number must be 11 digits</h6>
-          <div className='signup-cat'>email</div><input type="text" onChange={this.handleEmail}/>
-          <h6 className={(this.state.emailIsValid ? 'hidden' : 'invalid')}> Please enter a valid email </h6>
-          <button className='signup-cat' onClick={ this.submitUser }>Submit</button>
-          <h6 className={(this.state.formIsValid ? 'hidden' : 'invalid')}> Some of your data is not valid.  Please check above. </h6>
-        <Link to="/signin"> Return to Sign-in </Link>
+      <Grid>
+        <Row>
+          <h1> Sign-up </h1>
+        </Row>
+        <Row>
+          <Form>
+                <div className='signup-cat'><span>First Name</span> <input className="signup-input" type="text" onChange={this.handleFirstName} /></div><br/>
+                <h6 className={(this.state.firstnameIsValid ? 'hidden' : 'invalid')}> Name must be at least two letters. </h6>
+                <div className='signup-cat'><span>Last Name</span><input className="signup-input" type="text" onChange={this.handleLastName}/></div><br/>
+                <h6 className={(this.state.lastnameIsValid ? 'hidden' : 'invalid')}> Name must be at least two letters. </h6>
+                <div className='signup-cat'><span>Username</span><input className="signup-input" type="text" onChange={this.handleUsername}/></div><br/>
+                <h6 className={(this.state.usernameIsValid ? 'hidden' : 'invalid')}> Username must be at least four letters. </h6>
+                <div className='signup-cat'><span>Password</span> <input className="signup-input" type="password" onChange={this.handlePassword}/></div><br />
+                <h6 className={(this.state.passwordIsValid ? 'hidden' : 'invalid')}> Password must be at least four letters. </h6>
+                <div className='signup-cat'><span>Address</span><input className="signup-input" type="text" onChange={this.handleAddress}/></div><br/>
+                <div className='signup-cat'><span>Zip code</span><input className="signup-input" type="text" onChange={this.handleZipcode}/></div><br/>
+                <h6 className={(this.state.zipcodeIsValid ? 'hidden' : 'invalid')}> Please enter a valid zipcode </h6>
+                <div className='signup-cat'><span>Phone</span> <input className="signup-input" type="text" onChange={this.handlePhone}/></div>
+                <h6 className={(this.state.phoneIsValid ? 'hidden' : 'invalid')}> Phone number must be 11 digits</h6>
+                <div className='signup-cat'><span>Email</span> <input className="signup-input" type="text" onChange={this.handleEmail}/></div>
+                <h6 className={(this.state.emailIsValid ? 'hidden' : 'invalid')}> Please enter a valid email </h6>
+                <button className='signup-cat' onClick={ this.submitUser }>Submit</button>
+                <h6 className={(this.state.formIsValid ? 'hidden' : 'invalid')}> Some of your data is not valid.  Please check above. </h6>
+              <Link to="/signin"> Return to Sign-in </Link>
+              </Form>
+              </Row>
+            </Grid>
       </div>
     );
   }
