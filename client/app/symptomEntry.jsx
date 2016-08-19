@@ -213,7 +213,6 @@ export default class SymptomEntryView extends Component {
     return (
       <div className="symptom-container">
         <div className={!this.state.modalIsOpen ? "" : "hidden"}>
-          <h4>Please select your symptoms from the list below.</h4>
           <FilteredMultiSelect
             classNames={{
               buttonActive: 'symptom-select-button--active',

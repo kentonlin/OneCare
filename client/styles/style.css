@@ -299,7 +299,6 @@ border-radius: 4px;
   text-align: center;
   color: white;
   font-weight: lighter;
-
 }
 
 .doctor-footer {
@@ -370,7 +369,7 @@ border-radius: 4px;
   margin-top: 10px;
   margin-right: 20px;
   padding: 10px;
-  background-color: #e74c3c;
+  background-color: #1C587F;
   border-radius: 7px;
   padding:5px;
 }
@@ -703,7 +702,7 @@ border-radius: 4px;
 }
 
 .modal-content {
-  background-color: #2c3e50;
+  background-color: #1C587F;
   /*background-color: #	#00FF7F;*/
   color: #ffffff;
   border-radius: 20px;
@@ -737,7 +736,7 @@ border-radius: 4px;
 .symptom-container {
   display: flex;
   justify-content: center;
-  background-color: #2c3e50;
+  background-color: #1C587F;
   border-radius: 20px;
   width: 500px;
   /*margin: 100px;*/
@@ -746,11 +745,11 @@ border-radius: 4px;
 
 .modal-button-close-container {
   display: flex;
-  justify-content: flex-end;
-  padding: 5px;
+  justify-content: space-between;
+  padding-left: 15px;
   border-radius: 20px;
-  background-color: #2c3e50;
-  width: 500px
+  background-color: #1C587F;
+  width: 490px;
 }
 
 .modal-button-close {
@@ -765,7 +764,6 @@ border-radius: 4px;
 .model-content {
   border-radius: 50px;
   color: #f0ffff;
-
 }
 /*.STYLES FOR PRINTING BRAIN*/
 .brain-print-container {
