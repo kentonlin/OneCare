@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Router, Route, Link, browserHistory } from 'react-router';
 import $ from 'jquery';
+import {Button, ButtonToolbar, Form, FormGroup, Col, FormControl, ControlLabel, Checkbox, Row, Grid} from 'react-bootstrap';
 
 export default class Signup extends React.Component {
   constructor(props) {

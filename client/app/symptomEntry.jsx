@@ -159,7 +159,7 @@ export default class SymptomEntryView extends Component {
   }
 
   closeModal() {
-    this.setState({modalIsOpen: false});
+    this.setState({modalIsOpen: false}); 
   }
 
   openModal() {
