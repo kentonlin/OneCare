@@ -88,21 +88,27 @@ export default class Signup extends React.Component {
   render() {
     return (
       <div className= "signup-container">
-        <h1> Sign-up </h1>
-        <Form>
-          <div className='signup-cat'>First Name</div><input type="text" onChange={(event) => {this.setState({firstName: event.target.value})}}/><br/>
-          <div className='signup-cat'>Last Name</div><input type="text" onChange={(event) => {this.setState({lastName: event.target.value})}}/><br/>
-          <div className='signup-cat'>username</div><input type="text" onChange={(event) => {this.setState({username: event.target.value})}}/><br/>
-          <div className='signup-cat'>password</div><input type="password" onChange={(event) => {this.setState({password: event.target.value})}}/><br />
-          <div className='signup-cat'>address</div><input type="text" onChange={(event) => {this.setState({address: event.target.value})}}/><br/>
-          <div className='signup-cat'>zip code</div><input type="text" onChange={(event) => {this.setState({zipcode: event.target.value})}}/><br/>
-          <div className='signup-cat'>phone</div><input type="text" onChange={(event) => {this.setState({phone: event.target.value})
-        this.validatePhone(this.state.phone)}}/> <h6 className={(this.state.invalidPhone ? 'hidden' : 'invalid')}> Phone number must be 11 digits</h6>
-          <div className='signup-cat'>email</div><input type="text" onChange={(event) => {this.setState({email: event.target.value})
-          this.validateEmail(this.state.email)}}/><h6 className={(this.state.invalidEmail ? 'hidden' : 'invalid')}> Enter a valid email</h6>
-          <button className='signup-cat' onClick={ this.submitUser }>Submit</button>
-        </Form>
-        <Link to="/signin">Return to Sign-in </Link>
+      <Grid>
+        <Row>
+          <h1> Sign-up </h1>
+        </Row>
+        <Row>
+          <Form>
+            <div className='signup-cat'> <span>First Name</span> <input className="signup-input" type="text" onChange={(event) => {this.setState({firstName: event.target.value})}}></input></div><br/>
+            <div className='signup-cat'> <span>Last Name</span> <input className="signup-input" type="text" onChange={(event) => {this.setState({lastName: event.target.value})}}></input></div><br/>
+            <div className='signup-cat'> &nbsp;<span>Username</span> <input className="signup-input" type="text" onChange={(event) => {this.setState({username: event.target.value})}}></input></div><br/>
+            <div className='signup-cat'> &nbsp;<span>Password</span> <input className="signup-input" type="password" onChange={(event) => {this.setState({password: event.target.value})}}></input></div><br/>
+            <div className='signup-cat'> &nbsp; &nbsp;&nbsp;<span>Address</span> <input className="signup-input" type="text" onChange={(event) => {this.setState({address: event.target.value})}}></input></div><br/>
+            <div className='signup-cat'> &nbsp;&nbsp;&nbsp;<span>Zip code</span> <input className="signup-input" type="text" onChange={(event) => {this.setState({zipcode: event.target.value})}}></input></div><br/>
+            <div className='signup-cat'> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span>Phone</span> <input className="signup-input" type="text" onChange={(event) => {this.setState({phone: event.target.value})
+          this.validatePhone(this.state.phone)}}></input></div><h6 className={(this.state.invalidPhone ? 'hidden' : 'invalid')}>Phone number must be 11 digits</h6>
+            <div className='signup-cat'> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span>Email</span> <input className="signup-input" type="text" onChange={(event) => {this.setState({email: event.target.value})
+            this.validateEmail(this.state.email)}}></input></div><h6 className={(this.state.invalidEmail ? 'hidden' : 'invalid')}>Enter a valid email</h6>
+            <Button bsStyle='success' className='signup-cat' onClick={ this.submitUser }>Submit</Button>
+          </Form>
+          <Link to="/signin">Return to Sign-in </Link>
+        </Row>
+      </Grid>
       </div>
     );
   }

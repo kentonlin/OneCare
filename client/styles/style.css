@@ -500,8 +500,20 @@ border-radius: 4px;
   display: inline-block;
 }
 
-/*.signup-container {
-  padding-left: 10px;
+.signup-input {
+  width: 25%;
+}
+.signup-container {
+  /*padding-left: 10px;*/
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  margin-top: 5%;
+}
+
+/*.signup-cat {
+  text-align: center;
 }*/
 
 /* OTHER  */

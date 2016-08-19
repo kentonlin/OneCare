@@ -151,15 +151,15 @@ export default class SymptomEntryView extends Component {
   }
 
   clearSymptoms() {
-    this.setState({selectedSymptoms: []})
+    this.setState({selectedSymptoms: []});
   }
 
   setBrainState(state) {
-    this.setState({brainState: state})
+    this.setState({brainState: state});
   }
 
   closeModal() {
-    this.setState({modalIsOpen: false})
+    this.setState({modalIsOpen: false}); 
   }
 
   openModal() {
@@ -241,13 +241,8 @@ export default class SymptomEntryView extends Component {
           <Button bsStyle="danger"  bsSize="sm" onClick={this.clearSymptoms}>Clear all</Button>
           <Button bsStyle="success"  bsSize="sm" onClick={this.submitSymptoms}>Submit!</Button>
         </div>
-<<<<<<< HEAD
-        <div className={"brain-container " + this.state.modalIsOpen ? "" : "hidden"}> 
-          <SymptomEntryModal closeFn={this.props.closeFn} zipcode={this.props.zipcode} brainState={this.state.brainState} symptoms={this.state.selectedSymptoms} recommendations={this.state.recs} />
-=======
         <div className={"brain-container " + this.state.modalIsOpen ? "" : "hidden"}>
-          <SymptomEntryModal brainState={this.state.brainState} symptoms={this.state.selectedSymptoms} recommendations={this.state.recs} />
->>>>>>> pullDev
+          <SymptomEntryModal closeFn={this.props.closeFn} zipcode={this.props.zipcode} brainState={this.state.brainState} symptoms={this.state.selectedSymptoms} recommendations={this.state.recs} />
         </div>
       </div>
     );
