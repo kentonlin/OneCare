@@ -139,14 +139,6 @@ export default class DoctorEntryView extends React.Component {
     return (
       <div className="script-form-frame">
         {/* <Navigate /> */}
-<<<<<<< HEAD
-        <form className="doctor-entry-form">
-          <div>Name</div><input id="name" type="text" onChange={this.handleChange} />
-          <div>Phone</div><input id="phone" type="text" onChange={this.handleChange}></input><h6 className={(this.state.validPhone ? 'hidden' : 'invalid')}> Phone number must be 11 digits</h6><br />
-          <div>Email</div><input id="email" type="text" onChange={this.handleChange}></input><br /><h6 className="invalid"> (Your doctor will receive a notification that you have registered with them!) </h6><br />
-          <div>Address</div><input id="address" type="text" onChange={this.handleChange}></input><br />
-          <div>Specialty</div><select id="specialty" onChange={this.handleChange}>
-=======
         <h2>Input a new doctor!</h2>
         <div className="doctor-entry-form">
           <div>Name</div><input id="name" type="text" onChange={this.handleName} />
@@ -158,7 +150,6 @@ export default class DoctorEntryView extends React.Component {
           <h6 className="invalid"> (Your doctor will receive notification that you have registered with them!) </h6><br />
           <div>Address</div><input id="address" type="text" onChange={this.handleAddress}></input><br />
           <div>Specialty</div><select id="specialty" onChange={this.handleSpecialty}>
->>>>>>> 7d14e00309be059a7fb162d738a8fcecda168c7a
             <option>::Select Specialty::</option>
             {
               DOCTORS.map((doctor) => {

@@ -73,7 +73,7 @@
 	
 	var _container2 = _interopRequireDefault(_container);
 	
-	var _doctorEntryView = __webpack_require__(!(function webpackMissingModule() { var e = new Error("Cannot find module \"./doctorEntryView.jsx\""); e.code = 'MODULE_NOT_FOUND'; throw e; }()));
+	var _doctorEntryView = __webpack_require__(/*! ./doctorEntryView.jsx */ 495);
 	
 	var _doctorEntryView2 = _interopRequireDefault(_doctorEntryView);
 	
@@ -57767,7 +57767,259 @@
 	exports.ValidComponentChildren = _ValidComponentChildren3['default'];
 
 /***/ },
-/* 495 */,
+/* 495 */
+/*!****************************************!*\
+  !*** ./client/app/doctorEntryView.jsx ***!
+  \****************************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+	
+	var _react = __webpack_require__(/*! react */ 1);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _jquery = __webpack_require__(/*! jquery */ 240);
+	
+	var _jquery2 = _interopRequireDefault(_jquery);
+	
+	var _navigate = __webpack_require__(/*! ./navigate.jsx */ 243);
+	
+	var _navigate2 = _interopRequireDefault(_navigate);
+	
+	var _reactModal = __webpack_require__(/*! react-modal */ 496);
+	
+	var _reactModal2 = _interopRequireDefault(_reactModal);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+	
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+	
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+	
+	var DOCTORS = [{ id: 1, name: 'Allergologist' }, { id: 2, name: 'Andrologist' }, { id: 3, name: 'Anesthesiologist' }, { id: 4, name: 'Angiologist‎' }, { id: 5, name: 'Cardiologist' }, { id: 6, name: 'Dentist' }, { id: 7, name: 'Dermatologist‎' }, { id: 8, name: 'Emergency Medicine‎ Specialist' }, { id: 9, name: 'Endocrinology‎' }, { id: 10, name: 'Family Medicine‎ Specialist' }, { id: 11, name: 'Gastroenterologist‎' }, { id: 12, name: 'General practitioner' }, { id: 13, name: 'Geriatrician' }, { id: 14, name: 'Gynaecologist' }, { id: 15, name: 'Hematologist' }, { id: 16, name: 'Hepatologyist' }, { id: 17, name: 'Immunologist‎' }, { id: 18, name: 'Internal Medical Specialist' }, { id: 19, name: 'Nephrologist‎' }, { id: 20, name: 'Neurologist' }, { id: 21, name: 'Obstetrician' }, { id: 22, name: 'Oncologist' }, { id: 23, name: 'Ophthalmologist' }, { id: 24, name: 'Ear, nose, and Throat Doctor' }, { id: 25, name: 'Palliative Medical Expert' }, { id: 26, name: 'Pediatrician‎' }, { id: 27, name: 'Podiatrist' }, { id: 28, name: 'Psychiatrist' }, { id: 29, name: 'Pulmonologist' }, { id: 30, name: 'Radiologist' }, { id: 31, name: 'Rheumatologist‎' }, { id: 32, name: 'Expert in Sleep Medicine‎' }, { id: 33, name: 'Surgeon‎' }, { id: 34, name: 'Toxicologist' }, { id: 35, name: 'Urologist' }];
+	
+	var DoctorEntryView = function (_React$Component) {
+	  _inherits(DoctorEntryView, _React$Component);
+	
+	  function DoctorEntryView(props) {
+	    _classCallCheck(this, DoctorEntryView);
+	
+	    var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(DoctorEntryView).call(this, props));
+	
+	    _this.state = {
+	      modalIsOpen: true,
+	      name: "",
+	      phone: "",
+	      email: "",
+	      address: "",
+	      specialty: "",
+	      //validation
+	      phoneIsValid: false,
+	      specialtyIsValid: false,
+	      nameIsValid: false,
+	      emailIsValid: false,
+	      formIsValid: true
+	    };
+	    _this.submitNewDoctor = _this.submitNewDoctor.bind(_this);
+	    _this.handlePhone = _this.handlePhone.bind(_this);
+	    _this.handleSpecialty = _this.handleSpecialty.bind(_this);
+	    _this.handleName = _this.handleName.bind(_this);
+	    _this.handleEmail = _this.handleEmail.bind(_this);
+	    _this.handleAddress = _this.handleAddress.bind(_this);
+	    return _this;
+	  }
+	
+	  _createClass(DoctorEntryView, [{
+	    key: 'handlePhone',
+	    value: function handlePhone(e) {
+	      this.setState({ phone: e.target.value });
+	      if (e.target.value.match(/\d/g).length === 11) {
+	        this.setState({ phoneIsValid: true });
+	      } else {
+	        this.setState({ phoneIsValid: false });
+	      }
+	    }
+	  }, {
+	    key: 'handleSpecialty',
+	    value: function handleSpecialty(e) {
+	      this.setState({ specialty: e.target.value });
+	      if (e.target.value !== "::Select Specialty::") {
+	        this.setState({ specialtyIsValid: true });
+	      } else {
+	        this.setState({ specialtyIsValid: false });
+	      }
+	    }
+	  }, {
+	    key: 'handleName',
+	    value: function handleName(e) {
+	      this.setState({ name: e.target.value });
+	      if (e.target.value.length > 2) {
+	        this.setState({ nameIsValid: true });
+	      } else {
+	        this.setState({ nameIsValid: false });
+	      }
+	    }
+	  }, {
+	    key: 'handleEmail',
+	    value: function handleEmail(e) {
+	      var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+	      this.setState({ email: e.target.value });
+	      if (re.test(e.target.value)) {
+	        this.setState({ emailIsValid: true });
+	      } else {
+	        this.setState({ emailIsValid: false });
+	      }
+	    }
+	  }, {
+	    key: 'handleAddress',
+	    value: function handleAddress(e) {
+	      this.setState({ address: e.target.value });
+	    }
+	  }, {
+	    key: 'submitNewDoctor',
+	    value: function submitNewDoctor(e) {
+	      e.preventDefault();
+	      if (!this.state.nameIsValid || !this.state.phoneIsValid || !this.state.emailIsValid || !this.state.specialtyIsValid) {
+	        this.setState({ formIsValid: false });
+	      } else {
+	        var toSubmit = { "username": window.localStorage.username, "first_last": window.localStorage.first_last, "userID": window.localStorage.userID, "doc": {
+	            name: this.state.name,
+	            phone: this.state.phone,
+	            email: this.state.email,
+	            address: this.state.address,
+	            specialty: this.state.specialty
+	          } };
+	
+	        _jquery2.default.ajax({
+	          type: "POST",
+	          url: "/api/doctor/add",
+	          headers: {
+	            "content-type": "application/json"
+	          },
+	          data: JSON.stringify(toSubmit),
+	          success: this.props.closeFn(),
+	          error: this.props.closeFn()
+	        });
+	      }
+	    }
+	  }, {
+	    key: 'render',
+	    value: function render() {
+	      return _react2.default.createElement(
+	        'div',
+	        { className: 'script-form-frame' },
+	        _react2.default.createElement(
+	          'h2',
+	          null,
+	          'Input a new doctor!'
+	        ),
+	        _react2.default.createElement(
+	          'div',
+	          { className: 'doctor-entry-form' },
+	          _react2.default.createElement(
+	            'div',
+	            null,
+	            'Name'
+	          ),
+	          _react2.default.createElement('input', { id: 'name', type: 'text', onChange: this.handleName }),
+	          _react2.default.createElement(
+	            'div',
+	            { className: this.state.nameIsValid ? "hidden" : "invalid" },
+	            ' Name must be at least 2 characters. '
+	          ),
+	          _react2.default.createElement(
+	            'div',
+	            null,
+	            'Phone'
+	          ),
+	          _react2.default.createElement('input', { id: 'phone', type: 'text', onChange: this.handlePhone }),
+	          _react2.default.createElement('br', null),
+	          _react2.default.createElement(
+	            'div',
+	            { className: this.state.phoneIsValid ? "hidden" : "invalid" },
+	            ' Phone numbers must be 11 digits long. '
+	          ),
+	          _react2.default.createElement(
+	            'div',
+	            null,
+	            'Email'
+	          ),
+	          _react2.default.createElement('input', { id: 'email', type: 'text', onChange: this.handleEmail }),
+	          _react2.default.createElement('br', null),
+	          _react2.default.createElement(
+	            'div',
+	            { className: this.state.emailIsValid ? "hidden" : "invalid" },
+	            ' Please enter a valid email. '
+	          ),
+	          _react2.default.createElement(
+	            'h6',
+	            { className: 'invalid' },
+	            ' (Your doctor will receive notification that you have registered with them!) '
+	          ),
+	          _react2.default.createElement('br', null),
+	          _react2.default.createElement(
+	            'div',
+	            null,
+	            'Address'
+	          ),
+	          _react2.default.createElement('input', { id: 'address', type: 'text', onChange: this.handleAddress }),
+	          _react2.default.createElement('br', null),
+	          _react2.default.createElement(
+	            'div',
+	            null,
+	            'Specialty'
+	          ),
+	          _react2.default.createElement(
+	            'select',
+	            { id: 'specialty', onChange: this.handleSpecialty },
+	            _react2.default.createElement(
+	              'option',
+	              null,
+	              '::Select Specialty::'
+	            ),
+	            DOCTORS.map(function (doctor) {
+	              return _react2.default.createElement(
+	                'option',
+	                { key: doctor.id },
+	                doctor.name
+	              );
+	            })
+	          ),
+	          _react2.default.createElement(
+	            'div',
+	            { className: this.state.specialtyIsValid ? "hidden" : "invalid" },
+	            ' Select a specialty. '
+	          ),
+	          _react2.default.createElement(
+	            'button',
+	            { onClick: this.submitNewDoctor },
+	            'Submit!'
+	          ),
+	          _react2.default.createElement(
+	            'h6',
+	            { className: this.state.formIsValid ? 'hidden' : 'invalid' },
+	            ' Some of your data is not valid.  Please check above. '
+	          )
+	        )
+	      );
+	    }
+	  }]);
+	
+	  return DoctorEntryView;
+	}(_react2.default.Component);
+	
+	exports.default = DoctorEntryView;
+
+/***/ },
 /* 496 */
 /*!************************************!*\
   !*** ./~/react-modal/lib/index.js ***!
@@ -61963,7 +62215,7 @@
 	
 	var _scriptRemind2 = _interopRequireDefault(_scriptRemind);
 	
-	var _doctorEntryView = __webpack_require__(!(function webpackMissingModule() { var e = new Error("Cannot find module \"./doctorEntryView.jsx\""); e.code = 'MODULE_NOT_FOUND'; throw e; }()));
+	var _doctorEntryView = __webpack_require__(/*! ./doctorEntryView.jsx */ 495);
 	
 	var _doctorEntryView2 = _interopRequireDefault(_doctorEntryView);
 	
