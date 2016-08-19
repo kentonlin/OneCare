@@ -62791,6 +62791,11 @@
 	            'div',
 	            { className: 'modal-button-close-container' },
 	            _react2.default.createElement(
+	              'h2',
+	              null,
+	              'Input new prescription'
+	            ),
+	            _react2.default.createElement(
 	              'div',
 	              { className: 'modal-button-close', onClick: this.closeModalScript },
 	              _react2.default.createElement('i', { className: 'fa fa-times-circle', 'aria-hidden': 'true' })
@@ -62805,6 +62810,11 @@
 	          _react2.default.createElement(
 	            'div',
 	            { className: 'modal-button-close-container' },
+	            _react2.default.createElement(
+	              'h2',
+	              null,
+	              'Input new doctor'
+	            ),
 	            _react2.default.createElement(
 	              'div',
 	              { className: 'modal-button-close', onClick: this.closeModalDoctor },
@@ -62821,6 +62831,12 @@
 	            'div',
 	            { className: 'modal-button-close-container' },
 	            _react2.default.createElement(
+	              'h2',
+	              null,
+	              'Pharmacies near ',
+	              this.state.inputZip
+	            ),
+	            _react2.default.createElement(
 	              'div',
 	              { className: 'modal-button-close', onClick: this.closeModalMap },
 	              _react2.default.createElement('i', { className: 'fa fa-times-circle', 'aria-hidden': 'true' })
@@ -62835,6 +62851,11 @@
 	          _react2.default.createElement(
 	            'div',
 	            { className: 'modal-button-close-container' },
+	            _react2.default.createElement(
+	              'h4',
+	              null,
+	              'Please select your symptoms from the list below.'
+	            ),
 	            _react2.default.createElement(
 	              'div',
 	              { className: 'modal-button-close', onClick: this.closeModalSymptom },
@@ -62997,7 +63018,12 @@
 	                  String(new Date(script.refill)).split('').slice(0, 15).join('')
 	                )
 	              );
-	            }, this)
+	            }, this),
+	            _react2.default.createElement(
+	              'div',
+	              { onClick: this.openModalScript, className: this.state.scripts.length === 0 ? "scripts-empty" : "hidden" },
+	              'Please schedule some reminders!'
+	            )
 	          ),
 	          _react2.default.createElement(
 	            'div',
@@ -63164,7 +63190,12 @@
 	                  })
 	                )
 	              );
-	            }, this)
+	            }, this),
+	            _react2.default.createElement(
+	              'div',
+	              { onClick: this.openModalDoctor, className: this.state.doctors.length === 0 ? "doctors-empty" : "hidden" },
+	              'Please register some doctors!'
+	            )
 	          )
 	        )
 	      );

@@ -257,8 +257,11 @@ border-radius: 4px;
 }
 .doctors-container {
 <<<<<<< HEAD
+<<<<<<< HEAD
   float: right;
 =======
+=======
+>>>>>>> default
   display: flex;
   flex-flow: column nowrap;
   float:right;
@@ -385,10 +388,7 @@ border-radius: 4px;
   background-color: #1C587F;
   border-radius: 7px;
   padding:5px;
-<<<<<<< HEAD
-=======
   min-height: 100%;
->>>>>>> default
 }
 
 .scripts-title {
