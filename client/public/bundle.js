@@ -74,7 +74,7 @@
 
 	var _doctorEntryView2 = _interopRequireDefault(_doctorEntryView);
 
-	var _symptomEntry = __webpack_require__(516);
+	var _symptomEntry = __webpack_require__(!(function webpackMissingModule() { var e = new Error("Cannot find module \"./symptomEntry.jsx\""); e.code = 'MODULE_NOT_FOUND'; throw e; }()));
 
 	var _symptomEntry2 = _interopRequireDefault(_symptomEntry);
 
@@ -89,6 +89,10 @@
 	var _brainView = __webpack_require__(520);
 
 	var _brainView2 = _interopRequireDefault(_brainView);
+
+	var _splash = __webpack_require__(531);
+
+	var _splash2 = _interopRequireDefault(_splash);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -133,6 +137,7 @@
 	          _react2.default.createElement(_reactRouter.Route, { path: '/signin', component: _signin2.default }),
 	          _react2.default.createElement(_reactRouter.Route, { path: '/signup', component: _signup2.default }),
 	          _react2.default.createElement(_reactRouter.Route, { path: '/brain', component: _brainView2.default }),
+	          _react2.default.createElement(_reactRouter.Route, { path: '/splash', component: _splash2.default }),
 	          _react2.default.createElement(_reactRouter.Route, { path: '/*', component: _notFound2.default })
 	        )
 	      );
@@ -27227,6 +27232,8 @@
 
 	var _signup2 = _interopRequireDefault(_signup);
 
+	var _reactBootstrap = __webpack_require__(244);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -27290,48 +27297,107 @@
 	    value: function render() {
 	      var _this2 = this;
 
-	      return _react2.default.createElement(
-	        'div',
-	        { className: 'signin-container' },
+	      return (
+	        //      <Form horizontal>
+	        //   <FormGroup controlId="formHorizontalEmail">
+	        //     <Col componentClass={ControlLabel} sm={2}>
+	        //       Username
+	        //     </Col>
+	        //     <Col sm={10}>
+	        //       <FormControl type="text" onChange={(event) => {this.setState({username: event.target.value})}}/>
+	        //     </Col>
+	        //   </FormGroup>
+	        //
+	        //   <FormGroup controlId="formHorizontalPassword">
+	        //     <Col componentClass={ControlLabel} sm={2}>
+	        //       Password
+	        //     </Col>
+	        //     <Col sm={10}>
+	        //       <FormControl type="password" onChange={(event) => {this.setState({password: event.target.value})}}/>
+	        //     </Col>
+	        //   </FormGroup>
+	        //
+	        //   <FormGroup>
+	        //     <Col smOffset={2} sm={10}>
+	        //       <Checkbox>Remember me</Checkbox>
+	        //     </Col>
+	        //   </FormGroup>
+	        //
+	        //   <FormGroup>
+	        //     <Col smOffset={2} sm={10}>
+	        //       <Button onClick={this.submitLogin}>
+	        //         Sign in
+	        //       </Button>
+	        //     </Col>
+	        //   </FormGroup>
+	        // </Form>
 	        _react2.default.createElement(
-	          'h1',
-	          null,
-	          'Sign in to OneCare'
-	        ),
-	        _react2.default.createElement(
-	          'form',
-	          null,
+	          'div',
+	          { className: 'signin-container' },
 	          _react2.default.createElement(
-	            'span',
-	            { className: 'signin-cat' },
-	            'username'
-	          ),
-	          _react2.default.createElement('input', { type: 'text', onChange: function onChange(event) {
-	              _this2.setState({ username: event.target.value });
-	            } }),
-	          _react2.default.createElement('br', null),
-	          _react2.default.createElement(
-	            'span',
-	            { className: 'signin-cat' },
-	            'password'
-	          ),
-	          _react2.default.createElement('input', { type: 'password', onChange: function onChange(event) {
-	              _this2.setState({ password: event.target.value });
-	            } }),
-	          _react2.default.createElement('br', null),
-	          _react2.default.createElement(
-	            'div',
-	            { className: 'signup' },
+	            _reactBootstrap.Grid,
+	            null,
 	            _react2.default.createElement(
-	              _reactRouter.Link,
-	              { to: '/signup' },
-	              ' Signup '
+	              _reactBootstrap.Row,
+	              null,
+	              _react2.default.createElement(
+	                'h1',
+	                null,
+	                'Sign in to OneCare'
+	              )
+	            ),
+	            _react2.default.createElement(
+	              _reactBootstrap.Row,
+	              null,
+	              _react2.default.createElement(
+	                _reactBootstrap.Form,
+	                null,
+	                _react2.default.createElement(
+	                  'div',
+	                  { className: 'signin-cat' },
+	                  ' ',
+	                  _react2.default.createElement(
+	                    'span',
+	                    { className: 'signin-username' },
+	                    'Username'
+	                  ),
+	                  '  ',
+	                  _react2.default.createElement('input', { type: 'text', onChange: function onChange(event) {
+	                      _this2.setState({ username: event.target.value });
+	                    } })
+	                ),
+	                _react2.default.createElement('br', null),
+	                _react2.default.createElement(
+	                  'div',
+	                  { className: 'signin-cat2' },
+	                  ' ',
+	                  _react2.default.createElement(
+	                    'span',
+	                    { className: 'signin-password' },
+	                    'Password'
+	                  ),
+	                  '  ',
+	                  _react2.default.createElement('input', { type: 'password', onChange: function onChange(event) {
+	                      _this2.setState({ password: event.target.value });
+	                    } })
+	                ),
+	                _react2.default.createElement('br', null),
+	                _react2.default.createElement(
+	                  _reactBootstrap.Button,
+	                  { bsStyle: 'success', onClick: this.submitLogin },
+	                  'Submit'
+	                ),
+	                _react2.default.createElement(
+	                  'div',
+	                  { className: 'signup' },
+	                  _react2.default.createElement(
+	                    _reactRouter.Link,
+	                    { to: '/signup' },
+	                    ' Signup '
+	                  )
+	                )
+	              )
 	            )
-	          ),
-	          _react2.default.createElement(
-	            'button',
-	            { onClick: this.submitLogin },
-	            'Submit'
 	          )
 	        )
 	      );
@@ -37185,6 +37251,8 @@
 
 	var _jquery2 = _interopRequireDefault(_jquery);
 
+	var _reactBootstrap = __webpack_require__(244);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -37295,7 +37363,7 @@
 	          ' Sign-up '
 	        ),
 	        _react2.default.createElement(
-	          'form',
+	          _reactBootstrap.Form,
 	          null,
 	          _react2.default.createElement(
 	            'div',
@@ -58382,533 +58450,8 @@
 
 
 /***/ },
-/* 516 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-
-	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-	var _react = __webpack_require__(1);
-
-	var _react2 = _interopRequireDefault(_react);
-
-	var _reactFilteredMultiselect = __webpack_require__(517);
-
-	var _reactFilteredMultiselect2 = _interopRequireDefault(_reactFilteredMultiselect);
-
-	var _jquery = __webpack_require__(240);
-
-	var _jquery2 = _interopRequireDefault(_jquery);
-
-	var _navigate = __webpack_require__(243);
-
-	var _navigate2 = _interopRequireDefault(_navigate);
-
-	var _reactModal = __webpack_require__(496);
-
-	var _reactModal2 = _interopRequireDefault(_reactModal);
-
-	var _symptomEntryModal = __webpack_require__(518);
-
-	var _symptomEntryModal2 = _interopRequireDefault(_symptomEntryModal);
-
-	var _reactBootstrap = __webpack_require__(244);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-	var SYMPTOMS = [{ id: 1, name: 'Dizziness' }, { id: 2, name: 'Faintness' }, { id: 3, name: 'Headaches' }, { id: 4, name: 'Bags/dark circles around eyes' }, { id: 5, name: 'Blurred/tunnel vision' }, { id: 6, name: 'Swollen, reddened, sticky eyelids' }, { id: 7, name: 'Watery/itchy eyes' }, { id: 8, name: 'Drainage from ear' }, { id: 9, name: 'Earaches, ear infections' }, { id: 10, name: 'Itchy ears' }, { id: 11, name: 'Excessive mucus' }, { id: 12, name: 'Hay fever' }, { id: 13, name: 'Sinus problems' }, { id: 14, name: 'Sneezing attacks' }, { id: 15, name: 'Stuffy nose' }, { id: 16, name: 'Canker sores' }, { id: 17, name: 'Chronic coughing' }, { id: 18, name: 'Frequent need to clear throat' }, { id: 19, name: 'Sore throat, hoarseness' }, { id: 20, name: 'Swollen/discolored tongue, gums, lips' }, { id: 21, name: 'Acne' }, { id: 22, name: 'Excessive sweating' }, { id: 23, name: 'Flushing' }, { id: 24, name: 'Hair loss' }, { id: 25, name: 'Hives, rashes, dry skin' }, { id: 26, name: 'Asthma' }, { id: 27, name: 'Bronchitis' }, { id: 28, name: 'Chest congestion' }, { id: 29, name: 'Difficulty breathing' }, { id: 30, name: 'Shortness of breath' }, { id: 31, name: 'Joints/Muscle' }, { id: 32, name: 'Stiffness/limitation of movement' }, { id: 33, name: 'Feeling of weakness' }, { id: 34, name: 'Pain/aches in joints' }, { id: 35, name: 'Pain/aches in muscles' }, { id: 36, name: 'Apathy, lethargy' }, { id: 37, name: 'Fatigue, sluggishness' }, { id: 38, name: 'Hyperactivity' }, { id: 39, name: 'Restlessness' }, { id: 40, name: 'Insomnia' }, { id: 41, name: 'Confusion' }, { id: 42, name: 'Difficulty making decisions' }, { id: 43, name: 'Learning disabilities' }, { id: 44, name: 'Poor concentration' }, { id: 45, name: 'Poor memory' }, { id: 46, name: 'Poor physical coordination' }, { id: 47, name: 'Slurred speech' }, { id: 48, name: 'Stuttering/stammering' }, { id: 49, name: 'Anxiety, fear, nervousness' }, { id: 50, name: 'Depression' }, { id: 51, name: 'Mood swings' }, { id: 52, name: 'Lack of Energy/Activity' }, { id: 53, name: 'Binge eating/drinking' }, { id: 54, name: 'Craving certain foods' }, { id: 55, name: 'Excessive weight' }, { id: 56, name: 'Underweight' }, { id: 57, name: 'Water retention' }, { id: 58, name: 'Belching, passing gas' }, { id: 59, name: 'Bloating' }, { id: 60, name: 'Constipation' }, { id: 61, name: 'Diarrhea' }, { id: 62, name: 'Heartburn' }, { id: 63, name: 'Intestinal/stomach pain' }, { id: 64, name: 'Nausea, vomiting' }, { id: 65, name: 'Genital itch/discharge' }, { id: 66, name: 'Hot flashes/night sweats' }, { id: 67, name: 'Loss of libido' }, { id: 68, name: 'Painful menstrual cycle' }, { id: 69, name: 'Premenstrual syndrome' }, { id: 70, name: 'Short/long menstruation' }, { id: 71, name: 'Early onset of menopause' }, { id: 72, name: 'Fertility issues' }, { id: 73, name: 'Difficulty starting/stopping urination' }, { id: 74, name: 'Difficulty getting/maintaining erection' }, { id: 75, name: 'Loss of libido' }, { id: 76, name: 'Fertility issues' }, { id: 77, name: 'Chest pain' }, { id: 78, name: 'Frequent illness' }, { id: 79, name: 'Frequent/urgent urination' }, { id: 80, name: 'Irregular/skipped heartbeat' }, { id: 81, name: 'Rapid/pounding heartbeat' }, { id: 82, name: 'Numbness/tingling in hands' }];
-
-	var SymptomEntryView = function (_Component) {
-	  _inherits(SymptomEntryView, _Component);
-
-	  function SymptomEntryView(props) {
-	    _classCallCheck(this, SymptomEntryView);
-
-	    var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(SymptomEntryView).call(this, props));
-
-	    _this.state = {
-	      modalStyles: {
-	        overlay: {
-	          position: 'fixed',
-	          top: 0,
-	          left: 0,
-	          right: 0,
-	          bottom: 0,
-	          backgroundColor: 'rgba(255, 255, 255, 0.75)'
-	        },
-	        content: {
-	          position: 'absolute',
-	          top: '10%',
-	          left: '10%',
-	          right: '30%',
-	          bottom: '30%',
-	          border: '4px solid #ccc',
-	          background: '#fff',
-	          overflow: 'auto',
-	          WebkitOverflowScrolling: 'touch',
-	          borderRadius: '4px',
-	          outline: 'none',
-	          padding: '20px'
-
-	        }
-	      },
-	      selectedSymptoms: [],
-	      recs: [],
-	      modalIsOpen: false,
-	      // zipcode: this.props.zipcode,
-	      brainState: {}
-	    };
-	    _this.handleDeselect = _this.handleDeselect.bind(_this);
-	    _this.handleSelectionChange = _this.handleSelectionChange.bind(_this);
-	    _this.submitSymptoms = _this.submitSymptoms.bind(_this);
-	    _this.closeModal = _this.closeModal.bind(_this);
-	    _this.openModal = _this.openModal.bind(_this);
-	    _this.handleRecData = _this.handleRecData.bind(_this);
-	    _this.exitModal = _this.exitModal.bind(_this);
-	    _this.setBrainState = _this.setBrainState.bind(_this);
-	    _this.clearSymptoms = _this.clearSymptoms.bind(_this);
-	    return _this;
-	  }
-
-	  _createClass(SymptomEntryView, [{
-	    key: 'componentDidMount',
-	    value: function componentDidMount() {
-	      _jquery2.default.ajax({
-	        type: 'GET',
-	        url: '/api/brain/print',
-	        dataType: 'json',
-	        headers: {
-	          'Content-Type': 'application/json'
-	        }
-	      }).then(this.setBrainState);
-	    }
-	  }, {
-	    key: 'clearSymptoms',
-	    value: function clearSymptoms() {
-	      this.setState({ selectedSymptoms: [] });
-	    }
-	  }, {
-	    key: 'setBrainState',
-	    value: function setBrainState(state) {
-	      this.setState({ brainState: state });
-	    }
-	  }, {
-	    key: 'closeModal',
-	    value: function closeModal() {
-	      this.setState({ modalIsOpen: false });
-	    }
-	  }, {
-	    key: 'openModal',
-	    value: function openModal() {
-	      this.setState({ modalIsOpen: true });
-	    }
-	  }, {
-	    key: 'exitModal',
-	    value: function exitModal() {
-	      this.setState({ selectedSymptoms: [] });
-	      this.setState({ recs: [] });
-	      this.closeModal();
-	    }
-	  }, {
-	    key: 'handleDeselect',
-	    value: function handleDeselect(index) {
-	      var selectedSymptoms = this.state.selectedSymptoms.slice();
-	      selectedSymptoms.splice(index, 1);
-	      this.setState({ selectedSymptoms: selectedSymptoms });
-	    }
-	  }, {
-	    key: 'handleRecData',
-	    value: function handleRecData(recData) {
-	      console.log(recData);
-	      this.setState({ recs: recData });
-	      this.openModal();
-	    }
-	  }, {
-	    key: 'handleSelectionChange',
-	    value: function handleSelectionChange(selectedSymptoms) {
-	      this.setState({ selectedSymptoms: selectedSymptoms });
-	    }
-	  }, {
-	    key: 'submitSymptoms',
-	    value: function submitSymptoms() {
-	      console.log('you chose: ', this.state.selectedSymptoms);
-	      _jquery2.default.ajax({
-	        type: 'POST',
-	        url: '/api/brain/recommend',
-	        dataType: 'json',
-	        headers: {
-	          'Content-Type': 'application/json'
-	        },
-	        data: JSON.stringify({
-	          username: window.localStorage.getItem("username"),
-	          symptoms: this.state.selectedSymptoms }),
-	        success: this.handleRecData,
-	        error: function error(err) {
-	          console.log('Congrats you are superhuman', err);
-	        }
-	      });
-	    }
-	  }, {
-	    key: 'render',
-	    value: function render() {
-	      var _this2 = this;
-
-	      var selectedSymptoms = this.state.selectedSymptoms;
-
-
-	      return _react2.default.createElement(
-	        'div',
-	        { className: 'symptom-container' },
-	        _react2.default.createElement(
-	          'div',
-	          { className: !this.state.modalIsOpen ? "" : "hidden" },
-	          _react2.default.createElement(
-	            'h4',
-	            null,
-	            'Please select your symptoms from the list below.'
-	          ),
-	          _react2.default.createElement(_reactFilteredMultiselect2.default, {
-	            classNames: {
-	              buttonActive: 'symptom-select-button--active',
-	              button: 'symptom-select-button--inactive',
-	              filter: 'symptom-select-filter',
-	              select: 'symptom-select-select'
-	            },
-	            onChange: this.handleSelectionChange,
-	            options: SYMPTOMS,
-	            selectedOptions: selectedSymptoms,
-	            textProp: 'name',
-	            size: 20,
-	            valueProp: 'id' }),
-	          _react2.default.createElement(
-	            'div',
-	            { className: 'selected-symptoms-container' },
-	            selectedSymptoms.length === 0 && _react2.default.createElement(
-	              'p',
-	              null,
-	              '(nothing selected yet)'
-	            ),
-	            selectedSymptoms.length > 0 && _react2.default.createElement(
-	              'ul',
-	              { className: 'selected-symptoms' },
-	              selectedSymptoms.map(function (symptom, i) {
-	                return _react2.default.createElement(
-	                  _reactBootstrap.Button,
-	                  { key: symptom.id, bsStyle: 'primary', bsSize: 'small', onClick: _this2.handleDeselect.bind(null, i) },
-	                  _react2.default.createElement(
-	                    'div',
-	                    null,
-	                    symptom.name + ' ',
-	                    '  ',
-	                    _react2.default.createElement('i', { className: 'fa fa-times-circle', 'aria-hidden': 'true' })
-	                  )
-	                );
-	              })
-	            )
-	          ),
-	          _react2.default.createElement(
-	            _reactBootstrap.Button,
-	            { bsStyle: 'danger', bsSize: 'sm', onClick: this.clearSymptoms },
-	            'Clear all'
-	          ),
-	          _react2.default.createElement(
-	            _reactBootstrap.Button,
-	            { bsStyle: 'success', bsSize: 'sm', onClick: this.submitSymptoms },
-	            'Submit!'
-	          )
-	        ),
-	        _react2.default.createElement(
-	          'div',
-	          { className:  true ? "" : "hidden" },
-	          _react2.default.createElement(_symptomEntryModal2.default, { closeFn: this.props.closeFn, zipcode: this.props.zipcode, brainState: this.state.brainState, symptoms: this.state.selectedSymptoms, recommendations: this.state.recs })
-	        )
-	      );
-	    }
-	  }]);
-
-	  return SymptomEntryView;
-	}(_react.Component);
-
-	// export default SymptomEntry;
-	//add more bad boiz;
-	// http://hypothyroidmom.com/300-hypothyroidism-symptoms-yes-really/
-
-
-	exports.default = SymptomEntryView;
-
-/***/ },
-/* 517 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	Object.defineProperty(exports, '__esModule', {
-	  value: true
-	});
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
-
-	var _react = __webpack_require__(1);
-
-	var _react2 = _interopRequireDefault(_react);
-
-	function makeLookup(arr, prop) {
-	  var lkup = {};
-	  for (var i = 0, l = arr.length; i < l; i++) {
-	    if (prop) {
-	      lkup[arr[i][prop]] = true;
-	    } else {
-	      lkup[arr[i]] = true;
-	    }
-	  }
-	  return lkup;
-	}
-
-	function getItemsByProp(arr, prop, values) {
-	  var items = [];
-	  var found = 0;
-	  var valuesLookup = makeLookup(values);
-	  for (var i = 0, la = arr.length, lv = values.length; i < la && found < lv; i++) {
-	    if (valuesLookup[arr[i][prop]]) {
-	      items.push(arr[i]);
-	      found++;
-	    }
-	  }
-	  return items;
-	}
-
-	var DEFAULT_CLASS_NAMES = {
-	  button: 'FilteredMultiSelect__button',
-	  buttonActive: 'FilteredMultiSelect__button--active',
-	  filter: 'FilteredMultiSelect__filter',
-	  select: 'FilteredMultiSelect__select'
-	};
-
-	exports['default'] = _react2['default'].createClass({
-	  displayName: 'FilteredMultiSelect',
-
-	  propTypes: {
-	    onChange: _react.PropTypes.func.isRequired,
-	    options: _react.PropTypes.array.isRequired,
-
-	    buttonText: _react.PropTypes.string,
-	    className: _react.PropTypes.string,
-	    classNames: _react.PropTypes.object,
-	    defaultFilter: _react.PropTypes.string,
-	    disabled: _react.PropTypes.bool,
-	    placeholder: _react.PropTypes.string,
-	    selectedOptions: _react.PropTypes.array,
-	    size: _react.PropTypes.number,
-	    textProp: _react.PropTypes.string,
-	    valueProp: _react.PropTypes.string
-	  },
-
-	  getDefaultProps: function getDefaultProps() {
-	    return {
-	      buttonText: 'Select',
-	      className: 'FilteredMultiSelect',
-	      classNames: {},
-	      defaultFilter: '',
-	      disabled: false,
-	      placeholder: 'type to filter',
-	      size: 6,
-	      selectedOptions: [],
-	      textProp: 'text',
-	      valueProp: 'value'
-	    };
-	  },
-
-	  getInitialState: function getInitialState() {
-	    var _props = this.props;
-	    var defaultFilter = _props.defaultFilter;
-	    var selectedOptions = _props.selectedOptions;
-
-	    return {
-	      // Filter text
-	      filter: defaultFilter,
-	      // Options which haven't been selected and match the filter text
-	      filteredOptions: this._filterOptions(defaultFilter, selectedOptions),
-	      // Values of <options> currently selected in the <select>
-	      selectedValues: []
-	    };
-	  },
-
-	  componentWillReceiveProps: function componentWillReceiveProps(nextProps) {
-	    // Update visibile options in response to options or selectedOptions
-	    // changing. Also update selected values after the re-render completes, as
-	    // one of the previously selected options may have been removed.
-	    if (nextProps.options !== this.props.options || nextProps.selectedOptions !== this.props.selectedOptions || nextProps.options.length !== this.props.options.length || nextProps.selectedOptions.length !== this.props.selectedOptions.length) {
-	      this.setState({
-	        filteredOptions: this._filterOptions(this.state.filter, nextProps.selectedOptions, nextProps.options)
-	      }, this._updateSelectedValues);
-	    }
-	  },
-
-	  _getClassName: function _getClassName(name) {
-	    var classNames = [this.props.classNames[name] || DEFAULT_CLASS_NAMES[name]];
-
-	    for (var _len = arguments.length, modifiers = Array(_len > 1 ? _len - 1 : 0), _key = 1; _key < _len; _key++) {
-	      modifiers[_key - 1] = arguments[_key];
-	    }
-
-	    for (var i = 0, l = modifiers.length; i < l; i++) {
-	      if (modifiers[i]) {
-	        classNames.push(this.props.classNames[modifiers[i]] || DEFAULT_CLASS_NAMES[modifiers[i]]);
-	      }
-	    }
-	    return classNames.join(' ');
-	  },
-
-	  _filterOptions: function _filterOptions(filter, selectedOptions, options) {
-	    if (typeof filter == 'undefined') {
-	      filter = this.state.filter;
-	    }
-	    if (typeof selectedOptions == 'undefined') {
-	      selectedOptions = this.props.selectedOptions;
-	    }
-	    if (typeof options == 'undefined') {
-	      options = this.props.options;
-	    }
-	    filter = filter.toUpperCase();
-
-	    var _props2 = this.props;
-	    var textProp = _props2.textProp;
-	    var valueProp = _props2.valueProp;
-
-	    var selectedValueLookup = makeLookup(selectedOptions, valueProp);
-	    var filteredOptions = [];
-
-	    for (var i = 0, l = options.length; i < l; i++) {
-	      if (!selectedValueLookup[options[i][valueProp]] && (!filter || options[i][textProp].toUpperCase().indexOf(filter) !== -1)) {
-	        filteredOptions.push(options[i]);
-	      }
-	    }
-
-	    return filteredOptions;
-	  },
-
-	  _onFilterChange: function _onFilterChange(e) {
-	    var filter = e.target.value;
-	    this.setState({
-	      filter: filter,
-	      filteredOptions: this._filterOptions(filter)
-	    }, this._updateSelectedValues);
-	  },
-
-	  _onFilterKeyPress: function _onFilterKeyPress(e) {
-	    var _this = this;
-
-	    if (e.key === 'Enter') {
-	      e.preventDefault();
-	      if (this.state.filteredOptions.length === 1) {
-	        (function () {
-	          var selectedOption = _this.state.filteredOptions[0];
-	          var selectedOptions = _this.props.selectedOptions.concat([selectedOption]);
-	          _this.setState({ filter: '', selectedValues: [] }, function () {
-	            _this.props.onChange(selectedOptions);
-	          });
-	        })();
-	      }
-	    }
-	  },
-
-	  _updateSelectedValues: function _updateSelectedValues(e) {
-	    var el = e ? e.target : this.refs.select;
-	    var selectedValues = [];
-	    for (var i = 0, l = el.options.length; i < l; i++) {
-	      if (el.options[i].selected) {
-	        selectedValues.push(el.options[i].value);
-	      }
-	    }
-	    // Always update if we were handling an event, otherwise only update if
-	    // selectedValues has actually changed.
-	    if (e || String(this.state.selectedValues) !== String(selectedValues)) {
-	      this.setState({ selectedValues: selectedValues });
-	    }
-	  },
-
-	  /**
-	   * Adds backing objects for the currently selected options to the selection
-	   * and calls back with the new list.
-	   */
-	  _addSelectedToSelection: function _addSelectedToSelection(e) {
-	    var _this2 = this;
-
-	    var selectedOptions = this.props.selectedOptions.concat(getItemsByProp(this.state.filteredOptions, this.props.valueProp, this.state.selectedValues));
-	    this.setState({ selectedValues: [] }, function () {
-	      _this2.props.onChange(selectedOptions);
-	    });
-	  },
-
-	  render: function render() {
-	    var _state = this.state;
-	    var filter = _state.filter;
-	    var filteredOptions = _state.filteredOptions;
-	    var selectedValues = _state.selectedValues;
-	    var _props3 = this.props;
-	    var className = _props3.className;
-	    var disabled = _props3.disabled;
-	    var placeholder = _props3.placeholder;
-	    var size = _props3.size;
-	    var textProp = _props3.textProp;
-	    var valueProp = _props3.valueProp;
-
-	    var hasSelectedOptions = selectedValues.length > 0;
-	    return _react2['default'].createElement(
-	      'div',
-	      { className: className },
-	      _react2['default'].createElement('input', {
-	        type: 'text',
-	        className: this._getClassName('filter'),
-	        placeholder: placeholder,
-	        value: filter,
-	        onChange: this._onFilterChange,
-	        onKeyPress: this._onFilterKeyPress,
-	        disabled: disabled
-	      }),
-	      _react2['default'].createElement(
-	        'select',
-	        { multiple: true,
-	          ref: 'select',
-	          className: this._getClassName('select'),
-	          size: size,
-	          value: selectedValues,
-	          onChange: this._updateSelectedValues,
-	          onDoubleClick: this._addSelectedToSelection,
-	          disabled: disabled },
-	        filteredOptions.map(function (option) {
-	          return _react2['default'].createElement(
-	            'option',
-	            { key: option[valueProp], value: option[valueProp] },
-	            option[textProp]
-	          );
-	        })
-	      ),
-	      _react2['default'].createElement(
-	        'button',
-	        { type: 'button',
-	          className: this._getClassName('button', hasSelectedOptions && 'buttonActive'),
-	          disabled: !hasSelectedOptions,
-	          onClick: this._addSelectedToSelection },
-	        this.props.buttonText
-	      )
-	    );
-	  }
-	});
-	module.exports = exports['default'];
-
-/***/ },
+/* 516 */,
+/* 517 */,
 /* 518 */
 /***/ function(module, exports, __webpack_require__) {
 
@@ -59047,7 +58590,7 @@
 	      var query = (this.state.currentRec ? this.state.currentRec.name : '**empty**').split(' ').join('%20');
 	      if (query.charCodeAt(query.length - 1) === 8206) {
 	        query = query.slice(0, query.length - 1);
-	      };
+	      }
 	      var latitude = window.localStorage.latitude;
 	      var longitude = window.localStorage.longitude;
 	      var location = latitude + '%2C' + longitude;
@@ -60508,7 +60051,7 @@
 
 	var _doctorEntryView2 = _interopRequireDefault(_doctorEntryView);
 
-	var _symptomEntry = __webpack_require__(516);
+	var _symptomEntry = __webpack_require__(!(function webpackMissingModule() { var e = new Error("Cannot find module \"./symptomEntry.jsx\""); e.code = 'MODULE_NOT_FOUND'; throw e; }()));
 
 	var _symptomEntry2 = _interopRequireDefault(_symptomEntry);
 
@@ -60963,7 +60506,7 @@
 	        ),
 	        _react2.default.createElement(
 	          _reactBootstrap.Modal,
-	          { show: this.state.mapmodalIsOpen, style: this.state.modalStyles },
+	          { show: this.state.mapmodalIsOpen },
 	          _react2.default.createElement(
 	            'div',
 	            { className: 'modal-button-close-container' },
@@ -60978,7 +60521,7 @@
 	        ),
 	        _react2.default.createElement(
 	          _reactBootstrap.Modal,
-	          { show: this.state.symptomModalIsOpen, style: this.state.modalStyles },
+	          { show: this.state.symptomModalIsOpen, style: this.state.modalStyles, bsClass: 'modal' },
 	          _react2.default.createElement(
 	            'div',
 	            { className: 'modal-button-close-container' },
@@ -61324,7 +60867,156 @@
 	exports.default = Profile;
 
 /***/ },
-/* 531 */,
+/* 531 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _reactRouter = __webpack_require__(175);
+
+	var _reactBootstrap = __webpack_require__(244);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+	// impor  t $ from 'jquery';
+
+
+	// import {ButtonGroup} from 'react-bootstrap';
+	// import {Button} from 'react-bootstrap';
+	// import {DropdownButton} from 'react-bootstrap';
+	// import {MenuItem} from 'react-bootstrap';
+
+	var Splash = function (_React$Component) {
+	  _inherits(Splash, _React$Component);
+
+	  function Splash(props) {
+	    _classCallCheck(this, Splash);
+
+	    return _possibleConstructorReturn(this, Object.getPrototypeOf(Splash).call(this, props));
+	    // this.state= {
+	    //   openSignup: false,
+	    //   openLogin: false
+	    // };
+	    // this.openSignupPage = this.openSignupPage.bind(this);
+	    // this.openLoginPage = this.openLoginPage.bind(this);
+	  }
+
+	  // openSignupPage() {
+	  //   this.setState({
+	  //     openSignup: true
+	  //   });
+	  // }
+	  //
+	  // openLoginPage() {
+	  //   this.setState({
+	  //     openLoginPage: true
+	  //   })
+	  // }
+
+
+	  _createClass(Splash, [{
+	    key: 'render',
+	    value: function render() {
+	      return _react2.default.createElement(
+	        'div',
+	        null,
+	        _react2.default.createElement(
+	          'div',
+	          { className: 'splashHeader' },
+	          _react2.default.createElement(
+	            'video',
+	            { autoPlay: true, loop: true, id: 'video-background' },
+	            _react2.default.createElement('source', { id: 'mp4', src: 'https://fpdl.vimeocdn.com/vimeo-prod-skyfire-std-us/01/4528/6/172644004/557095694.mp4?token=57b5142f_0x33fefb0a9c04f360f3eb118144c0fdfe4cd333dd', type: 'video/mp4' })
+	          ),
+	          _react2.default.createElement(
+	            'div',
+	            { className: 'splashName' },
+	            _react2.default.createElement(
+	              'h2',
+	              null,
+	              ' OneCare '
+	            )
+	          ),
+	          _react2.default.createElement(
+	            'div',
+	            { className: 'signInSplash' },
+	            _react2.default.createElement(
+	              _reactRouter.Link,
+	              { to: '/signin' },
+	              ' Login '
+	            )
+	          ),
+	          _react2.default.createElement(
+	            'div',
+	            { className: 'signUpSplash' },
+	            _react2.default.createElement(
+	              _reactRouter.Link,
+	              { to: '/signup' },
+	              ' Signup '
+	            )
+	          )
+	        ),
+	        _react2.default.createElement(
+	          'div',
+	          { className: 'appDescribe' },
+	          _react2.default.createElement(
+	            'div',
+	            null,
+	            ' Prescription Reminder'
+	          ),
+	          _react2.default.createElement(
+	            'h3',
+	            null,
+	            ' Text Reminders '
+	          ),
+	          _react2.default.createElement(
+	            'h3',
+	            null,
+	            ' Remind by day/week/month '
+	          ),
+	          _react2.default.createElement('br', null),
+	          _react2.default.createElement('br', null),
+	          _react2.default.createElement(
+	            'h2',
+	            null,
+	            ' Doctor Recommender '
+	          ),
+	          _react2.default.createElement(
+	            'h3',
+	            null,
+	            ' Recommend a specialist '
+	          ),
+	          _react2.default.createElement(
+	            'h3',
+	            null,
+	            ' Search for nearby specialists '
+	          )
+	        )
+	      );
+	    }
+	  }]);
+
+	  return Splash;
+	}(_react2.default.Component);
+
+	exports.default = Splash;
+
+/***/ },
 /* 532 */
 /***/ function(module, exports, __webpack_require__) {
 
@@ -87042,6 +86734,11 @@
 	  }
 
 	  _createClass(Map, [{
+	    key: 'componentDidMount',
+	    value: function componentDidMount() {
+	      console.log(this.props);
+	    }
+	  }, {
 	    key: 'render',
 	    value: function render() {
 	      return (
@@ -103733,8 +103430,8 @@
 	      email: _this.props.data.email ? _this.props.data.email : "",
 	      address: _this.props.data.address ? _this.props.data.address : "",
 	      specialty: _this.props.data.specialty ? _this.props.data.specialty : "",
-	      validPhone: false,
-	      validSpecialty: false
+	      validPhone: _this.props.data.phone.length === 11 ? true : false,
+	      validSpecialty: _this.props.data.specialty ? true : false
 	    };
 	    _this.handleChange = _this.handleChange.bind(_this);
 	    _this.submitNewDoctor = _this.submitNewDoctor.bind(_this);
@@ -103785,15 +103482,27 @@
 	            specialty: this.state.specialty
 	          } };
 
+	        var id = this.props.data._id;
+
 	        _jquery2.default.ajax({
 	          type: "POST",
-	          url: "/api/doctor/add",
+	          url: "/api/doctor/delete",
+	          dataType: 'json',
 	          headers: {
-	            "content-type": "application/json"
+	            "Content-Type": "application/json"
 	          },
-	          data: JSON.stringify(toSubmit),
-	          success: this.props.closeFn(),
-	          error: this.props.closeFn()
+	          data: JSON.stringify({ "docID": id }),
+	          success: _jquery2.default.ajax({
+	            type: "POST",
+	            url: "/api/doctor/add",
+	            headers: {
+	              "content-type": "application/json"
+	            },
+	            data: JSON.stringify(toSubmit),
+	            success: this.props.closeFn(),
+	            error: this.props.closeFn()
+	          }),
+	          error: console.log('error in edit of doctor')
 	        });
 	      }
 	    }
@@ -103850,7 +103559,7 @@
 	          ),
 	          _react2.default.createElement(
 	            'select',
-	            { id: 'specialty', value: this.state.speciality, onChange: this.handleChange },
+	            { id: 'specialty', value: this.state.specialty, onChange: this.handleChange },
 	            _react2.default.createElement(
 	              'option',
 	              null,

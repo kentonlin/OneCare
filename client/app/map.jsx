@@ -9,6 +9,10 @@ export default class Map extends React.Component {
     };
   }
 
+  componentDidMount(){
+    console.log(this.props)
+  }
+
 
 
   render() {
