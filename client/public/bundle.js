@@ -37936,12 +37936,25 @@
 	      phone: "",
 	      zipcode: 10001,
 	      email: "",
-	      invalidPhone: false,
-	      invalidEmail: false
+	      //form validation
+	      firstnameIsValid: false,
+	      lastnameIsValid: false,
+	      usernameIsValid: false,
+	      passwordIsValid: false,
+	      phoneIsValid: false,
+	      emailIsValid: false,
+	      zipcodeIsValid: false,
+	      formIsValid: true
 	    };
 	    _this.submitUser = _this.submitUser.bind(_this);
-	    _this.validatePhone = _this.validatePhone.bind(_this);
-	    _this.validateEmail = _this.validateEmail.bind(_this);
+	    _this.handleFirstName = _this.handleFirstName.bind(_this);
+	    _this.handleLastName = _this.handleLastName.bind(_this);
+	    _this.handleUsername = _this.handleUsername.bind(_this);
+	    _this.handlePassword = _this.handlePassword.bind(_this);
+	    _this.handleAddress = _this.handleAddress.bind(_this);
+	    _this.handleZipcode = _this.handleZipcode.bind(_this);
+	    _this.handlePhone = _this.handlePhone.bind(_this);
+	    _this.handleEmail = _this.handleEmail.bind(_this);
 	    return _this;
 	  }
 	
@@ -37949,24 +37962,20 @@
 	    key: 'submitUser',
 	    value: function submitUser(e) {
 	
-	      if (!this.state.invalidPhone && !this.state.invalidEmail) {
-	        alert("Please input a valid phone number and email");
-	      } else if (!this.state.invalidPhone) {
-	        alert("Please input a valid phone number");
-	      } else if (!this.state.invalidEmail) {
-	        alert("Please input a valid email");
+	      if (!this.state.phoneIsValid || !this.state.emailIsValid || !this.state.zipcodeIsValid || !this.state.firstnameIsValid || !this.state.lastnameIsValid || !this.state.usernameIsValid || !this.state.passwordIsValid) {
+	        this.setState({ formIsValid: false });
 	      } else {
 	        window.localStorage.removeItem("currentPage");
 	        e.preventDefault();
 	        var newUser = {
-	          firstName: this.state.firstName,
-	          lastName: this.state.lastName,
-	          username: this.state.username,
-	          password: this.state.password,
+	          firstName: this.state.firstName, //length 2
+	          lastName: this.state.lastName, //length 2
+	          username: this.state.username, //length 4
+	          password: this.state.password, //length 4
 	          address: this.state.address,
-	          phone: this.state.phone,
-	          zipcode: this.state.zipcode,
-	          email: this.state.email
+	          phone: this.state.phone, //
+	          zipcode: this.state.zipcode, //exactly 5 digits
+	          email: this.state.email //
 	        };
 	
 	        _jquery2.default.ajax({
@@ -37991,27 +38000,84 @@
 	      }
 	    }
 	  }, {
-	    key: 'validatePhone',
-	    value: function validatePhone(phone) {
-	      this.setState({
-	        invalidPhone: phone.match(/\d/g).length === 10
-	      });
+	    key: 'handleFirstName',
+	    value: function handleFirstName(e) {
+	      this.setState({ firstName: e.target.value });
+	      if (e.target.value.length >= 2) {
+	        this.setState({ firstnameIsValid: true });
+	      } else {
+	        this.setState({ firstnameIsValid: false });
+	      }
 	    }
 	  }, {
-	    key: 'validateEmail',
-	    value: function validateEmail(email) {
+	    key: 'handleLastName',
+	    value: function handleLastName(e) {
+	      this.setState({ lastName: e.target.value });
+	      if (e.target.value.length >= 2) {
+	        this.setState({ lastnameIsValid: true });
+	      } else {
+	        this.setState({ lastnameIsValid: false });
+	      }
+	    }
+	  }, {
+	    key: 'handleUsername',
+	    value: function handleUsername(e) {
+	      this.setState({ username: e.target.value });
+	      if (e.target.value.length >= 4) {
+	        this.setState({ usernameIsValid: true });
+	      } else {
+	        this.setState({ usernameIsValid: false });
+	      }
+	    }
+	  }, {
+	    key: 'handlePassword',
+	    value: function handlePassword(e) {
+	      this.setState({ password: e.target.value });
+	      if (e.target.value.length >= 4) {
+	        this.setState({ passwordIsValid: true });
+	      } else {
+	        this.setState({ passwordIsValid: false });
+	      }
+	    }
+	  }, {
+	    key: 'handleAddress',
+	    value: function handleAddress(e) {
+	      this.setState({ address: e.target.value });
+	    }
+	  }, {
+	    key: 'handleZipcode',
+	    value: function handleZipcode(e) {
+	      this.setState({ zipcode: e.target.value });
+	      if (e.target.value.match(/\d/g).length === 5) {
+	        this.setState({ zipcodeIsValid: true });
+	      } else {
+	        this.setState({ zipcodeIsValid: false });
+	      }
+	    }
+	  }, {
+	    key: 'handlePhone',
+	    value: function handlePhone(e) {
+	      this.setState({ phone: e.target.value });
+	      if (e.target.value.match(/\d/g).length === 10) {
+	        this.setState({ phoneIsValid: true });
+	      } else {
+	        this.setState({ phoneIsValid: false });
+	      }
+	    }
+	  }, {
+	    key: 'handleEmail',
+	    value: function handleEmail(e) {
 	      var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-	      console.log("test", re.test(email));
-	      console.log("state", this.state.invalidEmail);
-	      this.setState({
-	        invalidEmail: re.test(email)
-	      });
+	      this.setState({ email: e.target.value });
+	      if (re.test(e.target.value)) {
+	        this.setState({ emailIsValid: true });
+	      } else {
+	        this.setState({ emailIsValid: false });
+	      }
 	    }
 	  }, {
 	    key: 'render',
 	    value: function render() {
-	      var _this2 = this;
-	
 	      return _react2.default.createElement(
 	        'div',
 	        { className: 'signup-container' },
@@ -38021,101 +38087,108 @@
 	          ' Sign-up '
 	        ),
 	        _react2.default.createElement(
-	          'form',
-	          null,
-	          _react2.default.createElement(
-	            'div',
-	            { className: 'signup-cat' },
-	            'First Name'
-	          ),
-	          _react2.default.createElement('input', { type: 'text', onChange: function onChange(event) {
-	              _this2.setState({ firstName: event.target.value });
-	            } }),
-	          _react2.default.createElement('br', null),
-	          _react2.default.createElement(
-	            'div',
-	            { className: 'signup-cat' },
-	            'Last Name'
-	          ),
-	          _react2.default.createElement('input', { type: 'text', onChange: function onChange(event) {
-	              _this2.setState({ lastName: event.target.value });
-	            } }),
-	          _react2.default.createElement('br', null),
-	          _react2.default.createElement(
-	            'div',
-	            { className: 'signup-cat' },
-	            'username'
-	          ),
-	          _react2.default.createElement('input', { type: 'text', onChange: function onChange(event) {
-	              _this2.setState({ username: event.target.value });
-	            } }),
-	          _react2.default.createElement('br', null),
-	          _react2.default.createElement(
-	            'div',
-	            { className: 'signup-cat' },
-	            'password'
-	          ),
-	          _react2.default.createElement('input', { type: 'password', onChange: function onChange(event) {
-	              _this2.setState({ password: event.target.value });
-	            } }),
-	          _react2.default.createElement('br', null),
-	          _react2.default.createElement(
-	            'div',
-	            { className: 'signup-cat' },
-	            'address'
-	          ),
-	          _react2.default.createElement('input', { type: 'text', onChange: function onChange(event) {
-	              _this2.setState({ address: event.target.value });
-	            } }),
-	          _react2.default.createElement('br', null),
-	          _react2.default.createElement(
-	            'div',
-	            { className: 'signup-cat' },
-	            'zip code'
-	          ),
-	          _react2.default.createElement('input', { type: 'text', onChange: function onChange(event) {
-	              _this2.setState({ zipcode: event.target.value });
-	            } }),
-	          _react2.default.createElement('br', null),
-	          _react2.default.createElement(
-	            'div',
-	            { className: 'signup-cat' },
-	            'phone'
-	          ),
-	          _react2.default.createElement('input', { type: 'text', onChange: function onChange(event) {
-	              _this2.setState({ phone: event.target.value });
-	              _this2.validatePhone(_this2.state.phone);
-	            } }),
-	          ' ',
-	          _react2.default.createElement(
-	            'h6',
-	            { className: this.state.invalidPhone ? 'hidden' : 'invalid' },
-	            ' Phone number must be 11 digits'
-	          ),
-	          _react2.default.createElement(
-	            'div',
-	            { className: 'signup-cat' },
-	            'email'
-	          ),
-	          _react2.default.createElement('input', { type: 'text', onChange: function onChange(event) {
-	              _this2.setState({ email: event.target.value });
-	              _this2.validateEmail(_this2.state.email);
-	            } }),
-	          _react2.default.createElement(
-	            'h6',
-	            { className: this.state.invalidEmail ? 'hidden' : 'invalid' },
-	            ' Enter a valid email'
-	          ),
-	          _react2.default.createElement(
-	            'button',
-	            { className: 'signup-cat', onClick: this.submitUser },
-	            'Submit'
-	          )
+	          'div',
+	          { className: 'signup-cat' },
+	          'First Name'
+	        ),
+	        _react2.default.createElement('input', { type: 'text', onChange: this.handleFirstName }),
+	        _react2.default.createElement('br', null),
+	        _react2.default.createElement(
+	          'h6',
+	          { className: this.state.firstnameIsValid ? 'hidden' : 'invalid' },
+	          ' Name must be at least two letters. '
+	        ),
+	        _react2.default.createElement(
+	          'div',
+	          { className: 'signup-cat' },
+	          'Last Name'
+	        ),
+	        _react2.default.createElement('input', { type: 'text', onChange: this.handleLastName }),
+	        _react2.default.createElement('br', null),
+	        _react2.default.createElement(
+	          'h6',
+	          { className: this.state.lastnameIsValid ? 'hidden' : 'invalid' },
+	          ' Name must be at least two letters. '
+	        ),
+	        _react2.default.createElement(
+	          'div',
+	          { className: 'signup-cat' },
+	          'username'
+	        ),
+	        _react2.default.createElement('input', { type: 'text', onChange: this.handleUsername }),
+	        _react2.default.createElement('br', null),
+	        _react2.default.createElement(
+	          'h6',
+	          { className: this.state.usernameIsValid ? 'hidden' : 'invalid' },
+	          ' Username must be at least four letters. '
+	        ),
+	        _react2.default.createElement(
+	          'div',
+	          { className: 'signup-cat' },
+	          'password'
+	        ),
+	        _react2.default.createElement('input', { type: 'password', onChange: this.handlePassword }),
+	        _react2.default.createElement('br', null),
+	        _react2.default.createElement(
+	          'h6',
+	          { className: this.state.passwordIsValid ? 'hidden' : 'invalid' },
+	          ' Password must be at least four letters. '
+	        ),
+	        _react2.default.createElement(
+	          'div',
+	          { className: 'signup-cat' },
+	          'address'
+	        ),
+	        _react2.default.createElement('input', { type: 'text', onChange: this.handleAddress }),
+	        _react2.default.createElement('br', null),
+	        _react2.default.createElement(
+	          'div',
+	          { className: 'signup-cat' },
+	          'zip code'
+	        ),
+	        _react2.default.createElement('input', { type: 'text', onChange: this.handleZipcode }),
+	        _react2.default.createElement('br', null),
+	        _react2.default.createElement(
+	          'h6',
+	          { className: this.state.zipcodeIsValid ? 'hidden' : 'invalid' },
+	          ' Please enter a valid zipcode '
+	        ),
+	        _react2.default.createElement(
+	          'div',
+	          { className: 'signup-cat' },
+	          'phone'
+	        ),
+	        _react2.default.createElement('input', { type: 'text', onChange: this.handlePhone }),
+	        _react2.default.createElement(
+	          'h6',
+	          { className: this.state.phoneIsValid ? 'hidden' : 'invalid' },
+	          ' Phone number must be 11 digits'
+	        ),
+	        _react2.default.createElement(
+	          'div',
+	          { className: 'signup-cat' },
+	          'email'
+	        ),
+	        _react2.default.createElement('input', { type: 'text', onChange: this.handleEmail }),
+	        _react2.default.createElement(
+	          'h6',
+	          { className: this.state.emailIsValid ? 'hidden' : 'invalid' },
+	          ' Please enter a valid email '
+	        ),
+	        _react2.default.createElement(
+	          'button',
+	          { className: 'signup-cat', onClick: this.submitUser },
+	          'Submit'
+	        ),
+	        _react2.default.createElement(
+	          'h6',
+	          { className: this.state.formIsValid ? 'hidden' : 'invalid' },
+	          ' Some of your data is not valid.  Please check above. '
 	        ),
 	        _react2.default.createElement(
 	          _reactRouter.Link,
 	          { to: '/signin' },
-	          'Return to Sign-in '
+	          ' Return to Sign-in '
 	        )
 	      );
 	    }
@@ -57749,49 +57822,74 @@
 	      email: "",
 	      address: "",
 	      specialty: "",
-	      validPhone: false,
-	      validSpecialty: false
+	      //validation
+	      phoneIsValid: false,
+	      specialtyIsValid: false,
+	      nameIsValid: false,
+	      emailIsValid: false,
+	      formIsValid: true
 	    };
-	    _this.handleChange = _this.handleChange.bind(_this);
 	    _this.submitNewDoctor = _this.submitNewDoctor.bind(_this);
+	    _this.handlePhone = _this.handlePhone.bind(_this);
+	    _this.handleSpecialty = _this.handleSpecialty.bind(_this);
+	    _this.handleName = _this.handleName.bind(_this);
+	    _this.handleEmail = _this.handleEmail.bind(_this);
+	    _this.handleAddress = _this.handleAddress.bind(_this);
 	    return _this;
 	  }
 	
 	  _createClass(DoctorEntryView, [{
-	    key: 'handleChange',
-	    value: function handleChange(event) {
-	      var stateVal = event.target.id;
-	      if (stateVal === "name") {
-	        this.setState({ name: event.target.value, validName: true });
-	      } else if (stateVal === "phone") {
-	        this.setState({ phone: event.target.value, validPhone: event.target.value.match(/\d/g).length === 11
-	        });
-	      } else if (stateVal === "email") {
-	        this.setState({ email: event.target.value });
-	      } else if (stateVal === "address") {
-	        this.setState({ address: event.target.value });
-	      } else if (stateVal === "specialty") {
-	        this.setState({ specialty: event.target.value, validSpecialty: true });
+	    key: 'handlePhone',
+	    value: function handlePhone(e) {
+	      this.setState({ phone: e.target.value });
+	      if (e.target.value.match(/\d/g).length === 11) {
+	        this.setState({ phoneIsValid: true });
+	      } else {
+	        this.setState({ phoneIsValid: false });
 	      }
+	    }
+	  }, {
+	    key: 'handleSpecialty',
+	    value: function handleSpecialty(e) {
+	      this.setState({ specialty: e.target.value });
+	      if (e.target.value !== "::Select Specialty::") {
+	        this.setState({ specialtyIsValid: true });
+	      } else {
+	        this.setState({ specialtyIsValid: false });
+	      }
+	    }
+	  }, {
+	    key: 'handleName',
+	    value: function handleName(e) {
+	      this.setState({ name: e.target.value });
+	      if (e.target.value.length > 2) {
+	        this.setState({ nameIsValid: true });
+	      } else {
+	        this.setState({ nameIsValid: false });
+	      }
+	    }
+	  }, {
+	    key: 'handleEmail',
+	    value: function handleEmail(e) {
+	      var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+	      this.setState({ email: e.target.value });
+	      if (re.test(e.target.value)) {
+	        this.setState({ emailIsValid: true });
+	      } else {
+	        this.setState({ emailIsValid: false });
+	      }
+	    }
+	  }, {
+	    key: 'handleAddress',
+	    value: function handleAddress(e) {
+	      this.setState({ address: e.target.value });
 	    }
 	  }, {
 	    key: 'submitNewDoctor',
 	    value: function submitNewDoctor(e) {
 	      e.preventDefault();
-	      if (!this.state.name.length && !this.state.validPhone && !this.state.validSpecialty) {
-	        alert("Please correct the following fields: name, phone, specialty");
-	      } else if (!this.state.validPhone && !this.state.validSpecialty) {
-	        alert("Please enter a valid phone and specialty");
-	      } else if (!this.state.name.length && !this.state.validSpecialty) {
-	        alert("Please enter a valid name and specialty");
-	      } else if (!this.state.name.length && !this.state.validPhone) {
-	        alert("Please enter a valid name and phone");
-	      } else if (!this.state.name.length) {
-	        alert("Please enter a name");
-	      } else if (!this.state.validPhone) {
-	        alert("Please enter a valid phone");
-	      } else if (!this.state.validSpecialty) {
-	        alert("Please enter a specialty");
+	      if (!this.state.nameIsValid || !this.state.phoneIsValid || !this.state.emailIsValid || !this.state.specialtyIsValid) {
+	        this.setState({ formIsValid: false });
 	      } else {
 	        var toSubmit = { "username": window.localStorage.username, "first_last": window.localStorage.first_last, "userID": window.localStorage.userID, "doc": {
 	            name: this.state.name,
@@ -57825,33 +57923,43 @@
 	          'Input a new doctor!'
 	        ),
 	        _react2.default.createElement(
-	          'form',
+	          'div',
 	          { className: 'doctor-entry-form' },
 	          _react2.default.createElement(
 	            'div',
 	            null,
 	            'Name'
 	          ),
-	          _react2.default.createElement('input', { id: 'name', type: 'text', onChange: this.handleChange }),
+	          _react2.default.createElement('input', { id: 'name', type: 'text', onChange: this.handleName }),
+	          _react2.default.createElement(
+	            'div',
+	            { className: this.state.nameIsValid ? "hidden" : "invalid" },
+	            ' Name must be at least 2 characters. '
+	          ),
 	          _react2.default.createElement(
 	            'div',
 	            null,
 	            'Phone'
 	          ),
-	          _react2.default.createElement('input', { id: 'phone', type: 'text', onChange: this.handleChange }),
-	          _react2.default.createElement(
-	            'h6',
-	            { className: this.state.validPhone ? 'hidden' : 'invalid' },
-	            ' Phone number must be 11 digits'
-	          ),
+	          _react2.default.createElement('input', { id: 'phone', type: 'text', onChange: this.handlePhone }),
 	          _react2.default.createElement('br', null),
+	          _react2.default.createElement(
+	            'div',
+	            { className: this.state.phoneIsValid ? "hidden" : "invalid" },
+	            ' Phone numbers must be 11 digits long. '
+	          ),
 	          _react2.default.createElement(
 	            'div',
 	            null,
 	            'Email'
 	          ),
-	          _react2.default.createElement('input', { id: 'email', type: 'text', onChange: this.handleChange }),
+	          _react2.default.createElement('input', { id: 'email', type: 'text', onChange: this.handleEmail }),
 	          _react2.default.createElement('br', null),
+	          _react2.default.createElement(
+	            'div',
+	            { className: this.state.emailIsValid ? "hidden" : "invalid" },
+	            ' Please enter a valid email. '
+	          ),
 	          _react2.default.createElement(
 	            'h6',
 	            { className: 'invalid' },
@@ -57863,7 +57971,7 @@
 	            null,
 	            'Address'
 	          ),
-	          _react2.default.createElement('input', { id: 'address', type: 'text', onChange: this.handleChange }),
+	          _react2.default.createElement('input', { id: 'address', type: 'text', onChange: this.handleAddress }),
 	          _react2.default.createElement('br', null),
 	          _react2.default.createElement(
 	            'div',
@@ -57872,7 +57980,7 @@
 	          ),
 	          _react2.default.createElement(
 	            'select',
-	            { id: 'specialty', onChange: this.handleChange },
+	            { id: 'specialty', onChange: this.handleSpecialty },
 	            _react2.default.createElement(
 	              'option',
 	              null,
@@ -57887,9 +57995,19 @@
 	            })
 	          ),
 	          _react2.default.createElement(
+	            'div',
+	            { className: this.state.specialtyIsValid ? "hidden" : "invalid" },
+	            ' Select a specialty. '
+	          ),
+	          _react2.default.createElement(
 	            'button',
 	            { onClick: this.submitNewDoctor },
 	            'Submit!'
+	          ),
+	          _react2.default.createElement(
+	            'h6',
+	            { className: this.state.formIsValid ? 'hidden' : 'invalid' },
+	            ' Some of your data is not valid.  Please check above. '
 	          )
 	        )
 	      );
@@ -62882,7 +63000,7 @@
 	      "formIsValid": true
 	    };
 	
-	    var date = new Date();
+	    var date = (0, _moment2.default)(new Date()).format("MM-DD-YYYY");
 	    _this.updateDrugName = _this.updateDrugName.bind(_this);
 	    _this.submitForm = _this.submitForm.bind(_this);
 	    _this.handleFrequency = _this.handleFrequency.bind(_this);
@@ -63008,7 +63126,7 @@
 	    key: 'submitForm',
 	    value: function submitForm() {
 	
-	      if (!this.state.nameIsValid && !this.state.refillDateIsValid && !this.state.dosageIsValid) {
+	      if (!this.state.nameIsValid || !this.state.refillDateIsValid || !this.state.dosageIsValid) {
 	        this.setState({ formIsValid: false });
 	      } else {
 	        var script = {

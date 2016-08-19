@@ -42,7 +42,7 @@ export default class ScriptRemindView extends React.Component {
       "formIsValid": true
     };
 
-  var date = new Date();
+  var date = moment(new Date()).format("MM-DD-YYYY")
   this.updateDrugName = this.updateDrugName.bind(this);
   this.submitForm = this.submitForm.bind(this);
   this.handleFrequency = this.handleFrequency.bind(this);
@@ -154,7 +154,7 @@ export default class ScriptRemindView extends React.Component {
 
     submitForm () {
 
-      if(!this.state.nameIsValid && !this.state.refillDateIsValid && !this.state.dosageIsValid){
+      if(!this.state.nameIsValid || !this.state.refillDateIsValid || !this.state.dosageIsValid){
         this.setState({formIsValid: false});
       } else {
         var script = {
