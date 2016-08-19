@@ -38267,13 +38267,13 @@
 	
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 	
-	var Navigate = function (_React$Component) {
-	  _inherits(Navigate, _React$Component);
+	var NavigateView = function (_React$Component) {
+	  _inherits(NavigateView, _React$Component);
 	
-	  function Navigate(props) {
-	    _classCallCheck(this, Navigate);
+	  function NavigateView(props) {
+	    _classCallCheck(this, NavigateView);
 	
-	    var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(Navigate).call(this, props));
+	    var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(NavigateView).call(this, props));
 	
 	    _this.state = {
 	      "username": window.localStorage.username
@@ -38282,7 +38282,7 @@
 	    return _this;
 	  }
 	
-	  _createClass(Navigate, [{
+	  _createClass(NavigateView, [{
 	    key: 'componentDidMount',
 	    value: function componentDidMount() {
 	      if (!window.localStorage.latitude) {
@@ -38332,10 +38332,10 @@
 	    }
 	  }]);
 	
-	  return Navigate;
+	  return NavigateView;
 	}(_react2.default.Component);
 	
-	exports.default = Navigate;
+	exports.default = NavigateView;
 
 /***/ },
 /* 244 */
@@ -60135,6 +60135,7 @@
 	      selectedSymptoms: [],
 	      recs: [],
 	      modalIsOpen: false,
+	      // zipcode: this.props.zipcode,
 	      brainState: {}
 	    };
 	    _this.handleDeselect = _this.handleDeselect.bind(_this);
@@ -60299,7 +60300,7 @@
 	        _react2.default.createElement(
 	          'div',
 	          { className:  true ? "" : "hidden" },
-	          _react2.default.createElement(_symptomEntryModal2.default, { brainState: this.state.brainState, symptoms: this.state.selectedSymptoms, recommendations: this.state.recs })
+	          _react2.default.createElement(_symptomEntryModal2.default, { closeFn: this.props.closeFn, zipcode: this.props.zipcode, brainState: this.state.brainState, symptoms: this.state.selectedSymptoms, recommendations: this.state.recs })
 	        )
 	      );
 	    }
@@ -60624,6 +60625,8 @@
 	
 	var _reactRouter = __webpack_require__(/*! react-router */ 175);
 	
+	var _reactBootstrap = __webpack_require__(/*! react-bootstrap */ 244);
+	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -60746,12 +60749,13 @@
 	      this.setState({
 	        drxs: drxs.data
 	      });
-	      console.log('this works');
 	      console.log('+++++++++++++++>', drxs);
 	    }
 	  }, {
 	    key: 'render',
 	    value: function render() {
+	      var _this2 = this;
+	
 	      return _react2.default.createElement(
 	        'div',
 	        null,
@@ -60827,17 +60831,19 @@
 	            _react2.default.createElement(
 	              'div',
 	              null,
-	              'Or, check out some ',
+	              'Or, click below to find some ',
 	              this.state.currentRec ? this.state.currentRec.name : '**empty**',
-	              's near you. Click the MONEY button!'
+	              's near you!'
 	            ),
 	            _react2.default.createElement(
-	              'button',
-	              { onClick: this.drx },
-	              'Show me the MONEY'
+	              _reactBootstrap.Button,
+	              { onClick: this.drx, bsStyle: 'primary', bsSize: 'small' },
+	              'Find ',
+	              this.state.currentRec ? this.state.currentRec.name : '**empty**',
+	              's'
 	            ),
 	            this.state.drxs.map(function (doctrx, i) {
-	              return _react2.default.createElement(_DRXView2.default, { info: doctrx });
+	              return _react2.default.createElement(_DRXView2.default, { closeFn: _this2.props.closeFn, zipcode: _this2.props.zipcode, info: doctrx });
 	            })
 	          ),
 	          _react2.default.createElement(
@@ -62025,7 +62031,7 @@
   \********************************/
 /***/ function(module, exports, __webpack_require__) {
 
-	"use strict";
+	'use strict';
 	
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
@@ -62036,6 +62042,8 @@
 	var _react = __webpack_require__(/*! react */ 1);
 	
 	var _react2 = _interopRequireDefault(_react);
+	
+	var _reactBootstrap = __webpack_require__(/*! react-bootstrap */ 244);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
@@ -62051,44 +62059,118 @@
 	  function DRXView(props) {
 	    _classCallCheck(this, DRXView);
 	
-	    return _possibleConstructorReturn(this, Object.getPrototypeOf(DRXView).call(this, props));
+	    // this.yalp = this.yalp.bind(this);
+	    var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(DRXView).call(this, props));
+	
+	    _this.findDrx = _this.findDrx.bind(_this);
+	    return _this;
 	  }
 	
-	  // this line of code will display insurance taken of each doctor, which is an array:
-	  // <div><span className="drx-attribute">Bio: </span>{this.props.info.insurances[i].insurance_provider.name}</div>
-	
-	
 	  _createClass(DRXView, [{
-	    key: "render",
+	    key: 'findDrx',
+	
+	
+	    // no longer needed :(
+	    // yalp() {
+	    //   $.ajax({
+	    //     type: 'POST',
+	    //     url: '/api/yelp',
+	    //     headers: {
+	    //       "content-type": "application/json"
+	    //     },
+	    //     data: JSON.stringify({ name: this.props.info.profile.first_name+' '+this.props.info.profile.last_name, zip: this.props.zipcode }),
+	    //     success: function(searchTerm) {
+	    //       console.log(searchTerm);
+	    //     }.bind(this),
+	    //     error: function(err) {
+	    //       console.error('no yelp', err);
+	    //     }
+	    //   });
+	    // }
+	
+	    value: function findDrx() {
+	      var npiUrl = 'https://api.betterdoctor.com/2016-03-01/doctors/npi/' + this.props.info.npi + '?user_key=87b39c90783391ac6ce972736d117741';
+	      console.log(npiUrl);
+	      console.log('PROPS:', this.props);
+	      $.ajax({
+	        type: 'GET',
+	        url: npiUrl,
+	        success: function (npiData) {
+	          console.log('name:', npiData.data.practices[0].name);
+	          console.log('phone:', npiData.data.practices[0].phones[0].number);
+	          console.log('addy:' + '\n', npiData.data.practices[0].visit_address.street + '\n', npiData.data.practices[0].visit_address.city + '\n', npiData.data.practices[0].visit_address.state + '\n', npiData.data.practices[0].visit_address.zip);
+	          console.log('spec:', npiData.data.specialties[0].actor);
+	
+	          var toSubmit = {
+	            "username": window.localStorage.username,
+	            "first_last": window.localStorage.first_last,
+	            "userID": window.localStorage.userID,
+	            "doc": {
+	              name: npiData.data.practices[0].name,
+	              phone: '1' + npiData.data.practices[0].phones[0].number,
+	              email: 'N/A',
+	              address: npiData.data.practices[0].visit_address.street + ' ' + npiData.data.practices[0].visit_address.city + ', ' + npiData.data.practices[0].visit_address.state,
+	              specialty: npiData.data.specialties[0].actor
+	            }
+	          };
+	
+	          $.ajax({
+	            type: 'POST',
+	            url: '/api/doctor/add',
+	            headers: {
+	              'content-type': 'application/json'
+	            },
+	            data: JSON.stringify(toSubmit),
+	            success: this.props.closeFn(),
+	            error: function error(err) {
+	              console.log('inner error', err);
+	            }
+	          });
+	        }.bind(this),
+	        error: function error(err) {
+	          console.log('outer error', err);
+	        }
+	      });
+	    }
+	  }, {
+	    key: 'render',
 	    value: function render() {
-	      console.log(this.props.info);
 	      return _react2.default.createElement(
-	        "div",
-	        { className: "card-wrap" },
+	        'div',
+	        { className: 'card-wrap' },
 	        _react2.default.createElement(
-	          "div",
-	          { className: "profile_pic-wrap" },
-	          _react2.default.createElement("img", { src: this.props.info.profile.image_url, alt: "" })
+	          'div',
+	          { className: 'profile_pic-wrap' },
+	          _react2.default.createElement('img', { src: this.props.info.profile.image_url, alt: '' })
 	        ),
 	        _react2.default.createElement(
-	          "div",
+	          'div',
 	          null,
 	          _react2.default.createElement(
-	            "p",
+	            _reactBootstrap.Button,
+	            { onClick: this.findDrx, bsStyle: 'primary', bsSize: 'xsmall' },
+	            'SAVE TO ROLODEX'
+	          )
+	        ),
+	        _react2.default.createElement(
+	          'div',
+	          null,
+	          _react2.default.createElement(
+	            'p',
 	            null,
 	            this.props.info.ratings[0] ? this.props.info.ratings[0].rating + ' stars' : 'No rating found'
 	          )
 	        ),
 	        _react2.default.createElement(
-	          "div",
-	          { className: "info-wrap" },
+	          'div',
+	          { className: 'info-wrap' },
 	          _react2.default.createElement(
-	            "h3",
-	            { className: "user-name" },
+	            'h3',
+	            { className: 'user-name' },
 	            this.props.info.profile.first_name + ' ' + this.props.info.profile.last_name
 	          ),
 	          _react2.default.createElement(
-	            "p",
+	            'p',
 	            null,
 	            this.props.info.profile.bio
 	          )
@@ -62099,13 +62181,6 @@
 	
 	  return DRXView;
 	}(_react2.default.Component);
-	// <div className="drx-view-container">
-	//   <div><span className="drx-attribute">Image: </span><img src={this.props.info.profile.image_url}></img></div>
-	//   <div><span className="drx-attribute">Rating: </span>{this.props.info.ratings[0] ? this.props.info.ratings[0].rating+' stars' : 'No rating found'}</div>
-	//   <div><span className="drx-attribute">Name: </span>{this.props.info.profile.first_name+' '+this.props.info.profile.last_name}</div>
-	//   <div><span className="drx-attribute">Bio: </span>{this.props.info.profile.bio}</div>
-	// </div>
-	
 	
 	exports.default = DRXView;
 
@@ -62189,18 +62264,18 @@
 	    _this.state = {
 	      doctors: [],
 	      scripts: [],
+	      zipcode: null,
 	      inputZip: null,
 	      editScript: null,
-	
 	      editDoctor: null,
 	      editModalDoctorIsOpen: false,
-	
 	      scriptmodalIsOpen: false,
 	      docmodalIsOpen: false,
 	      mapmodalIsOpen: false,
 	      symptomModalIsOpen: false,
 	      brainModalIsOpen: false,
 	      editModalIsOpen: false,
+	      notesOpen: false,
 	      openNotes: {
 	        doctor: '',
 	        notes: []
@@ -62228,7 +62303,6 @@
 	          borderRadius: '4px',
 	          outline: 'none',
 	          padding: '20px'
-	
 	        }
 	      }
 	    };
@@ -62249,8 +62323,7 @@
 	    _this.openEditModalScript = _this.openEditModalScript.bind(_this);
 	    _this.closeEditModalScript = _this.closeEditModalScript.bind(_this);
 	    _this.doctorNotes = _this.doctorNotes.bind(_this);
-	    // this.getZip = this.getZip.bind(this);
-	
+	    _this.getZip = _this.getZip.bind(_this);
 	    _this.openEditModalDoctor = _this.openEditModalDoctor.bind(_this);
 	    _this.closeEditModalDoctor = _this.closeEditModalDoctor.bind(_this);
 	
@@ -62295,7 +62368,6 @@
 	  }, {
 	    key: 'openModalScript',
 	    value: function openModalScript() {
-	
 	      console.log("open modal script called");
 	      console.log('this is the editscript', this.state.editScript);
 	      this.setState({
@@ -62361,6 +62433,8 @@
 	    value: function openModalSymptom() {
 	      this.setState({
 	        symptomModalIsOpen: true
+	      }, function () {
+	        console.log(this.state.zipcode);
 	      });
 	    }
 	  }, {
@@ -62449,6 +62523,10 @@
 	  }, {
 	    key: 'doctorNotes',
 	    value: function doctorNotes(doctor) {
+	      this.setState({
+	        notesOpen: !this.state.notesOpen
+	      });
+	
 	      var url = '/api/note/getAll/' + doctor._id;
 	      _jquery2.default.ajax({
 	        type: 'GET',
@@ -62527,33 +62605,33 @@
 	          notes: newNotes
 	        } });
 	    }
-	
-	    // getZip() {
-	    //   $.ajax({
-	    //     type: 'POST',
-	    //     url: '/api/user/zip',
-	    //     headers: {
-	    //       "content-type": "application/json"
-	    //     },
-	    //     data: JSON.stringify({"username": window.localStorage.username}),
-	    //     success: function(zipcode) {
-	    //       console.log("USER zipcode", zipcode);
-	    //       this.setState({
-	    //         zipcode: zipcode
-	    //       });
-	    //     }.bind(this),
-	    //     error: function(err) {
-	    //       console.log('Could not retrieve user zipcode', err);
-	    //     }
-	    //   });
-	    // }
-	
-	
+	  }, {
+	    key: 'getZip',
+	    value: function getZip() {
+	      _jquery2.default.ajax({
+	        type: 'POST',
+	        url: '/api/user/zip',
+	        headers: {
+	          "content-type": "application/json"
+	        },
+	        data: JSON.stringify({ "username": window.localStorage.username }),
+	        success: function (zipcode) {
+	          console.log("USER zipcode", zipcode);
+	          this.setState({
+	            zipcode: zipcode
+	          });
+	        }.bind(this),
+	        error: function error(err) {
+	          console.log('Could not retrieve user zipcode', err);
+	        }
+	      });
+	    }
 	  }, {
 	    key: 'componentDidMount',
 	    value: function componentDidMount() {
 	      this.getScripts();
 	      this.getDocs();
+	      this.getZip();
 	    }
 	  }, {
 	    key: 'render',
@@ -62607,8 +62685,7 @@
 	            )
 	          ),
 	          _react2.default.createElement(_map2.default, {
-	            zipcode: this.state.inputZip
-	          })
+	            zipcode: this.state.inputZip })
 	        ),
 	        _react2.default.createElement(
 	          _reactBootstrap.Modal,
@@ -62622,7 +62699,9 @@
 	              _react2.default.createElement('i', { className: 'fa fa-times-circle', 'aria-hidden': 'true' })
 	            )
 	          ),
-	          _react2.default.createElement(_symptomEntry2.default, { closeFn: this.closeModalSymptom })
+	          _react2.default.createElement(_symptomEntry2.default, {
+	            zipcode: this.state.zipcode,
+	            closeFn: this.closeModalSymptom })
 	        ),
 	        _react2.default.createElement(
 	          _reactBootstrap.Modal,
@@ -62682,12 +62761,12 @@
 	            { className: 'scripts-container' },
 	            _react2.default.createElement(
 	              'div',
-	              { className: 'scripts-title' },
-	              ' Prescriptions '
-	            ),
-	            _react2.default.createElement(
-	              'div',
 	              { className: 'scripts-header' },
+	              _react2.default.createElement(
+	                'div',
+	                { className: 'scripts-title' },
+	                ' Prescriptions '
+	              ),
 	              _react2.default.createElement(
 	                'div',
 	                null,
@@ -62695,31 +62774,31 @@
 	                    _this2.setState({ inputZip: event.target.value });
 	                  } }),
 	                _react2.default.createElement(
-	                  _reactBootstrap.Button,
-	                  { bsStyle: 'success', onClick: this.openModalMap },
-	                  ' ',
+	                  _reactBootstrap.OverlayTrigger,
+	                  { placement: 'top', overlay: _react2.default.createElement(
+	                      _reactBootstrap.Tooltip,
+	                      { id: 'tooltip' },
+	                      ' Find a nearby pharmacy'
+	                    ) },
 	                  _react2.default.createElement(
-	                    'div',
-	                    null,
+	                    _reactBootstrap.Button,
+	                    { bsStyle: 'info', onClick: this.openModalMap },
 	                    ' ',
-	                    _react2.default.createElement('i', { className: 'fa fa-search', 'aria-hidden': 'true' }),
-	                    ' Pharmacy '
-	                  ),
-	                  ' '
+	                    _react2.default.createElement(
+	                      'div',
+	                      null,
+	                      ' ',
+	                      _react2.default.createElement('i', { className: 'fa fa-search', 'aria-hidden': 'true' }),
+	                      ' Pharmacy '
+	                    ),
+	                    ' '
+	                  )
 	                )
 	              ),
 	              _react2.default.createElement(
-	                _reactBootstrap.Button,
-	                { bsClass: 'btn midnight-blue', onClick: this.openModalScript },
-	                ' ',
-	                _react2.default.createElement(
-	                  'div',
-	                  null,
-	                  ' ',
-	                  _react2.default.createElement('i', { className: 'fa fa-plus-circle', 'aria-hidden': 'true' }),
-	                  ' Prescription '
-	                ),
-	                ' '
+	                'div',
+	                { className: 'add-btn' },
+	                _react2.default.createElement('i', { className: 'fa fa-plus-circle white add', onClick: this.openModalScript, 'aria-hidden': 'true' })
 	              )
 	            ),
 	            this.state.scripts.map(function (script, idx) {
@@ -62727,21 +62806,29 @@
 	                'div',
 	                { className: 'scripts-view-container', key: idx },
 	                _react2.default.createElement(
-	                  'button',
-	                  { onClick: _this2.openEditModalScript.bind(_this2, idx) },
-	                  ' Edit Script '
-	                ),
-	                _react2.default.createElement(
 	                  'div',
 	                  { className: 'script-top-bar' },
 	                  _react2.default.createElement(
 	                    'div',
-	                    null,
+	                    { className: 'doc-top-first-half' },
 	                    _react2.default.createElement(
 	                      'p',
 	                      { className: 'script-name' },
 	                      ' ',
 	                      script.name
+	                    ),
+	                    _react2.default.createElement(
+	                      _reactBootstrap.OverlayTrigger,
+	                      { placement: 'top', overlay: _react2.default.createElement(
+	                          _reactBootstrap.Tooltip,
+	                          { id: 'tooltip' },
+	                          ' Click to edit card'
+	                        ) },
+	                      _react2.default.createElement(
+	                        'div',
+	                        { className: 'edit-icon' },
+	                        _react2.default.createElement('i', { className: 'fa fa-pencil-square-o pencil', 'aria-hidden': 'true', onClick: _this2.openEditModalScript.bind(_this2, idx) })
+	                      )
 	                    )
 	                  ),
 	                  _react2.default.createElement('i', { className: 'fa fa-times', 'aria-hidden': 'true', onClick: _this2.deleteScript.bind(_this2, idx) })
@@ -62749,29 +62836,23 @@
 	                _react2.default.createElement(
 	                  'div',
 	                  { className: 'script-attribute' },
-	                  ' ',
 	                  _react2.default.createElement('i', { className: 'fa fa-heart red', 'aria-hidden': 'true' }),
 	                  ' Dosage: ',
-	                  script.dosage,
-	                  ' '
+	                  script.dosage
 	                ),
 	                _react2.default.createElement(
 	                  'div',
 	                  { className: 'script-attribute' },
-	                  ' ',
 	                  _react2.default.createElement('i', { className: 'fa fa-bell gold', 'aria-hidden': 'true' }),
 	                  ' Reminder: ',
-	                  script.frequency,
-	                  ' '
+	                  script.frequency
 	                ),
 	                _react2.default.createElement(
 	                  'div',
 	                  { className: 'script-attribute' },
-	                  ' ',
 	                  _react2.default.createElement('i', { className: 'fa fa-calendar royal-blue', 'aria-hidden': 'true' }),
 	                  ' Refill: ',
-	                  String(new Date(script.refill)).split('').slice(0, 15).join(''),
-	                  ' '
+	                  String(new Date(script.refill)).split('').slice(0, 15).join('')
 	                )
 	              );
 	            }, this)
@@ -62781,36 +62862,40 @@
 	            { className: 'doctors-container' },
 	            _react2.default.createElement(
 	              'div',
-	              { className: 'doctors-title' },
-	              ' Doctors '
-	            ),
-	            _react2.default.createElement(
-	              'div',
 	              { className: 'doctors-header' },
 	              _react2.default.createElement(
-	                _reactBootstrap.Button,
-	                { bsStyle: 'success', bsSize: 'small', onClick: this.openModalSymptom },
-	                ' ',
+	                'div',
+	                { className: 'doctors-title' },
+	                ' Doctors '
+	              ),
+	              _react2.default.createElement(
+	                _reactBootstrap.OverlayTrigger,
+	                { placement: 'top', overlay: _react2.default.createElement(
+	                    _reactBootstrap.Tooltip,
+	                    { id: 'tooltip' },
+	                    ' Feeling sick? OneCare can recommend a specialist '
+	                  ) },
 	                _react2.default.createElement(
 	                  'div',
-	                  null,
-	                  ' ',
-	                  _react2.default.createElement('i', { className: 'fa fa-stethoscope', 'aria-hidden': 'true' }),
-	                  ' Recommend '
+	                  { className: 'rec-btn' },
+	                  _react2.default.createElement(
+	                    _reactBootstrap.Button,
+	                    { bsStyle: 'info', bsSize: 'small', onClick: this.openModalSymptom },
+	                    ' ',
+	                    _react2.default.createElement(
+	                      'div',
+	                      null,
+	                      ' ',
+	                      _react2.default.createElement('i', { className: 'fa fa-stethoscope', 'aria-hidden': 'true' }),
+	                      ' Recommend '
+	                    )
+	                  )
 	                )
 	              ),
 	              _react2.default.createElement(
-	                _reactBootstrap.Button,
-	                { bsClass: 'btn midnight-blue', onClick: this.openModalDoctor },
-	                ' ',
-	                _react2.default.createElement(
-	                  'div',
-	                  null,
-	                  ' ',
-	                  _react2.default.createElement('i', { className: 'fa fa-plus-circle', 'aria-hidden': 'true' }),
-	                  ' Doctor '
-	                ),
-	                ' '
+	                'div',
+	                { className: 'add-btn' },
+	                _react2.default.createElement('i', { className: 'fa fa-plus-circle white add', onClick: this.openModalDoctor, 'aria-hidden': 'true' })
 	              )
 	            ),
 	            this.state.doctors.map(function (doctor, idx) {
@@ -62818,74 +62903,123 @@
 	                'div',
 	                { className: ' doctor-view-container', key: idx },
 	                _react2.default.createElement(
-	                  'button',
-	                  { className: 'doctor-edit', onClick: _this2.openEditModalDoctor.bind(_this2, idx) },
-	                  ' Edit Doctor '
-	                ),
-	                _react2.default.createElement(
 	                  'div',
-	                  { className: 'doctor-top-bar' },
+	                  { className: 'doc-info' },
 	                  _react2.default.createElement(
-	                    'p',
-	                    { className: 'doctor-name' },
-	                    doctor.name
-	                  ),
-	                  _react2.default.createElement('i', { className: 'fa fa-times', 'aria-hidden': 'true', onClick: _this2.deleteDoc.bind(_this2, idx) })
-	                ),
-	                _react2.default.createElement(
-	                  'div',
-	                  { className: 'doctor-attribute' },
-	                  _react2.default.createElement('i', { className: 'fa fa-phone phone-green', 'aria-hidden': 'true' }),
-	                  '  ',
-	                  doctor.phone
-	                ),
-	                _react2.default.createElement(
-	                  'div',
-	                  { className: 'doctor-attribute' },
-	                  _react2.default.createElement('i', { className: 'fa fa-envelope', 'aria-hidden': 'true' }),
-	                  '  ',
-	                  doctor.email
-	                ),
-	                _react2.default.createElement(
-	                  'div',
-	                  { className: 'doctor-attribute' },
-	                  _react2.default.createElement('i', { className: 'fa fa-map-marker red', 'aria-hidden': 'true' }),
-	                  '  ',
-	                  doctor.address
-	                ),
-	                _react2.default.createElement(
-	                  'div',
-	                  { className: 'doctor-attribute' },
-	                  _react2.default.createElement('i', { className: 'fa fa-stethoscope', 'aria-hidden': 'true' }),
-	                  '  ',
-	                  doctor.specialty
-	                ),
-	                _react2.default.createElement(
-	                  'div',
-	                  { className: 'doctor-attribute' },
-	                  _react2.default.createElement(
-	                    _reactBootstrap.Button,
-	                    { bsStyle: 'info', bsSize: 'small', onClick: _this2.doctorNotes.bind(_this2, doctor) },
-	                    ' (view notes) '
+	                    'div',
+	                    { className: 'doctor-top-bar' },
+	                    _react2.default.createElement(
+	                      'div',
+	                      { className: 'doc-top-first-half' },
+	                      _react2.default.createElement(
+	                        'p',
+	                        { className: 'doctor-name' },
+	                        doctor.name
+	                      ),
+	                      _react2.default.createElement(
+	                        _reactBootstrap.OverlayTrigger,
+	                        { placement: 'top', overlay: _react2.default.createElement(
+	                            _reactBootstrap.Tooltip,
+	                            { id: 'tooltip' },
+	                            ' Click to edit card'
+	                          ) },
+	                        _react2.default.createElement(
+	                          'div',
+	                          { className: 'edit-icon' },
+	                          _react2.default.createElement('i', { className: 'fa fa-pencil-square-o pencil', 'aria-hidden': 'true', onClick: _this2.openEditModalDoctor.bind(_this2, idx) })
+	                        )
+	                      )
+	                    ),
+	                    _react2.default.createElement(
+	                      'div',
+	                      { className: 'delete-doc' },
+	                      _react2.default.createElement('i', { className: 'fa fa-times', 'aria-hidden': 'true', onClick: _this2.deleteDoc.bind(_this2, idx) })
+	                    )
 	                  ),
 	                  _react2.default.createElement(
 	                    'div',
-	                    { className: _this2.state.openNotes.doctor === doctor._id ? "doctor-notes-container" : "hidden" },
-	                    _this2.state.openNotes.notes.filter(function (note) {
-	                      return !note.hidden;
-	                    }).map(function (note, idx) {
-	                      return _react2.default.createElement(
+	                    { className: 'doctor-attribute' },
+	                    _react2.default.createElement('i', { className: 'fa fa-phone phone-green', 'aria-hidden': 'true' }),
+	                    ' ',
+	                    doctor.phone
+	                  ),
+	                  _react2.default.createElement(
+	                    'div',
+	                    { className: 'doctor-attribute' },
+	                    _react2.default.createElement(
+	                      'div',
+	                      { className: 'email-specialist-container' },
+	                      _react2.default.createElement(
 	                        'div',
-	                        { key: idx, className: "doctor-notes-entry" + (note.seen ? "" : " highlight") },
-	                        _react2.default.createElement(
-	                          'span',
-	                          { className: 'note-delete' },
-	                          _react2.default.createElement('i', { className: 'fa fa-times', 'aria-hidden': 'true', onClick: _this2.hideNote.bind(_this2, note) })
-	                        ),
-	                        note.body
-	                      );
-	                    })
+	                        null,
+	                        _react2.default.createElement('i', { className: 'fa fa-envelope envelope', 'aria-hidden': 'true' }),
+	                        '  ',
+	                        doctor.email
+	                      )
+	                    )
+	                  ),
+	                  _react2.default.createElement(
+	                    'div',
+	                    { className: 'doctor-footer' },
+	                    _react2.default.createElement(
+	                      'div',
+	                      { className: 'doctor-attribute' },
+	                      _react2.default.createElement('i', { className: 'fa fa-map-marker red', 'aria-hidden': 'true' }),
+	                      '  ',
+	                      doctor.address
+	                    ),
+	                    _react2.default.createElement(
+	                      'div',
+	                      { className: 'doctor-attribute' },
+	                      _react2.default.createElement(
+	                        'div',
+	                        { className: 'specialty-tag' },
+	                        _react2.default.createElement('i', { className: 'fa fa-stethoscope', 'aria-hidden': 'true' }),
+	                        ' ',
+	                        doctor.specialty
+	                      )
+	                    )
 	                  )
+	                ),
+	                _react2.default.createElement(
+	                  'div',
+	                  { className: 'show-notes' },
+	                  _react2.default.createElement(
+	                    _reactBootstrap.OverlayTrigger,
+	                    { placement: 'top', overlay: _react2.default.createElement(
+	                        _reactBootstrap.Tooltip,
+	                        { id: 'tooltip' },
+	                        ' Click to view doctor\'s notes'
+	                      ) },
+	                    _react2.default.createElement(
+	                      'div',
+	                      { className: _this2.state.notesOpen ? 'hidden' : 'note-icon' },
+	                      _react2.default.createElement('i', { className: 'fa fa-angle-double-down phone-green', 'aria-hidden': 'true', onClick: _this2.doctorNotes.bind(_this2, doctor) })
+	                    )
+	                  ),
+	                  _react2.default.createElement(
+	                    'div',
+	                    { className: _this2.state.notesOpen ? 'note-icon' : 'hidden' },
+	                    _react2.default.createElement('i', { className: 'fa fa-angle-double-up phone-green', 'aria-hidden': 'true', onClick: _this2.doctorNotes.bind(_this2, doctor) })
+	                  )
+	                ),
+	                _react2.default.createElement(
+	                  'div',
+	                  { className: _this2.state.openNotes.doctor === doctor._id ? "doctor-notes-container" : "hidden" },
+	                  _this2.state.openNotes.notes.filter(function (note) {
+	                    return !note.hidden;
+	                  }).map(function (note, idx) {
+	                    return _react2.default.createElement(
+	                      'div',
+	                      { key: idx, className: "doctor-notes-entry" + (note.seen ? "" : " highlight") },
+	                      _react2.default.createElement(
+	                        'span',
+	                        { className: 'note-delete' },
+	                        _react2.default.createElement('i', { className: 'fa fa-trash', 'aria-hidden': 'true', onClick: _this2.hideNote.bind(_this2, note) })
+	                      ),
+	                      note.body
+	                    );
+	                  })
 	                )
 	              );
 	            }, this)
