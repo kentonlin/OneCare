@@ -247,14 +247,14 @@ border-radius: 4px;
   margin-right: 180px;
 }
 .doctors-container {
-  float:right;
+  float: right;
   width: 550px;
   margin-top: 10px;
   margin-left: 20px;
   padding: 10px;
   background-color: #2980b9;
   border-radius: 7px;
-   padding:5px;
+  padding:5px;
 }
 
 .doctor-top-bar {
@@ -367,7 +367,7 @@ border-radius: 4px;
   padding: 10px;
   background-color: #e74c3c;
   border-radius: 7px;
-   padding:5px;
+  padding:5px;
 }
 
 .scripts-title {

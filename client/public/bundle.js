@@ -57820,11 +57820,6 @@
 	        'div',
 	        { className: 'script-form-frame' },
 	        _react2.default.createElement(
-	          'h2',
-	          null,
-	          'Input a new doctor!'
-	        ),
-	        _react2.default.createElement(
 	          'form',
 	          { className: 'doctor-entry-form' },
 	          _react2.default.createElement(
@@ -57855,7 +57850,7 @@
 	          _react2.default.createElement(
 	            'h6',
 	            { className: 'invalid' },
-	            ' (Your doctor will receive notification that you have registered with them!) '
+	            ' (Your doctor will receive a notification that you have registered with them!) '
 	          ),
 	          _react2.default.createElement('br', null),
 	          _react2.default.createElement(
@@ -62531,6 +62526,11 @@
 	            'div',
 	            { className: 'modal-button-close-container' },
 	            _react2.default.createElement(
+	              'h2',
+	              null,
+	              'Input a new prescription'
+	            ),
+	            _react2.default.createElement(
 	              'div',
 	              { className: 'modal-button-close', onClick: this.closeModalScript },
 	              _react2.default.createElement('i', { className: 'fa fa-times-circle', 'aria-hidden': 'true' })
@@ -62545,6 +62545,11 @@
 	          _react2.default.createElement(
 	            'div',
 	            { className: 'modal-button-close-container' },
+	            _react2.default.createElement(
+	              'h2',
+	              null,
+	              'Input a new doctor'
+	            ),
 	            _react2.default.createElement(
 	              'div',
 	              { className: 'modal-button-close', onClick: this.closeModalDoctor },
@@ -63114,7 +63119,6 @@
 	  }, {
 	    key: 'submitForm',
 	    value: function submitForm() {
-	
 	      if (!this.state.invalidName && !this.state.invalidReminderTime) {
 	        alert("Please enter a prescription name and reminder time");
 	      } else if (!this.state.invalidName) {
@@ -63151,37 +63155,25 @@
 	    value: function render() {
 	      return _react2.default.createElement(
 	        'div',
-	        null,
+	        { className: 'script-form-frame' },
 	        _react2.default.createElement(
 	          'div',
-	          null,
+	          { className: 'doctor-entry-form' },
 	          _react2.default.createElement(
-	            'h1',
+	            'h3',
 	            null,
-	            ' Set a Prescription Reminder '
+	            'Prescription Name'
 	          ),
-	          _react2.default.createElement(
-	            'h2',
-	            null,
-	            ' Current Drug: ',
-	            this.state.currentDrug,
-	            ' '
-	          ),
-	          _react2.default.createElement('input', {
-	            onChange: this.updateDrugName,
-	            placeholder: 'name'
-	            // placeholder={this.state.currentDrug}
-	            , defaultValue: this.state.currentDrug
-	          }),
+	          _react2.default.createElement('input', { onChange: this.updateDrugName, placeholder: this.state.currentDrug }),
 	          _react2.default.createElement(
 	            'h8',
 	            { className: 'required' },
-	            ' (required) '
+	            '(required)'
 	          )
 	        ),
 	        _react2.default.createElement(
 	          'div',
-	          { className: 'script-form-frame' },
+	          null,
 	          _react2.default.createElement(
 	            'h3',
 	            null,
@@ -63219,22 +63211,7 @@
 	        ),
 	        _react2.default.createElement(
 	          'div',
-	          { className: 'script-form-frame' },
-	          _react2.default.createElement(
-	            'h3',
-	            null,
-	            ' Refill Date'
-	          ),
-	          _react2.default.createElement(
-	            'div',
-	            { className: 'script-form-fields' },
-	            _react2.default.createElement(_reactInputCalendar2.default, { format: 'MM/DD/YYYY', date: this.state.date, onChange: this.handleRefillDate }),
-	            _react2.default.createElement('span', { className: this.state.date ? "" : "hidden" })
-	          )
-	        ),
-	        _react2.default.createElement(
-	          'div',
-	          { className: 'script-form-frame' },
+	          null,
 	          _react2.default.createElement(
 	            'h3',
 	            null,
@@ -63242,7 +63219,7 @@
 	          ),
 	          _react2.default.createElement(
 	            'div',
-	            { className: 'script-form-fields' },
+	            null,
 	            _react2.default.createElement(
 	              'select',
 	              { className: 'dropdown-replacement', value: this.state.scheduleFreq, onChange: this.handleFrequency },
@@ -63281,7 +63258,7 @@
 	        ),
 	        _react2.default.createElement(
 	          'div',
-	          { className: 'script-form-frame' },
+	          null,
 	          _react2.default.createElement(
 	            'div',
 	            { className: 'reminder' },
@@ -63329,12 +63306,27 @@
 	          ),
 	          _react2.default.createElement(
 	            'div',
-	            { className: 'clear' },
+	            null,
 	            _react2.default.createElement(
-	              _reactBootstrap.Button,
-	              { bsStyle: 'info', onClick: this.submitForm },
-	              ' Remind Me '
+	              'h3',
+	              null,
+	              ' Refill Date'
+	            ),
+	            _react2.default.createElement(
+	              'div',
+	              null,
+	              _react2.default.createElement(_reactInputCalendar2.default, { format: 'MM/DD/YYYY', date: this.state.date, onChange: this.handleRefillDate }),
+	              _react2.default.createElement('span', { className: this.state.date ? "" : "hidden" })
 	            )
+	          )
+	        ),
+	        _react2.default.createElement(
+	          'div',
+	          null,
+	          _react2.default.createElement(
+	            _reactBootstrap.Button,
+	            { bsStyle: 'info', onClick: this.submitForm },
+	            ' Remind Me '
 	          )
 	        )
 	      );

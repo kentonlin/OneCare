@@ -361,6 +361,7 @@ export default class Profile extends React.Component {
         <Navigate />
         <Modal show={this.state.scriptmodalIsOpen}>
             <div className="modal-button-close-container">
+              <h2>Input a new prescription</h2>
               <div className='modal-button-close' onClick={this.closeModalScript}><i className="fa fa-times-circle" aria-hidden="true"></i></div>
             </div>
             <ScriptRemind
@@ -371,6 +372,7 @@ export default class Profile extends React.Component {
 
         <Modal show={this.state.docmodalIsOpen} bsSize='small'>
             <div className="modal-button-close-container">
+              <h2>Input a new doctor</h2>
               <div className='modal-button-close' onClick={this.closeModalDoctor}><i className="fa fa-times-circle" aria-hidden="true"></i></div>
             </div>
             <DoctorEntryView
