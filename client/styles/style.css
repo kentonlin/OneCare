@@ -203,13 +203,8 @@ border-radius: 4px;
 /* PROFILE */
 
 .profile-container {
-<<<<<<< HEAD
   background-color: #D8D8D8;
   padding-left: 10px;
-=======
-  /*background-color: #D8D8D8;*/
-  background-color: #ffffff;
->>>>>>> pullDev
 }
 
 /********* DOCTORS *********/
@@ -515,10 +510,6 @@ border-radius: 4px;
 /*.signup-cat {
   text-align: center;
 }*/
-<<<<<<< HEAD
-=======
-
->>>>>>> newSignup
 /* OTHER  */
 .invalid {
   color: red;
@@ -899,7 +890,3 @@ border-radius: 4px;
   #example {
     text-align: center;
   }
-<<<<<<< HEAD
-=======
- }*/
->>>>>>> newSignup
