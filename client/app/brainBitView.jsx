@@ -22,7 +22,7 @@ export default class BrainBitView extends React.Component {
       } else {
         this.setState({isOn: true});
       }
-    }, Math.abs(this.props.value)*500);
+    }, Math.abs(this.props.value)*10);
     this.setState({halt: halt});
   }
 
