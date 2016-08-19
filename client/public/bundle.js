@@ -60088,6 +60088,10 @@
 	
 	var _reactBootstrap = __webpack_require__(/*! react-bootstrap */ 244);
 	
+	var _brainView = __webpack_require__(/*! ./brainView.jsx */ 520);
+	
+	var _brainView2 = _interopRequireDefault(_brainView);
+	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -60134,9 +60138,10 @@
 	      },
 	      selectedSymptoms: [],
 	      recs: [],
+	      symptomsWereSubmitted: false,
 	      modalIsOpen: false,
 	      // zipcode: this.props.zipcode,
-	      brainState: {}
+	      brainState: { output: [] }
 	    };
 	    _this.handleDeselect = _this.handleDeselect.bind(_this);
 	    _this.handleSelectionChange = _this.handleSelectionChange.bind(_this);
@@ -60212,6 +60217,7 @@
 	    key: 'submitSymptoms',
 	    value: function submitSymptoms() {
 	      console.log('you chose: ', this.state.selectedSymptoms);
+	      this.setState({ symptomsWereSubmitted: true });
 	      _jquery2.default.ajax({
 	        type: 'POST',
 	        url: '/api/brain/recommend',
@@ -60238,69 +60244,78 @@
 	
 	      return _react2.default.createElement(
 	        'div',
-	        { className: 'symptom-container' },
+	        null,
 	        _react2.default.createElement(
 	          'div',
-	          { className: !this.state.modalIsOpen ? "" : "hidden" },
-	          _react2.default.createElement(
-	            'h4',
-	            null,
-	            'Please select your symptoms from the list below.'
-	          ),
-	          _react2.default.createElement(_reactFilteredMultiselect2.default, {
-	            classNames: {
-	              buttonActive: 'symptom-select-button--active',
-	              button: 'symptom-select-button--inactive',
-	              filter: 'symptom-select-filter',
-	              select: 'symptom-select-select'
-	            },
-	            onChange: this.handleSelectionChange,
-	            options: SYMPTOMS,
-	            selectedOptions: selectedSymptoms,
-	            textProp: 'name',
-	            size: 20,
-	            valueProp: 'id' }),
+	          { className: 'symptom-container' },
 	          _react2.default.createElement(
 	            'div',
-	            { className: 'selected-symptoms-container' },
-	            selectedSymptoms.length === 0 && _react2.default.createElement(
-	              'p',
+	            { className: !this.state.symptomsWereSubmitted ? "" : "hidden" },
+	            _react2.default.createElement(
+	              'h4',
 	              null,
-	              '(nothing selected yet)'
+	              'Please select your symptoms from the list below.'
 	            ),
-	            selectedSymptoms.length > 0 && _react2.default.createElement(
-	              'ul',
-	              { className: 'selected-symptoms' },
-	              selectedSymptoms.map(function (symptom, i) {
-	                return _react2.default.createElement(
-	                  _reactBootstrap.Button,
-	                  { key: symptom.id, bsStyle: 'primary', bsSize: 'small', onClick: _this2.handleDeselect.bind(null, i) },
-	                  _react2.default.createElement(
-	                    'div',
-	                    null,
-	                    symptom.name + ' ',
-	                    '  ',
-	                    _react2.default.createElement('i', { className: 'fa fa-times-circle', 'aria-hidden': 'true' })
-	                  )
-	                );
-	              })
+	            _react2.default.createElement(_reactFilteredMultiselect2.default, {
+	              classNames: {
+	                buttonActive: 'symptom-select-button--active',
+	                button: 'symptom-select-button--inactive',
+	                filter: 'symptom-select-filter',
+	                select: 'symptom-select-select'
+	              },
+	              onChange: this.handleSelectionChange,
+	              options: SYMPTOMS,
+	              selectedOptions: selectedSymptoms,
+	              textProp: 'name',
+	              size: 20,
+	              valueProp: 'id' }),
+	            _react2.default.createElement(
+	              'div',
+	              { className: 'selected-symptoms-container' },
+	              selectedSymptoms.length === 0 && _react2.default.createElement(
+	                'p',
+	                null,
+	                '(nothing selected yet)'
+	              ),
+	              selectedSymptoms.length > 0 && _react2.default.createElement(
+	                'ul',
+	                { className: 'selected-symptoms' },
+	                selectedSymptoms.map(function (symptom, i) {
+	                  return _react2.default.createElement(
+	                    _reactBootstrap.Button,
+	                    { key: symptom.id, bsStyle: 'primary', bsSize: 'small', onClick: _this2.handleDeselect.bind(null, i) },
+	                    _react2.default.createElement(
+	                      'div',
+	                      null,
+	                      symptom.name + ' ',
+	                      '  ',
+	                      _react2.default.createElement('i', { className: 'fa fa-times-circle', 'aria-hidden': 'true' })
+	                    )
+	                  );
+	                })
+	              )
+	            ),
+	            _react2.default.createElement(
+	              _reactBootstrap.Button,
+	              { bsStyle: 'danger', bsSize: 'sm', onClick: this.clearSymptoms },
+	              'Clear all'
+	            ),
+	            _react2.default.createElement(
+	              _reactBootstrap.Button,
+	              { bsStyle: 'success', bsSize: 'sm', onClick: this.submitSymptoms },
+	              'Submit!'
 	            )
 	          ),
 	          _react2.default.createElement(
-	            _reactBootstrap.Button,
-	            { bsStyle: 'danger', bsSize: 'sm', onClick: this.clearSymptoms },
-	            'Clear all'
-	          ),
-	          _react2.default.createElement(
-	            _reactBootstrap.Button,
-	            { bsStyle: 'success', bsSize: 'sm', onClick: this.submitSymptoms },
-	            'Submit!'
+	            'div',
+	            { className:  true ? "" : "hidden" },
+	            _react2.default.createElement(_symptomEntryModal2.default, { closeFn: this.props.closeFn, zipcode: this.props.zipcode, brainState: this.state.brainState, symptoms: this.state.selectedSymptoms, recommendations: this.state.recs })
 	          )
 	        ),
 	        _react2.default.createElement(
 	          'div',
-	          { className:  true ? "" : "hidden" },
-	          _react2.default.createElement(_symptomEntryModal2.default, { closeFn: this.props.closeFn, zipcode: this.props.zipcode, brainState: this.state.brainState, symptoms: this.state.selectedSymptoms, recommendations: this.state.recs })
+	          { className: this.state.symptomsWereSubmitted && !this.state.modalIsOpen ? "" : "hidden" },
+	          _react2.default.createElement(_brainView2.default, { brainState: this.state.brainState })
 	        )
 	      );
 	    }
@@ -60308,11 +60323,6 @@
 	
 	  return SymptomEntryView;
 	}(_react.Component);
-	
-	// export default SymptomEntry;
-	//add more bad boiz;
-	// http://hypothyroidmom.com/300-hypothyroidism-symptoms-yes-really/
-	
 	
 	exports.default = SymptomEntryView;
 
@@ -61058,14 +61068,29 @@
 	  }
 	
 	  _createClass(BrainView, [{
+	    key: 'componentWillReceiveProps',
+	    value: function componentWillReceiveProps(nextProps) {
+	      console.log("nextProps: ", nextProps);
+	      this.setState({ brainState: nextProps.brainState });
+	    }
+	  }, {
 	    key: 'render',
 	    value: function render() {
 	      return _react2.default.createElement(
 	        'div',
-	        { className: this.state.brainState ? "brain-print-container" : "" },
-	        this.state.brainState.output.map(function (val, idx) {
-	          return _react2.default.createElement(_brainBitView2.default, { key: idx, value: val });
-	        })
+	        { className: 'loading-container' },
+	        _react2.default.createElement(
+	          'div',
+	          { className: 'loading-text' },
+	          ' (Loading) '
+	        ),
+	        _react2.default.createElement(
+	          'div',
+	          { className: this.state.brainState ? "brain-print-container" : "" },
+	          this.state.brainState.output.map(function (val, idx) {
+	            return _react2.default.createElement(_brainBitView2.default, { key: idx, value: val });
+	          })
+	        )
 	      );
 	    }
 	  }]);
@@ -61137,7 +61162,7 @@
 	        } else {
 	          _this2.setState({ isOn: true });
 	        }
-	      }, Math.abs(this.props.value) * 500);
+	      }, Math.abs(this.props.value) * 10);
 	      this.setState({ halt: halt });
 	    }
 	  }, {

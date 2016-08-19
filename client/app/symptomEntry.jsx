@@ -5,6 +5,7 @@ import Navigate from './navigate.jsx';
 import Modal from 'react-modal';
 import SymptomEntryModal from './symptomEntryModal.jsx';
 import {Button, ButtonToolbar } from 'react-bootstrap';
+import BrainView from './brainView.jsx';
 
 
 
@@ -124,9 +125,10 @@ export default class SymptomEntryView extends Component {
       },
       selectedSymptoms: [],
       recs: [],
+      symptomsWereSubmitted: false,
       modalIsOpen: false,
       // zipcode: this.props.zipcode,
-      brainState: {}
+      brainState: {output: []}
     };
     this.handleDeselect = this.handleDeselect.bind(this);
     this.handleSelectionChange = this.handleSelectionChange.bind(this);
@@ -190,6 +192,7 @@ export default class SymptomEntryView extends Component {
 
   submitSymptoms() {
     console.log('you chose: ', this.state.selectedSymptoms);
+    this.setState({symptomsWereSubmitted: true});
     $.ajax({
       type: 'POST',
       url: '/api/brain/recommend',
@@ -211,44 +214,45 @@ export default class SymptomEntryView extends Component {
     var { selectedSymptoms } = this.state;
 
     return (
-      <div className="symptom-container">
-        <div className={!this.state.modalIsOpen ? "" : "hidden"}>
-          <h4>Please select your symptoms from the list below.</h4>
-          <FilteredMultiSelect 
-            classNames={{
-              buttonActive: 'symptom-select-button--active',
-              button: 'symptom-select-button--inactive',
-              filter: 'symptom-select-filter',
-              select: 'symptom-select-select'
-            }}
-            onChange={this.handleSelectionChange}
-            options={SYMPTOMS}
-            selectedOptions={selectedSymptoms}
-            textProp='name'
-            size={20}
-            valueProp='id' />
-          <div className="selected-symptoms-container">  
-            {selectedSymptoms.length === 0 && <p>(nothing selected yet)</p>}
-            {selectedSymptoms.length > 0 && <ul className="selected-symptoms">
-              {selectedSymptoms.map((symptom, i) => 
-              <Button key={symptom.id} bsStyle="primary" bsSize='small' onClick={this.handleDeselect.bind(null, i)}> 
-                <div> 
-                  {`${symptom.name} `}  <i className="fa fa-times-circle" aria-hidden="true"></i>
-                </div>
-              </Button>)}
-            </ul>}
+      <div>
+        <div className="symptom-container">
+          <div className={!this.state.symptomsWereSubmitted ? "" : "hidden"}>
+            <h4>Please select your symptoms from the list below.</h4>
+            <FilteredMultiSelect 
+              classNames={{
+                buttonActive: 'symptom-select-button--active',
+                button: 'symptom-select-button--inactive',
+                filter: 'symptom-select-filter',
+                select: 'symptom-select-select'
+              }}
+              onChange={this.handleSelectionChange}
+              options={SYMPTOMS}
+              selectedOptions={selectedSymptoms}
+              textProp='name'
+              size={20}
+              valueProp='id' />
+            <div className="selected-symptoms-container">  
+              {selectedSymptoms.length === 0 && <p>(nothing selected yet)</p>}
+              {selectedSymptoms.length > 0 && <ul className="selected-symptoms">
+                {selectedSymptoms.map((symptom, i) => 
+                <Button key={symptom.id} bsStyle="primary" bsSize='small' onClick={this.handleDeselect.bind(null, i)}> 
+                  <div> 
+                    {`${symptom.name} `}  <i className="fa fa-times-circle" aria-hidden="true"></i>
+                  </div>
+                </Button>)}
+              </ul>}
+            </div>
+            <Button bsStyle="danger"  bsSize="sm" onClick={this.clearSymptoms}>Clear all</Button>
+            <Button bsStyle="success"  bsSize="sm" onClick={this.submitSymptoms}>Submit!</Button>
           </div>
-          <Button bsStyle="danger"  bsSize="sm" onClick={this.clearSymptoms}>Clear all</Button>
-          <Button bsStyle="success"  bsSize="sm" onClick={this.submitSymptoms}>Submit!</Button>
+          <div className={"brain-container " + this.state.modalIsOpen ? "" : "hidden"}> 
+            <SymptomEntryModal closeFn={this.props.closeFn} zipcode={this.props.zipcode} brainState={this.state.brainState} symptoms={this.state.selectedSymptoms} recommendations={this.state.recs} />
+          </div>
         </div>
-        <div className={"brain-container " + this.state.modalIsOpen ? "" : "hidden"}> 
-          <SymptomEntryModal closeFn={this.props.closeFn} zipcode={this.props.zipcode} brainState={this.state.brainState} symptoms={this.state.selectedSymptoms} recommendations={this.state.recs} />
+        <div className={this.state.symptomsWereSubmitted && !this.state.modalIsOpen ? "" : "hidden"}>
+          <BrainView brainState={this.state.brainState} />
         </div>
       </div>
     );
   }
 }
-
-// export default SymptomEntry;
-//add more bad boiz;
-// http://hypothyroidmom.com/300-hypothyroidism-symptoms-yes-really/
