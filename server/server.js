@@ -47,11 +47,11 @@ app.post('/api/email/receive', function(req, res){
   req.body['Subject'][0] === 'R' ? userID = req.body['Subject'].slice(4) : userID = req.body['Subject'] //depending on email client, Subject could include "Re:" at beginning
   console.log("Args to be passed", message, docEmail, userID);
   dbHelpers.receiveEmail(message, docEmail, userID, res);
-})
+});
 app.post('/api/email/send', function(req, res, next){
   console.log("request recieved at sendEmail");
   dbHelpers.sendEmail(req.body.name, res);
-})
+});
 // Add a new reminder to the reminder collection
 app.post('/api/reminder/add', function(req, res) {
   var newScript = req.body;
@@ -84,6 +84,11 @@ app.post('/api/user/doctor/add', function(req, res) {
   var data = req.body;
   console.log('this is the data that is being sent to helper', data);
   dbHelpers.addUserDoc(data, res);
+});
+
+app.post('/api/user/doctor/edit', function(req, res) {
+  var doctor = req.body;
+  dbHelpers.updateDoc(doctor, res);
 });
 //
 
@@ -166,7 +171,7 @@ app.get('/api/note/getAll/*', function(req, res) {
   var doctorID = ObjectId(req.url.split('/').pop());
   dbHelpers.getNotes(doctorID, res);
 });
-  
+
 // fun learning exp!
 // var yelp = new Yelp({
 //   consumer_key: '1GCGSst4AI3oOk0DnqltxA',
