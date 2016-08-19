@@ -57917,6 +57917,8 @@
 	
 	var _reactModal2 = _interopRequireDefault(_reactModal);
 	
+	var _reactBootstrap = __webpack_require__(/*! react-bootstrap */ 242);
+	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -58038,11 +58040,6 @@
 	        'div',
 	        { className: 'script-form-frame' },
 	        _react2.default.createElement(
-	          'h2',
-	          null,
-	          'Input a new doctor!'
-	        ),
-	        _react2.default.createElement(
 	          'div',
 	          { className: 'doctor-entry-form' },
 	          _react2.default.createElement(
@@ -58120,9 +58117,9 @@
 	            ' Select a specialty. '
 	          ),
 	          _react2.default.createElement(
-	            'button',
-	            { onClick: this.submitNewDoctor },
-	            'Submit!'
+	            _reactBootstrap.Button,
+	            { bsStyle: 'info', onClick: this.submitNewDoctor },
+	            'Save Doctor'
 	          ),
 	          _react2.default.createElement(
 	            'h6',
@@ -63435,21 +63432,14 @@
 	    value: function render() {
 	      return _react2.default.createElement(
 	        'div',
-	        null,
+	        { className: 'script-form-frame' },
 	        _react2.default.createElement(
 	          'div',
 	          null,
 	          _react2.default.createElement(
-	            'h1',
+	            'h3',
 	            null,
-	            ' Set a Prescription Reminder '
-	          ),
-	          _react2.default.createElement(
-	            'h2',
-	            null,
-	            ' Current Drug: ',
-	            this.state.currentDrug,
-	            ' '
+	            'Prescription name'
 	          ),
 	          _react2.default.createElement('input', {
 	            onChange: this.updateDrugName,
@@ -63470,7 +63460,7 @@
 	        ),
 	        _react2.default.createElement(
 	          'div',
-	          { className: 'script-form-frame' },
+	          null,
 	          _react2.default.createElement(
 	            'h3',
 	            null,
@@ -63478,7 +63468,7 @@
 	          ),
 	          _react2.default.createElement(
 	            'div',
-	            { className: 'script-form-fields' },
+	            null,
 	            _react2.default.createElement('input', {
 	              className: 'dosageInput',
 	              onChange: this.handleDoseAmount,
@@ -63513,7 +63503,7 @@
 	        ),
 	        _react2.default.createElement(
 	          'div',
-	          { className: 'script-form-frame' },
+	          null,
 	          _react2.default.createElement(
 	            'h3',
 	            null,
@@ -63521,7 +63511,7 @@
 	          ),
 	          _react2.default.createElement(
 	            'div',
-	            { className: 'script-form-fields' },
+	            null,
 	            _react2.default.createElement(_reactInputCalendar2.default, { format: 'MM/DD/YYYY', date: this.state.date, onChange: this.handleRefillDate }),
 	            _react2.default.createElement('span', { className: this.state.date ? "" : "hidden" })
 	          ),
@@ -63533,7 +63523,7 @@
 	        ),
 	        _react2.default.createElement(
 	          'div',
-	          { className: 'script-form-frame' },
+	          null,
 	          _react2.default.createElement(
 	            'h3',
 	            null,
@@ -63541,7 +63531,7 @@
 	          ),
 	          _react2.default.createElement(
 	            'div',
-	            { className: 'script-form-fields' },
+	            null,
 	            _react2.default.createElement(
 	              'select',
 	              { className: 'dropdown-replacement', value: this.state.scheduleFreq, onChange: this.handleFrequency },
@@ -63580,7 +63570,7 @@
 	        ),
 	        _react2.default.createElement(
 	          'div',
-	          { className: 'script-form-frame' },
+	          null,
 	          _react2.default.createElement(
 	            'div',
 	            { className: 'reminder' },
@@ -63632,7 +63622,7 @@
 	            _react2.default.createElement(
 	              _reactBootstrap.Button,
 	              { bsStyle: 'info', onClick: this.submitForm },
-	              ' Remind Me '
+	              'Remind Me'
 	            ),
 	            _react2.default.createElement(
 	              'h6',
