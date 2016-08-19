@@ -36,8 +36,8 @@ app.listen(process.env.PORT || 3000, function(){
 app.post('/api/user/zip', function(req, res) {
   // SAMPLE POST REQUEST POSTMAN
   // {"username": "kenton"}
-  var username = req.body.username;
-  dbHelpers.getZip(username, res);
+  var user = req.body;
+  dbHelpers.getZip(user, res);
 });
 
 app.post('/api/email/receive', function(req, res){
@@ -47,11 +47,11 @@ app.post('/api/email/receive', function(req, res){
   var userID = req.body['Subject'].slice(4); //format: 'Re: 57abc05eaeefbd68ee3183ea'
   console.log("Args to be passed", message, docEmail, userID);
   dbHelpers.receiveEmail(message, docEmail, userID, res);
-})
+});
 app.post('/api/email/send', function(req, res, next){
   console.log("request recieved at sendEmail");
   dbHelpers.sendEmail(req.body.name, res);
-})
+});
 // Add a new reminder to the reminder collection
 app.post('/api/reminder/add', function(req, res) {
   var newScript = req.body;
@@ -84,6 +84,11 @@ app.post('/api/user/doctor/add', function(req, res) {
   var data = req.body;
   console.log('this is the data that is being sent to helper', data);
   dbHelpers.addUserDoc(data, res);
+});
+
+app.post('/api/user/doctor/edit', function(req, res) {
+  var doctor = req.body;
+  dbHelpers.updateDoc(doctor, res);
 });
 //
 
@@ -159,13 +164,13 @@ app.post('/api/note/add/*', function(req, res) {
     doctor: doctorID
   }
   dbHelpers.addNote(data, res);
-})
+});
 
 app.get('/api/note/*', function(req, res) {
   //retrieves all notes for specified doctor
   var doctorID = ObjectId(req.url.split('/').pop());
   dbHelpers.getNotes(doctorID, res);
-})
+});
 
 app.get('/*', function(req, res) {
   res.sendFile(path.join(rootPath + "/index.html"));

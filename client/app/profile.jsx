@@ -35,33 +35,34 @@ export default class Profile extends React.Component {
       openNotes: {
         doctor: '',
         notes: []
-      },
-      modalStyles: {
-        overlay : {
-          position          : 'fixed',
-          top               : 0,
-          left              : 0,
-          right             : 0,
-          bottom            : 0,
-          backgroundColor   : '#333333'
-        },
-        content : {
-          position                   : 'absolute',
-          top                        : '10%',
-          left                       : '10%',
-          right                      : '30%',
-          bottom                     : '30%',
-          border                     : '4px solid #ccc',
-          background                 : '#333333',
-          color                      :  'white',
-          overflow                   : 'auto',
-          WebkitOverflowScrolling    : 'touch',
-          borderRadius               : '4px',
-          outline                    : 'none',
-          padding                    : '20px'
-
-        }
-      },
+      }
+      // modalStyles: {
+      //   overlay : {
+      //     position          : 'fixed',
+      //     top               : 0,
+      //     left              : 0,
+      //     right             : 0,
+      //     bottom            : 0,
+      //     backgroundColor   : '#333333',
+      //     borderRadius: '50px'
+      //   },
+        // content : {
+        //   position                   : 'absolute',
+        //   top                        : '10%',
+        //   left                       : '10%',
+        //   right                      : '30%',
+        //   bottom                     : '30%',
+        //   border                     : '4px solid #ccc',
+        //   background                 : '#333333',
+        //   color                      :  'white',
+        //   overflow                   : 'auto',
+        //   WebkitOverflowScrolling    : 'touch',
+        //   borderRadius               : '5px',
+        //   outline                    : 'none',
+        //   padding                    : '20px'
+        //
+        // }
+      // },
     };
     this.openModalScript = this.openModalScript.bind(this);
     this.closeModalScript = this.closeModalScript.bind(this);
@@ -332,7 +333,8 @@ export default class Profile extends React.Component {
             closeFn={this.closeModalDoctor} />
         </Modal>
 
-        <Modal show={this.state.mapmodalIsOpen} style={this.state.modalStyles}>
+        {/* <Modal show={this.state.mapmodalIsOpen} style={this.state.modalStyles}> */}
+        <Modal show={this.state.mapmodalIsOpen}>
             <div className="modal-button-close-container">
               <div className='modal-button-close' onClick={this.closeModalMap}><i className="fa fa-times-circle" aria-hidden="true"></i></div>
             </div>
@@ -341,11 +343,14 @@ export default class Profile extends React.Component {
           />
         </Modal>
 
-        <Modal show={this.state.symptomModalIsOpen} style={this.state.modalStyles}>
+        <Modal show={this.state.symptomModalIsOpen} style={this.state.modalStyles} bsClass='modal' >
+        {/* bsSize='small' */}
             <div className="modal-button-close-container">
               <div className='modal-button-close' onClick={this.closeModalSymptom}><i className="fa fa-times-circle" aria-hidden="true"></i></div>
             </div>
-            <SymptomEntry closeFn={this.closeModalSymptom} />
+            <SymptomEntry
+            closeFn={this.closeModalSymptom}
+            />
         </Modal>
 
         <Modal show={this.state.brainModalIsOpen} bsSize='small'>
@@ -356,7 +361,7 @@ export default class Profile extends React.Component {
             brainState
             symptoms
             recommendations
-            closeFn={this.closeModalDoctor} />
+            closeFn={this.closeModalDoctor}/>
         </Modal>
 
         <Modal show={this.state.editModalIsOpen} bsSize='small'>

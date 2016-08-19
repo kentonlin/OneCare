@@ -22,11 +22,11 @@ export default class SymptomEntryModal extends React.Component {
     this.downvote = this.downvote.bind(this);
     this.drx = this.drx.bind(this);
     this.assignDrx = this.assignDrx.bind(this);
-  };
+  }
 
   componentWillReceiveProps(nextProps) {
     if (nextProps.recommendations.length !== 0) {
-      console.log("de-cloaking", nextProps.recommendations[nextProps.recommendations.length-1].specialty)
+      console.log("de-cloaking", nextProps.recommendations[nextProps.recommendations.length-1].specialty);
       if(nextProps.recommendations[nextProps.recommendations.length-1].specialty) {
         this.setState({isInRolodex: true});
         this.setState({cloak: false});
@@ -81,7 +81,7 @@ export default class SymptomEntryModal extends React.Component {
     var query = (this.state.currentRec ? this.state.currentRec.name : '**empty**').split(' ').join('%20');
     if (query.charCodeAt(query.length-1) === 8206) {
       query = query.slice(0, query.length-1);
-    };
+    }
     var latitude = window.localStorage.latitude;
     var longitude = window.localStorage.longitude;
     var location = latitude+'%2C'+longitude;
@@ -121,7 +121,7 @@ export default class SymptomEntryModal extends React.Component {
                   <div key={symptom.id} className="modal-symptom-entry">
                     <div>{symptom.name}</div>
                   </div>
-                )
+                );
               })
             }
           </div>
@@ -129,7 +129,7 @@ export default class SymptomEntryModal extends React.Component {
             <div className={this.state.currentRec && this.state.currentRec.id === 1000 ? '' : 'hidden'}>We're glad to have been of assistance!</div>
             <div className={this.state.isInRolodex ? '' : 'hidden'}>
               <DoctorView
-                name={this.state.currentRec ? this.state.currentRec.name : ''} 
+                name={this.state.currentRec ? this.state.currentRec.name : ''}
                 phone={this.state.currentRec ? this.state.currentRec.phone : ''}
                 email={this.state.currentRec ? this.state.currentRec.email : ''}
                 address={this.state.currentRec ? this.state.currentRec.address : ''}
@@ -148,6 +148,6 @@ export default class SymptomEntryModal extends React.Component {
           </div>
         </div>
       </div>
-      )
+    );
   }
 }

@@ -50,7 +50,7 @@ var noteSchema = new Schema({
 	body: String,
   user: [{type: Schema.Types.ObjectId, ref: 'User'}],
   doctor: [{type: Schema.Types.ObjectId, ref: 'Doctor'}]
-})
+}); 
 
 var symptomSchema = new Schema({
 	id: Number,

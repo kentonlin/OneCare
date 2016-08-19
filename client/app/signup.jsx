@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Router, Route, Link, browserHistory } from 'react-router';
 import $ from 'jquery';
+import {Button, ButtonToolbar, Form, FormGroup, Col, FormControl, ControlLabel, Checkbox, Row, Grid} from 'react-bootstrap';
 
 export default class Signup extends React.Component {
   constructor(props) {
@@ -88,7 +89,7 @@ export default class Signup extends React.Component {
     return (
       <div className= "signup-container">
         <h1> Sign-up </h1>
-        <form>
+        <Form>
           <div className='signup-cat'>First Name</div><input type="text" onChange={(event) => {this.setState({firstName: event.target.value})}}/><br/>
           <div className='signup-cat'>Last Name</div><input type="text" onChange={(event) => {this.setState({lastName: event.target.value})}}/><br/>
           <div className='signup-cat'>username</div><input type="text" onChange={(event) => {this.setState({username: event.target.value})}}/><br/>
@@ -100,7 +101,7 @@ export default class Signup extends React.Component {
           <div className='signup-cat'>email</div><input type="text" onChange={(event) => {this.setState({email: event.target.value})
           this.validateEmail(this.state.email)}}/><h6 className={(this.state.invalidEmail ? 'hidden' : 'invalid')}> Enter a valid email</h6>
           <button className='signup-cat' onClick={ this.submitUser }>Submit</button>
-        </form>
+        </Form>
         <Link to="/signin">Return to Sign-in </Link>
       </div>
     );
