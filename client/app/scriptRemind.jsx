@@ -183,9 +183,6 @@ export default class ScriptRemindView extends React.Component {
   render() {
     return (
       <div>
-        <div className={this.state.formIsValid ? "hidden" : "invalid"}>
-          Please enter valid data below.
-        </div>
         <div>
           <h1> Set a Prescription Reminder </h1>
           <h2> Current Drug: {this.state.currentDrug} </h2>
@@ -266,6 +263,8 @@ export default class ScriptRemindView extends React.Component {
              </div>
              <div className='clear'>
                <Button bsStyle="info" onClick={this.submitForm}> Remind Me </Button>
+               <h6 className={(this.state.formIsValid ? 'hidden' : 'invalid')}> Some of your data is not valid.  Please check above. </h6>
+
              </div>
           </div>
 

@@ -63159,11 +63159,6 @@
 	        null,
 	        _react2.default.createElement(
 	          'div',
-	          { className: this.state.formIsValid ? "hidden" : "invalid" },
-	          'Please enter valid data below.'
-	        ),
-	        _react2.default.createElement(
-	          'div',
 	          null,
 	          _react2.default.createElement(
 	            'h1',
@@ -63359,6 +63354,11 @@
 	              _reactBootstrap.Button,
 	              { bsStyle: 'info', onClick: this.submitForm },
 	              ' Remind Me '
+	            ),
+	            _react2.default.createElement(
+	              'h6',
+	              { className: this.state.formIsValid ? 'hidden' : 'invalid' },
+	              ' Some of your data is not valid.  Please check above. '
 	            )
 	          )
 	        )
