@@ -10,7 +10,7 @@ import Map from './map.jsx';
 import _ from 'lodash';
 import { Modal, Button, ButtonToolbar, Tooltip, OverlayTrigger } from 'react-bootstrap';
 import EditDoctorModal from './editDoctor.jsx';
-
+import {ScrollBox, ScrollAxes, FastTrack} from 'react-scroll-box';
 
 export default class Profile extends React.Component {
   constructor(props) {
@@ -432,7 +432,7 @@ export default class Profile extends React.Component {
         </Modal>
 
       <div className="scripts-doctors">
-      <div className='scripts-container'>
+      <ScrollBox className='scripts-container' style={{height: '200px'}} fastTrack={FastTrack.PAGING}>
       <div className='scripts-header'>
         <div className='scripts-title shadow'> Prescriptions </div>
         <div className='find-pharm'>
