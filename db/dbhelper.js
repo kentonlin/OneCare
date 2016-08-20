@@ -371,7 +371,7 @@ var dbFunc = {
 	});
 },
 
-deleteReminder: function(scriptID, res, next) {
+deleteReminder: function(scriptID, res) {
 	//REMOVES SCRIPT DOCUMENT (reference still persists in user doc but it won't reference anything)
 	Model.script.findOne({"_id": scriptID}, function(err, script){
 		"use strict";
@@ -398,10 +398,10 @@ deleteReminder: function(scriptID, res, next) {
 		}
 		Model.script.remove({"_id": scriptID}, function(err){
 			if(err){
-				next("reminder not deleted", err);
+				console.log("reminder not deleted", err);
 			}
 			else{
-				res.status(202).send("REMINDER successfully deleted");
+				res.status(202).send(script);
 			}
 		});
 	});

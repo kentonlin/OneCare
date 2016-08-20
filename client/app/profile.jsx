@@ -110,10 +110,20 @@ export default class Profile extends React.Component {
        "Content-Type": "application/json"
      },
      data: JSON.stringify({ "reminderID": id }),
-     success: this.getScripts(),
+     success: function(data) {
+       console.log(data);
+       var newScripts = this.state.scripts.filter((script) => {
+         if (script._id === data._id) {
+           return false;
+         } else {
+           return true;
+         }
+       });
+       this.setState({scripts: newScripts});
+     }.bind(this),
      error: function(err) {
       console.error(err);
-     }
+     }.bind(this)
    });
   }
 
@@ -228,6 +238,8 @@ export default class Profile extends React.Component {
      success: function(data) {
        var sorted  = _.sortBy(data, 'refill'); //sorts scripts by refill date
        this.setState({scripts: sorted});
+       console.log('success condition in getScripts... ', sorted)
+       // this.forceUpdate();
      }.bind(this),
      error: function(err) {
        console.error('error in ajax request for user scripts', err);

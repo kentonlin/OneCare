@@ -58,9 +58,9 @@ app.post('/api/reminder/add', function(req, res) {
   dbHelpers.addScript(newScript, res);
 });
 
-app.post('/api/reminder/delete', function(req, res, next){
+app.post('/api/reminder/delete', function(req, res){
   var reminderID = req.body.reminderID;
-  dbHelpers.deleteReminder(reminderID, res, next);
+  dbHelpers.deleteReminder(reminderID, res);
 });
 
 app.post('/api/script/find', function(req, res) {
