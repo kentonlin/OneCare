@@ -636,6 +636,10 @@ border-radius: 4px;
 
 .signup-input {
   width: 25%;
+  float: left;
+}
+.signup-error {
+  float: right;
 }
 .signup-container {
   /*padding-left: 10px;*/
@@ -847,6 +851,10 @@ border-radius: 4px;
   color: #ffffff;
   border-radius: 20px;
   width: 500px;
+}
+
+#active-link{
+  background: #ffffff;
 }
 
 .modal-button {
