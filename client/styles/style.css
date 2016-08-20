@@ -90,6 +90,10 @@ input {
   background-color: #2c3e50;
 }
 
+.midnight-blue-text{
+  color: #2c3e50;
+}
+
 .white {
   color: #FFFFFF;
 }
@@ -189,6 +193,13 @@ border-radius: 4px;
   color: #00B300;
 }
 
+.close-x {
+  font-size: 18px;
+}
+.close-x:hover{
+  color: #CD0000;
+}
+
 
 .info {
   background-color: #d35400;
@@ -247,6 +258,7 @@ border-radius: 4px;
   margin-left: 5px;
   font-size: 22pt;
   font-weight: bold;
+  color: #2c3e50;
 }
 
 .doctors-header {
@@ -261,6 +273,7 @@ border-radius: 4px;
   margin-left: 5px;
   font-size: 14pt;
   font-weight: bold;
+  color: #2c3e50;
 }
 
 .doc-top-first-half {
@@ -363,7 +376,7 @@ border-radius: 4px;
 }
 
 .specialty-tag {
-  background-color: #228b22;
+  background-color: #2c3e50;
   border-radius: 25px;
   color: #FFFFFF;
   display: inline-block;
@@ -450,12 +463,14 @@ border-radius: 4px;
   margin-left: 5px;
   font-size: 22pt;
   font-weight: bold;
+  color: #2c3e50;
 }
 
 .script-attribute {
   margin-left: 10px;
   font-size: 14pt;
   font-weight: bold;
+  color: #2c3e50;
 }
 
 .script-form-frame {
@@ -876,7 +891,7 @@ border-radius: 4px;
   display: inline-block;
   color: #FFFFFF;
   border-radius: 20px;
-  background-color: inherit;
+  background-color: #2c3e50;
   width: 500px;
 }
 
@@ -1060,6 +1075,7 @@ border-radius: 4px;
 
 .map-container {
   padding: 10px;
+  text-align: center;
 }
   /*display:inline-block;
   min-width: 50%;
