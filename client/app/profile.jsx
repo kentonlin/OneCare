@@ -388,12 +388,10 @@ export default class Profile extends React.Component {
           zipcode={this.state.inputZip} />
         </Modal>
 
-        <Modal show={this.state.symptomModalIsOpen} style={this.state.modalStyles} bsClass='modal' >
-        {/* bsSize='small' */}
-            <div className="modal-button-close-container">
-            <h4>Please select your symptoms from the list below.</h4>
+        <Modal show={this.state.symptomModalIsOpen} style={this.state.modalStyles}>
+            {/* <div className="modal-button-close-container">
               <div className='modal-button-close' onClick={this.closeModalSymptom}><i className="fa fa-times-circle" aria-hidden="true"></i></div>
-            </div>
+            </div> */}
             <SymptomEntry
             zipcode={this.state.zipcode}
             closeFn={this.closeModalSymptom} />
@@ -542,7 +540,7 @@ export default class Profile extends React.Component {
                               !note.hidden
                             ))
                             .map((note, idx) => (
-                            <div key={idx} className={"doctor-notes-entry" + (note.seen ? "" : " highlight")}>
+                            <div key={idx} className={"doctor-notes-entry" + (note.seen ? "" : " phone-green")}>
                               <span className="note-delete"><i className="fa fa-trash" aria-hidden="true" onClick={this.hideNote.bind(this, note)}></i></span>
                               {note.body}
                             </div>
