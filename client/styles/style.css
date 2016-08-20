@@ -636,6 +636,10 @@ border-radius: 4px;
 
 .signup-input {
   width: 25%;
+  float: left;
+}
+.signup-error {
+  float: right;
 }
 .signup-container {
   /*padding-left: 10px;*/

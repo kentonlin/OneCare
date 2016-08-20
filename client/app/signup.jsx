@@ -184,8 +184,13 @@ export default class Signup extends React.Component {
           {/* </Col> */}
           {/* <Col md={4}> */}
           <FormGroup>
-            <ControlLabel>Zipcode</ControlLabel><FormControl type="text" onChange={this.handleZipcode}></FormControl></FormGroup>
-            <h6 className={(this.state.zipcodeIsValid ? 'hidden' : 'invalid')}> Please enter a valid zipcode </h6>
+            {/* <div className='signup-input'> */}
+              <ControlLabel>Zipcode</ControlLabel><FormControl type="text" onChange={this.handleZipcode}></FormControl>
+            {/* </div> */}
+            {/* <div className="signup-error"> */}
+              <h6 className={(this.state.zipcodeIsValid ? 'hidden' : 'invalid')}> Please enter a valid zipcode </h6>
+            {/* </div> */}
+          </FormGroup>
           {/* </Col> */}
           {/* <Col mdOffset={2} md={4}> */}
           <FormGroup  >
@@ -200,7 +205,10 @@ export default class Signup extends React.Component {
           <Row>
             <Button className='signup-cat' onClick={ this.submitUser }>Submit</Button>
           </Row>
+          <Col>
+
           <Link to="/signin"> Return to Sign-in </Link>
+          </Col>
           </Col>
           </Row>
                 {/* <h6 className={(this.state.firstnameIsValid ? 'hidden' : 'invalid')}> Name must be at least two letters. </h6>
