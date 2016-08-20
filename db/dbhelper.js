@@ -16,32 +16,28 @@ var mailgun = require('mailgun-js')({apiKey: api_key, domain: domain});
 
 var dbFunc = {
 
-	receiveEmail: function(message, docEmail, userID, res){
-		console.log("receiveEmail called with...", message, docEmail, userID);
-
-		Model.doctor.findOne({'email': docEmail}, function(err, doc){
-			if(err){
-				console.log("doctor not found", err);
-			}
+	receiveEmail: function(message, docEmail, userID, docID, res){
+		console.log("receiveEmail called with...", message, docEmail, userID, docID);
 			var note = {
 				seen: false,
 				hidden: false,
 				body: message,
 				user: userID,
-				doctor: doc._id
+				doctor: docID
 			}
+
 			this.addNote(note, res);
-		}.bind(this))
+
 	},
 
-	sendEmail: function(patientName, patientUserID, docEmail, res){
+	sendEmail: function(patientName, patientUserID, docID, docEmail, res){
 
 		var message = "Your patient, " + patientName + " has added you as a doctor in their OneCare network. If you would like to add any notes for this patient, simply reply to this email. Please DO NOT change the subject of this email thread";
 
 		var data = {
 		  from: 'OneCare <onecare@app25011ddcdf3a4f38b11f9b60d62e1106.mailgun.org>',
 		  to: docEmail, //can only send to email addresses we registed with Mailgun
-		  subject: patientUserID,
+		  subject: patientUserID + ":" + docID,
 		  text: message
 		};
 
@@ -117,7 +113,7 @@ var dbFunc = {
 					next(new Error("doctor added to user model"));
 				}
 				if(newDoc.email){ //email doctor if patient provided email address
-					this.sendEmail(data.first_last, data.userID, newDoc.email, res);
+					this.sendEmail(data.first_last, data.userID, newDoc._id, newDoc.email, res);
 				}
 				else{
 					res.status(201).send(newDoc);
