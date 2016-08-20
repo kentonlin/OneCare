@@ -28,7 +28,7 @@ import { Button } from 'react-bootstrap';
     {id: 21, name: 'Obstetrician'},
     {id: 22, name: 'Oncologist'},
     {id: 23, name: 'Ophthalmologist'},
-    {id: 24, name: 'Ear, nose, and Throat Doctor'},
+    {id: 24, name: 'Ear, Nose, and Throat Doctor'},
     {id: 25, name: 'Palliative Medical Expert'},
     {id: 26, name: 'Pediatrician‎'},
     {id: 27, name: 'Podiatrist'},
