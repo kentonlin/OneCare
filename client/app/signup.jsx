@@ -184,8 +184,13 @@ export default class Signup extends React.Component {
           {/* </Col> */}
           {/* <Col md={4}> */}
           <FormGroup>
-            <ControlLabel>Zipcode</ControlLabel><FormControl type="text" onChange={this.handleZipcode}></FormControl></FormGroup>
-            <h6 className={(this.state.zipcodeIsValid ? 'hidden' : 'invalid')}> Please enter a valid zipcode </h6>
+            {/* <div className='signup-input'> */}
+              <ControlLabel>Zipcode</ControlLabel><FormControl type="text" onChange={this.handleZipcode}></FormControl>
+            {/* </div> */}
+            {/* <div className="signup-error"> */}
+              <h6 className={(this.state.zipcodeIsValid ? 'hidden' : 'invalid')}> Please enter a valid zipcode </h6>
+            {/* </div> */}
+          </FormGroup>
           {/* </Col> */}
           {/* <Col mdOffset={2} md={4}> */}
           <FormGroup  >
