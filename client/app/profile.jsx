@@ -460,7 +460,9 @@ export default class Profile extends React.Component {
                           </div>{/* <a target="_blank" href={"https://simple.wikipedia.org/wiki/" + script.name}>(get more info)</a>*/}
                         </OverlayTrigger>
                       </div>
-                      <i className="fa fa-times" aria-hidden="true" onClick={this.deleteScript.bind(this, idx)}></i>
+                      <div className='close-x'>
+                        <i className="fa fa-times" aria-hidden="true" onClick={this.deleteScript.bind(this, idx)}></i>
+                      </div>
                     </div>
                     <div className='script-attribute'>
                       <i className="fa fa-heart red" aria-hidden="true"></i> Dosage: {script.dosage}
@@ -505,7 +507,7 @@ export default class Profile extends React.Component {
                                 </div>
                                 </OverlayTrigger>
                               </div>
-                              <div className='delete-doc'>
+                              <div className='delete-doc close-x'>
                                 <i className="fa fa-times" aria-hidden="true" onClick={this.deleteDoc.bind(this, idx)}></i>
                               </div>
                             </div>
@@ -533,11 +535,11 @@ export default class Profile extends React.Component {
                         <div className='show-notes'>
                             <OverlayTrigger placement='top' overlay={<Tooltip id="tooltip"> Click to view doctor's notes</Tooltip>}>
                               <div className={this.state.notesOpen ? 'hidden': 'note-icon'}>
-                                <i className="fa fa-angle-double-down phone-green" aria-hidden="true" onClick={this.doctorNotes.bind(this, doctor)}></i>
+                                <i className="fa fa-angle-double-down midnight-blue-text" aria-hidden="true" onClick={this.doctorNotes.bind(this, doctor)}></i>
                               </div>
                             </OverlayTrigger>
                             <div className={this.state.notesOpen ? 'note-icon': 'hidden'}>
-                              <i className="fa fa-angle-double-up phone-green" aria-hidden="true" onClick={this.doctorNotes.bind(this, doctor)}></i>
+                              <i className="fa fa-angle-double-up midnight-blue-text" aria-hidden="true" onClick={this.doctorNotes.bind(this, doctor)}></i>
                             </div>
                           </div>
                           <div className={this.state.openNotes.doctor === doctor._id ? "doctor-notes-container" : "hidden"}>

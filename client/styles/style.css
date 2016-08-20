@@ -90,6 +90,10 @@ input {
   background-color: #2c3e50;
 }
 
+.midnight-blue-text{
+  color: #2c3e50;
+}
+
 .white {
   color: #FFFFFF;
 }
@@ -187,6 +191,13 @@ border-radius: 4px;
 
 .add:hover {
   color: #00B300;
+}
+
+.close-x {
+  font-size: 18px;
+}
+.close-x:hover{
+  color: #CD0000;
 }
 
 
