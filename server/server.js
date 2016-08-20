@@ -44,9 +44,10 @@ app.post('/api/email/receive', function(req, res){
   var message = req.body['stripped-text']; //wrong property, need to change
   var docEmail = req.body['sender']; //format: 'hckilaru@gmail.com'
   var userID = '';
-  req.body['Subject'][0] === 'R' ? userID = req.body['Subject'].slice(4) : userID = req.body['Subject'] //depending on email client, Subject could include "Re:" at beginning
+  req.body['Subject'][0] === 'R' ? subject = req.body['Subject'].slice(4) : subject = req.body['Subject'] //depending on email client, Subject could include "Re:" at beginning
+  var userDocIDs = subject.split(":");
   console.log("Args to be passed", message, docEmail, userID);
-  dbHelpers.receiveEmail(message, docEmail, userID, res);
+  dbHelpers.receiveEmail(message, docEmail, userDocIDs[0], userDocIDs[1], res);
 });
 app.post('/api/email/send', function(req, res, next){
   console.log("request recieved at sendEmail");
@@ -58,9 +59,9 @@ app.post('/api/reminder/add', function(req, res) {
   dbHelpers.addScript(newScript, res);
 });
 
-app.post('/api/reminder/delete', function(req, res, next){
+app.post('/api/reminder/delete', function(req, res){
   var reminderID = req.body.reminderID;
-  dbHelpers.deleteReminder(reminderID, res, next);
+  dbHelpers.deleteReminder(reminderID, res);
 });
 
 app.post('/api/script/find', function(req, res) {
