@@ -215,7 +215,7 @@ export default class SymptomEntryView extends Component {
 
     return (
       <div className="symptom-container">
-        <div className={!this.state.modalIsOpen ? "" : "hidden"}>
+        <div className={!this.state.symptomsWereSubmitted ? "" : "hidden"}>
           <div className='symptom-select-header'>
             <h4>Please select your symptoms from the list below.</h4>
             <div className='modal-button-close' onClick={this.props.closeFn}><i className="fa fa-times-circle" aria-hidden="true"></i></div>
@@ -243,6 +243,14 @@ export default class SymptomEntryView extends Component {
                 </div>
               </Button>)}
             </ul>}
+            <div className='symptom-submit-buttons'>
+              <div className='clear-symptoms'>
+                <Button bsStyle="danger"  bsSize="sm" onClick={this.clearSymptoms}>Clear all</Button>
+              </div>
+              <div className='submit-symptoms'>
+                <Button bsStyle="success"  bsSize="sm" onClick={this.submitSymptoms}>Submit!</Button>
+             </div>
+           </div>
           </div>
         </div>
         <div className={this.state.symptomsWereSubmitted && !this.state.modalIsOpen ? "" : "hidden"}>
