@@ -25,7 +25,7 @@ export default class ScriptRemindView extends React.Component {
     super(props);
     this.state = {
       modalIsOpen: true,
-      "currentDrug": "None",
+      "currentDrug": "",
       "dosageAmt": 0,
       "dosageMeasure": 'mg',
       "date": date,
@@ -34,13 +34,15 @@ export default class ScriptRemindView extends React.Component {
       "reminderTime3": null,
       "scheduleFreq": "1x",
       "scheduleDayWeek": "day",
-      "invalidName": false,
-      "invalidReminderTime": false,
       "hasTwo": false,
-      "hasThree": false
+      "hasThree": false,
+      "nameIsValid": false,
+      "dosageIsValid": false,
+      "refillDateIsValid": false,
+      "formIsValid": true
     };
 
-  var date = new Date();
+  var date = moment(new Date()).format("MM-DD-YYYY")
   this.updateDrugName = this.updateDrugName.bind(this);
   this.submitForm = this.submitForm.bind(this);
   this.handleFrequency = this.handleFrequency.bind(this);
@@ -55,17 +57,34 @@ export default class ScriptRemindView extends React.Component {
   }
 
     updateDrugName(event){
-      this.setState({
+      if (event.target.value.length > 0) {
+        this.setState({
           currentDrug: event.target.value,
-          invalidName: true
+          nameIsValid: true
         });
+      } else {
+        this.setState({
+          currentDrug: event.target.value,
+          nameIsValid: false
+        });
+      }
     }
 
     handleRefillDate(date) {
-      this.setState({
-        "date": date
-      });
-
+      var then = moment(date, "MM-DD-YYYY")
+      var now = moment(new Date()).format("MM-DD-YYYY");
+      console.log(then.isAfter(now));
+      if (then.isAfter(now)) {
+        this.setState({
+          "date": date,
+          "refillDateIsValid": true
+        });
+      } else {
+        this.setState({
+          "date": date,
+          "refillDateIsValid": false
+        });
+      }
     }
 
     handleScheduleDayWeek(dayWeek){
@@ -82,10 +101,16 @@ export default class ScriptRemindView extends React.Component {
     }
 
     handleDoseAmount(amount) {
-      this.setState({
-        dosageAmt: amount.target.value
-      });
-
+      if (!Number.isNaN(Number(amount.target.value))) {
+        this.setState({
+          dosageAmt: amount.target.value,
+          dosageIsValid: true
+        });
+      } else {
+        this.setState({
+          dosageIsValid: false
+        });
+      }
     }
 
     handleFrequency(frequency) {
@@ -129,16 +154,9 @@ export default class ScriptRemindView extends React.Component {
 
     submitForm () {
 
-      if(!this.state.invalidName && !this.state.invalidReminderTime){
-        alert("Please enter a prescription name and reminder time")
-      }
-      else if(!this.state.invalidName){
-        alert("Please enter a prescription name");
-      }
-      // else if(!this.state.invalidReminderTime){
-      //   alert("Please enter a reminder time");
-      // }
-      else {
+      if(!this.state.nameIsValid || !this.state.refillDateIsValid || !this.state.dosageIsValid){
+        this.setState({formIsValid: false});
+      } else {
         var script = {
           "name": this.state.currentDrug,
           "dosage": this.state.dosageAmt + ' ' + this.state.dosageMeasure,
@@ -164,10 +182,9 @@ export default class ScriptRemindView extends React.Component {
 
   render() {
     return (
-      <div>
+      <div className='script-form-frame'>
         <div>
-          <h1> Set a Prescription Reminder </h1>
-          <h2> Current Drug: {this.state.currentDrug} </h2>
+          <h3>Prescription name</h3>
           <input
           onChange={this.updateDrugName}
           placeholder='name'
@@ -175,68 +192,71 @@ export default class ScriptRemindView extends React.Component {
           defaultValue={this.state.currentDrug}
           />
           <h8 className='required'> (required) </h8>
+          <div className={this.state.nameIsValid ? "hidden" : "invalid"}> Please enter valid input </div>
         </div>
-          <div className="script-form-frame">
-            <h3>Dosage</h3>
-            <div className="script-form-fields">
-              <input
-              className='dosageInput'
-              onChange={this.handleDoseAmount}
-              defaultValue={this.state.dosageAmt}
-              // placeholder='Dosage (e.g. if "Take 1 tablet", type "1")'
-              />
-              <select className="dropdown-replacement" value={this.state.dosageMeasure} onChange={this.handleDoseMeasurement}>
-                <option>mg</option>
-                <option>mL</option>
-                <option>tablet</option>
-              </select>
-            </div>
-          </div>
-          <div className="script-form-frame">
-              <h3> Refill Date</h3>
-              <div  className="script-form-fields">
-                <Calendar format='MM/DD/YYYY' date={this.state.date} onChange= {this.handleRefillDate}/>
-                <span className={this.state.date ? "" : "hidden"}></span>
-                {/* <span className={this.state.date ? "" : "hidden"}>You selected {this.state.date}</span> */}
-              </div>
-          </div>
-          <div className="script-form-frame">
-            <h3>Frequency</h3>
-            <div className="script-form-fields">
-              <select className="dropdown-replacement" value={this.state.scheduleFreq} onChange={this.handleFrequency}>
-                <option>1x</option>
-                <option>2x</option>
-                <option>3x</option>
-              </select>
-                per
-              <select className="dropdown-replacement" value={this.state.scheduleDayWeek} onChange={this.handleScheduleDayWeek}>
-                <option>day</option>
-                <option>week</option>
-              </select>
-            </div>
-          </div>
-          <div className="script-form-frame">
-             <div className="reminder">
-               <h3> Reminder Time 1</h3>
-               <Kronos time={this.state.reminderTime1} value='' placeholder={"Click to select a time"} onChangeDateTime={this.handleReminderTime1}/>
-               <h8 className='required'> (required) </h8>
-             </div>
-             <div className={(this.state.hasTwo ? 'reminder' : 'hidden')}>
-               <h3> Reminder Time 2</h3>
-               <Kronos time={this.state.reminderTime2} value='' placeholder={"Click to select a time"} onChangeDateTime={this.handleReminderTime2}/>
-               <h8 className='required'> (required) </h8>
-             </div>
-             <div className={this.state.hasThree ? 'reminder' : 'hidden'}>
-               <h3> Reminder Time 3</h3>
-               <Kronos time={this.state.reminderTime3} value='' placeholder={"Click to select a time"} onChangeDateTime={this.handleReminderTime3}/>
-               <h8 className='required'> (required) </h8>
-             </div>
-             <div className='clear'>
-               <Button bsStyle="info" onClick={this.submitForm}> Remind Me </Button>
-             </div>
+        <div>
+          <h3>Dosage</h3>
+          <div>
+            <input
+            className='dosageInput'
+            onChange={this.handleDoseAmount}
+            defaultValue={this.state.dosageAmt}
+            // placeholder='Dosage (e.g. if "Take 1 tablet", type "1")'
+            />
+            <select className="dropdown-replacement" value={this.state.dosageMeasure} onChange={this.handleDoseMeasurement}>
+              <option>mg</option>
+              <option>mL</option>
+              <option>tablet</option>
+            </select>
+            <div className={this.state.dosageIsValid ? "hidden" : "invalid"}> Please enter valid input </div>
           </div>
         </div>
-
+        <div>
+            <h3> Refill Date</h3>
+            <div>
+              <Calendar format='MM/DD/YYYY' date={this.state.date} onChange= {this.handleRefillDate}/>
+              <span className={this.state.date ? "" : "hidden"}></span>
+              {/* <span className={this.state.date ? "" : "hidden"}>You selected {this.state.date}</span> */}
+            </div>
+            <div className={this.state.refillDateIsValid ? "hidden" : "invalid"}> Please enter valid input </div>
+        </div>
+        <div>
+          <h3>Frequency</h3>
+          <div>
+            <select className="dropdown-replacement" value={this.state.scheduleFreq} onChange={this.handleFrequency}>
+              <option>1x</option>
+              <option>2x</option>
+              <option>3x</option>
+            </select>
+              per
+            <select className="dropdown-replacement" value={this.state.scheduleDayWeek} onChange={this.handleScheduleDayWeek}>
+              <option>day</option>
+              <option>week</option>
+            </select>
+          </div>
+        </div>
+        <div>
+           <div className="reminder">
+             <h3> Reminder Time 1</h3>
+             <Kronos time={this.state.reminderTime1} value='' placeholder={"Click to select a time"} onChangeDateTime={this.handleReminderTime1}/>
+             <h8 className='required'> (required) </h8>
+           </div>
+           <div className={(this.state.hasTwo ? 'reminder' : 'hidden')}>
+             <h3> Reminder Time 2</h3>
+             <Kronos time={this.state.reminderTime2} value='' placeholder={"Click to select a time"} onChangeDateTime={this.handleReminderTime2}/>
+             <h8 className='required'> (required) </h8>
+           </div>
+           <div className={this.state.hasThree ? 'reminder' : 'hidden'}>
+             <h3> Reminder Time 3</h3>
+             <Kronos time={this.state.reminderTime3} value='' placeholder={"Click to select a time"} onChangeDateTime={this.handleReminderTime3}/>
+             <h8 className='required'> (required) </h8>
+           </div>
+           <div className='clear'>
+             <Button bsStyle="info" onClick={this.submitForm}>Remind Me</Button>
+             <h6 className={(this.state.formIsValid ? 'hidden' : 'invalid')}> Some of your data is not valid.  Please check above. </h6>
+           </div>
+        </div>
+      </div>
     );
   }
 }

@@ -3,6 +3,7 @@ import { Router, Route, Link, browserHistory } from 'react-router';
 import $ from 'jquery';
 import ReactDOM from 'react-dom';
 import Signup from './signup.jsx';
+import {Button, ButtonToolbar, Form, FormGroup, Col, FormControl, ControlLabel, Checkbox, Row, Grid} from 'react-bootstrap';
 
 
 export default class Signin extends React.Component {
@@ -52,15 +53,21 @@ export default class Signin extends React.Component {
   render() {
     return (
       <div className="signin-container">
-        <h1>Sign in to OneCare</h1>
-        <form>
-          <span className='signin-cat'>username</span><input type="text" onChange={(event) => {this.setState({username: event.target.value})}}></input><br />
-          <span className='signin-cat'>password</span><input type="password" onChange={(event) => {this.setState({password: event.target.value})}}></input><br />
-          <div className='signup'>
-            <Link to='/signup'> Signup </Link>
-          </div>
-          <button onClick={ this.submitLogin}>Submit</button>
-        </form>
+        <Grid>
+          <Row className='signin-text'>
+            <h1>Sign in to OneCare</h1>
+          </Row>
+          <Row>
+            <Form>
+              <div className='signin-cat'> <span className='signin-text' >Username</span>&nbsp;&nbsp;<input type="text" onChange={(event) => {this.setState({username: event.target.value})}}></input></div><br />
+              <div className='signin-cat2'> <span className='signin-text' >Password</span>&nbsp;&nbsp;<input type="password" onChange={(event) => {this.setState({password: event.target.value})}}></input></div><br />
+              <Button bsStyle='success' onClick={ this.submitLogin}>Submit</Button>
+              <div className='signup'>
+              <Link to='/signup'> Signup </Link>
+              </div>
+            </Form>
+          </Row>
+        </Grid>
       </div>
     );
   }
