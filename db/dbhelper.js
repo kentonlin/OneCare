@@ -26,12 +26,10 @@ var dbFunc = {
 				doctor: docID
 			}
 
-			this.addNote(note, res);
-
+		this.addNote(note, res);
 	},
 
 	sendEmail: function(patientName, patientUserID, docID, docEmail, res){
-
 		var message = "Your patient, " + patientName + " has added you as a doctor in their OneCare network. If you would like to add any notes for this patient, simply reply to this email. Please DO NOT change the subject of this email thread";
 
 		var data = {
@@ -40,7 +38,6 @@ var dbFunc = {
 		  subject: patientUserID + ":" + docID,
 		  text: message
 		};
-
 		mailgun.messages().send(data, function (error, body) {
 			if(error){
 				console.log("Doctor not contacted", error);
