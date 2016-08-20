@@ -1,4 +1,4 @@
-  import React, { Component } from 'react';
+import React, { Component } from 'react';
 import { Router, Route, Link, browserHistory } from 'react-router';
 import $ from 'jquery';
 import {Button, ButtonToolbar, Form, FormGroup, Col, FormControl, ControlLabel, Checkbox, Row, Grid} from 'react-bootstrap';
@@ -87,7 +87,7 @@ export default class Signup extends React.Component {
   }
 
   handleLastName(e) {
-    this.setState({lastName: e.target.value})
+    this.setState({lastName: e.target.value});
     if (e.target.value.length >= 2) {
       this.setState({lastnameIsValid: true});
     } else {
@@ -105,7 +105,7 @@ export default class Signup extends React.Component {
   }
 
   handlePassword(e) {
-    this.setState({password: e.target.value})
+    this.setState({password: e.target.value});
     if (e.target.value.length >= 4) {
       this.setState({passwordIsValid: true});
     } else {
@@ -150,90 +150,52 @@ export default class Signup extends React.Component {
   render() {
     return (
       <div className= "signup-container">
-      <Grid>
-        <Row>
-          <Form>
-
+        <Grid>
           <Row>
-          <Col mdOffset={4} md={3}>
-          <Row>
-          <h1> Sign-up </h1>
-          </Row>
-          <FormGroup  >
-            <ControlLabel>First Name</ControlLabel><FormControl type="text"  onChange={this.handleFirstName}></FormControl></FormGroup>
-          {/* <Col md={4}> */}
-          {/* </Col> */}
-          <h6 className={(this.state.firstnameIsValid ? 'hidden' : 'invalid')}> Name must be at least two letters. </h6>
-          <FormGroup>
-            <ControlLabel>Last Name</ControlLabel><FormControl type="text" onChange={this.handleLastName}></FormControl></FormGroup>
-            <h6 className={(this.state.lastnameIsValid ? 'hidden' : 'invalid')}> Name must be at least two letters. </h6>
-          {/* </Col> */}
-          {/* <Col mdOffset={2} md={4}> */}
-          <FormGroup  >
-            <ControlLabel>Username</ControlLabel><FormControl type="text"  onChange={this.handleUsername}></FormControl></FormGroup>
-            <h6 className={(this.state.usernameIsValid ? 'hidden' : 'invalid')}> Username must be at least four letters. </h6>
-          {/* </Col> */}
-          {/* <Col md={4}> */}
-          <FormGroup>
-            <ControlLabel>Password</ControlLabel><FormControl type="password" onChange={this.handlePassword}></FormControl></FormGroup>
-            <h6 className={(this.state.passwordIsValid ? 'hidden' : 'invalid')}> Password must be at least four letters. </h6>
-          {/* </Col> */}
-          {/* <Col mdOffset={2} md={4}> */}
-          <FormGroup  >
-            <ControlLabel>Address</ControlLabel><FormControl type="text"  onChange={this.handleAddress}></FormControl></FormGroup>
-          {/* </Col> */}
-          {/* <Col md={4}> */}
-          <FormGroup>
-            {/* <div className='signup-input'> */}
-              <ControlLabel>Zipcode</ControlLabel><FormControl type="text" onChange={this.handleZipcode}></FormControl>
-            {/* </div> */}
-            {/* <div className="signup-error"> */}
-              <h6 className={(this.state.zipcodeIsValid ? 'hidden' : 'invalid')}> Please enter a valid zipcode </h6>
-            {/* </div> */}
-          </FormGroup>
-          {/* </Col> */}
-          {/* <Col mdOffset={2} md={4}> */}
-          <FormGroup  >
-            <ControlLabel>Phone</ControlLabel><FormControl type="text"  onChange={this.handlePhone}></FormControl></FormGroup>
-            <h6 className={(this.state.phoneIsValid ? 'hidden' : 'invalid')}> Phone number must be 11 digits</h6>
-          {/* </Col> */}
-          {/* <Col md={4}> */}
-          <FormGroup>
-            <ControlLabel>Email</ControlLabel><FormControl type="text" onChange={this.handleEmail}></FormControl></FormGroup>
-            <h6 className={(this.state.emailIsValid ? 'hidden' : 'invalid')}> Please enter a valid email </h6>
-
-          <Row>
-            <Button className='signup-cat' bsStyle='success' onClick={ this.submitUser }>Submit</Button>
-          </Row>
-          <Col>
-
-          <Link to="/signin"> Return to Sign-in </Link>
-          </Col>
-          </Col>
-          </Row>
-                {/* <h6 className={(this.state.firstnameIsValid ? 'hidden' : 'invalid')}> Name must be at least two letters. </h6>
-                <div className='signup-cat'><span>First Name</span> <input className="signup-input" type="text" onChange={this.handleFirstName} /></div><br/>
-                <h6 className={(this.state.lastnameIsValid ? 'hidden' : 'invalid')}> Name must be at least two letters. </h6>
-                <div className='signup-cat'><span>Last Name </span><input className="signup-input" type="text" onChange={this.handleLastName}/></div><br/>
-                <h6 className={(this.state.usernameIsValid ? 'hidden' : 'invalid')}> Username must be at least four letters. </h6>
-                <div className='signup-cat'> &nbsp;<span>Username  </span><input className="signup-input" type="text" onChange={this.handleUsername}/></div><br/>
-                <h6 className={(this.state.passwordIsValid ? 'hidden' : 'invalid')}> Password must be at least four letters. </h6>
-                <div className='signup-cat'>  &nbsp;<span>Password</span> <input className="signup-input" type="password" onChange={this.handlePassword}/></div><br />
-                <div className='signup-cat'> &nbsp;&nbsp;<span>Address </span><input className="signup-input" type="text" onChange={this.handleAddress}/></div><br/>
-                <h6 className={(this.state.zipcodeIsValid ? 'hidden' : 'invalid')}> Please enter a valid zipcode </h6>
-                <div className='signup-cat'><span>Zip code  </span><input className="signup-input" type="text" onChange={this.handleZipcode}/></div><br/>
-                <h6 className={(this.state.phoneIsValid ? 'hidden' : 'invalid')}> Phone number must be 11 digits</h6>
-                <div className='signup-cat'><span>     Phone     </span> <input className="signup-input" type="text" onChange={this.handlePhone}/></div>
-                <h6 className={(this.state.emailIsValid ? 'hidden' : 'invalid')}> Please enter a valid email </h6>
-                <div> <div className='signup-cat'><span>Email</span> <input className="signup-input" type="text" onChange={this.handleEmail}/></div>
-                <h6 className={(this.state.formIsValid ? 'hidden' : 'invalid')}> Some of your data is not valid.  Please check above. </h6></div> */}
-                {/* <Row>
-                <Button className='signup-cat' onClick={ this.submitUser }>Submit</Button>
+            <Form>
+              <Row>
+                <Col mdOffset={4} md={3}>
+                <Row>
+                  <h1 className="signup-h1"> Sign-up </h1>
                 </Row>
-              <Link to="/signin"> Return to Sign-in </Link> */}
-              </Form>
+                <Row>
+                  <br/>
+                </Row>
+                  <FormGroup className="left-align" >
+                    <ControlLabel>First Name</ControlLabel><FormControl type="text"  onChange={this.handleFirstName}></FormControl></FormGroup>
+                    <h6 className={(this.state.firstnameIsValid ? 'hidden' : 'invalid')}> Name must be at least two letters. </h6>
+                  <FormGroup className="left-align">
+                    <ControlLabel>Last Name</ControlLabel><FormControl type="text" onChange={this.handleLastName}></FormControl></FormGroup>
+                    <h6 className={(this.state.lastnameIsValid ? 'hidden' : 'invalid')}> Name must be at least two letters. </h6>
+                  <FormGroup className="left-align">
+                    <ControlLabel>Username</ControlLabel><FormControl type="text"  onChange={this.handleUsername}></FormControl></FormGroup>
+                    <h6 className={(this.state.usernameIsValid ? 'hidden' : 'invalid')}> Username must be at least four letters. </h6>
+                  <FormGroup className="left-align" >
+                    <ControlLabel>Password</ControlLabel><FormControl type="password" onChange={this.handlePassword}></FormControl></FormGroup>
+                    <h6 className={(this.state.passwordIsValid ? 'hidden' : 'invalid')}> Password must be at least four letters. </h6>
+                  <FormGroup className="left-align" >
+                    <ControlLabel>Address</ControlLabel><FormControl type="text"  onChange={this.handleAddress}></FormControl></FormGroup>
+                  <FormGroup className="left-align" >
+                    <ControlLabel>Zipcode</ControlLabel><FormControl type="text" onChange={this.handleZipcode}></FormControl>
+                    <h6 className={(this.state.zipcodeIsValid ? 'hidden' : 'invalid')}> Please enter a valid zipcode </h6>
+                  </FormGroup>
+                  <FormGroup  className="left-align" >
+                    <ControlLabel>Phone</ControlLabel><FormControl type="text"  onChange={this.handlePhone}></FormControl></FormGroup>
+                    <h6 className={(this.state.phoneIsValid ? 'hidden' : 'invalid')}> Phone number must be 11 digits</h6>
+                  <FormGroup className="left-align" >
+                    <ControlLabel>Email</ControlLabel><FormControl type="text" onChange={this.handleEmail}></FormControl></FormGroup>
+                    <h6 className={(this.state.emailIsValid ? 'hidden' : 'invalid')}> Please enter a valid email </h6>
+                  <Row>
+                    <Button className='signup-cat' bsStyle='success' onClick={ this.submitUser }>Submit</Button>
+                  </Row>
+                  <Col>
+                    <Link to="/signin"> Return to Sign-in </Link>
+                  </Col>
+                </Col>
               </Row>
-            </Grid>
+            </Form>
+          </Row>
+        </Grid>
       </div>
     );
   }
