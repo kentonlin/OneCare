@@ -455,12 +455,12 @@ export default class Profile extends React.Component {
                       <div className="doc-top-first-half">
                         <p className="script-name"> {script.name}</p>
                         <OverlayTrigger placement='top' overlay={<Tooltip id="tooltip"> Click to edit card</Tooltip>}>
-                          <div className='edit-icon'>
+                          <div className='edit-icon midnight-blue-text'>
                             <i className="fa fa-pencil-square-o pencil" aria-hidden="true" onClick={this.openEditModalScript.bind(this,idx)}></i>
                           </div>{/* <a target="_blank" href={"https://simple.wikipedia.org/wiki/" + script.name}>(get more info)</a>*/}
                         </OverlayTrigger>
                       </div>
-                      <div className='close-x'>
+                      <div className='midnight-blue-text close-x'>
                         <i className="fa fa-times" aria-hidden="true" onClick={this.deleteScript.bind(this, idx)}></i>
                       </div>
                     </div>
@@ -502,12 +502,12 @@ export default class Profile extends React.Component {
                               <div className="doc-top-first-half">
                                 <p className='doctor-name'>{doctor.name}</p>
                                 <OverlayTrigger placement='top' overlay={<Tooltip id="tooltip"> Click to edit card</Tooltip>}>
-                                <div className='edit-icon'>
+                                <div className='edit-icon midnight-blue-text'>
                                   <i className="fa fa-pencil-square-o pencil" aria-hidden="true" onClick={this.openEditModalDoctor.bind(this,idx)}></i>
                                 </div>
                                 </OverlayTrigger>
                               </div>
-                              <div className='delete-doc close-x'>
+                              <div className='delete-doc midnight-blue-text close-x'>
                                 <i className="fa fa-times" aria-hidden="true" onClick={this.deleteDoc.bind(this, idx)}></i>
                               </div>
                             </div>
