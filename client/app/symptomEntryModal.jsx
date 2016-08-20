@@ -152,7 +152,7 @@ export default class SymptomEntryModal extends React.Component {
                   <h2>{this.state.currentRec ? this.state.currentRec.name : '**empty**'}</h2>
                   <div className={this.state.currentRec && this.state.currentRec.id === 1000 ? '' : 'hidden'}>We're glad to have been of assistance!</div>
                 </div>
-                <div className='post-rec-options'>
+                <div className={this.state.currentRec && this.state.currentRec.id !== 1000 ? 'post-rec-options' : 'hidden'}>
                   <div className='register-new-doc'> <Link to='/newdoctor'>Click here to register a new {this.state.currentRec ? this.state.currentRec.name : '**empty**'}!</Link> </div>
                   <div className={this.state.isInRolodex ? 'hidden' : 'find-doc-btn'}>
                     <Button onClick={this.drx} bsStyle='success' bsSize='small'>Find Nearby {this.state.currentRec ? this.state.currentRec.name : '**empty**'}s</Button>
@@ -162,7 +162,7 @@ export default class SymptomEntryModal extends React.Component {
                     <span className={(this.state.currentRec && this.state.currentRec.id !== 1000 ? '' : 'hidden')+' modal-button downvote'} onClick={this.downvote}><i className="fa fa-thumbs-o-down" aria-hidden="true"></i></span>
                   </div>
                 </div>
-                {this.state.drxs.map((doctrx, i) => <DRXView closeFn={this.props.closeFn} zipcode={this.props.zipcode} info={doctrx}/>)}
+                {this.state.drxs.map((doctrx, i) => <DRXView specialty={this.state.currentRec.name} closeFn={this.props.closeFn} zipcode={this.props.zipcode} info={doctrx}/>)}
               </div>
             </div>
         </div>

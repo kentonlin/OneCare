@@ -60,7 +60,9 @@ export default class DRXView extends React.Component {
                     npiData.data.practices[0].visit_address.city+'\n',
                     npiData.data.practices[0].visit_address.state+'\n',
                     npiData.data.practices[0].visit_address.zip);
-        console.log('spec:', npiData.data.specialties[0].actor);
+        // console.log('spec:', npiData.data.specialties[0].actor);
+        console.log('spec:', this.props.specialty);
+
 
         var toSubmit = {
           "username": window.localStorage.username,
@@ -71,7 +73,7 @@ export default class DRXView extends React.Component {
             phone: '1'+npiData.data.practices[0].phones[0].number,
             email: 'N/A',
             address: npiData.data.practices[0].visit_address.street+' '+npiData.data.practices[0].visit_address.city+', '+npiData.data.practices[0].visit_address.state,
-            specialty: npiData.data.specialties[0].actor
+            specialty: this.props.specialty
           }
         };
 

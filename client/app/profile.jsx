@@ -10,7 +10,7 @@ import Map from './map.jsx';
 import _ from 'lodash';
 import { Modal, Button, ButtonToolbar, Tooltip, OverlayTrigger } from 'react-bootstrap';
 import EditDoctorModal from './editDoctor.jsx';
-
+import {ScrollBox, ScrollAxes, FastTrack} from 'react-scroll-box';
 
 export default class Profile extends React.Component {
   constructor(props) {
