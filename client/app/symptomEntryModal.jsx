@@ -157,7 +157,7 @@ export default class SymptomEntryModal extends React.Component {
                     <span className={(this.state.currentRec && this.state.currentRec.id !== 1000 ? '' : 'hidden')+' modal-button downvote'} onClick={this.downvote}><i className="fa fa-thumbs-o-down" aria-hidden="true"></i></span>
                   </div>
                 </div>
-                {this.state.drxs.map((doctrx, i) => <DRXView closeFn={this.props.closeFn} zipcode={this.props.zipcode} info={doctrx}/>)}
+                {this.state.drxs.map((doctrx, i) => <DRXView specialty={this.state.currentRec.name} closeFn={this.props.closeFn} zipcode={this.props.zipcode} info={doctrx}/>)}
               </div>
             </div>
         </div>
