@@ -93,7 +93,7 @@ export default class DoctorEntryView extends React.Component {
     } else {
       this.setState({nameIsValid: false});
     }
-    
+
   }
 
   handleEmail(e) {
@@ -104,7 +104,7 @@ export default class DoctorEntryView extends React.Component {
     } else {
       this.setState({emailIsValid: false});
     }
-    
+
   }
 
   handleAddress(e) {
@@ -142,15 +142,15 @@ export default class DoctorEntryView extends React.Component {
         {/* <Navigate /> */}
         <div className="doctor-entry-form">
           <div>Name</div><input id="name" type="text" onChange={this.handleName} />
-          <div className={this.state.nameIsValid ? "hidden" : "invalid"}> Name must be at least 2 characters. </div>
+          <div className={this.state.nameIsValid ? "hidden" : "invalid"}> Name must be at least 2 characters </div>
           <div>Phone</div><input id="phone" type="text" onChange={this.handlePhone}></input><br />
-          <div className={this.state.phoneIsValid ? "hidden" : "invalid"}> Phone numbers must be 11 digits long. </div>          
+          <div className={this.state.phoneIsValid ? "hidden" : "invalid"}> Phone numbers must be 11 digits long </div>
           <div>Email</div><input id="email" type="text" onChange={this.handleEmail}></input><br />
-          <div className={this.state.emailIsValid ? "hidden" : "invalid"}> Please enter a valid email. </div>
-          <h6 className="invalid"> (Your doctor will receive notification that you have registered with them!) </h6><br />
+          <div className={this.state.emailIsValid ? "hidden" : "invalid"}> Please enter a valid email </div>
+          <h6 className="invalid"> (Your doctor will receive an email from OneCare) </h6>
           <div>Address</div><input id="address" type="text" onChange={this.handleAddress}></input><br />
           <div>Specialty</div><select id="specialty" onChange={this.handleSpecialty}>
-            <option>::Select Specialty::</option>
+            <option>None Selected</option>
             {
               DOCTORS.map((doctor) => {
                 return (
@@ -159,9 +159,9 @@ export default class DoctorEntryView extends React.Component {
               })
             }
           </select>
-          <div className={this.state.specialtyIsValid ? "hidden" : "invalid"}> Select a specialty. </div>
+          <div className={this.state.specialtyIsValid ? "hidden" : "invalid"}> Select a specialty </div>
           <Button bsStyle='info' onClick={this.submitNewDoctor}>Save Doctor</Button>
-          <h6 className={(this.state.formIsValid ? 'hidden' : 'invalid')}> Some of your data is not valid.  Please check above. </h6>
+          <h6 className={(this.state.formIsValid ? 'hidden' : 'invalid')}> Some of your data is invalid.  Please check above. </h6>
         </div>
       </div>
     );

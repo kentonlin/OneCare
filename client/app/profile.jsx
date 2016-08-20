@@ -359,13 +359,13 @@ export default class Profile extends React.Component {
     return (
       <div className='profile-container'>
         <Navigate />
-        <div className='aqua'>
+        <div>
           <Modal show={this.state.scriptmodalIsOpen}>
-              <div className="modal-button-close-container aqua">
+              <div className="modal-button-close-container">
                 <h2>Input new prescription</h2>
                 <div className='modal-button-close' onClick={this.closeModalScript}><i className="fa fa-times-circle" aria-hidden="true"></i></div>
               </div>
-              <ScriptRemind className='aqua'
+              <ScriptRemind
               closeFn={this.closeModalScript} />
               {/* <Button onClick={this.closeModalScript}>Exit</Button> */}
 
@@ -386,8 +386,7 @@ export default class Profile extends React.Component {
             <h2>Pharmacies near {this.state.inputZip}</h2>
               <div className='modal-button-close' onClick={this.closeModalMap}><i className="fa fa-times-circle" aria-hidden="true"></i></div>
             </div>
-            <Map
-          zipcode={this.state.inputZip} />
+            <Map zipcode={this.state.inputZip} />
         </Modal>
 
         <Modal show={this.state.symptomModalIsOpen} style={this.state.modalStyles}>
@@ -455,12 +454,14 @@ export default class Profile extends React.Component {
                       <div className="doc-top-first-half">
                         <p className="script-name"> {script.name}</p>
                         <OverlayTrigger placement='top' overlay={<Tooltip id="tooltip"> Click to edit card</Tooltip>}>
-                          <div className='edit-icon'>
+                          <div className='edit-icon midnight-blue-text'>
                             <i className="fa fa-pencil-square-o pencil" aria-hidden="true" onClick={this.openEditModalScript.bind(this,idx)}></i>
                           </div>{/* <a target="_blank" href={"https://simple.wikipedia.org/wiki/" + script.name}>(get more info)</a>*/}
                         </OverlayTrigger>
                       </div>
-                      <i className="fa fa-times" aria-hidden="true" onClick={this.deleteScript.bind(this, idx)}></i>
+                      <div className='midnight-blue-text close-x'>
+                        <i className="fa fa-times" aria-hidden="true" onClick={this.deleteScript.bind(this, idx)}></i>
+                      </div>
                     </div>
                     <div className='script-attribute'>
                       <i className="fa fa-heart red" aria-hidden="true"></i> Dosage: {script.dosage}
@@ -500,12 +501,12 @@ export default class Profile extends React.Component {
                               <div className="doc-top-first-half">
                                 <p className='doctor-name'>{doctor.name}</p>
                                 <OverlayTrigger placement='top' overlay={<Tooltip id="tooltip"> Click to edit card</Tooltip>}>
-                                <div className='edit-icon'>
+                                <div className='edit-icon midnight-blue-text'>
                                   <i className="fa fa-pencil-square-o pencil" aria-hidden="true" onClick={this.openEditModalDoctor.bind(this,idx)}></i>
                                 </div>
                                 </OverlayTrigger>
                               </div>
-                              <div className='delete-doc'>
+                              <div className='delete-doc midnight-blue-text close-x'>
                                 <i className="fa fa-times" aria-hidden="true" onClick={this.deleteDoc.bind(this, idx)}></i>
                               </div>
                             </div>
@@ -533,11 +534,11 @@ export default class Profile extends React.Component {
                         <div className='show-notes'>
                             <OverlayTrigger placement='top' overlay={<Tooltip id="tooltip"> Click to view doctor's notes</Tooltip>}>
                               <div className={this.state.notesOpen ? 'hidden': 'note-icon'}>
-                                <i className="fa fa-angle-double-down phone-green" aria-hidden="true" onClick={this.doctorNotes.bind(this, doctor)}></i>
+                                <i className="fa fa-angle-double-down midnight-blue-text" aria-hidden="true" onClick={this.doctorNotes.bind(this, doctor)}></i>
                               </div>
                             </OverlayTrigger>
                             <div className={this.state.notesOpen ? 'note-icon': 'hidden'}>
-                              <i className="fa fa-angle-double-up phone-green" aria-hidden="true" onClick={this.doctorNotes.bind(this, doctor)}></i>
+                              <i className="fa fa-angle-double-up midnight-blue-text" aria-hidden="true" onClick={this.doctorNotes.bind(this, doctor)}></i>
                             </div>
                           </div>
                           <div className={this.state.openNotes.doctor === doctor._id ? "doctor-notes-container" : "hidden"}>
@@ -547,7 +548,7 @@ export default class Profile extends React.Component {
                             ))
                             .map((note, idx) => (
                             <div key={idx} className={"doctor-notes-entry" + (note.seen ? "" : " phone-green")}>
-                              <span className="note-delete"><i className="fa fa-trash" aria-hidden="true" onClick={this.hideNote.bind(this, note)}></i></span>
+                              <span className="note-delete midnight-blue-text"><i className="fa fa-trash" aria-hidden="true" onClick={this.hideNote.bind(this, note)}></i></span>
                               {note.body}
                             </div>
                             )
