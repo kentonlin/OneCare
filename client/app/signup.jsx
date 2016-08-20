@@ -203,7 +203,7 @@ export default class Signup extends React.Component {
             <h6 className={(this.state.emailIsValid ? 'hidden' : 'invalid')}> Please enter a valid email </h6>
 
           <Row>
-            <Button className='signup-cat' onClick={ this.submitUser }>Submit</Button>
+            <Button className='signup-cat' bsStyle='success' onClick={ this.submitUser }>Submit</Button>
           </Row>
           <Col>
 
