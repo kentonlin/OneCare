@@ -849,6 +849,10 @@ border-radius: 4px;
   width: 500px;
 }
 
+#active-link{
+  background: #ffffff;
+}
+
 .modal-button {
   display:flex;
   width: 45px;
