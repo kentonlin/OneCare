@@ -10,7 +10,7 @@ import Map from './map.jsx';
 import _ from 'lodash';
 import { Modal, Button, ButtonToolbar, Tooltip, OverlayTrigger } from 'react-bootstrap';
 import EditDoctorModal from './editDoctor.jsx';
-
+import {ScrollBox, ScrollAxes, FastTrack} from 'react-scroll-box';
 
 export default class Profile extends React.Component {
   constructor(props) {
@@ -359,18 +359,20 @@ export default class Profile extends React.Component {
     return (
       <div className='profile-container'>
         <Navigate />
-        <Modal show={this.state.scriptmodalIsOpen}>
-            <div className="modal-button-close-container">
-              <h2>Input new prescription</h2>
-              <div className='modal-button-close' onClick={this.closeModalScript}><i className="fa fa-times-circle" aria-hidden="true"></i></div>
-            </div>
-            <ScriptRemind
-            closeFn={this.closeModalScript} />
-            {/* <Button onClick={this.closeModalScript}>Exit</Button> */}
+        <div className='aqua'>
+          <Modal show={this.state.scriptmodalIsOpen}>
+              <div className="modal-button-close-container aqua">
+                <h2>Input new prescription</h2>
+                <div className='modal-button-close' onClick={this.closeModalScript}><i className="fa fa-times-circle" aria-hidden="true"></i></div>
+              </div>
+              <ScriptRemind className='aqua'
+              closeFn={this.closeModalScript} />
+              {/* <Button onClick={this.closeModalScript}>Exit</Button> */}
 
-        </Modal>
+          </Modal>
+        </div>
         <Modal show={this.state.docmodalIsOpen} bsSize='small'>
-            <div className="modal-button-close-container">
+            <div className="modal-button-close-container white">
               <h2>Input new doctor</h2>
               <div className='modal-button-close' onClick={this.closeModalDoctor}><i className="fa fa-times-circle" aria-hidden="true"></i></div>
             </div>
@@ -430,16 +432,18 @@ export default class Profile extends React.Component {
         </Modal>
 
       <div className="scripts-doctors">
-      <div className='scripts-container'>
+      <ScrollBox className='scripts-container' style={{height: '200px'}} fastTrack={FastTrack.PAGING}>
       <div className='scripts-header'>
-        <div className='scripts-title'> Prescriptions </div>
-        <div>
+        <div className='scripts-title shadow'> Prescriptions </div>
+        <div className='find-pharm'>
           <input className='zipcode-input' placeholder='Zipcode' type="text" onChange={(event) => {this.setState({inputZip: event.target.value})}}/>
-          <OverlayTrigger placement='top' overlay={<Tooltip id="tooltip"> Find a nearby pharmacy</Tooltip>}>
-            <Button bsStyle='info' onClick={this.openModalMap}> <div> <i className="fa fa-search" aria-hidden="true"></i> Pharmacy </div> </Button>
-          </OverlayTrigger>
+            <OverlayTrigger placement='top' overlay={<Tooltip id="tooltip"> Find a nearby pharmacy</Tooltip>}>
+              <div className='shadow-box'>
+                <Button bsStyle='info' onClick={this.openModalMap}> <div> <i className="fa fa-search" aria-hidden="true"></i> Pharmacy </div> </Button>
+              </div>
+            </OverlayTrigger>
         </div>
-        <div className='add-btn'>
+        <div className='add-btn shadow'>
           <i className="fa fa-plus-circle white add" onClick={this.openModalScript} aria-hidden="true"></i>
         </div>
       </div>
@@ -471,17 +475,19 @@ export default class Profile extends React.Component {
                );
               }, this)
             }
-            <div onClick={this.openModalScript} className={this.state.scripts.length === 0 ? "scripts-empty" : "hidden"}>Please schedule some reminders!</div>
+            <div onClick={this.openModalScript} className={this.state.scripts.length === 0 ? "scripts-empty" : "hidden"}>
+              Click to save a prescription reminder
+            </div>
           </div>
         <div className='doctors-container'>
         <div className='doctors-header'>
-          <div className='doctors-title'> Doctors </div>
+          <div className='doctors-title shadow'> Doctors </div>
           <OverlayTrigger placement='top' overlay={<Tooltip id="tooltip"> Feeling sick? OneCare can recommend a specialist </Tooltip>}>
-            <div className='rec-btn'>
+            <div className='rec-btn shadow-box'>
               <Button bsStyle="info" bsSize='small' onClick={this.openModalSymptom}> <div> <i className="fa fa-stethoscope" aria-hidden="true"></i> Recommend </div></Button>
             </div>
           </OverlayTrigger>
-          <div className='add-btn'>
+          <div className='add-btn shadow'>
             <i className="fa fa-plus-circle white add" onClick={this.openModalDoctor} aria-hidden="true"></i>
           </div>
         </div>
@@ -551,7 +557,7 @@ export default class Profile extends React.Component {
                     );
                 }, this)
               }
-              <div onClick={this.openModalDoctor} className={this.state.doctors.length === 0 ? "doctors-empty" : "hidden"}>Please register some doctors!</div>
+              <div onClick={this.openModalDoctor} className={this.state.doctors.length === 0 ? "doctors-empty" : "hidden"}>Click to save a new doctor</div>
           </div>
       </div>
       </div>

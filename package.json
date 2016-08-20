@@ -57,6 +57,7 @@
     "react-kronos": "^1.4.1",
     "react-modal": "^1.4.0",
     "react-router": "^2.6.1",
+    "react-scroll-box": "^0.3.3-beta",
     "request": "^2.74.0",
     "synaptic": "^1.0.8",
     "twilio": "^2.9.1",
