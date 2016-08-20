@@ -432,7 +432,7 @@ export default class Profile extends React.Component {
         </Modal>
 
       <div className="scripts-doctors">
-      <ScrollBox className='scripts-container' style={{height: '200px'}} fastTrack={FastTrack.PAGING}>
+      <div className='scripts-container'>
       <div className='scripts-header'>
         <div className='scripts-title shadow'> Prescriptions </div>
         <div className='find-pharm'>
