@@ -359,13 +359,13 @@ export default class Profile extends React.Component {
     return (
       <div className='profile-container'>
         <Navigate />
-        <div className='aqua'>
+        <div>
           <Modal show={this.state.scriptmodalIsOpen}>
-              <div className="modal-button-close-container aqua">
+              <div className="modal-button-close-container">
                 <h2>Input new prescription</h2>
                 <div className='modal-button-close' onClick={this.closeModalScript}><i className="fa fa-times-circle" aria-hidden="true"></i></div>
               </div>
-              <ScriptRemind className='aqua'
+              <ScriptRemind
               closeFn={this.closeModalScript} />
               {/* <Button onClick={this.closeModalScript}>Exit</Button> */}
 
@@ -386,8 +386,7 @@ export default class Profile extends React.Component {
             <h2>Pharmacies near {this.state.inputZip}</h2>
               <div className='modal-button-close' onClick={this.closeModalMap}><i className="fa fa-times-circle" aria-hidden="true"></i></div>
             </div>
-            <Map
-          zipcode={this.state.inputZip} />
+            <Map zipcode={this.state.inputZip} />
         </Modal>
 
         <Modal show={this.state.symptomModalIsOpen} style={this.state.modalStyles}>
@@ -549,7 +548,7 @@ export default class Profile extends React.Component {
                             ))
                             .map((note, idx) => (
                             <div key={idx} className={"doctor-notes-entry" + (note.seen ? "" : " phone-green")}>
-                              <span className="note-delete"><i className="fa fa-trash" aria-hidden="true" onClick={this.hideNote.bind(this, note)}></i></span>
+                              <span className="note-delete midnight-blue-text"><i className="fa fa-trash" aria-hidden="true" onClick={this.hideNote.bind(this, note)}></i></span>
                               {note.body}
                             </div>
                             )
