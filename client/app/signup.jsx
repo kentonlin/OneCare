@@ -205,7 +205,10 @@ export default class Signup extends React.Component {
           <Row>
             <Button className='signup-cat' onClick={ this.submitUser }>Submit</Button>
           </Row>
+          <Col>
+
           <Link to="/signin"> Return to Sign-in </Link>
+          </Col>
           </Col>
           </Row>
                 {/* <h6 className={(this.state.firstnameIsValid ? 'hidden' : 'invalid')}> Name must be at least two letters. </h6>
