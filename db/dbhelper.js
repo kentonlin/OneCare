@@ -95,7 +95,11 @@ var dbFunc = {
 			if(err){
 				console.log('error in fetching scripts', err);
 			}
-			res.send(found.scripts);
+			if (found) {
+			  res.send(found.scripts);
+			} else {
+				res.send([])
+			}
 		});
 	},
 
@@ -124,7 +128,11 @@ var dbFunc = {
 			if(err){
 				next(new Error(err));
 			}
-			res.send(user.doctors);
+			if (user) {
+	  		res.send(user.doctors);
+			} else {
+				res.send([]);
+			}
 		});
   },
 
