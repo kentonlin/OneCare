@@ -1,65 +1,100 @@
 import React, {Component} from 'react';
-// impor  t $ from 'jquery';
+import $ from 'jquery';
 import { Router, Route, Link, browserHistory } from 'react-router';
-import {Image} from 'react-bootstrap';
-// import {ButtonGroup} from 'react-bootstrap';
-// import {Button} from 'react-bootstrap';
-// import {DropdownButton} from 'react-bootstrap';
-// import {MenuItem} from 'react-bootstrap';
+import {Button, ResponsiveEmbed, Grid, Row, Col, Image} from 'react-bootstrap';
 
 export default class Splash extends React.Component {
   constructor(props) {
     super(props);
+  }
 
-    render() {
-      return (
-        <div>
-          <div className= "splashHeader">
-          {/* <video autoPlay loop id="video-background">
-            <source id="mp4" src="./mountain.mp4" type="video/mp4"/>
-          </video> */}
-            <div className= "splashName">
-              <h2> OneCare </h2>
-            </div>
-
-            <div className= "signInSplash">
-              <Link to='/signin'> Login </Link>
-            </div>
-
-            <div className= "signUpSplash">
-              <Link to='/signup'> Signup </Link>
-            </div>
-          </div>
-
-        <div className= "appDescribe">
-          <div> Prescription Reminder</div>
-          <h3> Text Reminders </h3>
-          <h3> Remind by day/week/month </h3>
-          <br/>
-          <br/>
-          <h2> Doctor Recommender </h2>
-          <h3> Recommend a specialist </h3>
-          <h3> Search for nearby specialists </h3>
+  render() {
+    return (
+      <div>
+        <div className="family" style={{width: 'auto', height: 'auto'}}>
+          <ResponsiveEmbed a16by9>
+            <embed type="image/jpeg" src="../styles/family.jpg" />
+          </ResponsiveEmbed>
         </div>
 
-              {/* <ButtonGroup vertical>
-        <Button>Button</Button>
-        <Button>Button</Button>
-        <DropdownButton title="Dropdown" id="bg-vertical-dropdown-1">
-          <MenuItem eventKey="1">Dropdown link</MenuItem>
-          <MenuItem eventKey="2">Dropdown link</MenuItem>
-        </DropdownButton>
-        <Button>Button</Button>
-        <Button>Button</Button>
-        <DropdownButton title="Dropdown" id="bg-vertical-dropdown-2">
-          <MenuItem eventKey="1">Dropdown link</MenuItem>
-          <MenuItem eventKey="2">Dropdown link</MenuItem>
-        </DropdownButton>
-        <DropdownButton title="Dropdown" id="bg-vertical-dropdown-3">
-          <MenuItem eventKey="1">Dropdown link</MenuItem>
-          <MenuItem eventKey="2">Dropdown link</MenuItem>
-        </DropdownButton>
-      </ButtonGroup> */}
+        <div className= "splashHeader">
+          <div className= "splashName">
+            <h1> OneCare </h1>
+          </div>
+
+          <div className= "signInSplash">
+            <div className='login shadow-box'><Link to='/signin'><Button bsSize='large' block bsStyle='primary' >Login</Button></Link> </div>
+          </div>
+          <div className= "signUpSplash">
+            <div className='logout'><Link to='/signup'><Button bsSize='large' block bsStyle='primary' >Signup</Button></Link> </div>
+          </div>
+        </div>
+
+
+        <div className= "appDescribe">
+          <Grid>
+            <Row>
+              <Col xs={6} md={6}>
+                <div className="circle">
+                  <div className="circleText">
+                    <h3> Prescription Reminder </h3>
+                    <h3> _____________________ </h3>
+                    <h4> Input your prescriptions </h4>
+                    <h4> Refill Text Reminders </h4>
+                    <h4> We'll send you text reminders to take your medications </h4>
+                    <h4> Add prescriptions to your own customized Roladex </h4>
+                    <h4> Edit your prescriptions </h4>
+                  </div>
+                </div>
+              </Col>
+              <Col xs={6} md={6}>
+                <div className="circle">
+                  <div className="circleText">
+                    <h3>Doctor Recommender</h3>
+                    <h3> _____________________ </h3>
+                    <h4> Input your symptoms </h4>
+                    <h4> We'll recommend a specialist for you! </h4>
+                    <h4> Search for nearby specialists </h4>
+                    <h4> Add Doctors to your own customized Roladex </h4>
+                    <h4> Edit your doctors </h4>
+                    <h4> Recieve doctor's notes on your Roladex </h4>
+                  </div>
+                </div>
+              </Col>
+
+            </Row>
+          </Grid>
+        </div>
+
+        <div className="team">
+          <Grid>
+            <Row>
+              <h1> Our Team: </h1>
+            </Row>
+            <Row>
+              <Col xs={6} md={3}>
+                <Image src="../styles/harish.jpg" circle responsive />
+                <h2> Harish Kilaru </h2>
+              </Col>
+              <Col xs={6} md={3}>
+                <Image src="../styles/kenton.png" circle responsive />
+                <h2> Kenton Lin </h2>
+              </Col>
+              <Col xs={6} md={3}>
+                <Image src="../styles/ian.jpg" circle responsive />
+                <h2> Ian Culleton </h2>
+              </Col>
+              <Col xs={6} md={3}>
+                <Image src="../styles/dan.jpg" circle responsive />
+                <h2> Dan Zhao </h2>
+              </Col>
+            </Row>
+          </Grid>
+        </div>
+
+        <div className="copyright">
+          OneCare Inc.&copy; 2016
+        </div>
       </div>
     );
   }
