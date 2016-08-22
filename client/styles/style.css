@@ -45,11 +45,11 @@ input {
   position: absolute;
   top: 50%;
   left: 44%;
+  width: 200px;
+  height: 100px;
 }
 
 .logout {
-  width: 200px;
-  height: 40px;
 }
 
 .appDescribe {
@@ -90,7 +90,7 @@ margin-top: 85px;
 }
 
 .copyright {
-  margin-top: 5px; 
+  margin-top: 5px;
   text-align: center;
   color: white;
 }
