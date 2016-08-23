@@ -18,7 +18,7 @@ var config = {
         include: APP_DIR,
         // Don't run node_modules or bower_components through babel loader
         excudel: /(node_modules|bower_components)/,
-        loader: 'babel-loader',
+        loader: 'babel',
         query: {
           presets: ['es2015', 'react']
         }
