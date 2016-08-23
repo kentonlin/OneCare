@@ -27307,10 +27307,12 @@
 	            _reactBootstrap.Row,
 	            null,
 	            _react2.default.createElement(
-	              'h1',
-	              { className: 'white' },
-	              'Sign in to OneCare'
-	            )
+	              'div',
+	              { className: 'one-care-header' },
+	              ' OneCare '
+	            ),
+	            ' ',
+	            _react2.default.createElement('br', null)
 	          ),
 	          _react2.default.createElement(
 	            _reactBootstrap.Row,
@@ -27351,7 +27353,7 @@
 	              _react2.default.createElement(
 	                _reactBootstrap.Button,
 	                { bsStyle: 'success', onClick: this.submitLogin },
-	                'Submit'
+	                'Login'
 	              ),
 	              _react2.default.createElement(
 	                'div',

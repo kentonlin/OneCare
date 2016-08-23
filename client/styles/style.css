@@ -166,6 +166,16 @@ margin-top: 85px;
 
 /* GENERAL (NOT APPLICABLE TO ONE PARTICULAR COMPONENT) */
 
+
+.one-care-header {
+  font-size: 60px;
+  color: white;
+}
+
+.login {
+  display: flex;
+  
+}
 .topName {
   color: yellow;
 }
