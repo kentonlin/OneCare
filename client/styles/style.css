@@ -126,6 +126,16 @@ input {
 
 /* GENERAL (NOT APPLICABLE TO ONE PARTICULAR COMPONENT) */
 
+
+.one-care-header {
+  font-size: 60px;
+  color: white;
+}
+
+.login {
+  display: flex;
+  
+}
 .topName {
   color: yellow;
 }
@@ -682,7 +692,7 @@ border-radius: 4px;
   display: inline-block;
 }
 .left-align {
-  text-align: left; 
+  text-align: left;
 }
 .signup-input {
   width: 25%;
