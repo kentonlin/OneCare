@@ -6,6 +6,3 @@ node_modules
 # misc
 .DS_Store
 npm-debug.log
-/client/public
-bundle.js.map
-bundle.js
