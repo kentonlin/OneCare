@@ -27351,9 +27351,13 @@
 	              ),
 	              _react2.default.createElement('br', null),
 	              _react2.default.createElement(
-	                _reactBootstrap.Button,
-	                { bsStyle: 'success', onClick: this.submitLogin },
-	                'Login'
+	                'div',
+	                { className: 'login' },
+	                _react2.default.createElement(
+	                  _reactBootstrap.Button,
+	                  { bsStyle: 'success', onClick: this.submitLogin },
+	                  'Login'
+	                )
 	              ),
 	              _react2.default.createElement(
 	                'div',
@@ -104286,6 +104290,10 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
+	var _jquery = __webpack_require__(240);
+
+	var _jquery2 = _interopRequireDefault(_jquery);
+
 	var _reactRouter = __webpack_require__(175);
 
 	var _reactBootstrap = __webpack_require__(242);
@@ -104297,13 +104305,6 @@
 	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-	// impor  t $ from 'jquery';
-
-
-	// import {ButtonGroup} from 'react-bootstrap';
-	// import {Button} from 'react-bootstrap';
-	// import {DropdownButton} from 'react-bootstrap';
-	// import {MenuItem} from 'react-bootstrap';
 
 	var Splash = function (_React$Component) {
 	  _inherits(Splash, _React$Component);
@@ -104312,26 +104313,7 @@
 	    _classCallCheck(this, Splash);
 
 	    return _possibleConstructorReturn(this, Object.getPrototypeOf(Splash).call(this, props));
-	    // this.state= {
-	    //   openSignup: false,
-	    //   openLogin: false
-	    // };
-	    // this.openSignupPage = this.openSignupPage.bind(this);
-	    // this.openLoginPage = this.openLoginPage.bind(this);
 	  }
-
-	  // openSignupPage() {
-	  //   this.setState({
-	  //     openSignup: true
-	  //   });
-	  // }
-	  //
-	  // openLoginPage() {
-	  //   this.setState({
-	  //     openLoginPage: true
-	  //   })
-	  // }
-
 
 	  _createClass(Splash, [{
 	    key: 'render',
@@ -104341,17 +104323,21 @@
 	        null,
 	        _react2.default.createElement(
 	          'div',
-	          { className: 'splashHeader' },
+	          { className: 'family', style: { width: 'auto', height: 'auto' } },
 	          _react2.default.createElement(
-	            'video',
-	            { autoPlay: true, loop: true, id: 'video-background' },
-	            _react2.default.createElement('source', { id: 'mp4', src: 'https://fpdl.vimeocdn.com/vimeo-prod-skyfire-std-us/01/4528/6/172644004/557095694.mp4?token=57b5142f_0x33fefb0a9c04f360f3eb118144c0fdfe4cd333dd', type: 'video/mp4' })
-	          ),
+	            _reactBootstrap.ResponsiveEmbed,
+	            { a16by9: true },
+	            _react2.default.createElement('embed', { type: 'image/jpeg', src: '../styles/family.jpg' })
+	          )
+	        ),
+	        _react2.default.createElement(
+	          'div',
+	          { className: 'splashHeader' },
 	          _react2.default.createElement(
 	            'div',
 	            { className: 'splashName' },
 	            _react2.default.createElement(
-	              'h2',
+	              'h1',
 	              null,
 	              ' OneCare '
 	            )
@@ -104360,18 +104346,36 @@
 	            'div',
 	            { className: 'signInSplash' },
 	            _react2.default.createElement(
-	              _reactRouter.Link,
-	              { to: '/signin' },
-	              ' Login '
+	              'div',
+	              { className: 'login shadow-box' },
+	              _react2.default.createElement(
+	                _reactRouter.Link,
+	                { to: '/signin' },
+	                _react2.default.createElement(
+	                  _reactBootstrap.Button,
+	                  { bsSize: 'large', block: true, bsStyle: 'primary' },
+	                  'Login'
+	                )
+	              ),
+	              ' '
 	            )
 	          ),
 	          _react2.default.createElement(
 	            'div',
 	            { className: 'signUpSplash' },
 	            _react2.default.createElement(
-	              _reactRouter.Link,
-	              { to: '/signup' },
-	              ' Signup '
+	              'div',
+	              { className: 'logout' },
+	              _react2.default.createElement(
+	                _reactRouter.Link,
+	                { to: '/signup' },
+	                _react2.default.createElement(
+	                  _reactBootstrap.Button,
+	                  { bsSize: 'large', block: true, bsStyle: 'primary' },
+	                  'Signup'
+	                )
+	              ),
+	              ' '
 	            )
 	          )
 	        ),
@@ -104379,37 +104383,178 @@
 	          'div',
 	          { className: 'appDescribe' },
 	          _react2.default.createElement(
-	            'div',
+	            _reactBootstrap.Grid,
 	            null,
-	            ' Prescription Reminder'
-	          ),
-	          _react2.default.createElement(
-	            'h3',
-	            null,
-	            ' Text Reminders '
-	          ),
-	          _react2.default.createElement(
-	            'h3',
-	            null,
-	            ' Remind by day/week/month '
-	          ),
-	          _react2.default.createElement('br', null),
-	          _react2.default.createElement('br', null),
-	          _react2.default.createElement(
-	            'h2',
-	            null,
-	            ' Doctor Recommender '
-	          ),
-	          _react2.default.createElement(
-	            'h3',
-	            null,
-	            ' Recommend a specialist '
-	          ),
-	          _react2.default.createElement(
-	            'h3',
-	            null,
-	            ' Search for nearby specialists '
+	            _react2.default.createElement(
+	              _reactBootstrap.Row,
+	              null,
+	              _react2.default.createElement(
+	                _reactBootstrap.Col,
+	                { xs: 6, md: 6 },
+	                _react2.default.createElement(
+	                  'div',
+	                  { className: 'circle' },
+	                  _react2.default.createElement(
+	                    'div',
+	                    { className: 'circleText' },
+	                    _react2.default.createElement(
+	                      'h3',
+	                      null,
+	                      ' Prescription Reminder '
+	                    ),
+	                    _react2.default.createElement(
+	                      'h3',
+	                      null,
+	                      ' _____________________ '
+	                    ),
+	                    _react2.default.createElement(
+	                      'h4',
+	                      null,
+	                      ' Input your prescriptions '
+	                    ),
+	                    _react2.default.createElement(
+	                      'h4',
+	                      null,
+	                      ' Refill Text Reminders '
+	                    ),
+	                    _react2.default.createElement(
+	                      'h4',
+	                      null,
+	                      ' We\'ll send you text reminders to take your medications '
+	                    ),
+	                    _react2.default.createElement(
+	                      'h4',
+	                      null,
+	                      ' Add prescriptions to your own customized Roladex '
+	                    ),
+	                    _react2.default.createElement(
+	                      'h4',
+	                      null,
+	                      ' Edit your prescriptions '
+	                    )
+	                  )
+	                )
+	              ),
+	              _react2.default.createElement(
+	                _reactBootstrap.Col,
+	                { xs: 6, md: 6 },
+	                _react2.default.createElement(
+	                  'div',
+	                  { className: 'circle' },
+	                  _react2.default.createElement(
+	                    'div',
+	                    { className: 'circleText' },
+	                    _react2.default.createElement(
+	                      'h3',
+	                      null,
+	                      'Doctor Recommender'
+	                    ),
+	                    _react2.default.createElement(
+	                      'h3',
+	                      null,
+	                      ' _____________________ '
+	                    ),
+	                    _react2.default.createElement(
+	                      'h4',
+	                      null,
+	                      ' Input your symptoms '
+	                    ),
+	                    _react2.default.createElement(
+	                      'h4',
+	                      null,
+	                      ' We\'ll recommend a specialist for you! '
+	                    ),
+	                    _react2.default.createElement(
+	                      'h4',
+	                      null,
+	                      ' Search for nearby specialists '
+	                    ),
+	                    _react2.default.createElement(
+	                      'h4',
+	                      null,
+	                      ' Add Doctors to your own customized Roladex '
+	                    ),
+	                    _react2.default.createElement(
+	                      'h4',
+	                      null,
+	                      ' Edit your doctors '
+	                    ),
+	                    _react2.default.createElement(
+	                      'h4',
+	                      null,
+	                      ' Recieve doctor\'s notes on your Roladex '
+	                    )
+	                  )
+	                )
+	              )
+	            )
 	          )
+	        ),
+	        _react2.default.createElement(
+	          'div',
+	          { className: 'team' },
+	          _react2.default.createElement(
+	            _reactBootstrap.Grid,
+	            null,
+	            _react2.default.createElement(
+	              _reactBootstrap.Row,
+	              null,
+	              _react2.default.createElement(
+	                'h1',
+	                null,
+	                ' Our Team: '
+	              )
+	            ),
+	            _react2.default.createElement(
+	              _reactBootstrap.Row,
+	              null,
+	              _react2.default.createElement(
+	                _reactBootstrap.Col,
+	                { xs: 6, md: 3 },
+	                _react2.default.createElement(_reactBootstrap.Image, { src: '../styles/harish.jpg', circle: true, responsive: true }),
+	                _react2.default.createElement(
+	                  'h2',
+	                  null,
+	                  ' Harish Kilaru '
+	                )
+	              ),
+	              _react2.default.createElement(
+	                _reactBootstrap.Col,
+	                { xs: 6, md: 3 },
+	                _react2.default.createElement(_reactBootstrap.Image, { src: '../styles/kenton.png', circle: true, responsive: true }),
+	                _react2.default.createElement(
+	                  'h2',
+	                  null,
+	                  ' Kenton Lin '
+	                )
+	              ),
+	              _react2.default.createElement(
+	                _reactBootstrap.Col,
+	                { xs: 6, md: 3 },
+	                _react2.default.createElement(_reactBootstrap.Image, { src: '../styles/ian.jpg', circle: true, responsive: true }),
+	                _react2.default.createElement(
+	                  'h2',
+	                  null,
+	                  ' Ian Culleton '
+	                )
+	              ),
+	              _react2.default.createElement(
+	                _reactBootstrap.Col,
+	                { xs: 6, md: 3 },
+	                _react2.default.createElement(_reactBootstrap.Image, { src: '../styles/dan.jpg', circle: true, responsive: true }),
+	                _react2.default.createElement(
+	                  'h2',
+	                  null,
+	                  ' Dan Zhao '
+	                )
+	              )
+	            )
+	          )
+	        ),
+	        _react2.default.createElement(
+	          'div',
+	          { className: 'copyright' },
+	          'OneCare Inc.© 2016'
 	        )
 	      );
 	    }

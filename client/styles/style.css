@@ -174,7 +174,8 @@ margin-top: 85px;
 
 .login {
   display: flex;
-  
+  justify-content: center;
+
 }
 .topName {
   color: yellow;
