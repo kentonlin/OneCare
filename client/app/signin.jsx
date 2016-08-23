@@ -52,48 +52,16 @@ export default class Signin extends React.Component {
 
   render() {
     return (
- //      <Form horizontal>
- //   <FormGroup controlId="formHorizontalEmail">
- //     <Col componentClass={ControlLabel} sm={2}>
- //       Username
- //     </Col>
- //     <Col sm={10}>
- //       <FormControl type="text" onChange={(event) => {this.setState({username: event.target.value})}}/>
- //     </Col>
- //   </FormGroup>
- //
- //   <FormGroup controlId="formHorizontalPassword">
- //     <Col componentClass={ControlLabel} sm={2}>
- //       Password
- //     </Col>
- //     <Col sm={10}>
- //       <FormControl type="password" onChange={(event) => {this.setState({password: event.target.value})}}/>
- //     </Col>
- //   </FormGroup>
- //
- //   <FormGroup>
- //     <Col smOffset={2} sm={10}>
- //       <Checkbox>Remember me</Checkbox>
- //     </Col>
- //   </FormGroup>
- //
- //   <FormGroup>
- //     <Col smOffset={2} sm={10}>
- //       <Button onClick={this.submitLogin}>
- //         Sign in
- //       </Button>
- //     </Col>
- //   </FormGroup>
- // </Form>
+
       <div className="signin-container">
         <Grid>
-          <Row>
+          <Row className='signin-text'>
             <h1>Sign in to OneCare</h1>
           </Row>
           <Row>
             <Form>
-              <div className='signin-cat'> <span className='signin-username' >Username</span>&nbsp;&nbsp;<input type="text" onChange={(event) => {this.setState({username: event.target.value})}}></input></div><br />
-              <div className='signin-cat2'> <span className='signin-password' >Password</span>&nbsp;&nbsp;<input type="password" onChange={(event) => {this.setState({password: event.target.value})}}></input></div><br />
+              <div className='signin-cat'> <span className='signin-text' >Username</span>&nbsp;&nbsp;<input type="text" onChange={(event) => {this.setState({username: event.target.value})}}></input></div><br />
+              <div className='signin-cat2'> <span className='signin-text' >Password</span>&nbsp;&nbsp;<input type="password" onChange={(event) => {this.setState({password: event.target.value})}}></input></div><br />
               <Button bsStyle='success' onClick={ this.submitLogin}>Submit</Button>
               <div className='signup'>
               <Link to='/signup'> Signup </Link>
