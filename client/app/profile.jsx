@@ -238,8 +238,6 @@ export default class Profile extends React.Component {
      success: function(data) {
        var sorted  = _.sortBy(data, 'refill'); //sorts scripts by refill date
        this.setState({scripts: sorted});
-       console.log('success condition in getScripts... ', sorted)
-       // this.forceUpdate();
      }.bind(this),
      error: function(err) {
        console.error('error in ajax request for user scripts', err);
