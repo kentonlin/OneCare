@@ -2,7 +2,26 @@
 
 A unified care-management system.
 
-Mocha: will be used for running our tests.
-Chai: will be used as our expectation library. Very versatile and lets us use RSpec like syntax.
-Sinon: will be used for mocks/stubs/spys.
-Enzyme: will be used for testing our React components. It's a beautiful testing library written by AirBnB.
+
+##Features 
+* Text reminders for daily medications and prescription refills 
+* Iron.io
+  * Twilio API 
+* Map of nearest pharmacies 
+  * Google Maps API
+* Display user prescriptions and doctors 
+  * React Framework
+*  Create groups and add members
+* Display group tasks and assigned tasks
+  * Angular Framework
+  * HTML/CSS 
+  * Bootstrap 
+* Specialist recommender given user symptoms
+  * Synaptic.js 
+  * BetterDoctor API 
+
+##Technologies 
+* React
+* MongoDB
+* Node
+* Express
