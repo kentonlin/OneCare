@@ -64,7 +64,7 @@ export default class Signup extends React.Component {
         },
         data: JSON.stringify(newUser),
           success: function(data){
-            console.log('user signup successful! This is the data returned: ', data.user.zipcode);
+            // console.log('user signup successful! This is the data returned: ', data.user.zipcode);
             window.localStorage.setItem("username", data.user.username);
             window.localStorage.setItem("token", data.token);
             window.location = "/profile";
