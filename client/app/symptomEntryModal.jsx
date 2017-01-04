@@ -115,7 +115,7 @@ export default class SymptomEntryModal extends React.Component {
     return(
       <div>
         <div className={this.state.cloak ? 'hidden' : '' +" recommend-modal-container"}>
-          <div className='modal-button-close' onClick={this.props.closeFn}><i className="fa fa-times-circle white" aria-hidden="true"></i></div>
+          <div className='modal-button-close close-x' onClick={this.props.closeFn}><i className="fa fa-times-circle white" aria-hidden="true"></i></div>
           <div className="symptom-modal-header">
             <div> Symptoms</div>
           </div>

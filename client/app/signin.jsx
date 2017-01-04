@@ -52,17 +52,18 @@ export default class Signin extends React.Component {
 
   render() {
     return (
-
       <div className="signin-container">
         <Grid>
-          <Row className='signin-text'>
-            <h1>Sign in to OneCare</h1>
+          <Row>
+            <div className='one-care-header'> OneCare </div> <br/>
           </Row>
           <Row>
             <Form>
-              <div className='signin-cat'> <span className='signin-text' >Username</span>&nbsp;&nbsp;<input type="text" onChange={(event) => {this.setState({username: event.target.value})}}></input></div><br />
-              <div className='signin-cat2'> <span className='signin-text' >Password</span>&nbsp;&nbsp;<input type="password" onChange={(event) => {this.setState({password: event.target.value})}}></input></div><br />
-              <Button bsStyle='success' onClick={ this.submitLogin}>Submit</Button>
+              <div className='signin-cat'> <span className='signin-username white' >Username</span>&nbsp;&nbsp;<input type="text" onChange={(event) => {this.setState({username: event.target.value})}}></input></div><br />
+              <div className='signin-cat2'> <span className='signin-password white' >Password</span>&nbsp;&nbsp;<input type="password" onChange={(event) => {this.setState({password: event.target.value})}}></input></div><br />
+              <div className='login'>
+                <Button bsStyle='success' onClick={ this.submitLogin}>Login</Button>
+              </div>
               <div className='signup'>
               <Link to='/signup'> Signup </Link>
               </div>
