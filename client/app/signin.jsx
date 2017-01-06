@@ -3,6 +3,7 @@ import { Router, Route, Link, browserHistory } from 'react-router';
 import $ from 'jquery';
 import ReactDOM from 'react-dom';
 import Signup from './signup.jsx';
+import {Button, ButtonToolbar, Form, FormGroup, Col, FormControl, ControlLabel, Checkbox, Row, Grid} from 'react-bootstrap';
 
 
 export default class Signin extends React.Component {
@@ -26,7 +27,7 @@ export default class Signin extends React.Component {
       "username": this.state.username,
       "password": this.state.password
     };
-    
+
     $.ajax({
       type: "POST",
       url: "/api/signin",
@@ -38,6 +39,8 @@ export default class Signin extends React.Component {
       success: function(data){
         window.localStorage.setItem("username", data.user.username);
         window.localStorage.setItem("token", data.token);
+        window.localStorage.setItem("first_last", data.user.first_last);
+        window.localStorage.setItem("userID", data.user.id);
         window.location = '/profile';
       },
       error: function(err){
@@ -50,15 +53,23 @@ export default class Signin extends React.Component {
   render() {
     return (
       <div className="signin-container">
-        <h1>Sign in to OneCare</h1>
-        <form>
-          <span className='signin-cat'>username</span><input type="text" onChange={(event) => {this.setState({username: event.target.value})}}></input><br />
-          <span className='signin-cat'>password</span><input type="password" onChange={(event) => {this.setState({password: event.target.value})}}></input><br />
-          <div className='signup'>
-            <Link to='/signup'> Signup </Link>
-          </div>
-          <button onClick={ this.submitLogin}>Submit</button>
-        </form>
+        <Grid>
+          <Row>
+            <div className='one-care-header'> OneCare </div> <br/>
+          </Row>
+          <Row>
+            <Form>
+              <div className='signin-cat'> <span className='signin-username white' >Username</span>&nbsp;&nbsp;<input type="text" onChange={(event) => {this.setState({username: event.target.value})}}></input></div><br />
+              <div className='signin-cat2'> <span className='signin-password white' >Password</span>&nbsp;&nbsp;<input type="password" onChange={(event) => {this.setState({password: event.target.value})}}></input></div><br />
+              <div className='login'>
+                <Button bsStyle='success' onClick={ this.submitLogin}>Login</Button>
+              </div>
+              <div className='signup'>
+              <Link to='/signup'> Signup </Link>
+              </div>
+            </Form>
+          </Row>
+        </Grid>
       </div>
     );
   }

@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import $ from 'jquery';
 import Navigate from './navigate.jsx';
-import Modal from "react-modal";
+import Modal from 'react-modal';
+import { Button } from 'react-bootstrap';
 
   var DOCTORS = [
     {id: 1, name: 'Allergologist'},
@@ -27,7 +28,7 @@ import Modal from "react-modal";
     {id: 21, name: 'Obstetrician'},
     {id: 22, name: 'Oncologist'},
     {id: 23, name: 'Ophthalmologist'},
-    {id: 24, name: 'Ear, nose, and Throat Doctor'},
+    {id: 24, name: 'Ear, Nose, and Throat Doctor'},
     {id: 25, name: 'Palliative Medical Expert'},
     {id: 26, name: 'Pediatrician‎'},
     {id: 27, name: 'Podiatrist'},
@@ -52,54 +53,70 @@ export default class DoctorEntryView extends React.Component {
       email: "",
       address: "",
       specialty: "",
-      validPhone: false,
-      validSpecialty: false
+      //validation
+      phoneIsValid: false,
+      specialtyIsValid: false,
+      nameIsValid: false,
+      emailIsValid: false,
+      formIsValid: true
     };
-    this.handleChange = this.handleChange.bind(this);
     this.submitNewDoctor = this.submitNewDoctor.bind(this);
+    this.handlePhone = this.handlePhone.bind(this);
+    this.handleSpecialty = this.handleSpecialty.bind(this);
+    this.handleName = this.handleName.bind(this);
+    this.handleEmail = this.handleEmail.bind(this);
+    this.handleAddress = this.handleAddress.bind(this);
   }
 
-  handleChange(event) {
-    var stateVal = event.target.id;
-    if (stateVal === "name") {
-      this.setState({name: event.target.value, validName:true});
-    } else if (stateVal === "phone") {
-      this.setState({phone: event.target.value, validPhone: event.target.value.match(/\d/g).length===11
-        });
-    } else if (stateVal === "email") {
-      this.setState({email: event.target.value});
-    } else if (stateVal === "address") {
-      this.setState({address: event.target.value});
-    } else if (stateVal === "specialty") {
-      this.setState({specialty: event.target.value, validSpecialty:true});
+  handlePhone(e) {
+    this.setState({phone: e.target.value});
+    if (e.target.value.match(/\d/g).length===11) {
+      this.setState({phoneIsValid: true});
+    } else {
+      this.setState({phoneIsValid: false});
     }
+  }
+
+  handleSpecialty(e) {
+    this.setState({specialty: e.target.value})
+    if (e.target.value !== "::Select Specialty::") {
+      this.setState({specialtyIsValid: true});
+    } else {
+      this.setState({specialtyIsValid: false});
+    }
+  }
+
+  handleName(e) {
+    this.setState({name: e.target.value})
+    if (e.target.value.length > 2) {
+      this.setState({nameIsValid: true});
+    } else {
+      this.setState({nameIsValid: false});
+    }
+
+  }
+
+  handleEmail(e) {
+    var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    this.setState({email: e.target.value});
+    if (re.test(e.target.value)) {
+      this.setState({emailIsValid: true});
+    } else {
+      this.setState({emailIsValid: false});
+    }
+
+  }
+
+  handleAddress(e) {
+    this.setState({address: e.target.value})
   }
 
   submitNewDoctor(e) {
     e.preventDefault();
-    if(!this.state.name.length && !this.state.validPhone && !this.state.validSpecialty){
-      alert("Please correct the following fields: name, phone, specialty");
-    }
-    else if(!this.state.validPhone && !this.state.validSpecialty){
-      alert("Please enter a valid phone and specialty");
-    }
-    else if(!this.state.name.length && !this.state.validSpecialty) {
-      alert("Please enter a valid name and specialty");
-    }
-    else if(!this.state.name.length && !this.state.validPhone){
-      alert("Please enter a valid name and phone");
-    }
-    else if(!this.state.name.length) {
-      alert("Please enter a name");
-    }
-    else if(!this.state.validPhone) {
-      alert("Please enter a valid phone");
-    }
-    else if(!this.state.validSpecialty) {
-      alert("Please enter a specialty");
-    }
-     else {
-      var toSubmit = { "username": window.localStorage.username, "doc": {
+    if(!this.state.nameIsValid || !this.state.phoneIsValid || !this.state.emailIsValid || !this.state.specialtyIsValid){
+      this.setState({formIsValid: false})
+    } else {
+      var toSubmit = { "username": window.localStorage.username, "first_last": window.localStorage.first_last, "userID": window.localStorage.userID, "doc": {
         name: this.state.name,
         phone: this.state.phone,
         email: this.state.email,
@@ -114,30 +131,26 @@ export default class DoctorEntryView extends React.Component {
           "content-type": "application/json"
         },
         data: JSON.stringify(toSubmit),
-        success: function(res) {
-          console.log(res, "has been added");
-          // function doctorlistview.adddoc() being called would render the page profile again.
-          // maybe try and call profile.getDocs() will rerender the profile.
-          
-        },
-        error: function(err) {
-          console.error("Doctor not registered: ", err);
-        }
+        success: this.props.closeFn(),
+        error: this.props.closeFn()
       });
     }
   }
   render() {
     return (
-      <div className="doctor-input">
-      {/* <Navigate /> */}
-      <h2>Input a new doctor!</h2>
-        <form className="doctor-entry-form">
-          <div>Name</div><input id="name" type="text" onChange={this.handleChange} />
-          <div>Phone</div><input id="phone" type="text" onChange={this.handleChange}></input><h6 className={(this.state.validPhone ? 'hidden' : 'invalid')}> Phone number must be 11 digits</h6><br />
-          <div>Email</div><input id="email" type="text" onChange={this.handleChange}></input><br />
-          <div>Address</div><input id="address" type="text" onChange={this.handleChange}></input><br />
-          <div>Specialty</div><select id="specialty" onChange={this.handleChange}>
-            <option>::Select Specialty::</option>
+      <div className="script-form-frame">
+        {/* <Navigate /> */}
+        <div className="doctor-entry-form">
+          <div>Name</div><input id="name" type="text" onChange={this.handleName} />
+          <div className={this.state.nameIsValid ? "hidden" : "invalid"}> Name must be at least 2 characters </div>
+          <div>Phone</div><input id="phone" type="text" onChange={this.handlePhone}></input><br />
+          <div className={this.state.phoneIsValid ? "hidden" : "invalid"}> Phone numbers must be 11 digits long </div>
+          <div>Email</div><input id="email" type="text" onChange={this.handleEmail}></input><br />
+          <div className={this.state.emailIsValid ? "hidden" : "invalid"}> Please enter a valid email </div>
+          <h6 className="invalid"> (Your doctor will receive an email from OneCare) </h6>
+          <div>Address</div><input id="address" type="text" onChange={this.handleAddress}></input><br />
+          <div>Specialty</div><select id="specialty" onChange={this.handleSpecialty}>
+            <option>None Selected</option>
             {
               DOCTORS.map((doctor) => {
                 return (
@@ -146,9 +159,10 @@ export default class DoctorEntryView extends React.Component {
               })
             }
           </select>
-          <button onClick={this.submitNewDoctor}>Submit!</button>
-        </form>
-        <hr />
+          <div className={this.state.specialtyIsValid ? "hidden" : "invalid"}> Select a specialty </div>
+          <Button bsStyle='info' onClick={this.submitNewDoctor}>Save Doctor</Button>
+          <h6 className={(this.state.formIsValid ? 'hidden' : 'invalid')}> Some of your data is invalid.  Please check above. </h6>
+        </div>
       </div>
     );
   }

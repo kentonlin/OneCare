@@ -23,12 +23,13 @@ var scriptSchema = new Schema({
 });
 
 var userSchema = new Schema({
+	firstName:{type: String, required: true},
+	lastName: {type: String, required: true},
 	username: {type: String, required: true, index: {unique: true} },
 	password: {type: String, required: true },
 	address: String,
 	phone: String,
-	// zipcode: Number,
-	zipcode: String, 
+	zipcode: String,
 	scripts: [{type: Schema.Types.ObjectId, ref: 'Script'}],
 	doctors: [{type: Schema.Types.ObjectId, ref: 'Doctor'}]// script models for user
 });
@@ -39,8 +40,17 @@ var doctorSchema = new Schema({
 	email: String,
 	specialty: String,
 	address: String,
-	patients: [{type: Schema.Types.ObjectId, ref: 'User'}]
+	patients: [{type: Schema.Types.ObjectId, ref: 'User'}],
+	notes: [{type: Schema.Types.ObjectId, ref: 'Note'}]
 });
+
+var noteSchema = new Schema({
+	seen: Boolean,
+	hidden: Boolean,
+	body: String,
+  user: [{type: Schema.Types.ObjectId, ref: 'User'}],
+  doctor: [{type: Schema.Types.ObjectId, ref: 'Doctor'}]
+}); 
 
 var symptomSchema = new Schema({
 	id: Number,
@@ -88,5 +98,6 @@ var User = mongoose.model('User', userSchema);
 var Doctor = mongoose.model('Doctor', doctorSchema);
 var Symptom = mongoose.model('Symptom', symptomSchema);
 var Brain = mongoose.model('Brain', brainSchema);
+var Note = mongoose.model('Note', noteSchema);
 
-module.exports = {user: User, script: Script, doctor: Doctor, symptom: Symptom, brain: Brain};
+module.exports = {user: User, script: Script, doctor: Doctor, symptom: Symptom, brain: Brain, note: Note};
